@@ -1,0 +1,12 @@
+{
+  "raw_tabular_files_checked": [
+    "enso_oni_2015_2026.csv",
+    "era5_pressure_levels_2015_2026.csv",
+    "era5_sst_2015_2026.csv",
+    "ghcnh-station-list.txt",
+    "openmeteo_danang_2015_2026.csv"
+  ],
+  "independent_observation_file_supplied": false,
+  "independent_observation_evaluated": false,
+  "limitation": "Open-Meteo Historical là dữ liệu mô hình/tái phân tích; cần trạm hoặc radar độc lập để kiểm chứng lượng mưa tại điểm."
+}

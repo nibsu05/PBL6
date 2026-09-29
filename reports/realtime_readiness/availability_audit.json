@@ -1,0 +1,15 @@
+{
+  "status": "unverified_missing_provenance",
+  "missing_prediction_columns": [
+    "issued_at"
+  ],
+  "missing_availability_columns": [
+    "available_at"
+  ],
+  "verified_windows": 0,
+  "predictions_file": "C:\\Users\\Admin\\Desktop\\PBL6\\reports\\rain_alert_experiment\\test_predictions.parquet",
+  "availability_file": "C:\\Users\\Admin\\Desktop\\PBL6\\data\\raw_data\\openmeteo_danang_2015_2026.csv",
+  "current_source": "Open-Meteo Historical Weather API (archive)",
+  "operational_claim_supported": false,
+  "caution": "Giờ cuối đầu vào không chứng minh dữ liệu đã sẵn có tại giờ phát hành. Cần lưu issued_at của dự báo và available_at của mọi biến đầu vào."
+}

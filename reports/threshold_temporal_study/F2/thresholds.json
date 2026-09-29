@@ -1,0 +1,56 @@
+{
+  "global_threshold": 0.1,
+  "precision_floor": 0.3,
+  "minimum_calibration_alerts": 10,
+  "selection_rule": "Max recall, then precision, then threshold; abstain if infeasible",
+  "horizons": [
+    {
+      "horizon_h": 1,
+      "threshold": 0.5,
+      "enabled": true,
+      "calibration_precision": 0.3108108108108108,
+      "calibration_recall": 0.359375,
+      "n_alerts": 74
+    },
+    {
+      "horizon_h": 2,
+      "threshold": 1.0,
+      "enabled": false,
+      "calibration_precision": null,
+      "calibration_recall": 0.0,
+      "n_alerts": 0
+    },
+    {
+      "horizon_h": 3,
+      "threshold": 1.0,
+      "enabled": false,
+      "calibration_precision": null,
+      "calibration_recall": 0.0,
+      "n_alerts": 0
+    },
+    {
+      "horizon_h": 4,
+      "threshold": 1.0,
+      "enabled": false,
+      "calibration_precision": null,
+      "calibration_recall": 0.0,
+      "n_alerts": 0
+    },
+    {
+      "horizon_h": 5,
+      "threshold": 1.0,
+      "enabled": false,
+      "calibration_precision": null,
+      "calibration_recall": 0.0,
+      "n_alerts": 0
+    },
+    {
+      "horizon_h": 6,
+      "threshold": 1.0,
+      "enabled": false,
+      "calibration_precision": null,
+      "calibration_recall": 0.0,
+      "n_alerts": 0
+    }
+  ]
+}

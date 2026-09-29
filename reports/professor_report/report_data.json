@@ -1,0 +1,1192 @@
+{
+  "train_hours": 71584,
+  "train_rain_counts": [
+    47819,
+    19675,
+    3662,
+    428
+  ],
+  "train_heavy_fraction": 0.005978989718372821,
+  "train_max_rain": 41.5,
+  "train_zero_fraction": 0.6680124050067054,
+  "split": {
+    "total_rows": 102264,
+    "calendar_missing_hours": 0,
+    "hours_without_precipitation": 0,
+    "invalid_rows": 24,
+    "train_scaler_rows": 71560,
+    "omitted_features": "",
+    "oni_excluded_realtime": 0,
+    "candidate_windows": 102235,
+    "windows_with_time_gap": 0,
+    "windows_with_missing_value": 24,
+    "windows_crossing_split": 10,
+    "train_windows": 71531,
+    "val_windows": 15335,
+    "test_windows": 15335,
+    "first_local": "2015-01-01 07:00:00+07:00",
+    "last_local": "2026-09-01 06:00:00+07:00",
+    "train_end": "2023-03-02 23:00:00+07:00",
+    "val_end": "2024-12-01 03:00:00+07:00",
+    "features": [
+      "temperature_2m",
+      "relative_humidity_2m",
+      "surface_pressure",
+      "wind_speed_10m",
+      "wind_direction_10m",
+      "precipitation",
+      "sin_hour",
+      "cos_hour",
+      "sin_month",
+      "cos_month",
+      "precip_lag_1h",
+      "precip_lag_2h",
+      "precip_lag_3h",
+      "precip_lag_6h",
+      "precip_lag_12h",
+      "precip_lag_24h",
+      "relative_humidity_2m_lag_1h",
+      "relative_humidity_2m_lag_3h",
+      "relative_humidity_2m_lag_6h",
+      "precip_roll_sum_3h",
+      "precip_roll_sum_6h",
+      "precip_roll_sum_24h"
+    ]
+  },
+  "example_peak_time": "2025-06-11T21:00:00+07:00",
+  "example_peak_predictions": [
+    {
+      "horizon": 1,
+      "actual": 41.900001525878906,
+      "standard": 8.548206329345703,
+      "dual": 4.883242130279541,
+      "persistence": 24.100000381469727
+    },
+    {
+      "horizon": 6,
+      "actual": 41.900001525878906,
+      "standard": 1.108533501625061,
+      "dual": 0.7702693939208984,
+      "persistence": 0.5
+    }
+  ],
+  "test_metrics": [
+    {
+      "period": "old_test_exploratory",
+      "policy": "dual_global",
+      "MAE": 0.2554161667106852,
+      "RMSE": 0.9958611344709056,
+      "R2": 0.2185751125272323,
+      "CC": 0.4739531699620333,
+      "TP": 331,
+      "FP": 1600,
+      "FN": 371,
+      "TN": 89708,
+      "precision": 0.1714137752459865,
+      "recall": 0.4715099715099715,
+      "hourly_F1": 0.2514242309153057,
+      "event_observed": 264,
+      "event_forecast": 287,
+      "event_hit": 71,
+      "event_precision": 0.2473867595818815,
+      "event_recall": 0.2689393939393939,
+      "event_F1": 0.2577132486388385
+    },
+    {
+      "period": "old_test_exploratory",
+      "policy": "dual_precision30",
+      "MAE": 0.2554161667106852,
+      "RMSE": 0.9958611344709056,
+      "R2": 0.2185751125272323,
+      "CC": 0.4739531699620333,
+      "TP": 178,
+      "FP": 564,
+      "FN": 524,
+      "TN": 90744,
+      "precision": 0.2398921832884097,
+      "recall": 0.2535612535612536,
+      "hourly_F1": 0.2465373961218836,
+      "event_observed": 264,
+      "event_forecast": 152,
+      "event_hit": 61,
+      "event_precision": 0.4013157894736842,
+      "event_recall": 0.231060606060606,
+      "event_F1": 0.2932692307692308
+    },
+    {
+      "period": "old_test_exploratory",
+      "policy": "standard",
+      "MAE": 0.3264576847887644,
+      "RMSE": 0.998634637986508,
+      "R2": 0.2142164673822593,
+      "CC": 0.5008927169404929,
+      "TP": 144,
+      "FP": 375,
+      "FN": 558,
+      "TN": 90933,
+      "precision": 0.2774566473988439,
+      "recall": 0.2051282051282051,
+      "hourly_F1": 0.2358722358722358,
+      "event_observed": 264,
+      "event_forecast": 128,
+      "event_hit": 47,
+      "event_precision": 0.3671875,
+      "event_recall": 0.178030303030303,
+      "event_F1": 0.2397959183673469
+    },
+    {
+      "period": "old_test_exploratory",
+      "policy": "persistence",
+      "MAE": 0.2850146734336189,
+      "RMSE": 1.1901144336105172,
+      "R2": -0.1160075085828564,
+      "CC": 0.4419427153884508,
+      "TP": 184,
+      "FP": 518,
+      "FN": 518,
+      "TN": 90790,
+      "precision": 0.2621082621082621,
+      "recall": 0.2621082621082621,
+      "hourly_F1": 0.2621082621082621,
+      "event_observed": 264,
+      "event_forecast": 264,
+      "event_hit": 74,
+      "event_precision": 0.2803030303030303,
+      "event_recall": 0.2803030303030303,
+      "event_F1": 0.2803030303030303
+    }
+  ],
+  "validation_metrics": [
+    {
+      "period": "original_validation",
+      "policy": "dual_global",
+      "MAE": 0.2562800020563109,
+      "RMSE": 0.9144840424495044,
+      "R2": 0.2406361891871238,
+      "CC": 0.4978261782078375,
+      "TP": 334,
+      "FP": 1526,
+      "FN": 524,
+      "TN": 89626,
+      "precision": 0.1795698924731182,
+      "recall": 0.3892773892773892,
+      "hourly_F1": 0.2457689477557027,
+      "event_observed": 390,
+      "event_forecast": 410,
+      "event_hit": 117,
+      "event_precision": 0.2853658536585365,
+      "event_recall": 0.3,
+      "event_F1": 0.2925
+    },
+    {
+      "period": "original_validation",
+      "policy": "dual_precision30",
+      "MAE": 0.2562800020563109,
+      "RMSE": 0.9144840424495044,
+      "R2": 0.2406361891871238,
+      "CC": 0.4978261782078375,
+      "TP": 197,
+      "FP": 409,
+      "FN": 661,
+      "TN": 90743,
+      "precision": 0.3250825082508251,
+      "recall": 0.2296037296037296,
+      "hourly_F1": 0.2691256830601093,
+      "event_observed": 390,
+      "event_forecast": 162,
+      "event_hit": 60,
+      "event_precision": 0.3703703703703703,
+      "event_recall": 0.1538461538461538,
+      "event_F1": 0.217391304347826
+    },
+    {
+      "period": "original_validation",
+      "policy": "standard",
+      "MAE": 0.337009930810658,
+      "RMSE": 0.938839369390833,
+      "R2": 0.1996495028005293,
+      "CC": 0.5163498325443684,
+      "TP": 188,
+      "FP": 327,
+      "FN": 670,
+      "TN": 90825,
+      "precision": 0.3650485436893204,
+      "recall": 0.2191142191142191,
+      "hourly_F1": 0.2738528769118718,
+      "event_observed": 390,
+      "event_forecast": 129,
+      "event_hit": 56,
+      "event_precision": 0.4341085271317829,
+      "event_recall": 0.1435897435897435,
+      "event_F1": 0.2157996146435452
+    },
+    {
+      "period": "original_validation",
+      "policy": "persistence",
+      "MAE": 0.2962580159257131,
+      "RMSE": 1.1257048871525417,
+      "R2": -0.1506592579266783,
+      "CC": 0.4246700165534079,
+      "TP": 216,
+      "FP": 642,
+      "FN": 642,
+      "TN": 90510,
+      "precision": 0.2517482517482518,
+      "recall": 0.2517482517482518,
+      "hourly_F1": 0.2517482517482518,
+      "event_observed": 390,
+      "event_forecast": 390,
+      "event_hit": 82,
+      "event_precision": 0.2102564102564102,
+      "event_recall": 0.2102564102564102,
+      "event_F1": 0.2102564102564102
+    }
+  ],
+  "temporal_metrics": [
+    {
+      "period": "F1",
+      "policy": "dual_global",
+      "MAE": 0.436806058706791,
+      "RMSE": 1.1568219951624796,
+      "R2": 0.179971871740702,
+      "CC": 0.4330346771149243,
+      "TP": 323,
+      "FP": 6728,
+      "FN": 61,
+      "TN": 19354,
+      "precision": 0.0458091050914763,
+      "recall": 0.8411458333333334,
+      "hourly_F1": 0.0868863483523873,
+      "event_observed": 186,
+      "event_forecast": 474,
+      "event_hit": 107,
+      "event_precision": 0.2257383966244725,
+      "event_recall": 0.5752688172043011,
+      "event_F1": 0.3242424242424242
+    },
+    {
+      "period": "F1",
+      "policy": "dual_precision30",
+      "MAE": 0.436806058706791,
+      "RMSE": 1.1568219951624796,
+      "R2": 0.179971871740702,
+      "CC": 0.4330346771149243,
+      "TP": 0,
+      "FP": 0,
+      "FN": 384,
+      "TN": 26082,
+      "precision": null,
+      "recall": 0.0,
+      "hourly_F1": 0.0,
+      "event_observed": 186,
+      "event_forecast": 0,
+      "event_hit": 0,
+      "event_precision": null,
+      "event_recall": 0.0,
+      "event_F1": 0.0
+    },
+    {
+      "period": "F1",
+      "policy": "standard",
+      "MAE": 0.4528716964939809,
+      "RMSE": 1.2070782248741023,
+      "R2": 0.1071746642717039,
+      "CC": 0.3569661353693031,
+      "TP": 8,
+      "FP": 49,
+      "FN": 376,
+      "TN": 26033,
+      "precision": 0.1403508771929824,
+      "recall": 0.0208333333333333,
+      "hourly_F1": 0.0362811791383219,
+      "event_observed": 186,
+      "event_forecast": 14,
+      "event_hit": 7,
+      "event_precision": 0.5,
+      "event_recall": 0.0376344086021505,
+      "event_F1": 0.07
+    },
+    {
+      "period": "F1",
+      "policy": "persistence",
+      "MAE": 0.4725232383018537,
+      "RMSE": 1.435432955833989,
+      "R2": -0.2625875439918621,
+      "CC": 0.368707309163901,
+      "TP": 78,
+      "FP": 306,
+      "FN": 306,
+      "TN": 25776,
+      "precision": 0.203125,
+      "recall": 0.203125,
+      "hourly_F1": 0.203125,
+      "event_observed": 186,
+      "event_forecast": 186,
+      "event_hit": 38,
+      "event_precision": 0.2043010752688172,
+      "event_recall": 0.2043010752688172,
+      "event_F1": 0.2043010752688172
+    },
+    {
+      "period": "F2",
+      "policy": "dual_global",
+      "MAE": 0.1470697396758945,
+      "RMSE": 0.3945399806910882,
+      "R2": 0.1257156038490955,
+      "CC": 0.3656289415973638,
+      "TP": 16,
+      "FP": 800,
+      "FN": 14,
+      "TN": 25348,
+      "precision": 0.0196078431372549,
+      "recall": 0.5333333333333333,
+      "hourly_F1": 0.0378250591016548,
+      "event_observed": 18,
+      "event_forecast": 174,
+      "event_hit": 13,
+      "event_precision": 0.0747126436781609,
+      "event_recall": 0.7222222222222222,
+      "event_F1": 0.1354166666666666
+    },
+    {
+      "period": "F2",
+      "policy": "dual_precision30",
+      "MAE": 0.1470697396758945,
+      "RMSE": 0.3945399806910882,
+      "R2": 0.1257156038490955,
+      "CC": 0.3656289415973638,
+      "TP": 0,
+      "FP": 4,
+      "FN": 30,
+      "TN": 26144,
+      "precision": 0.0,
+      "recall": 0.0,
+      "hourly_F1": 0.0,
+      "event_observed": 18,
+      "event_forecast": 4,
+      "event_hit": 1,
+      "event_precision": 0.25,
+      "event_recall": 0.0555555555555555,
+      "event_F1": 0.0909090909090909
+    },
+    {
+      "period": "F2",
+      "policy": "standard",
+      "MAE": 0.1430851898153047,
+      "RMSE": 0.4131044817781378,
+      "R2": 0.0415035632143642,
+      "CC": 0.3759636633704966,
+      "TP": 0,
+      "FP": 0,
+      "FN": 30,
+      "TN": 26148,
+      "precision": null,
+      "recall": 0.0,
+      "hourly_F1": 0.0,
+      "event_observed": 18,
+      "event_forecast": 0,
+      "event_hit": 0,
+      "event_precision": null,
+      "event_recall": 0.0,
+      "event_F1": 0.0
+    },
+    {
+      "period": "F2",
+      "policy": "persistence",
+      "MAE": 0.1234395300625243,
+      "RMSE": 0.5092947695421446,
+      "R2": -0.4568308225713624,
+      "CC": 0.2715799328214703,
+      "TP": 2,
+      "FP": 28,
+      "FN": 28,
+      "TN": 26120,
+      "precision": 0.0666666666666666,
+      "recall": 0.0666666666666666,
+      "hourly_F1": 0.0666666666666666,
+      "event_observed": 18,
+      "event_forecast": 18,
+      "event_hit": 10,
+      "event_precision": 0.5555555555555556,
+      "event_recall": 0.5555555555555556,
+      "event_F1": 0.5555555555555556
+    },
+    {
+      "period": "F3",
+      "policy": "dual_global",
+      "MAE": 0.3860802781493449,
+      "RMSE": 1.337686268356818,
+      "R2": 0.1813850392154082,
+      "CC": 0.4418589415023651,
+      "TP": 191,
+      "FP": 1075,
+      "FN": 205,
+      "TN": 20531,
+      "precision": 0.15086887835703,
+      "recall": 0.4823232323232323,
+      "hourly_F1": 0.2298435619735258,
+      "event_observed": 150,
+      "event_forecast": 245,
+      "event_hit": 44,
+      "event_precision": 0.1795918367346938,
+      "event_recall": 0.2933333333333333,
+      "event_F1": 0.2227848101265822
+    },
+    {
+      "period": "F3",
+      "policy": "dual_precision30",
+      "MAE": 0.3860802781493449,
+      "RMSE": 1.337686268356818,
+      "R2": 0.1813850392154082,
+      "CC": 0.4418589415023651,
+      "TP": 0,
+      "FP": 0,
+      "FN": 396,
+      "TN": 21606,
+      "precision": null,
+      "recall": 0.0,
+      "hourly_F1": 0.0,
+      "event_observed": 150,
+      "event_forecast": 0,
+      "event_hit": 0,
+      "event_precision": null,
+      "event_recall": 0.0,
+      "event_F1": 0.0
+    },
+    {
+      "period": "F3",
+      "policy": "standard",
+      "MAE": 0.4508862258600095,
+      "RMSE": 1.3579805154681144,
+      "R2": 0.1563579529262226,
+      "CC": 0.3983125577581919,
+      "TP": 14,
+      "FP": 60,
+      "FN": 382,
+      "TN": 21546,
+      "precision": 0.1891891891891892,
+      "recall": 0.0353535353535353,
+      "hourly_F1": 0.0595744680851063,
+      "event_observed": 150,
+      "event_forecast": 27,
+      "event_hit": 7,
+      "event_precision": 0.2592592592592592,
+      "event_recall": 0.0466666666666666,
+      "event_F1": 0.0790960451977401
+    },
+    {
+      "period": "F3",
+      "policy": "persistence",
+      "MAE": 0.4394145984337737,
+      "RMSE": 1.5102305327712937,
+      "R2": -0.0434163364609321,
+      "CC": 0.4782918317695346,
+      "TP": 134,
+      "FP": 262,
+      "FN": 262,
+      "TN": 21344,
+      "precision": 0.3383838383838384,
+      "recall": 0.3383838383838384,
+      "hourly_F1": 0.3383838383838384,
+      "event_observed": 150,
+      "event_forecast": 150,
+      "event_hit": 32,
+      "event_precision": 0.2133333333333333,
+      "event_recall": 0.2133333333333333,
+      "event_F1": 0.2133333333333333
+    }
+  ],
+  "folds": [
+    {
+      "fold": "F1",
+      "train_end_exclusive": "2023-01-01T00:00:00+07:00",
+      "calibration_end_exclusive": "2023-07-01T00:00:00+07:00",
+      "assessment_end_exclusive": "2024-01-01T00:00:00+07:00",
+      "windows": [
+        70068,
+        4339,
+        4411
+      ],
+      "standard_best_epoch": 5,
+      "dual_best_epoch": 1,
+      "global_threshold": 0.05,
+      "precision_thresholds": [
+        {
+          "horizon_h": 1,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        },
+        {
+          "horizon_h": 2,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        },
+        {
+          "horizon_h": 3,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        },
+        {
+          "horizon_h": 4,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        },
+        {
+          "horizon_h": 5,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        },
+        {
+          "horizon_h": 6,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        }
+      ]
+    },
+    {
+      "fold": "F2",
+      "train_end_exclusive": "2023-07-01T00:00:00+07:00",
+      "calibration_end_exclusive": "2024-01-01T00:00:00+07:00",
+      "assessment_end_exclusive": "2024-07-01T00:00:00+07:00",
+      "windows": [
+        74412,
+        4411,
+        4363
+      ],
+      "standard_best_epoch": 1,
+      "dual_best_epoch": 1,
+      "global_threshold": 0.1,
+      "precision_thresholds": [
+        {
+          "horizon_h": 1,
+          "threshold": 0.5,
+          "enabled": true,
+          "calibration_precision": 0.3108108108108108,
+          "calibration_recall": 0.359375,
+          "n_alerts": 74
+        },
+        {
+          "horizon_h": 2,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        },
+        {
+          "horizon_h": 3,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        },
+        {
+          "horizon_h": 4,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        },
+        {
+          "horizon_h": 5,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        },
+        {
+          "horizon_h": 6,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        }
+      ]
+    },
+    {
+      "fold": "F3",
+      "train_end_exclusive": "2024-01-01T00:00:00+07:00",
+      "calibration_end_exclusive": "2024-07-01T00:00:00+07:00",
+      "assessment_end_exclusive": "2024-12-01T00:00:00+07:00",
+      "windows": [
+        78828,
+        4363,
+        3667
+      ],
+      "standard_best_epoch": 10,
+      "dual_best_epoch": 10,
+      "global_threshold": 0.15,
+      "precision_thresholds": [
+        {
+          "horizon_h": 1,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        },
+        {
+          "horizon_h": 2,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        },
+        {
+          "horizon_h": 3,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        },
+        {
+          "horizon_h": 4,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        },
+        {
+          "horizon_h": 5,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        },
+        {
+          "horizon_h": 6,
+          "threshold": 1.0,
+          "enabled": false,
+          "calibration_precision": null,
+          "calibration_recall": 0.0,
+          "n_alerts": 0
+        }
+      ]
+    }
+  ],
+  "thresholds": {
+    "precision_floor": 0.3,
+    "minimum_calibration_alerts": 10,
+    "selection_rule": "Max recall, then precision, then threshold; abstain if infeasible",
+    "horizons": [
+      {
+        "horizon_h": 1,
+        "threshold": 0.55,
+        "enabled": true,
+        "calibration_precision": 0.3433734939759036,
+        "calibration_recall": 0.3986013986013986,
+        "n_alerts": 166
+      },
+      {
+        "horizon_h": 2,
+        "threshold": 0.6,
+        "enabled": true,
+        "calibration_precision": 0.30656934306569344,
+        "calibration_recall": 0.2937062937062937,
+        "n_alerts": 137
+      },
+      {
+        "horizon_h": 3,
+        "threshold": 0.7,
+        "enabled": true,
+        "calibration_precision": 0.32,
+        "calibration_recall": 0.22377622377622378,
+        "n_alerts": 100
+      },
+      {
+        "horizon_h": 4,
+        "threshold": 0.75,
+        "enabled": true,
+        "calibration_precision": 0.32051282051282054,
+        "calibration_recall": 0.17482517482517482,
+        "n_alerts": 78
+      },
+      {
+        "horizon_h": 5,
+        "threshold": 0.75,
+        "enabled": true,
+        "calibration_precision": 0.3492063492063492,
+        "calibration_recall": 0.15384615384615385,
+        "n_alerts": 63
+      },
+      {
+        "horizon_h": 6,
+        "threshold": 0.75,
+        "enabled": true,
+        "calibration_precision": 0.3064516129032258,
+        "calibration_recall": 0.13286713286713286,
+        "n_alerts": 62
+      }
+    ],
+    "checkpoint_sha256": "154c759032cf92e2fabd8bf71e5c5425f9ee28b3c5e45a027659a424c36d6aa7",
+    "fitted_on": "original_validation_only"
+  },
+  "baseline": {
+    "selected_variant": "standard",
+    "selection_reason": "Lấy mẫu sự kiện chưa cải thiện F1 mưa lớn trên validation.",
+    "selection_uses_validation_only": true,
+    "same_train_val_test_split": true,
+    "split": {
+      "total_rows": 102264,
+      "calendar_missing_hours": 0,
+      "hours_without_precipitation": 0,
+      "invalid_rows": 24,
+      "train_scaler_rows": 71560,
+      "omitted_features": "",
+      "oni_excluded_realtime": 0,
+      "candidate_windows": 102235,
+      "windows_with_time_gap": 0,
+      "windows_with_missing_value": 24,
+      "windows_crossing_split": 10,
+      "train_windows": 71531,
+      "val_windows": 15335,
+      "test_windows": 15335,
+      "first_local": "2015-01-01 07:00:00+07:00",
+      "last_local": "2026-09-01 06:00:00+07:00",
+      "train_end": "2023-03-02 23:00:00+07:00",
+      "val_end": "2024-12-01 03:00:00+07:00",
+      "features": [
+        "temperature_2m",
+        "relative_humidity_2m",
+        "surface_pressure",
+        "wind_speed_10m",
+        "wind_direction_10m",
+        "precipitation",
+        "sin_hour",
+        "cos_hour",
+        "sin_month",
+        "cos_month",
+        "precip_lag_1h",
+        "precip_lag_2h",
+        "precip_lag_3h",
+        "precip_lag_6h",
+        "precip_lag_12h",
+        "precip_lag_24h",
+        "relative_humidity_2m_lag_1h",
+        "relative_humidity_2m_lag_3h",
+        "relative_humidity_2m_lag_6h",
+        "precip_roll_sum_3h",
+        "precip_roll_sum_6h",
+        "precip_roll_sum_24h"
+      ]
+    },
+    "variants": {
+      "standard": {
+        "validation": {
+          "metrics": {
+            "MAE": 0.33700993103784566,
+            "RMSE": 0.9388393697868447,
+            "R2": 0.19964950212533783,
+            "CC": 0.5163498321471326
+          },
+          "detection": {
+            "threshold_mm_per_hour": 5.0,
+            "TP": 188,
+            "FP": 327,
+            "FN": 670,
+            "TN": 90825,
+            "precision": 0.3650485436893204,
+            "recall": 0.2191142191142191,
+            "F1": 0.27385287691187177
+          },
+          "heavy_count": 858,
+          "heavy_mae": 5.588007926940918
+        },
+        "checkpoint": "C:\\Users\\Admin\\Desktop\\PBL6\\models\\surface_only\\standard.pth",
+        "best_epoch": 2,
+        "epochs_ran": 9,
+        "best_val_loss": 2.238673884341178,
+        "device": "cuda",
+        "sampler": null,
+        "metrics": {
+          "MAE": 0.32645768478876447,
+          "RMSE": 0.9986346379865079,
+          "R2": 0.2142164673822593,
+          "CC": 0.5008927169404922
+        },
+        "heavy_rain": {
+          "threshold_mm_per_hour": 5.0,
+          "count_horizon_hour_pairs": 702,
+          "fraction_horizon_hour_pairs": 0.007629605477665471,
+          "mean_actual_mm_per_hour": 9.660683631896973,
+          "mean_predicted_mm_per_hour": 3.0266735553741455,
+          "MAE": 6.7329045459628105,
+          "RMSE": 9.029177690191206,
+          "R2": -1.2742563720458753,
+          "CC": 0.12390786966347746
+        },
+        "detection": {
+          "threshold_mm_per_hour": 5.0,
+          "TP": 144,
+          "FP": 375,
+          "FN": 558,
+          "TN": 90933,
+          "precision": 0.2774566473988439,
+          "recall": 0.20512820512820512,
+          "F1": 0.23587223587223585
+        }
+      },
+      "event_balanced": {
+        "validation": {
+          "metrics": {
+            "MAE": 0.3027664075620931,
+            "RMSE": 0.970468275694283,
+            "R2": 0.14481451904162357,
+            "CC": 0.39833382876433
+          },
+          "detection": {
+            "threshold_mm_per_hour": 5.0,
+            "TP": 48,
+            "FP": 115,
+            "FN": 810,
+            "TN": 91037,
+            "precision": 0.294478527607362,
+            "recall": 0.055944055944055944,
+            "F1": 0.0940254652301665
+          },
+          "heavy_count": 858,
+          "heavy_mae": 6.783443450927734
+        },
+        "checkpoint": "C:\\Users\\Admin\\Desktop\\PBL6\\models\\surface_only\\event_balanced.pth",
+        "best_epoch": 11,
+        "epochs_ran": 18,
+        "best_val_loss": 2.736275602957306,
+        "device": "cuda",
+        "sampler": {
+          "train_windows": 71531,
+          "heavy_windows": 1212,
+          "heavy_window_fraction": 0.01694370273028477,
+          "heavy_events": 135,
+          "event_gap_hours": 6,
+          "target_draw_fraction": 0.25
+        },
+        "metrics": {
+          "MAE": 0.29526640997584724,
+          "RMSE": 1.0478202790073772,
+          "R2": 0.13490605840451098,
+          "CC": 0.3893947219413456
+        },
+        "heavy_rain": {
+          "threshold_mm_per_hour": 5.0,
+          "count_horizon_hour_pairs": 702,
+          "fraction_horizon_hour_pairs": 0.007629605477665471,
+          "mean_actual_mm_per_hour": 9.660683631896973,
+          "mean_predicted_mm_per_hour": 1.9144160747528076,
+          "MAE": 7.798292610268945,
+          "RMSE": 9.92098881171822,
+          "R2": -1.7456990930756797,
+          "CC": 0.049126454772581575
+        },
+        "detection": {
+          "threshold_mm_per_hour": 5.0,
+          "TP": 49,
+          "FP": 170,
+          "FN": 653,
+          "TN": 91138,
+          "precision": 0.2237442922374429,
+          "recall": 0.0698005698005698,
+          "F1": 0.10640608034744842
+        }
+      }
+    },
+    "naive_test_baselines": {
+      "zero": {
+        "metrics": {
+          "MAE": 0.26513639952926293,
+          "RMSE": 1.1573416246669253,
+          "R2": -0.055389619370934895,
+          "CC": null
+        },
+        "detection": {
+          "threshold_mm_per_hour": 5.0,
+          "TP": 0,
+          "FP": 0,
+          "FN": 702,
+          "TN": 91308,
+          "precision": 0.0,
+          "recall": 0.0,
+          "F1": 0.0
+        },
+        "heavy_mae": 9.660683631896973
+      },
+      "persistence": {
+        "metrics": {
+          "MAE": 0.2850146734336189,
+          "RMSE": 1.1901144336105172,
+          "R2": -0.11600750858285624,
+          "CC": 0.4419427153884513
+        },
+        "detection": {
+          "threshold_mm_per_hour": 5.0,
+          "TP": 184,
+          "FP": 518,
+          "FN": 518,
+          "TN": 90790,
+          "precision": 0.2621082621082621,
+          "recall": 0.2621082621082621,
+          "F1": 0.2621082621082621
+        },
+        "heavy_mae": 7.131908416748047
+      }
+    }
+  },
+  "noaa": {
+    "station": "VMW00041003 - DA NANG, NOAA GHCNh",
+    "station_coordinates": {
+      "latitude": 16.05,
+      "longitude": 108.2
+    },
+    "year": 2025,
+    "ghcnh_rows": 17189,
+    "ghcnh_hourly_precipitation_values": 0,
+    "ghcnh_6h_reports": 216,
+    "ghcnh_12h_reports": 271,
+    "ghcnh_24h_reports": 358,
+    "ghcnh_6h_quality_codes": {
+      "1.0": 216
+    },
+    "ghcnh_6h_trace_reports": 53,
+    "ghcnh_6h_positive_reports": 163,
+    "ghcnh_6h_matched_test_reports": 216,
+    "isd_rows": 13012,
+    "isd_AA_period_hours_counts": {
+      "12": 41,
+      "18": 22,
+      "24": 142,
+      "06": 26,
+      "99": 134
+    },
+    "paired_6h_diagnostic": {
+      "openmeteo_6h_mm": {
+        "MAE_mm_6h": 5.950462947944524,
+        "RMSE_mm_6h": 12.728825801240408,
+        "mean_bias_mm_6h": -1.9912036515013491,
+        "CC": 0.7967484355346528
+      },
+      "bilstm_6h_mm": {
+        "MAE_mm_6h": 7.486161065308584,
+        "RMSE_mm_6h": 18.485233655853275,
+        "mean_bias_mm_6h": -1.6333459813147786,
+        "CC": 0.3919414558497326
+      },
+      "persistence_6h_mm": {
+        "MAE_mm_6h": 8.068055619023465,
+        "RMSE_mm_6h": 20.60319441598082,
+        "mean_bias_mm_6h": -1.9652776968699914,
+        "CC": 0.29612916533746136
+      }
+    },
+    "caution": "GHCNh thiếu lượng mưa 1 giờ; bản ghi 6 giờ không đều và chủ yếu xuất hiện khi có mưa. Các metric 6 giờ chỉ có điều kiện trên các bản ghi được báo, không đo recall/FAR trên mọi giờ. Giả định DATE là cuối kỳ tích lũy 6 giờ; cần xác nhận với đơn vị trạm.",
+    "sources": {
+      "ghcnh": "https://www.ncei.noaa.gov/products/global-historical-climatology-network-hourly",
+      "isd_format": "https://www.ncei.noaa.gov/pub/data/noaa/isd-format-document.pdf",
+      "openmeteo_hour_definition": "https://open-meteo.com/en/docs/historical-weather-api"
+    }
+  },
+  "availability": {
+    "status": "unverified_missing_provenance",
+    "missing_prediction_columns": [
+      "issued_at"
+    ],
+    "missing_availability_columns": [
+      "available_at"
+    ],
+    "verified_windows": 0,
+    "predictions_file": "C:\\Users\\Admin\\Desktop\\PBL6\\reports\\rain_alert_experiment\\test_predictions.parquet",
+    "availability_file": "C:\\Users\\Admin\\Desktop\\PBL6\\data\\raw_data\\openmeteo_danang_2015_2026.csv",
+    "current_source": "Open-Meteo Historical Weather API (archive)",
+    "operational_claim_supported": false,
+    "caution": "Giờ cuối đầu vào không chứng minh dữ liệu đã sẵn có tại giờ phát hành. Cần lưu issued_at của dự báo và available_at của mọi biến đầu vào."
+  },
+  "merge": {
+    "raw_dir": "C:\\Users\\Admin\\Desktop\\PBL6\\data\\raw_data",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "naive_datetime_assumption": "UTC",
+    "max_interp_hours": 2,
+    "era5_mode": "netcdf_nearest_grid_point",
+    "era5_files": 265,
+    "era5_selected_grid_points": {
+      "u_850": {
+        "latitude": 16.0,
+        "longitude": 108.25
+      },
+      "v_850": {
+        "latitude": 16.0,
+        "longitude": 108.25
+      },
+      "specific_humidity_850": {
+        "latitude": 16.0,
+        "longitude": 108.25
+      },
+      "sea_surface_temperature": {
+        "latitude": 16.25,
+        "longitude": 108.25
+      }
+    },
+    "missing_optional_era5_variables": [
+      "cape",
+      "cin",
+      "tcwv"
+    ],
+    "source_gaps": {
+      "openmeteo": {
+        "missing_hours": 0,
+        "blocks": []
+      },
+      "u_850": {
+        "missing_hours": 11016,
+        "blocks": [
+          {
+            "start_utc": "2024-04-01T00:00:00+00:00",
+            "end_utc": "2024-12-31T23:00:00+00:00",
+            "hours": 6600
+          },
+          {
+            "start_utc": "2026-03-01T00:00:00+00:00",
+            "end_utc": "2026-08-31T23:00:00+00:00",
+            "hours": 4416
+          }
+        ]
+      },
+      "v_850": {
+        "missing_hours": 11016,
+        "blocks": [
+          {
+            "start_utc": "2024-04-01T00:00:00+00:00",
+            "end_utc": "2024-12-31T23:00:00+00:00",
+            "hours": 6600
+          },
+          {
+            "start_utc": "2026-03-01T00:00:00+00:00",
+            "end_utc": "2026-08-31T23:00:00+00:00",
+            "hours": 4416
+          }
+        ]
+      },
+      "specific_humidity_850": {
+        "missing_hours": 11016,
+        "blocks": [
+          {
+            "start_utc": "2024-04-01T00:00:00+00:00",
+            "end_utc": "2024-12-31T23:00:00+00:00",
+            "hours": 6600
+          },
+          {
+            "start_utc": "2026-03-01T00:00:00+00:00",
+            "end_utc": "2026-08-31T23:00:00+00:00",
+            "hours": 4416
+          }
+        ]
+      },
+      "sea_surface_temperature": {
+        "missing_hours": 0,
+        "blocks": []
+      }
+    },
+    "oni_months": {
+      "first": "2015-01",
+      "last": "2026-07",
+      "count": 139
+    },
+    "interpolated_hours_by_variable": {
+      "temperature_2m": 0,
+      "relative_humidity_2m": 0,
+      "surface_pressure": 0,
+      "wind_speed_10m": 0,
+      "wind_direction_10m": 0,
+      "u_850": 0,
+      "v_850": 0,
+      "specific_humidity_850": 0,
+      "sea_surface_temperature": 0
+    },
+    "output": {
+      "rows": 91248,
+      "first_local": "2015-01-01T07:00:00+07:00",
+      "last_local": "2026-03-01T06:00:00+07:00",
+      "hours_removed_incomplete": 11016,
+      "columns": [
+        "datetime",
+        "temperature_2m",
+        "relative_humidity_2m",
+        "surface_pressure",
+        "wind_speed_10m",
+        "wind_direction_10m",
+        "precipitation",
+        "u_850",
+        "v_850",
+        "specific_humidity_850",
+        "sea_surface_temperature",
+        "oni_anom"
+      ]
+    }
+  },
+  "multisource_test": {
+    "MAE": 0.3811784124018206,
+    "RMSE": 1.14637713257594,
+    "R2": 0.24796556032840578,
+    "CC": 0.5322720691225239
+  },
+  "matched_surface_ablation": {
+    "features": [
+      "temperature_2m",
+      "relative_humidity_2m",
+      "surface_pressure",
+      "wind_speed_10m",
+      "wind_direction_10m",
+      "precipitation",
+      "sin_hour",
+      "cos_hour",
+      "sin_month",
+      "cos_month",
+      "precip_lag_1h",
+      "precip_lag_2h",
+      "precip_lag_3h",
+      "precip_lag_6h",
+      "precip_lag_12h",
+      "precip_lag_24h",
+      "relative_humidity_2m_lag_1h",
+      "relative_humidity_2m_lag_3h",
+      "relative_humidity_2m_lag_6h",
+      "precip_roll_sum_3h",
+      "precip_roll_sum_6h",
+      "precip_roll_sum_24h"
+    ],
+    "best_epoch": 3,
+    "epochs_ran": 10,
+    "test": {
+      "MAE": 0.3988309767203848,
+      "RMSE": 1.1832664731960525,
+      "R2": 0.19878730921513132,
+      "CC": 0.5060598292405325
+    },
+    "heavy_count": 636,
+    "heavy_mae": 6.535476207733154,
+    "heavy_mean_pred": 3.410531759262085
+  }
+}

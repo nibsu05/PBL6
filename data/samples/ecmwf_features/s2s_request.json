@@ -1,0 +1,43 @@
+{
+  "url": "https://ecds.ecmwf.int/api",
+  "dataset": "s2s-forecasts",
+  "filename": "s2s_ecmwf_sm20_init_20240829_00_lead_0_24.grib",
+  "request": {
+    "origin": "ecmwf",
+    "forecast_type": "control_forecast",
+    "level_type": "single_level",
+    "variable": [
+      "soil_moisture_top_20_cm"
+    ],
+    "year": [
+      "2024"
+    ],
+    "month": [
+      "08"
+    ],
+    "day": [
+      "29"
+    ],
+    "time": [
+      "00:00"
+    ],
+    "leadtime_hour": [
+      "0_24"
+    ],
+    "data_format": "grib",
+    "area": [
+      18,
+      105,
+      13.5,
+      111
+    ]
+  },
+  "created_at_utc": "2026-09-23T01:34:51.692838+00:00",
+  "status": "downloaded_and_extracted",
+  "request_id": "6fbcf614-6238-4897-994a-9bd10fd7cc00",
+  "checked_at_utc": "2026-09-23T01:35:01.646376+00:00",
+  "downloaded_at_utc": "2026-09-23T01:35:33.485273+00:00",
+  "bytes": 227,
+  "sha256": "fbfec04252650134969b3bc4389c669e5d6dbe320b4370ad14181030ab1d0625",
+  "completed_at_utc": "2026-09-23T01:36:52.130903+00:00"
+}

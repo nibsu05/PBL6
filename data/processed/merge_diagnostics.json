@@ -1,0 +1,122 @@
+{
+  "raw_dir": "C:\\Users\\Admin\\Desktop\\PBL6\\data\\raw_data",
+  "timezone": "Asia/Ho_Chi_Minh",
+  "naive_datetime_assumption": "UTC",
+  "max_interp_hours": 2,
+  "era5_mode": "netcdf_nearest_grid_point",
+  "era5_files": 265,
+  "era5_selected_grid_points": {
+    "u_850": {
+      "latitude": 16.0,
+      "longitude": 108.25
+    },
+    "v_850": {
+      "latitude": 16.0,
+      "longitude": 108.25
+    },
+    "specific_humidity_850": {
+      "latitude": 16.0,
+      "longitude": 108.25
+    },
+    "sea_surface_temperature": {
+      "latitude": 16.25,
+      "longitude": 108.25
+    }
+  },
+  "missing_optional_era5_variables": [
+    "cape",
+    "cin",
+    "tcwv"
+  ],
+  "source_gaps": {
+    "openmeteo": {
+      "missing_hours": 0,
+      "blocks": []
+    },
+    "u_850": {
+      "missing_hours": 11016,
+      "blocks": [
+        {
+          "start_utc": "2024-04-01T00:00:00+00:00",
+          "end_utc": "2024-12-31T23:00:00+00:00",
+          "hours": 6600
+        },
+        {
+          "start_utc": "2026-03-01T00:00:00+00:00",
+          "end_utc": "2026-08-31T23:00:00+00:00",
+          "hours": 4416
+        }
+      ]
+    },
+    "v_850": {
+      "missing_hours": 11016,
+      "blocks": [
+        {
+          "start_utc": "2024-04-01T00:00:00+00:00",
+          "end_utc": "2024-12-31T23:00:00+00:00",
+          "hours": 6600
+        },
+        {
+          "start_utc": "2026-03-01T00:00:00+00:00",
+          "end_utc": "2026-08-31T23:00:00+00:00",
+          "hours": 4416
+        }
+      ]
+    },
+    "specific_humidity_850": {
+      "missing_hours": 11016,
+      "blocks": [
+        {
+          "start_utc": "2024-04-01T00:00:00+00:00",
+          "end_utc": "2024-12-31T23:00:00+00:00",
+          "hours": 6600
+        },
+        {
+          "start_utc": "2026-03-01T00:00:00+00:00",
+          "end_utc": "2026-08-31T23:00:00+00:00",
+          "hours": 4416
+        }
+      ]
+    },
+    "sea_surface_temperature": {
+      "missing_hours": 0,
+      "blocks": []
+    }
+  },
+  "oni_months": {
+    "first": "2015-01",
+    "last": "2026-07",
+    "count": 139
+  },
+  "interpolated_hours_by_variable": {
+    "temperature_2m": 0,
+    "relative_humidity_2m": 0,
+    "surface_pressure": 0,
+    "wind_speed_10m": 0,
+    "wind_direction_10m": 0,
+    "u_850": 0,
+    "v_850": 0,
+    "specific_humidity_850": 0,
+    "sea_surface_temperature": 0
+  },
+  "output": {
+    "rows": 91248,
+    "first_local": "2015-01-01T07:00:00+07:00",
+    "last_local": "2026-03-01T06:00:00+07:00",
+    "hours_removed_incomplete": 11016,
+    "columns": [
+      "datetime",
+      "temperature_2m",
+      "relative_humidity_2m",
+      "surface_pressure",
+      "wind_speed_10m",
+      "wind_direction_10m",
+      "precipitation",
+      "u_850",
+      "v_850",
+      "specific_humidity_850",
+      "sea_surface_temperature",
+      "oni_anom"
+    ]
+  }
+}

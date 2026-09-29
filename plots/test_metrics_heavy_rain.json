@@ -1,0 +1,11 @@
+{
+  "threshold_mm_per_hour": 5.0,
+  "count_horizon_hour_pairs": 636,
+  "fraction_horizon_hour_pairs": 0.010471204188481676,
+  "mean_actual_mm_per_hour": 9.861320495605469,
+  "mean_predicted_mm_per_hour": 3.5498859882354736,
+  "MAE": 6.3657435999843495,
+  "RMSE": 8.840374327531439,
+  "R2": -1.0234663959843977,
+  "CC": 0.18519056129171166
+}

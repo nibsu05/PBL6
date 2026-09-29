@@ -1,0 +1,59 @@
+# ==============================================================================
+# .gitignore — Cấu hình Git cho dự án PBL6 (Dự báo mưa Đà Nẵng)
+# ==============================================================================
+
+# --- Môi trường Python & Cache ---
+.venv/
+env/
+venv/
+.cache/
+__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite
+.openmeteo_cache.sqlite
+
+# --- Dữ liệu thô kích thước lớn (Raw Big Data) ---
+# Không đẩy các file NetCDF và dữ liệu thô hàng trăm MB lên GitHub
+data/raw_data/era5_netcdf/
+data/raw_data/era5_nc_features/
+*.nc
+*.nc.part
+*.gz
+*.psv
+*.sqlite
+
+# Bỏ qua các file CSV thô lớn trong raw_data (dùng link Drive / Zenodo trong README)
+data/raw_data/*.csv
+data/raw_data/*.txt
+
+# Giữ lại dữ liệu mẫu (Sample data) trong data/samples/
+!data/samples/
+!data/samples/**
+
+# --- Dữ liệu xử lý trung gian kích thước lớn ---
+data/processed/*.csv
+data/processed/*.parquet
+data/processed/surface_only/*.csv
+data/processed/surface_only/*.parquet
+
+# Giữ lại các file báo cáo chẩn đoán định dạng JSON nhẹ trong processed
+!data/processed/*_diagnostics.json
+!data/processed/surface_only/*_diagnostics.json
+
+# --- Models, Plots, Reports & Code (ĐƯỢC GIỮ LẠI ĐẦY ĐỦ TRÊN GITHUB) ---
+# Các model checkpoint (~400 KB) được giữ lại để phục vụ inference ngay:
+!models/
+!models/**
+!plots/
+!plots/**
+!reports/
+!reports/**
+
+# --- IDE & Hệ điều hành ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log

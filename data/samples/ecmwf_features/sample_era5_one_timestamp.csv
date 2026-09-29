@@ -1,0 +1,2 @@
+﻿valid_time_utc,valid_time_local,latitude,longitude,distance_km,cin,cape,tcwv,cin_units,cape_units,tcwv_units
+2024-08-30T00:00:00+00:00,2024-08-30T07:00:00+07:00,16.0,108.25,7.917551712260176,443.8126220703125,1139.5,51.634613037109375,J kg**-1,J kg**-1,kg m**-2

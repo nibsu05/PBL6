@@ -1,0 +1,10 @@
+{
+  "device": "cuda",
+  "best_epoch": 1,
+  "best_val_loss": 1.7780087597969108,
+  "epochs_ran": 8,
+  "feature_count": 31,
+  "train_windows": 68440,
+  "val_windows": 12574,
+  "test_windows": 10123
+}

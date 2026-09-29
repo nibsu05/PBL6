@@ -1,0 +1,33 @@
+{
+  "checkpoint": "C:\\Users\\Admin\\Desktop\\PBL6\\models\\surface_only\\best_surface_model.pth",
+  "checkpoint_sha256": "39931814269107c36640d918300ce0e49f6b56d635ee5abb564fd3e56b5ea6b3",
+  "device": "cuda",
+  "test_windows": 15335,
+  "horizons_h": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "threshold_mm_h_strictly_greater_than": 5.0,
+  "event_gap_hours": 6,
+  "event_match": "Ghép cực đại một-đối-một khi khoảng giờ mưa lớn đầu-cuối giao nhau",
+  "seasons": "DJF/MAM/JJA/SON là quý khí tượng, không mặc định là mùa mưa/khô Đà Nẵng",
+  "season_and_month_metrics": "Gộp các cặp horizon–giờ; một valid hour có thể xuất hiện ở nhiều horizon",
+  "test_first_valid_local": "2024-12-01 03:00:00+07:00",
+  "test_last_valid_local": "2026-09-01 06:00:00+07:00",
+  "raw_observation_status": {
+    "raw_tabular_files_checked": [
+      "enso_oni_2015_2026.csv",
+      "era5_pressure_levels_2015_2026.csv",
+      "era5_sst_2015_2026.csv",
+      "ghcnh-station-list.txt",
+      "openmeteo_danang_2015_2026.csv"
+    ],
+    "independent_observation_file_supplied": false,
+    "independent_observation_evaluated": false,
+    "limitation": "Open-Meteo Historical là dữ liệu mô hình/tái phân tích; cần trạm hoặc radar độc lập để kiểm chứng lượng mưa tại điểm."
+  }
+}

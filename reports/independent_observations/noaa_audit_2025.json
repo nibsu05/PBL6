@@ -1,0 +1,53 @@
+{
+  "station": "VMW00041003 - DA NANG, NOAA GHCNh",
+  "station_coordinates": {
+    "latitude": 16.05,
+    "longitude": 108.2
+  },
+  "year": 2025,
+  "ghcnh_rows": 17189,
+  "ghcnh_hourly_precipitation_values": 0,
+  "ghcnh_6h_reports": 216,
+  "ghcnh_12h_reports": 271,
+  "ghcnh_24h_reports": 358,
+  "ghcnh_6h_quality_codes": {
+    "1.0": 216
+  },
+  "ghcnh_6h_trace_reports": 53,
+  "ghcnh_6h_positive_reports": 163,
+  "ghcnh_6h_matched_test_reports": 216,
+  "isd_rows": 13012,
+  "isd_AA_period_hours_counts": {
+    "12": 41,
+    "18": 22,
+    "24": 142,
+    "06": 26,
+    "99": 134
+  },
+  "paired_6h_diagnostic": {
+    "openmeteo_6h_mm": {
+      "MAE_mm_6h": 5.950462947944524,
+      "RMSE_mm_6h": 12.728825801240408,
+      "mean_bias_mm_6h": -1.9912036515013491,
+      "CC": 0.7967484355346528
+    },
+    "bilstm_6h_mm": {
+      "MAE_mm_6h": 7.486161065308584,
+      "RMSE_mm_6h": 18.485233655853275,
+      "mean_bias_mm_6h": -1.6333459813147786,
+      "CC": 0.3919414558497326
+    },
+    "persistence_6h_mm": {
+      "MAE_mm_6h": 8.068055619023465,
+      "RMSE_mm_6h": 20.60319441598082,
+      "mean_bias_mm_6h": -1.9652776968699914,
+      "CC": 0.29612916533746136
+    }
+  },
+  "caution": "GHCNh thiếu lượng mưa 1 giờ; bản ghi 6 giờ không đều và chủ yếu xuất hiện khi có mưa. Các metric 6 giờ chỉ có điều kiện trên các bản ghi được báo, không đo recall/FAR trên mọi giờ. Giả định DATE là cuối kỳ tích lũy 6 giờ; cần xác nhận với đơn vị trạm.",
+  "sources": {
+    "ghcnh": "https://www.ncei.noaa.gov/products/global-historical-climatology-network-hourly",
+    "isd_format": "https://www.ncei.noaa.gov/pub/data/noaa/isd-format-document.pdf",
+    "openmeteo_hour_definition": "https://open-meteo.com/en/docs/historical-weather-api"
+  }
+}

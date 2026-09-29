@@ -1,0 +1,42 @@
+{
+  "url": "https://cds.climate.copernicus.eu/api",
+  "dataset": "reanalysis-era5-single-levels",
+  "filename": "era5_cin_cape_tcwv_20240830_00.nc",
+  "request": {
+    "product_type": [
+      "reanalysis"
+    ],
+    "variable": [
+      "convective_inhibition",
+      "convective_available_potential_energy",
+      "total_column_water_vapour"
+    ],
+    "year": [
+      "2024"
+    ],
+    "month": [
+      "08"
+    ],
+    "day": [
+      "30"
+    ],
+    "time": [
+      "00:00"
+    ],
+    "data_format": "netcdf",
+    "download_format": "unarchived",
+    "area": [
+      16.5,
+      107.75,
+      15.75,
+      108.5
+    ]
+  },
+  "created_at_utc": "2026-09-23T01:27:26.091988+00:00",
+  "status": "downloaded_and_extracted",
+  "request_id": "863a850a-7aa0-41bd-a52f-3ed56238ef4b",
+  "checked_at_utc": "2026-09-23T01:27:27.832543+00:00",
+  "bytes": 42957,
+  "sha256": "a0d8fdd10a1390f5c6e352ed60f7bb1de28d207ba6386ede724cf9f4df8b038e",
+  "completed_at_utc": "2026-09-23T01:30:14.500765+00:00"
+}

@@ -1,0 +1,29 @@
+# ==============================================================================
+# Requirements — Pipeline thu thập dữ liệu khí tượng Đà Nẵng
+# ==============================================================================
+
+# --- Open-Meteo API client (FlatBuffers-based, hiệu năng cao) ---
+openmeteo-requests>=1.2.0
+
+# --- HTTP caching & retry ---
+requests-cache>=1.1.0
+retry-requests>=2.0.0
+
+# --- Copernicus CDS API client (ERA5 data) ---
+# Yêu cầu cdsapi >= 0.7.0 cho CDS API mới (2024+)
+# Cần cấu hình ~/.cdsapirc trước khi sử dụng
+cdsapi>=0.7.0
+
+# --- Xử lý dữ liệu NetCDF (ERA5 output) ---
+xarray>=2023.1.0
+netCDF4>=1.6.0
+
+# --- Data processing ---
+pandas>=2.0.0
+numpy>=1.24.0
+
+# --- Parquet I/O (engine cho pandas to_parquet/read_parquet) ---
+pyarrow>=12.0.0
+
+# --- HTTP requests (cho NOAA ENSO download) ---
+requests>=2.28.0

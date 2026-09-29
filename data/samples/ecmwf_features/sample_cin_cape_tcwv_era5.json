@@ -1,0 +1,50 @@
+[
+  {
+    "source": "ERA5 reanalysis",
+    "feature": "cin",
+    "value": 443.8126220703125,
+    "units": "J kg**-1",
+    "long_name": "Convective inhibition",
+    "valid_time_utc": "2024-08-30T00:00:00+00:00",
+    "valid_time_local": "2024-08-30T07:00:00+07:00",
+    "latitude": 16.0,
+    "longitude": 108.25,
+    "distance_km": 7.917551712260176,
+    "requested_latitude": 16.0544,
+    "requested_longitude": 108.2022,
+    "is_missing": false,
+    "extracted_at_utc": "2026-09-23T01:30:14.484334+00:00"
+  },
+  {
+    "source": "ERA5 reanalysis",
+    "feature": "cape",
+    "value": 1139.5,
+    "units": "J kg**-1",
+    "long_name": "Convective available potential energy",
+    "valid_time_utc": "2024-08-30T00:00:00+00:00",
+    "valid_time_local": "2024-08-30T07:00:00+07:00",
+    "latitude": 16.0,
+    "longitude": 108.25,
+    "distance_km": 7.917551712260176,
+    "requested_latitude": 16.0544,
+    "requested_longitude": 108.2022,
+    "is_missing": false,
+    "extracted_at_utc": "2026-09-23T01:30:14.488548+00:00"
+  },
+  {
+    "source": "ERA5 reanalysis",
+    "feature": "tcwv",
+    "value": 51.634613037109375,
+    "units": "kg m**-2",
+    "long_name": "Total column vertically-integrated water vapour",
+    "valid_time_utc": "2024-08-30T00:00:00+00:00",
+    "valid_time_local": "2024-08-30T07:00:00+07:00",
+    "latitude": 16.0,
+    "longitude": 108.25,
+    "distance_km": 7.917551712260176,
+    "requested_latitude": 16.0544,
+    "requested_longitude": 108.2022,
+    "is_missing": false,
+    "extracted_at_utc": "2026-09-23T01:30:14.488548+00:00"
+  }
+]

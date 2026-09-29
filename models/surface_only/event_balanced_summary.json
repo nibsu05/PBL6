@@ -1,0 +1,62 @@
+{
+  "validation": {
+    "metrics": {
+      "MAE": 0.3027664075620931,
+      "RMSE": 0.970468275694283,
+      "R2": 0.14481451904162357,
+      "CC": 0.39833382876433
+    },
+    "detection": {
+      "threshold_mm_per_hour": 5.0,
+      "TP": 48,
+      "FP": 115,
+      "FN": 810,
+      "TN": 91037,
+      "precision": 0.294478527607362,
+      "recall": 0.055944055944055944,
+      "F1": 0.0940254652301665
+    },
+    "heavy_count": 858,
+    "heavy_mae": 6.783443450927734
+  },
+  "checkpoint": "C:\\Users\\Admin\\Desktop\\PBL6\\models\\surface_only\\event_balanced.pth",
+  "best_epoch": 11,
+  "epochs_ran": 18,
+  "best_val_loss": 2.736275602957306,
+  "device": "cuda",
+  "sampler": {
+    "train_windows": 71531,
+    "heavy_windows": 1212,
+    "heavy_window_fraction": 0.01694370273028477,
+    "heavy_events": 135,
+    "event_gap_hours": 6,
+    "target_draw_fraction": 0.25
+  },
+  "metrics": {
+    "MAE": 0.29526640997584724,
+    "RMSE": 1.0478202790073772,
+    "R2": 0.13490605840451098,
+    "CC": 0.3893947219413456
+  },
+  "heavy_rain": {
+    "threshold_mm_per_hour": 5.0,
+    "count_horizon_hour_pairs": 702,
+    "fraction_horizon_hour_pairs": 0.007629605477665471,
+    "mean_actual_mm_per_hour": 9.660683631896973,
+    "mean_predicted_mm_per_hour": 1.9144160747528076,
+    "MAE": 7.798292610268945,
+    "RMSE": 9.92098881171822,
+    "R2": -1.7456990930756797,
+    "CC": 0.049126454772581575
+  },
+  "detection": {
+    "threshold_mm_per_hour": 5.0,
+    "TP": 49,
+    "FP": 170,
+    "FN": 653,
+    "TN": 91138,
+    "precision": 0.2237442922374429,
+    "recall": 0.0698005698005698,
+    "F1": 0.10640608034744842
+  }
+}

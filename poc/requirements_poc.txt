@@ -1,0 +1,27 @@
+# ==============================================================================
+# requirements_poc.txt — Dependencies cho PoC Pipeline
+# ==============================================================================
+
+# --- Core ---
+pandas>=2.0.0
+numpy>=1.24.0
+pyarrow>=12.0.0
+
+# --- Deep Learning (PyTorch) ---
+torch>=2.0.0
+torchinfo>=1.8.0
+
+# --- Machine Learning utilities ---
+scikit-learn>=1.3.0
+
+# --- Visualization ---
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# --- ERA5 / NetCDF ---
+cdsapi>=0.7.0
+xarray>=2023.1.0
+netCDF4>=1.6.0
+
+# --- Misc ---
+tqdm>=4.65.0

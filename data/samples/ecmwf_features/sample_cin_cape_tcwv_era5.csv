@@ -1,0 +1,4 @@
+﻿source,feature,value,units,long_name,valid_time_utc,valid_time_local,latitude,longitude,distance_km,requested_latitude,requested_longitude,is_missing,extracted_at_utc
+ERA5 reanalysis,cin,443.8126220703125,J kg**-1,Convective inhibition,2024-08-30T00:00:00+00:00,2024-08-30T07:00:00+07:00,16.0,108.25,7.917551712260176,16.0544,108.2022,False,2026-09-23T01:30:14.484334+00:00
+ERA5 reanalysis,cape,1139.5,J kg**-1,Convective available potential energy,2024-08-30T00:00:00+00:00,2024-08-30T07:00:00+07:00,16.0,108.25,7.917551712260176,16.0544,108.2022,False,2026-09-23T01:30:14.488548+00:00
+ERA5 reanalysis,tcwv,51.634613037109375,kg m**-2,Total column vertically-integrated water vapour,2024-08-30T00:00:00+00:00,2024-08-30T07:00:00+07:00,16.0,108.25,7.917551712260176,16.0544,108.2022,False,2026-09-23T01:30:14.488548+00:00
