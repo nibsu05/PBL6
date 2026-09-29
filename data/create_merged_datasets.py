@@ -154,12 +154,54 @@ def create_dataset_2_full_features_2023_2026(om, sst, pl, oni, thermo):
         logger.info("    * %-25s: %6d / %6d (%.2f%%)", col, valid_cnt, len(res), pct)
 
 
+def create_dataset_3_full_features_2021_2026(om, sst, pl, oni, thermo):
+    """
+    Bản 3: Bản merge ĐẦY ĐỦ từ 2021 đến 2026 (CÓ ĐỦ cả CIN, CAPE, TCWV, Độ ẩm đất).
+    """
+    logger.info("\n" + "=" * 60)
+    logger.info("TẠO BẢN 3: Dữ liệu đầy đủ 2021-2026 (CÓ ĐỦ CIN, CAPE, TCWV, Độ ẩm đất)")
+    logger.info("=" * 60)
+
+    start_date = pd.Timestamp("2021-01-01 00:00:00", tz="UTC")
+    end_date = pd.Timestamp("2026-08-31 23:00:00", tz="UTC")
+    ref_idx = pd.date_range(start_date, end_date, freq="h", tz="UTC")
+
+    # Ghép toàn bộ
+    merged = om.reindex(ref_idx).join(sst, how="left").join(thermo, how="left").join(pl, how="left").join(oni, how="left")
+    
+    # Nội suy ngắn <= 2 giờ cho các biến liên tục
+    merged = interpolate_short_gaps(merged, max_hours=2)
+
+    # Đổi timezone sang Asia/Ho_Chi_Minh
+    merged.index = merged.index.tz_convert(LOCAL_TZ)
+    merged.index.name = "datetime"
+    res = merged.reset_index()
+
+    out_csv = PROCESSED_DIR / "danang_full_features_2021_2026.csv"
+    out_parquet = PROCESSED_DIR / "danang_full_features_2021_2026.parquet"
+    res.to_csv(out_csv, index=False)
+    res.to_parquet(out_parquet, index=False)
+
+    logger.info("✓ Đã lưu Bản 3: %s", out_csv.name)
+    logger.info("  Số dòng: %d mốc giờ (%s -> %s)", len(res), res["datetime"].min(), res["datetime"].max())
+    logger.info("  Các cột (%d): %s", len(res.columns), list(res.columns))
+    
+    # Kiểm tra tỷ lệ đầy đủ của từng cột
+    logger.info("\n  Tỷ lệ dữ liệu hợp lệ (Non-null count):")
+    for col in res.columns:
+        valid_cnt = res[col].notna().sum()
+        pct = (valid_cnt / len(res)) * 100
+        logger.info("    * %-25s: %6d / %6d (%.2f%%)", col, valid_cnt, len(res), pct)
+
+
 def main():
     om, sst, pl, oni, thermo = load_raw_sources()
     create_dataset_1_baseline(om, sst, pl, oni)
     create_dataset_2_full_features_2023_2026(om, sst, pl, oni, thermo)
-    logger.info("\n🎉 ĐÃ TẠO XONG CẢ 2 BẢN MERGE THÀNH CÔNG!")
+    create_dataset_3_full_features_2021_2026(om, sst, pl, oni, thermo)
+    logger.info("\n🎉 ĐÃ TẠO XONG CÁC BẢN MERGE THÀNH CÔNG!")
 
 
 if __name__ == "__main__":
     main()
+
