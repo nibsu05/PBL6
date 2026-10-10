@@ -26,6 +26,7 @@ data/raw_data/era5_nc_features/
 # Bỏ qua các file CSV thô lớn trong raw_data (dùng link Drive / Zenodo trong README)
 data/raw_data/*.csv
 data/raw_data/*.txt
+data/operational/
 
 # Giữ lại dữ liệu mẫu (Sample data) trong data/samples/
 !data/samples/

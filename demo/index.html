@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102849">
+  <title>PBL6 · Dự báo mưa Đà Nẵng</title>
+  <style>
+    :root { color-scheme: light; --ink:#162941; --muted:#60728a; --blue:#2676d9; --sky:#e9f4ff; --line:#dfe7ef; --page:#f4f7fb; --card:#fff; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--page); color:var(--ink); font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    button { font:inherit; cursor:pointer; }
+    a { color:#1768c2; }
+    .container { width:min(1120px,calc(100% - 36px)); margin:auto; }
+    .topbar { background:#102849; color:#fff; }
+    .topbar-inner { min-height:64px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { display:flex; gap:12px; align-items:center; font-weight:750; letter-spacing:.02em; }
+    .brand-mark { width:31px; height:31px; border-radius:10px; background:linear-gradient(135deg,#45c6e5,#3578d8); display:grid; place-items:center; font-size:19px; }
+    .brand small { font-size:11px; color:#a9c5e9; font-weight:500; display:block; letter-spacing:.13em; }
+    .top-right { display:flex; align-items:center; gap:10px; }
+    .nav-link { color:#cfe3f8; text-decoration:none; font-size:13px; font-weight:650; white-space:nowrap; }
+    .nav-link:hover { color:#fff; text-decoration:underline; }
+    .status { display:inline-flex; align-items:center; gap:7px; padding:6px 11px; border-radius:999px; background:#264667; color:#e4f4ff; font-size:12px; white-space:nowrap; }
+    .status::before { content:""; width:7px; height:7px; border-radius:50%; background:#9cb8d9; }
+    .status.live::before,.status.cached::before { background:#5bddae; }
+    .status.stale::before,.status.error::before { background:#ffc578; }
+    .refresh { border:1px solid #54708e; color:#fff; background:transparent; border-radius:9px; padding:7px 12px; }
+    .refresh:hover { background:#244465; }
+    .hero { background:linear-gradient(120deg,#102849 0%,#17466c 60%,#1d6b8e 100%); color:#fff; padding:43px 0 93px; }
+    .eyebrow { font-size:12px; font-weight:750; color:#9fe8ec; letter-spacing:.13em; text-transform:uppercase; }
+    h1 { margin:7px 0 8px; font-size:clamp(30px,5vw,48px); line-height:1.16; letter-spacing:-.035em; }
+    .subtitle { margin:0; max-width:650px; color:#c7dbee; font-size:16px; }
+    .hero-meta { display:flex; flex-wrap:wrap; gap:12px 25px; margin-top:27px; font-size:13px; color:#d7e9fa; }
+    .hero-meta strong { color:white; font-weight:650; }
+    main { margin-top:-60px; position:relative; padding-bottom:35px; }
+    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .card { background:var(--card); border:1px solid var(--line); box-shadow:0 8px 26px rgba(12,34,63,.055); border-radius:16px; }
+    .metric { padding:20px 22px; min-height:128px; }
+    .metric-head { display:flex; gap:7px; align-items:center; color:var(--muted); font-size:13px; font-weight:650; }
+    .metric-value { font-size:35px; line-height:1.15; font-weight:770; letter-spacing:-.04em; margin-top:8px; }
+    .metric-value span { font-size:16px; font-weight:600; color:var(--muted); letter-spacing:0; }
+    .metric-foot { font-size:12px; color:#7a8ca2; margin-top:4px; }
+    .content-grid { display:grid; grid-template-columns:minmax(0,1.8fr) minmax(280px,.9fr); gap:16px; margin-top:18px; }
+    .panel { padding:21px 23px 23px; }
+    .panel h2 { font-size:19px; margin:0 0 3px; letter-spacing:-.015em; }
+    .panel-sub { color:var(--muted); font-size:13px; margin:0; }
+    .panel-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
+    .tabs { display:flex; gap:4px; padding:3px; background:#eef3f8; border-radius:10px; }
+    .tabs button { border:0; border-radius:8px; background:transparent; padding:6px 10px; color:#506881; font-size:12px; font-weight:700; white-space:nowrap; }
+    .tabs button.active { background:#fff; color:#195b9d; box-shadow:0 1px 4px rgba(10,43,78,.12); }
+    .chart-top { display:flex; justify-content:space-between; color:#708299; font-size:12px; margin-top:24px; }
+    .chart-viewport { overflow-x:auto; padding-bottom:5px; }
+    .chart { min-height:207px; display:flex; align-items:flex-end; gap:3px; border-bottom:1px solid #cdd9e5; padding:10px 0 0; }
+    .bar-item { min-width:23px; flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:196px; }
+    .bar { width:min(70%,32px); min-height:3px; background:linear-gradient(#37b7dc,#2374d4); border-radius:5px 5px 0 0; }
+    .bar.dry { background:#d8e5f1; }
+    .bar-label { height:27px; padding-top:5px; font-size:10px; color:#7588a1; white-space:nowrap; }
+    .chart-note { margin-top:12px; font-size:12px; color:#657990; }
+    .periods { display:grid; gap:11px; margin-top:20px; }
+    .period { padding:13px 14px; background:#f5f9fd; border:1px solid #e5eef6; border-radius:11px; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+    .period .day { font-size:13px; font-weight:700; }
+    .period .hours { font-size:11px; color:#788ba0; }
+    .period .amount { font-size:18px; font-weight:760; color:#1b66b3; white-space:nowrap; }
+    .below { display:grid; grid-template-columns:minmax(0,1.8fr) minmax(280px,.9fr); gap:16px; margin-top:16px; }
+    .history-section { margin-top:19px; scroll-margin-top:22px; }
+    .history-header { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; flex-wrap:wrap; }
+    .history-meta { color:#61758c; font-size:12px; margin-top:10px; }
+    .history-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:17px; }
+    .feature-card { padding:15px; border:1px solid #e2ebf3; border-radius:12px; background:#fbfdff; min-width:0; }
+    .feature-card:first-child { grid-column:1/-1; }
+    .feature-top { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+    .feature-top h3 { margin:0; font-size:14px; }
+    .feature-top span { font-size:11px; color:#6e8298; white-space:nowrap; }
+    .feature-svg { width:100%; height:143px; display:block; margin-top:10px; overflow:visible; }
+    .feature-axis { display:flex; justify-content:space-between; color:#8292a5; font-size:11px; }
+    .feature-summary { color:#546d87; font-size:11px; margin-top:7px; }
+    .day-detail { margin-top:22px; padding-top:21px; border-top:1px solid var(--line); }
+    .day-picker { display:flex; align-items:center; gap:9px; color:#536b83; font-size:13px; font-weight:650; }
+    .day-picker select { border:1px solid #c9d8e8; border-radius:9px; padding:7px 10px; color:var(--ink); background:#fff; font:inherit; }
+    .day-summary { margin-top:12px; color:#345a7f; font-size:13px; font-weight:650; }
+    .day-table { margin-top:19px; }
+    .day-table td:first-child { font-weight:650; white-space:nowrap; }
+    .day-table td,.day-table th { white-space:nowrap; }
+    .table-wrap { overflow-x:auto; margin-top:14px; }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th { text-align:left; color:#71839a; font-weight:650; border-bottom:1px solid var(--line); padding:10px 6px; }
+    td { border-bottom:1px solid #edf1f5; padding:10px 6px; }
+    td:last-child, th:last-child { text-align:right; }
+    .rain-cell { font-weight:720; color:#1768bd; }
+    .note-box { background:#eff7ff; border:1px solid #d9eaff; border-radius:11px; padding:13px; color:#365a7e; font-size:13px; margin-top:14px; }
+    .note-box.warning { background:#fff6e7; border-color:#f5dbaa; color:#755521; }
+    .source-list { margin:13px 0 0; padding:0; list-style:none; font-size:13px; }
+    .source-list li { padding:8px 0; border-bottom:1px solid #edf1f5; }
+    .source-list span { display:block; color:#7b8ca1; font-size:11px; }
+    .download { display:inline-block; margin-top:17px; border:1px solid #bbd4ee; background:#fff; color:#1c65a9; border-radius:9px; font-size:13px; font-weight:700; padding:8px 12px; text-decoration:none; }
+    .download:hover { background:#edf6ff; }
+    .empty { min-height:180px; display:grid; place-items:center; color:#647b94; text-align:center; padding:20px; }
+    footer { color:#697d94; font-size:12px; border-top:1px solid #e2e9f1; padding:20px 0 26px; }
+    @media(max-width:800px) { .content-grid,.below,.history-grid { grid-template-columns:1fr; } .stats { gap:9px; } .metric { padding:15px; min-height:111px; } .metric-value { font-size:28px; } .hero { padding:34px 0 85px; } }
+    @media(max-width:560px) { .container { width:min(100% - 24px,1120px); } .brand small { display:none; } .status { font-size:0; padding:8px; } .status::before { margin:0; } .refresh { font-size:12px; padding:6px 8px; } .nav-link { font-size:11px; } .stats { grid-template-columns:1fr 1fr; } .metric:last-child { grid-column:1/-1; } .metric { min-height:94px; } .metric-value { font-size:27px; } .panel { padding:17px; } .panel-head { flex-wrap:wrap; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand"><div class="brand-mark" aria-hidden="true">◕</div><div>PBL6 RAIN LAB<small>BẢN DEMO DỮ LIỆU VẬN HÀNH</small></div></div>
+      <div class="top-right"><a class="nav-link" href="#history">Dữ liệu quá khứ ↓</a><div id="status" class="status" aria-live="polite">Đang tải</div><button id="refresh" class="refresh" type="button">Cập nhật</button></div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="eyebrow">ĐÀ NẴNG · 16.0544°B, 108.2022°Đ</div>
+      <h1>Dự báo lượng mưa</h1>
+      <p class="subtitle">Bản thử nghiệm web sử dụng dự báo ECMWF IFS từ Open-Meteo. Số liệu thể hiện lượng mưa dự báo theo giờ tại một ô lưới gần điểm nghiên cứu.</p>
+      <div class="hero-meta">
+        <div>Truy xuất: <strong id="fetched-at">Đang tải…</strong></div>
+        <div>Múi giờ hiển thị: <strong>Việt Nam (UTC+7)</strong></div>
+        <div>Nguồn: <strong>ECMWF IFS / Open-Meteo</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <div id="message" role="status"></div>
+    <section class="stats" aria-label="Tổng lượng mưa dự báo">
+      <div class="card metric"><div class="metric-head">↗ &nbsp;6 giờ tới</div><div class="metric-value"><span id="total-6">—</span> <span>mm</span></div><div class="metric-foot">Tổng các giờ dự báo còn hiệu lực</div></div>
+      <div class="card metric"><div class="metric-head">◷ &nbsp;24 giờ tới</div><div class="metric-value"><span id="total-24">—</span> <span>mm</span></div><div class="metric-foot">Cộng lượng mưa từng giờ</div></div>
+      <div class="card metric"><div class="metric-head">▤ &nbsp;72 giờ tới</div><div class="metric-value"><span id="total-72">—</span> <span>mm</span></div><div class="metric-foot">Tối đa 72 giờ từ thời điểm hiện tại</div></div>
+    </section>
+
+    <div class="content-grid">
+      <section class="card panel">
+        <div class="panel-head"><div><h2>Mưa theo giờ</h2><p class="panel-sub">Mỗi cột là lượng mưa tích lũy trong một giờ, đơn vị mm.</p></div><div class="tabs" role="tablist" aria-label="Khoảng dự báo"><button class="active" data-span="6" role="tab" aria-selected="true">6 giờ</button><button data-span="24" role="tab" aria-selected="false">24 giờ</button><button data-span="72" role="tab" aria-selected="false">72 giờ</button></div></div>
+        <div class="chart-top"><span id="chart-title">6 giờ tới</span><span id="chart-max"></span></div>
+        <div class="chart-viewport"><div id="chart" class="chart"><div class="empty">Đang tải dữ liệu dự báo…</div></div></div>
+        <div class="chart-note">Giờ trên biểu đồ là thời điểm kết thúc khoảng tích lũy, theo UTC+7.</div>
+      </section>
+      <section class="card panel"><h2>Tổng theo ngày</h2><p class="panel-sub">Tính trên các giờ còn trong cửa sổ dự báo; ngày đầu và cuối có thể chưa trọn 24 giờ.</p><div id="periods" class="periods"><div class="empty">Đang tải…</div></div></section>
+    </div>
+
+    <div class="below">
+      <section class="card panel"><h2>6 giờ kế tiếp</h2><p class="panel-sub">Chi tiết lượng mưa và thời tiết cùng thời điểm.</p><div class="table-wrap"><table><thead><tr><th>Giờ kết thúc</th><th>Mưa</th><th>Nhiệt độ</th><th>Độ ẩm</th><th>Gió</th></tr></thead><tbody id="hour-table"><tr><td colspan="5">Đang tải…</td></tr></tbody></table></div><a id="download" class="download" href="/api/forecast.csv">Tải CSV dự báo</a></section>
+      <section class="card panel"><h2>Thu thập dự báo tự động</h2><p class="panel-sub">Backend kiểm tra mỗi 30 phút; ECMWF IFS thường có bản chạy mới mỗi 6 giờ.</p><ul class="source-list"><li>Nguồn và điểm nghiên cứu <span><a href="https://open-meteo.com/en/docs/ecmwf-api" target="_blank" rel="noopener">ECMWF IFS qua Open-Meteo</a> · 16.0544°B, 108.2022°Đ</span></li><li>Ô lưới trả về <span id="grid-point">—</span></li><li>Thu thập thành công gần nhất <span id="last-success">Đang chờ…</span></li><li>Kiểm tra nguồn gần nhất <span id="last-attempt">Đang chờ…</span></li><li>Snapshot lưu gần nhất <span id="last-snapshot">Đang chờ…</span></li><li>Lần kiểm tra tự động tiếp theo <span id="next-attempt">Đang chờ…</span></li><li>Tình trạng nguồn và lưu trữ <span id="collect-error">Đang chờ…</span></li></ul><div class="note-box">Đây là <strong>dự báo từ mô hình thời tiết</strong>, không phải lượng mưa trạm đo. Bi-LSTM và Informer của dự án đang được kiểm định riêng trước khi đưa vào hiển thị chính.</div><div class="note-box warning">Khi có nguy cơ thiên tai, xem <a href="https://nchmf.gov.vn/kttv/" target="_blank" rel="noopener">bản tin chính thức của Trung tâm Dự báo KTTV Quốc gia</a>.</div></section>
+    </div>
+
+    <section id="history" class="card panel history-section" aria-labelledby="history-heading">
+      <div class="history-header">
+        <div><h2 id="history-heading">Dữ liệu quá khứ</h2><p class="panel-sub">Ước tính lịch sử ECMWF IFS tại điểm Đà Nẵng qua Open-Meteo; dùng để khảo sát, không phải số đo trạm.</p></div>
+        <div class="tabs" role="tablist" aria-label="Khoảng dữ liệu quá khứ"><button class="active" data-history-days="7" role="tab" aria-selected="true">7 ngày · theo giờ</button><button data-history-days="30" role="tab" aria-selected="false">30 ngày · theo ngày</button></div>
+      </div>
+      <div id="history-meta" class="history-meta">Đang tải dữ liệu lịch sử…</div>
+      <div id="history-message" role="status"></div>
+      <div id="history-grid" class="history-grid"><div class="empty">Đang tải các biểu đồ…</div></div>
+      <div class="chart-note">Mưa là tổng trong giờ trước thời điểm ghi; các biến còn lại là giá trị tại thời điểm ghi. Chế độ 30 ngày cộng mưa theo ngày và lấy trung bình ngày cho các biến khác. Dữ liệu lịch sử được backend tải lại mỗi 24 giờ.</div>
+      <div class="day-detail" id="day-detail">
+        <div class="history-header"><div><h2 id="day-detail-title">Chi tiết một ngày</h2><p class="panel-sub">Chọn một ngày đã hoàn tất để xem riêng 24 giờ của từng đặc trưng.</p></div><label class="day-picker" for="history-date">Ngày <select id="history-date" aria-label="Chọn ngày lịch sử" disabled></select></label></div>
+        <div id="day-summary" class="day-summary">Đang tải ngày gần nhất…</div>
+        <div id="day-grid" class="history-grid"></div>
+        <div class="table-wrap day-table"><table><thead><tr><th>Giờ kết thúc</th><th>Mưa (mm)</th><th>Nhiệt độ (°C)</th><th>Độ ẩm (%)</th><th>Áp suất (hPa)</th><th>Gió (km/h)</th></tr></thead><tbody id="day-table-body"><tr><td colspan="6">Đang tải…</td></tr></tbody></table></div>
+        <div class="chart-note">Mốc 00:00 ngày kế tiếp là lượng mưa của 23:00–00:00 ngày đã chọn. Các biến còn lại trong hàng đó là giá trị tại 00:00.</div>
+      </div>
+    </section>
+  </main>
+  <footer><div class="container">PBL6 · Demo triển khai dữ liệu dự báo thời gian thực · Không có API key VRain · Dữ liệu trên trang có thể thay đổi khi bản chạy mô hình được cập nhật.</div></footer>
+  <script>
+    const zone = 'Asia/Ho_Chi_Minh';
+    const fmtHour = new Intl.DateTimeFormat('vi-VN', {timeZone:zone, hour:'2-digit', minute:'2-digit', hourCycle:'h23'});
+    const fmtDate = new Intl.DateTimeFormat('vi-VN', {timeZone:zone, day:'2-digit', month:'2-digit', year:'numeric'});
+    const fmtStamp = new Intl.DateTimeFormat('vi-VN', {timeZone:zone, day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit', hourCycle:'h23'});
+    const dateKey = new Intl.DateTimeFormat('en-CA', {timeZone:zone, year:'numeric', month:'2-digit', day:'2-digit'});
+    let forecast = null;
+    let span = 6;
+    let historyDays = 7;
+    let history = null;
+    let selectedDate = null;
+    const byId = id => document.getElementById(id);
+    const amount = value => Number(value).toLocaleString('vi-VN', {minimumFractionDigits:1, maximumFractionDigits:1});
+    const instant = value => new Date(value);
+
+    function showMessage(text, warning=false) {
+      const box = byId('message'); box.replaceChildren();
+      if (!text) return;
+      const note = document.createElement('div'); note.className = 'note-box' + (warning ? ' warning' : '');
+      note.style.margin = '0 0 16px'; note.textContent = text; box.appendChild(note);
+    }
+    function setStatus(status) {
+      const node = byId('status'); node.className = 'status ' + status;
+      node.textContent = ({live:'Vừa cập nhật',cached:'Dữ liệu mới',stale:'Dữ liệu cũ',error:'Chưa có dữ liệu'})[status] || 'Đang tải';
+    }
+    function renderChart() {
+      const hours = forecast.hours.slice(0, span);
+      const max = Math.max(1, ...hours.map(item => item.precipitation_mm));
+      byId('chart-title').textContent = span + ' giờ tới';
+      byId('chart-max').textContent = 'Đỉnh: ' + amount(Math.max(0, ...hours.map(item => item.precipitation_mm))) + ' mm/giờ';
+      const chart = byId('chart'); chart.replaceChildren();
+      chart.style.minWidth = span === 72 ? '1450px' : span === 24 ? '660px' : '0';
+      hours.forEach((item, index) => {
+        const wrap = document.createElement('div'); wrap.className = 'bar-item';
+        const bar = document.createElement('div'); bar.className = 'bar' + (item.precipitation_mm === 0 ? ' dry' : '');
+        bar.style.height = Math.max(3, Math.round(item.precipitation_mm / max * 160)) + 'px';
+        bar.title = fmtStamp.format(instant(item.valid_at)) + ' · ' + amount(item.precipitation_mm) + ' mm';
+        const label = document.createElement('div'); label.className = 'bar-label';
+        label.textContent = index % (span === 72 ? 6 : span === 24 ? 3 : 1) === 0 ? fmtHour.format(instant(item.valid_at)) : '';
+        wrap.append(bar,label); chart.appendChild(wrap);
+      });
+    }
+    function renderPeriods() {
+      const groups = new Map();
+      forecast.hours.forEach(item => {
+        const key = dateKey.format(instant(item.valid_at));
+        const group = groups.get(key) || {date:item.valid_at, count:0, sum:0};
+        group.count += 1; group.sum += item.precipitation_mm; groups.set(key, group);
+      });
+      const target = byId('periods'); target.replaceChildren();
+      for (const group of groups.values()) {
+        const row = document.createElement('div'); row.className = 'period';
+        const left = document.createElement('div');
+        const day = document.createElement('div'); day.className = 'day'; day.textContent = fmtDate.format(instant(group.date));
+        const hours = document.createElement('div'); hours.className = 'hours'; hours.textContent = group.count + ' giờ trong dự báo';
+        const total = document.createElement('div'); total.className = 'amount'; total.textContent = amount(group.sum) + ' mm';
+        left.append(day,hours); row.append(left,total); target.appendChild(row);
+      }
+    }
+    function renderTable() {
+      const target = byId('hour-table'); target.replaceChildren();
+      forecast.hours.slice(0,6).forEach(item => {
+        const row = document.createElement('tr');
+        [fmtStamp.format(instant(item.valid_at)), amount(item.precipitation_mm) + ' mm', amount(item.temperature_c) + ' °C', Math.round(item.relative_humidity_pct) + '%', amount(item.wind_speed_kmh) + ' km/h'].forEach((value,index) => {
+          const cell = document.createElement('td'); cell.textContent = value;
+          if (index === 1) cell.className = 'rain-cell'; row.appendChild(cell);
+        });
+        target.appendChild(row);
+      });
+    }
+    function renderCollection(collection) {
+      const localTime = value => value ? fmtStamp.format(instant(value)) + ' (UTC+7)' : 'Chưa có';
+      byId('last-success').textContent = localTime(collection.last_success_at);
+      byId('last-attempt').textContent = localTime(collection.last_attempt_at);
+      byId('last-snapshot').textContent = localTime(collection.last_snapshot_at);
+      byId('next-attempt').textContent = localTime(collection.next_scheduled_at);
+      byId('collect-error').textContent = collection.last_error || collection.last_storage_error || 'Hoạt động bình thường';
+    }
+    const historyFeatures = [
+      {key:'precipitation_mm', title:'Lượng mưa', hourlyUnit:'mm/giờ', dailyUnit:'mm/ngày', color:'#2676d9', kind:'bar'},
+      {key:'temperature_c', title:'Nhiệt độ 2 m', hourlyUnit:'°C', dailyUnit:'°C', color:'#e88649', kind:'line'},
+      {key:'relative_humidity_pct', title:'Độ ẩm tương đối', hourlyUnit:'%', dailyUnit:'%', color:'#1a9e9b', kind:'line'},
+      {key:'surface_pressure_hpa', title:'Áp suất bề mặt', hourlyUnit:'hPa', dailyUnit:'hPa', color:'#9b69c8', kind:'line'},
+      {key:'wind_speed_kmh', title:'Tốc độ gió 10 m', hourlyUnit:'km/h', dailyUnit:'km/h', color:'#597fa6', kind:'line'},
+    ];
+    function historyPoints(feature) {
+      if (historyDays === 7) {
+        const first = history.daily.at(-7).date_local;
+        return history.rows.filter(row => row.date_local >= first).map(row => ({label:fmtStamp.format(instant(row.valid_at)), value:Number(row[feature.key])}));
+      }
+      return history.daily.map(day => ({label:day.date_local.slice(8,10)+'/'+day.date_local.slice(5,7), value:Number(day[feature.key])}));
+    }
+    function svgElement(name, attrs={}) {
+      const item = document.createElementNS('http://www.w3.org/2000/svg',name);
+      Object.entries(attrs).forEach(([key,value]) => item.setAttribute(key,String(value)));
+      return item;
+    }
+    function drawFeature(feature, points, unit) {
+      const values = points.map(item => item.value).filter(Number.isFinite);
+      if (!values.length) return null;
+      const low = feature.kind === 'bar' ? 0 : Math.min(...values);
+      const high = Math.max(...values);
+      const range = Math.max(high-low, feature.kind === 'bar' ? 1 : 0.2);
+      const bottom = 125, top = 10, left = 10, width = 620;
+      const x = i => left + (points.length === 1 ? width/2 : i*width/(points.length-1));
+      const y = value => bottom - (value-low)/range*(bottom-top);
+      const card = document.createElement('article'); card.className = 'feature-card';
+      const head = document.createElement('div'); head.className = 'feature-top';
+      const title = document.createElement('h3'); title.textContent = feature.title;
+      const unitText = document.createElement('span'); unitText.textContent = unit;
+      head.append(title,unitText); card.appendChild(head);
+      const svg = svgElement('svg',{viewBox:'0 0 640 143',class:'feature-svg',role:'img','aria-label':feature.title+' theo thời gian'});
+      [10,67,125].forEach(level => svg.appendChild(svgElement('line',{x1:10,y1:level,x2:630,y2:level,stroke:'#e5edf5','stroke-width':1})));
+      if (feature.kind === 'bar') {
+        const step = width / Math.max(1,points.length);
+        points.forEach((point,i) => {
+          const barHeight = Math.max(1.5,bottom-y(point.value));
+          const bar = svgElement('rect',{x:left+i*step+step*.12,y:bottom-barHeight,width:Math.max(1,step*.76),height:barHeight,fill:feature.color,rx:1});
+          const hint = svgElement('title'); hint.textContent = point.label+' · '+amount(point.value)+' '+unit;
+          bar.appendChild(hint); svg.appendChild(bar);
+        });
+      } else {
+        const path = points.map((point,i) => (i === 0 ? 'M' : 'L')+x(i).toFixed(1)+' '+y(point.value).toFixed(1)).join(' ');
+        svg.appendChild(svgElement('path',{d:path,fill:'none',stroke:feature.color,'stroke-width':2.5,'stroke-linecap':'round','stroke-linejoin':'round'}));
+      }
+      card.appendChild(svg);
+      const axis = document.createElement('div'); axis.className = 'feature-axis';
+      const first = document.createElement('span'); first.textContent = points[0].label;
+      const last = document.createElement('span'); last.textContent = points.at(-1).label;
+      axis.append(first,last); card.appendChild(axis);
+      const stats = document.createElement('div'); stats.className = 'feature-summary';
+      stats.textContent = feature.kind === 'bar'
+        ? 'Tổng kỳ: '+amount(values.reduce((sum,value)=>sum+value,0))+' mm · Cao nhất: '+amount(high)+' '+unit
+        : 'Thấp nhất: '+amount(Math.min(...values))+' '+unit+' · Cao nhất: '+amount(high)+' '+unit;
+      card.appendChild(stats);
+      return card;
+    }
+    function renderSelectedDay() {
+      if (!history || !selectedDate) return;
+      const rows = history.rows.filter(row => row.date_local === selectedDate);
+      const daily = history.daily.find(day => day.date_local === selectedDate);
+      const title = selectedDate.slice(8,10)+'/'+selectedDate.slice(5,7)+'/'+selectedDate.slice(0,4);
+      byId('day-detail-title').textContent = 'Chi tiết ngày '+title;
+      if (rows.length !== 24 || !daily) {
+        byId('day-summary').textContent = 'Ngày này chưa có đủ 24 giờ trong bộ lịch sử.';
+        byId('day-grid').replaceChildren(); byId('day-table-body').replaceChildren();
+        return;
+      }
+      byId('day-summary').textContent = 'Tổng mưa: '+amount(daily.precipitation_mm)+' mm · Nhiệt độ trung bình: '+amount(daily.temperature_c)+' °C · '+rows.length+' giờ đầy đủ';
+      const charts = byId('day-grid'); charts.replaceChildren();
+      historyFeatures.forEach(feature => {
+        const points = rows.map(row => ({label:fmtStamp.format(instant(row.valid_at)), value:Number(row[feature.key])}));
+        const chart = drawFeature(feature,points,feature.hourlyUnit);
+        if (chart) charts.appendChild(chart);
+      });
+      const table = byId('day-table-body'); table.replaceChildren();
+      rows.forEach(item => {
+        const line = document.createElement('tr');
+        [fmtStamp.format(instant(item.valid_at)),amount(item.precipitation_mm),amount(item.temperature_c),amount(item.relative_humidity_pct),amount(item.surface_pressure_hpa),amount(item.wind_speed_kmh)].forEach((value,index) => {
+          const cell = document.createElement('td'); cell.textContent = value;
+          if (index === 1) cell.className = 'rain-cell';
+          line.appendChild(cell);
+        });
+        table.appendChild(line);
+      });
+    }
+    function renderHistory(data) {
+      history = data;
+      const first = historyDays === 7 ? data.daily.at(-7).date_local : data.start_date_local;
+      byId('history-meta').textContent = 'Từ '+first+' đến '+data.end_date_local+' (giờ Việt Nam) · '+(historyDays === 7 ? 168 : 720)+' mốc giờ · Tải lúc '+fmtStamp.format(instant(data.fetched_at));
+      const message = byId('history-message'); message.replaceChildren();
+      if (data.notice) { const note=document.createElement('div'); note.className='note-box warning'; note.textContent=data.notice; message.appendChild(note); }
+      const grid = byId('history-grid'); grid.replaceChildren();
+      historyFeatures.forEach(feature => {
+        const chart=drawFeature(feature,historyPoints(feature),historyDays === 7 ? feature.hourlyUnit : feature.dailyUnit);
+        if (chart) grid.appendChild(chart);
+      });
+      const dateInput = byId('history-date');
+      dateInput.replaceChildren();
+      data.daily.slice().reverse().forEach(day => {
+        const option = document.createElement('option');
+        option.value = day.date_local;
+        option.textContent = day.date_local.slice(8,10)+'/'+day.date_local.slice(5,7)+'/'+day.date_local.slice(0,4);
+        dateInput.appendChild(option);
+      });
+      dateInput.disabled = false;
+      if (!selectedDate || selectedDate < data.start_date_local || selectedDate > data.end_date_local) selectedDate = data.end_date_local;
+      dateInput.value = selectedDate;
+      renderSelectedDay();
+    }
+    async function loadHistory() {
+      try {
+        const response = await fetch('/api/history?days=30',{cache:'no-store'});
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Không tải được dữ liệu quá khứ');
+        renderHistory(data);
+      } catch (error) {
+        byId('history-meta').textContent = 'Dữ liệu lịch sử tạm thời chưa sẵn có';
+        const box = byId('history-message'); box.replaceChildren();
+        const note = document.createElement('div'); note.className='note-box warning'; note.textContent=error.message; box.appendChild(note);
+        if (!history) byId('history-grid').replaceChildren();
+      }
+    }
+    function render(data) {
+      forecast = data;
+      setStatus(data.status);
+      byId('fetched-at').textContent = fmtStamp.format(instant(data.fetched_at));
+      const grid = data.grid_location || {};
+      byId('grid-point').textContent = Number(grid.latitude).toFixed(4) + '°B, ' + Number(grid.longitude).toFixed(4) + '°Đ';
+      renderCollection(data.collection);
+      [6,24,72].forEach(n => byId('total-' + n).textContent = amount(data.totals_mm[n]));
+      showMessage(data.notice || (data.status === 'stale' ? 'Dữ liệu đang cũ; hãy kiểm tra thời điểm truy xuất.' : ''), data.status === 'stale');
+      renderChart(); renderPeriods(); renderTable();
+    }
+    async function load(force=false) {
+      byId('refresh').disabled = true;
+      try {
+        const response = await fetch('/api/forecast' + (force ? '?refresh=1' : ''), {cache:'no-store'});
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Không tải được dữ liệu');
+        render(data);
+      } catch (error) {
+        if (!forecast) setStatus('error');
+        showMessage(error.message + '. Hãy kiểm tra kết nối rồi thử Cập nhật.', true);
+        try {
+          const status = await fetch('/api/collection', {cache:'no-store'});
+          if (status.ok) renderCollection(await status.json());
+        } catch (_) { /* Trang vẫn báo lỗi dự báo phía trên. */ }
+      } finally { byId('refresh').disabled = false; }
+    }
+    document.querySelectorAll('[data-span]').forEach(button => button.addEventListener('click', () => {
+      span = Number(button.dataset.span);
+      document.querySelectorAll('[data-span]').forEach(other => { const active = other === button; other.classList.toggle('active', active); other.setAttribute('aria-selected', String(active)); });
+      if (forecast) renderChart();
+    }));
+    document.querySelectorAll('[data-history-days]').forEach(button => button.addEventListener('click', () => {
+      historyDays = Number(button.dataset.historyDays);
+      document.querySelectorAll('[data-history-days]').forEach(other => {const active=other === button; other.classList.toggle('active',active); other.setAttribute('aria-selected',String(active));});
+      if (history) renderHistory(history); else loadHistory();
+    }));
+    byId('history-date').addEventListener('change', event => {
+      selectedDate = event.target.value;
+      renderSelectedDay();
+    });
+    byId('refresh').addEventListener('click', () => load(true));
+    load(); loadHistory();
+    setInterval(() => load(), 60 * 1000);
+    setInterval(() => loadHistory(), 10 * 60 * 1000);
+  </script>
+</body>
+</html>

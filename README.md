@@ -50,6 +50,11 @@ Dự án nghiên cứu và xây dựng hệ thống dự báo lượng mưa hạ
 
 ## 🚀 Hướng Dẫn Cài Đặt và Chạy
 
+### Web demo dự báo Đà Nẵng (không cần VRain API key)
+
+Chạy `python demo/app.py --port 8765`, sau đó mở
+`http://127.0.0.1:8765/`. Xem [hướng dẫn và kịch bản báo cáo](demo/README.md).
+
 ### 1. Cài đặt môi trường
 
 ```bash

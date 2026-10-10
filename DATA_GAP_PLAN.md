@@ -46,3 +46,17 @@ Nhánh bề mặt toàn thời gian và đối chứng persistence đã được
 ```
 
 Lệnh `--prepare-only` tạo master CSV/Parquet, đặc trưng, scaler và báo cáo số cửa sổ. Lệnh cuối huấn luyện, lưu checkpoint và xuất bốn hình tại `plots/`. Môi trường `.venv` trong dự án này đã được cài xong; có thể chạy thẳng hai lệnh cuối. Khi chỉ muốn train lại trên master sẵn có, thêm `--reuse-merged` để khỏi đọc lại 265 file NetCDF.
+
+---
+
+## Cập nhật trạng thái xử lý dữ liệu khuyết
+
+1. **ERA5 PL850**: Toàn bộ 15 tháng (11.016 giờ) khuyết đã được tải bù về 5 tệp NetCDF tại `data/raw_data/era5_nc_features/` và trích xuất vào `era5_pressure_levels_2015_2026.csv`. Dữ liệu đạt đủ **102.264 mốc giờ** (2015-01-01 07:00 -> 2026-09-01 06:00 UTC+7), không còn gap nào.
+2. **NOAA ONI**: Đã tải bổ sung các tháng 07–08/2026 trực tiếp từ NOAA CPC, cập nhật vào `enso_oni_2015_2026.csv` đạt đủ **102.264 mốc giờ**.
+3. **ERA5 Thermo & Soil**: Toàn bộ 11.5 năm (2015–2026) gồm 4 biến CAPE, CIN, TCWV, Soil Moisture (`swvl1`) đã được tải bù hoàn tất 100% từ Copernicus CDS API về `data/raw_data/era5_nc_features/`. Tệp `era5_thermo_soil_2015_2026.csv` đạt đủ **102.264 mốc giờ**. Các giá trị thiếu của `cin` đã được chuẩn hóa quy ước về $0.0\text{ J/kg}$ khi không có đối lưu.
+4. **Bản Master Merged & Full Features**:
+   - `danang_master_merged.csv` & `danang_baseline_2015_2026_no_thermo_soil.csv`: **102.264 mốc giờ** (0 gap, 0 NaN).
+   - `danang_full_features_2015_2026.csv`: **102.264 mốc giờ** trọn vẹn 11.5 năm với đầy đủ 16 biến thời tiết, nhiệt động học và biển (0 gap, 0 NaN).
+   - `danang_full_features_2021_2026.csv` (49.656 giờ) & `danang_full_features_2023_2026.csv` (32.136 giờ): đều đạt 0 gap, 0 NaN.
+
+
