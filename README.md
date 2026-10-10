@@ -37,6 +37,4 @@ Dự án nghiên cứu và xây dựng hệ thống dự báo lượng mưa hạ
 
 ---
 
-## 📦 Dữ Liệu Dự Án (Google Drive)
-
-Link tải dữ liệu: [Google Drive](https://drive.google.com/drive/folders/1FQtUt-nV7P2UCDxUuN5Poeub0Cc01pVl?usp=sharing)
+Data: [Google Drive](https://drive.google.com/drive/folders/1FQtUt-nV7P2UCDxUuN5Poeub0Cc01pVl?usp=sharing)
