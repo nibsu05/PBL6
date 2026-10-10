@@ -3,6 +3,14 @@
 Chạy bằng Python của bộ công cụ tài liệu có python-docx. Hình và JSON được
 tạo trước bởi build_progress_report_assets.py bằng môi trường của dự án.
 """
+
+import sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+
 from pathlib import Path
 import json
 import csv
@@ -13,7 +21,6 @@ from docx.enum.table import WD_TABLE_ALIGNMENT, WD_CELL_VERTICAL_ALIGNMENT
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
-ROOT = Path(__file__).resolve().parent
 OUT = ROOT / 'reports/professor_report'
 D = json.loads((OUT / 'report_data.json').read_text(encoding='utf-8'))
 TEST = {r['policy']: r for r in D['test_metrics']}

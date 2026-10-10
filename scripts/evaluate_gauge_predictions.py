@@ -6,6 +6,13 @@ không chạy script này và không tạo chỉ số đánh giá độc lập g
 
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+
 import argparse
 import hashlib
 import json
@@ -18,7 +25,6 @@ import pandas as pd
 
 from src.event_evaluation import detection_scores, score_episodes, score_pairs
 
-ROOT = Path(__file__).resolve().parent
 THRESHOLD = 5.0
 MODELS = ("dual_head", "standard", "persistence")
 

@@ -8,6 +8,13 @@ checkpoint và ngưỡng cảnh báo theo validation.
 
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+
 import argparse
 import json
 import logging
@@ -37,7 +44,6 @@ from src.train_bilstm import predict as predict_standard
 from src.train_rain_alert import fit_alert_model, predict_alert
 from src.visualize_and_evaluate import _metrics
 
-ROOT = Path(__file__).resolve().parent
 LOGGER = logging.getLogger(__name__)
 THRESHOLD_MM_H = 5.0
 MODEL_NAMES = ("dual_head", "standard", "persistence")

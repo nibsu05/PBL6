@@ -10,6 +10,13 @@ DataLoader của train thay đổi; kết quả đa nguồn cũ được giữ n
 
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+
 import argparse
 import json
 import logging
@@ -27,7 +34,6 @@ from src.merge_raw_data import SURFACE_COLUMNS
 from src.train_bilstm import TrainingConfig, predict, train_bilstm
 from src.visualize_and_evaluate import _metrics, evaluate_and_visualize
 
-ROOT = Path(__file__).resolve().parent
 LOGGER = logging.getLogger(__name__)
 HEAVY_THRESHOLD = 5.0
 

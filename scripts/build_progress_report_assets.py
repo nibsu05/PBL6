@@ -1,5 +1,12 @@
 """Tạo hình 300 DPI và số liệu có thể truy vết cho báo cáo tiến độ."""
 from __future__ import annotations
+
+import sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 import json
 import os
 from pathlib import Path
@@ -13,7 +20,6 @@ import matplotlib.dates as mdates
 from matplotlib.patches import FancyBboxPatch
 from run_rain_alert_experiment import _jsonable
 
-ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "reports/professor_report"
 FIG = OUT / "figures"
 STUDY = ROOT / "reports/threshold_temporal_study"

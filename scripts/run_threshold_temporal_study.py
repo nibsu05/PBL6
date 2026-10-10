@@ -6,6 +6,13 @@ ngưỡng trên calibration, rồi đánh giá giai đoạn kế tiếp.
 """
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+
 import argparse
 import hashlib
 import json
@@ -28,7 +35,6 @@ from src.train_bilstm import TrainingConfig, train_bilstm, predict
 from src.visualize_and_evaluate import _metrics
 from run_rain_alert_experiment import _jsonable, _evaluate_split, _load_standard, select_threshold
 
-ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "reports" / "threshold_temporal_study"
 LOG = logging.getLogger(__name__)
 POLICY_NAMES = ("dual_global", "dual_precision30", "standard", "persistence")

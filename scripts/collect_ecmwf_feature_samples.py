@@ -4,6 +4,13 @@ Mẫu được lưu tách khỏi dữ liệu huấn luyện. Lưu ID request đ�
 request cũ, không tạo hàng đợi trùng. Không ghi token vào log hay metadata.
 """
 from __future__ import annotations
+
+import sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 import argparse
 import hashlib
 import json
@@ -18,7 +25,6 @@ import xarray as xr
 from cdsapi.api import read_config
 from ecmwf.datastores import Client
 
-ROOT = Path(__file__).resolve().parent
 OUT = ROOT / 'data/samples/ecmwf_features'
 LAT, LON = 16.0544, 108.2022
 REQUESTS = {

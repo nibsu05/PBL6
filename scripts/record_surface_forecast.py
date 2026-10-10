@@ -7,6 +7,13 @@ luồng thời gian thực. Mỗi lần phát hành lưu một file bất biến
 
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+
 import argparse
 import hashlib
 import json
@@ -23,7 +30,6 @@ from src.bilstm_model import BiLSTM
 from src.feature_engineering import engineer_features
 from src.rain_alert_model import RainAlertBiLSTM
 
-ROOT = Path(__file__).resolve().parent
 SURFACE = ("temperature_2m", "relative_humidity_2m", "surface_pressure",
            "wind_speed_10m", "wind_direction_10m", "precipitation")
 

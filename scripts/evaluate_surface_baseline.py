@@ -8,6 +8,13 @@ precipitation_mm_h đã quy về cùng giờ hiệu lực với Open-Meteo.
 
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+
 import argparse
 import hashlib
 import json
@@ -33,7 +40,6 @@ from src.dataset_prep import prepare_datasets
 from src.event_evaluation import score_by_horizon, score_episodes
 from src.train_bilstm import predict
 
-ROOT = Path(__file__).resolve().parent
 LOGGER = logging.getLogger(__name__)
 FORECAST_COLS = ("predicted_mm", "persistence_mm", "zero_mm")
 THRESHOLD = 5.0

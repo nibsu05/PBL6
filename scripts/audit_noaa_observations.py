@@ -7,6 +7,13 @@ có bản ghi là 0 mm. Đối chiếu 6 giờ dưới đây chỉ dùng các k�
 
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+
 import gzip
 import json
 import re
@@ -16,7 +23,6 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parent
 RAW = ROOT / "data" / "raw_data"
 OUT = ROOT / "reports" / "independent_observations"
 GHCNH = RAW / "ghcnh_danang_2025.psv"

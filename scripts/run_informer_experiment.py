@@ -1,3 +1,9 @@
+import sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 import argparse
 import os
 import torch
@@ -5,6 +11,7 @@ import json
 import numpy as np
 import logging
 from pathlib import Path
+import sys
 
 from experiments.informer_ablation_config import get_experiment, list_experiments
 from src.informer_dataset import prepare_informer_data

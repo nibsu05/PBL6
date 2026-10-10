@@ -6,6 +6,13 @@ có không ghi issued_at và available_at. Có thể truyền file as-of thật 
 
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+
 import argparse
 import json
 import sys
@@ -15,7 +22,6 @@ import pandas as pd
 
 from src.availability_audit import audit_asof_windows
 
-ROOT = Path(__file__).resolve().parent
 
 
 def main() -> None:
