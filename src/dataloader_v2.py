@@ -52,7 +52,7 @@ FEATURE_GROUPS: dict[str, dict[str, tuple[str, ...]]] = {
                     "rh850_pct", "u500", "v500", "q500_gkg", "t500_c", "w500_pas", "shear_850_500")},
     "A4": {"past": ("era5_tp_mm",), "future": ("era5_tp_mm", "cape", "tcwv", "ivt_mag", "u850", "v850")},
     "A5": {"past": ("ctx_tcwv", "ctx_ivt_mag")},
-    # Sản phẩm B — Informer/TFT 1–3 ngày
+    # Sản phẩm B — TFT 1–3 ngày (Informer chỉ chạy một cấu hình để đối chiếu)
     "B0": {"past": SURFACE, "obs": ("gsmap_mm",)},
     "B1": {"past": ("cold_surge_dp_hpa", "dp_tonkin_south_hpa", "u850", "v850", "tcwv", "ivt_u", "ivt_v", "ivt_mag")},
     "B2": {"past": ("cape", "cin_capped", "has_lfc", "kx", "tt")},

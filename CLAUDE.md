@@ -2,6 +2,7 @@
 
 > **Đọc file này trước khi làm bất cứ việc gì.** Kế hoạch chi tiết, kèm số liệu bằng chứng, nằm ở
 > [`project_plan_v2.md`](project_plan_v2.md); đó là nguồn sự thật. Cập nhật lần cuối: 11/10/2026.
+> **Kế hoạch dành cho nhóm** (quy trình, giai đoạn hiện tại, lộ trình, phân công) nằm ở [`KE_HOACH_DU_AN.md`](KE_HOACH_DU_AN.md). Mỗi khi xong một giai đoạn hoặc chốt một quyết định, cập nhật các mục 4 và 6 của file đó.
 > `project_master_plan.md`, `SURFACE_BASELINE_REPORT.md`, `DATA_GAP_PLAN.md` và `reports/informer_baseline_report.md`
 > là tài liệu cũ, do agent khác viết. Chỉ dùng chúng để tham khảo lịch sử. Một số nhận định trong đó đã bị bác bỏ (xem mục "Quyết định").
 
@@ -26,7 +27,7 @@
   - Hạn: 1–3 ngày, có thể mở rộng đến 7 ngày.
   - Phát hành lúc 00/06/12/18 UTC.
   - Hiển thị: tổng mưa ngày và xác suất vượt 16/50/100 mm.
-  - Mô hình: xem mục "Chờ chốt".
+  - Mô hình: **TFT** (Temporal Fusion Transformer), chốt ngày 11/10/2026 vì giảng viên không bắt buộc Informer. Chi tiết ở plan mục 4.4.
 - **Thuật ngữ** (Thông tư 08/2022): cực ngắn ≤12 h; ngắn 12–72 h; vừa 3–10 ngày. **Không gọi 24–72 h là "dài hạn".**
 - **Đơn vị không gian:** ô 0,1° (lưới GSMaP).
   - Một tỉnh là tập các ô nằm trong ranh giới 34 tỉnh mới (Nghị quyết 202/2025). Đà Nẵng mới gồm Đà Nẵng cũ và Quảng Nam.
@@ -53,22 +54,23 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 4. **Vệ tinh gần như không thấy mưa mùa đông (tháng 11–2) ở Trung Bộ.**
    - Vào mùa đông, nhãn theo giờ thực chất là tổng mưa ngày bị trải đều ra các giờ.
    - Sản phẩm A chỉ đánh giá theo giờ và tổng 3 h trên tháng 5–10; mùa đông chỉ chấm tổng 6 h và 24 h. Mọi bảng kết quả tách theo mùa.
-5. **Informer là lựa chọn yếu:**
+5. **Chọn TFT thay Informer cho sản phẩm B** (chốt 11/10/2026). Informer là lựa chọn yếu vì:
    - Trên bộ chuẩn Weather, Informer kém cả phương án lặp lại giá trị gần nhất (Zeng 2023).
    - Lần chạy cũ của đồ án chỉ đạt R² = 0,04.
    - Informer không có cơ chế riêng cho đầu vào tương lai và đặc trưng tĩnh.
-   - Vì vậy bắt buộc so sánh với TFT, DLinear, LightGBM, ECMWF thô và ECMWF + quantile mapping.
+   - TFT có sẵn cơ chế cho đặc trưng tĩnh, dự báo số tương lai và chuỗi quá khứ, xuất được phân vị và trọng số chọn biến.
+   - Đối chứng bắt buộc: ECMWF thô, ECMWF + quantile mapping, LightGBM, DLinear, Bi-LSTM (bảng 2×2). Informer chỉ chạy một cấu hình.
+   - TFT được **tự cài đặt** bằng PyTorch, đọc từ `WindowSampler`; không dùng `pytorch-forecasting` vì không vừa 8 GB RAM.
 6. **Không có dữ liệu Vrain** (người dùng xác nhận không xin được). Kiểm chứng độc lập chỉ dựa vào NOAA GSOD tại 10 trạm, đến 24/08/2025.
 7. **Những nhận định cũ đã bị bác bỏ:**
    - "Informer vượt Bi-LSTM 21 %": hai mô hình được chấm trên tập test khác nhau.
    - "IMERG trễ 29 h nên không dùng được làm đầu vào": IMERG Early lấy trực tiếp từ NASA chỉ trễ khoảng 4 h.
    - "Previous Runs có CAPE": thực tế các trường này rỗng.
 
-## Chờ chốt với giảng viên (hỏi người dùng trước khi làm phần liên quan)
+## Còn chờ chốt (hỏi người dùng trước khi làm phần liên quan)
 
-1. Có bắt buộc dùng Informer làm mô hình chính của sản phẩm B không? Đề xuất: nếu được, dùng TFT làm mô hình chính, Informer làm đối chứng.
-2. Hai vùng kiểm tra: Hà Nội, cùng TP.HCM **hoặc** Đắk Lắk.
-3. Hạn nộp bài (đang giả định cuối 12/2026) và số người trong nhóm.
+1. Hai vùng kiểm tra: Hà Nội, cùng TP.HCM **hoặc** Đắk Lắk.
+2. Hạn nộp bài (đang giả định cuối 12/2026) và số người trong nhóm.
 
 ## Trạng thái và việc tiếp theo
 
@@ -80,10 +82,11 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 - Dataloader.
 
 **Tiếp theo, theo thứ tự:**
+0. *(Ưu tiên, làm song song)* Bật ghi log live trên một máy chạy liên tục: dự báo ECMWF cho các ô Đà Nẵng và quan trắc GSMaP NRT/IMERG. Mùa mưa đang diễn ra, nên mỗi tuần chậm là mất một tuần dữ liệu để kiểm định thật.
 1. Cài `torch` vào `.venv`. Chạy **pilot** Bi-LSTM với S0 (A0), S1 (A0 + A1, trễ 4 h) và S4 (A0–A4) trên khoảng 30 ô, 2 seed, rồi so theo cặp bằng bootstrap. Nếu phân biệt được các cấu hình thì chạy ablation đầy đủ.
 2. Baseline trên lưới: khí hậu, persistence có trễ, mưa ERA5/ECMWF, LightGBM.
 3. Ablation A0–A5 và thí nghiệm độ trễ L ∈ {0,5; 2; 4; 8; 14; ∞} trên máy RTX 4060.
-4. Sản phẩm B: Informer (đưa dự báo số tương lai vào decoder), TFT, DLinear, cùng bảng 2×2 đối chiếu kiến trúc.
+4. Sản phẩm B: **TFT** (tự cài đặt; quantile loss cộng xác suất vượt ngưỡng ngày), ablation B0–B5 và LOGO; DLinear; Informer một cấu hình; bảng 2×2 Bi-LSTM với TFT.
 5. T-OPS:
    - Single Runs ECMWF IFS 9 km: có mưa, CAPE, TCWV từ 03/2024; biến 850 hPa trả rỗng.
    - Historical Forecast: có từ 2017.

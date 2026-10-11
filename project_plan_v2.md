@@ -1,4 +1,4 @@
-# Kế hoạch v2: Dự báo mưa 0–6 giờ (Bi-LSTM) và 1–3 ngày (Informer) cho các tỉnh/thành Việt Nam, từ so sánh mô hình đến ứng dụng
+# Kế hoạch v2: Dự báo mưa 0–6 giờ (Bi-LSTM) và 1–3 ngày (TFT) cho các tỉnh/thành Việt Nam, từ so sánh mô hình đến ứng dụng
 
 > Lập ngày 11/10/2026. Tài liệu này đọc cùng `project_master_plan.md` (bản sáng cùng ngày); mục 11 ghi rõ phần giữ, phần đổi.
 > Các con số ở mục 1 được tính lại hôm nay từ `data/processed/danang_full_features_2015_2026.parquet`, NOAA GSOD (trạm sân bay Đà Nẵng) và Open-Meteo Previous Runs.
@@ -8,9 +8,9 @@
 ## 0. Tóm tắt các quyết định
 
 1. **Đổi nhãn trước khi làm việc khác.** Nhãn hiện tại là mưa Open-Meteo Archive, về bản chất là tái phân tích ERA5. So với trạm Đà Nẵng, nhãn này chỉ bắt được 8 % số ngày mưa ≥100 mm (mục 1.1). Thí nghiệm 0 (mục 4.1) sẽ chọn nhãn mới, như IMERG Final hoặc GSMaP Gauge, bằng cách đối chiếu với trạm.
-2. **AI không thay mô hình số mà sửa và bổ sung nó.** Câu hỏi nghiên cứu: *nhóm đặc trưng nâng cao nào giúp Bi-LSTM và Informer vượt dự báo số thô (ECMWF) cùng các baseline?*
+2. **AI không thay mô hình số mà sửa và bổ sung nó.** Câu hỏi nghiên cứu: *nhóm đặc trưng nâng cao nào giúp Bi-LSTM và TFT vượt dự báo số thô (ECMWF) cùng các baseline?*
 3. **Bi-LSTM 0–6 h cần có mưa quan trắc gần thời gian thực, và điều này triển khai được.** IMERG Early có độ trễ khoảng 4 h. Thí nghiệm "độ trễ quan trắc" là đóng góp chính của sản phẩm này.
-4. **Decoder của Informer 1–3 ngày phải nhận dự báo số cho các giờ tương lai.** Chỉ dùng lịch sử thì gần như không có kỹ năng: Informer hiện tại có R² = 0,04, và tự tương quan của mưa ở độ trễ 72 h chỉ còn 0,06.
+4. **Mô hình 1–3 ngày (TFT, chốt ngày 11/10/2026) phải nhận dự báo số cho các giờ tương lai.** Chỉ dùng lịch sử thì gần như không có kỹ năng: Informer hiện tại có R² = 0,04, và tự tương quan của mưa ở độ trễ 72 h chỉ còn 0,06.
 5. **Đơn vị dự báo là ô lưới 0,1° (khoảng 11 km), không phải một điểm cho mỗi tỉnh.** Một mô hình chung phục vụ mọi ô và mọi tỉnh, có thêm đặc trưng tĩnh (độ cao, khoảng cách tới biển…). Một tỉnh là tập các ô nằm trong ranh giới 34 tỉnh mới. App hiển thị trung bình, giá trị lớn nhất và % diện tích của tỉnh, và cho tra cứu theo xã/phường.
 6. **So sánh có kiểm soát:**
    - Cố định kiến trúc, chỉ thêm hoặc bớt nhóm đặc trưng (cả cộng dồn lẫn bỏ từng nhóm).
@@ -27,7 +27,10 @@
    - **Nên có:** thêm 4 vùng khí hậu.
    - **Mở rộng:** toàn quốc, GSMaP_NOW, hạn 7 ngày.
 
-### 0b. Phạm vi và lựa chọn mô hình (đề xuất ngày 11/10/2026, chờ nhóm và giảng viên chốt)
+### 0b. Phạm vi và lựa chọn mô hình (ngày 11/10/2026)
+
+> **Đã chốt về mô hình:** giảng viên không bắt buộc dùng Informer, nên **sản phẩm B dùng TFT làm mô hình chính**. Lý do và cách triển khai ở mục 4.4.
+> **Phạm vi:** vẫn là đề xuất; vùng kiểm tra phía nam còn chờ chọn.
 
 **Phạm vi**
 
@@ -49,9 +52,9 @@
 | Hạn | Mô hình | Đánh giá |
 | --- | --- | --- |
 | 0–6 h | **Bi-LSTM**, giữ nguyên | Phù hợp. Họ LSTM là lựa chọn chuẩn cho chuỗi khí tượng–thủy văn. Bằng chứng so sánh Bi-LSTM với LSTM và GRU không ngã ngũ, nên kiến trúc không phải đòn bẩy chính. |
-| 1–3 ngày | **Informer**, kèm đối chứng bắt buộc: **TFT**, DLinear, LightGBM, ECMWF thô, ECMWF + quantile mapping | Informer là lựa chọn yếu nếu xét riêng về chất lượng (lý do ở dưới). Nếu giảng viên cho phép, nên để **TFT làm mô hình chính** và Informer làm đối chứng. |
+| 1–3 ngày | **TFT (Temporal Fusion Transformer)**, kèm đối chứng: ECMWF thô, ECMWF + quantile mapping, LightGBM, DLinear, Bi-LSTM (bảng 2×2). Informer chạy một cấu hình để đối chiếu. | TFT được thiết kế cho đúng ba loại đầu vào của bài toán: đặc trưng tĩnh, dự báo số cho các giờ tương lai, và chuỗi quan sát quá khứ (Lim et al. 2021). Ngoài ra, TFT xuất được phân vị và trọng số chọn biến. |
 
-Lý do Informer là lựa chọn yếu cho hạn 1–3 ngày:
+Lý do không chọn Informer cho hạn 1–3 ngày:
 - **Thiết kế không khớp bài toán:** cơ chế ProbSparse sinh ra để tiết kiệm tính toán với chuỗi rất dài, trong khi bài toán ở đây chỉ là 168 → 72 bước.
 - **Kết quả trên bộ chuẩn Weather:** Informer kém cả phương án lặp lại giá trị gần nhất (MSE 0,300 so với 0,259 ở hạn 96; 1,059 so với 0,465 ở hạn 720), trong khi DLinear chỉ 0,176 / 0,323 (Zeng et al. 2023).
 - **Kết quả của chính đồ án:** R² = 0,04.
@@ -111,7 +114,7 @@ Ngoài ra, 64 % lượng mưa năm rơi vào tháng 9–12.
 
 **Hàm ý:**
 - Với Bi-LSTM 0–6 h, mưa quan trắc gần nhất là đặc trưng mạnh. Điều kiện là đặc trưng đó thật sự có sẵn lúc app chạy.
-- Với Informer 1–3 ngày, lịch sử mưa gần như không mang thông tin. Kỹ năng phải đến từ dự báo số và hình thế thời tiết quy mô lớn.
+- Với mô hình 1–3 ngày, lịch sử mưa gần như không mang thông tin. Kỹ năng phải đến từ dự báo số và hình thế thời tiết quy mô lớn.
 
 ### 1.4. Đọc lại đúng các kết quả mô hình hiện có
 
@@ -209,7 +212,7 @@ Vì vậy, gọi hạn 24–72 h là "dài hạn" sẽ bị hội đồng bắt 
 
 | | Sản phẩm A: cực ngắn | Sản phẩm B: hạn ngắn (có thể mở rộng sang hạn vừa) |
 | --- | --- | --- |
-| Mô hình chính | Bi-LSTM | Informer |
+| Mô hình chính | Bi-LSTM | TFT |
 | Hạn dự báo | t+1 → t+6 h, từng giờ | t+1 → t+72 h, từng giờ (mở rộng đến t+168 h) |
 | Hiển thị | Tổng mưa 3 h tới; xác suất có mưa và mưa to trong 3 h; biểu đồ 6 h | Tổng mưa ngày 1–3, chia khối 6 h; xác suất mưa ≥16 / 50 / 100 mm/24 h |
 | Chu kỳ phát hành | Mỗi giờ, theo dữ liệu IMERG Early mới | Mỗi 6 h, theo lượt chạy ECMWF mới |
@@ -272,7 +275,7 @@ Mỗi đặc trưng phải điền đủ 4 cột:
 
 **Giai đoạn dữ liệu:**
 - 2015–2025: bắt buộc.
-- Nên kéo về 2001 cho Informer. Số sự kiện mưa to tăng khoảng 2,3 lần, và cả ERA5 lẫn IMERG đều có dữ liệu cho giai đoạn này.
+- Nên kéo về 2001 cho TFT. Số sự kiện mưa to tăng khoảng 2,3 lần, và cả ERA5 lẫn IMERG đều có dữ liệu cho giai đoạn này.
 
 ---
 
@@ -414,17 +417,34 @@ Mỗi đặc trưng phải điền đủ 4 cột:
   - Trong các nghiên cứu dùng radar 1 km ở Mỹ, điểm giao với mô hình số là khoảng 7–8 h (MetNet) và gần 12 h (MetNet-2).
   - Với vệ tinh 11 km và độ trễ 4 h, điểm giao nhiều khả năng đến sớm hơn nhiều. Đo được điểm giao này đã là một kết quả có giá trị.
 
-### 4.4. Sản phẩm B: Informer 1–3 ngày
+### 4.4. Sản phẩm B: TFT 1–3 ngày (đã chốt ngày 11/10/2026)
 
-**Cấu hình:** encoder 168 h; decoder gồm 48 h nhãn và 72 h dự báo.
+**Vì sao chọn TFT:**
+- **Khớp cấu trúc bài toán:**
+  - `x_past` (168 h) đi vào encoder LSTM.
+  - `x_future` (72 h dự báo số tại giờ đích) đi vào decoder; đây là "đầu vào đã biết trước cho tương lai".
+  - `static` (8 đặc trưng tĩnh) làm điều kiện cho toàn mạng.
+  - Dataloader v2 đã trả đúng ba khối này.
+- **Hỗ trợ giải thích:** khối chọn biến (variable selection) cho trọng số quan trọng của từng biến. Đây là góc nhìn thứ hai, bổ sung cho ablation (vốn đo theo hiệu năng), và rất hợp để trình bày "nhóm đặc trưng nào quan trọng".
+- **Xuất xác suất:** quantile loss cho ra phân vị. Thêm một đầu phân loại cho xác suất tổng 24 h vượt 16 / 50 / 100 mm. Điều này đúng với yêu cầu ở mục 1.7, nơi mọi dự báo tất định đều có BSS âm.
+- **Đã có bằng chứng trong lĩnh vực:**
+  - Koya & Roy (2023), trên 2.610 lưu vực Caravan: TFT vượt LSTM và Transformer.
+  - Nghiên cứu hạn hán dòng chảy trên 671 lưu vực CAMELS: TFT đạt KGE 0,87, LSTM có đặc trưng tĩnh đạt 0,81.
+  - Có nghiên cứu khác cho kết quả lẫn lộn, nên vẫn phải so với baseline.
 
-**Thay đổi cần làm:**
-- **Cách dựng decoder:** ở phần tương lai, kênh mưa vẫn bằng 0 như hiện nay. Các kênh còn lại được điền giá trị dự báo số tại giờ đích, thay vì toàn 0 như code hiện tại.
-- **Hàm mất mát:** thêm một số hạng tính trên tổng 24 h để giảm ảnh hưởng của nhiễu theo giờ.
+**Cách triển khai:**
+- **Tự cài đặt một TFT gọn bằng PyTorch** (khoảng 300–400 dòng), gồm GRN, khối chọn biến cho past/future/static, encoder–decoder LSTM, attention đa đầu có thể diễn giải, và đầu ra phân vị cộng đầu phân loại. Mô hình đọc thẳng từ `WindowSampler`.
+- **Không dùng `pytorch-forecasting`**, vì thư viện này dựng dữ liệu bằng DataFrame, không vừa 8 GB RAM với 2,2 triệu cửa sổ. Nếu muốn, có thể dùng thư viện để đối chiếu trên tập nhỏ.
+- **Cấu hình khởi đầu:** hidden 64, 4 đầu attention, dropout 0,1. Mỗi epoch rút khoảng 300.000 cửa sổ (`epoch_subset`).
+- **Hàm mất mát:** quantile (0,1 / 0,5 / 0,9) trên log1p của mưa giờ, cộng số hạng trên tổng 24 h, cộng BCE cho xác suất vượt ngưỡng ngày.
+
+**Informer** chỉ chạy **một cấu hình** (B0–B3, dự báo số đưa vào decoder; code cũ ở `src/informer/`) để trả lời câu hỏi "vì sao đổi mô hình". Không chạy ablation cho Informer.
+
+**Tùy chọn:** thêm TiDE (Das et al. 2023), một mô hình MLP có hỗ trợ đầu vào tương lai, nhanh gấp 5–10 lần Transformer, nếu còn thời gian.
 
 | Nhóm | Nội dung | Ghi chú |
 | --- | --- | --- |
-| **B0** Nền | Mưa quá khứ (IMERG, theo đúng độ trễ thực tế); thời gian; đặc trưng tĩnh; biến bề mặt | Tương đương Informer hiện tại, chỉ đổi nhãn |
+| **B0** Nền | Mưa quá khứ (IMERG, theo đúng độ trễ thực tế); thời gian; đặc trưng tĩnh; biến bề mặt | Tương đương mô hình chỉ dùng lịch sử (như Informer cũ), đã đổi nhãn và quan trắc có trễ |
 | **B1** Hình thế synop | MSLP và chỉ số không khí lạnh (chênh MSLP Bắc–Trung, gió bắc 925 hPa); gió 850 hPa; TCWV; IVT | Không khí lạnh kết hợp gió đông là cơ chế gây mưa lớn tháng 10–12 ở Trung Bộ |
 | **B2** Đối lưu | CAPE, CIN, K-index | |
 | **B3** Dự báo số cho tương lai (đưa vào decoder) | Mưa, TCWV, CAPE, MSLP, gió 850 hPa tại t+1…t+72 | Nhóm được kỳ vọng quan trọng nhất |
@@ -446,10 +466,11 @@ Phải có baseline thì câu "tốt hơn" mới có nghĩa.
 | Dự báo số thô (ECMWF, nội suy về ô) | ✓ | ✓ | Đối thủ chính |
 | Dự báo số + hiệu chỉnh phân vị (quantile mapping) | ✓ | ✓ | Phương pháp hậu xử lý cổ điển, chi phí thấp |
 | LightGBM với cùng tập đặc trưng (trải phẳng các bước trễ) | ✓ | ✓ | Kiểm tra xem có thật sự cần học sâu không |
-| DLinear và LSTM seq2seq | — | ✓ | Zeng et al. (2023) cho thấy mô hình tuyến tính đơn giản thường thắng Informer trên các bộ chuẩn LTSF |
+| DLinear | — | ✓ | Zeng et al. (2023) cho thấy mô hình tuyến tính đơn giản thường thắng các Transformer LTSF |
+| Informer (một cấu hình) | — | ✓ | Đối chiếu để giải thích vì sao chọn TFT |
 | Oracle | ✓ | — | Giới hạn trên |
 
-**Thêm bảng 2 × 2 (chi phí thấp):** chạy cả Bi-LSTM và Informer ở cả hai hạn, với tập đặc trưng tốt nhất. Bảng này dùng để bảo vệ lựa chọn kiến trúc. Nếu kết quả ngược lại với lựa chọn ban đầu thì báo cáo trung thực.
+**Thêm bảng 2 × 2 (chi phí thấp):** chạy cả Bi-LSTM và TFT ở cả hai hạn, với tập đặc trưng tốt nhất. Bảng này dùng để bảo vệ lựa chọn kiến trúc. Nếu kết quả ngược lại với lựa chọn ban đầu thì báo cáo trung thực.
 
 ### 4.6. Khối lượng tính toán
 
@@ -457,7 +478,7 @@ Phải có baseline thì câu "tốt hơn" mới có nghĩa.
 
 - Giai đoạn sàng lọc ablation chạy trên tập con khoảng 30 ô, bước trượt 6 h. Chỉ cấu hình cuối mới huấn luyện trên toàn bộ ô.
 - **Bi-LSTM:** khoảng 10 cấu hình × 3 seed, cộng 6 mức trễ × 3 seed, tổng cộng khoảng 50 lượt × 10 phút ≈ **8–10 giờ GPU**.
-- **Informer:** khoảng 8 cấu hình × 3 seed ≈ 25 lượt × 30–40 phút ≈ **15 giờ GPU** (chạy qua 2 đêm).
+- **TFT:** khoảng 8 cấu hình × 3 seed ≈ 25 lượt × 30–40 phút ≈ **15 giờ GPU** (chạy qua 2 đêm); Informer một cấu hình thêm khoảng 2 giờ.
 - **Baseline:** chạy trên CPU, mất vài giờ.
 
 ---
@@ -537,7 +558,7 @@ Không có dữ liệu Vrain, nên kiểm chứng độc lập dựa hoàn toàn
 | --- | --- | --- | --- |
 | Mỗi tỉnh một mô hình riêng | Đơn giản, dễ giải thích | Phải duy trì 34 mô hình; tỉnh ít mưa to sẽ thiếu mẫu; không dự báo được nơi chưa huấn luyện | Chỉ dùng làm đối chứng |
 | **Một mô hình chung cho mọi ô**, kèm đặc trưng tĩnh (có thể thêm embedding vùng) | Học chung từ mọi vùng nên có nhiều mẫu mưa to hơn; chạy được cho ô mới; chỉ phải triển khai một mô hình | Cần kiểm tra khả năng tổng quát hóa | **Chọn** (Rasp & Lerch 2018; Montero-Manso & Hyndman 2021) |
-| Mô hình lưới (ConvLSTM, U-Net) cho ra bản đồ | Khai thác trọn cấu trúc không gian | Lệch khỏi đề tài Bi-LSTM/Informer; nặng về tính toán | Để làm hướng mở rộng |
+| Mô hình lưới (ConvLSTM, U-Net) cho ra bản đồ | Khai thác trọn cấu trúc không gian | Lệch khỏi đề tài Bi-LSTM/TFT; nặng về tính toán | Để làm hướng mở rộng |
 
 **Đặc trưng tĩnh:** độ cao trung bình và độ lệch chuẩn độ cao trong ô, độ dốc theo hướng gió mùa đông bắc, khoảng cách tới biển, vĩ độ và kinh độ.
 
@@ -591,7 +612,7 @@ flowchart LR
     N --> F
     S --> F
     F --> A["Bi-LSTM 0–6 h\n(có quan trắc / L=∞ dự phòng)"]
-    F --> B["Informer 1–3 ngày"]
+    F --> B["TFT 1–3 ngày"]
     A --> DB[("Kho dự báo\nissued_at, version, hash")]
     B --> DB
     DB --> API["API: tỉnh / ô / xã / kiểm chứng"]
@@ -608,7 +629,7 @@ flowchart LR
 | `ingest_obs` | 30 phút | Tải IMERG Early mới cho các ô |
 | `ingest_nwp` | Mỗi giờ (lượt chạy mới có mỗi 6 h) | Gọi Open-Meteo Forecast cho ECMWF, gộp nhiều tọa độ vào một request, lấy cả `past_days` |
 | `nowcast` | Mỗi giờ | Dựng đặc trưng, chạy Bi-LSTM. Nếu quan trắc trễ quá ngưỡng, tự chuyển sang biến thể L = ∞ |
-| `shortrange` | Sau mỗi lượt chạy ECMWF | Chạy Informer |
+| `shortrange` | Sau mỗi lượt chạy ECMWF | Chạy TFT |
 | `verify` | Hằng ngày | So dự báo đã lưu với IMERG Late (có sau khoảng 14 h) và IMERG Early; cập nhật bảng kiểm chứng |
 
 ### 7.3. Chống lệch giữa huấn luyện và chạy thật
@@ -638,36 +659,9 @@ flowchart LR
 
 ## 8. Lộ trình
 
-Giả định nộp bài vào cuối tháng 12/2026. Nếu hạn khác, co giãn tuần 8–10.
-
-| Tuần | Thời gian | Việc chính | Cổng / đầu ra |
-| --- | --- | --- | --- |
-| 1 | 12–18/10 | ✅ Bộ đánh giá dùng chung, dữ liệu 10 trạm, bảng baseline, Thí nghiệm 0 (11/10; đề xuất nhãn GSMaP hiệu chỉnh trạm). Còn lại: Lập bảng hợp đồng dữ liệu, kiểm từng biến có trong ECMWF của Open-Meteo. Sửa nợ kỹ thuật. **Bật ghi log của app ngay** (ECMWF cho nhiều ô và GSMaP/IMERG cho Đà Nẵng mới), vì mùa mưa đang diễn ra | Cổng 1: chốt nhãn |
-| 2 | 19–25/10 | Pipeline ô lưới cho Đà Nẵng mới: ERA5, IMERG, đặc trưng tĩnh. Tải dữ liệu Single Runs và Historical Forecast. Chạy các baseline: khí hậu, persistence, ECMWF thô, quantile mapping, LightGBM. Chạy một lần đo thời gian | Cổng 2: bảng baseline |
-| 3–4 | 26/10–08/11 | Bi-LSTM: S0–S5, thí nghiệm độ trễ, Oracle, LOGO | Cổng 3: Bi-LSTM có vượt ECMWF thô và persistence ở ít nhất một chỉ số chính trên validation không? |
-| 5–6 | 09–22/11 | Informer L0–L5 (decoder có dự báo số); DLinear; LSTM; bảng 2 × 2. Song song: tải dữ liệu cho 4 vùng còn lại | Cổng 4 |
-| 7 | 23–29/11 | Chạy T-OPS trên Val-OPS 2024, chọn biến thể để triển khai; fine-tune nếu cần; mở tập test 2025 | Đóng băng kết quả chính |
-| 8 | 30/11–06/12 | Mô hình chung đa vùng; thí nghiệm bỏ ô và bỏ vùng | Kết quả về không gian |
-| 9–10 | 07–20/12 | App: bản đồ tỉnh, tra cứu xã, hai sản phẩm, bảng kiểm chứng live; đưa lên server | Demo chạy liên tục |
-| 11 | 21–27/12 | Báo cáo, slide, phân tích sự kiện, tổng kết kiểm định live | Nộp bài |
-
-**Phân vai cho nhóm 3–4 người:**
-- Dữ liệu và đánh giá: Thí nghiệm 0, baseline, chỉ số, bootstrap.
-- Bi-LSTM.
-- Informer và các baseline LTSF.
-- App.
-
-Viết báo cáo song song, bắt đầu từ tuần 2.
-
-**Đường cắt MVP (nếu chậm tiến độ):**
-- **Phạm vi tối thiểu phải giữ:**
-  - Chỉ Đà Nẵng mới.
-  - Bi-LSTM: S0, S1, S2, S4, cùng 3 mức trễ (0,5 h / 4 h / ∞).
-  - Informer: L0, L1, L3.
-  - Baseline: khí hậu, persistence, ECMWF thô, LightGBM, DLinear.
-  - T-OPS trên 2025.
-  - App cho một tỉnh.
-- **Bỏ trước khi cần cắt:** A5, B5, đa vùng, hạn 7 ngày, fine-tune MOS.
+> **Lộ trình, trạng thái hiện hành và phân công nằm ở [`KE_HOACH_DU_AN.md`](KE_HOACH_DU_AN.md), các mục 4, 6 và 7.** Chỉ cập nhật tiến độ ở file đó, để tránh hai bản lộ trình lệch nhau.
+>
+> Tóm tắt ngày 11/10/2026: tuần 1–2 (dữ liệu, bộ đánh giá, dataloader) đã xong; tiếp theo là baseline trên lưới và pilot Bi-LSTM (tuần 2), ablation Bi-LSTM (tuần 3–4), TFT (tuần 5–6), T-OPS (tuần 7), 2 vùng kiểm tra (tuần 8), app (tuần 9–10), báo cáo (tuần 11).
 
 ---
 
@@ -712,7 +706,7 @@ Viết báo cáo song song, bắt đầu từ tuần 2.
 2. **Quan trắc gần có thể triển khai.** IMERG trên Google Earth Engine trễ khoảng 29 h, nhưng IMERG Early lấy từ GES DISC chỉ trễ khoảng 4 h. Vì vậy plan thêm nhóm A1 và thí nghiệm độ trễ, thay vì chỉ để quan trắc trong Oracle.
 3. **Thêm Thí nghiệm 0:** chọn nhãn bằng cách đối chiếu với trạm. Số liệu ở mục 1.1 cho thấy đây là việc cấp bách.
 4. **Nguồn dữ liệu T-OPS:** Previous Runs không có CAPE và TCWV (đã thử), nên dùng Single Runs cho T-OPS.
-5. **Baseline và đặc trưng cho Informer:** thêm DLinear và LSTM làm baseline; thêm nhóm khí hậu quy mô lớn cho hạn dài hơn.
+5. **Mô hình hạn 1–3 ngày:** đổi Informer sang TFT (chốt ngày 11/10/2026, giảng viên không bắt buộc Informer); thêm DLinear làm baseline, giữ Informer một cấu hình để đối chiếu; thêm nhóm khí hậu quy mô lớn cho hạn dài hơn.
 6. **Lộ trình:** khoảng 11 tuần, phù hợp sức làm của sinh viên, thay vì 2–3 tuần.
 
 ---

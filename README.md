@@ -4,15 +4,16 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-orange.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-Dự án nghiên cứu và xây dựng hệ thống dự báo lượng mưa hạn ngắn (1–6 giờ) và hạn vừa (24–72 giờ) tại khu vực Đà Nẵng mới (Đà Nẵng + Quảng Nam) và mở rộng sang các vùng khí hậu khác của Việt Nam.
+Dự án nghiên cứu và xây dựng hệ thống dự báo lượng mưa cực ngắn (1–6 giờ) và hạn ngắn (1–3 ngày) tại khu vực Đà Nẵng mới (Đà Nẵng + Quảng Nam) và mở rộng sang các vùng khí hậu khác của Việt Nam.
 
 ---
 
 ## 🚀 Pipeline v2 (từ 11/10/2026) — bắt đầu từ đây
 
-Hướng đi hiện tại, các quyết định và trạng thái: **[`CLAUDE.md`](CLAUDE.md)** (tóm tắt) và **[`project_plan_v2.md`](project_plan_v2.md)** (chi tiết kèm số liệu).
+**Thành viên nhóm, đọc trước:** [`KE_HOACH_DU_AN.md`](KE_HOACH_DU_AN.md) (dự án làm gì, quy trình, đang ở giai đoạn nào, lộ trình, phân công).
+Chi tiết kỹ thuật: [`project_plan_v2.md`](project_plan_v2.md). Bối cảnh cho AI agent: [`CLAUDE.md`](CLAUDE.md).
 
-- Nhãn: GSMaP v8 hiệu chỉnh trạm. Lưới 0,1° phủ Đà Nẵng mới (Đà Nẵng cũ + Quảng Nam), 2015 → 09/2026.
+- Mô hình: Bi-LSTM (0–6 h) và TFT (1–3 ngày). Nhãn: GSMaP v8 hiệu chỉnh trạm. Lưới 0,1° phủ Đà Nẵng mới (Đà Nẵng cũ + Quảng Nam), 2015 → 09/2026.
 - Kiểm chứng: 10 trạm synop NOAA GSOD. Bảng baseline và Thí nghiệm 0 ở [`reports/station_benchmark/README.md`](reports/station_benchmark/README.md).
 - Dữ liệu nguồn v2 (khoảng 2,9 GB, file `pbl6_data_v2_2026-10-11.tar`) nằm trên Google Drive (đường dẫn bên dưới). Giải nén ở thư mục gốc repo rồi chạy:
 
