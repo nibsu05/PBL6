@@ -1,0 +1,494 @@
+{
+  "years": {
+    "2015": {
+      "year": 2015,
+      "hours": 8760,
+      "cells": 296,
+      "nan_frac": {},
+      "label_permanent_frac": 1.0,
+      "danang_label_total_mm": 1243.3,
+      "danang_era5_tp_total_mm": 2396.2,
+      "label_max_mm_h": 23.6
+    },
+    "2016": {
+      "year": 2016,
+      "hours": 8784,
+      "cells": 296,
+      "nan_frac": {},
+      "label_permanent_frac": 1.0,
+      "danang_label_total_mm": 2896.8,
+      "danang_era5_tp_total_mm": 3026.8,
+      "label_max_mm_h": 46.2
+    },
+    "2017": {
+      "year": 2017,
+      "hours": 8760,
+      "cells": 296,
+      "nan_frac": {},
+      "label_permanent_frac": 1.0,
+      "danang_label_total_mm": 2618.5,
+      "danang_era5_tp_total_mm": 3522.2,
+      "label_max_mm_h": 24.4
+    },
+    "2018": {
+      "year": 2018,
+      "hours": 8760,
+      "cells": 296,
+      "nan_frac": {},
+      "label_permanent_frac": 1.0,
+      "danang_label_total_mm": 2047.6,
+      "danang_era5_tp_total_mm": 2177.8,
+      "label_max_mm_h": 30.9
+    },
+    "2019": {
+      "year": 2019,
+      "hours": 8760,
+      "cells": 296,
+      "nan_frac": {},
+      "label_permanent_frac": 1.0,
+      "danang_label_total_mm": 1885.5,
+      "danang_era5_tp_total_mm": 2039.7,
+      "label_max_mm_h": 29.3
+    },
+    "2020": {
+      "year": 2020,
+      "hours": 8784,
+      "cells": 296,
+      "nan_frac": {},
+      "label_permanent_frac": 1.0,
+      "danang_label_total_mm": 2981.5,
+      "danang_era5_tp_total_mm": 3307.2,
+      "label_max_mm_h": 51.3
+    },
+    "2021": {
+      "year": 2021,
+      "hours": 8760,
+      "cells": 296,
+      "nan_frac": {},
+      "label_permanent_frac": 1.0,
+      "danang_label_total_mm": 2830.8,
+      "danang_era5_tp_total_mm": 3229.2,
+      "label_max_mm_h": 32.6
+    },
+    "2022": {
+      "year": 2022,
+      "hours": 8760,
+      "cells": 296,
+      "nan_frac": {
+        "kx": 0.0016,
+        "tt": 0.0016,
+        "era5_tp_mm": 0.0016
+      },
+      "label_permanent_frac": 1.0,
+      "danang_label_total_mm": 2678.9,
+      "danang_era5_tp_total_mm": 3353.7,
+      "label_max_mm_h": 69.7
+    },
+    "2023": {
+      "year": 2023,
+      "hours": 8760,
+      "cells": 296,
+      "nan_frac": {},
+      "label_permanent_frac": 1.0,
+      "danang_label_total_mm": 3023.7,
+      "danang_era5_tp_total_mm": 2764.2,
+      "label_max_mm_h": 58.2
+    },
+    "2024": {
+      "year": 2024,
+      "hours": 8784,
+      "cells": 296,
+      "nan_frac": {
+        "kx": 0.0008,
+        "tt": 0.0008,
+        "era5_tp_mm": 0.0008
+      },
+      "label_permanent_frac": 1.0,
+      "danang_label_total_mm": 2395.6,
+      "danang_era5_tp_total_mm": 2859.7,
+      "label_max_mm_h": 32.6
+    },
+    "2025": {
+      "year": 2025,
+      "hours": 8760,
+      "cells": 296,
+      "nan_frac": {},
+      "label_permanent_frac": 1.0,
+      "danang_label_total_mm": 3311.0,
+      "danang_era5_tp_total_mm": 3535.8,
+      "label_max_mm_h": 77.3
+    },
+    "2026": {
+      "year": 2026,
+      "hours": 8760,
+      "cells": 296,
+      "nan_frac": {
+        "y_gsmap_gc_mm": 0.25205,
+        "label_permanent": 0.25205,
+        "gsmap_mm": 0.25205,
+        "gsmap_nb5_mean_mm": 0.25205,
+        "gsmap_nb5_max_mm": 0.25205,
+        "t2m_c": 0.25205,
+        "td2m_c": 0.25205,
+        "rh2m_pct": 0.25205,
+        "sp_hpa": 0.25205,
+        "mslp_hpa": 0.25205,
+        "u10": 0.25205,
+        "v10": 0.25205,
+        "wspd10": 0.25205,
+        "tcc": 0.25205,
+        "lcc": 0.25205,
+        "mcc": 0.25205,
+        "hcc": 0.25205,
+        "cape": 0.25205,
+        "cin_capped": 0.25205,
+        "has_lfc": 0.25205,
+        "tcwv": 0.25205,
+        "kx": 0.25205,
+        "tt": 0.25205,
+        "blh": 0.25205,
+        "ivt_u": 0.25205,
+        "ivt_v": 0.25205,
+        "ivt_mag": 0.25205,
+        "vimd_mmh": 0.25205,
+        "u850": 0.25205,
+        "v850": 0.25205,
+        "q850_gkg": 0.25205,
+        "t850_c": 0.25205,
+        "w850_pas": 0.25205,
+        "rh850_pct": 0.25205,
+        "u500": 0.25205,
+        "v500": 0.25205,
+        "q500_gkg": 0.25205,
+        "t500_c": 0.25205,
+        "w500_pas": 0.25205,
+        "shear_850_500": 0.25205,
+        "era5_tp_mm": 0.25217,
+        "swvl1": 0.25205,
+        "ctx_tcwv": 0.25205,
+        "ctx_ivt_mag": 0.25205,
+        "cold_surge_dp_hpa": 0.25205,
+        "dp_tonkin_south_hpa": 0.25205,
+        "sst_region_c": 0.25205
+      },
+      "label_permanent_frac": 1.0,
+      "danang_label_total_mm": 923.3,
+      "danang_era5_tp_total_mm": 1447.0,
+      "label_max_mm_h": 22.6
+    }
+  },
+  "version": "v2",
+  "created_utc": "2026-10-11T10:57:11+00:00",
+  "git_commit": "7f40a21",
+  "time_convention": "hàng t = khoảng [t, t+1h) UTC; biến tức thời ERA5 lấy tại t; mưa ERA5 dịch từ mốc t+1h",
+  "label": "y_gsmap_gc_mm (GSMaP v8 hiệu chỉnh trạm, quyết định Cổng 1 ngày 11/10/2026)",
+  "cells": "296 ô đất (tỷ lệ biển < 0.5) trong hộp 14,6–16,5°B × 107–109°Đ",
+  "features": [
+    {
+      "name": "y_gsmap_gc_mm",
+      "unit": "mm/h",
+      "group": "label",
+      "description": "Nhãn: GSMaP v8 hiệu chỉnh trạm"
+    },
+    {
+      "name": "label_permanent",
+      "unit": "0/1",
+      "group": "meta",
+      "description": "1 nếu ảnh GSMaP là bản permanent"
+    },
+    {
+      "name": "gsmap_mm",
+      "unit": "mm/h",
+      "group": "A1",
+      "description": "GSMaP thô tại ô (đầu vào quan trắc; dịch trễ ở dataloader)"
+    },
+    {
+      "name": "gsmap_nb5_mean_mm",
+      "unit": "mm/h",
+      "group": "A1",
+      "description": "GSMaP thô, trung bình 5×5 ô"
+    },
+    {
+      "name": "gsmap_nb5_max_mm",
+      "unit": "mm/h",
+      "group": "A1",
+      "description": "GSMaP thô, lớn nhất 5×5 ô"
+    },
+    {
+      "name": "t2m_c",
+      "unit": "°C",
+      "group": "A0",
+      "description": "Nhiệt độ 2 m"
+    },
+    {
+      "name": "td2m_c",
+      "unit": "°C",
+      "group": "A0",
+      "description": "Điểm sương 2 m"
+    },
+    {
+      "name": "rh2m_pct",
+      "unit": "%",
+      "group": "A0",
+      "description": "Độ ẩm tương đối 2 m"
+    },
+    {
+      "name": "sp_hpa",
+      "unit": "hPa",
+      "group": "A0",
+      "description": "Áp suất bề mặt"
+    },
+    {
+      "name": "mslp_hpa",
+      "unit": "hPa",
+      "group": "A0",
+      "description": "Áp suất mực biển"
+    },
+    {
+      "name": "u10",
+      "unit": "m/s",
+      "group": "A0",
+      "description": "Gió u 10 m"
+    },
+    {
+      "name": "v10",
+      "unit": "m/s",
+      "group": "A0",
+      "description": "Gió v 10 m"
+    },
+    {
+      "name": "wspd10",
+      "unit": "m/s",
+      "group": "A0",
+      "description": "Tốc độ gió 10 m"
+    },
+    {
+      "name": "tcc",
+      "unit": "0-1",
+      "group": "A0",
+      "description": "Mây tổng"
+    },
+    {
+      "name": "lcc",
+      "unit": "0-1",
+      "group": "A0",
+      "description": "Mây thấp"
+    },
+    {
+      "name": "mcc",
+      "unit": "0-1",
+      "group": "A0",
+      "description": "Mây trung"
+    },
+    {
+      "name": "hcc",
+      "unit": "0-1",
+      "group": "A0",
+      "description": "Mây cao"
+    },
+    {
+      "name": "cape",
+      "unit": "J/kg",
+      "group": "A2",
+      "description": "CAPE"
+    },
+    {
+      "name": "cin_capped",
+      "unit": "J/kg",
+      "group": "A2",
+      "description": "CIN, NaN→500 (không có LFC)"
+    },
+    {
+      "name": "has_lfc",
+      "unit": "0-1",
+      "group": "A2",
+      "description": "Tỷ lệ nút có mực đối lưu tự do"
+    },
+    {
+      "name": "tcwv",
+      "unit": "kg/m²",
+      "group": "A2",
+      "description": "Hơi nước cột"
+    },
+    {
+      "name": "kx",
+      "unit": "K",
+      "group": "A2",
+      "description": "K-index"
+    },
+    {
+      "name": "tt",
+      "unit": "K",
+      "group": "A2",
+      "description": "Total Totals"
+    },
+    {
+      "name": "blh",
+      "unit": "m",
+      "group": "A2",
+      "description": "Độ cao lớp biên"
+    },
+    {
+      "name": "ivt_u",
+      "unit": "kg/m/s",
+      "group": "A3",
+      "description": "Thông lượng ẩm tích phân, thành phần đông"
+    },
+    {
+      "name": "ivt_v",
+      "unit": "kg/m/s",
+      "group": "A3",
+      "description": "Thông lượng ẩm tích phân, thành phần bắc"
+    },
+    {
+      "name": "ivt_mag",
+      "unit": "kg/m/s",
+      "group": "A3",
+      "description": "Độ lớn IVT"
+    },
+    {
+      "name": "vimd_mmh",
+      "unit": "mm/h",
+      "group": "A3",
+      "description": "Phân kỳ thông lượng ẩm (âm = hội tụ)"
+    },
+    {
+      "name": "u850",
+      "unit": "m/s",
+      "group": "A3",
+      "description": "Gió u 850 hPa"
+    },
+    {
+      "name": "v850",
+      "unit": "m/s",
+      "group": "A3",
+      "description": "Gió v 850 hPa"
+    },
+    {
+      "name": "q850_gkg",
+      "unit": "g/kg",
+      "group": "A3",
+      "description": "Độ ẩm riêng 850 hPa"
+    },
+    {
+      "name": "t850_c",
+      "unit": "°C",
+      "group": "A3",
+      "description": "Nhiệt độ 850 hPa"
+    },
+    {
+      "name": "w850_pas",
+      "unit": "Pa/s",
+      "group": "A3",
+      "description": "Omega 850 hPa (âm = thăng)"
+    },
+    {
+      "name": "rh850_pct",
+      "unit": "%",
+      "group": "A3",
+      "description": "RH 850 hPa"
+    },
+    {
+      "name": "u500",
+      "unit": "m/s",
+      "group": "A3",
+      "description": "Gió u 500 hPa"
+    },
+    {
+      "name": "v500",
+      "unit": "m/s",
+      "group": "A3",
+      "description": "Gió v 500 hPa"
+    },
+    {
+      "name": "q500_gkg",
+      "unit": "g/kg",
+      "group": "A3",
+      "description": "Độ ẩm riêng 500 hPa"
+    },
+    {
+      "name": "t500_c",
+      "unit": "°C",
+      "group": "A3",
+      "description": "Nhiệt độ 500 hPa"
+    },
+    {
+      "name": "w500_pas",
+      "unit": "Pa/s",
+      "group": "A3",
+      "description": "Omega 500 hPa"
+    },
+    {
+      "name": "shear_850_500",
+      "unit": "m/s",
+      "group": "A3",
+      "description": "Đứt gió 850–500 hPa"
+    },
+    {
+      "name": "era5_tp_mm",
+      "unit": "mm/h",
+      "group": "G4",
+      "description": "Mưa ERA5 trong khoảng [t, t+1h) (mưa của mô hình số, không phải nhãn)"
+    },
+    {
+      "name": "swvl1",
+      "unit": "m³/m³",
+      "group": "slow",
+      "description": "Độ ẩm đất lớp 1"
+    },
+    {
+      "name": "ctx_tcwv",
+      "unit": "kg/m²",
+      "group": "B5",
+      "description": "TCWV trung bình 3×3 nút ERA5 (~0,75°)"
+    },
+    {
+      "name": "ctx_ivt_mag",
+      "unit": "kg/m/s",
+      "group": "B5",
+      "description": "IVT trung bình 3×3 nút ERA5"
+    },
+    {
+      "name": "cold_surge_dp_hpa",
+      "unit": "hPa",
+      "group": "B1",
+      "description": "MSLP Hà Nội − MSLP Đà Nẵng (chỉ số không khí lạnh)"
+    },
+    {
+      "name": "dp_tonkin_south_hpa",
+      "unit": "hPa",
+      "group": "B1",
+      "description": "MSLP vịnh Bắc Bộ − MSLP Nam Trung Bộ"
+    },
+    {
+      "name": "sst_region_c",
+      "unit": "°C",
+      "group": "B4",
+      "description": "SST trung bình vùng biển 15,5–16,5°B, 108,75–109,5°Đ"
+    },
+    {
+      "name": "sin_hour",
+      "unit": "",
+      "group": "A0",
+      "description": "sin giờ địa phương"
+    },
+    {
+      "name": "cos_hour",
+      "unit": "",
+      "group": "A0",
+      "description": "cos giờ địa phương"
+    },
+    {
+      "name": "sin_doy",
+      "unit": "",
+      "group": "A0",
+      "description": "sin ngày-trong-năm"
+    },
+    {
+      "name": "cos_doy",
+      "unit": "",
+      "group": "A0",
+      "description": "cos ngày-trong-năm"
+    }
+  ]
+}

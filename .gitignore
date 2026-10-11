@@ -27,6 +27,15 @@ data/raw_data/era5_nc_features/
 data/raw_data/*.csv
 data/raw_data/*.txt
 data/operational/
+# Dữ liệu trạm, dự báo lưu trữ và trích xuất Earth Engine (tái tạo bằng scripts/)
+data/raw_data/gsod/
+data/raw_data/openmeteo_baselines/
+data/raw_data/gee/
+data/processed/stations/
+data/processed/gee/
+# Dataset v2: giữ manifest.json, cells.parquet, normalizers/; bỏ mảng lớn (~12 GB) và cache chỉ số
+data/processed/dataset_v2/*.npy
+data/processed/dataset_v2/index_cache/
 
 # Giữ lại dữ liệu mẫu (Sample data) trong data/samples/
 !data/samples/
@@ -58,3 +67,6 @@ data/processed/surface_only/*.parquet
 Thumbs.db
 desktop.ini
 *.log
+
+# Bài báo tham khảo (PDF có bản quyền, repo công khai) — lưu trên Google Drive
+Paper/

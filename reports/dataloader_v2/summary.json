@@ -1,0 +1,292 @@
+{
+  "A: S0 (A0)": {
+    "config_key": "6d41104270",
+    "groups": [
+      "A0"
+    ],
+    "latency_h": null,
+    "input_len": 24,
+    "horizon": 6,
+    "n_features": {
+      "x_past": 15,
+      "x_future": 4,
+      "static": 8
+    },
+    "samples": {
+      "train": 13127616,
+      "val": 3749280,
+      "val_ops": 1879776,
+      "test": 1874640
+    },
+    "samples_by_season_test": {
+      "summer": 945024,
+      "winter": 616320,
+      "spring": 313296
+    },
+    "cells": 214,
+    "index_seconds": 65.8,
+    "batch256_seconds": 0.034,
+    "batch_all_finite": true,
+    "alignment_mismatches_of_50": 0,
+    "train_label_mean_mm_h": 0.361,
+    "x_past_names": [
+      "t2m_c",
+      "td2m_c",
+      "rh2m_pct",
+      "sp_hpa",
+      "mslp_hpa",
+      "u10",
+      "v10",
+      "tcc",
+      "lcc",
+      "mcc",
+      "hcc",
+      "sin_hour",
+      "cos_hour",
+      "sin_doy",
+      "cos_doy"
+    ],
+    "x_future_names": [
+      "sin_hour",
+      "cos_hour",
+      "sin_doy",
+      "cos_doy"
+    ]
+  },
+  "A: S1 (A0+A1, trễ 4 h)": {
+    "config_key": "5c647c87fb",
+    "groups": [
+      "A0",
+      "A1"
+    ],
+    "latency_h": 4,
+    "input_len": 24,
+    "horizon": 6,
+    "n_features": {
+      "x_past": 18,
+      "x_future": 4,
+      "static": 8
+    },
+    "samples": {
+      "train": 13126760,
+      "val": 3749280,
+      "val_ops": 1879776,
+      "test": 1874640
+    },
+    "samples_by_season_test": {
+      "summer": 945024,
+      "winter": 616320,
+      "spring": 313296
+    },
+    "cells": 214,
+    "index_seconds": 65.3,
+    "batch256_seconds": 0.074,
+    "batch_all_finite": true,
+    "alignment_mismatches_of_50": 0,
+    "train_label_mean_mm_h": 0.372,
+    "x_past_names": [
+      "t2m_c",
+      "td2m_c",
+      "rh2m_pct",
+      "sp_hpa",
+      "mslp_hpa",
+      "u10",
+      "v10",
+      "tcc",
+      "lcc",
+      "mcc",
+      "hcc",
+      "sin_hour",
+      "cos_hour",
+      "sin_doy",
+      "cos_doy",
+      "gsmap_mm@lag4",
+      "gsmap_nb5_mean_mm@lag4",
+      "gsmap_nb5_max_mm@lag4"
+    ],
+    "x_future_names": [
+      "sin_hour",
+      "cos_hour",
+      "sin_doy",
+      "cos_doy"
+    ]
+  },
+  "A: đầy đủ (A0–A5, trễ 4 h)": {
+    "config_key": "4e6794b8be",
+    "groups": [
+      "A0",
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A5"
+    ],
+    "latency_h": 4,
+    "input_len": 24,
+    "horizon": 6,
+    "n_features": {
+      "x_past": 44,
+      "x_future": 10,
+      "static": 8
+    },
+    "samples": {
+      "train": 13126760,
+      "val": 3733444,
+      "val_ops": 1871858,
+      "test": 1874640
+    },
+    "samples_by_season_test": {
+      "summer": 945024,
+      "winter": 616320,
+      "spring": 313296
+    },
+    "cells": 214,
+    "index_seconds": 101.0,
+    "batch256_seconds": 0.12,
+    "batch_all_finite": true,
+    "alignment_mismatches_of_50": 0,
+    "train_label_mean_mm_h": 0.372,
+    "x_past_names": [
+      "t2m_c",
+      "td2m_c",
+      "rh2m_pct",
+      "sp_hpa",
+      "mslp_hpa",
+      "u10",
+      "v10",
+      "tcc",
+      "lcc",
+      "mcc",
+      "hcc",
+      "cape",
+      "cin_capped",
+      "has_lfc",
+      "tcwv",
+      "kx",
+      "tt",
+      "blh",
+      "ivt_u",
+      "ivt_v",
+      "ivt_mag",
+      "vimd_mmh",
+      "u850",
+      "v850",
+      "q850_gkg",
+      "t850_c",
+      "w850_pas",
+      "rh850_pct",
+      "u500",
+      "v500",
+      "q500_gkg",
+      "t500_c",
+      "w500_pas",
+      "shear_850_500",
+      "era5_tp_mm",
+      "ctx_tcwv",
+      "ctx_ivt_mag",
+      "sin_hour",
+      "cos_hour",
+      "sin_doy",
+      "cos_doy",
+      "gsmap_mm@lag4",
+      "gsmap_nb5_mean_mm@lag4",
+      "gsmap_nb5_max_mm@lag4"
+    ],
+    "x_future_names": [
+      "era5_tp_mm",
+      "cape",
+      "tcwv",
+      "ivt_mag",
+      "u850",
+      "v850",
+      "sin_hour",
+      "cos_hour",
+      "sin_doy",
+      "cos_doy"
+    ]
+  },
+  "B: đầy đủ (B0–B5, trễ 4 h)": {
+    "config_key": "05b0492498",
+    "groups": [
+      "B0",
+      "B1",
+      "B2",
+      "B3",
+      "B4",
+      "B5"
+    ],
+    "latency_h": 4,
+    "input_len": 168,
+    "horizon": 72,
+    "n_features": {
+      "x_past": 32,
+      "x_future": 12,
+      "static": 8
+    },
+    "samples": {
+      "train": 2182586,
+      "val": 606904,
+      "val_ops": 304308,
+      "test": 312440
+    },
+    "samples_by_season_test": {
+      "summer": 157504,
+      "winter": 102720,
+      "spring": 52216
+    },
+    "cells": 214,
+    "index_seconds": 108.4,
+    "batch256_seconds": 0.101,
+    "batch_all_finite": true,
+    "alignment_mismatches_of_50": 0,
+    "train_label_mean_mm_h": 0.293,
+    "x_past_names": [
+      "t2m_c",
+      "td2m_c",
+      "rh2m_pct",
+      "sp_hpa",
+      "mslp_hpa",
+      "u10",
+      "v10",
+      "tcc",
+      "lcc",
+      "mcc",
+      "hcc",
+      "cold_surge_dp_hpa",
+      "dp_tonkin_south_hpa",
+      "u850",
+      "v850",
+      "tcwv",
+      "ivt_u",
+      "ivt_v",
+      "ivt_mag",
+      "cape",
+      "cin_capped",
+      "has_lfc",
+      "kx",
+      "tt",
+      "sst_region_c",
+      "ctx_tcwv",
+      "ctx_ivt_mag",
+      "sin_hour",
+      "cos_hour",
+      "sin_doy",
+      "cos_doy",
+      "gsmap_mm@lag4"
+    ],
+    "x_future_names": [
+      "era5_tp_mm",
+      "tcwv",
+      "cape",
+      "mslp_hpa",
+      "u850",
+      "v850",
+      "ivt_mag",
+      "cold_surge_dp_hpa",
+      "sin_hour",
+      "cos_hour",
+      "sin_doy",
+      "cos_doy"
+    ]
+  }
+}

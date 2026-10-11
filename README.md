@@ -4,7 +4,28 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-orange.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-Dự án nghiên cứu và xây dựng hệ thống dự báo lượng mưa hạn ngắn (1–6 giờ) và hạn vừa (24–72 giờ) tại khu vực
+Dự án nghiên cứu và xây dựng hệ thống dự báo lượng mưa hạn ngắn (1–6 giờ) và hạn vừa (24–72 giờ) tại khu vực Đà Nẵng mới (Đà Nẵng + Quảng Nam) và mở rộng sang các vùng khí hậu khác của Việt Nam.
+
+---
+
+## 🚀 Pipeline v2 (từ 11/10/2026) — bắt đầu từ đây
+
+Hướng đi hiện tại, các quyết định và trạng thái: **[`CLAUDE.md`](CLAUDE.md)** (tóm tắt) và **[`project_plan_v2.md`](project_plan_v2.md)** (chi tiết kèm số liệu).
+
+- Nhãn: GSMaP v8 hiệu chỉnh trạm. Lưới 0,1° phủ Đà Nẵng mới (Đà Nẵng cũ + Quảng Nam), 2015 → 09/2026.
+- Kiểm chứng: 10 trạm synop NOAA GSOD. Bảng baseline và Thí nghiệm 0 ở [`reports/station_benchmark/README.md`](reports/station_benchmark/README.md).
+- Dữ liệu nguồn v2 (khoảng 2,9 GB, file `pbl6_data_v2_2026-10-11.tar`) nằm trên Google Drive (đường dẫn bên dưới). Giải nén ở thư mục gốc repo rồi chạy:
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+tar -xf pbl6_data_v2_2026-10-11.tar
+.venv/bin/python scripts/package_data.py verify
+.venv/bin/python scripts/build_dataset_v2.py --years 2015 2026
+.venv/bin/python -c "from src.dataloader_v2 import build_cell_major; build_cell_major()"
+.venv/bin/python scripts/inspect_dataloader_v2.py
+```
+
+Các tài liệu và kết quả trước 11/10/2026 (`project_master_plan.md`, `SURFACE_BASELINE_REPORT.md`, `reports/informer_baseline_report.md`…) được giữ lại để tham khảo lịch sử. Chúng dùng nhãn ERA5/Open-Meteo, mà nhãn này đã được chứng minh là bỏ sót mưa to.
 
 ---
 
