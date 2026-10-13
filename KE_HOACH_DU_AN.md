@@ -131,7 +131,7 @@ flowchart LR
 | 0. Khảo sát và quyết định | 1 | ✅ Xong (còn 2 câu hỏi nhỏ, xem mục 8) | `project_plan_v2.md` |
 | 1. Dữ liệu và bộ đánh giá | 1–2 | ✅ **Xong** | Dataset v2, dataloader, bảng baseline ở `reports/station_benchmark/README.md` |
 | 2. Baseline trên lưới | 2 | ⏳ Tiếp theo | — |
-| 3. Sản phẩm A: Bi-LSTM | 3–4 | 🔄 Đang chuẩn bị pilot trên Windows | Dữ liệu nguồn verify 2233/2233; PyTorch CUDA nhận RTX 3050 Ti 4 GB; chuẩn bị S0/S1/S4 |
+| 3. Sản phẩm A: Bi-LSTM | 3–4 | ✅ Pilot 2 seed; ablation đầy đủ chưa bắt đầu | `reports/pilot_bilstm_v2/README.md`: S4 tăng BSS nhưng chưa tăng chắc CSI; tiếp theo 3 seed và so kiến trúc |
 | 4. Sản phẩm B: TFT | 5–6 | Chưa bắt đầu | — |
 | 5. Đánh giá vận hành thật và độ bền | 7 | Chưa bắt đầu | — |
 | 6. Mở rộng 2 vùng | 8 | Chưa bắt đầu | — |
@@ -140,7 +140,8 @@ flowchart LR
 
 ### Những gì đã có trong tay
 
-**Cập nhật máy mới 13/10:** đã khôi phục và xác minh dữ liệu nguồn; đã đăng nhập GitHub bằng gh; CUDA hoạt động. Do ổ C ít dung lượng, chuẩn bị dataset riêng 93 ô Đà Nẵng bằng `--cell-major-only`. Lỗi cửa sổ nhãn vượt ranh giới năm train/validation đã được sửa; **57 kiểm tra đạt** trên Windows. Inspect và kết quả pilot sẽ được ghi khi kiểm tra/chạy xong. Đang xác nhận USB đích trước khi sao chép repo.
+**Cập nhật 13/10:** dữ liệu verify 2233/2233; CUDA hoạt động; dataset 93 ô Đà Nẵng đã dựng; inspect bốn cấu hình đạt 0 mẫu lệch và batch hữu hạn. **58 kiểm tra đã đạt** trên Windows (57 bộ chung và 1 kiểm tra baseline giờ). Pilot 2 seed đã xong. Repo làm việc chuyển sang `D:\PBL6_v2`; giữ nguyên bản USB `D:\PBL6` cũ. Kết quả chưa chứng minh vượt ECMWF, và chưa so Bi-LSTM với TFT.
+<!-- OFFLINE_BATCH_STATUS --> Chuẩn bị batch Python 3 seed trên 30 ô, rồi 93 ô; giới hạn đến 14:00 ngày 13/10/2026 giờ Việt Nam; log ở `data/operational/offline_pilot_batch/`.
 
 - **Nhãn mưa** đã được chọn bằng cách đối chiếu với 10 trạm đo thật (xem mục 5).
 - **Dataset v2:** 296 ô, mỗi giờ từ 2015 đến 09/2026, 51 đặc trưng. Đã kiểm tra chất lượng; dữ liệu thiếu dưới 0,2 %.
@@ -183,7 +184,7 @@ Người dùng ưu tiên có đầu ra mới mỗi tuần; hạn nộp chưa ph�
 
 | Tuần | Thời gian | Việc chính | Đầu ra / cổng kiểm soát |
 | --- | --- | --- | --- |
-| 1–2 | 12–25/10 | **Đã xong:** dữ liệu nguồn verify 2233/2233 trên máy Windows, bộ đánh giá; cài CUDA. **Đang làm:** dataset Đà Nẵng và pilot S0/S1/S4 (2 seed), so cặp validation 2023. **Còn lại:** baseline trên lưới, ghi log live, ECMWF T-OPS | Inspect: 0 mẫu lệch, batch hữu hạn; báo cáo pilot kèm bootstrap 95 %, không chọn mô hình trên test 2025 |
+| 1–2 | 12–25/10 | **Đã xong:** verify 2233/2233, CUDA, dataset Đà Nẵng, inspect, pilot 2 seed. **Tiếp theo:** batch 3 seed, baseline hiệu chỉnh, protocol 2×2 kiến trúc; ghi log live và ECMWF T-OPS | Pilot có tín hiệu xác suất, chưa chốt CSI; xem `reports/research_rainfall/README.md`; test 2025 giữ kín |
 | 3–4 | 26/10–08/11 | Bi-LSTM: ablation A0–A5 (3 seed), thí nghiệm độ trễ, đánh giá tách mùa | Cổng 3: Bi-LSTM có vượt ECMWF thô và persistence không? |
 | 5–6 | 09–22/11 | TFT: cài đặt, ablation B0–B5; DLinear; Informer một cấu hình; bảng 2×2 Bi-LSTM với TFT | Cổng 4: TFT có vượt ECMWF và ECMWF + hiệu chỉnh không? |
 | 7 | 23–29/11 | Đánh giá với đầu vào dự báo thật (T-OPS); chọn cấu hình cho app; mở tập test 2025 | Đóng băng kết quả chính |
