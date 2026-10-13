@@ -45,6 +45,14 @@ class DomainFeatureTest(unittest.TestCase):
         np.testing.assert_array_equal(raw['x_past'][...,-4:],0)
         base.future=1000.
         np.testing.assert_array_equal(domain['x_past'],DomainSampler(base,'domain').batch(ix)['x_past'])
+    def test_terrain_ablation_changes_only_one_standardized_channel(self):
+        base=FakeSampler();ix=np.array([[0,30]],dtype=np.int32)
+        full=DomainSampler(base,'domain').batch(ix)['x_past']
+        removed=DomainSampler(base,'domain',derived_mask=[1,0,1,1]).batch(ix)['x_past']
+        self.assertEqual(full.shape,removed.shape)
+        np.testing.assert_array_equal(removed[...,-3],0)
+        np.testing.assert_array_equal(full[...,[0,1,2,3,4,6,7]],removed[...,[0,1,2,3,4,6,7]])
+        with self.assertRaises(ValueError):DomainSampler(base,derived_mask=[1,0])
     def test_missing_static_is_rejected(self):
         base=FakeSampler();base.ds.cells.loc[0,'ne_upslope_m']=np.nan
         with self.assertRaises(ValueError):DomainSampler(base,'domain').batch(np.array([[0,30]]))

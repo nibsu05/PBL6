@@ -45,9 +45,13 @@ class DerivedNormalizer:
 
 
 class DomainSampler:
-    def __init__(self, base: WindowSampler, kind='padding', derived_norm=None):
+    def __init__(self, base: WindowSampler, kind='padding', derived_norm=None, derived_mask=None):
         if kind not in ('padding', 'domain'):
             raise ValueError('kind phải là padding hoặc domain')
+        mask = np.ones(4, dtype=np.float32) if derived_mask is None else np.asarray(derived_mask, np.float32)
+        if mask.shape != (4,) or not np.isin(mask, [0, 1]).all():
+            raise ValueError('derived_mask phải có 4 phần tử 0/1')
+        self.derived_mask = mask
         self.base, self.kind, self.derived_norm = base, kind, derived_norm
         self.cfg, self.ds = base.cfg, base.ds
         self.future_names = base.future_names
@@ -74,6 +78,8 @@ class DomainSampler:
                 extra = self.derived_norm.transform(extra)
             if not np.isfinite(extra).all():
                 raise ValueError('Đặc trưng domain không hữu hạn; không tự điền dữ liệu thiếu')
+        # Mask sau chuẩn hóa: cột bị bỏ thành hằng0, giữ kích thước/tham số.
+        extra = extra * self.derived_mask
         out['x_past'] = np.concatenate((out['x_past'], extra), axis=-1)
         return out
 
