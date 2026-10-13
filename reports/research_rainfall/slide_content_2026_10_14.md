@@ -1,6 +1,6 @@
 # Nội dung 6 slide để trao đổi với giảng viên lúc 08:00, 14/10/2026
 
-> **Chốt nội dung khoảng 00:00 ngày 14/10 (giờ Việt Nam).** Đây là nội dung để nhóm tự thiết kế slide, không phải kết quả cuối của đồ án. Gợi ý trình bày 6–7 phút, khoảng 1 phút/slide. Giữ số liệu dưới đây cố định cho buổi sáng; watcher NRT đang chạy có thể cung cấp nhật ký mới nhưng không tự biến thành kết quả chất lượng mô hình.
+> **Bản dàn ý chốt khoảng 00:00 ngày 14/10.** Sau đó đã dựng [bộ PowerPoint 8 slide](../presentation_2026_10_14/PBL6_Da_Nang_2026_10_14.pptx), bổ sung slide nhu cầu từ [rà soát tài liệu](user_needs_desk_review_2026_10_14.md). Bản này giữ lời dẫn và số liệu gốc để nhóm tập nói 6–7 phút. Watcher NRT chỉ thêm nhật ký nguồn, không tự biến thành kết quả chất lượng mô hình.
 
 ## Thông điệp mở đầu (20 giây)
 

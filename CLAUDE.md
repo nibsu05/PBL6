@@ -81,6 +81,8 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 
 14. **Ghi latency thật:** `scripts/watch_gsmap_nrt.py` đã chuẩn bị và test bằng FTP giả; prompt credential một lần trong terminal, poll `latest/` mỗi 10 phút, bỏ qua baseline lúc bắt đầu, chỉ tải file raw v8 mới và ghi `first_seen_at_utc`/`first_recorded_at_utc`, SHA-256 ngoài Git. `first_seen` là cận trên thời điểm JAXA phát hành với độ phân giải poll; lỗi mạng làm khoảng bất định lớn hơn. Người dùng đã chạy phiên 12 giờ lúc 16:31 UTC 13/10. Lần poll2 (16:41 UTC) thấy file raw mới `gsmap_nrt.20261013.1200.dat.gz`, không lỗi; thời điểm JAXA phát hành nằm sau baseline và trước 16:41, age sau cuối khoảng mưa bị chặn bảo thủ [3,53;3,70] h. Một tệp chưa là phân phối latency. Cổng NRT lag4/issue thử17 UTC đã có 24/24 tệp máy nhận trước issue (lúc audit issue còn trong tương lai); AI vẫn tắt vì khí tượng as-of/T-OPS chưa đạt. Snapshot tĩnh `reports/followup_danang/jaxa_live_first_detection.json`; status động watcher bị Git bỏ qua, raw ngoài Git.
 
+15. **Báo cáo giảng viên 08:00 ngày 14/10:** Đã tạo bộ 8 slide PowerPoint chỉnh sửa được `reports/presentation_2026_10_14/PBL6_Da_Nang_2026_10_14.pptx` (7 slide chính, 1 slide đối chứng ECMWF) và rà soát nhu cầu từ tài liệu công `reports/research_rainfall/user_needs_desk_review_2026_10_14.md`. Trang người dùng là giả thuyết, **chưa có phỏng vấn**. Danang Smart City đã có theo dõi mưa/ngập; app PBL chỉ nhắm lớp dự báo mưa 0–6 giờ theo ô, chưa dự báo ngập đường hay cảnh báo chính thức. Các slide dùng validation lịch sử, nêu CI và giới hạn; AI live vẫn tắt. Nguồn đặt trong ghi chú từng slide.
+
 ## Còn chờ chốt (hỏi người dùng trước khi làm phần liên quan)
 
 1. Hai vùng kiểm tra: Hà Nội, cùng TP.HCM **hoặc** Đắk Lắk.
@@ -88,8 +90,8 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 
 ## Trạng thái và việc tiếp theo
 
-**Trạng thái chốt sau lượt tiếp tục 13/10/2026:**
-- Dàn ý báo cáo 08:00 ngày 14/10 đã chốt: `reports/research_rainfall/slide_content_2026_10_14.md`, 6 slide + 1 dự phòng, người dùng tự thiết kế. Nội dung chính: nhãn, phép so cùng mẫu, Tweedie, giả thuyết domain có CI, cổng nguồn/app, kế hoạch. Không chờ watcher đủ 12 giờ hoặc đưa số NRT đơn lẻ thành kết luận mô hình.
+**Trạng thái cập nhật 14/10/2026:**
+- Bộ slide báo cáo 08:00 ngày 14/10 đã dựng và kiểm tra ảnh xuất từng trang: `reports/presentation_2026_10_14/PBL6_Da_Nang_2026_10_14.pptx`, 7 slide chính + 1 dự phòng. Rà soát nhu cầu ở `reports/research_rainfall/user_needs_desk_review_2026_10_14.md` là desk review, chưa phỏng vấn. Nội dung gồm bài toán/người dùng, nhãn, Tweedie, giả thuyết domain có CI, cổng nguồn/app, kế hoạch. Không đưa số NRT đơn lẻ thành kết luận chất lượng mô hình.
 - Repo làm việc `D:\PBL6_v2`; tác giả commit mới là `nibsu05 <168987662+nibsu05@users.noreply.github.com>`. Không viết lại lịch sử đã push. Dữ liệu verify 2233/2233, dataloader lệch 0; test 2025 giữ kín.
 - BASE/RAW/DOMAIN trên 30 ô/3 fold và đợt follow-up Tweedie LightGBM, Tweedie Bi-LSTM, NO_TERRAIN, 63 ô chưa train đã hoàn tất. Chi tiết cùng CI ở `reports/domain_screen_danang/` và `reports/followup_danang/`.
 - Tweedie LightGBM RAW giảm RMSE 3 h mùa 5–10 từ 4,607/4,841/4,205 xuống 3,947/4,534/3,610 mm ở 2021/2022/2023. Tweedie Bi-LSTM RAW từ 4,046/4,661/3,963 xuống 3,876/4,581/3,540. Đây là validation lịch sử, chưa là hiệu năng vận hành. Đầu xác suất của Bi-LSTM Tweedie kém đi trong 2022 (BSS ≥1: 0,148 so 0,186).

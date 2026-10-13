@@ -1,6 +1,6 @@
 # Kết quả thực hiện và đề xuất trao đổi ngày 14/10/2026
 
-> Dàn ý 6 slide dễ trình bày cho buổi 08:00: [slide_content_2026_10_14.md](slide_content_2026_10_14.md). Số liệu mô hình đã chốt; watcher đêm nay chỉ bổ sung nhật ký nguồn, không thay kết luận.
+> [Bộ PowerPoint 8 slide chỉnh sửa được](../presentation_2026_10_14/PBL6_Da_Nang_2026_10_14.pptx) cho buổi 08:00: 7 slide chính và 1 dự phòng ECMWF. [Rà soát nhu cầu](user_needs_desk_review_2026_10_14.md) là nghiên cứu tài liệu, chưa phỏng vấn. [Dàn ý cũ](slide_content_2026_10_14.md) vẫn giữ để đọc lời dẫn; số liệu mô hình đã chốt, watcher chỉ bổ sung nhật ký nguồn.
 
 ## Kết luận cần trình bày trước
 
