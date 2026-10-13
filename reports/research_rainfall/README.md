@@ -2,6 +2,8 @@
 
 Ngày 13/10/2026. Đề tài cần hai loại bằng chứng: mô hình nào tốt hơn khi nhận cùng thông tin, và mô hình được chọn có dùng được trong một app phát hành dự báo thật hay không. Trọng tâm hiện tại là đóng góp nhóm thông tin và biểu diễn theo khí tượng địa phương; so kiến trúc là đối chứng, dự báo ECMWF kiểm tra giá trị sử dụng của app.
 
+**Thực hiện tối 13/10:**Đã chạy domain screen3 fold,27NN+9LightGBM, audit nhãn, collector93 ô vàAPI archive từcheckpoint. Xem [kết quả cho14/10](brief_giang_vien_2026_10_14.md) và [kế hoạch thực hiện](execution_plan.md). Test 2025 giữ kín;chưa có kết luận vận hành.
+
 ## Ba phép so sánh cần tách biệt
 
 | Phép so | Giữ cố định | Thay đổi | Câu hỏi trả lời |

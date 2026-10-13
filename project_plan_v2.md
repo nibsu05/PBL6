@@ -62,6 +62,12 @@ Lý do không chọn Informer cho hạn 1–3 ngày:
 
 ---
 
+### Cập nhật thực nghiệm tối 13/10/2026
+
+Đã hoàn tất BASE/RAW/DOMAIN trên30 ô,3 fold2021–2023, NN3 seed vàLightGBM, cùng30.000 mẫu train/fold. DOMAIN thêm proxy gió–ẩm–địa hình vàoRAW, cùng số tham số174.154. CSI quyết định ≥10 mm/3h NN tăng0,051/0,007/0,031 soRAW nhưng CI95% đều chứa0, LightGBM chưa xác nhận lợi ích rõ;giữ hai ứng viên để kiểm định tiếp. Thử nghiệm không dùng khí tượng tương lai, không mởtest 2025.
+
+Audit nhãn theo mùa và nguồn forecast 93 ô đã chạy;API checkpoint chỉ archive. Thiết kế/điểm:[domain screen](reports/domain_screen_danang/README.md),[brief 14/10](reports/research_rainfall/brief_giang_vien_2026_10_14.md). Lộ trình hiện hành ởKE_HOACH_DU_AN.md mục4/6 và [execution_plan.md](reports/research_rainfall/execution_plan.md).
+
 ## 1. Hiện trạng và bằng chứng
 
 ### 1.1. Nhãn hiện tại thiếu mưa to nghiêm trọng
@@ -183,7 +189,7 @@ Giai đoạn B (02/2024–08/2025), 10 trạm gộp, 5.313 trạm-ngày, 130 ng�
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | Khí hậu | 7,16 | 0,26 | 0,10 | 0,00 | 0,00 | −0,55 | −0,06 |
 | Persistence | 7,54 | 0,34 | 0,17 | 0,11 | 1,02 | −0,72 | −0,72 |
-| ERA5 (nhãn hiện tại) | 6,06 | 0,57 | 0,25 | 0,17 | 0,48 | −0,46 | −0,11 |
+| ERA5 (nhãn cũ) | 6,06 | 0,57 | 0,25 | 0,17 | 0,48 | −0,46 | −0,11 |
 | ECMWF, dự báo trước 1 ngày | 6,48 | 0,52 | 0,25 | 0,16 | 0,47 | −0,53 | −0,12 |
 | ECMWF, dự báo trước 3 ngày | 6,75 | 0,45 | 0,25 | 0,12 | 0,46 | −0,53 | −0,23 |
 | ECMWF, dự báo trước 5 ngày | 7,14 | 0,34 | 0,20 | 0,09 | 0,46 | −0,66 | −0,29 |
@@ -355,7 +361,7 @@ Mỗi đặc trưng phải điền đủ 4 cột:
 1. **Vệ tinh gần như "mù" với mưa mùa đông ở Trung Bộ (tháng 11–2).**
    - Đây là mưa địa hình mây thấp, khó phát hiện bằng vi sóng và hồng ngoại.
    - Đo tại trạm Trung Trung Bộ, 2021–2024, mùa đông: GSMaP thô có bias −7,8 mm/ngày và FBI ≥16 mm chỉ 0,17; IMERG có bias −5,0 mm/ngày và FBI 0,41. Riêng GSMaP hiệu chỉnh trạm vẫn tốt: CSI ≥50 mm đạt 0,43 vào mùa đông và 0,46 vào mùa hè–thu.
-   - Hệ quả: vào mùa đông, nhãn theo giờ thực chất là **tổng mưa ngày của trạm được trải đều ra các giờ**. Ví dụ ngày 16/12/2015, nhãn khoảng 2,6–2,8 mm/h liên tục suốt 18 giờ. Có 56 % lượng mưa mùa đông của nhãn rơi vào những giờ vệ tinh không thấy mưa; mùa hè–thu tỷ lệ này là 25 %.
+   - Hệ quả: vào mùa đông, nhãn theo giờ có thể phụ thuộc mạnh vào hiệu chỉnh tổng ngày, với một số đợt có giá trị gần đều; không suy thành mọi giờ mùa đông đều sai. Ví dụ ngày 16/12/2015, nhãn khoảng 2,6–2,8 mm/h liên tục suốt 18 giờ. Trong phân tích trước, có 56 % lượng mưa mùa đông của nhãn rơi vào những giờ vệ tinh không thấy mưa; mùa hè–thu tỷ lệ này là 25 %.
 2. **Hệ quả cho thiết kế mô hình:**
    - **Sản phẩm A (0–6 h):**
      - Đánh giá chính theo giờ và tổng 3 h trên mùa hè–thu (tháng 5–10), khi thời điểm mưa của nhãn là thật.

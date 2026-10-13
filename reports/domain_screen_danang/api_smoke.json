@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "health": {
+    "ok": true,
+    "mode": "archive_validation",
+    "operational_ready": false
+  },
+  "available_years": [
+    2021,
+    2022
+  ],
+  "endpoints": [
+    "/health",
+    "/api/meta",
+    "/api/predict"
+  ],
+  "http_status": 200,
+  "inference_year": 2021,
+  "amount_shape": [
+    1,
+    6
+  ],
+  "probability_shape": [
+    1,
+    3,
+    3
+  ],
+  "finite": true,
+  "mode": "archive_validation",
+  "operational_ready": false
+}

@@ -1,0 +1,13 @@
+{
+  "snapshot_id": "20261013T122019Z",
+  "requested_cells": 93,
+  "weather_contract_passed": 93,
+  "failed": 0,
+  "failures": [],
+  "init_time_known": false,
+  "ready_for_ml": false,
+  "source_models": [
+    "ecmwf_ifs",
+    "ecmwf_ifs025"
+  ]
+}

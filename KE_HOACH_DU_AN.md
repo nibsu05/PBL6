@@ -130,20 +130,22 @@ flowchart LR
 | --- | --- | --- | --- |
 | 0. Khảo sát và quyết định | 1 | ✅ Xong (còn 2 câu hỏi nhỏ, xem mục 8) | `project_plan_v2.md` |
 | 1. Dữ liệu và bộ đánh giá | 1–2 | ✅ **Xong** | Dataset v2, dataloader, bảng baseline ở `reports/station_benchmark/README.md` |
-| 2. Baseline trên lưới | 2 | Đang thực hiện cùng domain screen | LightGBM/khí hậu trên cùngfold |
-| 3. Sản phẩm A: Bi-LSTM | 3–4 | ✅ Pilot 3 seed trên 30/93 ô; ablation đầy đủ chưa bắt đầu | `reports/pilot_bilstm_v2_93cells_3seeds/README.md`: S1 tăng CSI so S0; S4 tốt hơn về BS; tiếp theo kiểm tra nhãn/đầu quyết định và giả thuyết địa phương trước so kiến trúc |
+| 2. Baseline trên lưới | 2 | ✅ LightGBM/khí hậu30 ô,3 fold | reports/domain_screen_danang/; vận hành thật còn chờ |
+| 3. Sản phẩm A: Bi-LSTM | 3–4 | ✅ Pilot30/93 ô và domain screen3 fold; E0–E5 rộng chưa chạy | `reports/pilot_bilstm_v2_93cells_3 seeds/README.md`: S1 tăng CSI so S0; S4 tốt hơn về BS; tiếp theo kiểm tra nhãn/đầu quyết định và giả thuyết địa phương trước so kiến trúc |
 | 4. Sản phẩm B: TFT | 5–6 | Chưa bắt đầu | — |
 | 5. Đánh giá vận hành thật và độ bền | 7 | Chưa bắt đầu | — |
 | 6. Mở rộng 2 vùng | 8 | Chưa bắt đầu | — |
-| 7. App và kiểm định live | 9–10 (ghi log live: **ngay**) | Chưa bắt đầu | Bản demo cũ ở `demo/` |
-| 8. Báo cáo và bảo vệ | Viết song song từ tuần 2 | Chưa bắt đầu | — |
+| 7. App và kiểm định live | Ghi log ngay, app MVP theo cổng | Đã có API archivecheckpoint và logger forecast 93 ô | demo/domain_api.py; MLlive/quan trắc NRT/chọn mô hình cuối còn chờ |
+| 8. Báo cáo và bảo vệ | Viết cùng thực nghiệm | ✅ Brief kết quả cho14/10 | reports/research_rainfall/brief_giang_vien_2026_10_14.md |
 
-Đợt thực hiện kế tiếp: reports/domain_screen_danang/README.md; code và smoke đã có, đang chuẩn bị lượt đủ. Đề xuất nền: `reports/research_rainfall/next_experiment.md`; cập nhật phê bình/ưu tiên theo `literature_domain_review.md`. Chưa khởi chạy E0–E5 hoặc TFT; nghiên cứu địa phương ưu tiên trước mở rộng số kiến trúc.
+Đợt thực hiện kế tiếp: reports/domain_screen_danang/README.md; lượt đầy đủ đã hoàn tất; số liệu và CI đã lưu. Đề xuất nền: `reports/research_rainfall/next_experiment.md`; cập nhật phê bình/ưu tiên theo `literature_domain_review.md`. Chưa khởi chạy E0–E5 hoặc TFT; nghiên cứu địa phương ưu tiên trước mở rộng số kiến trúc.
+
+**Kết quả tối 13/10:**27 lượt NN+9 pipeline LightGBM,131.400 cửa sổ/3 fold;DOMAIN tăng CSI xác suất NN so RAW 0,051/0,007/0,031 nhưng CI chứa0; chưa chốt app.73 kiểm tra đạt, API suy luận CPU đã chạy, forecast 93/93 ô đạt contract. Báo cáo và kế hoạch cụ thể: reports/research_rainfall/brief_giang_vien_2026_10_14.md, execution_plan.md.
 
 ### Những gì đã có trong tay
 
-**Cập nhật 13/10:** dữ liệu verify 2233/2233; CUDA hoạt động; dataset 93 ô Đà Nẵng đã dựng; inspect bốn cấu hình đạt 0 mẫu lệch và batch hữu hạn. **58 kiểm tra đã đạt** trên Windows (57 bộ chung và 1 kiểm tra baseline giờ). Pilot 3 seed trên 30 và 93 ô đã xong. Repo làm việc chuyển sang `D:\PBL6_v2`; giữ nguyên bản USB `D:\PBL6` cũ. Kết quả chưa chứng minh vượt ECMWF, và chưa so Bi-LSTM với TFT.
-<!-- OFFLINE_BATCH_STATUS --> Batch 3 seed trên 93 ô đã hoàn tất; bảng số liệu ở `reports/pilot_bilstm_v2_93cells_3seeds/`. Đã diễn giải: S1 tăng CSI so S0; S4 tốt hơn về BS; chưa so kiến trúc hoặc kiểm định vận hành. Không chấm test 2025.
+**Cập nhật 13/10:** dữ liệu verify 2233/2233; CUDA hoạt động; dataset 93 ô Đà Nẵng đã dựng; inspect bốn cấu hình đạt 0 mẫu lệch và batch hữu hạn. **73 kiểm tra đã đạt** trên Windows (58 kiểm tra trước đó và15 kiểm tra domain/nguồn live/suy luận). Pilot 3 seed trên 30 và 93 ô đã xong. Repo làm việc chuyển sang `D:\PBL6_v2`; giữ nguyên bản USB `D:\PBL6` cũ. Kết quả chưa chứng minh vượt ECMWF, và chưa so Bi-LSTM với TFT.
+<!-- OFFLINE_BATCH_STATUS --> Batch 3 seed trên 93 ô đã hoàn tất; bảng số liệu ở `reports/pilot_bilstm_v2_93cells_3 seeds/`. Đã diễn giải: S1 tăng CSI so S0; S4 tốt hơn về BS; chưa so kiến trúc hoặc kiểm định vận hành. Không chấm test 2025.
 
 - **Nhãn mưa** đã được chọn bằng cách đối chiếu với 10 trạm đo thật (xem mục 5).
 - **Dataset v2:** 296 ô, mỗi giờ từ 2015 đến 09/2026, 51 đặc trưng. Đã kiểm tra chất lượng; dữ liệu thiếu dưới 0,2 %.
@@ -167,10 +169,10 @@ flowchart LR
 3. **Mức sàn cần vượt:**
    - Dự báo ECMWF trước 1 ngày chỉ báo được khoảng một nửa số ngày mưa to.
    - Mọi dự báo dạng "có / không" đều thua việc chỉ dùng xác suất khí hậu (BSS âm).
-   - Vì vậy mô hình của nhóm phải **xuất xác suất**. Chỉ cần đạt BSS > 0 là đã hơn mọi nguồn hiện có trên chỉ số này.
-4. **Vệ tinh gần như không thấy mưa mùa đông (tháng 11–2) ở Trung Bộ**, vì đây là mưa từ mây thấp, mưa địa hình. Hệ quả:
+   - Vì vậy mô hình của nhóm phải **xuất xác suất**. BSS > 0 chỉ xác nhận tốt hơn khí hậu tham chiếu; để so nguồn phải cùng mẫu, nhãn, hạn và cách xuất xác suất.
+4. **Nhãn mưa giờ thay đổi chất lượng theo mùa.** Audit 93 ô Đà Nẵng 2021–2023: 67,6% tổng GC mùa11–2 nằm ở giờ raw≤0,01mm, so với20,8% mùa5–10. Đây là phụ thuộc hiệu chỉnh, chưa chứng minh mọi giờ mưa đều sai. Hệ quả:
    - Sản phẩm A được chấm theo giờ chủ yếu trên tháng 5–10.
-   - Mùa đông chỉ chấm tổng 6 giờ và 24 giờ.
+   - Mùa đông chấm tổng 6 giờ như chỉ số phụ; 24 giờ dùng QC nhãn với trạm hoặc sản phẩm B.
    - Quan trắc vệ tinh dự kiến ít giúp vào mùa đông.
 5. **Vì sao dùng TFT thay Informer:**
    - Trên bộ dữ liệu chuẩn, Informer thua cả cách đoán "lặp lại giá trị gần nhất".
@@ -180,31 +182,20 @@ flowchart LR
 
 ---
 
-## 6. Lộ trình các tuần tới
+## 6. Lộ trình thực hiện tiếp
 
-**Đợt tối13/10:** triển khai BASE/RAW/DOMAIN và Bi-LSTM/LightGBM trên3fold, thiết kế đóng băng tại reports/domain_screen_danang/README.md; audit nhãn và probe live đã xong. Cần kết quả thực nghiệm và bước triển khai để trao đổi sáng14/10.
+Tập trung Đà Nẵng, có đầu ra kiểm chứng mỗi tuần; chi tiết và cổng chuyển tiếp ở [execution_plan.md](reports/research_rainfall/execution_plan.md). Lịch là mục tiêu theo năng lực nhóm, không thay điều kiện kiểm định.
 
-Người dùng ưu tiên có đầu ra mới mỗi tuần; hạn nộp chưa phải ràng buộc (chốt 13/10/2026). Các mốc dưới đây là tham khảo, điều chỉnh theo bằng chứng từ thí nghiệm; tập trung Đà Nẵng trước khi mở rộng vùng.
+| Mốc | Việc thực hiện | Đầu ra cần đạt |
+| --- | --- | --- |
+| Tối13/10 — đã xong | Domain screen3 fold, NN/cây, audit nhãn, forecast 93 ô, API checkpoint | Số liệu, CI, code và brief 14/10; chưa kết luận thắng vận hành |
+| 14–20/10 | Chọn ứng viênRAW/DOMAIN;ablation từng proxy/nhóm;đầu lượngmưa;hoàn tất NRT và ghi nguồn;giao diện archive | Bảng lựa chọn có lý do, contract nguồn, demo dùng checkpoint thật |
+| 21–27/10 | Kiểm định forecast thật2024;baseline thô/hiệu chỉnh;parity train/app;giao diện6h, nguồn thiếu/cũ, ghi dự báo | MVP Đà Nẵng khi đạt cổng nguồn/kỹ năng;test 2025 chỉ mở sau đóng băng |
+| Sau MVP | TFT 1–3ngày, so kiến trúc cùng đầu vào/hạn;kiểm tra ô mới và hai vùng | Bằng chứng theo câu hỏi riêng, không nhân model khi chưa có giả thuyết |
 
-| Tuần | Thời gian | Việc chính | Đầu ra / cổng kiểm soát |
-| --- | --- | --- | --- |
-| 1–2 | 12–25/10 | **Đã xong:** verify 2233/2233, CUDA, dataset Đà Nẵng, inspect, pilot 3 seed trên 30/93 ô. **Tiếp theo:** hợp đồng nguồn live và nhãn; kiểm tra đầu quyết định, baseline cùng mẫu và giả thuyết gió–ẩm–địa hình theo `literature_domain_review.md`; E0–E5 sàng lọc trước khi mở rộng kiến trúc/T-OPS | Pilot có tín hiệu xác suất, chưa chốt CSI; xem `reports/research_rainfall/README.md`; test 2025 giữ kín |
-| 3–4 | 26/10–08/11 | Bi-LSTM: ablation A0–A5 (3 seed), thí nghiệm độ trễ, đánh giá tách mùa | Cổng 3: Bi-LSTM có vượt ECMWF thô và persistence không? |
-| 5–6 | 09–22/11 | TFT: cài đặt, ablation B0–B5; DLinear; Informer một cấu hình; bảng 2×2 Bi-LSTM với TFT | Cổng 4: TFT có vượt ECMWF và ECMWF + hiệu chỉnh không? |
-| 7 | 23–29/11 | Đánh giá với đầu vào dự báo thật (T-OPS); chọn cấu hình cho app; mở tập test 2025 | Đóng băng kết quả chính |
-| 8 | 30/11–06/12 | Tải và chạy 2 vùng kiểm tra; thí nghiệm bỏ ô và bỏ vùng | Kết quả tổng quát hóa |
-| 9–10 | 07–20/12 | App: bản đồ tỉnh, chi tiết điểm, hai sản phẩm, bảng kiểm chứng live | Demo chạy liên tục |
-| 11 | 21–27/12 | Hoàn thiện báo cáo, slide, phân tích các trận mưa lớn (14/10/2022, 10/2023, 10/2025) | Nộp bài |
+Bộ ghi forecast khí tượng93 ô đã chạy mỗi giờ giới hạn2,1 giờ;chưa cài tác vụ chạy vĩnh viễn, chưa có stream quan trắc NRT. Cần một máy luôn bật và nguồn quan trắc xác minh được để kiểm định live. API hiện là archive 2021–2023, server thử đã đóng.
 
-**Phạm vi tối thiểu nếu trễ tiến độ (MVP):**
-- Chỉ Đà Nẵng.
-- Bi-LSTM với các nhóm A0, A1, A2, A4 và 3 mức trễ.
-- TFT với các nhóm B0, B1, B3.
-- Baseline: khí hậu, persistence, ECMWF thô, LightGBM, DLinear.
-- T-OPS trên năm 2025.
-- App cho một tỉnh, có ghi log live.
-
-Những thứ bỏ trước tiên nếu phải cắt: nhóm bối cảnh vùng, 2 vùng mở rộng, hạn 7 ngày.
+Không chọn model chỉ vì một năm đẹp hoặc thêm biến mang tên vật lý. DOMAIN có tín hiệu CSI NN2/3 năm nhưng CI còn rộng;giữ đối chứngRAW để kiểm tra tiếp. Không coi tăng CSI đầu xác suất là cải thiện tương đương của lượngmưa mm.
 
 ---
 

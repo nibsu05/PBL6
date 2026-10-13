@@ -298,6 +298,7 @@ def main():
                     data=warm.copy()
                     if ca==a:data['event']=(data.obs>=10).astype(float);oc='event'
                     result=paired_block_bootstrap(data,oc,ca,cb,metric,n_boot=args.bootstrap,seed=year)
+                    if result['metric'].startswith('CSI'):result['metric']='CSI_probability>=10mm/3h'
                     comparisons.append(dict(year=year,learner=learner,**result))
         pd.DataFrame(rows).to_csv(report/'scores.csv',index=False)
         pd.DataFrame(regime_rows).to_csv(report/'regimes.csv',index=False)

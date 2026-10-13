@@ -46,3 +46,13 @@ Tiêu chí đặt trước: ΔCSI≥0,03 hoặc BS giảm tương đối≥5% so
     .venv\Scripts\python.exe scripts\screen_danang_domain.py
 
 Job bị ngắt: chạy lại nguyên tham số thêm --resume. Checkpoint/dự báo/raw snapshot ở data/operational/ ngoài Git. Báo cáo công khai chỉ gồm tổng hợp; môi trường và SHA train index ở run.json.
+
+## Kết quả đã hoàn tất
+
+27 lượt NN và 9 pipeline LightGBM trên 3 fold, 131.400 cửa sổ evaluation; 73 kiểm tra đạt. DOMAIN tăng CSI quyết định của Bi-LSTM so RAW 0,051 / 0,007 / 0,031, nhưng cả ba CI95% chứa 0. LightGBM chưa xác nhận lợi ích rõ. Giữ RAW/DOMAIN làm ứng viên, chưa chọn checkpoint vận hành. RAW/DOMAIN đều có 174.154 tham số NN.
+
+Bảng đầy đủ: scores.csv; quyết định: domain_decisions.csv; manifest: run.json; tổng hợp: summary.json. Biểu đồ và diễn giải ở [brief giảng viên14/10](../research_rainfall/brief_giang_vien_2026_10_14.md); kế hoạch thực hiện ở [execution_plan.md](../research_rainfall/execution_plan.md).
+
+CSI bootstrap đã đổi tên thành CSI_probability>=10mm/3h cho đúng ý nghĩa: phép tính dùng nhãn nhị phân của sự kiện10mm/3h rồi chấm ngưỡng1. Việc đổi nhãn không thay số liệu hay phép tính.
+
+Suy luận CPU/checkpoint đã kiểm tra20mẫu/cấu hình ở2021 và2023; inference_parity.json lưu sai số. API health/meta/predict đã qua HTTP thật, api_smoke.json chỉ giữ tổng hợp kiểm tra. Server thử đã đóng. Checkpoint, dữ liệu và JSON dự báo chi tiết nằm ngoài Git.

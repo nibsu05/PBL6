@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "device": "cpu",
+  "rows": [
+    {
+      "year": 2023,
+      "config": "BASE",
+      "n": 20,
+      "max_abs_amount_mm": 2.86102294921875e-05,
+      "max_abs_probability": 9.834766387939453e-06
+    },
+    {
+      "year": 2023,
+      "config": "RAW",
+      "n": 20,
+      "max_abs_amount_mm": 0.00016021728515625,
+      "max_abs_probability": 1.6808509826660156e-05
+    },
+    {
+      "year": 2023,
+      "config": "DOMAIN",
+      "n": 20,
+      "max_abs_amount_mm": 0.0002562999725341797,
+      "max_abs_probability": 3.808736801147461e-05
+    },
+    {
+      "year": 2021,
+      "config": "BASE",
+      "n": 20,
+      "max_abs_amount_mm": 0.0001010894775390625,
+      "max_abs_probability": 1.919269561767578e-05
+    },
+    {
+      "year": 2021,
+      "config": "RAW",
+      "n": 20,
+      "max_abs_amount_mm": 0.00028324127197265625,
+      "max_abs_probability": 1.6421079635620117e-05
+    },
+    {
+      "year": 2021,
+      "config": "DOMAIN",
+      "n": 20,
+      "max_abs_amount_mm": 0.00016021728515625,
+      "max_abs_probability": 1.919269561767578e-05
+    }
+  ],
+  "source": "Reload trained checkpoints, normalization and stored Platt parameters; compare saved CUDA ensemble."
+}

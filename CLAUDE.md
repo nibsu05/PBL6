@@ -53,9 +53,9 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 3. **Mức sàn:** ECMWF dự báo trước 1 ngày ngang ERA5. Mọi dự báo tất định có BSS < 0 và FBI ≥50 mm khoảng 0,47.
    - Vì vậy mô hình phải xuất xác suất đã hiệu chỉnh.
    - MAE **không phải** chỉ số chính.
-4. **Vệ tinh gần như không thấy mưa mùa đông (tháng 11–2) ở Trung Bộ.**
-   - Vào mùa đông, nhãn theo giờ thực chất là tổng mưa ngày bị trải đều ra các giờ.
-   - Sản phẩm A chỉ đánh giá theo giờ và tổng 3 h trên tháng 5–10; mùa đông chỉ chấm tổng 6 h và 24 h. Mọi bảng kết quả tách theo mùa.
+4. **Chất lượng nhãn mưa giờ phụ thuộc mùa ở Đà Nẵng/Trung Bộ.**
+   - Audit 93 ô Đà Nẵng 2021–2023: 67,6% tổng GC mùa 11–2 nằm ở giờ raw ≤0,01 mm; mùa 5–10 là 20,8%. Chỉ báo cho thấy phụ thuộc hiệu chỉnh mạnh, không chứng minh mọi giờ mưa mùa đông đều sai hoặc được trải đều.
+   - Sản phẩm A chấm giờ/3 h chính trên tháng 5–10; mùa đông chỉ chấm 6 h như chỉ số phụ vẫn có bất định nhãn. Tổng 24 h dùng QC nhãn với trạm hoặc sản phẩm B, không biến mô hình 6 h thành dự báo 24 h. Tách mọi bảng theo mùa.
 5. **Chọn TFT thay Informer cho sản phẩm B** (chốt 11/10/2026). Informer là lựa chọn yếu vì:
    - Trên bộ chuẩn Weather, Informer kém cả phương án lặp lại giá trị gần nhất (Zeng 2023).
    - Lần chạy cũ của đồ án chỉ đạt R² = 0,04.
@@ -77,12 +77,14 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 
 ## Trạng thái và việc tiếp theo
 
-**Đợt tiếp tục nghiên cứu và thực nghiệm (13/10/2026, tối):**
-- Người dùng ưu tiên kết quả chất lượng và kế hoạch thực hiện, cần trao đổi với giảng viên sáng14/10; không còn yêu cầu theo dõi usage40% trong đợt này.
-- Repo chính D:\PBL6_v2. Rà soát9 nguồn gốc ở reports/research_rainfall/literature_domain_review.md đã xong; không chỉ làm báo cáo.
-- Code scripts/screen_danang_domain.py và src/domain_features.py: BASE/RAW/DOMAIN,3fold2021–2023,Bi-LSTM3seed+LightGBM,cùng mẫu. Thiết kế đóng băng tại reports/domain_screen_danang/README.md. Smoke đã hoàn tất, đang chuẩn bị lượt đủ.
-- Audit nhãn và probe live đã xong: cube/pointGC khớp tổng ngày; GC phụ thuộc hiệu chỉnh ở giờraw khô rõ hơn mùa11–2. IFS9km thiếu850,IFS025 thiếuCIN; snapshot/nhãn riêng tư ngoài Git.
-- E0–E5 rộng,TFT,T-OPS và app mới chưa triển khai; test2025 giữ kín. Chọn ứng viên sau kết quảfold, chưa tuyên bố cải thiện vật lý hoặc app.
+**Trạng thái chốt tối 13/10/2026:**
+- Repo chính: D:\PBL6_v2. Người dùng ưu tiên kết quả và kế hoạch thực hiện để trao đổi với giảng viên sáng 14/10; không còn yêu cầu giữ mức usage 40% trong đợt này.
+- Đã hoàn tất BASE/RAW/DOMAIN: 3 fold 2021–2023, 27 lượt Bi-LSTM và 9 pipeline LightGBM, cùng 30.000 mẫu train/fold, 131.400 cửa sổ evaluation. Thiết kế/kết quả ở reports/domain_screen_danang/; 73 kiểm tra đạt.
+- DOMAIN−RAW CSI xác suất Bi-LSTM = +0,051/+0,007/+0,031. Hai năm đạt mốc thực dụng nhưng CI95% đều chứa 0; LightGBM chưa xác nhận lợi ích rõ. Giữ RAW/DOMAIN làm ứng viên kiểm định nguồn, chưa chọn mô hình cuối; đầu lượng mưa còn thiên thấp.
+- Audit nhãn, probe nguồn và thu forecast 93/93 ô đã xong. Bộ ghi khí tượng mỗi giờ đang chạy giới hạn 2,1 giờ (PID/log trong data/operational/); quan trắc NRT và T-OPS chưa hoàn tất.
+- Suy luận CPU từ checkpoint/normalizer/Platt đã khớp dự báo lưu ở 2021/2023. API demo/domain_api.py qua HTTP smoke, chỉ archive validation 2021–2023. Server thử đã đóng; frontend mới và ML live chưa có.
+- Brief sáng mai: reports/research_rainfall/brief_giang_vien_2026_10_14.md. Bước triển khai và cổng theo tuần: execution_plan.md. Tiếp theo là ablation thành phần, đầu lượng mưa Tweedie/hurdle, nguồn NRT và forecast thật trước app 6 h; TFT/hai vùng sau.
+- E0–E5 rộng, TFT, T-OPS và app đầy đủ chưa triển khai. Test 2025 giữ kín. Job training/test đã hoàn tất; chỉ collector khí tượng có thời hạn còn chạy.
 
 
 **Đã xong (11/10/2026):**
@@ -101,14 +103,14 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 - Pilot dùng chung cửa sổ của S4 cho S0/S1/S4, 30 ô chọn theo địa hình/khoảng cách biển, 2 seed. Train 2015–2021; chọn epoch và hiệu chỉnh xác suất ở 2022; so cặp ở 2023. **Không chấm mô hình trên test 2025 trong pilot.**
 - Pilot 2 seed đã xong: BSS mùa hè–thu tổng 0–3 h S0/S1/S4 = 0,186/0,195/0,239; CSI ≥10 mm = 0,157/0,150/0,089. S4 giảm BS chắc hơn theo bootstrap, nhưng chưa phân biệt chắc CSI. Không tuyên bố thắng ECMWF hoặc TFT. Xem `reports/pilot_bilstm_v2/README.md`.
 - Thiết kế so kiến trúc và app được rà soát ở `reports/research_rainfall/README.md`: bảng 2×2 cùng dữ liệu/hạn; ablation thông tin tách riêng; ECMWF là đối chứng giá trị vận hành. TFT và T-OPS chưa triển khai trong lượt này.
-<!-- OFFLINE_BATCH_STATUS --> Batch 3 seed trên 93 ô đã hoàn tất; bảng số liệu ở `reports/pilot_bilstm_v2_93cells_3seeds/`. Đã diễn giải: S1 tăng CSI so S0; S4 tốt hơn về BS; chưa so kiến trúc hoặc kiểm định vận hành. Không chấm test 2025.
+<!-- OFFLINE_BATCH_STATUS --> Batch 3 seed trên 93 ô đã hoàn tất; bảng số liệu ở `reports/pilot_bilstm_v2_93cells_3 seeds/`. Đã diễn giải: S1 tăng CSI so S0; S4 tốt hơn về BS; chưa so kiến trúc hoặc kiểm định vận hành. Không chấm test 2025.
 
 - Rà soát bài báo và chẩn đoán bổ sung ở `reports/research_rainfall/literature_domain_review.md`: ưu tiên kiểm tra nhãn, quy tắc quyết định mưa hiếm và giả thuyết gió–ẩm–địa hình trước khi nhân số kiến trúc. Chẩn đoán 30 ô/3 seed: CSI đầu xác suất S1 = 0,383 (ngưỡng chọn 2022, chấm 2023), FAR = 0,485; đây là khám phá validation, không thay CSI lượng mưa gốc hoặc chứng minh triển khai. Chưa train E0–E5/TFT.
 
 **Tiếp theo, theo thứ tự:**
-0. *(Ưu tiên, làm song song)* Bật ghi log live trên một máy chạy liên tục: dự báo ECMWF cho các ô Đà Nẵng và quan trắc GSMaP NRT/IMERG. Mùa mưa đang diễn ra, nên mỗi tuần chậm là mất một tuần dữ liệu để kiểm định thật.
-1. Đã xong pilot 3 seed trên 30 và 93 ô: S1 tăng CSI so S0 có khoảng tin cậy không chứa 0; S4 giảm BS so S0/S1. Chưa có cấu hình thắng mọi chỉ số. Đợt tiếp theo được đề xuất ở `reports/research_rainfall/next_experiment.md`: kiểm tra nguồn live, giữ Bi-LSTM để so riêng TCWV, CAPE/CIN, gió–ẩm 850 và độ ẩm đất trên nền A0+A1; thêm baseline cùng mẫu, sau đó kiểm tra kiến trúc và vận hành. Chưa khởi chạy đợt mới; test 2025 giữ kín.
-2. Baseline trên lưới: khí hậu, persistence có trễ, mưa ERA5/ECMWF, LightGBM.
+0. *(Ưu tiên)* Bộ ghi khí tượng93 ô đã có và chạy giới hạn2,1 giờ; cần chốt máy luôn bật và nguồn NRT để ghi lâu dài: dự báo ECMWF cho các ô Đà Nẵng và quan trắc GSMaP NRT/IMERG. Mùa mưa đang diễn ra, nên mỗi tuần chậm là mất một tuần dữ liệu để kiểm định thật.
+1. Đã xong pilot 3 seed trên 30 và 93 ô: S1 tăng CSI so S0 có khoảng tin cậy không chứa 0; S4 giảm BS so S0/S1. Chưa có cấu hình thắng mọi chỉ số. Đợt tiếp theo được đề xuất ở `reports/research_rainfall/next_experiment.md`: kiểm tra nguồn live, giữ Bi-LSTM để so riêng TCWV, CAPE/CIN, gió–ẩm 850 và độ ẩm đất trên nền A0+A1; thêm baseline cùng mẫu, sau đó kiểm tra kiến trúc và vận hành. Đã xong đợtBASE/RAW/DOMAIN 3 fold; xem reports/domain_screen_danang/ và reports/research_rainfall/execution_plan.md. Test 2025 giữ kín.
+2. Baseline khí hậu/LightGBM cùng3 fold đã có; bổ sung persistence đúng nguồn live và ECMWF thô/hiệu chỉnh khi T-OPS.
 3. Ablation A0–A5 và thí nghiệm độ trễ L ∈ {0,5; 2; 4; 8; 14; ∞} trên máy RTX 4060.
 4. Sản phẩm B: **TFT** (tự cài đặt; quantile loss cộng xác suất vượt ngưỡng ngày), ablation B0–B5 và LOGO; DLinear; Informer một cấu hình; bảng 2×2 Bi-LSTM với TFT.
 5. T-OPS:
@@ -125,6 +127,9 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 | `src/baselines.py` | Baseline khí hậu theo ngày trong năm, persistence |
 | `src/station_registry.py`, `src/admin_regions.py` | 12 trạm synop; ánh xạ 63 tỉnh cũ (GAUL) sang 34 tỉnh mới |
 | `src/dataset_v2.py` | Phép biến đổi thuần: nội suy ERA5 → ô, mã hóa CIN, thống kê lân cận 5×5, đặc trưng thời gian |
+| `src/domain_features.py`, `src/domain_inference.py`, `src/live_domain_inputs.py` | Biểu diễn vật lý, suy luận checkpoint và hợp đồng nguồn khí tượng |
+| `scripts/screen_danang_domain.py`, `collect_domain_live.py`, `predict_domain_archive.py` | Thí nghiệm3 fold, thu forecast và kiểm tra suy luận |
+| `demo/domain_api.py` | API archive từ checkpoint thật; chưa dự báo live |
 | `src/dataloader_v2.py` | `WindowConfig`, `product_a/b`, `FEATURE_GROUPS` A0–A5 / B0–B5, `sample_index`, `Normalizer`, `WindowSampler`, `epoch_subset`, `torch_dataset` |
 | `scripts/fetch_gsod_stations.py`, `fetch_openmeteo_baselines.py`, `station_daily_benchmark.py` | Dữ liệu trạm và bảng baseline / Thí nghiệm 0 |
 | `scripts/extract_gee_precip.py`, `extract_gee_era5.py`, `extract_gee_static.py` | Tải từ Earth Engine (cần `--project`) |

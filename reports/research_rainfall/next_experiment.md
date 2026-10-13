@@ -2,6 +2,8 @@
 
 Đề xuất ngày 13/10/2026. Mục tiêu trước mắt là đo giá trị bổ sung của các nhóm dữ liệu trên Đà Nẵng, rồi chọn cấu hình có nguồn đầu vào vận hành. Chưa khởi chạy các thí nghiệm này.
 
+**Cập nhật tối 13/10:**Đã hoàn tất phép soBASE/RAW/DOMAIN trên3 fold, NN3 seed vàLightGBM. Đây là phép so nguyên liệu/biểu diễn liên quan E1/E3, không phải toàn bộ E0–E5. Xem [brief kết quả14/10](brief_giang_vien_2026_10_14.md),[kế hoạch thực hiện](execution_plan.md) và [số liệu](../domain_screen_danang/README.md). DOMAIN tăng CSI NN ở2/3 năm tới mốc thực dụng nhưng CI chứa0;giữRAW/DOMAIN ứng viên, chưa chọn app.
+
 ## Phạm vi đợt đầu
 
 Đà Nẵng, dự báo 6 giờ; hiển thị lượng mưa giờ, tổng 3 giờ và xác suất. Giữ sản phẩm 1–3 ngày ở giai đoạn tiếp theo. Giữ Bi-LSTM để cô lập đóng góp dữ liệu; kiểm tra kết luận bằng một mô hình tabular sau sàng lọc, rồi so TFT trên cùng đầu vào và cùng hạn.

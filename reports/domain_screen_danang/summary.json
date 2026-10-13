@@ -1,0 +1,75 @@
+{
+  "completed": true,
+  "nn_runs": 27,
+  "lightgbm_pipelines": 9,
+  "lightgbm_heads": 135,
+  "eval_windows": 131400,
+  "practical_domain_years": {
+    "BiLSTM": 2,
+    "LightGBM": 0
+  },
+  "decisions": [
+    {
+      "learner": "BiLSTM",
+      "year": 2021,
+      "delta_csi": 0.05126009751133159,
+      "ci_low": -0.0023987857209883047,
+      "ci_high": 0.08611895346429424,
+      "relative_bs1_reduction": -0.004915709474930838,
+      "relative_bs10_reduction": 0.045146113009612736,
+      "practical_signal": true
+    },
+    {
+      "learner": "BiLSTM",
+      "year": 2022,
+      "delta_csi": 0.006814306317206031,
+      "ci_low": -0.03675649320258996,
+      "ci_high": 0.04121168940428468,
+      "relative_bs1_reduction": -0.003314761445508932,
+      "relative_bs10_reduction": -0.0031243286025400404,
+      "practical_signal": false
+    },
+    {
+      "learner": "BiLSTM",
+      "year": 2023,
+      "delta_csi": 0.031236514174199592,
+      "ci_low": -0.017158125962426354,
+      "ci_high": 0.12275008577641443,
+      "relative_bs1_reduction": 0.008524704829263144,
+      "relative_bs10_reduction": 0.0234106642309003,
+      "practical_signal": true
+    },
+    {
+      "learner": "LightGBM",
+      "year": 2021,
+      "delta_csi": -0.004200048546309787,
+      "ci_low": -0.047365741989238715,
+      "ci_high": 0.02917708580344167,
+      "relative_bs1_reduction": 0.0168512779903022,
+      "relative_bs10_reduction": -0.02705510938170813,
+      "practical_signal": false
+    },
+    {
+      "learner": "LightGBM",
+      "year": 2022,
+      "delta_csi": -0.001285223937004587,
+      "ci_low": -0.032702244061930466,
+      "ci_high": 0.034237340769413135,
+      "relative_bs1_reduction": -0.00113878838833819,
+      "relative_bs10_reduction": -0.001515631137982855,
+      "practical_signal": false
+    },
+    {
+      "learner": "LightGBM",
+      "year": 2023,
+      "delta_csi": 0.015793019294811472,
+      "ci_low": -0.01577225511254488,
+      "ci_high": 0.05552167979848836,
+      "relative_bs1_reduction": 0.00747909033148709,
+      "relative_bs10_reduction": 0.03128626750823768,
+      "practical_signal": false
+    }
+  ],
+  "tests_passed": 73,
+  "test_2025_scored": false
+}
