@@ -1,0 +1,23 @@
+{
+  "watcher_started_at_utc": "2026-10-13T16:31:41.754802+00:00",
+  "first_new_file": "gsmap_nrt.20261013.1200.dat.gz",
+  "first_seen_at_utc": "2026-10-13T16:41:45.152851+00:00",
+  "first_recorded_at_utc": "2026-10-13T16:41:47.330953+00:00",
+  "first_seen_age_from_interval_end_h": 3.6958757919444447,
+  "conservative_publication_age_window_h": [
+    3.5282652227777778,
+    3.6958757919444447
+  ],
+  "first_seen_poll_interval_s": 600,
+  "watcher_polls_at_snapshot": 2,
+  "watcher_errors_at_snapshot": 0,
+  "sha256": "ba69d6ff16da7c391b99d55e47278070de1cbfd93f0b048357121910a264908b",
+  "lag4_candidate_issue_utc": "2026-10-13T17:00:00+00:00",
+  "lag4_required_files_present": 24,
+  "lag4_required_files_received_by_issue": 24,
+  "lag4_history_contract_passed": true,
+  "candidate_issue_in_future_when_audited": true,
+  "actual_forecast_issued": false,
+  "ready_for_ml": false,
+  "caveat": "First seen is an upper bound; watcher start is a conservative lower bound. One file does not establish typical JAXA latency or ML skill."
+}

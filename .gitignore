@@ -74,3 +74,6 @@ desktop.ini
 
 # Bài báo tham khảo (PDF có bản quyền, repo công khai) — lưu trên Google Drive
 Paper/
+
+# Watcher cập nhật mỗi 10 phút; chỉ commit snapshot tổng hợp đã chốt
+reports/followup_danang/jaxa_live_watch_status.json
