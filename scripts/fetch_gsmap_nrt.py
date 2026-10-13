@@ -31,7 +31,7 @@ def credentials():
     return uid, pw
 
 
-def connect(allow_plain_ftp):
+def connect(allow_plain_ftp, announce=True):
     client = ftplib.FTP_TLS(context=ssl.create_default_context())
     client.connect(HOST, 21, timeout=25)
     try:
@@ -43,7 +43,8 @@ def connect(allow_plain_ftp):
             raise
         if not allow_plain_ftp:
             raise RuntimeError('JAXA does not offer FTPS; rerun with --allow-plain-ftp')
-        print('TRANSPORT FTP_PLAINTEXT (JAXA server does not support FTPS)', flush=True)
+        if announce:
+            print('TRANSPORT FTP_PLAINTEXT (JAXA server does not support FTPS)', flush=True)
         plain = ftplib.FTP()
         plain.connect(HOST, 21, timeout=25)
         return plain, 'FTP_PLAINTEXT'
