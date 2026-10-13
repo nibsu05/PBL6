@@ -37,12 +37,13 @@ def batches(data,order,batch_size,device):
         yield {k:torch.from_numpy(v[ix]).to(device) for k,v in data.items()}
 
 @torch.no_grad()
-def predict_pack(model,data,batch_size,device):
+def predict_pack(model,data,batch_size,device,amount_mode="log"):
     model.eval()
     amount,logit=[],[]
     for b in batches(data,np.arange(len(data['y'])),batch_size,device):
         a,l=model(b['x_past'],b['x_future'],b['static'])
-        amount.append(torch.expm1(a).cpu().numpy())
+        if amount_mode not in ("log","mean"):raise ValueError("amount_mode không hợp lệ")
+        amount.append((torch.expm1(a) if amount_mode=="log" else a).cpu().numpy())
         logit.append(l.cpu().numpy())
     return np.concatenate(amount),np.concatenate(logit)
 
@@ -53,7 +54,7 @@ def tune_threshold(obs,prob):
     scores=[contingency_scores(obs,(prob>=t).astype(float),1)['CSI'] for t in grid]
     return float(grid[int(np.nanargmax(scores))])
 
-def nn_train(train,cal,seed,args,device):
+def nn_train(train,cal,seed,args,device,loss_fn=pilot_loss):
     random.seed(seed);np.random.seed(seed);torch.manual_seed(seed)
     model=BiLSTMV2(train['x_past'].shape[2],train['x_future'].shape[2]).to(device)
     optimizer=torch.optim.Adam(model.parameters(),lr=1e-3)
@@ -68,7 +69,7 @@ def nn_train(train,cal,seed,args,device):
         for b in batches(train,order,args.batch_size,device):
             optimizer.zero_grad(set_to_none=True)
             a,l=model(b['x_past'],b['x_future'],b['static'])
-            loss=pilot_loss(a,l,b['y'])
+            loss=loss_fn(a,l,b['y'])
             if not torch.isfinite(loss):raise ValueError('Loss không hữu hạn')
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(),1.)
@@ -79,7 +80,7 @@ def nn_train(train,cal,seed,args,device):
         with torch.no_grad():
             for b in batches(cal,cal_ix,args.batch_size,device):
                 a,l=model(b['x_past'],b['x_future'],b['static'])
-                vloss+=float(pilot_loss(a,l,b['y']).item())*len(b['y'])
+                vloss+=float(loss_fn(a,l,b['y']).item())*len(b['y'])
         vloss/=len(cal_ix)
         history.append(dict(epoch=epoch+1,train_loss=loss_sum/len(order),cal_loss=vloss,seconds=time.perf_counter()-start))
         LOG.info('seed%s epoch%s train %.4f cal %.4f %.1fs',seed,epoch+1,loss_sum/len(order),vloss,history[-1]['seconds'])
