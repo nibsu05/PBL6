@@ -1,0 +1,71 @@
+{
+  "station_usaf": "488550",
+  "station_lat": 16.044,
+  "station_lon": 108.199,
+  "containing_cell": {
+    "site": "c16.05_108.15",
+    "lat": 16.05,
+    "lon": 108.15,
+    "elev_mean_m": 28.143742374033728,
+    "elev_std_m": 48.492675773311376,
+    "elev_max_m": 358.8070068359375,
+    "ocean_frac": 0.10791728526198335,
+    "water_frac": 0.12511688375602842,
+    "province_old": "Da Nang City",
+    "province": "Đà Nẵng",
+    "coast_dist_km": 11.131999999999762,
+    "ne_upslope_m": -39.652050991041584
+  },
+  "years": [
+    2021,
+    2022,
+    2023
+  ],
+  "common_daily_pairs": 1042,
+  "sources": [
+    "cube_gc",
+    "cube_raw",
+    "cube_era5",
+    "point_gsmap_gc",
+    "point_imerg"
+  ],
+  "cube_point_alignment": {
+    "n": 1092,
+    "mae": 1.942268112203577e-07,
+    "max_abs": 1.1444091796875e-05,
+    "fraction_close_01mm": 1.0
+  },
+  "eligible_domain_cells": 93,
+  "total_cells": 93,
+  "excluded_sites": [],
+  "correction_dependence": [
+    {
+      "season": "may_oct",
+      "n_cell_hours": 1232064,
+      "gc_volume_mm_sum": 509208.78466796875,
+      "fraction_gc_volume_raw_le_001": 0.20789984348909343,
+      "n_raw_dry_gc_wet_hours": 217453
+    },
+    {
+      "season": "nov_feb",
+      "n_cell_hours": 803520,
+      "gc_volume_mm_sum": 239432.1728515625,
+      "fraction_gc_volume_raw_le_001": 0.6759085700178211,
+      "n_raw_dry_gc_wet_hours": 266333
+    },
+    {
+      "season": "mar_apr",
+      "n_cell_hours": 408456,
+      "gc_volume_mm_sum": 44958.797424316406,
+      "fraction_gc_volume_raw_le_001": 0.38828709513523124,
+      "n_raw_dry_gc_wet_hours": 29639
+    }
+  ],
+  "caveats": [
+    "GSOD ngày UTC; kiểm tra hàng đủ 24 giờ.",
+    "Trạm và ô 0.1 độ khác diện tích đại diện.",
+    "GSMaP GC có hiệu chỉnh trạm nên GSOD không bảo đảm độc lập.",
+    "GC có mưa khi raw khô là chỉ báo phụ thuộc hiệu chỉnh, không chứng minh mưa thật sai giờ.",
+    "Không đọc/chấm dự báo test 2025."
+  ]
+}

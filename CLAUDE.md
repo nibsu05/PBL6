@@ -77,13 +77,12 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 
 ## Trạng thái và việc tiếp theo
 
-**Điểm dừng để tiếp tục sau (13/10/2026):**
-- Repo chính: `D:\PBL6_v2`; đọc `reports/research_rainfall/literature_domain_review.md` trước khi thiết kế lượt mới.
-- Rà soát 9 bài/nguồn gốc, bảng PLOS và dữ liệu công khai tối thiểu đã lưu trong báo cáo. Dữ liệu bài báo chỉ cache ngoài Git.
-- Chẩn đoán đầu quyết định đã tái lập bằng `scripts/diagnose_pilot_decisions.py`: S1 CSI xác suất 0,383 so CSI lượng mưa 0,180 trên 30 ô/3 seed, validation 2023; FAR 0,485. Không gọi đây là cải thiện dự báo mm hoặc kiểm định app.
-- Lượt sau: kiểm tra nhãn/quy tắc quyết định; chốt phép so cùng nguyên liệu raw với biểu diễn gió–ẩm–địa hình và chế độ mưa; thêm baseline tabular; đặt tiêu chí dừng rồi kiểm tra vài fold năm trước mở rộng kiến trúc.
-- E0–E5, TFT, T-OPS và app mới chưa triển khai. Test 2025 giữ kín.
-- Các batch và chẩn đoán đã hoàn tất; không còn tiến trình Python chạy khi chốt. Chưa khởi chạy job mới.
+**Đợt tiếp tục nghiên cứu và thực nghiệm (13/10/2026, tối):**
+- Người dùng ưu tiên kết quả chất lượng và kế hoạch thực hiện, cần trao đổi với giảng viên sáng14/10; không còn yêu cầu theo dõi usage40% trong đợt này.
+- Repo chính D:\PBL6_v2. Rà soát9 nguồn gốc ở reports/research_rainfall/literature_domain_review.md đã xong; không chỉ làm báo cáo.
+- Code scripts/screen_danang_domain.py và src/domain_features.py: BASE/RAW/DOMAIN,3fold2021–2023,Bi-LSTM3seed+LightGBM,cùng mẫu. Thiết kế đóng băng tại reports/domain_screen_danang/README.md. Smoke đã hoàn tất, đang chuẩn bị lượt đủ.
+- Audit nhãn và probe live đã xong: cube/pointGC khớp tổng ngày; GC phụ thuộc hiệu chỉnh ở giờraw khô rõ hơn mùa11–2. IFS9km thiếu850,IFS025 thiếuCIN; snapshot/nhãn riêng tư ngoài Git.
+- E0–E5 rộng,TFT,T-OPS và app mới chưa triển khai; test2025 giữ kín. Chọn ứng viên sau kết quảfold, chưa tuyên bố cải thiện vật lý hoặc app.
 
 
 **Đã xong (11/10/2026):**

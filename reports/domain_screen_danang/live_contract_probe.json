@@ -1,0 +1,357 @@
+{
+  "probes": [
+    {
+      "requested_model": "ecmwf_ifs",
+      "http": 200,
+      "error": null,
+      "latitude": 16.063269,
+      "longitude": 108.15341,
+      "fields": [
+        {
+          "field": "temperature_2m",
+          "unit": "°C",
+          "total": 96,
+          "finite": 96,
+          "min": 23.4,
+          "max": 30.4
+        },
+        {
+          "field": "dew_point_2m",
+          "unit": "°C",
+          "total": 96,
+          "finite": 96,
+          "min": 22.3,
+          "max": 24.8
+        },
+        {
+          "field": "relative_humidity_2m",
+          "unit": "%",
+          "total": 96,
+          "finite": 96,
+          "min": 62.0,
+          "max": 99.0
+        },
+        {
+          "field": "surface_pressure",
+          "unit": "hPa",
+          "total": 96,
+          "finite": 96,
+          "min": 1010.7,
+          "max": 1015.7
+        },
+        {
+          "field": "pressure_msl",
+          "unit": "hPa",
+          "total": 96,
+          "finite": 96,
+          "min": 1012.1,
+          "max": 1017.1
+        },
+        {
+          "field": "wind_speed_10m",
+          "unit": "m/s",
+          "total": 96,
+          "finite": 96,
+          "min": 0.16,
+          "max": 4.25
+        },
+        {
+          "field": "wind_direction_10m",
+          "unit": "°",
+          "total": 96,
+          "finite": 96,
+          "min": 2.0,
+          "max": 360.0
+        },
+        {
+          "field": "cloud_cover",
+          "unit": "%",
+          "total": 96,
+          "finite": 96,
+          "min": 20.0,
+          "max": 100.0
+        },
+        {
+          "field": "cloud_cover_low",
+          "unit": "%",
+          "total": 96,
+          "finite": 96,
+          "min": 0.0,
+          "max": 100.0
+        },
+        {
+          "field": "cloud_cover_mid",
+          "unit": "%",
+          "total": 96,
+          "finite": 96,
+          "min": 0.0,
+          "max": 100.0
+        },
+        {
+          "field": "cloud_cover_high",
+          "unit": "%",
+          "total": 96,
+          "finite": 96,
+          "min": 0.0,
+          "max": 99.0
+        },
+        {
+          "field": "precipitation",
+          "unit": "mm",
+          "total": 96,
+          "finite": 96,
+          "min": 0.0,
+          "max": 3.4
+        },
+        {
+          "field": "cape",
+          "unit": "J/kg",
+          "total": 96,
+          "finite": 96,
+          "min": 60.0,
+          "max": 1990.0
+        },
+        {
+          "field": "convective_inhibition",
+          "unit": "J/kg",
+          "total": 96,
+          "finite": 96,
+          "min": 0.0,
+          "max": 116.0
+        },
+        {
+          "field": "total_column_integrated_water_vapour",
+          "unit": "kg/m²",
+          "total": 96,
+          "finite": 96,
+          "min": 40.7,
+          "max": 65.0
+        },
+        {
+          "field": "soil_moisture_0_to_7cm",
+          "unit": "m³/m³",
+          "total": 96,
+          "finite": 96,
+          "min": 0.466,
+          "max": 0.517
+        },
+        {
+          "field": "temperature_850hPa",
+          "unit": "undefined",
+          "total": 96,
+          "finite": 0,
+          "min": null,
+          "max": null
+        },
+        {
+          "field": "relative_humidity_850hPa",
+          "unit": "undefined",
+          "total": 96,
+          "finite": 0,
+          "min": null,
+          "max": null
+        },
+        {
+          "field": "wind_speed_850hPa",
+          "unit": "undefined",
+          "total": 96,
+          "finite": 0,
+          "min": null,
+          "max": null
+        },
+        {
+          "field": "wind_direction_850hPa",
+          "unit": "undefined",
+          "total": 96,
+          "finite": 0,
+          "min": null,
+          "max": null
+        }
+      ],
+      "sha256": "4286d1793ed38182a76fc2cae779c8ff6958e9b20fe64d3d51196d33a4335e91",
+      "retrieved_at_utc": "20261013T120610Z",
+      "first_time": "2026-10-11T00:00",
+      "last_time": "2026-10-14T23:00"
+    },
+    {
+      "requested_model": "ecmwf_ifs025",
+      "http": 200,
+      "error": null,
+      "latitude": 16.0,
+      "longitude": 108.25,
+      "fields": [
+        {
+          "field": "temperature_2m",
+          "unit": "°C",
+          "total": 96,
+          "finite": 96,
+          "min": 23.9,
+          "max": 29.8
+        },
+        {
+          "field": "dew_point_2m",
+          "unit": "°C",
+          "total": 96,
+          "finite": 96,
+          "min": 22.3,
+          "max": 24.8
+        },
+        {
+          "field": "relative_humidity_2m",
+          "unit": "%",
+          "total": 96,
+          "finite": 96,
+          "min": 65.0,
+          "max": 99.0
+        },
+        {
+          "field": "surface_pressure",
+          "unit": "hPa",
+          "total": 96,
+          "finite": 96,
+          "min": 1010.6,
+          "max": 1015.6
+        },
+        {
+          "field": "pressure_msl",
+          "unit": "hPa",
+          "total": 96,
+          "finite": 96,
+          "min": 1012.0,
+          "max": 1017.0
+        },
+        {
+          "field": "wind_speed_10m",
+          "unit": "m/s",
+          "total": 96,
+          "finite": 96,
+          "min": 0.1,
+          "max": 5.03
+        },
+        {
+          "field": "wind_direction_10m",
+          "unit": "°",
+          "total": 96,
+          "finite": 96,
+          "min": 2.0,
+          "max": 360.0
+        },
+        {
+          "field": "cloud_cover",
+          "unit": "%",
+          "total": 96,
+          "finite": 96,
+          "min": 30.0,
+          "max": 100.0
+        },
+        {
+          "field": "cloud_cover_low",
+          "unit": "%",
+          "total": 96,
+          "finite": 96,
+          "min": 0.0,
+          "max": 81.0
+        },
+        {
+          "field": "cloud_cover_mid",
+          "unit": "%",
+          "total": 96,
+          "finite": 96,
+          "min": 0.0,
+          "max": 84.0
+        },
+        {
+          "field": "cloud_cover_high",
+          "unit": "%",
+          "total": 96,
+          "finite": 96,
+          "min": 20.0,
+          "max": 100.0
+        },
+        {
+          "field": "precipitation",
+          "unit": "mm",
+          "total": 96,
+          "finite": 96,
+          "min": 0.0,
+          "max": 2.0
+        },
+        {
+          "field": "cape",
+          "unit": "J/kg",
+          "total": 96,
+          "finite": 96,
+          "min": 360.0,
+          "max": 1760.0
+        },
+        {
+          "field": "convective_inhibition",
+          "unit": "undefined",
+          "total": 96,
+          "finite": 0,
+          "min": null,
+          "max": null
+        },
+        {
+          "field": "total_column_integrated_water_vapour",
+          "unit": "kg/m²",
+          "total": 96,
+          "finite": 96,
+          "min": 42.2,
+          "max": 65.8
+        },
+        {
+          "field": "soil_moisture_0_to_7cm",
+          "unit": "m³/m³",
+          "total": 96,
+          "finite": 96,
+          "min": 0.324,
+          "max": 0.348
+        },
+        {
+          "field": "temperature_850hPa",
+          "unit": "°C",
+          "total": 96,
+          "finite": 96,
+          "min": 17.0,
+          "max": 18.8
+        },
+        {
+          "field": "relative_humidity_850hPa",
+          "unit": "%",
+          "total": 96,
+          "finite": 96,
+          "min": 65.0,
+          "max": 100.0
+        },
+        {
+          "field": "wind_speed_850hPa",
+          "unit": "m/s",
+          "total": 96,
+          "finite": 96,
+          "min": 3.91,
+          "max": 9.64
+        },
+        {
+          "field": "wind_direction_850hPa",
+          "unit": "°",
+          "total": 96,
+          "finite": 96,
+          "min": 8.0,
+          "max": 100.0
+        }
+      ],
+      "sha256": "140f0a0ec04de1ce28f0718185069965fed0af6c8c1cdcaa4ceeae9135da1ba7",
+      "retrieved_at_utc": "20261013T120610Z",
+      "first_time": "2026-10-11T00:00",
+      "last_time": "2026-10-14T23:00"
+    }
+  ],
+  "docs": "https://open-meteo.com/en/docs/ecmwf-api",
+  "caveats": [
+    "Snapshot tại lúc tải, không bảo đảm đầy đủ hoặc liên tục.",
+    "past_days là chuỗi lưu trữ cập nhật, không chứng minh biết trước đúng thời điểm phát hành.",
+    "IFS025 nội suy giờ từ bước 3/6h; cần kiểm tra kho run theo thời điểm trước app.",
+    "q850 cần suy từ nhiệt độ/RH và 850hPa, kiểm tra đơn vị/parity trước triển khai."
+  ]
+}

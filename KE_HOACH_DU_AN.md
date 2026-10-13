@@ -130,7 +130,7 @@ flowchart LR
 | --- | --- | --- | --- |
 | 0. Khảo sát và quyết định | 1 | ✅ Xong (còn 2 câu hỏi nhỏ, xem mục 8) | `project_plan_v2.md` |
 | 1. Dữ liệu và bộ đánh giá | 1–2 | ✅ **Xong** | Dataset v2, dataloader, bảng baseline ở `reports/station_benchmark/README.md` |
-| 2. Baseline trên lưới | 2 | ⏳ Tiếp theo | — |
+| 2. Baseline trên lưới | 2 | Đang thực hiện cùng domain screen | LightGBM/khí hậu trên cùngfold |
 | 3. Sản phẩm A: Bi-LSTM | 3–4 | ✅ Pilot 3 seed trên 30/93 ô; ablation đầy đủ chưa bắt đầu | `reports/pilot_bilstm_v2_93cells_3seeds/README.md`: S1 tăng CSI so S0; S4 tốt hơn về BS; tiếp theo kiểm tra nhãn/đầu quyết định và giả thuyết địa phương trước so kiến trúc |
 | 4. Sản phẩm B: TFT | 5–6 | Chưa bắt đầu | — |
 | 5. Đánh giá vận hành thật và độ bền | 7 | Chưa bắt đầu | — |
@@ -138,7 +138,7 @@ flowchart LR
 | 7. App và kiểm định live | 9–10 (ghi log live: **ngay**) | Chưa bắt đầu | Bản demo cũ ở `demo/` |
 | 8. Báo cáo và bảo vệ | Viết song song từ tuần 2 | Chưa bắt đầu | — |
 
-Đề xuất thí nghiệm kế tiếp: `reports/research_rainfall/next_experiment.md`; cập nhật phê bình/ưu tiên theo `literature_domain_review.md`. Chưa khởi chạy E0–E5 hoặc TFT; nghiên cứu địa phương ưu tiên trước mở rộng số kiến trúc.
+Đợt thực hiện kế tiếp: reports/domain_screen_danang/README.md; code và smoke đã có, đang chuẩn bị lượt đủ. Đề xuất nền: `reports/research_rainfall/next_experiment.md`; cập nhật phê bình/ưu tiên theo `literature_domain_review.md`. Chưa khởi chạy E0–E5 hoặc TFT; nghiên cứu địa phương ưu tiên trước mở rộng số kiến trúc.
 
 ### Những gì đã có trong tay
 
@@ -181,6 +181,8 @@ flowchart LR
 ---
 
 ## 6. Lộ trình các tuần tới
+
+**Đợt tối13/10:** triển khai BASE/RAW/DOMAIN và Bi-LSTM/LightGBM trên3fold, thiết kế đóng băng tại reports/domain_screen_danang/README.md; audit nhãn và probe live đã xong. Cần kết quả thực nghiệm và bước triển khai để trao đổi sáng14/10.
 
 Người dùng ưu tiên có đầu ra mới mỗi tuần; hạn nộp chưa phải ràng buộc (chốt 13/10/2026). Các mốc dưới đây là tham khảo, điều chỉnh theo bằng chứng từ thí nghiệm; tập trung Đà Nẵng trước khi mở rộng vùng.
 
