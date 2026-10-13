@@ -138,6 +138,8 @@ flowchart LR
 | 7. App và kiểm định live | 9–10 (ghi log live: **ngay**) | Chưa bắt đầu | Bản demo cũ ở `demo/` |
 | 8. Báo cáo và bảo vệ | Viết song song từ tuần 2 | Chưa bắt đầu | — |
 
+Đề xuất thí nghiệm kế tiếp: `reports/research_rainfall/next_experiment.md`; chưa khởi chạy E0–E5.
+
 ### Những gì đã có trong tay
 
 **Cập nhật 13/10:** dữ liệu verify 2233/2233; CUDA hoạt động; dataset 93 ô Đà Nẵng đã dựng; inspect bốn cấu hình đạt 0 mẫu lệch và batch hữu hạn. **58 kiểm tra đã đạt** trên Windows (57 bộ chung và 1 kiểm tra baseline giờ). Pilot 3 seed trên 30 và 93 ô đã xong. Repo làm việc chuyển sang `D:\PBL6_v2`; giữ nguyên bản USB `D:\PBL6` cũ. Kết quả chưa chứng minh vượt ECMWF, và chưa so Bi-LSTM với TFT.
@@ -184,7 +186,7 @@ Người dùng ưu tiên có đầu ra mới mỗi tuần; hạn nộp chưa ph�
 
 | Tuần | Thời gian | Việc chính | Đầu ra / cổng kiểm soát |
 | --- | --- | --- | --- |
-| 1–2 | 12–25/10 | **Đã xong:** verify 2233/2233, CUDA, dataset Đà Nẵng, inspect, pilot 3 seed trên 30/93 ô. **Tiếp theo:** baseline hiệu chỉnh/tabular, đầu lượng mưa và bảng 2×2 kiến trúc; ghi log live và ECMWF T-OPS | Pilot có tín hiệu xác suất, chưa chốt CSI; xem `reports/research_rainfall/README.md`; test 2025 giữ kín |
+| 1–2 | 12–25/10 | **Đã xong:** verify 2233/2233, CUDA, dataset Đà Nẵng, inspect, pilot 3 seed trên 30/93 ô. **Tiếp theo:** hợp đồng nguồn live; đề xuất E0–E5 tách riêng nhóm đặc trưng, baseline cùng mẫu và kiểm tra đầu lượng mưa; kiểm tra kiến trúc, ghi log live và T-OPS sau sàng lọc | Pilot có tín hiệu xác suất, chưa chốt CSI; xem `reports/research_rainfall/README.md`; test 2025 giữ kín |
 | 3–4 | 26/10–08/11 | Bi-LSTM: ablation A0–A5 (3 seed), thí nghiệm độ trễ, đánh giá tách mùa | Cổng 3: Bi-LSTM có vượt ECMWF thô và persistence không? |
 | 5–6 | 09–22/11 | TFT: cài đặt, ablation B0–B5; DLinear; Informer một cấu hình; bảng 2×2 Bi-LSTM với TFT | Cổng 4: TFT có vượt ECMWF và ECMWF + hiệu chỉnh không? |
 | 7 | 23–29/11 | Đánh giá với đầu vào dự báo thật (T-OPS); chọn cấu hình cho app; mở tập test 2025 | Đóng băng kết quả chính |
