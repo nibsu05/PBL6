@@ -141,7 +141,7 @@ flowchart LR
 ### Những gì đã có trong tay
 
 **Cập nhật 13/10:** dữ liệu verify 2233/2233; CUDA hoạt động; dataset 93 ô Đà Nẵng đã dựng; inspect bốn cấu hình đạt 0 mẫu lệch và batch hữu hạn. **58 kiểm tra đã đạt** trên Windows (57 bộ chung và 1 kiểm tra baseline giờ). Pilot 2 seed đã xong. Repo làm việc chuyển sang `D:\PBL6_v2`; giữ nguyên bản USB `D:\PBL6` cũ. Kết quả chưa chứng minh vượt ECMWF, và chưa so Bi-LSTM với TFT.
-<!-- OFFLINE_BATCH_STATUS --> Batch 3 seed trên 30 ô đã hoàn tất; bảng số liệu ở `reports/pilot_bilstm_v2_3seeds/`. Chưa có diễn giải mới của agent; không chấm test 2025.
+<!-- OFFLINE_BATCH_STATUS --> Batch 3 seed trên 93 ô đã hoàn tất; bảng số liệu ở `reports/pilot_bilstm_v2_93cells_3seeds/`. Chưa có diễn giải mới của agent; không chấm test 2025.
 
 - **Nhãn mưa** đã được chọn bằng cách đối chiếu với 10 trạm đo thật (xem mục 5).
 - **Dataset v2:** 296 ô, mỗi giờ từ 2015 đến 09/2026, 51 đặc trưng. Đã kiểm tra chất lượng; dữ liệu thiếu dưới 0,2 %.
