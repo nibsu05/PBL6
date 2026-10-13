@@ -98,12 +98,12 @@ def calibrate(logits_cal, y_cal, logits_eval):
 
 
 def climatology(ds, train, evaluation):
-    # Cùng cửa sổ train, theo ô × tháng; chỉ dùng nhãn 2015–21.
-    train_month = (ds.hours[train[:, 1]] + pd.Timedelta(hours=7)).month.to_numpy() - 1
-    eval_month = (ds.hours[evaluation[:, 1]] + pd.Timedelta(hours=7)).month.to_numpy() - 1
-    key = train[:, 0] * 12 + train_month
-    eval_key = evaluation[:, 0] * 12 + eval_month
-    n_bins = len(ds.cells) * 12
+    # Cùng cửa sổ train, theo ô × tháng × giờ địa phương; chỉ dùng nhãn 2015–21.
+    train_time = ds.hours[train[:, 1]] + pd.Timedelta(hours=7)
+    eval_time = ds.hours[evaluation[:, 1]] + pd.Timedelta(hours=7)
+    key = (train[:, 0] * 12 + train_time.month.to_numpy() - 1) * 24 + train_time.hour.to_numpy()
+    eval_key = (evaluation[:, 0] * 12 + eval_time.month.to_numpy() - 1) * 24 + eval_time.hour.to_numpy()
+    n_bins = len(ds.cells) * 12 * 24
     count = np.bincount(key, minlength=n_bins)
     y = totals(labels(ds, train))
     amounts = np.stack([np.bincount(key, weights=y[:, j], minlength=n_bins) / np.maximum(count, 1)
@@ -147,6 +147,7 @@ def main():
     parser.add_argument("--patience", type=int, default=4)
     parser.add_argument("--bootstrap", type=int, default=1000)
     parser.add_argument("--output-name", default="pilot_bilstm_v2")
+    parser.add_argument("--rescore", action="store_true", help="Chấm lại dự báo đã lưu, không huấn luyện lại")
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
     torch.set_num_threads(4)
@@ -192,12 +193,26 @@ def main():
                 "history": [], "test_2025_scored": False,
                 "mode": "T-ERA5: ERA5 là tham chiếu perfect prog; chưa có đối chứng ECMWF vận hành"}
     LOGGER.info("%s; %d ô; train/cal/eval=%d/%d/%d", device, len(selected), len(train), len(calibration), len(evaluation))
+    if args.rescore:
+        metadata = json.loads((report / "run.json").read_text(encoding="utf-8"))
+        if metadata["args"]["cells"] != args.cells or metadata["args"]["seeds"] != args.seeds:
+            raise ValueError("--rescore phải dùng số ô và seed của lượt đã lưu")
+        metadata["scoring_git_commit"] = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+    metadata["climatology"] = "ô × tháng × giờ địa phương; nhãn train 2015–2021; xác suất Beta(1,1)"
     cal_subset = epoch_subset(calibration, 12000, 2022)
     for name, cfg in configs.items():
-        norm = Normalizer.fit(ds, cfg, range(2015, 2022))
-        norm.save(private / f"normalizer_{name}.json")
-        sampler = WindowSampler(ds, cfg, norm)
+        if not args.rescore:
+            norm = Normalizer.fit(ds, cfg, range(2015, 2022))
+            norm.save(private / f"normalizer_{name}.json")
+            sampler = WindowSampler(ds, cfg, norm)
         for seed in args.seeds:
+            if args.rescore:
+                run = f"{name}_seed{seed}"
+                with np.load(private / f"{run}.npz") as saved:
+                    np.testing.assert_array_equal(saved["y"], y_eval)
+                    amounts[run] = totals(saved["amount"])
+                    probabilities[run] = saved["probability"].copy()
+                continue
             random.seed(seed); np.random.seed(seed); torch.manual_seed(seed)
             model = BiLSTMV2(len(sampler.x_past_names), len(sampler.future_names)).to(device)
             optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
