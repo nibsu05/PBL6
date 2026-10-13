@@ -119,6 +119,8 @@ def live_data(query):
             amount_mm=[payload['hourly']['precipitation'][i] for i in selected])
     point=ROOT/'data/operational/nrt_point_probe/latest.json'
     if point.exists():result['satellite_point']=json.loads(point.read_text(encoding='utf-8'))
+    history=ROOT/'reports/followup_danang/nrt_history_readiness.json'
+    if history.exists():result['nrt_history']=json.loads(history.read_text(encoding='utf-8'))
     return result
 
 class Handler(BaseHTTPRequestHandler):
