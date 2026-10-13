@@ -23,16 +23,18 @@ Giữ phép so mô hình/nhóm đặc trưng trên **cùng đầu vào, cửa s�
 
 ## Đánh giá sau lượt thực nghiệm 13/10
 
-Đã chạy các thí nghiệm ưu tiên, không còn ở trạng thái đề xuất: Tweedie LightGBM/NN trên RAW, bỏ riêng proxy địa hình và 63 ô chưa train. Báo cáo/CI ở `reports/followup_danang/`. RMSE 3 h LightGBM Tweedie giảm 6–14% so L1(log) trên cả ba năm; Bi-LSTM Tweedie giảm khoảng 2–11% nhưng BSS xác suất ≥1 kém hơn trong 2022. DOMAIN vẫn chưa có CI khẳng định lợi ích CSI trên từng năm hoặc 63 ô. Đủ cơ sở tiếp tục PBL và hoàn thiện demo, chưa đủ chọn AI live.
+Đã chạy các thí nghiệm ưu tiên, không còn ở trạng thái đề xuất: Tweedie LightGBM/NN trên RAW, bỏ riêng proxy địa hình, 63 ô chưa train và stress/retrain quan trắc lag5 ba fold. Báo cáo/CI ở `reports/followup_danang/`. RMSE 3 h LightGBM Tweedie giảm 6–14% so L1(log) trên cả ba năm; Bi-LSTM Tweedie giảm khoảng 2–11% nhưng BSS xác suất ≥1 kém hơn trong 2022. DOMAIN vẫn chưa có CI khẳng định lợi ích CSI trên từng năm hoặc 63 ô. Đủ cơ sở tiếp tục PBL và hoàn thiện demo, chưa đủ chọn AI live.
 
 Demo archive từ checkpoint có bản đồ 93 ô và bảng 30/63 ô tách rõ; 36 HTTP parity case và 86 kiểm tra code đạt. JAXA FTP đã xác minh và tải raw/Gauge_NRT v8 cùng giờ; raw 93/93 ô hữu hạn, SHA-256 đúng. Popup web khác hai binary ở 3/3 ô có mưa, nguyên nhân chưa rõ. Tab live chỉ có ECMWF nguồn/điểm web tham khảo và cổng NRT lag4/issue16 21/24 tệp kịp; lag5/issue17 thử trong tương lai 24/24; chưa là app AI vận hành.
 
+**Kết quả độ trễ nguồn:** Tải24h raw NRT cho thấy lag4/issue16 có21/24 file đến kịp máy; lag5/issue17 thử có24/24, nhưng giờ phát hành JAXA chưa được đo liên tục. Train lại Bi-LSTM RAW Tweedie lag5 cùng index/3seed/đầu loss làm RMSE 3h tăng +0,053/+0,043/+0,038 mm ở 2021/2022/2023 (CI95% hiệu số dương cả3), CSI xác suất ≥10 giảm mô tả 2/3 năm nhưng CI chứa0. [Bảng/CI](../followup_danang/bilstm_tweedie_lag5/README.md). Tín hiệu này là validation khám phá, chưa chọn lag4 hay lag5 cho app.
+
 ## Từ 14 đến 20/10: nối quan trắc và đóng băng ứng viên
 
-1. Đã tải/kiểm 24 tệp raw NRT liên tiếp: SHA-256 đúng, 93/93 ô hữu hạn. `scripts/audit_jaxa_nrt_history.py` cho lag4/issue16 có 21/24 tệp kịp máy nhận; lag5/issue17 (lúc kiểm còn tương lai) có 24/24. **Đây là tải backlog**, không chứng thực latency phát hành JAXA. Tiếp theo ghi file mới liên tục ≥28 giờ theo `first_recorded_at_utc`, đo độ trễ nhiều ngày và thử model lag5 cùng validation trước khi đổi cấu hình app. FTP thường không mã hóa trên máy chủ này; script không tự hạ cấp. Chỉ nhập credential ở prompt terminal.
+1. Đã tải/kiểm 24 tệp raw NRT liên tiếp: SHA-256 đúng, 93/93 ô hữu hạn. `scripts/audit_jaxa_nrt_history.py` cho lag4/issue16 có 21/24 tệp kịp máy nhận; lag5/issue17 (lúc kiểm còn tương lai) có 24/24. **Đây là tải backlog**, không chứng thực latency phát hành JAXA. Đã stress và train lại lag5 trên validation; tiếp theo ghi file **mới** liên tục ≥28 giờ theo `first_recorded_at_utc`, đo độ trễ nhiều ngày rồi so hai cấu hình bằng nguồn NRT/khí tượng as-of trước khi đổi app. FTP thường không mã hóa trên máy chủ này; script không tự hạ cấp. Chỉ nhập credential ở prompt terminal.
 2. Làm rõ sai khác popup web với binary bằng nguồn JAXA độc lập/phiên bản hiển thị; không dùng popup làm chuẩn. So lịch sử NRT thật với MVK/raw trong train trên cùng ô/giờ và đo lệch theo mùa khi đủ ngày. Không giả định hai thuật toán tương đương từ định dạng giống nhau; cần cửa sổ 24 h kết thúc trước giờ phát hành 4 h, tức ít nhất 28 h lịch sử khi bắt đầu ghi.
 3. Chốt máy luôn bật cho logger forecast/quan trắc. Dùng timestamp phát hành và lấy dữ liệu để bảo đảm không nhìn tương lai. Nếu nguồn NRT chưa đạt contract, demo tiếp tục hiển thị archive và ECMWF thô.
-4. Xem lại RAW/DOMAIN và hai đầu Tweedie theo RMSE, bias, BSS/CSI, FAR và CI. Không đổi chọn model theo một metric duy nhất; không mở test 2025 khi chưa đóng băng thiết kế.
+4. Xem lại RAW/DOMAIN và hai đầu Tweedie theo RMSE, bias, BSS/CSI, FAR và CI. Nếu lag4 thường không kịp và lag5 giảm kỹ năng, train thêm đối chứng không cần vệ tinh trên cùng mẫu và giữ ECMWF nguồn làm dự phòng. Không đổi chọn model theo một metric duy nhất; không mở test 2025 khi chưa đóng băng thiết kế.
 
 Điều kiện hết tuần: lịch sử NRT ≥28 giờ có timestamp/hash, kiểm tra lệch train→NRT và bất nhất popup được ghi rõ, logger có máy chạy, bảng ứng viên có lý do, demo archive chạy ổn.
 

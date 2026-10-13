@@ -1,0 +1,166 @@
+{
+  "results": [
+    {
+      "year": 2021,
+      "n": 22080,
+      "days": 184,
+      "tau_10": 0.24,
+      "checkpoint_trained_latency_h": 4,
+      "stressed_input_latency_h": 5,
+      "frozen_checkpoint_norm_calibration": true,
+      "lag4": {
+        "n": 22080,
+        "obs_mean": 1.2694473476827388,
+        "fcst_mean": 1.0379331131546967,
+        "MAE": 1.1669804331699158,
+        "RMSE": 3.876446839599017,
+        "bias": -0.23151423452804196,
+        "CC": 0.6697355554573959,
+        "BS_1": 0.0903007760643959,
+        "BS_10": 0.018816456198692322,
+        "CSI_prob_10": 0.40594795539033457,
+        "CSI_amount_10": 0.2889963724304716,
+        "n_obs_events_10": 710,
+        "hits_prob_10": 546,
+        "false_alarms_prob_10": 635
+      },
+      "lag5": {
+        "n": 22080,
+        "obs_mean": 1.2694473476827388,
+        "fcst_mean": 1.0352077775502395,
+        "MAE": 1.1789434333201982,
+        "RMSE": 3.9213938788796363,
+        "bias": -0.23423957013249927,
+        "CC": 0.6548315277891117,
+        "BS_1": 0.09086688607931137,
+        "BS_10": 0.019408946856856346,
+        "CSI_prob_10": 0.4077961019490255,
+        "CSI_amount_10": 0.25029797377830754,
+        "n_obs_events_10": 710,
+        "hits_prob_10": 544,
+        "false_alarms_prob_10": 624
+      },
+      "paired_ci": {
+        "rmse_lag5_minus_lag4_ci95": [
+          0.002282202243804933,
+          0.08693130612373352
+        ],
+        "csi_prob10_lag5_minus_lag4_ci95": [
+          -0.021565930346217885,
+          0.017696755861289253
+        ],
+        "bootstrap_valid_csi": 1000
+      },
+      "test_2025_scored": false
+    },
+    {
+      "year": 2022,
+      "n": 22080,
+      "days": 184,
+      "tau_10": 0.22,
+      "checkpoint_trained_latency_h": 4,
+      "stressed_input_latency_h": 5,
+      "frozen_checkpoint_norm_calibration": true,
+      "lag4": {
+        "n": 22080,
+        "obs_mean": 1.0943771530182331,
+        "fcst_mean": 1.0687611400126775,
+        "MAE": 1.2297299017969214,
+        "RMSE": 4.580674003455911,
+        "bias": -0.025616013005555546,
+        "CC": 0.5116933843513214,
+        "BS_1": 0.1045490950345993,
+        "BS_10": 0.018155880272388458,
+        "CSI_prob_10": 0.26141078838174275,
+        "CSI_amount_10": 0.27197346600331673,
+        "n_obs_events_10": 520,
+        "hits_prob_10": 252,
+        "false_alarms_prob_10": 444
+      },
+      "lag5": {
+        "n": 22080,
+        "obs_mean": 1.0943771530182331,
+        "fcst_mean": 1.076599746768593,
+        "MAE": 1.2365027667366792,
+        "RMSE": 4.581874881589,
+        "bias": -0.01777740624963991,
+        "CC": 0.5107804839447739,
+        "BS_1": 0.10478124022483826,
+        "BS_10": 0.018231168389320374,
+        "CSI_prob_10": 0.25603357817418676,
+        "CSI_amount_10": 0.26721311475409837,
+        "n_obs_events_10": 520,
+        "hits_prob_10": 244,
+        "false_alarms_prob_10": 433
+      },
+      "paired_ci": {
+        "rmse_lag5_minus_lag4_ci95": [
+          -0.012040740251541138,
+          0.009835726022720334
+        ],
+        "csi_prob10_lag5_minus_lag4_ci95": [
+          -0.012849345599515302,
+          0.004248700733436472
+        ],
+        "bootstrap_valid_csi": 1000
+      },
+      "test_2025_scored": false
+    },
+    {
+      "year": 2023,
+      "n": 22080,
+      "days": 184,
+      "tau_10": 0.27,
+      "checkpoint_trained_latency_h": 4,
+      "stressed_input_latency_h": 5,
+      "frozen_checkpoint_norm_calibration": true,
+      "lag4": {
+        "n": 22080,
+        "obs_mean": 1.2511931660399516,
+        "fcst_mean": 1.2520323879571704,
+        "MAE": 1.182917900747344,
+        "RMSE": 3.5396693951256712,
+        "bias": 0.0008392219172189167,
+        "CC": 0.6677840930425862,
+        "BS_1": 0.10053586214780807,
+        "BS_10": 0.020204531028866768,
+        "CSI_prob_10": 0.4143540669856459,
+        "CSI_amount_10": 0.39096267190569745,
+        "n_obs_events_10": 721,
+        "hits_prob_10": 433,
+        "false_alarms_prob_10": 324
+      },
+      "lag5": {
+        "n": 22080,
+        "obs_mean": 1.2511931660399516,
+        "fcst_mean": 1.252051213420223,
+        "MAE": 1.1916786060764064,
+        "RMSE": 3.5459405862715347,
+        "bias": 0.00085804738027155,
+        "CC": 0.6663351107564527,
+        "BS_1": 0.10088208317756653,
+        "BS_10": 0.020356014370918274,
+        "CSI_prob_10": 0.40227703984819735,
+        "CSI_amount_10": 0.3936696340257171,
+        "n_obs_events_10": 721,
+        "hits_prob_10": 424,
+        "false_alarms_prob_10": 333
+      },
+      "paired_ci": {
+        "rmse_lag5_minus_lag4_ci95": [
+          -0.03075353503227234,
+          0.0434753119945526
+        ],
+        "csi_prob10_lag5_minus_lag4_ci95": [
+          -0.028919221553806985,
+          0.013910307658337675
+        ],
+        "bootstrap_valid_csi": 1000
+      },
+      "test_2025_scored": false
+    }
+  ],
+  "model": "BiLSTM_RAW_TWEEDIE",
+  "interpretation": "Frozen lag4 checkpoint stressed with lag5 observation; not a retrained lag5 model or T-OPS.",
+  "test_2025_scored": false
+}

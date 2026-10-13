@@ -33,6 +33,10 @@ Tweedie LightGBM đã giảm RMSE trên cả3năm soL1log, nên thử Bi-LSTM RA
 
 Đây là mở rộng khám phá sau nhìn kết quảLightGBM, không là xác nhận độc lập. Script train_bilstm_tweedie.py; các artifact gốc giữ nguyên. Chính:RMSE3h/bias/sự kiệnmưa; kiểm traBSS/CSIprob để không đánh đổi đầu xácsuất vô thức. Không chọn giá trịp/scale bằng năm evaluation.
 
+## Độ trễ quan trắc và mô hình lag5
+
+Sau 24 file NRT và hai audit as-of, đã stress checkpoint lag4 và train lại Bi-LSTM RAW Tweedie lag5 với cùng30ô/index/3seed/3fold. RMSE lượng mưa3h của bản retrain lag5 tăng nhỏ nhưng CI hiệu số dương cả3 năm; BSS≥1 giảm mô tả cả3, CSI xác suất≥10 chưa phân biệt chắc. Bảng đầy đủ và giới hạn ở [`bilstm_tweedie_lag5/README.md`](bilstm_tweedie_lag5/README.md). Không dùng dữ liệu backfill để suy latency JAXA hay phát AI live.
+
 ## Kết quả và quyết định tạm thời 13/10/2026
 
 | Năm | RMSE LightGBM RAW L1(log) → Tweedie | RMSE Bi-LSTM RAW log-Huber → Tweedie | CSI lượng mưa ≥10 Bi-LSTM cũ → Tweedie |
