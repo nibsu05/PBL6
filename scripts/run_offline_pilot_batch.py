@@ -38,6 +38,9 @@ def main():
         status["state"] = "deadline_reached"
         save()
         return
+    if sys.platform == "win32":
+        import ctypes
+        ctypes.windll.kernel32.SetThreadExecutionState(0x80000001)  # Giữ máy thức trong vòng đời batch.
     command = [sys.executable, "-u", str(ROOT / "scripts/pilot_bilstm_v2.py"),
                "--dataset-dir", "data/processed/dataset_v2_danang", "--seeds", "42", "43", "44",
                "--cells", str(args.cells), "--output-name", args.output_name]
