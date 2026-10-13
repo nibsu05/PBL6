@@ -23,4 +23,3 @@ Ngày 13/10/2026. Trên 68.448 cửa sổ mùa hè–thu 2023, tổng 0–3 h:
 Các điểm là của trung bình dự báo 3 seed. Bootstrap theo khối ngày giữ các ô cùng ngày đi cùng nhau; chưa mô tả đầy đủ bất định giữa seed. Nhãn là GSMaP hiệu chỉnh, đầu vào tương lai S4 là ERA5 perfect prog; chưa là kiểm định vận hành hay kiểm chứng mưa tại điểm.
 
 Bước ưu tiên là baseline hiệu chỉnh xác suất và tabular cùng mẫu, kiểm tra đầu ra lượng mưa/hiệu chỉnh trên 2022, rồi bảng 2×2 Bi-LSTM/TFT ở 6/72 h. Không chọn mô hình bằng test 2025. Trước app cần hợp đồng dữ liệu live và T-OPS.
-
