@@ -1,6 +1,6 @@
 # Thiết kế so sánh mô hình và app dự báo mưa Đà Nẵng
 
-Ngày 13/10/2026. Đề tài cần hai loại bằng chứng: mô hình nào tốt hơn khi nhận cùng thông tin, và mô hình được chọn có dùng được trong một app phát hành dự báo thật hay không. Phép so kiến trúc là trọng tâm nghiên cứu; dự báo ECMWF là đối chứng về giá trị sử dụng của app.
+Ngày 13/10/2026. Đề tài cần hai loại bằng chứng: mô hình nào tốt hơn khi nhận cùng thông tin, và mô hình được chọn có dùng được trong một app phát hành dự báo thật hay không. Trọng tâm hiện tại là đóng góp nhóm thông tin và biểu diễn theo khí tượng địa phương; so kiến trúc là đối chứng, dự báo ECMWF kiểm tra giá trị sử dụng của app.
 
 ## Ba phép so sánh cần tách biệt
 
@@ -53,3 +53,5 @@ Pipeline gồm thu nhận ECMWF/vệ tinh → dựng đặc trưng dùng chung v
 Trước khi tích hợp checkpoint, cần bảng hợp đồng từng biến và parity test: cùng một đầu vào lưu trữ phải cho cùng tensor ở train và app. Nếu vệ tinh không có hoặc quá trễ, dùng cấu hình đã kiểm định không có quan trắc. Nếu bản tin cũ, giao diện hiện tuổi dữ liệu. Forecast ECMWF có thể là lớp hiển thị dự phòng trong lúc AI chưa đủ bằng chứng.
 
 Đầu ra gần nhất là protocol 2×2, một bảng so trên validation và hợp đồng dữ liệu live. TFT hoàn chỉnh, kiểm định T-OPS và app hai sản phẩm vẫn là các giai đoạn phải triển khai và kiểm tra, chưa được pilot hiện tại hoàn tất.
+
+Rà soát chuyên sâu và điều chỉnh ưu tiên: [literature_domain_review.md](literature_domain_review.md).

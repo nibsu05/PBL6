@@ -77,6 +77,15 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 
 ## Trạng thái và việc tiếp theo
 
+**Điểm dừng để tiếp tục sau (13/10/2026):**
+- Repo chính: `D:\PBL6_v2`; đọc `reports/research_rainfall/literature_domain_review.md` trước khi thiết kế lượt mới.
+- Rà soát 9 bài/nguồn gốc, bảng PLOS và dữ liệu công khai tối thiểu đã lưu trong báo cáo. Dữ liệu bài báo chỉ cache ngoài Git.
+- Chẩn đoán đầu quyết định đã tái lập bằng `scripts/diagnose_pilot_decisions.py`: S1 CSI xác suất 0,383 so CSI lượng mưa 0,180 trên 30 ô/3 seed, validation 2023; FAR 0,485. Không gọi đây là cải thiện dự báo mm hoặc kiểm định app.
+- Lượt sau: kiểm tra nhãn/quy tắc quyết định; chốt phép so cùng nguyên liệu raw với biểu diễn gió–ẩm–địa hình và chế độ mưa; thêm baseline tabular; đặt tiêu chí dừng rồi kiểm tra vài fold năm trước mở rộng kiến trúc.
+- E0–E5, TFT, T-OPS và app mới chưa triển khai. Test 2025 giữ kín.
+- Các batch và chẩn đoán đã hoàn tất; không còn tiến trình Python chạy khi chốt. Chưa khởi chạy job mới.
+
+
 **Đã xong (11/10/2026):**
 - Bộ đánh giá dùng chung.
 - Dữ liệu 10 trạm và bảng baseline (`reports/station_benchmark/README.md`).
@@ -94,6 +103,8 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 - Pilot 2 seed đã xong: BSS mùa hè–thu tổng 0–3 h S0/S1/S4 = 0,186/0,195/0,239; CSI ≥10 mm = 0,157/0,150/0,089. S4 giảm BS chắc hơn theo bootstrap, nhưng chưa phân biệt chắc CSI. Không tuyên bố thắng ECMWF hoặc TFT. Xem `reports/pilot_bilstm_v2/README.md`.
 - Thiết kế so kiến trúc và app được rà soát ở `reports/research_rainfall/README.md`: bảng 2×2 cùng dữ liệu/hạn; ablation thông tin tách riêng; ECMWF là đối chứng giá trị vận hành. TFT và T-OPS chưa triển khai trong lượt này.
 <!-- OFFLINE_BATCH_STATUS --> Batch 3 seed trên 93 ô đã hoàn tất; bảng số liệu ở `reports/pilot_bilstm_v2_93cells_3seeds/`. Đã diễn giải: S1 tăng CSI so S0; S4 tốt hơn về BS; chưa so kiến trúc hoặc kiểm định vận hành. Không chấm test 2025.
+
+- Rà soát bài báo và chẩn đoán bổ sung ở `reports/research_rainfall/literature_domain_review.md`: ưu tiên kiểm tra nhãn, quy tắc quyết định mưa hiếm và giả thuyết gió–ẩm–địa hình trước khi nhân số kiến trúc. Chẩn đoán 30 ô/3 seed: CSI đầu xác suất S1 = 0,383 (ngưỡng chọn 2022, chấm 2023), FAR = 0,485; đây là khám phá validation, không thay CSI lượng mưa gốc hoặc chứng minh triển khai. Chưa train E0–E5/TFT.
 
 **Tiếp theo, theo thứ tự:**
 0. *(Ưu tiên, làm song song)* Bật ghi log live trên một máy chạy liên tục: dự báo ECMWF cho các ô Đà Nẵng và quan trắc GSMaP NRT/IMERG. Mùa mưa đang diễn ra, nên mỗi tuần chậm là mất một tuần dữ liệu để kiểm định thật.

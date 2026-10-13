@@ -53,3 +53,7 @@ Với tổ hợp tốt, bỏ từng nhóm ra để kiểm tra thông tin trùng 
 4. Chấm trên dự báo thật; chỉ tích hợp checkpoint đạt điều kiện vào app. Một mô hình chung cho các ô, không nhân bản một mô hình cho từng tỉnh.
 
 App có thể làm giao diện và ghi log song song: bản đồ 93 ô, chọn điểm, lượng mưa và xác suất, thời điểm cập nhật và trạng thái dữ liệu. Việc chọn checkpoint cuối phải dựa trên kiểm định vận hành, không chỉ bảng điểm ERA5.
+
+## Điều chỉnh sau rà soát tài liệu
+
+Xem `literature_domain_review.md` và chẩn đoán `decision_head_diagnostic.json`. E0–E5 là sàng lọc nguyên liệu; trước khi chạy rộng cần kiểm tra nhãn và phân biệt CSI từ lượng mưa với CSI từ đầu xác suất. Bổ sung phép so raw khí tượng với biểu diễn gió–ẩm–địa hình trên cùng nguồn dữ liệu, và đánh giá theo chế độ mưa. Độ ẩm đất là nhánh khám phá, chưa là ưu tiên chính. Chạy ít cấu hình trên vài năm và baseline tabular trước khi mở rộng so nhiều kiến trúc. Đây là điều chỉnh đề xuất; chưa khởi chạy các cấu hình mới.
