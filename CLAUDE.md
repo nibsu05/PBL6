@@ -89,6 +89,7 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 ## Trạng thái và việc tiếp theo
 
 **Trạng thái chốt sau lượt tiếp tục 13/10/2026:**
+- Dàn ý báo cáo 08:00 ngày 14/10 đã chốt: `reports/research_rainfall/slide_content_2026_10_14.md`, 6 slide + 1 dự phòng, người dùng tự thiết kế. Nội dung chính: nhãn, phép so cùng mẫu, Tweedie, giả thuyết domain có CI, cổng nguồn/app, kế hoạch. Không chờ watcher đủ 12 giờ hoặc đưa số NRT đơn lẻ thành kết luận mô hình.
 - Repo làm việc `D:\PBL6_v2`; tác giả commit mới là `nibsu05 <168987662+nibsu05@users.noreply.github.com>`. Không viết lại lịch sử đã push. Dữ liệu verify 2233/2233, dataloader lệch 0; test 2025 giữ kín.
 - BASE/RAW/DOMAIN trên 30 ô/3 fold và đợt follow-up Tweedie LightGBM, Tweedie Bi-LSTM, NO_TERRAIN, 63 ô chưa train đã hoàn tất. Chi tiết cùng CI ở `reports/domain_screen_danang/` và `reports/followup_danang/`.
 - Tweedie LightGBM RAW giảm RMSE 3 h mùa 5–10 từ 4,607/4,841/4,205 xuống 3,947/4,534/3,610 mm ở 2021/2022/2023. Tweedie Bi-LSTM RAW từ 4,046/4,661/3,963 xuống 3,876/4,581/3,540. Đây là validation lịch sử, chưa là hiệu năng vận hành. Đầu xác suất của Bi-LSTM Tweedie kém đi trong 2022 (BSS ≥1: 0,148 so 0,186).

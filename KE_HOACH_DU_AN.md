@@ -130,6 +130,7 @@ flowchart LR
 | Nguồn vận hành | 4 snapshot hiện tại/93 ô không biết run; **pilot ECMWF 56/56 run, 30 ô × 14 ngày đã chấm**; 24h NRT đã kiểm; watcher 12h đang chạy, thấy file raw mới đầu tiên sau10phút, lỗi0 | `reports/research_rainfall/ecmwf_pilot_14d/`, `reports/followup_danang/jaxa_binary_audit.json`; chưa có đầu vào AI as-of hay điểm AI–ECMWF cùng mẫu |
 | App Đà Nẵng | Demo archive từ checkpoint, HTTP parity 36 case đạt; watcher thấy file mới16:41 UTC. Lag4/issue17 thử: 24/24 tệp đã nhận trước mốc (lúc audit issue còn tương lai) | `demo/domain_api.py`, `reports/followup_danang/nrt_latency_sensitivity.json`; checkpoint lag4, AI live chưa bật |
 | Sản phẩm B TFT, hai vùng ngoài Đà Nẵng | Chưa bắt đầu | Sau MVP và kiểm định nguồn |
+| Trao đổi giảng viên 08:00 ngày 14/10 | Dàn ý 6 slide và slide dự phòng đã chốt; nhóm tự thiết kế | `reports/research_rainfall/slide_content_2026_10_14.md`; không tuyên bố AI thắng ECMWF hoặc live |
 
 **Lựa chọn hiện tại:** Tweedie cải thiện ước lượng mm rõ trên validation; RAW và DOMAIN chưa phân định chắc ở CSI xác suất. Không chọn model chỉ vì điểm một năm hoặc tên đặc trưng. 87 kiểm tra code đạt chứng minh pipeline chạy đúng trong phạm vi được kiểm, không chứng minh kỹ năng dự báo. Test 2025 vẫn niêm phong. Bảng năm, CI và giới hạn ở `reports/followup_danang/` và brief 14/10.
 
@@ -172,6 +173,8 @@ flowchart LR
 Tweedie LightGBM giảm RMSE 3 h tháng 5–10 cả ba năm so đầu L1(log), nhưng không thay đầu xác suất. Tweedie Bi-LSTM cũng giảm RMSE cả ba năm, song BSS ≥1 năm 2022 giảm từ 0,186 xuống 0,148. DOMAIN cải thiện CSI ở hai năm nhưng CI chứa 0; kết quả bỏ proxy và 63 ô chưa train không xác nhận chắc. Vì vậy giữ nhiều ứng viên có lý do, chưa quảng cáo một cấu hình thắng mọi chỉ số.
 
 JAXA FTP cổng 21 hoạt động nhưng trả 504 cho FTPS; đăng nhập và tải raw/Gauge_NRT v8 thành công bằng prompt terminal. Script chỉ dùng FTP thường khi có `--allow-plain-ftp`; không đưa UID/password vào lệnh, file hay Git. Một tệp lúc 10 UTC ngày 13/10 đã qua SHA-256, định dạng và 93/93 ô; raw/Gauge tương quan 0,998 nhưng popup web không khớp 3/3 ô có mưa, chưa rõ lý do. Popup chỉ để tham khảo, không dùng làm nhãn/đầu vào ML. Demo ở `http://127.0.0.1:8766/` vẫn là archive validation và ECMWF thô; AI live cần lịch sử quan trắc, T-OPS và máy ghi liên tục.
+
+**Mốc sáng 14/10 lúc 08:00:** dựng 6 slide từ dàn ý đã chốt tối nay, ưu tiên kết quả Tweedie cùng bảng domain có CI và demo archive. Khoảng 07:15 chỉ kiểm tra demo/watch status; không đổi số liệu mô hình vì thêm một file NRT đêm nay.
 
 Cuối mỗi tuần, cập nhật mục 4/6 và quyết định/trạng thái trong `CLAUDE.md`, rồi commit/push code và báo cáo; dữ liệu/checkpoint ngoài Git.
 

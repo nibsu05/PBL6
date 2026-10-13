@@ -1,5 +1,7 @@
 # Kết quả thực hiện và đề xuất trao đổi ngày 14/10/2026
 
+> Dàn ý 6 slide dễ trình bày cho buổi 08:00: [slide_content_2026_10_14.md](slide_content_2026_10_14.md). Số liệu mô hình đã chốt; watcher đêm nay chỉ bổ sung nhật ký nguồn, không thay kết luận.
+
 ## Kết luận cần trình bày trước
 
 Đã thực hiện phép so có kiểm soát trên dữ liệu Đà Nẵng, gồm ba năm validation lịch sử, Bi-LSTM ba seed và LightGBM. Phần hiểu biết địa phương được kiểm tra bằng cách thêm biểu diễn gió–ẩm–địa hình vào chính các biến khí tượng thô đó; không quy lợi ích thêm nguồn dữ liệu cho biểu diễn vật lý.

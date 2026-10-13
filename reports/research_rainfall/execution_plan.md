@@ -1,6 +1,6 @@
 # Kế hoạch thực hiện để chọn mô hình và triển khai app
 
-Cập nhật 13/10/2026. Tập trung Đà Nẵng trước; ưu tiên một đầu ra kiểm chứng được mỗi tuần. Ba người cùng hiểu toàn bộ dự án, nhưng có người chịu trách nhiệm chính cho từng đầu ra; chưa gán tên.
+Cập nhật 13/10/2026. Tập trung Đà Nẵng trước; ưu tiên một đầu ra kiểm chứng được mỗi tuần. Nội dung trình bày 08:00 ngày 14/10 đã chốt ở [dàn ý 6 slide](slide_content_2026_10_14.md); không chờ watcher chạy đủ 12 giờ để làm slide. Ba người cùng hiểu toàn bộ dự án, nhưng có người chịu trách nhiệm chính cho từng đầu ra; chưa gán tên.
 
 ## Mục tiêu cụ thể
 
