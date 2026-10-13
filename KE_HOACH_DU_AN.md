@@ -127,11 +127,11 @@ flowchart LR
 | Dữ liệu và đánh giá | Xong | Verify 2233/2233, dataloader 0 mẫu lệch; `reports/station_benchmark/` |
 | Bi-LSTM/LightGBM Đà Nẵng | Pilot và BASE/RAW/DOMAIN 3 fold xong | `reports/pilot_bilstm_v2_93cells_3seeds/`, `reports/domain_screen_danang/` |
 | Follow-up có giả thuyết | Xong: Tweedie cây/NN, bỏ proxy địa hình, 63 ô chưa train | `reports/followup_danang/`; cùng mùa/cửa sổ và CI theo ngày |
-| Nguồn vận hành | 4 snapshot forecast 93/93 ô, chưa biết run khởi tạo; 1 probe Single Runs 2024 tại 1 điểm trả 47/48 giờ mưa; JAXA raw/Gauge_NRT một giờ 93/93 ô | `reports/research_rainfall/ecmwf_single_run_probe.json`, `reports/followup_danang/jaxa_binary_audit.json`; **chưa có** bộ 2024/93 ô hay điểm AI–ECMWF cùng mẫu |
+| Nguồn vận hành | 4 snapshot hiện tại/93 ô không biết run; **pilot ECMWF 56/56 run, 30 ô × 14 ngày đã chấm**; JAXA raw/Gauge_NRT một giờ 93/93 ô | `reports/research_rainfall/ecmwf_pilot_14d/`, `reports/followup_danang/jaxa_binary_audit.json`; chưa có đầu vào AI as-of hay điểm AI–ECMWF cùng mẫu |
 | App Đà Nẵng | Demo archive từ checkpoint, HTTP parity 36 case đạt | `demo/domain_api.py`, `demo/research.html`; AI live chưa bật |
 | Sản phẩm B TFT, hai vùng ngoài Đà Nẵng | Chưa bắt đầu | Sau MVP và kiểm định nguồn |
 
-**Lựa chọn hiện tại:** Tweedie cải thiện ước lượng mm rõ trên validation; RAW và DOMAIN chưa phân định chắc ở CSI xác suất. Không chọn model chỉ vì điểm một năm hoặc tên đặc trưng. 83 kiểm tra code đạt chứng minh pipeline chạy đúng trong phạm vi được kiểm, không chứng minh kỹ năng dự báo. Test 2025 vẫn niêm phong. Bảng năm, CI và giới hạn ở `reports/followup_danang/` và brief 14/10.
+**Lựa chọn hiện tại:** Tweedie cải thiện ước lượng mm rõ trên validation; RAW và DOMAIN chưa phân định chắc ở CSI xác suất. Không chọn model chỉ vì điểm một năm hoặc tên đặc trưng. 85 kiểm tra code đạt chứng minh pipeline chạy đúng trong phạm vi được kiểm, không chứng minh kỹ năng dự báo. Test 2025 vẫn niêm phong. Bảng năm, CI và giới hạn ở `reports/followup_danang/` và brief 14/10.
 
 ## 5. Kết quả quan trọng đến nay (để hiểu vì sao làm như vậy)
 
@@ -164,9 +164,9 @@ flowchart LR
 
 | Mốc | Việc đã có / cần làm | Cổng bằng chứng |
 | --- | --- | --- |
-| 13/10 — đã xong | BASE/RAW/DOMAIN 3 fold; Tweedie LightGBM và Bi-LSTM; NO_TERRAIN; 63 ô; demo archive | Số liệu, CI, 83 test, 36 HTTP parity; chưa mở 2025 |
+| 13/10 — đã xong | BASE/RAW/DOMAIN 3 fold; Tweedie LightGBM và Bi-LSTM; NO_TERRAIN; 63 ô; demo archive | Số liệu, CI, 85 test, 36 HTTP parity; chưa mở 2025 |
 | 14–20/10 | Đã tải raw/Gauge_NRT v8 một giờ; tiếp tục ghi tối thiểu 28 giờ NRT liên tục có `first_recorded_at` (cửa sổ 24 giờ, trễ quan trắc 4 giờ), đo latency nhiều ngày, kiểm tra lệch train→NRT và nguyên nhân popup khác binary; chốt máy luôn bật | Manifest/hash riêng tư và báo cáo QC công khai; nếu chưa đạt nguồn, giữ demo archive/ECMWF thô |
-| 21–27/10 | Thí điểm 14 ngày cố định tháng 10/2024 trên 30 ô: Single Runs ECMWF, nhãn GC và nguồn AI as-of; chặn giờ run và dùng mốc sẵn có bảo thủ (theo tài liệu thường trễ 4–6 h), ghi bất định trước `issue_at`. Chỉ mở rộng 93 ô/mùa 5–10 nếu completeness/parity đạt | Bảng tỷ lệ thiếu, xuất xứ và kỹ năng cùng mẫu; điểm AI–ECMWF chỉ công bố khi đầu vào AI vận hành hợp lệ; 2025 giữ kín |
+| 21–27/10 | **Pilot nguồn ECMWF 56 run/30 ô đã xong**: 1.680 cặp đủ forecast/nhãn; CI còn rộng do 4 ngày mưa mạnh. Tiếp theo kiểm tra NRT/khí tượng đầu vào AI as-of, tăng ngày/sự kiện và mở 93 ô chỉ khi parity đạt | Bảng AI–ECMWF cùng mẫu chỉ công bố sau cổng đầu vào; `available_at` lịch sử còn là giả định bảo thủ, 2025 giữ kín |
 | Sau cổng vận hành | App AI live 6 h Đà Nẵng nếu đủ nguồn và kỹ năng; TFT 1–3 ngày, hai vùng khác theo sau | Mỗi dự báo lưu thời điểm phát hành, nguồn, version/hash; kiểm chứng sau khi nhãn đến |
 
 Tweedie LightGBM giảm RMSE 3 h tháng 5–10 cả ba năm so đầu L1(log), nhưng không thay đầu xác suất. Tweedie Bi-LSTM cũng giảm RMSE cả ba năm, song BSS ≥1 năm 2022 giảm từ 0,186 xuống 0,148. DOMAIN cải thiện CSI ở hai năm nhưng CI chứa 0; kết quả bỏ proxy và 63 ô chưa train không xác nhận chắc. Vì vậy giữ nhiều ứng viên có lý do, chưa quảng cáo một cấu hình thắng mọi chỉ số.

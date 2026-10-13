@@ -1,0 +1,137 @@
+{
+  "period_start_utc": "2024-10-01T00:00:00+00:00",
+  "period_end_exclusive_utc": "2024-10-15T00:00:00+00:00",
+  "sites": 30,
+  "issues": 56,
+  "candidate_issue_cells": 1680,
+  "source": "Open-Meteo ECMWF IFS Single Runs",
+  "model": "ecmwf_ifs",
+  "api_processing_note": "Hourly precipitation and spatial mapping supplied by Open-Meteo; not native ECMWF GRIB",
+  "assumed_run_age_h": 12,
+  "actual_historical_available_at_attested": false,
+  "lag6_is_optimistic_sensitivity_only": true,
+  "open_meteo_rain_time": "end of hourly interval",
+  "source_documentation": "https://open-meteo.com/en/docs/single-runs-api",
+  "no_ai_comparison": true,
+  "test_2025_scored": false,
+  "scores_0_3h": {
+    "n": 1680,
+    "obs_mean": 1.70446878013955,
+    "fcst_mean": 1.4521428571428572,
+    "MAE": 2.031807350471084,
+    "RMSE": 3.950334937946592,
+    "bias": -0.25232592299669276,
+    "CC": 0.19912346743494092,
+    "n_obs_events": 62,
+    "hits": 8,
+    "misses": 54,
+    "false_alarms": 28,
+    "POD": 0.12903225806451613,
+    "FAR": 0.7777777777777778,
+    "CSI": 0.08888888888888889,
+    "FBI": 0.5806451612903226,
+    "threshold_mm": 10,
+    "valid_fraction": 1.0,
+    "rmse_ci95_5day": [
+      3.319834356421824,
+      5.232380158625902
+    ],
+    "csi_ci95_5day": [
+      0.0,
+      0.11940298507462686
+    ],
+    "event_days": 4,
+    "zero_rmse_same_rows": 3.878273204600135,
+    "delta_rmse_vs_zero_ci95_5day": [
+      -0.8725239532347171,
+      1.234797104006541
+    ],
+    "lag6_sensitivity_common_n": 1650,
+    "lag12_rmse_common": 3.97821192266237,
+    "lag6_rmse_common": 3.9723820752648855,
+    "lag6_minus_lag12_rmse_ci95_5day": [
+      -0.22891926175652122,
+      0.1276574096140557
+    ]
+  },
+  "scores_3_6h": {
+    "n": 1680,
+    "obs_mean": 1.6881288211304872,
+    "fcst_mean": 1.5283928571428573,
+    "MAE": 1.9769763631311559,
+    "RMSE": 4.046986511197859,
+    "bias": -0.15973596398763001,
+    "CC": 0.227734103108311,
+    "n_obs_events": 52,
+    "hits": 6,
+    "misses": 46,
+    "false_alarms": 47,
+    "POD": 0.11538461538461539,
+    "FAR": 0.8867924528301887,
+    "CSI": 0.06060606060606061,
+    "FBI": 1.0192307692307692,
+    "threshold_mm": 10,
+    "valid_fraction": 1.0,
+    "rmse_ci95_5day": [
+      3.1340779248838704,
+      4.820500083457607
+    ],
+    "csi_ci95_5day": [
+      0.0,
+      0.10526315789473684
+    ],
+    "event_days": 4,
+    "zero_rmse_same_rows": 3.520733380025739,
+    "delta_rmse_vs_zero_ci95_5day": [
+      -1.035433571680096,
+      2.3957270489446607
+    ],
+    "lag6_sensitivity_common_n": 1650,
+    "lag12_rmse_common": 4.07807130873415,
+    "lag6_rmse_common": 3.546590246739823,
+    "lag6_minus_lag12_rmse_ci95_5day": [
+      -0.9341967559995101,
+      0.012274686564647336
+    ]
+  },
+  "scores_0_6h": {
+    "n": 1680,
+    "obs_mean": 3.392597601270037,
+    "fcst_mean": 2.9805357142857143,
+    "MAE": 3.690778072902135,
+    "RMSE": 7.0783613316683995,
+    "bias": -0.4120618869843228,
+    "CC": 0.2549902134303999,
+    "n_obs_events": 29,
+    "hits": 1,
+    "misses": 28,
+    "false_alarms": 12,
+    "POD": 0.034482758620689655,
+    "FAR": 0.9230769230769231,
+    "CSI": 0.024390243902439025,
+    "FBI": 0.4482758620689655,
+    "threshold_mm": 25,
+    "valid_fraction": 1.0,
+    "rmse_ci95_5day": [
+      6.023374665902049,
+      8.859841039386218
+    ],
+    "csi_ci95_5day": [
+      0.0,
+      0.04411764705882353
+    ],
+    "event_days": 4,
+    "zero_rmse_same_rows": 7.221721175890257,
+    "delta_rmse_vs_zero_ci95_5day": [
+      -2.618685402159239,
+      2.8391032473649997
+    ],
+    "lag6_sensitivity_common_n": 1650,
+    "lag12_rmse_common": 7.135863538676928,
+    "lag6_rmse_common": 6.72544984741604,
+    "lag6_minus_lag12_rmse_ci95_5day": [
+      -0.8400615901882853,
+      0.12827008239143822
+    ]
+  }
+}

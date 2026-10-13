@@ -1,0 +1,13 @@
+{
+  "period_start_utc": "2024-10-01T00:00:00+00:00",
+  "period_end_exclusive_utc": "2024-10-15T00:00:00+00:00",
+  "sites": 30,
+  "requested_runs": 56,
+  "cached_runs": 56,
+  "fresh_runs_this_call": 34,
+  "collection_complete": true,
+  "rate_limit_min_interval_s": 8,
+  "failure_type": null,
+  "actual_historical_available_at_attested": false,
+  "test_2025_scored": false
+}
