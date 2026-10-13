@@ -32,3 +32,17 @@ Model/pred/index ởdata/operational/followup_danang ngoàiGit. Số liệu theo
 Tweedie LightGBM đã giảm RMSE trên cả3năm soL1log, nên thử Bi-LSTM RAW giữ nguyên174.154tham số/seed/ngân sách. Softplus được diễn giải là meanmm/h thay vìlog1p; hồi quy bằng devianceTweedie p1,5, chia cho deviance của forecast meanhằng tính trên chính30.000mẫu train. BCE không trọng số lớp giữ hệ số1. Encoder học chung nên đầu xácsuất có thể đổi và phải hiệu chỉnh lại trên nămcal cũ.
 
 Đây là mở rộng khám phá sau nhìn kết quảLightGBM, không là xác nhận độc lập. Script train_bilstm_tweedie.py; các artifact gốc giữ nguyên. Chính:RMSE3h/bias/sự kiệnmưa; kiểm traBSS/CSIprob để không đánh đổi đầu xácsuất vô thức. Không chọn giá trịp/scale bằng năm evaluation.
+
+## Kết quả và quyết định tạm thời 13/10/2026
+
+| Năm | RMSE LightGBM RAW L1(log) → Tweedie | RMSE Bi-LSTM RAW log-Huber → Tweedie | CSI lượng mưa ≥10 Bi-LSTM cũ → Tweedie |
+| --- | ---: | ---: | ---: |
+| 2021 | 4,607 → 3,947 | 4,046 → 3,876 | 0,191 → 0,289 |
+| 2022 | 4,841 → 4,534 | 4,661 → 4,581 | 0,164 → 0,272 |
+| 2023 | 4,205 → 3,610 | 3,963 → 3,540 | 0,092 → 0,391 |
+
+Đơn vị RMSE là mm/3 h; tất cả là mùa 5–10, cùng 30 ô và mẫu theo năm. CI bootstrap RMSE LightGBM Tweedie−L1(log) dưới 0 cả ba năm; Bi-LSTM Tweedie−cũ dưới 0 năm 2021 và 2023, chứa 0 năm 2022. Đầu xác suất Bi-LSTM Tweedie kém ở 2022: BSS ≥1 là 0,148 so 0,186. Không tuyên bố một cấu hình thắng mọi chỉ số.
+
+Bỏ `ne_terrain_index` làm CSI xác suất của DOMAIN giảm mô tả 0,025/0,009/0,051 theo năm, nhưng CI của từng hiệu số chứa 0. Trên 63 ô chưa train, DOMAIN−RAW là +0,042/−0,003/+0,029, CI đều chứa 0. 63 ô vẫn ở cùng Đà Nẵng và có tương quan thời tiết; chưa là kiểm tra tỉnh khác. Điểm ngoại suy tỉnh hoặc ưu thế domain chưa được chứng minh.
+
+Demo archive dùng checkpoint thật trên 93 ô; 36 phép so dự báo HTTP và 81 kiểm tra code đạt. Nguồn JAXA công khai chỉ ở mức điểm, chưa đủ cho ML. FTP JAXA cổng 21 trả 220, `AUTH TLS` trả 504: server không hỗ trợ FTPS; chưa xác minh credential/tải binary v8. `scripts/fetch_gsmap_nrt.py` yêu cầu chọn rõ `--allow-plain-ftp` và có `--check-only`. Nhập password trong terminal riêng, không qua chat/lệnh/tệp. Dữ liệu tải và manifest nằm trong `data/operational/` ngoài Git. T-OPS/ECMWF cùng mẫu và parity NRT là cổng trước AI live; test 2025 giữ kín.

@@ -8,11 +8,19 @@ Bi-LSTM thêm biểu diễn vật lý tăng CSI quyết định ≥10 mm/3 h so 
 
 Đây là kết quả nghiên cứu hồi cứu có code và checkpoint tái lập. Chưa xác nhận vận hành; test 2025 chưa mở. Đầu xác suất và đầu lượng mưa trả lời hai mục tiêu khác nhau, nên giữ riêng hai loại CSI.
 
+## Cập nhật sau các phép thử kế tiếp tối 13/10
+
+Giảng viên có thể xem đây là kết quả mới rõ nhất: **đổi cách học lượng mưa cải thiện ước lượng mm ổn định hơn việc thêm proxy domain**. Trên cùng 30 ô, mùa 5–10, tổng 0–3 h, RMSE LightGBM RAW L1(log) → Tweedie lần lượt 4,607→3,947; 4,841→4,534; 4,205→3,610 mm ở 2021–2023. Bi-LSTM RAW log-Huber → Tweedie: 4,046→3,876; 4,661→4,581; 3,963→3,540 mm. Chỉ số CSI theo **lượng mm** ≥10 của Bi-LSTM tăng 0,191→0,289; 0,164→0,272; 0,092→0,391. Đây vẫn là validation lịch sử và nhãn vệ tinh, chưa phải kết quả vận hành.
+
+Cái giá cần nói thẳng: BSS xác suất ≥1 của Bi-LSTM Tweedie năm 2022 giảm 0,186→0,148. DOMAIN−RAW CSI xác suất trên 63 ô chưa train = +0,042/−0,003/+0,029, CI95% từng năm chứa0; phép bỏ proxy địa hình cũng chưa có CI tách0. Vì vậy app chưa chốt model thắng chung; đầu lượng mm và xác suất phải đánh giá riêng, rồi so ECMWF cùng mẫu trên dữ liệu phát hành thật.
+
+Đã có giao diện demo archive cho 93 ô Đà Nẵng từ checkpoint thật; 36 kiểm tra dự báo API với kết quả lưu khớp. Tab live chỉ là ECMWF thô/điểm JAXA công khai. FTP JAXA tới được nhưng không hỗ trợ FTPS; chưa có tệp NRT v8 xác minh, nên **chưa bật AI live**. Test 2025 giữ kín. Bảng/CI và giới hạn ở `reports/followup_danang/`; cổng tiếp theo nằm trong `execution_plan.md`.
+
 ## Những gì đã làm và kiểm tra
 
 - 27 lượt Bi-LSTM (3 cấu hình × 3 năm × 3 seed), 9 pipeline LightGBM (135 đầu), cố định 30.000 mẫu train mỗi fold; 131400 cửa sổ evaluation, 30 ô chọn theo địa hình/khoảng cách biển.
 - Train/cal/eval cuốn chiếu; chuẩn hóa chỉ trên train; RAW/DOMAIN cùng số tham số và cùng cửa sổ. Tương lai chỉ gồm lịch. Loss khác giữa NN/cây nên so learner có giới hạn.
-- 73 kiểm tra đạt. Suy luận CPU từ checkpoint/normalizer/Platt đã khớp dự báo CUDA đã lưu trong sai số số học nhỏ; API HTTP đã trả dự báo thật từ checkpoint ở chế độ archive.
+- 81 kiểm tra đạt. Suy luận CPU từ checkpoint/normalizer/Platt đã khớp dự báo CUDA đã lưu trong sai số số học nhỏ; API HTTP đã trả dự báo thật từ checkpoint ở chế độ archive.
 - Đã lấy snapshot forecast và kiểm tra hợp đồng khí tượng cho 93/93 ô; bộ ghi theo giờ chạy trong 2,1 giờ. NRT quan trắc và T-OPS chưa hoàn tất.
 
 ## Kết quả chính

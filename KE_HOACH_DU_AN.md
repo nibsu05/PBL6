@@ -12,12 +12,8 @@
   - **Sản phẩm A**, 0–6 giờ tới, dùng **Bi-LSTM**.
   - **Sản phẩm B**, 1–3 ngày tới, dùng **TFT** (Temporal Fusion Transformer).
 - **Câu hỏi nghiên cứu:** nhóm thông tin nào (quan trắc vệ tinh, độ bất ổn định, dòng ẩm, dự báo số…) giúp mô hình AI **vượt dự báo số ECMWF** ở hạn nào và mùa nào?
-- **Đang ở đâu:** **phần dữ liệu và bộ đánh giá đã xong**. Phần này vốn là phần khó và rủi ro nhất, và đã xong sớm khoảng 1 tuần so với lộ trình. **Bước tiếp theo là huấn luyện**, bắt đầu bằng một pilot Bi-LSTM.
-- **Việc cần làm ngay:**
-  1. Tập trung thí nghiệm tại Đà Nẵng trước; vùng phía nam chưa chốt.
-  2. Phân vai cho 3 thành viên (đề xuất ở mục 7).
-  3. Chạy pilot Bi-LSTM.
-  4. Bật ghi log dự báo live, vì mùa mưa đang diễn ra.
+- **Đang ở đâu:** dữ liệu, bộ đánh giá, pilot và bốn phép thử follow-up tại Đà Nẵng đã hoàn tất; demo archive từ checkpoint thật hoạt động. Chưa có dự báo AI live hay kết luận vượt ECMWF.
+- **Việc cần làm ngay:** xác minh/tải GSMaP NRT v8, ghi nguồn liên tục, kiểm định cùng ECMWF trên forecast thật; giữ kết quả Tweedie và domain làm ứng viên. Xem mục 4 và 6.
 
 ---
 
@@ -126,34 +122,16 @@ flowchart LR
 
 ## 4. Đang ở giai đoạn nào
 
-| Giai đoạn | Tuần | Trạng thái | Kết quả / bằng chứng |
-| --- | --- | --- | --- |
-| 0. Khảo sát và quyết định | 1 | ✅ Xong (còn 2 câu hỏi nhỏ, xem mục 8) | `project_plan_v2.md` |
-| 1. Dữ liệu và bộ đánh giá | 1–2 | ✅ **Xong** | Dataset v2, dataloader, bảng baseline ở `reports/station_benchmark/README.md` |
-| 2. Baseline trên lưới | 2 | ✅ LightGBM/khí hậu30 ô,3 fold | reports/domain_screen_danang/; vận hành thật còn chờ |
-| 3. Sản phẩm A: Bi-LSTM | 3–4 | ✅ Pilot30/93 ô và domain screen3 fold; E0–E5 rộng chưa chạy | `reports/pilot_bilstm_v2_93cells_3seeds/README.md`: S1 tăng CSI so S0; S4 tốt hơn về BS; tiếp theo kiểm tra nhãn/đầu quyết định và giả thuyết địa phương trước so kiến trúc |
-| 4. Sản phẩm B: TFT | 5–6 | Chưa bắt đầu | — |
-| 5. Đánh giá vận hành thật và độ bền | 7 | Chưa bắt đầu | — |
-| 6. Mở rộng 2 vùng | 8 | Chưa bắt đầu | — |
-| 7. App và kiểm định live | Ghi log ngay, app MVP theo cổng | Đã có API archivecheckpoint và logger forecast 93 ô | demo/domain_api.py; MLlive/quan trắc NRT/chọn mô hình cuối còn chờ |
-| 8. Báo cáo và bảo vệ | Viết cùng thực nghiệm | ✅ Brief kết quả cho14/10 | reports/research_rainfall/brief_giang_vien_2026_10_14.md |
+| Giai đoạn | Trạng thái 13/10/2026 | Bằng chứng |
+| --- | --- | --- |
+| Dữ liệu và đánh giá | Xong | Verify 2233/2233, dataloader 0 mẫu lệch; `reports/station_benchmark/` |
+| Bi-LSTM/LightGBM Đà Nẵng | Pilot và BASE/RAW/DOMAIN 3 fold xong | `reports/pilot_bilstm_v2_93cells_3seeds/`, `reports/domain_screen_danang/` |
+| Follow-up có giả thuyết | Xong: Tweedie cây/NN, bỏ proxy địa hình, 63 ô chưa train | `reports/followup_danang/`; cùng mùa/cửa sổ và CI theo ngày |
+| Nguồn vận hành | Forecast snapshot 93/93 ô; JAXA FTP cổng 21 tới được, FTPS không hỗ trợ | `reports/followup_danang/nrt_access_status.json`; binary NRT và T-OPS còn chờ |
+| App Đà Nẵng | Demo archive từ checkpoint, HTTP parity 36 case đạt | `demo/domain_api.py`, `demo/research.html`; AI live chưa bật |
+| Sản phẩm B TFT, hai vùng ngoài Đà Nẵng | Chưa bắt đầu | Sau MVP và kiểm định nguồn |
 
-Đợt thực hiện kế tiếp: reports/domain_screen_danang/README.md; lượt đầy đủ đã hoàn tất; số liệu và CI đã lưu. Đề xuất nền: `reports/research_rainfall/next_experiment.md`; cập nhật phê bình/ưu tiên theo `literature_domain_review.md`. Chưa khởi chạy E0–E5 hoặc TFT; nghiên cứu địa phương ưu tiên trước mở rộng số kiến trúc.
-
-**Kết quả tối 13/10:**27 lượt NN+9 pipeline LightGBM,131.400 cửa sổ/3 fold;DOMAIN tăng CSI xác suất NN so RAW 0,051/0,007/0,031 nhưng CI chứa0; chưa chốt app.73 kiểm tra đạt, API suy luận CPU đã chạy, forecast 93/93 ô đạt contract. Báo cáo và kế hoạch cụ thể: reports/research_rainfall/brief_giang_vien_2026_10_14.md, execution_plan.md.
-
-### Những gì đã có trong tay
-
-**Cập nhật 13/10:** dữ liệu verify 2233/2233; CUDA hoạt động; dataset 93 ô Đà Nẵng đã dựng; inspect bốn cấu hình đạt 0 mẫu lệch và batch hữu hạn. **73 kiểm tra đã đạt** trên Windows (58 kiểm tra trước đó và15 kiểm tra domain/nguồn live/suy luận). Pilot 3 seed trên 30 và 93 ô đã xong. Repo làm việc chuyển sang `D:\PBL6_v2`; giữ nguyên bản USB `D:\PBL6` cũ. Kết quả chưa chứng minh vượt ECMWF, và chưa so Bi-LSTM với TFT.
-<!-- OFFLINE_BATCH_STATUS --> Batch 3 seed trên 93 ô đã hoàn tất; bảng số liệu ở `reports/pilot_bilstm_v2_93cells_3seeds/`. Đã diễn giải: S1 tăng CSI so S0; S4 tốt hơn về BS; chưa so kiến trúc hoặc kiểm định vận hành. Không chấm test 2025.
-
-- **Nhãn mưa** đã được chọn bằng cách đối chiếu với 10 trạm đo thật (xem mục 5).
-- **Dataset v2:** 296 ô, mỗi giờ từ 2015 đến 09/2026, 51 đặc trưng. Đã kiểm tra chất lượng; dữ liệu thiếu dưới 0,2 %.
-- **Dataloader:** đọc theo từng cửa sổ trực tiếp từ đĩa, vừa máy 8 GB. Không có rò rỉ dữ liệu (đã có test kiểm chứng).
-- **Bộ đánh giá dùng chung**, kèm bảng "mức sàn" của các nguồn hiện có (khí hậu, ECMWF, GFS, ERA5).
-- **34 unit test** cho các phần mới, tất cả đều đạt.
-
----
+**Lựa chọn hiện tại:** Tweedie cải thiện ước lượng mm rõ trên validation; RAW và DOMAIN chưa phân định chắc ở CSI xác suất. Không chọn model chỉ vì điểm một năm hoặc tên đặc trưng. 81 kiểm tra code đạt chứng minh pipeline chạy đúng trong phạm vi được kiểm, không chứng minh kỹ năng dự báo. Test 2025 vẫn niêm phong. Bảng năm, CI và giới hạn ở `reports/followup_danang/` và brief 14/10.
 
 ## 5. Kết quả quan trọng đến nay (để hiểu vì sao làm như vậy)
 
@@ -184,26 +162,18 @@ flowchart LR
 
 ## 6. Lộ trình thực hiện tiếp
 
-**Đợt tiếp đã thực hiện:**Tweedie GB/NN,ablationNO_TERRAIN vàkiểm tra63ô xong;81test và36HTTPparitycases đạt.Demo8766 chạycheckpoint vànguồn hiện tại.SourcebinaryJAXA đangkiểmtrakết nối sauđăng ký.Gitauthornibsu05 áp dụng từcommitmới.Kếtquả ởreports/followup_danang/.
-
-
-**Ưu tiên cụ thể sau đánh giá:** đầu lượngmưa trên RAW, kiểm tra63ô chưa train và bỏ riêng proxy địa hình; NRT/demo archive làm song song. Ba thử nghiệm mới chưa khởi chạy. Các chỉ số hiện tại đủ để tiếp tục PBL, chưa đủ chốt chất lượng vận hành.
-
-
-Tập trung Đà Nẵng, có đầu ra kiểm chứng mỗi tuần; chi tiết và cổng chuyển tiếp ở [execution_plan.md](reports/research_rainfall/execution_plan.md). Lịch là mục tiêu theo năng lực nhóm, không thay điều kiện kiểm định.
-
-| Mốc | Việc thực hiện | Đầu ra cần đạt |
+| Mốc | Việc đã có / cần làm | Cổng bằng chứng |
 | --- | --- | --- |
-| Tối13/10 — đã xong | Domain screen3 fold, NN/cây, audit nhãn, forecast 93 ô, API checkpoint | Số liệu, CI, code và brief 14/10; chưa kết luận thắng vận hành |
-| 14–20/10 | Chọn ứng viênRAW/DOMAIN;ablation từng proxy/nhóm;đầu lượngmưa;hoàn tất NRT và ghi nguồn;giao diện archive | Bảng lựa chọn có lý do, contract nguồn, demo dùng checkpoint thật |
-| 21–27/10 | Kiểm định forecast thật2024;baseline thô/hiệu chỉnh;parity train/app;giao diện6h, nguồn thiếu/cũ, ghi dự báo | MVP Đà Nẵng khi đạt cổng nguồn/kỹ năng;test 2025 chỉ mở sau đóng băng |
-| Sau MVP | TFT 1–3ngày, so kiến trúc cùng đầu vào/hạn;kiểm tra ô mới và hai vùng | Bằng chứng theo câu hỏi riêng, không nhân model khi chưa có giả thuyết |
+| 13/10 — đã xong | BASE/RAW/DOMAIN 3 fold; Tweedie LightGBM và Bi-LSTM; NO_TERRAIN; 63 ô; demo archive | Số liệu, CI, 81 test, 36 HTTP parity; chưa mở 2025 |
+| 14–20/10 | Nhập credential JAXA trong terminal riêng, kiểm tra login rồi tải một binary NRT v8; đo latency/version/schema, đối chiếu train; chốt máy ghi liên tục | File NRT thật và manifest riêng tư, báo cáo không có secret; nếu nguồn thiếu, giữ demo archive/ECMWF thô |
+| 21–27/10 | Dựng T-OPS 2024 theo `issued_at ≤ issue`, đối chiếu ECMWF thô/hiệu chỉnh và RAW/DOMAIN/Tweedie cùng mẫu; kiểm tra parity đầu vào | Bảng kỹ năng theo mùa, CI và nguồn; quyết định ứng viên app trước khi mở test 2025 |
+| Sau cổng vận hành | App AI live 6 h Đà Nẵng nếu đủ nguồn và kỹ năng; TFT 1–3 ngày, hai vùng khác theo sau | Mỗi dự báo lưu thời điểm phát hành, nguồn, version/hash; kiểm chứng sau khi nhãn đến |
 
-Bộ ghi forecast khí tượng93 ô đã chạy mỗi giờ giới hạn2,1 giờ;chưa cài tác vụ chạy vĩnh viễn, chưa có stream quan trắc NRT. Cần một máy luôn bật và nguồn quan trắc xác minh được để kiểm định live. API hiện là archive 2021–2023, server thử đã đóng.
+Tweedie LightGBM giảm RMSE 3 h tháng 5–10 cả ba năm so đầu L1(log), nhưng không thay đầu xác suất. Tweedie Bi-LSTM cũng giảm RMSE cả ba năm, song BSS ≥1 năm 2022 giảm từ 0,186 xuống 0,148. DOMAIN cải thiện CSI ở hai năm nhưng CI chứa 0; kết quả bỏ proxy và 63 ô chưa train không xác nhận chắc. Vì vậy giữ nhiều ứng viên có lý do, chưa quảng cáo một cấu hình thắng mọi chỉ số.
 
-Không chọn model chỉ vì một năm đẹp hoặc thêm biến mang tên vật lý. DOMAIN có tín hiệu CSI NN2/3 năm nhưng CI còn rộng;giữ đối chứngRAW để kiểm tra tiếp. Không coi tăng CSI đầu xác suất là cải thiện tương đương của lượngmưa mm.
+JAXA FTP cổng 21 hoạt động nhưng trả 504 cho FTPS. `scripts/fetch_gsmap_nrt.py --check-only --allow-plain-ftp` cần nhập UID/password **trong terminal tương tác**, không đưa vào chat, lệnh, file hay Git. Script chỉ dùng FTP thường khi có cờ rõ ràng. Demo ở `http://127.0.0.1:8766/` đang là archive validation và ECMWF thô; chưa có AI live. Logger forecast trước đó có thời hạn, chưa được cài chạy vĩnh viễn. Nhóm nên chốt máy luôn bật trong tuần này.
 
----
+Cuối mỗi tuần, cập nhật mục 4/6 và quyết định/trạng thái trong `CLAUDE.md`, rồi commit/push code và báo cáo; dữ liệu/checkpoint ngoài Git.
 
 ## 7. Phân công gợi ý
 

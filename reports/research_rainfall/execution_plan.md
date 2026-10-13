@@ -16,29 +16,20 @@ Một app dự báo 6 giờ cho các ô 0,1° thuộc Đà Nẵng: mưa giờ, t
 | Suy luận checkpoint và API | src/domain_inference.py, demo/domain_api.py | Đã chạy CPU/HTTP thật; archive validation |
 | Báo cáo có kết quả, CI và đề xuất | brief_giang_vien_2026_10_14.md | Sinh từ số liệu, không thay việc huấn luyện |
 
-## Đánh giá khả thi và thứ tự đợt tiếp theo
+## Đánh giá sau lượt thực nghiệm 13/10
 
-Đánh giá sau lượt ba năm: đủ cơ sở tiếp tục PBL và xây app thử nghiệm, chưa chứng minh mô hình vượt trội hoặc phù hợp mọi tỉnh Việt Nam. Trung bình năm, Bi-LSTM BASE/RAW/DOMAIN có CSI quyết định10mm/3h 0,325/0,346/0,376; BSS1mm/3h 0,198/0,214/0,214; RMSE3h 4,308/4,224/4,242mm. Đây là trung bình mô tả của ba fold, không phải một test độc lập hoặc CI gộp. DOMAIN giúp quyết định sự kiện rõ hơn đầu lượng mưa; CI hiệu số từng năm chứa0, FAR DOMAIN từng năm khoảng41–60%. Không dùng73 kiểm tra code làm bằng chứng chất lượng dự báo.
+Đã chạy các thí nghiệm ưu tiên, không còn ở trạng thái đề xuất: Tweedie LightGBM/NN trên RAW, bỏ riêng proxy địa hình và 63 ô chưa train. Báo cáo/CI ở `reports/followup_danang/`. RMSE 3 h LightGBM Tweedie giảm 6–14% so L1(log) trên cả ba năm; Bi-LSTM Tweedie giảm khoảng 2–11% nhưng BSS xác suất ≥1 kém hơn trong 2022. DOMAIN vẫn chưa có CI khẳng định lợi ích CSI trên từng năm hoặc 63 ô. Đủ cơ sở tiếp tục PBL và hoàn thiện demo, chưa đủ chọn AI live.
 
-Ưu tiên đợt thực hiện tiếp theo; các thí nghiệm mới dưới đây chưa khởi chạy:
+Demo archive từ checkpoint có bản đồ 93 ô và bảng 30/63 ô tách rõ; 36 HTTP parity case và 81 kiểm tra code đạt. Tab live hiện chỉ có ECMWF thô/điểm JAXA công khai. Máy chủ FTP JAXA cổng 21 tới được, FTPS không hỗ trợ; chưa có binary NRT thực chứng. Không gọi tab live là app AI vận hành.
 
-1. **Đầu lượng mưa:** thử LightGBM RAW với objective Tweedie cố định variance_power1,5 trên nhãnmm, đối chứng L1log hiện có. Giữ các cửa sổ/chuẩn hóa/ngân sách cây và đầu xác suất để cô lập thay đổi đầu lượng mưa. Báo RMSE,bias,CSI lượngmưa và sai số trong các sự kiện lớn; cải thiện chưa được bảo đảm. Nếu có lợi ích, thử đầu lượngmưa phù hợp tương tự cho Bi-LSTM. [Tham số chính thức LightGBM4.5](https://lightgbm.readthedocs.io/en/v4.5.0/Parameters.html#objective-parameters).
-2. **Kiểm tra phạm vi không gian:** dùng checkpoint hiện có đánh giá63ô chưa dùng huấn luyện trong lượt domain, so RAW/DOMAIN trên cùng năm/mẫu và bootstrap khối ngày. Đây là kiểm tra nội suy sang ô chưa train, không là kiểm định độc lập giữa các tỉnh; các ô lân cận và đợt mưa vẫn tương quan. Không đưa nhãn các ô này vào chọn epoch/hiệu chỉnh của checkpoint cũ.
-3. **Tách đóng góp domain:** giữ toàn bộ nguyên liệu và số tham số, bỏ riêng chỉ báo gió–ẩm×địa hình khỏi DOMAIN. So ba năm/seed với FULL và RAW đã lưu. Chỉ kết luận vai trò địa hình nếu phép bỏ thành phần ủng hộ; chưa gán toàn bộ mức tăng của bốn proxy cho địa hình.
-4. **Nối app song song:** ghi forecast, hoàn tất nguồn quan trắc NRT và demo archive từ checkpoint. Chọn ứng viên vận hành bằng forecast thực sự có ở giờ phát hành, so forecast thô/hiệu chỉnh trên cùng mẫu. TFT và mở rộng tỉnh theo sau MVP6h.
+## Từ 14 đến 20/10: nối quan trắc và đóng băng ứng viên
 
-Đầu ra của đợt: bảng lựa chọn đầu lượngmưa, kiểm tra ô mới và phép bỏ địa hình; demo có checkpoint thật. Các nhóm CAPE/CIN và đất giữ trong lộ trình sau khi ba câu hỏi ưu tiên có kết quả, tránh tăng số cấu hình cùng lúc.
+1. Kiểm tra JAXA login bằng `scripts/fetch_gsmap_nrt.py --check-only --allow-plain-ftp` trong terminal riêng, nhập UID/password tương tác. Sau đó tải một binary v8, ghi hash, thời điểm lấy, version, khoảng mưa, phần trăm thiếu và tốc độ trễ. FTP thường không mã hóa trên máy chủ này; script không tự hạ cấp.
+2. So một hoặc nhiều tệp NRT thật với nguồn MVK/raw trong train trên cùng ô/giờ. Đo phân phối và lỗi theo mùa nếu có đủ ngày; không giả định hai thuật toán tương đương từ định dạng giống nhau. Tập đủ lịch sử quan trắc trễ và context cho cửa sổ 24 h trước khi chạy AI.
+3. Chốt máy luôn bật cho logger forecast/quan trắc. Dùng timestamp phát hành và lấy dữ liệu để bảo đảm không nhìn tương lai. Nếu nguồn NRT chưa đạt contract, demo tiếp tục hiển thị archive và ECMWF thô.
+4. Xem lại RAW/DOMAIN và hai đầu Tweedie theo RMSE, bias, BSS/CSI, FAR và CI. Không đổi chọn model theo một metric duy nhất; không mở test 2025 khi chưa đóng băng thiết kế.
 
-## Từ 14 đến 20/10: chốt ứng viên và nối dữ liệu
-
-1. Xem cả ba năm, biến thiên seed và CI. Nếu DOMAIN không lặp lợi ích, không đưa vào app chỉ vì tên gọi vật lý. Giữ RAW và BASE để kiểm tra nguồn; giảm số cấu hình khi lợi ích chưa rõ.
-2. Với DOMAIN, bỏ từng proxy để biết thành phần nào giúp; xem gradient địa hình hai chiều như giả thuyết tiếp theo, cung cấp cùng gradient cho RAW. Tách đóng góp nguyên liệu còn thiếu bằng phép bỏ TCWV/bỏ gió–ẩm850 trên cùng cửa sổ RAW. CAPE/CIN là nhánh tiếp theo có giả thuyết về mưa đối lưu; đất là nhánh khám phá thấp hơn. Mỗi đợt chỉ trả lời một câu hỏi, không đồng thời đổi kiến trúc/loss/split.
-3. Đánh giá đầu lượng mưa riêng: L1/Huber trên log có thể co mưa to về nhỏ. Thử một đầu Tweedie hoặc hai phần có/không mưa và cường độ, giữ nguyên dữ liệu/đầu xác suất. Báo bias/RMSE/CSI cùng mẫu; không chọn đầu mm bằng MAE đơn độc.
-4. Duy trì ghi forecast mỗi giờ trên máy luôn bật. scripts/collect_domain_live.py đã có vòng lặp; hiện chạy giới hạn 2,1 giờ để không tạo dịch vụ vĩnh viễn ngầm. Thiết lập tác vụ Windows lâu dài khi chốt máy chạy.
-5. Hoàn tất nguồn quan trắc NRT: kiểm tra truy cập GSMaP NRT hoặc IMERG Early, timestamp khoảng mưa, latency đo từ file thật, checksum và sơ đồ chuyển về ô. Thông tin đăng nhập qua công cụ/hệ thống máy, không vào chat/repo. Không lấy bản GC đã hiệu chỉnh trạm làm đầu vào live.
-6. Làm giao diện archive từ API hiện có để xem bản đồ ô, các trận mưa và dự báo cùng quan trắc. Giao diện live dùng ECMWF thô trong lúc ML chưa đủ nguồn; ghi nguồn rõ. Đây là một đầu ra app cụ thể cho tuần đầu.
-
-Điều kiện hoàn tất tuần: bảng chọn ứng viên có lý do; hợp đồng đơn vị/tầng/giờ cho mọi biến; quan trắc NRT mẫu đã kiểm tra hoặc ghi rõ điều kiện truy cập còn thiếu; demo archive dùng checkpoint thật. Không đổi kết luận để che thiếu nguồn.
+Điều kiện hết tuần: tệp NRT thật đã xác minh hoặc ghi rõ vì sao chưa truy cập được, logger có kế hoạch máy chủ, bảng ứng viên có lý do, demo archive chạy ổn.
 
 ## Từ 21 đến 27/10: kiểm định nguồn forecast thật và app 6 giờ
 

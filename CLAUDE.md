@@ -70,6 +70,9 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
    - "Previous Runs có CAPE": thực tế các trường này rỗng.
 8. **Phạm vi và cách làm việc chốt ngày 13/10/2026:** tập trung nghiên cứu và thử nghiệm Đà Nẵng trước; chưa chọn vùng phía nam. Nhóm 3 người, chưa phân vai; ưu tiên đầu ra kiểm chứng được hằng tuần, không dùng hạn nộp giả định làm ràng buộc. Phân vai ở kế hoạch mục 7 chỉ là đề xuất.
 
+9. **Kết quả sau thay hàm mất mát (13/10):** cải thiện lớn nhất hiện thấy ở đầu lượng mưa Tweedie, không phải thêm nhiều tên mô hình. Giữ riêng điểm lượng mm và xác suất; chỉ chọn cấu hình app sau khi kiểm định T-OPS cùng ECMWF, bởi Tweedie Bi-LSTM làm BSS năm 2022 xấu hơn. Kết quả NO_TERRAIN/63 ô chưa đủ quy lợi ích chắc chắn cho địa hình.
+10. **Nguồn JAXA và an toàn credential:** máy chủ FTP không hỗ trợ FTPS trong probe; không tự hạ cấp rồi gửi mật khẩu. Script yêu cầu `--allow-plain-ftp`, nhập credential tại prompt terminal, không đặt vào đối số lệnh hoặc chat, chỉ lưu dữ liệu trong `data/operational/`.
+
 ## Còn chờ chốt (hỏi người dùng trước khi làm phần liên quan)
 
 1. Hai vùng kiểm tra: Hà Nội, cùng TP.HCM **hoặc** Đắk Lắk.
@@ -77,20 +80,14 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 
 ## Trạng thái và việc tiếp theo
 
-**Trạng thái chốt tối 13/10/2026:**
-- Repo chính: D:\PBL6_v2. Người dùng ưu tiên kết quả và kế hoạch thực hiện để trao đổi với giảng viên sáng 14/10; không còn yêu cầu giữ mức usage 40% trong đợt này.
-- Đã hoàn tất BASE/RAW/DOMAIN: 3 fold 2021–2023, 27 lượt Bi-LSTM và 9 pipeline LightGBM, cùng 30.000 mẫu train/fold, 131.400 cửa sổ evaluation. Thiết kế/kết quả ở reports/domain_screen_danang/; 73 kiểm tra đạt.
-- DOMAIN−RAW CSI xác suất Bi-LSTM = +0,051/+0,007/+0,031. Hai năm đạt mốc thực dụng nhưng CI95% đều chứa 0; LightGBM chưa xác nhận lợi ích rõ. Giữ RAW/DOMAIN làm ứng viên kiểm định nguồn, chưa chọn mô hình cuối; đầu lượng mưa còn thiên thấp.
-- Audit nhãn, probe nguồn và thu forecast 93/93 ô đã xong. Bộ ghi khí tượng mỗi giờ đang chạy giới hạn 2,1 giờ (PID/log trong data/operational/); quan trắc NRT và T-OPS chưa hoàn tất.
-- Suy luận CPU từ checkpoint/normalizer/Platt đã khớp dự báo lưu ở 2021/2023. API demo/domain_api.py qua HTTP smoke, chỉ archive validation 2021–2023. Server thử đã đóng; frontend mới và ML live chưa có.
-- Brief sáng mai: reports/research_rainfall/brief_giang_vien_2026_10_14.md. Bước triển khai và cổng theo tuần: execution_plan.md. Tiếp theo là ablation thành phần, đầu lượng mưa Tweedie/hurdle, nguồn NRT và forecast thật trước app 6 h; TFT/hai vùng sau.
-- E0–E5 rộng, TFT, T-OPS và app đầy đủ chưa triển khai. Test 2025 giữ kín. Job training/test đã hoàn tất; chỉ collector khí tượng có thời hạn còn chạy.
-
-
-- Ưu tiên sau đánh giá khả thi: đầu lượngmưa Tweedie trên RAW, kiểm tra63ô chưa train và bỏ riêng proxy địa hình; nguồn NRT/demo archive song song. Các phép thử này chưa khởi chạy; chi tiết execution_plan.md. Đây là kết luận định hướng, chưa đổi mô hình đã train.
-
-
-**Cập nhật đợt tiếp tục tối13/10:** đã chạy xong Tweedie LightGBM,NO_TERRAIN3seed,63ôchưa train vàBi-LSTM RAW Tweedie.81kiểm tra đạt;HTTPparity36cases đạt. Demo localhost8766 cócheckpoint thật vànguồnECMWF/JAXA táchchế độ; sourceJAXA binary đang kiểmtrakết nối sau người dùng đăng ký. Gitauthor của repo đã đổi sangnibsu05+noreply theo yêu cầu; không viếtlại history đãpush. Kếtquả tổnghợpở reports/followup_danang/. Test2025 vẫn giữkín.
+**Trạng thái chốt sau lượt tiếp tục 13/10/2026:**
+- Repo làm việc `D:\PBL6_v2`; tác giả commit mới là `nibsu05 <168987662+nibsu05@users.noreply.github.com>`. Không viết lại lịch sử đã push. Dữ liệu verify 2233/2233, dataloader lệch 0; test 2025 giữ kín.
+- BASE/RAW/DOMAIN trên 30 ô/3 fold và đợt follow-up Tweedie LightGBM, Tweedie Bi-LSTM, NO_TERRAIN, 63 ô chưa train đã hoàn tất. Chi tiết cùng CI ở `reports/domain_screen_danang/` và `reports/followup_danang/`.
+- Tweedie LightGBM RAW giảm RMSE 3 h mùa 5–10 từ 4,607/4,841/4,205 xuống 3,947/4,534/3,610 mm ở 2021/2022/2023. Tweedie Bi-LSTM RAW từ 4,046/4,661/3,963 xuống 3,876/4,581/3,540. Đây là validation lịch sử, chưa là hiệu năng vận hành. Đầu xác suất của Bi-LSTM Tweedie kém đi trong 2022 (BSS ≥1: 0,148 so 0,186).
+- DOMAIN−RAW CSI quyết định ≥10 mm/3 h = +0,051/+0,007/+0,031 trên 30 ô; CI từng năm đều chứa 0. Bỏ proxy địa hình giảm CSI mô tả 0,025/0,009/0,051 nhưng CI chứa 0. Trên 63 ô chưa train, DOMAIN−RAW = +0,042/−0,003/+0,029, CI đều chứa 0. Chưa chốt biểu diễn domain là ưu thế đáng tin cậy.
+- Demo `http://127.0.0.1:8766/` đang phục vụ checkpoint thật ở chế độ archive 2021–2023; 36 phép so HTTP với dự báo lưu đạt và 81 kiểm tra code đạt. Tab live chỉ hiển thị ECMWF thô/điểm JAXA công khai, **không phải ML live**. Chưa so ECMWF trên cùng mẫu T-OPS.
+- Forecast 93/93 ô đã đạt hợp đồng nguồn trong snapshot; logger từng chạy giới hạn 2,1 giờ, chưa có máy luôn bật. Điểm GSMaP NRT công khai đã probe nhưng không đạt điều kiện đầu vào ML. Máy chủ FTP JAXA cổng 21 trả 220, FTPS `AUTH TLS` trả 504; chưa xác minh đăng nhập/tải binary vì công cụ terminal không truyền được mật khẩu qua stdin an toàn. `scripts/fetch_gsmap_nrt.py` bắt buộc chọn rõ `--allow-plain-ftp` nếu dùng FTP thường, hỗ trợ `--check-only`; không có credential trong Git.
+- Ưu tiên tiếp theo: người dùng chạy kiểm tra đăng nhập JAXA trong terminal riêng; tải một tệp NRT v8, kiểm tra schema/latency và parity với dữ liệu train; sau đó ghi quan trắc liên tục, kiểm định T-OPS 2024 và ECMWF cùng mẫu trước khi bật AI live. Brief sáng 14/10 ở `reports/research_rainfall/brief_giang_vien_2026_10_14.md`; lộ trình ở `execution_plan.md`.
 
 **Đã xong (11/10/2026):**
 - Bộ đánh giá dùng chung.

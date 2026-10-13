@@ -68,6 +68,14 @@ Lý do không chọn Informer cho hạn 1–3 ngày:
 
 Audit nhãn theo mùa và nguồn forecast 93 ô đã chạy;API checkpoint chỉ archive. Thiết kế/điểm:[domain screen](reports/domain_screen_danang/README.md),[brief 14/10](reports/research_rainfall/brief_giang_vien_2026_10_14.md). Lộ trình hiện hành ởKE_HOACH_DU_AN.md mục4/6 và [execution_plan.md](reports/research_rainfall/execution_plan.md).
 
+### Cập nhật follow-up và điều kiện app (13/10/2026)
+
+Đã chạy Tweedie LightGBM/Bi-LSTM RAW, phép bỏ riêng `ne_terrain_index` và suy luận trên 63 ô Đà Nẵng chưa train. RMSE tổng 3 h tháng 5–10 của LightGBM L1(log) → Tweedie: 4,607→3,947 (2021), 4,841→4,534 (2022), 4,205→3,610 (2023). Bi-LSTM RAW cũ → Tweedie: 4,046→3,876; 4,661→4,581; 3,963→3,540. CSI lượng mưa ≥10 cũng tăng; xác suất Bi-LSTM Tweedie đánh đổi BSS ≥1 trong 2022 (0,186→0,148). Kết quả là validation hồi cứu, không chứng minh triển khai tốt hơn ECMWF.
+
+FULL DOMAIN−NO_TERRAIN CSI xác suất ≥10 tăng mô tả 0,025/0,009/0,051, CI từng năm chứa 0. Trên 63 ô chưa train DOMAIN−RAW +0,042/−0,003/+0,029, CI cũng chứa 0. Do đó câu chuyện địa hình là giả thuyết có kiểm tra, chưa là phát hiện chắc chắn. File chính ở `reports/followup_danang/`.
+
+Demo archive `demo/domain_api.py` và `demo/research.html` dùng checkpoint thật, 36 kiểm tra parity qua HTTP đạt. FTP JAXA tới được qua cổng 21 nhưng không hỗ trợ FTPS; binary NRT v8 chưa tải/xác minh đăng nhập. T-OPS và so ECMWF cùng mẫu là cổng bắt buộc trước AI live. Test 2025 còn niêm phong.
+
 ## 1. Hiện trạng và bằng chứng
 
 ### 1.1. Nhãn hiện tại thiếu mưa to nghiêm trọng
