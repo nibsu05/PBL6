@@ -1,0 +1,121 @@
+{
+  "task": "amount",
+  "args": {
+    "task": "amount",
+    "years": [
+      2021,
+      2022,
+      2023
+    ],
+    "epochs": 15,
+    "patience": 4,
+    "batch_size": 256,
+    "bootstrap": 1000
+  },
+  "started_utc": "2026-10-13T13:23:50.881247+00:00",
+  "git_commit": "874abbc6ea9a98bdd3ea9000a18c04033313d496",
+  "source_training_git": "bc63d7b41e0970dd739365633b5c0bbd5cea8926",
+  "source_report_sha256": "5200426ef7416097f940e006d857102abbd6bb75552fda5c477c4bd1744efbd0",
+  "source_cells": [
+    "c15.15_108.25",
+    "c15.25_108.05",
+    "c15.35_107.95",
+    "c15.35_108.35",
+    "c15.35_108.45",
+    "c15.45_107.75",
+    "c15.45_107.85",
+    "c15.45_108.15",
+    "c15.45_108.45",
+    "c15.55_107.45",
+    "c15.55_107.75",
+    "c15.55_108.05",
+    "c15.65_107.95",
+    "c15.65_108.05",
+    "c15.65_108.15",
+    "c15.75_107.65",
+    "c15.75_107.75",
+    "c15.75_108.35",
+    "c15.85_107.45",
+    "c15.85_107.65",
+    "c15.85_107.85",
+    "c15.95_107.55",
+    "c15.95_107.65",
+    "c15.95_107.75",
+    "c15.95_107.95",
+    "c15.95_108.05",
+    "c15.95_108.25",
+    "c16.05_107.85",
+    "c16.05_107.95",
+    "c16.15_108.05"
+  ],
+  "history": [
+    {
+      "year": 2021,
+      "seconds": 35.8147561000078,
+      "n_train": 30000,
+      "n_eval": 43800,
+      "train_index_sha256": "7e2fc3c7f6c8ee9c9f1f4b26ab0de6326e8f29b080a60a77483a89f44b087489",
+      "event_head_changed": false,
+      "opts": {
+        "n_estimators": 100,
+        "num_leaves": 15,
+        "max_bin": 63,
+        "min_child_samples": 50,
+        "learning_rate": 0.05,
+        "n_jobs": 4,
+        "random_state": 42,
+        "verbosity": -1,
+        "deterministic": true,
+        "force_col_wise": true,
+        "objective": "tweedie",
+        "tweedie_variance_power": 1.5
+      }
+    },
+    {
+      "year": 2022,
+      "seconds": 33.163263099995675,
+      "n_train": 30000,
+      "n_eval": 43800,
+      "train_index_sha256": "28aef2257e7ee0e63575e5406798d742e980156b324aca8e905cbe46cceeef08",
+      "event_head_changed": false,
+      "opts": {
+        "n_estimators": 100,
+        "num_leaves": 15,
+        "max_bin": 63,
+        "min_child_samples": 50,
+        "learning_rate": 0.05,
+        "n_jobs": 4,
+        "random_state": 42,
+        "verbosity": -1,
+        "deterministic": true,
+        "force_col_wise": true,
+        "objective": "tweedie",
+        "tweedie_variance_power": 1.5
+      }
+    },
+    {
+      "year": 2023,
+      "seconds": 34.815763899998274,
+      "n_train": 30000,
+      "n_eval": 43800,
+      "train_index_sha256": "564fa56a80ad930a791da445fd92f337baf0472dd8263ac4c8b54a8a0993fead",
+      "event_head_changed": false,
+      "opts": {
+        "n_estimators": 100,
+        "num_leaves": 15,
+        "max_bin": 63,
+        "min_child_samples": 50,
+        "learning_rate": 0.05,
+        "n_jobs": 4,
+        "random_state": 42,
+        "verbosity": -1,
+        "deterministic": true,
+        "force_col_wise": true,
+        "objective": "tweedie",
+        "tweedie_variance_power": 1.5
+      }
+    }
+  ],
+  "completed": true,
+  "test_2025_scored": false
+}

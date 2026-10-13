@@ -21,7 +21,7 @@ def native_indices(lat,lon):
     i=np.rint((59.95-lat)/.1).astype(int)
     j=np.rint((lon-.05)/.1).astype(int)
     if np.any((i<0)|(i>=1200)|(j<0)|(j>=3600)):raise ValueError('Ngoài lướiNRT60N–60S')
-    if not np.allclose(lat,59.95-i*.1,atol=1e-5) or not np.allclose(lon,.05+j*.1,atol=1e-5):
+    if not np.allclose(lat,59.95-i*.1,atol=1e-5,rtol=0) or not np.allclose(lon,.05+j*.1,atol=1e-5,rtol=0):
         raise ValueError('Cần tâm ô0,1°, không tự dịch nửaô')
     return i,j
 

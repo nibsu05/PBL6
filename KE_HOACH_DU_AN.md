@@ -184,6 +184,9 @@ flowchart LR
 
 ## 6. Lộ trình thực hiện tiếp
 
+**Đợt tiếp đã thực hiện:**Tweedie GB/NN,ablationNO_TERRAIN vàkiểm tra63ô xong;81test và36HTTPparitycases đạt.Demo8766 chạycheckpoint vànguồn hiện tại.SourcebinaryJAXA đangkiểmtrakết nối sauđăng ký.Gitauthornibsu05 áp dụng từcommitmới.Kếtquả ởreports/followup_danang/.
+
+
 **Ưu tiên cụ thể sau đánh giá:** đầu lượngmưa trên RAW, kiểm tra63ô chưa train và bỏ riêng proxy địa hình; NRT/demo archive làm song song. Ba thử nghiệm mới chưa khởi chạy. Các chỉ số hiện tại đủ để tiếp tục PBL, chưa đủ chốt chất lượng vận hành.
 
 

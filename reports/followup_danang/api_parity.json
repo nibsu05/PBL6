@@ -1,0 +1,261 @@
+{
+  "passed": true,
+  "cases": 36,
+  "details": [
+    {
+      "year": 2021,
+      "config": "RAW",
+      "scope": "trained",
+      "amount_error": 8.07642936706543e-06,
+      "prob_error": 6.079673767089844e-06
+    },
+    {
+      "year": 2021,
+      "config": "RAW",
+      "scope": "trained",
+      "amount_error": 1.5616416931152344e-05,
+      "prob_error": 3.802776336669922e-05
+    },
+    {
+      "year": 2021,
+      "config": "DOMAIN",
+      "scope": "trained",
+      "amount_error": 1.2814998626708984e-06,
+      "prob_error": 1.1622905731201172e-06
+    },
+    {
+      "year": 2021,
+      "config": "DOMAIN",
+      "scope": "trained",
+      "amount_error": 1.0952353477478027e-06,
+      "prob_error": 5.319714546203613e-06
+    },
+    {
+      "year": 2021,
+      "config": "TREE_L1",
+      "scope": "trained",
+      "amount_error": 7.015997643966543e-09,
+      "prob_error": 1.2195646548196493e-08
+    },
+    {
+      "year": 2021,
+      "config": "TREE_L1",
+      "scope": "trained",
+      "amount_error": 3.592366334959074e-09,
+      "prob_error": 4.15401490289069e-09
+    },
+    {
+      "year": 2021,
+      "config": "TREE_TWEEDIE",
+      "scope": "trained",
+      "amount_error": 1.4323277508498933e-08,
+      "prob_error": 1.2195646548196493e-08
+    },
+    {
+      "year": 2021,
+      "config": "TREE_TWEEDIE",
+      "scope": "trained",
+      "amount_error": 1.971006122203356e-09,
+      "prob_error": 4.15401490289069e-09
+    },
+    {
+      "year": 2021,
+      "config": "RAW_TWEEDIE",
+      "scope": "trained",
+      "amount_error": 1.2814998626708984e-06,
+      "prob_error": 1.7881393432617188e-06
+    },
+    {
+      "year": 2021,
+      "config": "RAW_TWEEDIE",
+      "scope": "trained",
+      "amount_error": 1.633167266845703e-05,
+      "prob_error": 3.5434961318969727e-05
+    },
+    {
+      "year": 2021,
+      "config": "RAW",
+      "scope": "unseen",
+      "amount_error": 5.811452865600586e-06,
+      "prob_error": 3.606081008911133e-06
+    },
+    {
+      "year": 2021,
+      "config": "DOMAIN",
+      "scope": "unseen",
+      "amount_error": 2.9414892196655273e-05,
+      "prob_error": 1.52587890625e-05
+    },
+    {
+      "year": 2022,
+      "config": "RAW",
+      "scope": "trained",
+      "amount_error": 4.552304744720459e-06,
+      "prob_error": 5.364418029785156e-06
+    },
+    {
+      "year": 2022,
+      "config": "RAW",
+      "scope": "trained",
+      "amount_error": 1.1570751667022705e-05,
+      "prob_error": 2.8967857360839844e-05
+    },
+    {
+      "year": 2022,
+      "config": "DOMAIN",
+      "scope": "trained",
+      "amount_error": 4.06801700592041e-06,
+      "prob_error": 3.337860107421875e-06
+    },
+    {
+      "year": 2022,
+      "config": "DOMAIN",
+      "scope": "trained",
+      "amount_error": 7.793307304382324e-06,
+      "prob_error": 1.0401010513305664e-05
+    },
+    {
+      "year": 2022,
+      "config": "TREE_L1",
+      "scope": "trained",
+      "amount_error": 6.8445379086679026e-09,
+      "prob_error": 4.7523030233254104e-09
+    },
+    {
+      "year": 2022,
+      "config": "TREE_L1",
+      "scope": "trained",
+      "amount_error": 3.7038601630179357e-09,
+      "prob_error": 5.301876437879827e-09
+    },
+    {
+      "year": 2022,
+      "config": "TREE_TWEEDIE",
+      "scope": "trained",
+      "amount_error": 1.0796720517625147e-08,
+      "prob_error": 4.7523030233254104e-09
+    },
+    {
+      "year": 2022,
+      "config": "TREE_TWEEDIE",
+      "scope": "trained",
+      "amount_error": 3.467456627381793e-09,
+      "prob_error": 5.301876437879827e-09
+    },
+    {
+      "year": 2022,
+      "config": "RAW_TWEEDIE",
+      "scope": "trained",
+      "amount_error": 1.8775463104248047e-06,
+      "prob_error": 3.6656856536865234e-06
+    },
+    {
+      "year": 2022,
+      "config": "RAW_TWEEDIE",
+      "scope": "trained",
+      "amount_error": 1.9073486328125e-06,
+      "prob_error": 3.546476364135742e-06
+    },
+    {
+      "year": 2022,
+      "config": "RAW",
+      "scope": "unseen",
+      "amount_error": 6.854534149169922e-07,
+      "prob_error": 4.291534423828125e-06
+    },
+    {
+      "year": 2022,
+      "config": "DOMAIN",
+      "scope": "unseen",
+      "amount_error": 1.773238182067871e-06,
+      "prob_error": 7.271766662597656e-06
+    },
+    {
+      "year": 2023,
+      "config": "RAW",
+      "scope": "trained",
+      "amount_error": 2.7939677238464355e-06,
+      "prob_error": 4.202127456665039e-06
+    },
+    {
+      "year": 2023,
+      "config": "RAW",
+      "scope": "trained",
+      "amount_error": 7.972121238708496e-07,
+      "prob_error": 2.175569534301758e-06
+    },
+    {
+      "year": 2023,
+      "config": "DOMAIN",
+      "scope": "trained",
+      "amount_error": 1.7881393432617188e-07,
+      "prob_error": 7.197260856628418e-06
+    },
+    {
+      "year": 2023,
+      "config": "DOMAIN",
+      "scope": "trained",
+      "amount_error": 2.1457672119140625e-06,
+      "prob_error": 4.470348358154297e-06
+    },
+    {
+      "year": 2023,
+      "config": "TREE_L1",
+      "scope": "trained",
+      "amount_error": 7.542313856800931e-10,
+      "prob_error": 5.015326917656715e-09
+    },
+    {
+      "year": 2023,
+      "config": "TREE_L1",
+      "scope": "trained",
+      "amount_error": 1.5928181759661264e-09,
+      "prob_error": 1.0634653463403865e-08
+    },
+    {
+      "year": 2023,
+      "config": "TREE_TWEEDIE",
+      "scope": "trained",
+      "amount_error": 3.681447341419286e-09,
+      "prob_error": 5.015326917656715e-09
+    },
+    {
+      "year": 2023,
+      "config": "TREE_TWEEDIE",
+      "scope": "trained",
+      "amount_error": 5.248325662954301e-09,
+      "prob_error": 1.0634653463403865e-08
+    },
+    {
+      "year": 2023,
+      "config": "RAW_TWEEDIE",
+      "scope": "trained",
+      "amount_error": 5.513429641723633e-06,
+      "prob_error": 6.452202796936035e-06
+    },
+    {
+      "year": 2023,
+      "config": "RAW_TWEEDIE",
+      "scope": "trained",
+      "amount_error": 5.781650543212891e-06,
+      "prob_error": 5.5730342864990234e-06
+    },
+    {
+      "year": 2023,
+      "config": "RAW",
+      "scope": "unseen",
+      "amount_error": 3.3229589462280273e-06,
+      "prob_error": 3.9637088775634766e-06
+    },
+    {
+      "year": 2023,
+      "config": "DOMAIN",
+      "scope": "unseen",
+      "amount_error": 3.9637088775634766e-06,
+      "prob_error": 4.231929779052734e-06
+    }
+  ],
+  "maps93_passed": true,
+  "winter_window": "6h",
+  "test2025_rejected": true
+}

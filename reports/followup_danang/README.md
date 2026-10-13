@@ -32,4 +32,3 @@ Model/pred/index ởdata/operational/followup_danang ngoàiGit. Số liệu theo
 Tweedie LightGBM đã giảm RMSE trên cả3năm soL1log, nên thử Bi-LSTM RAW giữ nguyên174.154tham số/seed/ngân sách. Softplus được diễn giải là meanmm/h thay vìlog1p; hồi quy bằng devianceTweedie p1,5, chia cho deviance của forecast meanhằng tính trên chính30.000mẫu train. BCE không trọng số lớp giữ hệ số1. Encoder học chung nên đầu xácsuất có thể đổi và phải hiệu chỉnh lại trên nămcal cũ.
 
 Đây là mở rộng khám phá sau nhìn kết quảLightGBM, không là xác nhận độc lập. Script train_bilstm_tweedie.py; các artifact gốc giữ nguyên. Chính:RMSE3h/bias/sự kiệnmưa; kiểm traBSS/CSIprob để không đánh đổi đầu xácsuất vô thức. Không chọn giá trịp/scale bằng năm evaluation.
-

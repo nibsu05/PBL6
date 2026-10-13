@@ -89,6 +89,9 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 
 - Ưu tiên sau đánh giá khả thi: đầu lượngmưa Tweedie trên RAW, kiểm tra63ô chưa train và bỏ riêng proxy địa hình; nguồn NRT/demo archive song song. Các phép thử này chưa khởi chạy; chi tiết execution_plan.md. Đây là kết luận định hướng, chưa đổi mô hình đã train.
 
+
+**Cập nhật đợt tiếp tục tối13/10:** đã chạy xong Tweedie LightGBM,NO_TERRAIN3seed,63ôchưa train vàBi-LSTM RAW Tweedie.81kiểm tra đạt;HTTPparity36cases đạt. Demo localhost8766 cócheckpoint thật vànguồnECMWF/JAXA táchchế độ; sourceJAXA binary đang kiểmtrakết nối sau người dùng đăng ký. Gitauthor của repo đã đổi sangnibsu05+noreply theo yêu cầu; không viếtlại history đãpush. Kếtquả tổnghợpở reports/followup_danang/. Test2025 vẫn giữkín.
+
 **Đã xong (11/10/2026):**
 - Bộ đánh giá dùng chung.
 - Dữ liệu 10 trạm và bảng baseline (`reports/station_benchmark/README.md`).
