@@ -50,9 +50,10 @@ def main():
             ax.plot(sub.year,sub[metric],marker='o',color=color,label=source.replace('_',' '))
         ax.set_xticks([2021,2022,2023]);ax.set_xlabel('Năm validation lịch sử');ax.set_ylabel(metric.replace('_prob_10','').replace('_1',''))
         ax.set_title(title);ax.grid(alpha=.15)
-    axes[1].legend(fontsize=8,loc='lower left',ncol=2)
+    handles,legend_labels=axes[1].get_legend_handles_labels()
+    fig.legend(handles,legend_labels,fontsize=8,loc='lower center',bbox_to_anchor=(.5,.005),ncol=3)
     fig.suptitle('Đà Nẵng: cùng mẫu, cùng nguồn — tháng 5–10, 30 ô',fontsize=14)
-    fig.tight_layout()
+    fig.tight_layout(rect=[0,.14,1,1])
     fig.savefig(OUT/'model_comparison.png',dpi=170);fig.savefig(OUT/'model_comparison.svg');plt.close(fig)
     fig,axes=plt.subplots(1,2,figsize=(11,4.5),sharey=True)
     for ax,learner in zip(axes,['BiLSTM','LightGBM']):
