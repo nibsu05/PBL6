@@ -1,0 +1,14 @@
+{
+  "lag4_issue16": {
+    "required_files_present": 24,
+    "received_by_issue": 21,
+    "contract_passed": false
+  },
+  "lag5_issue17": {
+    "required_files_present": 24,
+    "received_by_issue": 24,
+    "contract_passed": true,
+    "candidate_issue_in_future": true
+  },
+  "caveat": "Bulk download records local receipt time, not first JAXA publication; lag5 model has not been trained or evaluated. Neither case permits AI live."
+}

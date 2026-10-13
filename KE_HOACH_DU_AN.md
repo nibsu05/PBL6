@@ -128,7 +128,7 @@ flowchart LR
 | Bi-LSTM/LightGBM Đà Nẵng | Pilot và BASE/RAW/DOMAIN 3 fold xong | `reports/pilot_bilstm_v2_93cells_3seeds/`, `reports/domain_screen_danang/` |
 | Follow-up có giả thuyết | Xong: Tweedie cây/NN, bỏ proxy địa hình, 63 ô chưa train | `reports/followup_danang/`; cùng mùa/cửa sổ và CI theo ngày |
 | Nguồn vận hành | 4 snapshot hiện tại/93 ô không biết run; **pilot ECMWF 56/56 run, 30 ô × 14 ngày đã chấm**; JAXA raw/Gauge_NRT một giờ 93/93 ô | `reports/research_rainfall/ecmwf_pilot_14d/`, `reports/followup_danang/jaxa_binary_audit.json`; chưa có đầu vào AI as-of hay điểm AI–ECMWF cùng mẫu |
-| App Đà Nẵng | Demo archive từ checkpoint, HTTP parity 36 case đạt; tab nguồn hiện cổng NRT as-of 0/24 tệp đúng giờ ở issue thử 15 UTC | `demo/domain_api.py`, `scripts/audit_jaxa_nrt_history.py`; AI live chưa bật |
+| App Đà Nẵng | Demo archive từ checkpoint, HTTP parity 36 case đạt; 24 giờ NRT raw đã kiểm. Lag4/issue16: 21/24 tệp kịp; lag5/issue17 thử trong tương lai: 24/24 | `demo/domain_api.py`, `reports/followup_danang/nrt_latency_sensitivity.json`; checkpoint lag4, AI live chưa bật |
 | Sản phẩm B TFT, hai vùng ngoài Đà Nẵng | Chưa bắt đầu | Sau MVP và kiểm định nguồn |
 
 **Lựa chọn hiện tại:** Tweedie cải thiện ước lượng mm rõ trên validation; RAW và DOMAIN chưa phân định chắc ở CSI xác suất. Không chọn model chỉ vì điểm một năm hoặc tên đặc trưng. 86 kiểm tra code đạt chứng minh pipeline chạy đúng trong phạm vi được kiểm, không chứng minh kỹ năng dự báo. Test 2025 vẫn niêm phong. Bảng năm, CI và giới hạn ở `reports/followup_danang/` và brief 14/10.
@@ -165,7 +165,7 @@ flowchart LR
 | Mốc | Việc đã có / cần làm | Cổng bằng chứng |
 | --- | --- | --- |
 | 13/10 — đã xong | BASE/RAW/DOMAIN 3 fold; Tweedie LightGBM và Bi-LSTM; NO_TERRAIN; 63 ô; demo archive | Số liệu, CI, 86 test, 36 HTTP parity; chưa mở 2025 |
-| 14–20/10 | Đã tải raw/Gauge_NRT v8 một giờ; tiếp tục ghi tối thiểu 28 giờ NRT liên tục có `first_recorded_at` (cửa sổ 24 giờ, trễ quan trắc 4 giờ), chạy `scripts/audit_jaxa_nrt_history.py` để kiểm tệp đã đến trước issue; đo latency nhiều ngày, kiểm tra lệch train→NRT và nguyên nhân popup khác binary; chốt máy luôn bật | Manifest/hash riêng tư và báo cáo QC công khai; nếu chưa đạt nguồn, giữ demo archive/ECMWF thô |
+| 14–20/10 | Đã tải/kiểm 24 tệp NRT liên tiếp, 93/93 ô hữu hạn; lag4/issue16 kịp 21/24, lag5/issue17 thử kịp 24/24. Tiếp theo chạy logger **liên tục** để đo lúc tệp mới xuất hiện (backfill không đo latency JAXA), rồi thử model lag5 trên cùng validation, kiểm tra lệch train→NRT và popup | Chỉ chọn lag/giờ phát hành khi có phân phối latency và kỹ năng lag5; checkpoint lag4 chưa dùng trực tiếp với lag5, app vẫn archive/ECMWF nguồn |
 | 21–27/10 | **Pilot nguồn ECMWF 56 run/30 ô đã xong**: 1.680 cặp đủ forecast/nhãn; CI còn rộng do 4 ngày mưa mạnh. Tiếp theo kiểm tra NRT/khí tượng đầu vào AI as-of, tăng ngày/sự kiện và mở 93 ô chỉ khi parity đạt | Bảng AI–ECMWF cùng mẫu chỉ công bố sau cổng đầu vào; `available_at` lịch sử còn là giả định bảo thủ, 2025 giữ kín |
 | Sau cổng vận hành | App AI live 6 h Đà Nẵng nếu đủ nguồn và kỹ năng; TFT 1–3 ngày, hai vùng khác theo sau | Mỗi dự báo lưu thời điểm phát hành, nguồn, version/hash; kiểm chứng sau khi nhãn đến |
 

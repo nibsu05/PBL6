@@ -1,0 +1,20 @@
+{
+  "audited_at_utc": "2026-10-13T16:03:46.031289+00:00",
+  "candidate_issue_utc": "2026-10-13T17:00:00+00:00",
+  "candidate_issue_in_future": true,
+  "actual_forecast_issued": false,
+  "required_first_interval_utc": "2026-10-12T12:00:00+00:00",
+  "required_last_interval_utc": "2026-10-13T11:00:00+00:00",
+  "required_hours": 24,
+  "observation_lag_hours": 5,
+  "available_unique_raw_hours": 24,
+  "required_files_present": 24,
+  "required_files_received_by_issue": 24,
+  "target_cells": 93,
+  "min_finite_target_cells": 93,
+  "conflicting_versions": 0,
+  "nrt_history_contract_passed": true,
+  "ready_for_ml": false,
+  "receipt_provenance": "Giờ máy nhận file; tải backlog không chứng thực giờ JAXA công bố",
+  "reason": "Cần parity NRT→train, nguồn khí tượng forecast as-of và đánh giá T-OPS trước AI live."
+}

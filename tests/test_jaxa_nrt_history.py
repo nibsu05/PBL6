@@ -17,6 +17,13 @@ class NRTHistoryGateTest(unittest.TestCase):
         rows[hours[-1].isoformat()]['recorded_at'] = issue + pd.Timedelta(minutes=2)
         _, _, present, received = coverage(rows, issue)
         self.assertEqual((present, received), (24, 23))
+        issue_next = issue + pd.Timedelta(hours=2)
+        later_hours = required_intervals(issue_next, lag_h=5)
+        self.assertEqual(later_hours[0], pd.Timestamp('2026-10-12T12:00:00Z'))
+        self.assertEqual(later_hours[-1], pd.Timestamp('2026-10-13T11:00:00Z'))
+        rows[later_hours[-1].isoformat()] = {'recorded_at': issue_next - pd.Timedelta(hours=1)}
+        _, _, present_later, received_later = coverage(rows, issue_next, latency_h=5)
+        self.assertEqual((present_later, received_later), (24, 24))
         rows.pop(hours[0].isoformat())
         _, _, present, received = coverage(rows, issue)
         self.assertEqual((present, received), (23, 22))
