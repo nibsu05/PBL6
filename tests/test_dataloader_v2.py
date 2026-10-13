@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import gc
 import tempfile
 import unittest
 from pathlib import Path
@@ -50,6 +51,8 @@ class DataloaderTest(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
+        del cls.ds
+        gc.collect()  # Windows không cho xóa file memmap còn mở.
         cls.tmp.cleanup()
 
     def test_cell_major_cube_matches_yearly_files(self) -> None:
@@ -93,6 +96,13 @@ class DataloaderTest(unittest.TestCase):
         finally:
             cube[0, 10000, 0] = 10000
             cube.flush()
+
+    def test_targets_do_not_cross_train_validation_boundary(self) -> None:
+        cfg = WindowConfig(groups=("A0",), horizon=6, latency_h=None)
+        idx = sample_index(self.ds, cfg, [2020])
+        self.assertEqual(idx[:, 1].max(), 8784 - 6)
+        last_target_year = self.ds.hours[idx[:, 1] + cfg.horizon - 1].year
+        self.assertTrue((last_target_year == 2020).all())
 
     def test_issue_hours_and_season(self) -> None:
         cfg = WindowConfig(groups=("A0",), input_len=168, horizon=72, latency_h=None, issue_stride_h=6,

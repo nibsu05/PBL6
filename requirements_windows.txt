@@ -1,0 +1,9 @@
+# Môi trường Windows đã kiểm tra trên RTX 3050 Ti, driver 546.92.
+# Cài torch CUDA trước: python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cu121
+-r requirements.txt
+torch==2.5.1
+# PyArrow 26 bị Application Control chặn DLL trên máy này; bản 18.1 nhập thành công.
+pyarrow==18.1.0
+numpy==2.2.6
+scipy==1.15.3
+scikit-learn==1.6.1

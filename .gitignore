@@ -4,6 +4,7 @@
 
 # --- Môi trường Python & Cache ---
 .venv/
+.tools/
 env/
 venv/
 .cache/
@@ -20,6 +21,7 @@ data/raw_data/era5_nc_features/
 *.nc
 *.nc.part
 *.gz
+*.tar
 *.psv
 *.sqlite
 
@@ -36,6 +38,8 @@ data/processed/gee/
 # Dataset v2: giữ manifest.json, cells.parquet, normalizers/; bỏ mảng lớn (~12 GB) và cache chỉ số
 data/processed/dataset_v2/*.npy
 data/processed/dataset_v2/index_cache/
+data/processed/dataset_v2_danang/
+data/processed/pilot_bilstm_v2*/
 
 # Giữ lại dữ liệu mẫu (Sample data) trong data/samples/
 !data/samples/

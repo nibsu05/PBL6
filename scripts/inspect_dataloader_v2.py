@@ -16,6 +16,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 import json
+import argparse
 import logging
 import time
 
@@ -52,20 +53,26 @@ def check_alignment(ds: DatasetV2, sampler: WindowSampler, index: np.ndarray, n:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--dataset-dir", type=Path, default=DATASET_DIR)
+    parser.add_argument("--out", type=Path, default=OUT)
+    args = parser.parse_args()
+    dataset_dir, out = args.dataset_dir, args.out
+    cache, norms = dataset_dir / "index_cache", dataset_dir / "normalizers"
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
-    if not (DATASET_DIR / CUBE).exists():
+    if not (dataset_dir / CUBE).exists():
         LOGGER.info("Tạo %s …", CUBE)
-        build_cell_major()
-    ds = DatasetV2()
-    NORMS.mkdir(parents=True, exist_ok=True)
-    OUT.mkdir(parents=True, exist_ok=True)
+        build_cell_major(dataset_dir)
+    ds = DatasetV2(dataset_dir)
+    norms.mkdir(parents=True, exist_ok=True)
+    out.mkdir(parents=True, exist_ok=True)
     summary = {}
     for name, cfg in CONFIGS.items():
         t0 = time.time()
-        splits = {s: sample_index(ds, cfg, years, cache_dir=CACHE) for s, years in DEFAULT_SPLIT.items()}
+        splits = {s: sample_index(ds, cfg, years, cache_dir=cache) for s, years in DEFAULT_SPLIT.items()}
         t_index = time.time() - t0
         norm = Normalizer.fit(ds, cfg, DEFAULT_SPLIT["train"])
-        norm.save(NORMS / f"{cfg.key()}.json")
+        norm.save(norms / f"{cfg.key()}.json")
         sampler = WindowSampler(ds, cfg, norm)
         rng = np.random.default_rng(0)
         train = splits["train"]
@@ -93,8 +100,10 @@ def main() -> None:
         LOGGER.info("%s: train %d · val %d · val_ops %d · test %d mẫu; %d ô; đặc trưng past/future/static = %s; "
                     "batch 256 mất %.2f s; hữu hạn=%s; lệch=%d", name, *info["samples"].values(), info["cells"],
                     tuple(info["n_features"].values()), t_batch, finite, info["alignment_mismatches_of_50"])
-    (OUT / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
-    LOGGER.info("Ghi %s", (OUT / "summary.json").relative_to(ROOT))
+    (out / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+    LOGGER.info("Ghi %s", out / "summary.json")
+    if any(not info["batch_all_finite"] or info["alignment_mismatches_of_50"] for info in summary.values()):
+        raise SystemExit("Dataloader không đạt kiểm tra hữu hạn/căn chỉnh")
 
 
 if __name__ == "__main__":

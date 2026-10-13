@@ -25,7 +25,7 @@ class GaugeCliTest(unittest.TestCase):
                            "2025-01-01T02:00:00+07:00,8\n", encoding="utf-8")
             normalized = root / "normalized"
             subprocess.run([
-                sys.executable, str(ROOT / "prepare_gauge_observations.py"),
+                sys.executable, str(ROOT / "scripts" / "prepare_gauge_observations.py"),
                 "--input", str(raw), "--station-name", "Synthetic station",
                 "--lat", "16.05", "--lon", "108.20", "--source-name", "test fixture",
                 "--source-timezone", "Asia/Ho_Chi_Minh", "--timestamp-means", "end",
@@ -48,7 +48,7 @@ class GaugeCliTest(unittest.TestCase):
             )
             out = root / "evaluation"
             subprocess.run([
-                sys.executable, str(ROOT / "evaluate_gauge_predictions.py"),
+                sys.executable, str(ROOT / "scripts" / "evaluate_gauge_predictions.py"),
                 "--observations", str(normalized / "observations.csv"),
                 "--station-metadata", str(normalized / "station_metadata.json"),
                 "--predictions", str(root / "predictions.parquet"),

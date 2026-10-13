@@ -168,7 +168,7 @@ def sample_index(ds: DatasetV2, cfg: WindowConfig, years: Iterable[int], cache_d
     years = sorted(set(int(y) for y in years))
     cache = None
     if cache_dir is not None:
-        cache = Path(cache_dir) / f"index_{cfg.key()}_{'-'.join(map(str, years))}.npy"
+        cache = Path(cache_dir) / f"index_v2_{cfg.key()}_{'-'.join(map(str, years))}.npy"
         if cache.exists():
             return np.load(cache)
     feats = cfg.feature_lists()
@@ -194,7 +194,8 @@ def sample_index(ds: DatasetV2, cfg: WindowConfig, years: Iterable[int], cache_d
             lab_ok &= block[:, perm] == 1
         valid = (_window_all(past_ok, -W, W, candidates)
                  & _window_all(fut_ok, 0, H, candidates)
-                 & _window_all(lab_ok, 0, H, candidates))
+                 & _window_all(lab_ok, 0, H, candidates)
+                 & _window_all(in_years, 0, H, candidates))
         if len(o_idx):
             obs_ok = np.isfinite(block[:, o_idx]).all(axis=1)
             valid &= _window_all(obs_ok, -W - L, W, candidates)
@@ -365,7 +366,8 @@ DEFAULT_SPLIT = {"train": tuple(range(2015, 2022)), "val": (2022, 2023), "val_op
 
 
 def product_a(groups: Sequence[str] = ("A0",), latency_h: int | None = 4, **kw) -> WindowConfig:
-    return WindowConfig(groups=tuple(groups), input_len=24, horizon=6, latency_h=latency_h, issue_stride_h=1, **kw)
+    return WindowConfig(groups=tuple(groups), input_len=24, horizon=6, latency_h=latency_h,
+                        issue_stride_h=kw.pop("issue_stride_h", 1), **kw)
 
 
 def product_b(groups: Sequence[str] = ("B0",), latency_h: int | None = 4, **kw) -> WindowConfig:

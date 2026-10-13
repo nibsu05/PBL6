@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
+from typing import Callable
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = Path(__file__).resolve().parent
 for p in (ROOT, SCRIPTS):
@@ -144,7 +145,8 @@ def node_context(field: np.ndarray, node_lat: np.ndarray, node_lon: np.ndarray) 
     return mean
 
 
-def build_year(year: int, cells: pd.DataFrame, out_mask: np.ndarray) -> dict:
+def build_year(year: int, cells: pd.DataFrame, out_mask: np.ndarray,
+               sink: Callable[[int, np.ndarray, pd.DatetimeIndex], None] | None = None) -> dict:
     hours = pd.date_range(f"{year}-01-01", f"{year + 1}-01-01", freq="h", inclusive="left")
     gs_files = files_overlapping(GSMAP_DIR, hours[0], hours[-1])
     era_files = files_overlapping(ERA5_DIR, hours[0], hours[-1] + pd.Timedelta(hours=1))
@@ -203,8 +205,11 @@ def build_year(year: int, cells: pd.DataFrame, out_mask: np.ndarray) -> dict:
         else:
             X[..., k] = tfeat[:, ["sin_hour", "cos_hour", "sin_doy", "cos_doy"].index(name)][:, None]
 
-    np.save(OUT / f"{year}.npy", X)
-    np.save(OUT / f"{year}_hours.npy", hours.values.astype("datetime64[ns]"))
+    if sink is None:
+        np.save(OUT / f"{year}.npy", X)
+        np.save(OUT / f"{year}_hours.npy", hours.values.astype("datetime64[ns]"))
+    else:
+        sink(year, X, hours)
     out_cells = cells[out_mask]
     dn = (out_cells["province"] == "Đà Nẵng").to_numpy()
     label = X[..., NAMES.index("y_gsmap_gc_mm")]
@@ -220,27 +225,58 @@ def build_year(year: int, cells: pd.DataFrame, out_mask: np.ndarray) -> dict:
 
 
 def main() -> None:
+    global OUT
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--years", nargs=2, type=int, default=[2015, 2026])
+    parser.add_argument("--out", type=Path, default=OUT, help="Thư mục dataset đầu ra")
+    parser.add_argument("--provinces", nargs="+", help="Chỉ lưu ô thuộc các tỉnh này; vẫn tính lân cận trên toàn lưới")
+    parser.add_argument("--cell-major-only", action="store_true",
+                        help="Ghi trực tiếp memmap [ô, giờ, đặc trưng], không lưu thêm mảng từng năm (~6 GB)")
     args = parser.parse_args()
+    if args.years[0] > args.years[1]:
+        parser.error("Năm bắt đầu phải <= năm kết thúc")
+    OUT = args.out
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
     OUT.mkdir(parents=True, exist_ok=True)
     cells = pd.read_parquet(STATIC).sort_values(["lat", "lon"]).reset_index(drop=True)
     out_mask = (cells["ocean_frac"] < OCEAN_MAX).to_numpy()
+    if args.provinces:
+        out_mask = out_mask & cells["province"].isin(args.provinces).to_numpy()
+    if not out_mask.any():
+        parser.error("Không có ô đất trong vùng đã chọn")
     cells[out_mask].reset_index(drop=True).to_parquet(OUT / "cells.parquet", index=False)
 
     manifest_path = OUT / "manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {"years": {}}
+    sink = None
+    cube = None
+    if args.cell_major_only:
+        # Giữ nguyên phép biến đổi; chỉ đổi đích lưu để máy ít dung lượng không cần hai bản cube.
+        hours_all = pd.date_range(f"{args.years[0]}-01-01", f"{args.years[1] + 1}-01-01",
+                                  freq="h", inclusive="left")
+        cube = np.lib.format.open_memmap(OUT / "cube_cell_major.partial.npy", mode="w+", dtype=np.float32,
+                                        shape=(int(out_mask.sum()), len(hours_all), len(NAMES)))
+        def sink(year: int, values: np.ndarray, hours: pd.DatetimeIndex) -> None:
+            start = hours_all.get_loc(hours[0])
+            cube[:, start:start + len(hours), :] = values.transpose(1, 0, 2)
+            cube.flush()
     for year in range(args.years[0], args.years[1] + 1):
         try:
-            qc = build_year(year, cells, out_mask)
+            qc = build_year(year, cells, out_mask, sink=sink)
         except FileNotFoundError as exc:
+            if args.cell_major_only:
+                raise
             LOGGER.warning("%s", exc)
             continue
         manifest["years"][str(year)] = qc
         LOGGER.info("Năm %d: %d giờ × %d ô; mưa nhãn TB Đà Nẵng %.0f mm (ERA5 %.0f mm); NaN: %s", year, qc["hours"],
                     qc["cells"], qc["danang_label_total_mm"], qc["danang_era5_tp_total_mm"],
                     {k: v for k, v in qc["nan_frac"].items() if v > 0.001})
+    if args.cell_major_only:
+        cube.flush()
+        del cube
+        (OUT / "cube_cell_major.partial.npy").replace(OUT / "cube_cell_major.npy")
+        np.save(OUT / "hours_all.npy", hours_all.values.astype("datetime64[ns]"))
     try:
         commit = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, capture_output=True, text=True).stdout.strip()
     except OSError:
@@ -250,6 +286,7 @@ def main() -> None:
         "time_convention": "hàng t = khoảng [t, t+1h) UTC; biến tức thời ERA5 lấy tại t; mưa ERA5 dịch từ mốc t+1h",
         "label": "y_gsmap_gc_mm (GSMaP v8 hiệu chỉnh trạm, quyết định Cổng 1 ngày 11/10/2026)",
         "cells": f"{int(out_mask.sum())} ô đất (tỷ lệ biển < {OCEAN_MAX}) trong hộp 14,6–16,5°B × 107–109°Đ",
+        "selected_provinces": args.provinces,
         "features": [{"name": n, "unit": u, "group": g, "description": d} for n, u, g, d in FEATURES],
     })
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")

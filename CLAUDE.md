@@ -1,7 +1,7 @@
 # PBL6 – Dự báo mưa: bối cảnh cho agent
 
 > **Đọc file này trước khi làm bất cứ việc gì.** Kế hoạch chi tiết, kèm số liệu bằng chứng, nằm ở
-> [`project_plan_v2.md`](project_plan_v2.md); đó là nguồn sự thật. Cập nhật lần cuối: 11/10/2026.
+> [`project_plan_v2.md`](project_plan_v2.md); đó là nguồn sự thật. Cập nhật lần cuối: 13/10/2026.
 > **Kế hoạch dành cho nhóm** (quy trình, giai đoạn hiện tại, lộ trình, phân công) nằm ở [`KE_HOACH_DU_AN.md`](KE_HOACH_DU_AN.md). Mỗi khi xong một giai đoạn hoặc chốt một quyết định, cập nhật các mục 4 và 6 của file đó.
 > `project_master_plan.md`, `SURFACE_BASELINE_REPORT.md`, `DATA_GAP_PLAN.md` và `reports/informer_baseline_report.md`
 > là tài liệu cũ, do agent khác viết. Chỉ dùng chúng để tham khảo lịch sử. Một số nhận định trong đó đã bị bác bỏ (xem mục "Quyết định").
@@ -14,6 +14,7 @@
 - Máy:
   - MacBook M2 8 GB RAM: lưu dữ liệu, viết code, chạy pilot.
   - Máy nhóm có RTX 4060 8 GB: chạy huấn luyện dài.
+  - Máy Windows đang thiết lập ngày 13/10/2026: RTX 3050 Ti Laptop 4 GB, driver 546.92; ổ C ít dung lượng. Python Windows ở `.venv\Scripts\python.exe` (không dùng Python MSYS2 có sẵn).
 - Repo `nibsu05/PBL6` là **repo công khai**. Không commit dữ liệu, file PDF bài báo hay thông tin đăng nhập.
 
 ## Bài toán (đã chốt)
@@ -66,11 +67,12 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
    - "Informer vượt Bi-LSTM 21 %": hai mô hình được chấm trên tập test khác nhau.
    - "IMERG trễ 29 h nên không dùng được làm đầu vào": IMERG Early lấy trực tiếp từ NASA chỉ trễ khoảng 4 h.
    - "Previous Runs có CAPE": thực tế các trường này rỗng.
+8. **Phạm vi và cách làm việc chốt ngày 13/10/2026:** tập trung nghiên cứu và thử nghiệm Đà Nẵng trước; chưa chọn vùng phía nam. Nhóm 3 người, chưa phân vai; ưu tiên đầu ra kiểm chứng được hằng tuần, không dùng hạn nộp giả định làm ràng buộc. Phân vai ở kế hoạch mục 7 chỉ là đề xuất.
 
 ## Còn chờ chốt (hỏi người dùng trước khi làm phần liên quan)
 
 1. Hai vùng kiểm tra: Hà Nội, cùng TP.HCM **hoặc** Đắk Lắk.
-2. Hạn nộp bài (đang giả định cuối 12/2026) và số người trong nhóm.
+2. Phân vai cụ thể cho 3 thành viên. Người dùng ưu tiên tiến độ hằng tuần; chưa cần chốt hạn nộp để chạy thí nghiệm Đà Nẵng.
 
 ## Trạng thái và việc tiếp theo
 
@@ -80,6 +82,14 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 - Thí nghiệm 0.
 - Dataset v2: 296 ô đất, trong đó 214 ô thuộc Việt Nam (93 Đà Nẵng, 85 Quảng Ngãi, 32 Huế, 4 ô giáp ranh); giai đoạn 2015 → 09/2026; 51 đặc trưng.
 - Dataloader.
+
+**Thiết lập máy Windows (13/10/2026, đang thực hiện):**
+- Đã khôi phục dữ liệu và xác minh **2233/2233 file khớp, thiếu 0, sai 0**; xóa bản tar sau verify theo đồng ý của người dùng để thu hồi dung lượng. Nguồn vẫn trên Drive.
+- GitHub đã đăng nhập bằng `gh auth login --web`, thông tin đăng nhập lưu trong keyring.
+- Python Windows 3.12.15; PyTorch 2.5.1+cu121; CUDA nhận RTX 3050 Ti và phép nhân ma trận GPU hữu hạn. `requirements_windows.txt` giữ các phiên bản tương thích.
+- Chuẩn bị dataset riêng `data/processed/dataset_v2_danang/` với 93 ô Đà Nẵng, ghi memmap trực tiếp để tránh lưu hai bản mảng. Chưa ghi nhận inspect/pilot hoàn tất khi chưa có kết quả thực tế.
+- Sửa dataloader loại cửa sổ có nhãn vượt ranh giới năm train/validation; đổi phiên bản cache để không tái dùng chỉ số cũ.
+- Pilot dùng chung cửa sổ của S4 cho S0/S1/S4, 30 ô chọn theo địa hình/khoảng cách biển, 2 seed. Train 2015–2021; chọn epoch và hiệu chỉnh xác suất ở 2022; so cặp ở 2023. **Không chấm mô hình trên test 2025 trong pilot.**
 
 **Tiếp theo, theo thứ tự:**
 0. *(Ưu tiên, làm song song)* Bật ghi log live trên một máy chạy liên tục: dự báo ECMWF cho các ô Đà Nẵng và quan trắc GSMaP NRT/IMERG. Mùa mưa đang diễn ra, nên mỗi tuần chậm là mất một tuần dữ liệu để kiểm định thật.

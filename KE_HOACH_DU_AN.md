@@ -2,7 +2,7 @@
 
 > **Dành cho các thành viên trong nhóm.** File này trả lời bốn câu hỏi: dự án làm gì, quy trình ra sao, đang ở giai đoạn nào, và mỗi người cần làm gì tiếp theo.
 > Chi tiết kỹ thuật và số liệu đầy đủ nằm ở [`project_plan_v2.md`](project_plan_v2.md). Bối cảnh dành cho AI agent nằm ở [`CLAUDE.md`](CLAUDE.md).
-> **Cập nhật:** 11/10/2026. Khi chuyển sang giai đoạn mới hoặc chốt một quyết định, hãy sửa mục 4, mục 6 và ngày cập nhật.
+> **Cập nhật:** 13/10/2026. Khi chuyển sang giai đoạn mới hoặc chốt một quyết định, hãy sửa mục 4, mục 6 và ngày cập nhật.
 
 ---
 
@@ -14,8 +14,8 @@
 - **Câu hỏi nghiên cứu:** nhóm thông tin nào (quan trắc vệ tinh, độ bất ổn định, dòng ẩm, dự báo số…) giúp mô hình AI **vượt dự báo số ECMWF** ở hạn nào và mùa nào?
 - **Đang ở đâu:** **phần dữ liệu và bộ đánh giá đã xong**. Phần này vốn là phần khó và rủi ro nhất, và đã xong sớm khoảng 1 tuần so với lộ trình. **Bước tiếp theo là huấn luyện**, bắt đầu bằng một pilot Bi-LSTM.
 - **Việc cần làm ngay:**
-  1. Chọn vùng kiểm tra phía nam.
-  2. Phân vai trong nhóm.
+  1. Tập trung thí nghiệm tại Đà Nẵng trước; vùng phía nam chưa chốt.
+  2. Phân vai cho 3 thành viên (đề xuất ở mục 7).
   3. Chạy pilot Bi-LSTM.
   4. Bật ghi log dự báo live, vì mùa mưa đang diễn ra.
 
@@ -131,7 +131,7 @@ flowchart LR
 | 0. Khảo sát và quyết định | 1 | ✅ Xong (còn 2 câu hỏi nhỏ, xem mục 8) | `project_plan_v2.md` |
 | 1. Dữ liệu và bộ đánh giá | 1–2 | ✅ **Xong** | Dataset v2, dataloader, bảng baseline ở `reports/station_benchmark/README.md` |
 | 2. Baseline trên lưới | 2 | ⏳ Tiếp theo | — |
-| 3. Sản phẩm A: Bi-LSTM | 3–4 | ⏳ Tiếp theo (pilot trước) | — |
+| 3. Sản phẩm A: Bi-LSTM | 3–4 | 🔄 Đang chuẩn bị pilot trên Windows | Dữ liệu nguồn verify 2233/2233; PyTorch CUDA nhận RTX 3050 Ti 4 GB; chuẩn bị S0/S1/S4 |
 | 4. Sản phẩm B: TFT | 5–6 | Chưa bắt đầu | — |
 | 5. Đánh giá vận hành thật và độ bền | 7 | Chưa bắt đầu | — |
 | 6. Mở rộng 2 vùng | 8 | Chưa bắt đầu | — |
@@ -139,6 +139,8 @@ flowchart LR
 | 8. Báo cáo và bảo vệ | Viết song song từ tuần 2 | Chưa bắt đầu | — |
 
 ### Những gì đã có trong tay
+
+**Cập nhật máy mới 13/10:** đã khôi phục và xác minh dữ liệu nguồn; đã đăng nhập GitHub bằng gh; CUDA hoạt động. Do ổ C ít dung lượng, chuẩn bị dataset riêng 93 ô Đà Nẵng bằng `--cell-major-only`. Lỗi cửa sổ nhãn vượt ranh giới năm train/validation đã được sửa; **57 kiểm tra đạt** trên Windows. Inspect và kết quả pilot sẽ được ghi khi kiểm tra/chạy xong. Đang xác nhận USB đích trước khi sao chép repo.
 
 - **Nhãn mưa** đã được chọn bằng cách đối chiếu với 10 trạm đo thật (xem mục 5).
 - **Dataset v2:** 296 ô, mỗi giờ từ 2015 đến 09/2026, 51 đặc trưng. Đã kiểm tra chất lượng; dữ liệu thiếu dưới 0,2 %.
@@ -177,11 +179,11 @@ flowchart LR
 
 ## 6. Lộ trình các tuần tới
 
-Giả định nộp bài cuối tháng 12/2026. Nếu hạn khác, co giãn các tuần 8–10.
+Người dùng ưu tiên có đầu ra mới mỗi tuần; hạn nộp chưa phải ràng buộc (chốt 13/10/2026). Các mốc dưới đây là tham khảo, điều chỉnh theo bằng chứng từ thí nghiệm; tập trung Đà Nẵng trước khi mở rộng vùng.
 
 | Tuần | Thời gian | Việc chính | Đầu ra / cổng kiểm soát |
 | --- | --- | --- | --- |
-| 1–2 | 12–25/10 | **Đã xong:** dữ liệu, bộ đánh giá, dataloader. **Còn lại:** baseline trên lưới (khí hậu, persistence, ECMWF/ERA5 thô, LightGBM); pilot Bi-LSTM; bật ghi log live; tải dự báo ECMWF lưu trữ cho T-OPS | Bảng mức sàn trên lưới; pilot cho thấy có phân biệt được các cấu hình không |
+| 1–2 | 12–25/10 | **Đã xong:** dữ liệu nguồn verify 2233/2233 trên máy Windows, bộ đánh giá; cài CUDA. **Đang làm:** dataset Đà Nẵng và pilot S0/S1/S4 (2 seed), so cặp validation 2023. **Còn lại:** baseline trên lưới, ghi log live, ECMWF T-OPS | Inspect: 0 mẫu lệch, batch hữu hạn; báo cáo pilot kèm bootstrap 95 %, không chọn mô hình trên test 2025 |
 | 3–4 | 26/10–08/11 | Bi-LSTM: ablation A0–A5 (3 seed), thí nghiệm độ trễ, đánh giá tách mùa | Cổng 3: Bi-LSTM có vượt ECMWF thô và persistence không? |
 | 5–6 | 09–22/11 | TFT: cài đặt, ablation B0–B5; DLinear; Informer một cấu hình; bảng 2×2 Bi-LSTM với TFT | Cổng 4: TFT có vượt ECMWF và ECMWF + hiệu chỉnh không? |
 | 7 | 23–29/11 | Đánh giá với đầu vào dự báo thật (T-OPS); chọn cấu hình cho app; mở tập test 2025 | Đóng băng kết quả chính |
@@ -203,6 +205,16 @@ Những thứ bỏ trước tiên nếu phải cắt: nhóm bối cảnh vùng, 
 
 ## 7. Phân công gợi ý
 
+**Nhóm có 3 người, chưa chốt phân vai (13/10/2026).** Mỗi người vẫn nghiên cứu toàn bộ, nhưng nên có một người chịu trách nhiệm chính cho từng đầu ra:
+
+| Thành viên (tạm gọi) | Trách nhiệm chính | Người phản biện |
+| --- | --- | --- |
+| 1 | Dữ liệu, baseline, chống rò rỉ, bootstrap và tổng hợp kết quả | 2 |
+| 2 | Bi-LSTM trước; TFT sau; checkpoint, cấu hình và nhật ký huấn luyện | 3 |
+| 3 | Ghi log live, đầu vào ECMWF/vệ tinh, pipeline suy luận và app | 1 |
+
+Cuối mỗi tuần, cả nhóm đọc cùng bảng kết quả và chốt một việc cần giải quyết tiếp. Người phụ trách ghi bằng chứng, cập nhật mục 4/6 và `CLAUDE.md`, rồi commit/push code và báo cáo; dữ liệu và checkpoint thử nghiệm giữ ngoài Git. Đây là đề xuất, chưa gán tên người.
+
 Mọi người dùng chung `src/dataloader_v2.py` (dữ liệu vào) và `src/verification.py` (chấm điểm), nên phần việc của từng người ghép lại được với nhau.
 
 | Mảng | Việc | Cần từ người khác | Giao cho người khác |
@@ -220,7 +232,7 @@ Máy huấn luyện chính là **máy có RTX 4060**. Máy Mac 8 GB dùng để 
 ## 8. Câu hỏi còn mở
 
 1. Vùng kiểm tra phía nam: **TP.HCM** (mưa nhiệt đới đồng bằng) hay **Đắk Lắk** (mưa dông Tây Nguyên)? Vùng phía bắc là Hà Nội.
-2. Hạn nộp bài chính xác và phân vai cụ thể (điền vào bảng ở mục 7).
+2. Phân vai cụ thể cho 3 thành viên (điền tên ở mục 7). Hạn nộp chưa phải ràng buộc; ưu tiên kết quả mỗi tuần.
 
 ---
 
@@ -242,6 +254,20 @@ tar -xf pbl6_data_v2_2026-10-11.tar                 # đặt file tar ở thư m
 ```
 
 Trên máy có GPU NVIDIA, cài PyTorch bản CUDA theo hướng dẫn tại pytorch.org. Ví dụ: `pip install torch --index-url https://download.pytorch.org/whl/cu124`.
+
+**Windows RTX 3050 Ti, driver 546.92 (đã kiểm tra 13/10/2026):** dùng Python Windows, tránh bản MSYS2 trong PATH. Trong `.venv` cài `torch==2.5.1` từ index `cu121`, rồi cài `requirements_windows.txt`. Các phiên bản NumPy/SciPy/scikit-learn/PyArrow được giữ cố định vì DLL của một số bản mới bị Application Control trên máy này chặn.
+
+```powershell
+.venv\Scripts\python.exe -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cu121
+.venv\Scripts\python.exe -m pip install -r requirements_windows.txt
+.venv\Scripts\python.exe scripts/package_data.py verify
+# Chỉ lưu 93 ô Đà Nẵng, vẫn tính lân cận từ toàn bộ lưới nguồn:
+.venv\Scripts\python.exe scripts/build_dataset_v2.py --years 2015 2026 --cell-major-only --provinces "Đà Nẵng" --out data/processed/dataset_v2_danang
+.venv\Scripts\python.exe scripts/inspect_dataloader_v2.py --dataset-dir data/processed/dataset_v2_danang --out reports/dataloader_v2_danang
+.venv\Scripts\python.exe scripts/pilot_bilstm_v2.py --dataset-dir data/processed/dataset_v2_danang
+```
+
+Pilot có 30 ô, bước trượt 6 h, seed 42/43; tối đa 15 epoch, mỗi epoch 30.000 cửa sổ, early stopping patience 4. Chọn epoch/hiệu chỉnh xác suất trên 2022, so cặp trên 2023; chỉ số chính tổng 3 h trên tháng 5–10, mùa đông chỉ tổng 6 h. ERA5 trong báo cáo pilot là tham chiếu perfect prog, chưa thay thế kiểm định với ECMWF thật. Không chấm mô hình trên test 2025 ở bước này.
 
 ## 10. Quy tắc làm việc chung
 
