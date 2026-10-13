@@ -1,0 +1,16 @@
+{
+  "retrieved_at_utc": "2026-10-13T15:19:49.217735+00:00",
+  "sha256": "bac12b4b5dfcd9bc48e24d2b15dcfe45df3f222261f4208f8697210efae47458",
+  "requested_lat": 16.05,
+  "requested_lon": 108.15,
+  "run_init_utc": "2024-10-01T00:00:00+00:00",
+  "hours": 48,
+  "finite_precip_hours": 47,
+  "unit": "mm",
+  "run_initialisation_known": true,
+  "actual_available_at_known": false,
+  "grid_cells_collected": 1,
+  "evaluation_year_2024_collected": false,
+  "ready_for_tops_comparison": false,
+  "source_documentation": "https://open-meteo.com/en/docs/single-runs-api"
+}

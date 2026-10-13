@@ -2,11 +2,11 @@
   "source": "JAXA Global Rainfall Watch public point display",
   "product_mode": "NRT",
   "algorithm_version": "not_attested_by_point_response",
-  "retrieved_at_utc": "2026-10-13T14:58:30.855591+00:00",
+  "retrieved_at_utc": "2026-10-13T15:02:30.121399+00:00",
   "ready_for_ml": false,
-  "latency_from_interval_end_h": 4.9752376641666665,
-  "point_url": "https://sharaku.eorc.jaxa.jp/cgi-bin/trmm/GSMaP/tilemap/pick.cgi?prod=rain&ymd=202610130900&lat=16.05&lon=108.15",
-  "mode_url": "https://sharaku.eorc.jaxa.jp/GSMaP/map_data/mode/2026/gsmap_mode.20261013.0900.txt",
-  "html_sha256": "56542e536d3785f09531d22242a8d2c28eedf3df2e442dd5a198234d4d938f91",
+  "latency_from_interval_end_h": 4.041700388611111,
+  "point_url": "https://sharaku.eorc.jaxa.jp/cgi-bin/trmm/GSMaP/tilemap/pick.cgi?prod=rain&ymd=202610131000&lat=16.05&lon=108.15",
+  "mode_url": "https://sharaku.eorc.jaxa.jp/GSMaP/map_data/mode/2026/gsmap_mode.20261013.1000.txt",
+  "html_sha256": "6512e0d718116ef137e1ae3b9c25c295ce5b60dfeb5047e65ea7a52acdb35e4e",
   "mode_sha256": "d8b0f538b21e9df695df69eaad056199de6f0c287a3c595d577b96e0faa3c676"
 }

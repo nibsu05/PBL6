@@ -1,0 +1,33 @@
+{
+  "audited_at_utc": "2026-10-13T15:11:40.065102+00:00",
+  "interval_start_utc": "2026-10-13T10:00:00+00:00",
+  "interval_end_utc": "2026-10-13T11:00:00+00:00",
+  "official_format": "1200x3600 float32 little-endian, 0.1 degree; NW centre 59.95N,0.05E",
+  "official_format_url": "https://sharaku.eorc.jaxa.jp/GSMaP/document/new/DataFormatDescription_NRT8.pdf",
+  "raw_file": "gsmap_nrt.20261013.1000.dat.gz",
+  "raw_sha256": "4cc59a90af63efe13604104125fca0e3e5d727c1a3001878538e86d8618a7ad2",
+  "gauge_file": "gsmap_gauge.20261013.1000.dat.gz",
+  "gauge_sha256": "90404b10e7d5246c115534cf1e70fe57f0991aec944c67f4d8874b3c733a439b",
+  "context_cells": 296,
+  "danang_cells": 93,
+  "raw_finite_cells": 93,
+  "gauge_finite_cells": 93,
+  "raw_wet_cells": 64,
+  "gauge_wet_cells": 69,
+  "raw_gauge_corr_93": 0.9980036356161355,
+  "raw_gauge_mae_mm_h_93": 0.14807406067848206,
+  "public_popup_samples": 4,
+  "public_popup_nonzero_raw_samples": 3,
+  "popup_raw_matches_within_0p01": 1,
+  "popup_gauge_matches_within_0p01": 1,
+  "popup_raw_max_abs_diff_mm_h": 11.786463699340821,
+  "popup_gauge_max_abs_diff_mm_h": 12.070675811767579,
+  "popup_algorithm_version_attested": false,
+  "numeric_mismatch_cause": "unresolved",
+  "ready_for_ml": false,
+  "blockers": [
+    "Need at least 28h continuous as-of NRT history (24h window plus 4h lag) and measured latency",
+    "Need archived raw/MVK to NRT input-shift test and ECMWF T-OPS",
+    "Public map point display differs from both FTP binary fields at all three rainy sample cells"
+  ]
+}

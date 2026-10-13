@@ -16,11 +16,11 @@
    - Cố định kiến trúc, chỉ thêm hoặc bớt nhóm đặc trưng (cả cộng dồn lẫn bỏ từng nhóm).
    - Chạy ít nhất 3 seed, dùng cùng một tập test, kiểm định bằng bootstrap khối.
    - Luôn kèm thang baseline: khí hậu, persistence, ECMWF thô, LightGBM, DLinear.
-7. **Đánh giá theo hai chế độ đầu vào:**
+7. **Đánh giá theo hai chế độ đầu vào; so mô hình cùng dữ liệu và so thêm đối chứng ECMWF:**
    - **T-ERA5:** đầu vào là tái phân tích.
    - **T-OPS:** đầu vào là dự báo thật đã lưu trữ (ECMWF Single Runs, có từ 03/2024).
 
-   Test cuối là năm 2025. Kiểm định trên tương lai thật bằng cách cho app chạy **ngay từ tuần này**, qua mùa mưa 10–12/2026.
+   Test cuối là năm 2025. ERA5 là tái phân tích của thời tiết đã qua; đối chứng ECMWF là **bản IFS được phát hành cho tương lai tại thời điểm dự báo**, lấy lại từ [Single Runs archive](https://open-meteo.com/en/docs/single-runs-api), không phải ERA5. `run` chỉ là giờ khởi tạo và thường cần 4–6 giờ mới có kết quả; T-OPS phải chặn theo giờ thật sự có sẵn trước `issue_at`, không chỉ `run ≤ issue_at`. Kiểm định trên tương lai thật bằng cách cho app chạy qua mùa mưa 10–12/2026.
 8. **Kiểm chứng độc lập không có Vrain:** dùng 10 trạm synop NOAA GSOD đạt kiểm soát chất lượng, giai đoạn 2015 → 24/08/2025. Mức sàn đã đo ở mục 1.7.
 9. **Phạm vi chia tầng:**
    - **MVP:** Đà Nẵng mới, khoảng 100 ô.
@@ -74,7 +74,7 @@ Audit nhãn theo mùa và nguồn forecast 93 ô đã chạy;API checkpoint ch�
 
 FULL DOMAIN−NO_TERRAIN CSI xác suất ≥10 tăng mô tả 0,025/0,009/0,051, CI từng năm chứa 0. Trên 63 ô chưa train DOMAIN−RAW +0,042/−0,003/+0,029, CI cũng chứa 0. Do đó câu chuyện địa hình là giả thuyết có kiểm tra, chưa là phát hiện chắc chắn. File chính ở `reports/followup_danang/`.
 
-Demo archive `demo/domain_api.py` và `demo/research.html` dùng checkpoint thật, 36 kiểm tra parity qua HTTP đạt. FTP JAXA tới được qua cổng 21 nhưng không hỗ trợ FTPS; binary NRT v8 chưa tải/xác minh đăng nhập. T-OPS và so ECMWF cùng mẫu là cổng bắt buộc trước AI live. Test 2025 còn niêm phong.
+Demo archive `demo/domain_api.py` và `demo/research.html` dùng checkpoint thật, 36 kiểm tra parity qua HTTP đạt. Đã xác minh JAXA FTP và tải raw/Gauge_NRT v8 cùng giờ 10 UTC 13/10; hash/format đúng, raw 93/93 ô hữu hạn. Raw/Gauge tương quan 0,998 trên Đà Nẵng nhưng popup web khác cả hai ở ba ô có mưa; chưa rõ nguyên nhân, popup không được dùng làm nhãn/đầu vào. Cần lịch sử NRT theo giờ, kiểm tra dịch chuyển MVK/raw→NRT và T-OPS/ECMWF cùng mẫu trước AI live. Tình trạng ECMWF thực tế: 4 snapshot hiện tại cho 93 ô không có `run_init`; baseline trạm/ngày 1–5 ngày không phải đối chứng cho Bi-LSTM 0–6 h. Một probe Single Runs 2024 ở 1 điểm trả 47/48 giờ mưa; **chưa thu bộ run 2024 trên 93 ô, chưa có điểm so cùng mẫu**. Checkpoint domain hiện dùng ERA5 hồi cứu và GSMaP raw lưu trữ nên không thể gắn điểm 2021–2023 với ECMWF như kiểm định vận hành. Test 2025 còn niêm phong.
 
 ## 1. Hiện trạng và bằng chứng
 

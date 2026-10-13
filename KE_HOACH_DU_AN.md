@@ -13,7 +13,7 @@
   - **Sản phẩm B**, 1–3 ngày tới, dùng **TFT** (Temporal Fusion Transformer).
 - **Câu hỏi nghiên cứu:** nhóm thông tin nào (quan trắc vệ tinh, độ bất ổn định, dòng ẩm, dự báo số…) giúp mô hình AI **vượt dự báo số ECMWF** ở hạn nào và mùa nào?
 - **Đang ở đâu:** dữ liệu, bộ đánh giá, pilot và bốn phép thử follow-up tại Đà Nẵng đã hoàn tất; demo archive từ checkpoint thật hoạt động. Chưa có dự báo AI live hay kết luận vượt ECMWF.
-- **Việc cần làm ngay:** xác minh/tải GSMaP NRT v8, ghi nguồn liên tục, kiểm định cùng ECMWF trên forecast thật; giữ kết quả Tweedie và domain làm ứng viên. Xem mục 4 và 6.
+- **Việc cần làm ngay:** đã tải và giải mã một giờ GSMaP raw/Gauge_NRT v8; tiếp tục ghi nguồn liên tục, kiểm tra lệch giữa NRT và dữ liệu train, rồi so ECMWF trên forecast thật. Xem mục 4 và 6.
 
 ---
 
@@ -42,7 +42,7 @@ Về tên gọi: theo Thông tư 08/2022, hạn 1–3 ngày là **hạn ngắn**
 
 ### 2.3. Điều mà kết quả phải chứng minh
 
-Đối thủ chính là **dự báo số ECMWF**, không phải các mô hình AI khác. Đồ án trả lời 4 câu hỏi:
+Đồ án làm **hai phép so bổ sung cho nhau**: (1) Bi-LSTM/LightGBM/TFT và các nhóm đặc trưng trên cùng dữ liệu để hiểu yếu tố nào giúp; (2) cấu hình được chọn so với **dự báo ECMWF thô/hiệu chỉnh** trên cùng ô, cùng giờ, cùng nhãn để đo giá trị thêm cho app. ERA5 là tái phân tích của thời tiết đã qua, dùng trong thí nghiệm hồi cứu; ECMWF IFS Single Runs là các **bản dự báo đã phát hành trong quá khứ**, vẫn dự báo tương lai so với thời điểm phát hành đó. Thư viện [Single Runs](https://open-meteo.com/en/docs/single-runs-api) giữ từng lần chạy riêng từ 03/2024. Mốc `run` là giờ khởi tạo, chưa phải giờ bản dự báo đã sẵn có; kiểm định T-OPS phải bảo đảm `available_at ≤ issue_at` (hoặc dùng độ trễ bảo thủ và kiểm tra độ nhạy), rồi mới so cùng mẫu. Phép so này chưa hoàn tất; không diễn giải điểm validation 2021–2023 là đã thắng ECMWF. Đồ án trả lời 4 câu hỏi:
 1. Nhóm thông tin nào quyết định ở hạn nào, mùa nào?
 2. AI có thêm giá trị so với ECMWF không?
 3. Lợi ích đó còn giữ được khi chạy với dữ liệu thật không (đánh giá T-OPS)?
@@ -127,11 +127,11 @@ flowchart LR
 | Dữ liệu và đánh giá | Xong | Verify 2233/2233, dataloader 0 mẫu lệch; `reports/station_benchmark/` |
 | Bi-LSTM/LightGBM Đà Nẵng | Pilot và BASE/RAW/DOMAIN 3 fold xong | `reports/pilot_bilstm_v2_93cells_3seeds/`, `reports/domain_screen_danang/` |
 | Follow-up có giả thuyết | Xong: Tweedie cây/NN, bỏ proxy địa hình, 63 ô chưa train | `reports/followup_danang/`; cùng mùa/cửa sổ và CI theo ngày |
-| Nguồn vận hành | Forecast snapshot 93/93 ô; JAXA FTP cổng 21 tới được, FTPS không hỗ trợ | `reports/followup_danang/nrt_access_status.json`; binary NRT và T-OPS còn chờ |
+| Nguồn vận hành | 4 snapshot forecast 93/93 ô, chưa biết run khởi tạo; 1 probe Single Runs 2024 tại 1 điểm trả 47/48 giờ mưa; JAXA raw/Gauge_NRT một giờ 93/93 ô | `reports/research_rainfall/ecmwf_single_run_probe.json`, `reports/followup_danang/jaxa_binary_audit.json`; **chưa có** bộ 2024/93 ô hay điểm AI–ECMWF cùng mẫu |
 | App Đà Nẵng | Demo archive từ checkpoint, HTTP parity 36 case đạt | `demo/domain_api.py`, `demo/research.html`; AI live chưa bật |
 | Sản phẩm B TFT, hai vùng ngoài Đà Nẵng | Chưa bắt đầu | Sau MVP và kiểm định nguồn |
 
-**Lựa chọn hiện tại:** Tweedie cải thiện ước lượng mm rõ trên validation; RAW và DOMAIN chưa phân định chắc ở CSI xác suất. Không chọn model chỉ vì điểm một năm hoặc tên đặc trưng. 81 kiểm tra code đạt chứng minh pipeline chạy đúng trong phạm vi được kiểm, không chứng minh kỹ năng dự báo. Test 2025 vẫn niêm phong. Bảng năm, CI và giới hạn ở `reports/followup_danang/` và brief 14/10.
+**Lựa chọn hiện tại:** Tweedie cải thiện ước lượng mm rõ trên validation; RAW và DOMAIN chưa phân định chắc ở CSI xác suất. Không chọn model chỉ vì điểm một năm hoặc tên đặc trưng. 83 kiểm tra code đạt chứng minh pipeline chạy đúng trong phạm vi được kiểm, không chứng minh kỹ năng dự báo. Test 2025 vẫn niêm phong. Bảng năm, CI và giới hạn ở `reports/followup_danang/` và brief 14/10.
 
 ## 5. Kết quả quan trọng đến nay (để hiểu vì sao làm như vậy)
 
@@ -164,14 +164,14 @@ flowchart LR
 
 | Mốc | Việc đã có / cần làm | Cổng bằng chứng |
 | --- | --- | --- |
-| 13/10 — đã xong | BASE/RAW/DOMAIN 3 fold; Tweedie LightGBM và Bi-LSTM; NO_TERRAIN; 63 ô; demo archive | Số liệu, CI, 81 test, 36 HTTP parity; chưa mở 2025 |
-| 14–20/10 | Nhập credential JAXA trong terminal riêng, kiểm tra login rồi tải một binary NRT v8; đo latency/version/schema, đối chiếu train; chốt máy ghi liên tục | File NRT thật và manifest riêng tư, báo cáo không có secret; nếu nguồn thiếu, giữ demo archive/ECMWF thô |
-| 21–27/10 | Dựng T-OPS 2024 theo `issued_at ≤ issue`, đối chiếu ECMWF thô/hiệu chỉnh và RAW/DOMAIN/Tweedie cùng mẫu; kiểm tra parity đầu vào | Bảng kỹ năng theo mùa, CI và nguồn; quyết định ứng viên app trước khi mở test 2025 |
+| 13/10 — đã xong | BASE/RAW/DOMAIN 3 fold; Tweedie LightGBM và Bi-LSTM; NO_TERRAIN; 63 ô; demo archive | Số liệu, CI, 83 test, 36 HTTP parity; chưa mở 2025 |
+| 14–20/10 | Đã tải raw/Gauge_NRT v8 một giờ; tiếp tục ghi tối thiểu 28 giờ NRT liên tục có `first_recorded_at` (cửa sổ 24 giờ, trễ quan trắc 4 giờ), đo latency nhiều ngày, kiểm tra lệch train→NRT và nguyên nhân popup khác binary; chốt máy luôn bật | Manifest/hash riêng tư và báo cáo QC công khai; nếu chưa đạt nguồn, giữ demo archive/ECMWF thô |
+| 21–27/10 | Thí điểm 14 ngày cố định tháng 10/2024 trên 30 ô: Single Runs ECMWF, nhãn GC và nguồn AI as-of; chặn giờ run và dùng mốc sẵn có bảo thủ (theo tài liệu thường trễ 4–6 h), ghi bất định trước `issue_at`. Chỉ mở rộng 93 ô/mùa 5–10 nếu completeness/parity đạt | Bảng tỷ lệ thiếu, xuất xứ và kỹ năng cùng mẫu; điểm AI–ECMWF chỉ công bố khi đầu vào AI vận hành hợp lệ; 2025 giữ kín |
 | Sau cổng vận hành | App AI live 6 h Đà Nẵng nếu đủ nguồn và kỹ năng; TFT 1–3 ngày, hai vùng khác theo sau | Mỗi dự báo lưu thời điểm phát hành, nguồn, version/hash; kiểm chứng sau khi nhãn đến |
 
 Tweedie LightGBM giảm RMSE 3 h tháng 5–10 cả ba năm so đầu L1(log), nhưng không thay đầu xác suất. Tweedie Bi-LSTM cũng giảm RMSE cả ba năm, song BSS ≥1 năm 2022 giảm từ 0,186 xuống 0,148. DOMAIN cải thiện CSI ở hai năm nhưng CI chứa 0; kết quả bỏ proxy và 63 ô chưa train không xác nhận chắc. Vì vậy giữ nhiều ứng viên có lý do, chưa quảng cáo một cấu hình thắng mọi chỉ số.
 
-JAXA FTP cổng 21 hoạt động nhưng trả 504 cho FTPS. `scripts/fetch_gsmap_nrt.py --check-only --allow-plain-ftp` cần nhập UID/password **trong terminal tương tác**, không đưa vào chat, lệnh, file hay Git. Script chỉ dùng FTP thường khi có cờ rõ ràng. Demo ở `http://127.0.0.1:8766/` đang là archive validation và ECMWF thô; chưa có AI live. Logger forecast trước đó có thời hạn, chưa được cài chạy vĩnh viễn. Nhóm nên chốt máy luôn bật trong tuần này.
+JAXA FTP cổng 21 hoạt động nhưng trả 504 cho FTPS; đăng nhập và tải raw/Gauge_NRT v8 thành công bằng prompt terminal. Script chỉ dùng FTP thường khi có `--allow-plain-ftp`; không đưa UID/password vào lệnh, file hay Git. Một tệp lúc 10 UTC ngày 13/10 đã qua SHA-256, định dạng và 93/93 ô; raw/Gauge tương quan 0,998 nhưng popup web không khớp 3/3 ô có mưa, chưa rõ lý do. Popup chỉ để tham khảo, không dùng làm nhãn/đầu vào ML. Demo ở `http://127.0.0.1:8766/` vẫn là archive validation và ECMWF thô; AI live cần lịch sử quan trắc, T-OPS và máy ghi liên tục.
 
 Cuối mỗi tuần, cập nhật mục 4/6 và quyết định/trạng thái trong `CLAUDE.md`, rồi commit/push code và báo cáo; dữ liệu/checkpoint ngoài Git.
 

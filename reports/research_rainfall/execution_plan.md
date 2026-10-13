@@ -6,13 +6,18 @@ Cập nhật 13/10/2026. Tập trung Đà Nẵng trước; ưu tiên một đầ
 
 Một app dự báo 6 giờ cho các ô 0,1° thuộc Đà Nẵng: mưa giờ, tổng 3 giờ và xác suất vượt ngưỡng, thời điểm cập nhật, trạng thái nguồn và so với forecast thô. Chọn cấu hình bằng đánh giá cùng mẫu và đầu vào thực sự có lúc phát hành. Một mô hình chung có đặc trưng địa hình; chưa tuyên bố đặc biệt phù hợp mọi tỉnh Việt Nam.
 
+## Hai phép so trong kế hoạch
+
+Giữ phép so mô hình/nhóm đặc trưng trên **cùng đầu vào, cửa sổ, nhãn và năm** để trả lời câu hỏi nghiên cứu. Thêm ECMWF IFS như đối chứng vận hành: lấy bản dự báo có `run` được khởi tạo trong quá khứ nhưng **đã sẵn có trước giờ app phát hành**, chấm trên đúng ô/giờ/hạn/nhãn với AI. [Open-Meteo Single Runs](https://open-meteo.com/en/docs/single-runs-api) giữ từng run ECMWF từ 03/2024 và nêu rõ giờ `run` chưa phải giờ công bố (thường trễ 4–6 h). T-OPS 2024 sẽ ghi `run_init`, `available_at` ước lượng bảo thủ/đã đo và `issue_at`, kiểm tra `available_at ≤ issue_at`, thử độ nhạy với độ trễ, rồi mới so ECMWF thô, ECMWF hiệu chỉnh, LightGBM và Bi-LSTM. ERA5 dùng trong hồi cứu không được thay cho dự báo đã phát hành. Chưa có kết quả cùng mẫu nên chưa kết luận AI vượt ECMWF. Hiện chỉ có 4 snapshot nguồn hiện tại/93 ô (không biết run), một probe Single Runs 2024 ở 1 điểm với 47/48 giờ mưa hợp lệ, và baseline trạm/ngày từ Previous Runs. **Chưa có dataset run 2024 cho 93 ô và chưa chấm AI–ECMWF cùng mẫu.** Checkpoint hiện dùng ERA5 hồi cứu và GSMaP raw lưu trữ; phải kiểm tra/thay nguồn as-of trước khi gắn nhãn so vận hành.
+
 ## Đầu ra đợt này
 
 | Đầu ra | Bằng chứng | Trạng thái |
 | --- | --- | --- |
 | So BASE/RAW/DOMAIN trên 3 fold năm, NN/cây | reports/domain_screen_danang/ | Đã xong:27NN+9LightGBM; summary.json xác nhận |
 | Kiểm tra nguồn nhãn theo mùa và trạm | label_audit.json, label_station_scores.csv | Đã chạy trên 2021–2023 |
-| Hợp đồng nguồn forecast và dữ liệu 93 ô | live_contract_probe.json, live_collection_status.json | 93/93 ô đạt contract; snapshot ngoài Git |
+| Hợp đồng nguồn forecast và dữ liệu 93 ô | live_contract_probe.json, live_collection_status.json | 4 snapshot hoàn chỉnh 93/93 ô; chưa biết run, chưa dùng chấm AI |
+| Probe run ECMWF lịch sử | ecmwf_single_run_probe.json | 1 điểm, run 01/10/2024 00 UTC, 47/48 giờ mưa hợp lệ; chưa có bộ 93 ô |
 | Suy luận checkpoint và API | src/domain_inference.py, demo/domain_api.py | Đã chạy CPU/HTTP thật; archive validation |
 | Báo cáo có kết quả, CI và đề xuất | brief_giang_vien_2026_10_14.md | Sinh từ số liệu, không thay việc huấn luyện |
 
@@ -20,20 +25,20 @@ Một app dự báo 6 giờ cho các ô 0,1° thuộc Đà Nẵng: mưa giờ, t
 
 Đã chạy các thí nghiệm ưu tiên, không còn ở trạng thái đề xuất: Tweedie LightGBM/NN trên RAW, bỏ riêng proxy địa hình và 63 ô chưa train. Báo cáo/CI ở `reports/followup_danang/`. RMSE 3 h LightGBM Tweedie giảm 6–14% so L1(log) trên cả ba năm; Bi-LSTM Tweedie giảm khoảng 2–11% nhưng BSS xác suất ≥1 kém hơn trong 2022. DOMAIN vẫn chưa có CI khẳng định lợi ích CSI trên từng năm hoặc 63 ô. Đủ cơ sở tiếp tục PBL và hoàn thiện demo, chưa đủ chọn AI live.
 
-Demo archive từ checkpoint có bản đồ 93 ô và bảng 30/63 ô tách rõ; 36 HTTP parity case và 81 kiểm tra code đạt. Tab live hiện chỉ có ECMWF thô/điểm JAXA công khai. Máy chủ FTP JAXA cổng 21 tới được, FTPS không hỗ trợ; chưa có binary NRT thực chứng. Không gọi tab live là app AI vận hành.
+Demo archive từ checkpoint có bản đồ 93 ô và bảng 30/63 ô tách rõ; 36 HTTP parity case và 83 kiểm tra code đạt. JAXA FTP đã xác minh và tải raw/Gauge_NRT v8 cùng giờ; raw 93/93 ô hữu hạn, SHA-256 đúng. Popup web khác hai binary ở 3/3 ô có mưa, nguyên nhân chưa rõ. Tab live chỉ có ECMWF thô/điểm web tham khảo; chưa là app AI vận hành.
 
 ## Từ 14 đến 20/10: nối quan trắc và đóng băng ứng viên
 
-1. Kiểm tra JAXA login bằng `scripts/fetch_gsmap_nrt.py --check-only --allow-plain-ftp` trong terminal riêng, nhập UID/password tương tác. Sau đó tải một binary v8, ghi hash, thời điểm lấy, version, khoảng mưa, phần trăm thiếu và tốc độ trễ. FTP thường không mã hóa trên máy chủ này; script không tự hạ cấp.
-2. So một hoặc nhiều tệp NRT thật với nguồn MVK/raw trong train trên cùng ô/giờ. Đo phân phối và lỗi theo mùa nếu có đủ ngày; không giả định hai thuật toán tương đương từ định dạng giống nhau. Tập đủ lịch sử quan trắc trễ và context cho cửa sổ 24 h trước khi chạy AI.
+1. Đã kiểm tra JAXA login và tải raw/Gauge_NRT v8 một giờ; tiếp tục thu ít nhất 28 giờ liên tục theo `first_recorded_at_utc`, đo phân phối latency nhiều ngày và kiểm tra file thiếu. FTP thường không mã hóa trên máy chủ này; script không tự hạ cấp. Chỉ nhập credential ở prompt terminal.
+2. Làm rõ sai khác popup web với binary bằng nguồn JAXA độc lập/phiên bản hiển thị; không dùng popup làm chuẩn. So lịch sử NRT thật với MVK/raw trong train trên cùng ô/giờ và đo lệch theo mùa khi đủ ngày. Không giả định hai thuật toán tương đương từ định dạng giống nhau; cần cửa sổ 24 h kết thúc trước giờ phát hành 4 h, tức ít nhất 28 h lịch sử khi bắt đầu ghi.
 3. Chốt máy luôn bật cho logger forecast/quan trắc. Dùng timestamp phát hành và lấy dữ liệu để bảo đảm không nhìn tương lai. Nếu nguồn NRT chưa đạt contract, demo tiếp tục hiển thị archive và ECMWF thô.
 4. Xem lại RAW/DOMAIN và hai đầu Tweedie theo RMSE, bias, BSS/CSI, FAR và CI. Không đổi chọn model theo một metric duy nhất; không mở test 2025 khi chưa đóng băng thiết kế.
 
-Điều kiện hết tuần: tệp NRT thật đã xác minh hoặc ghi rõ vì sao chưa truy cập được, logger có kế hoạch máy chủ, bảng ứng viên có lý do, demo archive chạy ổn.
+Điều kiện hết tuần: lịch sử NRT ≥28 giờ có timestamp/hash, kiểm tra lệch train→NRT và bất nhất popup được ghi rõ, logger có máy chạy, bảng ứng viên có lý do, demo archive chạy ổn.
 
 ## Từ 21 đến 27/10: kiểm định nguồn forecast thật và app 6 giờ
 
-1. Dùng forecast lưu trữ có run/issued time kiểm tra biến thể vận hành trên năm 2024. Chứng minh từng tensor chỉ dùng bản forecast/quan trắc đã đến trước giờ phát hành. Historical Forecast/past_days ghép chuỗi chưa đủ bằng chứng cho run-time parity.
+1. Trước tiên thí điểm **14 ngày cố định 01–14/10/2024 trên 30 ô** để kiểm tra quyền truy cập, tỷ lệ thiếu, giờ xuất hiện và nhãn cùng mẫu; chỉ mở rộng 93 ô/mùa 5–10 khi đạt cổng. Dùng ECMWF IFS Single Runs 2024 giữ nguyên từng `run`. Giờ khởi tạo run không phải giờ công bố: Open-Meteo nêu global model thường trễ 4–6 h. Ghi hoặc chặn bằng `available_at` bảo thủ, kiểm tra `available_at ≤ issue_at` cho mọi tensor và làm phân tích độ nhạy; quan trắc cũng phải có `first_recorded_at ≤ issue_at`. Chuỗi Historical Forecast/past_days đã ghép không đủ để chứng minh as-of parity.
 2. So cùng mẫu: forecast thô, hiệu chỉnh xác suất đơn giản, persistence đúng độ trễ, LightGBM và ứng viên Bi-LSTM. Hiệu chỉnh/ngưỡng chỉ chọn trên tập cho phép; giữ 2025 kín tới khi đóng băng thiết kế.
 3. Cùng đầu vào qua pipeline train và app; kiểm tra thời gian, cloud%, m/s, q850, dữ liệu thiếu/cũ. Kiểm tra suy luận CPU hiện có là bước đầu; chưa thay parity nguồn vận hành.
 4. App chỉ dùng ML khi đủ contract và được đánh giá. Nếu quan trắc thiếu/cũ, hiển thị nguồn dự phòng ECMWF thô hoặc cấu hình không quan trắc đã kiểm định; không điền 0 để tạo dự báo AI.

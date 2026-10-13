@@ -1,0 +1,12 @@
+{
+  "authenticated": true,
+  "host": "hokusai.eorc.jaxa.jp",
+  "transport": "FTP_PLAINTEXT",
+  "directory": "/realtime_ver/v8/latest/",
+  "algorithm_version": 8,
+  "product": "GSMaP_Gauge_NRT",
+  "available_files": 24,
+  "last_file": "gsmap_gauge.20261013.1000.dat.gz",
+  "credential_persisted": false,
+  "downloaded_files": 1
+}

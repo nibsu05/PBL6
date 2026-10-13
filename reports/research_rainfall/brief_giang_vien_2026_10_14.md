@@ -14,13 +14,15 @@ Giảng viên có thể xem đây là kết quả mới rõ nhất: **đổi cá
 
 Cái giá cần nói thẳng: BSS xác suất ≥1 của Bi-LSTM Tweedie năm 2022 giảm 0,186→0,148. DOMAIN−RAW CSI xác suất trên 63 ô chưa train = +0,042/−0,003/+0,029, CI95% từng năm chứa0; phép bỏ proxy địa hình cũng chưa có CI tách0. Vì vậy app chưa chốt model thắng chung; đầu lượng mm và xác suất phải đánh giá riêng, rồi so ECMWF cùng mẫu trên dữ liệu phát hành thật.
 
-Đã có giao diện demo archive cho 93 ô Đà Nẵng từ checkpoint thật; 36 kiểm tra dự báo API với kết quả lưu khớp. Tab live chỉ là ECMWF thô/điểm JAXA công khai. FTP JAXA tới được nhưng không hỗ trợ FTPS; chưa có tệp NRT v8 xác minh, nên **chưa bật AI live**. Test 2025 giữ kín. Bảng/CI và giới hạn ở `reports/followup_danang/`; cổng tiếp theo nằm trong `execution_plan.md`.
+Đã có giao diện demo archive cho 93 ô Đà Nẵng từ checkpoint thật; 36 kiểm tra dự báo API với kết quả lưu khớp. JAXA FTP đã đăng nhập và tải raw/Gauge_NRT v8 cùng giờ; SHA-256/format đúng, raw cho 93/93 ô hữu hạn. Raw/Gauge gần nhau (tương quan 0,998 trên 93 ô), nhưng popup web khác cả hai tại ba ô có mưa; nguyên nhân chưa xác định. Tab live chỉ hiển thị ECMWF thô và điểm web để tham khảo; **chưa bật AI live**. Cần thu lịch sử NRT, kiểm tra dịch chuyển nguồn và so T-OPS cùng ECMWF. Test 2025 giữ kín. QC nguồn ở `reports/followup_danang/jaxa_binary_audit.json`; cổng tiếp theo trong `execution_plan.md`.
+
+**Lý do vẫn so ECMWF:** bảng Bi-LSTM/LightGBM và ablation cùng dữ liệu cho biết thay đổi thiết kế có ích không; ECMWF IFS thô/hiệu chỉnh là mức dự báo đã dùng được, để hỏi AI có thêm giá trị cho app không. Lấy các bản dự báo ECMWF phát hành trong năm 2024 từ [Single Runs](https://open-meteo.com/en/docs/single-runs-api) rồi chấm như lúc ấy, chỉ dùng run đã có trước giờ dự báo (kể cả độ trễ công bố 4–6 h). ERA5 hồi cứu không thay thế phép so này. Bảng ECMWF cùng mẫu chưa chạy, do đó chưa tuyên bố AI thắng. Cụ thể hiện có 4 snapshot forecast 93 ô trong một buổi (không biết run), một phép so ECMWF cũ ở trạm/ngày hạn 1–5 ngày và một probe Single Runs 2024 tại 1 điểm (47/48 giờ mưa hợp lệ). **Chưa có run lịch sử 2024 cho 93 ô.** Checkpoint hiện huấn luyện bằng ERA5 hồi cứu và mưa vệ tinh lưu trữ; muốn chấm vận hành phải thay/kiểm tra đầu vào as-of. Bước thí điểm 14 ngày cố định trên 30 ô đi trước bảng cả mùa.
 
 ## Những gì đã làm và kiểm tra
 
 - 27 lượt Bi-LSTM (3 cấu hình × 3 năm × 3 seed), 9 pipeline LightGBM (135 đầu), cố định 30.000 mẫu train mỗi fold; 131400 cửa sổ evaluation, 30 ô chọn theo địa hình/khoảng cách biển.
 - Train/cal/eval cuốn chiếu; chuẩn hóa chỉ trên train; RAW/DOMAIN cùng số tham số và cùng cửa sổ. Tương lai chỉ gồm lịch. Loss khác giữa NN/cây nên so learner có giới hạn.
-- 81 kiểm tra đạt. Suy luận CPU từ checkpoint/normalizer/Platt đã khớp dự báo CUDA đã lưu trong sai số số học nhỏ; API HTTP đã trả dự báo thật từ checkpoint ở chế độ archive.
+- 83 kiểm tra đạt. Suy luận CPU từ checkpoint/normalizer/Platt đã khớp dự báo CUDA đã lưu trong sai số số học nhỏ; API HTTP đã trả dự báo thật từ checkpoint ở chế độ archive.
 - Đã lấy snapshot forecast và kiểm tra hợp đồng khí tượng cho 93/93 ô; bộ ghi theo giờ chạy trong 2,1 giờ. NRT quan trắc và T-OPS chưa hoàn tất.
 
 ## Kết quả chính
