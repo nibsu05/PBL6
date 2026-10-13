@@ -16,6 +16,19 @@ Một app dự báo 6 giờ cho các ô 0,1° thuộc Đà Nẵng: mưa giờ, t
 | Suy luận checkpoint và API | src/domain_inference.py, demo/domain_api.py | Đã chạy CPU/HTTP thật; archive validation |
 | Báo cáo có kết quả, CI và đề xuất | brief_giang_vien_2026_10_14.md | Sinh từ số liệu, không thay việc huấn luyện |
 
+## Đánh giá khả thi và thứ tự đợt tiếp theo
+
+Đánh giá sau lượt ba năm: đủ cơ sở tiếp tục PBL và xây app thử nghiệm, chưa chứng minh mô hình vượt trội hoặc phù hợp mọi tỉnh Việt Nam. Trung bình năm, Bi-LSTM BASE/RAW/DOMAIN có CSI quyết định10mm/3h 0,325/0,346/0,376; BSS1mm/3h 0,198/0,214/0,214; RMSE3h 4,308/4,224/4,242mm. Đây là trung bình mô tả của ba fold, không phải một test độc lập hoặc CI gộp. DOMAIN giúp quyết định sự kiện rõ hơn đầu lượng mưa; CI hiệu số từng năm chứa0, FAR DOMAIN từng năm khoảng41–60%. Không dùng73 kiểm tra code làm bằng chứng chất lượng dự báo.
+
+Ưu tiên đợt thực hiện tiếp theo; các thí nghiệm mới dưới đây chưa khởi chạy:
+
+1. **Đầu lượng mưa:** thử LightGBM RAW với objective Tweedie cố định variance_power1,5 trên nhãnmm, đối chứng L1log hiện có. Giữ các cửa sổ/chuẩn hóa/ngân sách cây và đầu xác suất để cô lập thay đổi đầu lượng mưa. Báo RMSE,bias,CSI lượngmưa và sai số trong các sự kiện lớn; cải thiện chưa được bảo đảm. Nếu có lợi ích, thử đầu lượngmưa phù hợp tương tự cho Bi-LSTM. [Tham số chính thức LightGBM4.5](https://lightgbm.readthedocs.io/en/v4.5.0/Parameters.html#objective-parameters).
+2. **Kiểm tra phạm vi không gian:** dùng checkpoint hiện có đánh giá63ô chưa dùng huấn luyện trong lượt domain, so RAW/DOMAIN trên cùng năm/mẫu và bootstrap khối ngày. Đây là kiểm tra nội suy sang ô chưa train, không là kiểm định độc lập giữa các tỉnh; các ô lân cận và đợt mưa vẫn tương quan. Không đưa nhãn các ô này vào chọn epoch/hiệu chỉnh của checkpoint cũ.
+3. **Tách đóng góp domain:** giữ toàn bộ nguyên liệu và số tham số, bỏ riêng chỉ báo gió–ẩm×địa hình khỏi DOMAIN. So ba năm/seed với FULL và RAW đã lưu. Chỉ kết luận vai trò địa hình nếu phép bỏ thành phần ủng hộ; chưa gán toàn bộ mức tăng của bốn proxy cho địa hình.
+4. **Nối app song song:** ghi forecast, hoàn tất nguồn quan trắc NRT và demo archive từ checkpoint. Chọn ứng viên vận hành bằng forecast thực sự có ở giờ phát hành, so forecast thô/hiệu chỉnh trên cùng mẫu. TFT và mở rộng tỉnh theo sau MVP6h.
+
+Đầu ra của đợt: bảng lựa chọn đầu lượngmưa, kiểm tra ô mới và phép bỏ địa hình; demo có checkpoint thật. Các nhóm CAPE/CIN và đất giữ trong lộ trình sau khi ba câu hỏi ưu tiên có kết quả, tránh tăng số cấu hình cùng lúc.
+
 ## Từ 14 đến 20/10: chốt ứng viên và nối dữ liệu
 
 1. Xem cả ba năm, biến thiên seed và CI. Nếu DOMAIN không lặp lợi ích, không đưa vào app chỉ vì tên gọi vật lý. Giữ RAW và BASE để kiểm tra nguồn; giảm số cấu hình khi lợi ích chưa rõ.

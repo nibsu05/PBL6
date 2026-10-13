@@ -131,7 +131,7 @@ flowchart LR
 | 0. Khảo sát và quyết định | 1 | ✅ Xong (còn 2 câu hỏi nhỏ, xem mục 8) | `project_plan_v2.md` |
 | 1. Dữ liệu và bộ đánh giá | 1–2 | ✅ **Xong** | Dataset v2, dataloader, bảng baseline ở `reports/station_benchmark/README.md` |
 | 2. Baseline trên lưới | 2 | ✅ LightGBM/khí hậu30 ô,3 fold | reports/domain_screen_danang/; vận hành thật còn chờ |
-| 3. Sản phẩm A: Bi-LSTM | 3–4 | ✅ Pilot30/93 ô và domain screen3 fold; E0–E5 rộng chưa chạy | `reports/pilot_bilstm_v2_93cells_3 seeds/README.md`: S1 tăng CSI so S0; S4 tốt hơn về BS; tiếp theo kiểm tra nhãn/đầu quyết định và giả thuyết địa phương trước so kiến trúc |
+| 3. Sản phẩm A: Bi-LSTM | 3–4 | ✅ Pilot30/93 ô và domain screen3 fold; E0–E5 rộng chưa chạy | `reports/pilot_bilstm_v2_93cells_3seeds/README.md`: S1 tăng CSI so S0; S4 tốt hơn về BS; tiếp theo kiểm tra nhãn/đầu quyết định và giả thuyết địa phương trước so kiến trúc |
 | 4. Sản phẩm B: TFT | 5–6 | Chưa bắt đầu | — |
 | 5. Đánh giá vận hành thật và độ bền | 7 | Chưa bắt đầu | — |
 | 6. Mở rộng 2 vùng | 8 | Chưa bắt đầu | — |
@@ -145,7 +145,7 @@ flowchart LR
 ### Những gì đã có trong tay
 
 **Cập nhật 13/10:** dữ liệu verify 2233/2233; CUDA hoạt động; dataset 93 ô Đà Nẵng đã dựng; inspect bốn cấu hình đạt 0 mẫu lệch và batch hữu hạn. **73 kiểm tra đã đạt** trên Windows (58 kiểm tra trước đó và15 kiểm tra domain/nguồn live/suy luận). Pilot 3 seed trên 30 và 93 ô đã xong. Repo làm việc chuyển sang `D:\PBL6_v2`; giữ nguyên bản USB `D:\PBL6` cũ. Kết quả chưa chứng minh vượt ECMWF, và chưa so Bi-LSTM với TFT.
-<!-- OFFLINE_BATCH_STATUS --> Batch 3 seed trên 93 ô đã hoàn tất; bảng số liệu ở `reports/pilot_bilstm_v2_93cells_3 seeds/`. Đã diễn giải: S1 tăng CSI so S0; S4 tốt hơn về BS; chưa so kiến trúc hoặc kiểm định vận hành. Không chấm test 2025.
+<!-- OFFLINE_BATCH_STATUS --> Batch 3 seed trên 93 ô đã hoàn tất; bảng số liệu ở `reports/pilot_bilstm_v2_93cells_3seeds/`. Đã diễn giải: S1 tăng CSI so S0; S4 tốt hơn về BS; chưa so kiến trúc hoặc kiểm định vận hành. Không chấm test 2025.
 
 - **Nhãn mưa** đã được chọn bằng cách đối chiếu với 10 trạm đo thật (xem mục 5).
 - **Dataset v2:** 296 ô, mỗi giờ từ 2015 đến 09/2026, 51 đặc trưng. Đã kiểm tra chất lượng; dữ liệu thiếu dưới 0,2 %.
@@ -183,6 +183,9 @@ flowchart LR
 ---
 
 ## 6. Lộ trình thực hiện tiếp
+
+**Ưu tiên cụ thể sau đánh giá:** đầu lượngmưa trên RAW, kiểm tra63ô chưa train và bỏ riêng proxy địa hình; NRT/demo archive làm song song. Ba thử nghiệm mới chưa khởi chạy. Các chỉ số hiện tại đủ để tiếp tục PBL, chưa đủ chốt chất lượng vận hành.
+
 
 Tập trung Đà Nẵng, có đầu ra kiểm chứng mỗi tuần; chi tiết và cổng chuyển tiếp ở [execution_plan.md](reports/research_rainfall/execution_plan.md). Lịch là mục tiêu theo năng lực nhóm, không thay điều kiện kiểm định.
 
