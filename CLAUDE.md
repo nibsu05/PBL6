@@ -85,6 +85,8 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 
 16. **Slide khảo sát đề tài độc lập (14/10):** Đã tạo `reports/presentation_2026_10_14/Khao_sat_de_tai_1_slide_2026_10_14.pptx` để giải thích hạn 1–6 giờ, ưu tiên thử tổng mưa 3 giờ, sản phẩm đối chiếu và phạm vi công việc. Nguồn WMO xác nhận nowcasting 0–6 giờ; HKO MyObservatory có mưa 1–2 giờ; CWA Đài Loan có tổng mưa theo khoảng 3 giờ khi mưa lớn. Đây là tham chiếu thiết kế, **không chứng minh nhu cầu người dùng cao nhất ở 3 giờ**. Cần khảo sát quyết định thực tế và lựa chọn 1/3/6 giờ trước khi chốt giao diện. Ghi chú slide chứa URL và giới hạn diễn giải.
 
+17. **Bộ slide giải thích đầy đủ (14/10):** Đã tạo `reports/presentation_2026_10_14/PBL6_Da_Nang_full_brief_2026_10_14.pptx` từ bộ 8 slide đã kiểm chứng, thêm bốn trang về đầu ra nghiên cứu, vai trò từng nguồn dữ liệu, phép so mô hình và luồng app. Tổng 12 slide, trong đó slide 12 ECMWF là dự phòng; ghi chú từng slide có nguồn/lời dẫn và `reports/presentation_2026_10_14/presenter_guide_full_2026_10_14.md` giúp trình bày 8–10 phút hoặc rút còn 5 phút. Không chạy thí nghiệm mới, không mở test 2025, không thay kết luận AI live/ECMWF.
+
 ## Còn chờ chốt (hỏi người dùng trước khi làm phần liên quan)
 
 1. Hai vùng kiểm tra: Hà Nội, cùng TP.HCM **hoặc** Đắk Lắk.
@@ -93,7 +95,7 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 ## Trạng thái và việc tiếp theo
 
 **Trạng thái cập nhật 14/10/2026:**
-- Bộ slide báo cáo 08:00 ngày 14/10 đã dựng và kiểm tra ảnh xuất từng trang: `reports/presentation_2026_10_14/PBL6_Da_Nang_2026_10_14.pptx`, 7 slide chính + 1 dự phòng; slide khảo sát đề tài độc lập `reports/presentation_2026_10_14/Khao_sat_de_tai_1_slide_2026_10_14.pptx`. Rà soát nhu cầu ở `reports/research_rainfall/user_needs_desk_review_2026_10_14.md` là desk review, chưa phỏng vấn. Nội dung gồm bài toán/người dùng, nhãn, Tweedie, giả thuyết domain có CI, cổng nguồn/app, kế hoạch. Không đưa số NRT đơn lẻ thành kết luận chất lượng mô hình.
+- Bộ slide mở rộng `reports/presentation_2026_10_14/PBL6_Da_Nang_full_brief_2026_10_14.pptx` gồm 11 trang chính và 1 trang ECMWF dự phòng, đã kiểm tra hiển thị. Lời dẫn tại `reports/presentation_2026_10_14/presenter_guide_full_2026_10_14.md`. Bộ 8 slide và slide khảo sát riêng vẫn giữ; nhu cầu người dùng mới là rà soát tài liệu, chưa phỏng vấn. Số mô hình không thay đổi; AI live chưa bật.
 - Repo làm việc `D:\PBL6_v2`; tác giả commit mới là `nibsu05 <168987662+nibsu05@users.noreply.github.com>`. Không viết lại lịch sử đã push. Dữ liệu verify 2233/2233, dataloader lệch 0; test 2025 giữ kín.
 - BASE/RAW/DOMAIN trên 30 ô/3 fold và đợt follow-up Tweedie LightGBM, Tweedie Bi-LSTM, NO_TERRAIN, 63 ô chưa train đã hoàn tất. Chi tiết cùng CI ở `reports/domain_screen_danang/` và `reports/followup_danang/`.
 - Tweedie LightGBM RAW giảm RMSE 3 h mùa 5–10 từ 4,607/4,841/4,205 xuống 3,947/4,534/3,610 mm ở 2021/2022/2023. Tweedie Bi-LSTM RAW từ 4,046/4,661/3,963 xuống 3,876/4,581/3,540. Đây là validation lịch sử, chưa là hiệu năng vận hành. Đầu xác suất của Bi-LSTM Tweedie kém đi trong 2022 (BSS ≥1: 0,148 so 0,186).

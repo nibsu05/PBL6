@@ -1,6 +1,6 @@
 # Kết quả thực hiện và đề xuất trao đổi ngày 14/10/2026
 
-> [Bộ PowerPoint 8 slide chỉnh sửa được](../presentation_2026_10_14/PBL6_Da_Nang_2026_10_14.pptx) cho buổi 08:00: 7 slide chính và 1 dự phòng ECMWF. [Rà soát nhu cầu](user_needs_desk_review_2026_10_14.md) là nghiên cứu tài liệu, chưa phỏng vấn. [Dàn ý cũ](slide_content_2026_10_14.md) vẫn giữ để đọc lời dẫn; số liệu mô hình đã chốt, watcher chỉ bổ sung nhật ký nguồn.
+> [Bộ PowerPoint mở rộng 12 slide](../presentation_2026_10_14/PBL6_Da_Nang_full_brief_2026_10_14.pptx) và [lời dẫn ngắn](../presentation_2026_10_14/presenter_guide_full_2026_10_14.md) là bản trình bày từ dữ liệu đến app. [Bản 8 slide](../presentation_2026_10_14/PBL6_Da_Nang_2026_10_14.pptx) cho buổi 08:00: 7 slide chính và 1 dự phòng ECMWF. [Rà soát nhu cầu](user_needs_desk_review_2026_10_14.md) là nghiên cứu tài liệu, chưa phỏng vấn. [Dàn ý cũ](slide_content_2026_10_14.md) vẫn giữ để đọc lời dẫn; số liệu mô hình đã chốt, watcher chỉ bổ sung nhật ký nguồn.
 
 [Slide khảo sát đề tài riêng](../presentation_2026_10_14/Khao_sat_de_tai_1_slide_2026_10_14.pptx) đối chiếu mốc 0–6 giờ của WMO, sản phẩm 1–2 giờ của HKO, tổng mưa theo khoảng 3 giờ của CWA và chức năng quan trắc tại Đà Nẵng. Mốc 3 giờ là ưu tiên đánh giá của nhóm, chưa phải nhu cầu cao nhất đã khảo sát. Chi tiết nguồn ở [bản rà soát nhu cầu](user_needs_desk_review_2026_10_14.md).
 
