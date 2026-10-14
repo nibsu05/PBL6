@@ -21,3 +21,11 @@ WMO nhấn mạnh thông tin cảnh báo cần **kịp thời, hiểu được v
 **Giới hạn sản phẩm:** Lưới 0,1° khoảng 11 km, không có mô hình thủy lực, cống thoát nước, triều và địa hình đường phố. App chỉ nói lượng mưa/xác suất trên một ô; việc cảnh báo ngập cấp đường cần mô hình/tổ chức khác và sự kiểm chứng riêng.
 
 **Việc nghiên cứu người dùng tiếp theo:** hỏi một nhóm nhỏ đại diện các vai trò trên về quyết định thực tế, mốc thời gian hữu ích, cách hiểu xác suất và ngưỡng mưa; cho họ xem demo để kiểm tra cách đọc bản đồ. Ghi rõ số người/địa điểm và điều chỉnh ngưỡng/giao diện theo phản hồi, không suy từ tài liệu công rằng người dùng đã chấp nhận sản phẩm.
+
+## Hạn dự báo: bằng chứng sản phẩm và câu hỏi khảo sát
+
+[WMO OSCAR](https://space.oscar.wmo.int/applicationareas/view/2_3_nowcasting_very_short_range_forecasting) mô tả nowcasting là dự báo thời tiết địa phương từ hiện tại đến 6 giờ tới. [MyObservatory của Hong Kong Observatory](https://www.hko.gov.hk/en/myobservatory.htm) có dự báo mưa theo vị trí trong 1 hoặc 2 giờ. [Cơ quan Khí tượng Đài Loan (CWA, tr. 24)](https://www.cwa.gov.tw/Data/service/notice/download/Publish_20250326113535.pdf) cho biết họ phát hành lượng mưa dự báo theo **khoảng 3 giờ** cho 12 giờ tới trong đợt bão/mưa lớn. Ví dụ CWA nói về khoảng cộng dồn, **không** nói chỉ dự báo đến giờ thứ 3.
+
+Những nguồn này cho thấy sản phẩm dự báo vài giờ và tổng mưa 3 giờ có tiền lệ chuyên môn. Chúng **không đo nhu cầu của người dùng Đà Nẵng**. Việc nhóm ưu tiên kiểm chứng 0–3 giờ là lựa chọn thử nghiệm hiện tại, phù hợp với bảng kết quả tổng mưa 3 giờ đã có; sản phẩm A vẫn dự kiến xuất hạn 1–6 giờ. [Slide khảo sát đề tài độc lập](../presentation_2026_10_14/Khao_sat_de_tai_1_slide_2026_10_14.pptx) tóm lược ranh giới này để trình bày.
+
+Khi phỏng vấn người dùng, hỏi về một quyết định cụ thể trước mưa, rồi cho chọn mốc cần biết trước **1, 3 hoặc 6 giờ**; hỏi thêm họ cần lượng mưa, xác suất hay trạng thái nguồn, và dữ liệu cũ bao lâu thì họ không muốn dùng. Chỉ sau khi thu và ghi rõ mẫu khảo sát mới kết luận mốc nào được ưu tiên.

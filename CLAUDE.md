@@ -1,7 +1,7 @@
 # PBL6 – Dự báo mưa: bối cảnh cho agent
 
 > **Đọc file này trước khi làm bất cứ việc gì.** Kế hoạch chi tiết, kèm số liệu bằng chứng, nằm ở
-> [`project_plan_v2.md`](project_plan_v2.md); đó là nguồn sự thật. Cập nhật lần cuối: 13/10/2026.
+> [`project_plan_v2.md`](project_plan_v2.md); đó là nguồn sự thật. Cập nhật lần cuối: 14/10/2026.
 > **Kế hoạch dành cho nhóm** (quy trình, giai đoạn hiện tại, lộ trình, phân công) nằm ở [`KE_HOACH_DU_AN.md`](KE_HOACH_DU_AN.md). Mỗi khi xong một giai đoạn hoặc chốt một quyết định, cập nhật các mục 4 và 6 của file đó.
 > `project_master_plan.md`, `SURFACE_BASELINE_REPORT.md`, `DATA_GAP_PLAN.md` và `reports/informer_baseline_report.md`
 > là tài liệu cũ, do agent khác viết. Chỉ dùng chúng để tham khảo lịch sử. Một số nhận định trong đó đã bị bác bỏ (xem mục "Quyết định").
@@ -83,6 +83,8 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 
 15. **Báo cáo giảng viên 08:00 ngày 14/10:** Đã tạo bộ 8 slide PowerPoint chỉnh sửa được `reports/presentation_2026_10_14/PBL6_Da_Nang_2026_10_14.pptx` (7 slide chính, 1 slide đối chứng ECMWF) và rà soát nhu cầu từ tài liệu công `reports/research_rainfall/user_needs_desk_review_2026_10_14.md`. Trang người dùng là giả thuyết, **chưa có phỏng vấn**. Danang Smart City đã có theo dõi mưa/ngập; app PBL chỉ nhắm lớp dự báo mưa 0–6 giờ theo ô, chưa dự báo ngập đường hay cảnh báo chính thức. Các slide dùng validation lịch sử, nêu CI và giới hạn; AI live vẫn tắt. Nguồn đặt trong ghi chú từng slide.
 
+16. **Slide khảo sát đề tài độc lập (14/10):** Đã tạo `reports/presentation_2026_10_14/Khao_sat_de_tai_1_slide_2026_10_14.pptx` để giải thích hạn 1–6 giờ, ưu tiên thử tổng mưa 3 giờ, sản phẩm đối chiếu và phạm vi công việc. Nguồn WMO xác nhận nowcasting 0–6 giờ; HKO MyObservatory có mưa 1–2 giờ; CWA Đài Loan có tổng mưa theo khoảng 3 giờ khi mưa lớn. Đây là tham chiếu thiết kế, **không chứng minh nhu cầu người dùng cao nhất ở 3 giờ**. Cần khảo sát quyết định thực tế và lựa chọn 1/3/6 giờ trước khi chốt giao diện. Ghi chú slide chứa URL và giới hạn diễn giải.
+
 ## Còn chờ chốt (hỏi người dùng trước khi làm phần liên quan)
 
 1. Hai vùng kiểm tra: Hà Nội, cùng TP.HCM **hoặc** Đắk Lắk.
@@ -91,7 +93,7 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 ## Trạng thái và việc tiếp theo
 
 **Trạng thái cập nhật 14/10/2026:**
-- Bộ slide báo cáo 08:00 ngày 14/10 đã dựng và kiểm tra ảnh xuất từng trang: `reports/presentation_2026_10_14/PBL6_Da_Nang_2026_10_14.pptx`, 7 slide chính + 1 dự phòng. Rà soát nhu cầu ở `reports/research_rainfall/user_needs_desk_review_2026_10_14.md` là desk review, chưa phỏng vấn. Nội dung gồm bài toán/người dùng, nhãn, Tweedie, giả thuyết domain có CI, cổng nguồn/app, kế hoạch. Không đưa số NRT đơn lẻ thành kết luận chất lượng mô hình.
+- Bộ slide báo cáo 08:00 ngày 14/10 đã dựng và kiểm tra ảnh xuất từng trang: `reports/presentation_2026_10_14/PBL6_Da_Nang_2026_10_14.pptx`, 7 slide chính + 1 dự phòng; slide khảo sát đề tài độc lập `reports/presentation_2026_10_14/Khao_sat_de_tai_1_slide_2026_10_14.pptx`. Rà soát nhu cầu ở `reports/research_rainfall/user_needs_desk_review_2026_10_14.md` là desk review, chưa phỏng vấn. Nội dung gồm bài toán/người dùng, nhãn, Tweedie, giả thuyết domain có CI, cổng nguồn/app, kế hoạch. Không đưa số NRT đơn lẻ thành kết luận chất lượng mô hình.
 - Repo làm việc `D:\PBL6_v2`; tác giả commit mới là `nibsu05 <168987662+nibsu05@users.noreply.github.com>`. Không viết lại lịch sử đã push. Dữ liệu verify 2233/2233, dataloader lệch 0; test 2025 giữ kín.
 - BASE/RAW/DOMAIN trên 30 ô/3 fold và đợt follow-up Tweedie LightGBM, Tweedie Bi-LSTM, NO_TERRAIN, 63 ô chưa train đã hoàn tất. Chi tiết cùng CI ở `reports/domain_screen_danang/` và `reports/followup_danang/`.
 - Tweedie LightGBM RAW giảm RMSE 3 h mùa 5–10 từ 4,607/4,841/4,205 xuống 3,947/4,534/3,610 mm ở 2021/2022/2023. Tweedie Bi-LSTM RAW từ 4,046/4,661/3,963 xuống 3,876/4,581/3,540. Đây là validation lịch sử, chưa là hiệu năng vận hành. Đầu xác suất của Bi-LSTM Tweedie kém đi trong 2022 (BSS ≥1: 0,148 so 0,186).

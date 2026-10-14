@@ -2,7 +2,7 @@
 
 > **Dành cho các thành viên trong nhóm.** File này trả lời bốn câu hỏi: dự án làm gì, quy trình ra sao, đang ở giai đoạn nào, và mỗi người cần làm gì tiếp theo.
 > Chi tiết kỹ thuật và số liệu đầy đủ nằm ở [`project_plan_v2.md`](project_plan_v2.md). Bối cảnh dành cho AI agent nằm ở [`CLAUDE.md`](CLAUDE.md).
-> **Cập nhật:** 13/10/2026. Khi chuyển sang giai đoạn mới hoặc chốt một quyết định, hãy sửa mục 4, mục 6 và ngày cập nhật.
+> **Cập nhật:** 14/10/2026. Khi chuyển sang giai đoạn mới hoặc chốt một quyết định, hãy sửa mục 4, mục 6 và ngày cập nhật.
 
 ---
 
@@ -130,7 +130,7 @@ flowchart LR
 | Nguồn vận hành | 4 snapshot hiện tại/93 ô không biết run; **pilot ECMWF 56/56 run, 30 ô × 14 ngày đã chấm**; 24h NRT đã kiểm; watcher 12h đang chạy, thấy file raw mới đầu tiên sau10phút, lỗi0 | `reports/research_rainfall/ecmwf_pilot_14d/`, `reports/followup_danang/jaxa_binary_audit.json`; chưa có đầu vào AI as-of hay điểm AI–ECMWF cùng mẫu |
 | App Đà Nẵng | Demo archive từ checkpoint, HTTP parity 36 case đạt; watcher thấy file mới16:41 UTC. Lag4/issue17 thử: 24/24 tệp đã nhận trước mốc (lúc audit issue còn tương lai) | `demo/domain_api.py`, `reports/followup_danang/nrt_latency_sensitivity.json`; checkpoint lag4, AI live chưa bật |
 | Sản phẩm B TFT, hai vùng ngoài Đà Nẵng | Chưa bắt đầu | Sau MVP và kiểm định nguồn |
-| Trao đổi giảng viên 08:00 ngày 14/10 | Đã dựng 8 slide PowerPoint chỉnh sửa được (7 chính, 1 dự phòng), kiểm tra ảnh từng trang; rà soát nhu cầu từ tài liệu, chưa phỏng vấn | `reports/presentation_2026_10_14/PBL6_Da_Nang_2026_10_14.pptx`, `reports/research_rainfall/user_needs_desk_review_2026_10_14.md`; không tuyên bố AI thắng ECMWF hoặc live |
+| Trao đổi giảng viên 08:00 ngày 14/10 | Bộ 8 slide báo cáo và một slide khảo sát đề tài riêng; rà soát nhu cầu từ tài liệu, chưa phỏng vấn | `reports/presentation_2026_10_14/Khao_sat_de_tai_1_slide_2026_10_14.pptx`, `reports/presentation_2026_10_14/PBL6_Da_Nang_2026_10_14.pptx`; mốc 3 giờ là ưu tiên thử nghiệm, không phải nhu cầu cao nhất đã đo |
 
 **Lựa chọn hiện tại:** Tweedie cải thiện ước lượng mm rõ trên validation; RAW và DOMAIN chưa phân định chắc ở CSI xác suất. Không chọn model chỉ vì điểm một năm hoặc tên đặc trưng. 87 kiểm tra code đạt chứng minh pipeline chạy đúng trong phạm vi được kiểm, không chứng minh kỹ năng dự báo. Test 2025 vẫn niêm phong. Bảng năm, CI và giới hạn ở `reports/followup_danang/` và brief 14/10.
 
@@ -167,6 +167,7 @@ flowchart LR
 | --- | --- | --- |
 | 13/10 — đã xong | BASE/RAW/DOMAIN 3 fold; Tweedie LightGBM và Bi-LSTM; NO_TERRAIN; 63 ô; demo archive | Số liệu, CI, 87 test, 36 HTTP parity; chưa mở 2025 |
 | 14/10 08:00 — đã chuẩn bị | Slide nhu cầu, kết quả mô hình, giới hạn và lộ trình đã đóng số cho giảng viên | `reports/presentation_2026_10_14/PBL6_Da_Nang_2026_10_14.pptx`; khảo sát tài liệu `reports/research_rainfall/user_needs_desk_review_2026_10_14.md`; xin ý kiến về phạm vi 0–6 giờ, thước đo và trạm giờ độc lập |
+| Sau buổi 14/10 | Phỏng vấn người dùng về quyết định cần chuẩn bị và chọn mốc 1/3/6 giờ; kiểm tra họ hiểu tổng mưa 3 giờ, xác suất và độ mới dữ liệu | Ghi số mẫu/đối tượng/câu trả lời; không suy nhu cầu từ ví dụ HKO/CWA; [slide khảo sát](reports/presentation_2026_10_14/Khao_sat_de_tai_1_slide_2026_10_14.pptx) |
 | 14–20/10 | Đã tải/kiểm 24 tệp NRT liên tiếp, 93/93 ô hữu hạn; lag4/issue16 kịp 21/24, lag5/issue17 thử kịp 24/24. Đã stress và train lại Bi-LSTM Tweedie lag5 cùng30ô/3seed/3fold: RMSE tăng nhỏ cả3 năm. Watcher `scripts/watch_gsmap_nrt.py` đã chạy phiên12h từ16:31 UTC; poll2 thấy file mới12 UTC lúc16:41, lỗi0, lag4/issue thử17 có24/24 file kịp máy nhận. Để watcher tiếp tục và đo latency nhiều ngày (backfill không đo latency JAXA), kiểm tra lệch train→NRT và popup | Chỉ chọn lag/giờ phát hành khi có phân phối latency và kỹ năng T-OPS; xét model không cần vệ tinh nếu lag4 không kịp/lag5 yếu; app vẫn archive/ECMWF nguồn |
 | 21–27/10 | **Pilot nguồn ECMWF 56 run/30 ô đã xong**: 1.680 cặp đủ forecast/nhãn; CI còn rộng do 4 ngày mưa mạnh. Tiếp theo kiểm tra NRT/khí tượng đầu vào AI as-of, tăng ngày/sự kiện và mở 93 ô chỉ khi parity đạt | Bảng AI–ECMWF cùng mẫu chỉ công bố sau cổng đầu vào; `available_at` lịch sử còn là giả định bảo thủ, 2025 giữ kín |
 | Sau cổng vận hành | App AI live 6 h Đà Nẵng nếu đủ nguồn và kỹ năng; TFT 1–3 ngày, hai vùng khác theo sau | Mỗi dự báo lưu thời điểm phát hành, nguồn, version/hash; kiểm chứng sau khi nhãn đến |
