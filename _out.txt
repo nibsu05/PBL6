@@ -1,0 +1,15 @@
+﻿====================================================================================================
+python : Traceback (most recent call last):
+At C:\Users\duyta\AppData\Local\Temp\ps-script-150159f8-8eb9-4358-982a-6178928ba32f.ps1:75 char:1
++ python experiments\_analyze_bi_fa_tw.py 2>&1 | Out-File -Encoding utf ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "D:\nkd\PBL6\experiments\_analyze_bi_fa_tw.py", line 47, in <module>
+    print("B\u1ea2NG TRUNG B╠NH 3 SEED (test 2023, 93 ⌠ \u0110α N\u1eb5ng, Bi-LSTM Tweedie)")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\duyta\miniconda3\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u1ea2' in position 1: character maps to <undefined>
