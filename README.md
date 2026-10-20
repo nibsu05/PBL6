@@ -10,6 +10,8 @@ Dự án nghiên cứu đóng góp của các nhóm đặc trưng dữ liệu ch
 
 **Nhánh ngày 21/10, đã có ma trận phát triển:** [TFT/LightGBM 24–72 giờ, E0–E7, ba seed](reports/short_range_ablation_2026_10_21/README.md) có Word, 8 slide, FAQ, danh mục 44 biến, CI 20.000 bootstrap và kiểm chứng 96/96 lượt. TFT thêm riêng A hoặc M có tín hiệu cải thiện ngày 1 sau hiệu chỉnh 9 phép so; chưa có bằng chứng tương tự ở ngày 2–3 hoặc SST. Giữ nguyên [pilot](reports/short_range_pilot_2026_10_21/README.md). [Kế hoạch đầy đủ](reports/short_range_plan_2026_10_21/README.md) còn ranh/QC nhãn và kiểm định cuối; footprint 93 ô vẫn xấp xỉ, năm 2025 chưa mở.
 
+**Chuẩn bị báo cáo trong 30 phút:** [bản ngắn Word, 5 slide và lời trình bày 5 phút](reports/short_range_brief_2026_10_21/README.md) tổng hợp từ số liệu đã kiểm chứng. Mã/báo cáo trên `research/tft-regional`, [PR #1 vào main](https://github.com/nibsu05/PBL6/pull/1) đang mở.
+
 ---
 
 ## 🚀 Pipeline v2 (từ 11/10/2026) — bắt đầu từ đây

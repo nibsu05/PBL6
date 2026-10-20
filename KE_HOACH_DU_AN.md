@@ -124,6 +124,8 @@ flowchart LR
 
 **Cập nhật 21/10, đã hoàn thành ma trận phát triển nhánh ngày:** người dùng làm TFT 24–72 giờ, ưu tiên kết quả trong 3–4 giờ. [Bộ mở rộng có Word, 8 slide, FAQ và danh mục biến](reports/short_range_ablation_2026_10_21/README.md) gồm 72 lượt TFT (E0–E7 × ba fold × ba seed) và 24 pipeline LightGBM, 27 kiểm tra đạt, 96/96 lượt tái lập calibration/evaluation. Đã giữ nguyên [pilot](reports/short_range_pilot_2026_10_21/README.md). TFT ngày 1: thêm riêng A hoặc M có CI điều chỉnh trên 0 trong gia đình 9 phép so, 20.000 bootstrap khối 7/14 ngày; SST và ngày 2–3 chưa có bằng chứng tương tự. E7 TFT ngày 3 BSS −0,038. Footprint vẫn xấp xỉ; chưa mở 2025 hoặc hoàn thiện ranh/kiểm chứng nhãn. Tiến trình ma trận khoảng 27,9 phút, không đồng nhất với thời gian hoàn thiện nghiên cứu.
 
+**Mốc báo cáo nhanh tiếp theo:** [Word ngắn, 5 slide và lời trình bày 5 phút](reports/short_range_brief_2026_10_21/README.md) đã tổng hợp từ kết quả này. Commit đầu tiên `ad78de3` đã push lên nhánh TFT, [PR #1](https://github.com/nibsu05/PBL6/pull/1) đang mở vào main. Đây là bước trình bày kết quả, không phải đợt thí nghiệm mới.
+
 **Trạng thái hiện tại 20/10:** đã hoàn tất [tài liệu hợp nhất gửi nhóm](reports/regional_research_plan_2026_10_20/PHUONG_AN_CUOI.docx), với đầu ra vùng trực tiếp, E0–E7/Bi-LSTM/LightGBM, chính sách bằng chứng giữ nguyên và 18 quyết định × 6 tiêu chí. Dữ liệu vùng V1/V2 và pilot có trên main; chưa có Bi-LSTM vùng theo protocol cuối và chưa hoàn thiện giao ranh/kiểm chứng nhãn. Bảng 14/10 sau đây là kết quả của các giai đoạn trước, không phải trạng thái toàn bộ phương án mới.
 
 **Đổi trọng tâm20/10:** nghiên cứu thêm/bớt đặc trưng, không tập trung app. Đã tạo hai bộ vùng102.984giờ:V1/49predictor,V2/138predictor; nhãn cùngmeanGauge93ô, trọng số toàn ô xấp xỉ vùng. Đã chạy pilotLightGBM2021–2023; V2 có CI dương về cải thiện ởmộtsốphépso2021, chưa lặp chắc2022/2023. Verify2233/2233,22test vàparity thực đạt; không trainNN hoặc chấmtest2025. [Kết quả/CI](reports/regional_danang_v1_v2/README.md). Domain screen30ô/pilot93ô trước đây là các đợt khác.
@@ -172,6 +174,8 @@ flowchart LR
 ## 6. Lộ trình thực hiện tiếp
 
 **Quy trình Git, người dùng đồng ý 21/10:** nhánh `research/tft-regional` dùng cho phần TFT; commit/push mã và báo cáo, tạo PR vào `main` để review và tích hợp. `main` dùng chung cho cả nhánh giờ và nhánh ngày; dữ liệu/checkpoint tiếp tục ngoài Git.
+
+Đã có PR #1 và bộ trình bày nhanh cho báo cáo. Các bước dữ liệu/holdout dưới đây vẫn còn nguyên; tài liệu ngắn không thay kết luận hoặc phạm vi của báo cáo đầy đủ.
 
 **Nhánh ngày đã duyệt 21/10:** loader/baseline/TFT, pilot và ma trận E0–E7 ba seed đã hoàn thành trên footprint 93 ô cố định, xấp xỉ. Tiếp theo chốt ranh/QC nhãn và tương thích định nghĩa vùng với Bi-LSTM; chạy lại development nếu vùng/nhãn thay đổi; sau khóa mới train/cal/test 2025 E0/E7. Không gọi ma trận phát triển là hoàn tất cổng dữ liệu hoặc nghiên cứu cuối. Bộ Word/slide/FAQ đã sẵn sàng, không cần thêm Informer hoặc app để báo cáo đợt này.
 
