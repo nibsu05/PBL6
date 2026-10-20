@@ -6,7 +6,9 @@
 
 Dự án nghiên cứu đóng góp của các nhóm đặc trưng dữ liệu cho dự đoán mưa vùng trực tiếp tại Đà Nẵng mới (Đà Nẵng cũ + Quảng Nam).
 
-**Phạm vi hiện tại — 20/10/2026:** tổng hợp đầu vào và nhãn theo vùng trước mô hình, lịch sử 24 giờ → dự đoán 6 giờ, Bi-LSTM/LightGBM và thí nghiệm thêm/bớt đặc trưng E0–E7. App và TFT thuộc phần mở rộng. [Phương án cuối gửi nhóm](reports/regional_research_plan_2026_10_20/README.md) có bản Word, Markdown, ma trận 18 quyết định × 6 tiêu chí và gói ZIP; [báo cáo V1/V2](reports/regional_danang_v1_v2/README.md) và [rà soát Bi-LSTM trên dev](reports/research_rainfall/dev_bilstm_review_2026_10_20.md) nêu kết quả, giới hạn và việc cần sửa. Bi-LSTM vùng theo phương án cuối chưa được huấn luyện; test 2025 tiếp tục giữ kín.
+**Phạm vi hiện tại — 21/10/2026:** tổng hợp đầu vào và nhãn theo vùng trước mô hình, nghiên cứu thêm/bớt đặc trưng E0–E7. Nhóm triển khai hai nhánh: Bi-LSTM 1–6 giờ và TFT 24–72 giờ; mỗi nhánh có LightGBM đối chứng và giao thức riêng. Người dùng phụ trách TFT, thành viên khác phụ trách Bi-LSTM. App chưa phải trọng tâm. [Phương án vùng nền ngày 20/10](reports/regional_research_plan_2026_10_20/README.md) có Word và ma trận 18 quyết định × 6 tiêu chí; [báo cáo V1/V2](reports/regional_danang_v1_v2/README.md) và [rà soát Bi-LSTM trên dev](reports/research_rainfall/dev_bilstm_review_2026_10_20.md) lưu bằng chứng trước nhánh ngày. Chưa xác nhận Bi-LSTM vùng mới đã được thành viên hoàn tất; test 2025 tiếp tục giữ kín.
+
+**Nhánh ngày 21/10, đã có ma trận phát triển:** [TFT/LightGBM 24–72 giờ, E0–E7, ba seed](reports/short_range_ablation_2026_10_21/README.md) có Word, 8 slide, FAQ, danh mục 44 biến, CI 20.000 bootstrap và kiểm chứng 96/96 lượt. TFT thêm riêng A hoặc M có tín hiệu cải thiện ngày 1 sau hiệu chỉnh 9 phép so; chưa có bằng chứng tương tự ở ngày 2–3 hoặc SST. Giữ nguyên [pilot](reports/short_range_pilot_2026_10_21/README.md). [Kế hoạch đầy đủ](reports/short_range_plan_2026_10_21/README.md) còn ranh/QC nhãn và kiểm định cuối; footprint 93 ô vẫn xấp xỉ, năm 2025 chưa mở.
 
 ---
 

@@ -1,7 +1,7 @@
 # PBL6 – Dự báo mưa: bối cảnh cho agent
 
 > **Đọc file này trước khi làm bất cứ việc gì.** Kế hoạch chi tiết, kèm số liệu bằng chứng, nằm ở
-> [`project_plan_v2.md`](project_plan_v2.md); đọc cùng phương án hiện tại và đối chiếu bằng chứng. Cập nhật lần cuối: 20/10/2026.
+> [`project_plan_v2.md`](project_plan_v2.md); đọc cùng phương án hiện tại và đối chiếu bằng chứng. Cập nhật lần cuối: 21/10/2026.
 > **Kế hoạch dành cho nhóm** (quy trình, giai đoạn hiện tại, lộ trình, phân công) nằm ở [`KE_HOACH_DU_AN.md`](KE_HOACH_DU_AN.md). Mỗi khi xong một giai đoạn hoặc chốt một quyết định, cập nhật các mục 4 và 6 của file đó.
 > `project_master_plan.md`, `SURFACE_BASELINE_REPORT.md`, `DATA_GAP_PLAN.md` và `reports/informer_baseline_report.md`
 > là tài liệu cũ, do agent khác viết. Chỉ dùng chúng để tham khảo lịch sử. Một số nhận định trong đó đã bị bác bỏ (xem mục "Quyết định").
@@ -15,6 +15,7 @@
   - MacBook M2 8 GB RAM: lưu dữ liệu, viết code, chạy pilot.
   - Máy nhóm có RTX 4060 8 GB: chạy huấn luyện dài.
   - Máy Windows đang thiết lập ngày 13/10/2026: RTX 3050 Ti Laptop 4 GB, driver 546.92; ổ C ít dung lượng. Python Windows ở `.venv\Scripts\python.exe` (không dùng Python MSYS2 có sẵn).
+  - **Máy hiện tại xác nhận21/10/2026:** RTX4060Laptop8GB, driver617.14; CUDA khả dụng với torch2.5.1+cu121, RAM hệ thống nhận diện~15,2GiB. Người dùng xác nhận dùng GPU này cho TFT. Mốc3050Ti ở trên là lịch sử, không dùng để dự toán công việc mới.
   - Repo làm việc chuyển sang USB **`D:\PBL6_v2`** theo xác nhận của người dùng. `D:\PBL6` cũ giữ nguyên; bản trên C là bản nguồn/backup của lần chuyển này.
 - Repo `nibsu05/PBL6` là **repo công khai**. Không commit dữ liệu, file PDF bài báo hay thông tin đăng nhập.
 
@@ -37,6 +38,19 @@
 - Pilot so OLD_COMMON,V1_COMMON,V2_COMMON,V1_FULL,V2_FULL trên cùng nhãn Gauge vùng và cửa sổ chung;3fold eval2021/2022/2023,calnămtrước,train2015→eval−2. Một seed LightGBM deterministic không bagging/feature sampling; không train NN mới. Không dùng cột mưa, ONI cũ hoặc CIN cũ trong đối chứng COMMON; FULL có CIN mới. Không đưa ERA5 giờ đích.
 - RMSE3h toàn năm OLD_COMMON/V1_FULL/V2_FULL:2021=2,569/2,488/2,403;2022=2,632/2,584/2,648;2023=2,156/2,142/2,082mm. V2_FULL−V1_FULL:−0,085/+0,064/−0,060; CI95%chỉ2021dưới0. 6h chưa có lợi ích ổn định. V1_COMMON−OLD_COMMON CIchứa0ởcả3fold/cả2hạn; chưa khẳng định chỉ gộp lưới giúp hơn.
 - Tín hiệu không gian rõ hơn ở2021, không lặp chắc2022/2023; nhiều phép so chưa hiệu chỉnh. GiữV1 làm nền,V2 nhánh ablation, không tuyên bố bộ mới thắng chung. Persistence dùng nhãnGauge hồi cứu có RMSE3h thấp hơn các model khí tượng nhưng có thông tin mưa quá khứ khác đầu vào; cần phép so bổ sung đúng nguồn, chưa là baseline vận hành. Không lấy pilot này thay kiểm chứng nhãn/thực tế/khả năng toàn Việt Nam.
+
+## Nhánh 24–72 giờ được duyệt ngày 21/10/2026 — pilot và ma trận phát triển
+
+- **Quy trình Git đã được người dùng đồng ý:** phát triển trên `research/tft-regional`, commit/push mã và báo cáo lên nhánh đó, tạo PR vào `main`. `main` là bản tích hợp chung cho các nhánh nghiên cứu sau review. Dữ liệu/checkpoint ngoài Git; nhánh Bi-LSTM do thành viên khác phụ trách.
+- Người dùng duyệt [kế hoạch đầy đủ/Word/protocol](reports/short_range_plan_2026_10_21/README.md) và yêu cầu ưu tiên kết quả trong 3–4 giờ để báo cáo ngày mai. Đã tạo nhánh `research/tft-regional`, triển khai loader/TFT vùng/baseline/đánh giá và hoàn thành [bộ pilot có Word, 7 slide, hình, CI](reports/short_range_pilot_2026_10_21/README.md). Không tự thay ma trận nhánh6h.
+- Đề nghị V1 vùng, lịch sử168h gộp6h, ba tổng24h kết thúc tại24/48/72h; TFT+LightGBM E0–E7. Decoder chính chỉ biết lịch; không đưa ERA5 giờ đích. Informer/forecast thật/V2/app là tùy chọn ngoài ngân sách chính.
+- Kiểm kê read-only2015–2023 được3.248issue ngày hợp lệ trên maskE7; F1/F2/F3 có train1.809/2.173/2.536issue. Không phân tích2025; verify nguồn2233/2233 lại đạt ngày21/10. Hai scriptinspect_short_range_plan/build_short_range_plan chỉ kiểm kê/xuất tài liệu, không phải pipeline huấn luyện.
+- Pilot: E0/E7, 3 fold eval2021–2023, seed42; 6 lượt TFT và6pipeline LightGBM. 23 kiểm tra đạt (12 mới,11 verification),12/12 lượt checkpoint tái lập toàn bộ evaluation trên thiết bị gốc; CPU có trôi số học nhỏ được ghi riêng. Bootstrap paired7/14ngày,2.000lần là CI thăm dò, chưa hiệu chỉnh đa so sánh hoặc bất định seed. Không mở2025.
+- BSS16 gộp E7 ngày1: LightGBM0,303/TFT0,220; ngày3:−0,075/−0,047. RMSE ngày1 E7:17,706/20,391mm/24h. ΔBSS E7−E0 ngày1: LightGBM+0,160 CI95%[+0,101;+0,223], TFT+0,088[+0,023;+0,156], khối7ngày. Không kết luận TFT thắng hoặc quy lợi ích riêng từng nhóm. Nhiều điểm chỉ là phát triển khám phá.
+- **Mở rộng sau pilot:** người dùng hỏi còn thời gian làm gì tiếp; đã hoàn thành [E0–E7, ba seed, Word/8 slide/FAQ/danh mục 44 biến](reports/short_range_ablation_2026_10_21/README.md): 72 lượt TFT và 24 pipeline LightGBM trên footprint 93 ô xấp xỉ đã khóa. 27 kiểm tra đạt; 96/96 lượt tái lập cả calibration/evaluation; 12/12 seed 42 E0/E7 khớp pilot. Dữ liệu/checkpoint/dự báo từng dòng ngoài Git; giữ nguyên pilot và bốn module nguồn đã băm. Không phân tích hoặc chấm năm 2025.
+- TFT ensemble ba seed: BSS E0 ngày 1/2/3 = 0,135/0,018/−0,034; E7 = 0,246/0,028/−0,038. Ngày 1, E1−E0 (thêm A) ΔBSS +0,085, CI99,44% [+0,002;+0,161]; E2−E0 (thêm M) +0,144 [+0,068;+0,233]. Đây là hai CI trên 0 trong gia đình 9 phép so đã khóa; cùng kết luận với khối 14 ngày. 20.000 bootstrap paired, reference lấy mẫu lại cùng nhãn/dự báo. Chưa có CI chính điều chỉnh trên 0 cho SST hoặc ngày 2–3; các năm development đã được xem trước, chưa là holdout độc lập.
+- LightGBM ngày 1 BSS E4=0,315, E7=0,303: thêm hết biến chưa chắc có điểm tốt nhất. Không quy mọi chênh lệch TFT/LightGBM cho kiến trúc; còn khác biểu diễn/loss và số tham số tăng theo số biến. Nhóm C chỉ có SST vùng, không diễn giải thành ENSO/MJO đã được kiểm tra đầy đủ.
+- Dự toán 48–70 giờ công ban đầu là khung nghiên cứu đầy đủ, chưa phải thời gian đã làm. **Số đo ma trận 96 lượt:** fitting/save/calibration khoảng 27,7 phút, tiến trình khoảng 27,9 phút; thay dự trù GPU 8–30 giờ ban đầu bằng số đo thực. Nhiều seed/factorial đã có trên footprint xấp xỉ; bước tiếp là chốt ranh và kiểm chứng nhãn, chạy lại nếu dữ liệu đổi, sau khóa mới holdout. Chưa coi nghiên cứu đầy đủ đã hoàn tất. Người dùng chưa xác nhận giờ/ngày.
 
 ## Cấu hình sản phẩm trước đây (lịch sử, không thay định hướng trên)
 
