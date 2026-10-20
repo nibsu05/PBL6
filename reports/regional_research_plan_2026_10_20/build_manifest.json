@@ -1,0 +1,70 @@
+{
+  "document_date": "2026-10-20",
+  "status": "agreed_objective_and_planned_protocol_not_training_results",
+  "objective": "Direct regional mean rainfall prediction; research first",
+  "decisions": 18,
+  "criteria_per_decision": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+  ],
+  "protected_decisions_retained": [
+    "D1",
+    "D2",
+    "D9",
+    "D10",
+    "D14",
+    "D15"
+  ],
+  "same_protocol_superior_evidence_used_to_replace_protected": false,
+  "primary_feature_counts": {
+    "E0": 11,
+    "E1": 23,
+    "E2": 31,
+    "E3": 12,
+    "E4": 43,
+    "E5": 24,
+    "E6": 32,
+    "E7": 44
+  },
+  "reference_catalog_commit": "d3f39360b8ab28e88be4b56310fbae10db8b9db7",
+  "word_tables": 27,
+  "word_paragraphs": 189,
+  "models_trained_by_this_build": false,
+  "test_2025_scored_by_this_build": false,
+  "files": {
+    "PHUONG_AN_CUOI.md": {
+      "sha256": "9b21b295742f9d2a7b9eb640ba4d7d53f54a85db4b5d6ea67a0840cbd38f4056",
+      "bytes": 63289
+    },
+    "PHUONG_AN_CUOI.docx": {
+      "sha256": "0616d2cd9222c7da98eecb26f9330eb278993252b6ee60bb647c69d42401f904",
+      "bytes": 61664
+    },
+    "QUYET_DINH_6_TIEU_CHI.csv": {
+      "sha256": "4a73f9319b4243537282ac2caa9d5ea07034696b9a672f787dcdea1a4755b5b6",
+      "bytes": 21120
+    },
+    "decisions.json": {
+      "sha256": "e0a8b68e58548fe75d5767843a26c0895159c1c752708ebee004474e0898eed0",
+      "bytes": 23855
+    },
+    "feature_groups.json": {
+      "sha256": "fedf0410bdc7f6d0776e7f8e3d2c4d1812e4ad19c998eca7728d2f2cf82ed46e",
+      "bytes": 1558
+    },
+    "feature_catalog_reference.csv": {
+      "sha256": "1fde93d30b0ede5deff8f691bac68a41a025132748b86cb2338efd5f0500bcd4",
+      "bytes": 4694
+    }
+  },
+  "group_source": {
+    "filename": "TONG_HOP_DE_XUAT.md",
+    "sha256": "c446d3e72a04b3cb1d74e284ee4fe9a03ec7ffefb1a6a401e991181dea5d83dd",
+    "lines": 477,
+    "referenced_commit": "e531982"
+  }
+}

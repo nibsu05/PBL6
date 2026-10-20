@@ -1,7 +1,7 @@
 # PBL6 – Dự báo mưa: bối cảnh cho agent
 
 > **Đọc file này trước khi làm bất cứ việc gì.** Kế hoạch chi tiết, kèm số liệu bằng chứng, nằm ở
-> [`project_plan_v2.md`](project_plan_v2.md); các nhận định trong kế hoạch cần đối chiếu code/dữ liệu và cập nhật phản biện. Cập nhật lần cuối: 20/10/2026.
+> [`project_plan_v2.md`](project_plan_v2.md); đọc cùng phương án hiện tại và đối chiếu bằng chứng. Cập nhật lần cuối: 20/10/2026.
 > **Kế hoạch dành cho nhóm** (quy trình, giai đoạn hiện tại, lộ trình, phân công) nằm ở [`KE_HOACH_DU_AN.md`](KE_HOACH_DU_AN.md). Mỗi khi xong một giai đoạn hoặc chốt một quyết định, cập nhật các mục 4 và 6 của file đó.
 > `project_master_plan.md`, `SURFACE_BASELINE_REPORT.md`, `DATA_GAP_PLAN.md` và `reports/informer_baseline_report.md`
 > là tài liệu cũ, do agent khác viết. Chỉ dùng chúng để tham khảo lịch sử. Một số nhận định trong đó đã bị bác bỏ (xem mục "Quyết định").
@@ -18,11 +18,15 @@
   - Repo làm việc chuyển sang USB **`D:\PBL6_v2`** theo xác nhận của người dùng. `D:\PBL6` cũ giữ nguyên; bản trên C là bản nguồn/backup của lần chuyển này.
 - Repo `nibsu05/PBL6` là **repo công khai**. Không commit dữ liệu, file PDF bài báo hay thông tin đăng nhập.
 
-## Định hướng hiện tại (người dùng xác nhận ngày 20/10/2026)
+## Quyết định hiện tại: nghiên cứu và dự đoán vùng trực tiếp (20/10/2026)
 
-- **Ưu tiên nghiên cứu theo dạng bài báo:** đo đóng góp của việc thêm/bớt đặc trưng khí tượng, mưa và địa hình cho dự đoán mưa trên một vùng như Đà Nẵng. Không đặt trước đặc trưng mới chắc chắn cải thiện; không suy từ một vùng ra toàn Việt Nam.
-- **App không còn là trọng tâm.** Thu nguồn live, hậu xử lý IFS và mục tiêu thắng ECMWF vận hành không phải cổng bắt buộc cho hướng nghiên cứu hiện tại. Giữ ERA5 làm nền nghiên cứu hồi cứu, nhưng vẫn phải tách dự báo dùng lịch sử với ước lượng dùng khí tượng giờ đích.
-- Dữ liệu/cấu hình thực tế ở [thiet_ke_nghien_cuu_dac_trung_2026_10_20.md](reports/research_rainfall/thiet_ke_nghien_cuu_dac_trung_2026_10_20.md). Sau đó người dùng yêu cầu tạo2phiên bản tổng hợp vùng và so full_features cũ bằng thực nghiệm. Đã làm V1/V2 và pilot LightGBM24h→tổng3/6h; chưa chốt lại toàn bộ hạn hoặc kiến trúc nghiên cứu.
+- Người dùng xác nhận **nghiên cứu đặc trưng là trọng tâm, đầu ra chính là dự đoán vùng trực tiếp**. Tổng hợp khí tượng/nhãn từ các ô trước khi học; một mẫu là một thời điểm của cả vùng. Không tự đổi sang dự đoán từng ô rồi mới gộp hoặc quay lại ưu tiên app.
+- Đã hợp nhất tài liệu nhóm TONG_HOP_DE_XUAT với phương án nghiên cứu: [phương án cuối](reports/regional_research_plan_2026_10_20/PHUONG_AN_CUOI.md), kèm Word, 18 quyết định, mỗi quyết định giải thích đủ sáu tiêu chí mục 13.
+- **Giữ D1/D2/D9/D10/D14/D15 có nhãn bằng chứng theo yêu cầu người dùng**; chưa có phép đo tốt hơn cùng giao thức để thay. Gauge chính/IMERG kiểm tra độ bền; CSI/BSS chính, RMSE/bias và MAE phụ; tách mùa, không gọi điểm giờ mùa đông là kết quả chính. Ghi rõ provenance Best Match và giới hạn nhãn giờ, không dùng phép tính khác mẫu để tự thay bảng của nhóm.
+- Phương án triển khai chọn lịch sử 24 giờ → 6 giờ, Bi-LSTM vùng và LightGBM, factorial E0–E7 trên V1; V2/S0/S7 và raw lag4/Q0/Q7 là nhánh phụ. Danh mục 11/12/20/1 cột B/A/M/C không chồng lấn lưu trong feature_groups.json. Không đưa ERA5 giờ đích vào nghiên cứu chính; không gọi SST là đã kiểm tra ENSO/MJO.
+- Ba fold phát triển eval 2021–2023; sau khóa thiết kế, train 2015–2023/cal 2024/test 2025. Không dùng 2026 để chọn mô hình chấm năm 2025. Giữ kín test 2025.
+- V1/V2 đã tạo ở main d3f3936, nhưng loader/huấn luyện Bi-LSTM vùng theo phương án cuối **chưa triển khai trong lượt viết tài liệu**. Cần sửa các lỗi trên dev theo [bản rà soát](reports/research_rainfall/dev_bilstm_review_2026_10_20.md), chốt giao ranh/ô biên và kiểm chứng nhãn trước chạy đầy đủ. 93 ô hiện là vùng xấp xỉ, không mặc định đúng toàn địa giới.
+- App, TFT 1–3 ngày, T-OPS và đa vùng là mở rộng; giữ code/kết quả đã có để tái dùng. Người dùng yêu cầu đưa toàn bộ thay đổi mới lên main; bộ tài liệu hợp nhất và rà soát được công bố trên main, không merge dữ liệu/checkpoint của dev.
 - Kiểm tra trước: đã quét93ô×87.672giờ2015–2024; ba cột kx/tt/era5_tp_mm mỗi cột thiếu1.953giátrịô–giờ; các cột khác hữu hạn. Lượt hiện tại verify nguồn2233/2233,22test đạt, kiểm tra parity V1/V2 và3mẫu tổng hợp trực tiếp nguồn. Hữu hạn không bảo đảm nhãn chính xác; test mô hình2025chưa mở.
 
 ### V1/V2 dữ liệu vùng và pilot so đầu vào (20/10/2026)
@@ -34,7 +38,7 @@
 - RMSE3h toàn năm OLD_COMMON/V1_FULL/V2_FULL:2021=2,569/2,488/2,403;2022=2,632/2,584/2,648;2023=2,156/2,142/2,082mm. V2_FULL−V1_FULL:−0,085/+0,064/−0,060; CI95%chỉ2021dưới0. 6h chưa có lợi ích ổn định. V1_COMMON−OLD_COMMON CIchứa0ởcả3fold/cả2hạn; chưa khẳng định chỉ gộp lưới giúp hơn.
 - Tín hiệu không gian rõ hơn ở2021, không lặp chắc2022/2023; nhiều phép so chưa hiệu chỉnh. GiữV1 làm nền,V2 nhánh ablation, không tuyên bố bộ mới thắng chung. Persistence dùng nhãnGauge hồi cứu có RMSE3h thấp hơn các model khí tượng nhưng có thông tin mưa quá khứ khác đầu vào; cần phép so bổ sung đúng nguồn, chưa là baseline vận hành. Không lấy pilot này thay kiểm chứng nhãn/thực tế/khả năng toàn Việt Nam.
 
-### Cấu hình sản phẩm và hướng vận hành trước đây (tham khảo lịch sử)
+## Cấu hình sản phẩm trước đây (lịch sử, không thay định hướng trên)
 
 - **Sản phẩm A:**
   - Mô hình: Bi-LSTM.

@@ -1,0 +1,4 @@
+# Keep published document checksums identical across Git checkouts.
+reports/regional_research_plan_2026_10_20/*.md text eol=lf
+reports/regional_research_plan_2026_10_20/*.json text eol=lf
+reports/regional_research_plan_2026_10_20/*.csv text eol=lf

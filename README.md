@@ -4,7 +4,9 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-orange.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-Dự án nghiên cứu và xây dựng hệ thống dự báo lượng mưa cực ngắn (1–6 giờ) và hạn ngắn (1–3 ngày) tại khu vực Đà Nẵng mới (Đà Nẵng + Quảng Nam) và mở rộng sang các vùng khí hậu khác của Việt Nam.
+Dự án nghiên cứu đóng góp của các nhóm đặc trưng dữ liệu cho dự đoán mưa vùng trực tiếp tại Đà Nẵng mới (Đà Nẵng cũ + Quảng Nam).
+
+**Phạm vi hiện tại — 20/10/2026:** tổng hợp đầu vào và nhãn theo vùng trước mô hình, lịch sử 24 giờ → dự đoán 6 giờ, Bi-LSTM/LightGBM và thí nghiệm thêm/bớt đặc trưng E0–E7. App và TFT thuộc phần mở rộng. [Phương án cuối gửi nhóm](reports/regional_research_plan_2026_10_20/README.md) có bản Word, Markdown, ma trận 18 quyết định × 6 tiêu chí và gói ZIP; [báo cáo V1/V2](reports/regional_danang_v1_v2/README.md) và [rà soát Bi-LSTM trên dev](reports/research_rainfall/dev_bilstm_review_2026_10_20.md) nêu kết quả, giới hạn và việc cần sửa. Bi-LSTM vùng theo phương án cuối chưa được huấn luyện; test 2025 tiếp tục giữ kín.
 
 ---
 
@@ -13,7 +15,7 @@ Dự án nghiên cứu và xây dựng hệ thống dự báo lượng mưa cự
 **Thành viên nhóm, đọc trước:** [`KE_HOACH_DU_AN.md`](KE_HOACH_DU_AN.md) (dự án làm gì, quy trình, đang ở giai đoạn nào, lộ trình, phân công).
 Chi tiết kỹ thuật: [`project_plan_v2.md`](project_plan_v2.md). Bối cảnh cho AI agent: [`CLAUDE.md`](CLAUDE.md).
 
-- Mô hình: Bi-LSTM (0–6 h) và TFT (1–3 ngày). Nhãn: GSMaP v8 hiệu chỉnh trạm. Lưới 0,1° phủ Đà Nẵng mới (Đà Nẵng cũ + Quảng Nam), 2015 → 09/2026.
+- Pipeline nguồn và cấu hình trước đây: Bi-LSTM (0–6 h), TFT (1–3 ngày), nhãn GSMaP v8 hiệu chỉnh trạm và lưới 0,1°, 2015 → 09/2026. Nghiên cứu hiện tại dùng các ô để tạo chuỗi vùng; cần chốt giao ranh và kiểm chứng nhãn trước huấn luyện đầy đủ.
 - Kiểm chứng: 10 trạm synop NOAA GSOD. Bảng baseline và Thí nghiệm 0 ở [`reports/station_benchmark/README.md`](reports/station_benchmark/README.md).
 - Dữ liệu nguồn v2 (khoảng 2,9 GB, file `pbl6_data_v2_2026-10-11.tar`) nằm trên Google Drive (đường dẫn bên dưới). Giải nén ở thư mục gốc repo rồi chạy:
 

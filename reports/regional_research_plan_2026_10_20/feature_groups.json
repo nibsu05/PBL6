@@ -1,0 +1,22 @@
+{
+  "status": "planned_protocol_not_a_training_run",
+  "representation_primary": "V1 area means; calendar columns keep their names",
+  "mapping": "For a native variable x use mean__x; calendar names unchanged",
+  "B": ["t2m_c", "td2m_c", "rh2m_pct", "sp_hpa", "mslp_hpa", "u10", "v10", "sin_hour", "cos_hour", "sin_doy", "cos_doy"],
+  "A": ["cape", "cin_capped", "has_lfc", "tcwv", "kx", "tt", "blh", "tcc", "lcc", "mcc", "hcc", "swvl1"],
+  "M": ["u850", "v850", "q850_gkg", "t850_c", "rh850_pct", "w850_pas", "u500", "v500", "q500_gkg", "t500_c", "w500_pas", "shear_850_500", "ivt_u", "ivt_v", "ivt_mag", "vimd_mmh", "ctx_tcwv", "ctx_ivt_mag", "cold_surge_dp_hpa", "dp_tonkin_south_hpa"],
+  "C": ["sst_region_c"],
+  "Q_secondary": ["gsmap_mm", "gsmap_nb5_mean_mm", "gsmap_nb5_max_mm"],
+  "excluded_from_primary": ["y_region_gc_mm", "label_permanent", "label_valid_weight_fraction", "era5_tp_mm", "wspd10", "oni_anom"],
+  "experiments": {
+    "E0": ["B"], "E1": ["B", "A"], "E2": ["B", "M"], "E3": ["B", "C"],
+    "E4": ["B", "A", "M"], "E5": ["B", "A", "C"], "E6": ["B", "M", "C"], "E7": ["B", "A", "M", "C"]
+  },
+  "notes": [
+    "M is circulation and moisture, not a validated monsoon index.",
+    "C is regional SST only, not a complete ENSO/MJO climate group.",
+    "The spatial additions S0/S7 may only use source variables present in E0/E7 respectively.",
+    "Three terrain-wind-moisture proxies require all their inputs and belong only to S7.",
+    "Q is shifted by four hours for a retrospective sensitivity, not asserted equivalent to NRT."
+  ]
+}
