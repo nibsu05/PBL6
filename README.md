@@ -12,6 +12,8 @@ Dự án nghiên cứu đóng góp của các nhóm đặc trưng dữ liệu ch
 
 **Chuẩn bị báo cáo trong 30 phút:** [bản ngắn Word, 5 slide và lời trình bày 5 phút](reports/short_range_brief_2026_10_21/README.md) tổng hợp từ số liệu đã kiểm chứng. Mã/báo cáo trên `research/tft-regional`, [PR #1 vào main](https://github.com/nibsu05/PBL6/pull/1) đang mở.
 
+**Giải thích đầy đủ cho thành viên nhóm:** [tài liệu Word/Markdown và Excel 18 sheet](reports/short_range_explained_2026_10_21/README.md) giải thích mục tiêu ba tổng mưa vùng 24 giờ, đủ 44 đặc trưng và E0–E7, lý do thử TFT, giới hạn so Informer, vai trò LightGBM, công thức/ví dụ đọc từng metric. Có đủ 48 dòng chính, chi tiết năm/mùa/seed/ngưỡng và bằng chứng 96 lượt; đây là tổng hợp development, không mở test 2025.
+
 ---
 
 ## 🚀 Pipeline v2 (từ 11/10/2026) — bắt đầu từ đây

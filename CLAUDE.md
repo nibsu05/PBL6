@@ -51,6 +51,8 @@
 - **Mở rộng sau pilot:** người dùng hỏi còn thời gian làm gì tiếp; đã hoàn thành [E0–E7, ba seed, Word/8 slide/FAQ/danh mục 44 biến](reports/short_range_ablation_2026_10_21/README.md): 72 lượt TFT và 24 pipeline LightGBM trên footprint 93 ô xấp xỉ đã khóa. 27 kiểm tra đạt; 96/96 lượt tái lập cả calibration/evaluation; 12/12 seed 42 E0/E7 khớp pilot. Dữ liệu/checkpoint/dự báo từng dòng ngoài Git; giữ nguyên pilot và bốn module nguồn đã băm. Không phân tích hoặc chấm năm 2025.
 - TFT ensemble ba seed: BSS E0 ngày 1/2/3 = 0,135/0,018/−0,034; E7 = 0,246/0,028/−0,038. Ngày 1, E1−E0 (thêm A) ΔBSS +0,085, CI99,44% [+0,002;+0,161]; E2−E0 (thêm M) +0,144 [+0,068;+0,233]. Đây là hai CI trên 0 trong gia đình 9 phép so đã khóa; cùng kết luận với khối 14 ngày. 20.000 bootstrap paired, reference lấy mẫu lại cùng nhãn/dự báo. Chưa có CI chính điều chỉnh trên 0 cho SST hoặc ngày 2–3; các năm development đã được xem trước, chưa là holdout độc lập.
 - LightGBM ngày 1 BSS E4=0,315, E7=0,303: thêm hết biến chưa chắc có điểm tốt nhất. Không quy mọi chênh lệch TFT/LightGBM cho kiến trúc; còn khác biểu diễn/loss và số tham số tăng theo số biến. Nhóm C chỉ có SST vùng, không diễn giải thành ENSO/MJO đã được kiểm tra đầy đủ.
+- **Yêu cầu giải thích đầy đủ tiếp theo ngày 21/10:** đã tạo [Word/Markdown và Excel 18 sheet](reports/short_range_explained_2026_10_21/README.md), có 48 dòng chính = 8 E × 2 họ × 3 ngày, bảng đủ 44 biến, chi tiết năm/mùa/seed/ngưỡng và ví dụ metrics. Đầu ra là ba tổng 24 giờ riêng [0,24), [24,48), [48,72), không phải từng giờ hoặc tổng tích lũy 48/72 giờ; một mẫu là cả vùng. Chỉ đọc aggregate đã kiểm chứng, không fit thêm hoặc mở 2025. Người dùng cần giải thích có chiều sâu, không chỉ gửi nhận xét ngắn hoặc link.
+- **Sửa lý do chọn mô hình:** chọn TFT là giả thuyết thiết kế cho nhiều nhóm biến/nhiều hạn, chưa có bằng chứng thắng Informer cùng giao thức. Informer có time marks trong mã chính thức; R² cũ và benchmark khác không loại được nó cho mưa vùng. Bản TFT hiện là adaptation không có static context/phân vị, chỉ lịch tương lai. LightGBM là đối chứng học từ cùng nguyên liệu tóm tắt, không phải nguồn dữ liệu khác; phép so hiện chưa cô lập riêng kiến trúc. Tài liệu mới dẫn bài gốc và phân biệt nhận định áp dụng của dự án.
 - Dự toán 48–70 giờ công ban đầu là khung nghiên cứu đầy đủ, chưa phải thời gian đã làm. **Số đo ma trận 96 lượt:** fitting/save/calibration khoảng 27,7 phút, tiến trình khoảng 27,9 phút; thay dự trù GPU 8–30 giờ ban đầu bằng số đo thực. Nhiều seed/factorial đã có trên footprint xấp xỉ; bước tiếp là chốt ranh và kiểm chứng nhãn, chạy lại nếu dữ liệu đổi, sau khóa mới holdout. Chưa coi nghiên cứu đầy đủ đã hoàn tất. Người dùng chưa xác nhận giờ/ngày.
 
 ## Cấu hình sản phẩm trước đây (lịch sử, không thay định hướng trên)
@@ -91,13 +93,11 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 4. **Chất lượng nhãn mưa giờ phụ thuộc mùa ở Đà Nẵng/Trung Bộ.**
    - Audit 93 ô Đà Nẵng 2021–2023: 67,6% tổng GC mùa 11–2 nằm ở giờ raw ≤0,01 mm; mùa 5–10 là 20,8%. Chỉ báo cho thấy phụ thuộc hiệu chỉnh mạnh, không chứng minh mọi giờ mưa mùa đông đều sai hoặc được trải đều.
    - Sản phẩm A chấm giờ/3 h chính trên tháng 5–10; mùa đông chỉ chấm 6 h như chỉ số phụ vẫn có bất định nhãn. Tổng 24 h dùng QC nhãn với trạm hoặc sản phẩm B, không biến mô hình 6 h thành dự báo 24 h. Tách mọi bảng theo mùa.
-5. **Chọn TFT thay Informer cho sản phẩm B** (chốt 11/10/2026). Informer là lựa chọn yếu vì:
-   - Trên bộ chuẩn Weather, Informer kém cả phương án lặp lại giá trị gần nhất (Zeng 2023).
-   - Lần chạy cũ của đồ án chỉ đạt R² = 0,04.
-   - Informer không có cơ chế riêng cho đầu vào tương lai và đặc trưng tĩnh.
-   - TFT có sẵn cơ chế cho đặc trưng tĩnh, dự báo số tương lai và chuỗi quá khứ, xuất được phân vị và trọng số chọn biến.
-   - Đối chứng bắt buộc: ECMWF thô, ECMWF + quantile mapping, LightGBM, DLinear, Bi-LSTM (bảng 2×2). Informer chỉ chạy một cấu hình.
-   - TFT được **tự cài đặt** bằng PyTorch, đọc từ `WindowSampler`; không dùng `pytorch-forecasting` vì không vừa 8 GB RAM.
+5. **TFT là kiến trúc thử nghiệm chính nhánh ngày**, rà soát lại lý do 21/10/2026:
+   - Chưa chạy Informer cùng giao thức vùng; benchmark khác và R² cũ 0,04 không đủ để kết luận Informer yếu hoặc không khả thi ở đây.
+   - Informer có time marks; không nói hoàn toàn không nhận thông tin tương lai đã biết. Ưu thế tính toán chuỗi dài của nó chưa phải nút thắt rõ ở encoder 28 bước hiện tại.
+   - TFT gốc có lựa chọn biến/gating và thiết kế nhiều hạn, là lý do để thử; chưa bảo đảm dự đoán tốt hơn. Bản vùng tự cài PyTorch giữ VSN/GRN/LSTM/attention, bỏ static context, dùng Tweedie/BCE, chưa xuất phân vị và chưa dùng forecast thật.
+   - Đối chứng đang có: LightGBM, khí hậu, luôn 0. So TFT/LightGBM là hai pipeline cùng nguyên liệu nhưng khác biểu diễn, chưa là phép so chỉ đổi kiến trúc. ECMWF/DLinear/Informer thuộc phép thử khác phải đăng ký, không gọi là đã chạy.
 6. **Không có dữ liệu Vrain** (người dùng xác nhận không xin được). Kiểm chứng độc lập chỉ dựa vào NOAA GSOD tại 10 trạm, đến 24/08/2025.
 7. **Những nhận định cũ đã bị bác bỏ:**
    - "Informer vượt Bi-LSTM 21 %": hai mô hình được chấm trên tập test khác nhau.

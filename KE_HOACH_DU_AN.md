@@ -126,6 +126,8 @@ flowchart LR
 
 **Mốc báo cáo nhanh tiếp theo:** [Word ngắn, 5 slide và lời trình bày 5 phút](reports/short_range_brief_2026_10_21/README.md) đã tổng hợp từ kết quả này. Commit đầu tiên `ad78de3` đã push lên nhánh TFT, [PR #1](https://github.com/nibsu05/PBL6/pull/1) đang mở vào main. Đây là bước trình bày kết quả, không phải đợt thí nghiệm mới.
 
+**Bản giải thích đầy đủ theo yêu cầu tiếp theo:** [Word/Markdown và Excel 18 sheet](reports/short_range_explained_2026_10_21/README.md) có đủ 48 dòng kết quả chính, 44 biến, trạng thái 96 lượt và hướng dẫn từ mục tiêu đến metrics bằng ví dụ. Giải thích rõ ba tổng mưa vùng 24 giờ, vai trò TFT/Informer/LightGBM và khác biệt lượng mm/xác suất/quyết định sự kiện. Chỉ tổng hợp aggregate, không thêm lần huấn luyện hoặc chấm 2025.
+
 **Trạng thái hiện tại 20/10:** đã hoàn tất [tài liệu hợp nhất gửi nhóm](reports/regional_research_plan_2026_10_20/PHUONG_AN_CUOI.docx), với đầu ra vùng trực tiếp, E0–E7/Bi-LSTM/LightGBM, chính sách bằng chứng giữ nguyên và 18 quyết định × 6 tiêu chí. Dữ liệu vùng V1/V2 và pilot có trên main; chưa có Bi-LSTM vùng theo protocol cuối và chưa hoàn thiện giao ranh/kiểm chứng nhãn. Bảng 14/10 sau đây là kết quả của các giai đoạn trước, không phải trạng thái toàn bộ phương án mới.
 
 **Đổi trọng tâm20/10:** nghiên cứu thêm/bớt đặc trưng, không tập trung app. Đã tạo hai bộ vùng102.984giờ:V1/49predictor,V2/138predictor; nhãn cùngmeanGauge93ô, trọng số toàn ô xấp xỉ vùng. Đã chạy pilotLightGBM2021–2023; V2 có CI dương về cải thiện ởmộtsốphépso2021, chưa lặp chắc2022/2023. Verify2233/2233,22test vàparity thực đạt; không trainNN hoặc chấmtest2025. [Kết quả/CI](reports/regional_danang_v1_v2/README.md). Domain screen30ô/pilot93ô trước đây là các đợt khác.
@@ -163,11 +165,7 @@ flowchart LR
    - Sản phẩm A được chấm theo giờ chủ yếu trên tháng 5–10.
    - Mùa đông chấm tổng 6 giờ như chỉ số phụ; 24 giờ dùng QC nhãn với trạm hoặc sản phẩm B.
    - Quan trắc vệ tinh dự kiến ít giúp vào mùa đông.
-5. **Vì sao dùng TFT thay Informer:**
-   - Trên bộ dữ liệu chuẩn, Informer thua cả cách đoán "lặp lại giá trị gần nhất".
-   - Lần chạy cũ của nhóm chỉ đạt R² = 0,04.
-   - TFT được thiết kế đúng cho loại đầu vào của bài toán: dự báo số cho tương lai và đặc trưng tĩnh.
-   - Informer vẫn chạy một cấu hình để đối chiếu.
+5. **Vì sao thử TFT, cập nhật 21/10:** lựa chọn biến/gating và thiết kế nhiều hạn là cơ sở thiết kế. Chưa có phép so Informer cùng giao thức vùng; không dùng benchmark khác hoặc R² cũ để tuyên bố nó không khả thi. Bản TFT hiện chỉ nhận lịch tương lai, không có static context hay phân vị. LightGBM đã chạy đủ cùng nguyên liệu, là đối chứng thực nghiệm cần đọc cả khi có điểm tốt hơn TFT. Informer là lựa chọn mở rộng khi cần trả lời câu hỏi kiến trúc, không phải đã chạy để chứng minh thất bại.
 
 ---
 
@@ -176,6 +174,8 @@ flowchart LR
 **Quy trình Git, người dùng đồng ý 21/10:** nhánh `research/tft-regional` dùng cho phần TFT; commit/push mã và báo cáo, tạo PR vào `main` để review và tích hợp. `main` dùng chung cho cả nhánh giờ và nhánh ngày; dữ liệu/checkpoint tiếp tục ngoài Git.
 
 Đã có PR #1 và bộ trình bày nhanh cho báo cáo. Các bước dữ liệu/holdout dưới đây vẫn còn nguyên; tài liệu ngắn không thay kết luận hoặc phạm vi của báo cáo đầy đủ.
+
+Đã bổ sung bản giải thích đầy đủ và Excel 18 sheet cho nhóm theo yêu cầu. Nhận định cần giữ: A/M có tín hiệu xác suất ngày 1; cả hai họ và mọi E hiện BSS âm ngày 3; chưa chứng minh TFT thắng LightGBM hoặc Informer. Khi dữ liệu/giao thức chưa đổi, dùng kết quả đã kiểm chứng để giải thích, không chạy lại chỉ vì cần báo cáo dài hơn. Nếu đổi tiêu chí chọn mô hình từ sự kiện sang RMSE, phải khóa trước holdout.
 
 **Nhánh ngày đã duyệt 21/10:** loader/baseline/TFT, pilot và ma trận E0–E7 ba seed đã hoàn thành trên footprint 93 ô cố định, xấp xỉ. Tiếp theo chốt ranh/QC nhãn và tương thích định nghĩa vùng với Bi-LSTM; chạy lại development nếu vùng/nhãn thay đổi; sau khóa mới train/cal/test 2025 E0/E7. Không gọi ma trận phát triển là hoàn tất cổng dữ liệu hoặc nghiên cứu cuối. Bộ Word/slide/FAQ đã sẵn sàng, không cần thêm Informer hoặc app để báo cáo đợt này.
 
