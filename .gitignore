@@ -39,6 +39,7 @@ data/processed/gee/
 data/processed/dataset_v2/*.npy
 data/processed/dataset_v2/index_cache/
 data/processed/dataset_v2_danang/
+data/processed/regional_danang/
 data/processed/pilot_bilstm_v2*/
 
 # Giữ lại dữ liệu mẫu (Sample data) trong data/samples/
@@ -71,6 +72,8 @@ data/processed/surface_only/*.parquet
 Thumbs.db
 desktop.ini
 *.log
+# Tệp khóa tạm của Microsoft Office
+~$*
 
 # Bài báo tham khảo (PDF có bản quyền, repo công khai) — lưu trên Google Drive
 Paper/

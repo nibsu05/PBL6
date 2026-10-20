@@ -1,0 +1,54 @@
+{
+  "version": "regional-v1-v2-2026-10-20",
+  "source_manifest_sha256": "9caf9db3debedd8e295d4f68ce26c38c2af34676cd37756a60d5fdc1843be532",
+  "packaged_source_verification": "2233/2233 matched, missing0, mismatch0 on2026-10-20",
+  "region": "93 selected Danang-new grid cells; approximate footprint, not exact administrative polygon",
+  "weighting": "Spherical full-cell area, 0.1 degree; no polygon-intersection geometry available locally",
+  "footprint_full_cells_km2": 11074.064711765875,
+  "cells": 93,
+  "zones": {
+    "coastal": {
+      "cells": 23,
+      "weight": 0.2471333934841429
+    },
+    "interior": {
+      "cells": 44,
+      "weight": 0.47323421588462894
+    },
+    "highland": {
+      "cells": 26,
+      "weight": 0.2796323906312283
+    }
+  },
+  "zone_rules": "coastal distance<=30km; remaining highland elevation>=600m; remainder interior. Fixed without labels.",
+  "missing_policy": "strict complete selected spatial support per feature; no filling or changing denominator",
+  "label": "Area mean of hourly GSMaP Gauge v8, same y for V1 and V2",
+  "time_convention": "[datetime, datetime+1h) UTC; calendar padding after last complete label removed",
+  "start": "2015-01-01 00:00:00+00:00",
+  "end": "2026-09-30 23:00:00+00:00",
+  "year_2025": "Exported mechanically; reserved and excluded from all pilot fitting/scoring/diagnostics",
+  "predictors_v1": 49,
+  "predictors_v2": 138,
+  "outputs": {
+    "v1": {
+      "path": "data\\processed\\regional_danang\\v1_hourly.parquet",
+      "rows": 102984,
+      "columns_including_metadata": 53,
+      "sha256": "92a6bc6a527b25107761e85f0d14e64713a39dfd2930560a4498927c27dfc448",
+      "bytes": 44265704
+    },
+    "v2": {
+      "path": "data\\processed\\regional_danang\\v2_hourly.parquet",
+      "rows": 102984,
+      "columns_including_metadata": 142,
+      "sha256": "b114736f371569f6966ea3355dbc62e3ebed9b7312b3bb4378b155a3df4e19fa",
+      "bytes": 121513015
+    }
+  },
+  "caveats": [
+    "Spatial summaries are not independent new observations.",
+    "ERA5 interpolation to0.1deg does not improve native resolution.",
+    "Raw/Gauge share satellite algorithms; live availability not asserted.",
+    "All8static columns are constant for one regional target and not repeated as predictor columns."
+  ]
+}

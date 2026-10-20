@@ -1,0 +1,10 @@
+{
+  "n": 78888,
+  "obs_mean": 0.2814773587642921,
+  "fcst_mean": 0.24410176452692425,
+  "MAE": 0.29829870130059793,
+  "RMSE": 0.9797573616123088,
+  "bias": -0.0373755942373678,
+  "CC": 0.4547479027056129,
+  "meaning": "Different products and spatial supports; not independent truth or a quality ranking."
+}

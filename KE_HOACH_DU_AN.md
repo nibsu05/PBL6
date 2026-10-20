@@ -2,24 +2,24 @@
 
 > **Dành cho các thành viên trong nhóm.** File này trả lời bốn câu hỏi: dự án làm gì, quy trình ra sao, đang ở giai đoạn nào, và mỗi người cần làm gì tiếp theo.
 > Chi tiết kỹ thuật và số liệu đầy đủ nằm ở [`project_plan_v2.md`](project_plan_v2.md). Bối cảnh dành cho AI agent nằm ở [`CLAUDE.md`](CLAUDE.md).
-> **Cập nhật:** 14/10/2026. Khi chuyển sang giai đoạn mới hoặc chốt một quyết định, hãy sửa mục 4, mục 6 và ngày cập nhật.
+> **Cập nhật:** 20/10/2026 (bổ sung phản biện dữ liệu, hai bộ tổng hợp vùng V1/V2 và pilot so đầu vào cũ/mới; các thí nghiệm trước đó giữ mốc lịch sử). Khi chuyển sang giai đoạn mới hoặc chốt một quyết định, hãy sửa mục 4, mục 6 và ngày cập nhật.
 
 ---
 
 ## 1. Đọc nhanh trong 1 phút
 
-- **Mục tiêu:** dự báo mưa cho **Đà Nẵng mới** (Đà Nẵng cũ cộng Quảng Nam) theo hai sản phẩm. Kết quả cuối là **một app**.
+- **Mục tiêu hiện tại, người dùng xác nhận20/10:** nghiên cứu theo dạng bài báo về đóng góp của việc thêm/bớt đặc trưng dữ liệu cho dự đoán mưa trên một vùng như **Đà Nẵng**. App không còn là trọng tâm. Hai cấu hình sản phẩm trước đây để tham khảo:
   - **Sản phẩm A**, 0–6 giờ tới, dùng **Bi-LSTM**.
   - **Sản phẩm B**, 1–3 ngày tới, dùng **TFT** (Temporal Fusion Transformer).
-- **Câu hỏi nghiên cứu:** nhóm thông tin nào (quan trắc vệ tinh, độ bất ổn định, dòng ẩm, dự báo số…) giúp mô hình AI **vượt dự báo số ECMWF** ở hạn nào và mùa nào?
-- **Đang ở đâu:** dữ liệu, bộ đánh giá, pilot và bốn phép thử follow-up tại Đà Nẵng đã hoàn tất; demo archive từ checkpoint thật hoạt động. Chưa có dự báo AI live hay kết luận vượt ECMWF.
-- **Việc cần làm ngay:** đã tải và giải mã một giờ GSMaP raw/Gauge_NRT v8; tiếp tục ghi nguồn liên tục, kiểm tra lệch giữa NRT và dữ liệu train, rồi so ECMWF trên forecast thật. Xem mục 4 và 6.
+- **Câu hỏi nghiên cứu:** giữ kiến trúc và điều kiện đánh giá cố định, nhóm khí tượng/quan trắc/địa hình nào cải thiện dự đoán mưa ngoài mẫu tại Đà Nẵng, ở hạn và mùa nào? Chấp nhận kết quả không cải thiện; chưa suy ra toàn Việt Nam.
+- **Đang ở đâu:** đã tạo V1(trung bình vùng) vàV2(thêm không gian), chạy pilotLightGBM so đầu vào cũ/mới trên cùng nhãn vùng; có tín hiệu dương2021nhưng chưa ổn định2022–2023. [Báo cáoV1/V2](reports/regional_danang_v1_v2/README.md). Các thí nghiệm/app dưới đây giữ để tham khảo lịch sử.
+- **Việc cần làm ngay:** dùngV1 làm nền,V2 nhánh nghiên cứu; chốt hạn/nhãn vùng và ablation có đối chứng mưa quá khứ phù hợp, giữtest2025kín. [Danh mục dữ liệu](reports/research_rainfall/thiet_ke_nghien_cuu_dac_trung_2026_10_20.md). Không mở rộng mô hình chỉ để tìm mức tăng thuận lợi.
 
 ---
 
 ## 2. Dự án làm gì
 
-### 2.1. Hai sản phẩm
+### 2.1. Hai cấu hình sản phẩm trước đây (tham khảo, chưa chốt lại hạn nghiên cứu)
 
 | | Sản phẩm A: cực ngắn | Sản phẩm B: hạn ngắn |
 | --- | --- | --- |
@@ -122,6 +122,10 @@ flowchart LR
 
 ## 4. Đang ở giai đoạn nào
 
+**Đổi trọng tâm20/10:** nghiên cứu thêm/bớt đặc trưng, không tập trung app. Đã tạo hai bộ vùng102.984giờ:V1/49predictor,V2/138predictor; nhãn cùngmeanGauge93ô, trọng số toàn ô xấp xỉ vùng. Đã chạy pilotLightGBM2021–2023; V2 có CI dương về cải thiện ởmộtsốphépso2021, chưa lặp chắc2022/2023. Verify2233/2233,22test vàparity thực đạt; không trainNN hoặc chấmtest2025. [Kết quả/CI](reports/regional_danang_v1_v2/README.md). Domain screen30ô/pilot93ô trước đây là các đợt khác.
+
+**Bổ sung20/10:** [Phản biện dữ liệu](reports/research_rainfall/phan_bien_du_lieu_2026_10_20.md) phát hiện nhãn Open-Meteo cũ không khóa ERA5; bootstrap mới tại Đà Nẵng chưa xác nhận chắc ưu thế CSI≥50/ngày của GSMaP so ERA5 trong cube; probe kho forecast2024thiếu850hPa. Đây là rà soát nguồn/diễn giải, chưa chọn lại mô hình hoặc xác nhận logger chạy liên tục đến20/10.
+
 | Giai đoạn | Trạng thái 14/10/2026 | Bằng chứng |
 | --- | --- | --- |
 | Dữ liệu và đánh giá | Xong | Verify 2233/2233, dataloader 0 mẫu lệch; `reports/station_benchmark/` |
@@ -162,6 +166,12 @@ flowchart LR
 ---
 
 ## 6. Lộ trình thực hiện tiếp
+
+**Lộ trình ưu tiên mới20/10:** (1) chốt đầu ra bản đồ ô/trung bình vùng và hạn; (2) QC nhãn/giờ/mùa và danh mục biến thực dùng; (3) so nhóm bề mặt, ẩm–hoàn lưu, đối lưu, địa hình, tương tác và mưa quá khứ trên cùng kiến trúc/mẫu; (4) xác nhận theo năm/đợt mưa, mức ô và vùng, giữ test2025kín. ERA5 tiếp tục là nền hồi cứu; forecast live/IFS không là điều kiện bắt buộc. Bảng công việc vận hành bên dưới giữ để tra cứu lịch sử, không tự triển khai theo ưu tiên cũ.
+
+**Đầu ra đã hoàn tất theo yêu cầu tiếp theo:** V1/V2 và sofull_featurescũ có báo cáo,Word,hình vàscript tái lập. V1mean vùng chưa chắc thắng đầu vào cũ khi giữ loại biến; thêm biến/không gian có tín hiệu nhưng dao động theo năm/hạn. Bước tiếp nên kiểm tra mưa quá khứ và ablation nhóm trên bộ vùng đã chốt, không dùngtest2025để lựa chọn. Nếu cần trung bình địa giới chính xác, bổ sung giao ranh polygon trước đóng băng dữ liệu cuối.
+
+**Ưu tiên sau phản biện20/10:** xác minh provenance nhãn cũ và giờ tích lũy GSOD, kiểm tra nhãn dưới ngày, chốt bộ biến forecast thực sự lấy được trước khi mở rộng thí nghiệm. Báo cáo đề xuất thử hậu xử lý ECMWF với bộ biến tối thiểu; đây chưa phải quyết định thay phạm vi đã chốt. Không dùng bảng Open-Meteo best_match làm bằng chứng ERA5 thuần yếu hoặc coi trainERA5→ECMWF là thay nguồn đã được xác nhận.
 
 | Mốc | Việc đã có / cần làm | Cổng bằng chứng |
 | --- | --- | --- |

@@ -1,5 +1,7 @@
 # Kế hoạch v2: Dự báo mưa 0–6 giờ (Bi-LSTM) và 1–3 ngày (TFT) cho các tỉnh/thành Việt Nam, từ so sánh mô hình đến ứng dụng
 
+> **Định hướng mới20/10/2026 của người dùng:** ưu tiên nghiên cứu thêm/bớt đặc trưng cho mưa một vùng, không tập trungapp. Đã tạoV1/V2vùng và chạy pilotLightGBM sofull_featurescũ trên cùng nhãn: [báo cáo/CI](reports/regional_danang_v1_v2/README.md). Có tín hiệu dương2021, chưa ổn định2022–2023; chưa chốt lại toàn bộ hạn/kiến trúc hoặc mởtest2025. [Thiết kế nghiên cứu](reports/research_rainfall/thiet_ke_nghien_cuu_dac_trung_2026_10_20.md) và [phản biện dữ liệu](reports/research_rainfall/phan_bien_du_lieu_2026_10_20.md) được ưu tiên hơn kế hoạch vận hành cũ bên dưới. Không quyOpen-Meteobest_match thànhERA5thuần hoặc coi nhãnngày đãxácnhận nhãngiờ.
+
 > Lập ngày 11/10/2026. Tài liệu này đọc cùng `project_master_plan.md` (bản sáng cùng ngày); mục 11 ghi rõ phần giữ, phần đổi.
 > Các con số ở mục 1 được tính lại hôm nay từ `data/processed/danang_full_features_2015_2026.parquet`, NOAA GSOD (trạm sân bay Đà Nẵng) và Open-Meteo Previous Runs.
 

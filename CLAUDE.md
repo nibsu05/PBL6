@@ -1,7 +1,7 @@
 # PBL6 – Dự báo mưa: bối cảnh cho agent
 
 > **Đọc file này trước khi làm bất cứ việc gì.** Kế hoạch chi tiết, kèm số liệu bằng chứng, nằm ở
-> [`project_plan_v2.md`](project_plan_v2.md); đó là nguồn sự thật. Cập nhật lần cuối: 14/10/2026.
+> [`project_plan_v2.md`](project_plan_v2.md); các nhận định trong kế hoạch cần đối chiếu code/dữ liệu và cập nhật phản biện. Cập nhật lần cuối: 20/10/2026.
 > **Kế hoạch dành cho nhóm** (quy trình, giai đoạn hiện tại, lộ trình, phân công) nằm ở [`KE_HOACH_DU_AN.md`](KE_HOACH_DU_AN.md). Mỗi khi xong một giai đoạn hoặc chốt một quyết định, cập nhật các mục 4 và 6 của file đó.
 > `project_master_plan.md`, `SURFACE_BASELINE_REPORT.md`, `DATA_GAP_PLAN.md` và `reports/informer_baseline_report.md`
 > là tài liệu cũ, do agent khác viết. Chỉ dùng chúng để tham khảo lịch sử. Một số nhận định trong đó đã bị bác bỏ (xem mục "Quyết định").
@@ -18,7 +18,23 @@
   - Repo làm việc chuyển sang USB **`D:\PBL6_v2`** theo xác nhận của người dùng. `D:\PBL6` cũ giữ nguyên; bản trên C là bản nguồn/backup của lần chuyển này.
 - Repo `nibsu05/PBL6` là **repo công khai**. Không commit dữ liệu, file PDF bài báo hay thông tin đăng nhập.
 
-## Bài toán (đã chốt)
+## Định hướng hiện tại (người dùng xác nhận ngày 20/10/2026)
+
+- **Ưu tiên nghiên cứu theo dạng bài báo:** đo đóng góp của việc thêm/bớt đặc trưng khí tượng, mưa và địa hình cho dự đoán mưa trên một vùng như Đà Nẵng. Không đặt trước đặc trưng mới chắc chắn cải thiện; không suy từ một vùng ra toàn Việt Nam.
+- **App không còn là trọng tâm.** Thu nguồn live, hậu xử lý IFS và mục tiêu thắng ECMWF vận hành không phải cổng bắt buộc cho hướng nghiên cứu hiện tại. Giữ ERA5 làm nền nghiên cứu hồi cứu, nhưng vẫn phải tách dự báo dùng lịch sử với ước lượng dùng khí tượng giờ đích.
+- Dữ liệu/cấu hình thực tế ở [thiet_ke_nghien_cuu_dac_trung_2026_10_20.md](reports/research_rainfall/thiet_ke_nghien_cuu_dac_trung_2026_10_20.md). Sau đó người dùng yêu cầu tạo2phiên bản tổng hợp vùng và so full_features cũ bằng thực nghiệm. Đã làm V1/V2 và pilot LightGBM24h→tổng3/6h; chưa chốt lại toàn bộ hạn hoặc kiến trúc nghiên cứu.
+- Kiểm tra trước: đã quét93ô×87.672giờ2015–2024; ba cột kx/tt/era5_tp_mm mỗi cột thiếu1.953giátrịô–giờ; các cột khác hữu hạn. Lượt hiện tại verify nguồn2233/2233,22test đạt, kiểm tra parity V1/V2 và3mẫu tổng hợp trực tiếp nguồn. Hữu hạn không bảo đảm nhãn chính xác; test mô hình2025chưa mở.
+
+### V1/V2 dữ liệu vùng và pilot so đầu vào (20/10/2026)
+
+- Đã tạo `data/processed/regional_danang/v1_hourly.parquet` và `v2_hourly.parquet` ngoài Git:102.984giờ2015-01-01→2026-09-30. V1 có49predictor ứng viên, V2 có138(=V1+89không gian); các cột datetime/nhãn/QC tách riêng. Giữ nguyên file full_features và cube gốc. 2025chỉ được xuất cơ học, không fit/chấm/thống kê pilot.
+- Trọng số là diện tích **toàn ô** trên cầu, footprint93ô~11.074km²; chưa có polygon giao ranh nên chưa gọi là trung bình địa giới chính xác. Tiểu vùng cố định không xem nhãn:23ô venbiển(proxy≤30km),26ô cao(≥600m,khôngvenbiển),44ô còn lại. Thiếu ô nào thì thống kê biến đóNaN, không thay vùng/điền0.
+- Code: `src/regional_dataset.py`, `scripts/build_regional_datasets.py`, `pilot_regional_datasets.py`, `report_regional_datasets.py`. [Báo cáo cùng dữ liệu/CI/hình/Word](reports/regional_danang_v1_v2/README.md). Chỉ public code/thống kê; raw/Parquet/model/dự báo từng dòng ngoài Git.
+- Pilot so OLD_COMMON,V1_COMMON,V2_COMMON,V1_FULL,V2_FULL trên cùng nhãn Gauge vùng và cửa sổ chung;3fold eval2021/2022/2023,calnămtrước,train2015→eval−2. Một seed LightGBM deterministic không bagging/feature sampling; không train NN mới. Không dùng cột mưa, ONI cũ hoặc CIN cũ trong đối chứng COMMON; FULL có CIN mới. Không đưa ERA5 giờ đích.
+- RMSE3h toàn năm OLD_COMMON/V1_FULL/V2_FULL:2021=2,569/2,488/2,403;2022=2,632/2,584/2,648;2023=2,156/2,142/2,082mm. V2_FULL−V1_FULL:−0,085/+0,064/−0,060; CI95%chỉ2021dưới0. 6h chưa có lợi ích ổn định. V1_COMMON−OLD_COMMON CIchứa0ởcả3fold/cả2hạn; chưa khẳng định chỉ gộp lưới giúp hơn.
+- Tín hiệu không gian rõ hơn ở2021, không lặp chắc2022/2023; nhiều phép so chưa hiệu chỉnh. GiữV1 làm nền,V2 nhánh ablation, không tuyên bố bộ mới thắng chung. Persistence dùng nhãnGauge hồi cứu có RMSE3h thấp hơn các model khí tượng nhưng có thông tin mưa quá khứ khác đầu vào; cần phép so bổ sung đúng nguồn, chưa là baseline vận hành. Không lấy pilot này thay kiểm chứng nhãn/thực tế/khả năng toàn Việt Nam.
+
+### Cấu hình sản phẩm và hướng vận hành trước đây (tham khảo lịch sử)
 
 - **Sản phẩm A:**
   - Mô hình: Bi-LSTM.
@@ -87,12 +103,23 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
 
 17. **Bộ slide giải thích đầy đủ (14/10):** Đã tạo `reports/presentation_2026_10_14/PBL6_Da_Nang_full_brief_2026_10_14.pptx` từ bộ 8 slide đã kiểm chứng, thêm bốn trang về đầu ra nghiên cứu, vai trò từng nguồn dữ liệu, phép so mô hình và luồng app. Tổng 12 slide, trong đó slide 12 ECMWF là dự phòng; ghi chú từng slide có nguồn/lời dẫn và `reports/presentation_2026_10_14/presenter_guide_full_2026_10_14.md` giúp trình bày 8–10 phút hoặc rút còn 5 phút. Không chạy thí nghiệm mới, không mở test 2025, không thay kết luận AI live/ECMWF.
 
+## Phản biện dữ liệu ngày 20/10/2026
+
+Theo yêu cầu đánh giá độc lập của người dùng, đã rà code, tính lại cặp nhãn Đà Nẵng 2021–2023 và probe Single Runs; không huấn luyện hoặc mở test mô hình 2025. Báo cáo [phan_bien_du_lieu_2026_10_20.md](reports/research_rainfall/phan_bien_du_lieu_2026_10_20.md) cần đọc trước khi dùng các quyết định/số liệu cũ làm lập luận:
+
+- `fetch_openmeteo_baselines.py` không khóa `models=era5` cho Archive; `era5_om` là best_match, **không được quy bảng CSI 0,17 hoặc phát biểu 8% cho ERA5 thuần khi chưa truy lại nguồn**. Điều này không vô hiệu mọi bảng nguồn cũ, nhưng thay đổi cách diễn giải provenance.
+- Cùng1.042ngày Đà Nẵng 2021–2023: CSI≥50 của cube ERA5/GSMaP GC =0,352/0,438; bootstrap khối5ngày/1.000lần seed20261020, CI95% GC−ERA5=[−0,054;+0,230]. Tháng5–10:0,467/0,487, CI=[−0,204;+0,243]. Đây là kiểm tra khám phá trên ghép ngày hiện có, chưa xác nhận nhãn giờ hoặc tính độc lập trạm. Cần kiểm chứng EOD/cờ GSOD; không tự đổi ngày từ tài liệu quốc gia cũ.
+- Probe mới một tọa độ/run2024-10-01T00:00: IFS9km có mưa/bề mặt/TCWV/CAPE nhưng4trường850 toàn null; IFS025 trả400 runkhôngcó. Chưa thể tái tạo predictor850 bằng pipeline kho2024đã kiểm; không suy rằng mọi kho/ngày đều thiếu. BASE/RAW/DOMAIN chỉ dùng khí tượng quá khứ; S4 mới có ERA5 giờ đích; cả hai vẫn cần kiểm tra chuyển nguồn vận hành.
+- Đề xuất thu hẹp đường app sang hậu xử lý forecast thật với bộ biến đã xác minh; ERA5 giữ cho nghiên cứu/pretrain có kiểm định; NRT/tầngcao phải chứng minh giá trị và khả năng nguồn. **Đây là đề xuất phản biện, chưa thay quyết định mô hình/phạm vi của nhóm.** Bản định hướng dữ liệu và Word được gắn cảnh báo đọc cùng phản biện.
+
 ## Còn chờ chốt (hỏi người dùng trước khi làm phần liên quan)
 
 1. Hai vùng kiểm tra: Hà Nội, cùng TP.HCM **hoặc** Đắk Lắk.
 2. Phân vai cụ thể cho 3 thành viên. Người dùng ưu tiên tiến độ hằng tuần; chưa cần chốt hạn nộp để chạy thí nghiệm Đà Nẵng.
 
 ## Trạng thái và việc tiếp theo
+
+**Ưu tiên mới20/10:** nghiên cứu ablation đặc trưng trên dữ liệu lịch sử, theo định hướng người dùng ở đầu file. Các công việc app/logger/T-OPS bên dưới là lộ trình cũ, không tự tiếp tục như mục tiêu chính. Trước huấn luyện mới cần cố định đầu ra/hạn và giao thức so đặc trưng, kiểm chứng nhãn, giữ test2025 kín; không đưa ERA5 giờ đích vào phép so chính nếu gọi là dự báo từ quá khứ.
 
 **Trạng thái cập nhật 14/10/2026:**
 - Bộ slide mở rộng `reports/presentation_2026_10_14/PBL6_Da_Nang_full_brief_2026_10_14.pptx` gồm 11 trang chính và 1 trang ECMWF dự phòng, đã kiểm tra hiển thị. Lời dẫn tại `reports/presentation_2026_10_14/presenter_guide_full_2026_10_14.md`. Bộ 8 slide và slide khảo sát riêng vẫn giữ; nhu cầu người dùng mới là rà soát tài liệu, chưa phỏng vấn. Số mô hình không thay đổi; AI live chưa bật.
