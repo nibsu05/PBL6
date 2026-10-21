@@ -1,0 +1,58 @@
+{
+  "scope": "Development factorial on frozen approximate 93-full-cell footprint",
+  "frozen_before_first_matrix_run": true,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "experiments": [
+    "E0",
+    "E1",
+    "E2",
+    "E3",
+    "E4",
+    "E5",
+    "E6",
+    "E7"
+  ],
+  "source_hash": "92a6bc6a527b25107761e85f0d14e64713a39dfd2930560a4498927c27dfc448",
+  "code_hashes": {
+    "src/short_range_dataset.py": "542be8863962f64315269da2c093d19ed78de54a849b38a296c319f559759c39",
+    "src/tft_regional.py": "3b5c047f8d4c5cb42a512cee9a90db549ed711c29d66125747df15b6620df1bf",
+    "src/short_range_evaluation.py": "674c650149283f59008d4f2a80a86ec226baec7b40e12143c663a170edf3ad1a",
+    "scripts/pilot_short_range.py": "c2f8d03454d1f2254394123f459a292118b59c711a7399f9acd23364851572aa",
+    "scripts/run_short_range_matrix.py": "e502a48ed54e87666ec9d6a74c453ebfbe30b0398753bce9d55dde1fd86bf752"
+  },
+  "years": [
+    2021,
+    2022,
+    2023
+  ],
+  "primary_family": "TFT ensemble E1-E0,E2-E0,E3-E0 x3days BSS16, pooled2021-2023",
+  "primary_family_size": 9,
+  "simultaneous_confidence": 0.9944444444444445,
+  "bootstrap_repeats": 20000,
+  "block_days": 7,
+  "sensitivity_block_days": 14,
+  "bootstrap_seed": 20261021,
+  "ensemble": "Arithmetic mean of three calibrated probabilities and amounts",
+  "ensemble_threshold": "CSI grid selected from averaged calibration probabilities only; rare fallback0.5",
+  "region_gate_resolution": "Freeze existing 93 full cells and describe as approximate footprint, not administrative polygon",
+  "administrative_boundary_or_independent_label_validation_complete": false,
+  "future_era5": false,
+  "past_rain": false,
+  "max_epochs": 40,
+  "batch": 64,
+  "hidden": 32,
+  "patience": 6,
+  "identical_pilot_fitting_code": true,
+  "test2025_read": false,
+  "final_holdout_authorized_by_this_run": false,
+  "limitations": [
+    "Development years already explored; not confirmatory independent holdout",
+    "Calibration used for epoch selection and probability fitting",
+    "Bootstrap conditional on fitted ensemble, not all training or label uncertainty",
+    "Approximate regional footprint and retrospective reanalysis; no operational claim"
+  ]
+}

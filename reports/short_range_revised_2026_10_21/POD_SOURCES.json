@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-21",
+  "conclusion": "Chưa có căn cứ coi POD=0.4 là chuẩn tốt chung. Đánh giá phụ thuộc sự kiện, hạn, không gian, nhãn, baseline và FAR; không so điểm paper khác giao thức với dự án.",
+  "sources": [
+    {"id":"P1","title":"Skill Validation of High-Impact Rainfall Forecasts over Vietnam Using the European Centre for Medium-Range Weather Forecasts (ECMWF) Integrated Forecasting System (IFS) and Dynamical Downscaling with the Weather Research and Forecasting Model","year":2025,"doi":"10.3390/atmos16020224","url":"https://www.mdpi.com/2073-4433/16/2/224","archive":"https://publikationen.bibliothek.kit.edu/1000180260/157979900","finding":"Mục 4.3, ngưỡng 25 mm/24h: bản đồ POD của các cấu hình WRF có khoảng 0.3–0.4, một số trạm vùng R6 đạt 0.5–0.7. Đây là mô tả kết quả theo trạm/vùng, không phải chuẩn POD tối thiểu.","limit":"Dự báo số và kiểm chứng tại trạm, khác nhãn GSMaP trung bình vùng và quyết định xác suất của dự án. Không dùng các điểm này để xếp hạng dự án cao hơn paper."},
+    {"id":"P2","title":"Can GPM IMERG Capture Extreme Precipitation in North China Plain?","year":2022,"doi":"10.3390/rs14040928","url":"https://www.mdpi.com/2072-4292/14/4/928","finding":"Phần đánh giá theo giờ mô tả POD tối đa khoảng 0.4 đi cùng FAR tối thiểu khoảng 0.6 và nhận định khả năng phát hiện thấp.","limit":"Ước lượng mưa vệ tinh, không phải dự báo tương lai 24–72h; dùng để minh họa cách diễn giải 0.4 phụ thuộc ngữ cảnh, không lấy làm đối thủ của dự án."},
+    {"id":"V3","title":"JWGFVR Forecast Verification: Probability of Detection and False Alarm Ratio","url":"https://jwgfvr.github.io/forecastverification/","finding":"POD có miền 0–1, lý tưởng 1, bỏ qua báo nhầm và có thể tăng khi phát hành thêm dự báo có; hướng dẫn yêu cầu đọc với FAR. Không đưa ra một mốc 0.4 đạt chuẩn cho mọi bài toán."},
+    {"id":"A5","title":"Informer official attention implementation","url":"https://raw.githubusercontent.com/zhouhaoyi/Informer2020/main/models/attn.py","finding":"Số active queries theo factor*ceil(log(Lq)); là cơ sở sửa công thức trong subclass pilot mới, giữ nguyên mã cũ."}
+  ]
+}

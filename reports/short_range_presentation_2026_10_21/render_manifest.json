@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "method": "Chromium render of shared HTML slide scene; not native PPTX rendering",
+  "slides": 34,
+  "text_overflows": [],
+  "html_sha256": "ab71231d640df78e4ea0c6f9ff0fe489e734941f1cd9c781fd43e60f0f89f0d8",
+  "pptx_sha256": "4f2490ba1315a5a941bf1e12bd5baa2664d48d61cafca73501fc54ed0d2c9f42",
+  "scene_sha256": "dc770ee09ef54e0a5eeba2cec9a885eb50e34618dbfab3ff676974c295049ce6",
+  "preview_sha256": "e5cd6652e68e860c483cf67244e35ffa1172ece7c29c796b4ee2c993fda11775",
+  "preview_bytes": 1272591
+}
