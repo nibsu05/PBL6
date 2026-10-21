@@ -122,6 +122,8 @@ flowchart LR
 
 ## 4. Đang ở giai đoạn nào
 
+**Bản báo cáo hiện tại theo yêu cầu so đủ ba mô hình:** [47 slide, Word và bảng CSV](reports/short_range_three_models_2026_10_21/README.md), 32 slide chính và 15 tra cứu. Mọi bảng xếp hạng có LightGBM/TFT/Informer cùng E/ngày; E7 đủ tám metrics. Informer vẫn mới E0/E7, chưa E1–E6; không đánh dấu mô hình thắng ở phép so thiếu. Có 114 lượt đã được kiểm chứng nhưng chưa đủ ma trận ba mô hình. Không huấn luyện mới hoặc mở test 2025 khi cập nhật slide.
+
 **Cập nhật 21/10, đã hoàn thành ma trận phát triển nhánh ngày:** người dùng làm TFT 24–72 giờ, ưu tiên kết quả trong 3–4 giờ. [Bộ mở rộng có Word, 8 slide, FAQ và danh mục biến](reports/short_range_ablation_2026_10_21/README.md) gồm 72 lượt TFT (E0–E7 × ba fold × ba seed) và 24 pipeline LightGBM, 27 kiểm tra đạt, 96/96 lượt tái lập calibration/evaluation. Đã giữ nguyên [pilot](reports/short_range_pilot_2026_10_21/README.md). TFT ngày 1: thêm riêng A hoặc M có CI điều chỉnh trên 0 trong gia đình 9 phép so, 20.000 bootstrap khối 7/14 ngày; SST và ngày 2–3 chưa có bằng chứng tương tự. E7 TFT ngày 3 BSS −0,038. Footprint vẫn xấp xỉ; chưa mở 2025 hoặc hoàn thiện ranh/kiểm chứng nhãn. Tiến trình ma trận khoảng 27,9 phút, không đồng nhất với thời gian hoàn thiện nghiên cứu.
 
 **Mốc báo cáo nhanh tiếp theo:** [Word ngắn, 5 slide và lời trình bày 5 phút](reports/short_range_brief_2026_10_21/README.md) đã tổng hợp từ kết quả này. Commit đầu tiên `ad78de3` đã push lên nhánh TFT, [PR #1](https://github.com/nibsu05/PBL6/pull/1) đang mở vào main. Đây là bước trình bày kết quả, không phải đợt thí nghiệm mới.
@@ -169,11 +171,13 @@ flowchart LR
    - Sản phẩm A được chấm theo giờ chủ yếu trên tháng 5–10.
    - Mùa đông chấm tổng 6 giờ như chỉ số phụ; 24 giờ dùng QC nhãn với trạm hoặc sản phẩm B.
    - Quan trắc vệ tinh dự kiến ít giúp vào mùa đông.
-5. **Vì sao thử TFT, cập nhật 21/10:** lựa chọn biến/gating và thiết kế nhiều hạn là cơ sở thiết kế. Chưa có phép so Informer cùng giao thức vùng; không dùng benchmark khác hoặc R² cũ để tuyên bố nó không khả thi. Bản TFT hiện chỉ nhận lịch tương lai, không có static context hay phân vị. LightGBM đã chạy đủ cùng nguyên liệu, là đối chứng thực nghiệm cần đọc cả khi có điểm tốt hơn TFT. Informer là lựa chọn mở rộng khi cần trả lời câu hỏi kiến trúc, không phải đã chạy để chứng minh thất bại.
+5. **Vì sao thử TFT, cập nhật 21/10:** lựa chọn biến/gating và thiết kế nhiều hạn là cơ sở thiết kế. Đã có Informer vùng E0/E7 ba seed, chưa E1–E6; không dùng benchmark khác hoặc R² cũ để tuyên bố nó không khả thi. Bản TFT hiện chỉ nhận lịch tương lai, không có static context hay phân vị. LightGBM đã chạy đủ cùng nguyên liệu, là đối chứng thực nghiệm cần đọc cả khi có điểm tốt hơn TFT. Các bảng xếp hạng hiện tại phải đặt đủ LightGBM/TFT/Informer; điểm tốt hơn chưa là kết luận thắng có ý nghĩa thống kê.
 
 ---
 
 ## 6. Lộ trình thực hiện tiếp
+
+Theo yêu cầu mới, dùng bảng ba mô hình đồng thời để báo cáo; không tách cặp làm mất đối chứng LightGBM. Có thể so đầy đủ ở E0/E7 hiện tại. Nếu mở rộng ma trận Informer E1–E6 thì còn 54 lượt; bước cập nhật slide này chưa thực hiện mở rộng. Kết luận E7 ngày 1: LightGBM tốt hơn theo RMSE/BSS/FAR, Informer có CSI cao nhất, TFT có POD cao nhất; ngày 3 cả ba BSS âm. Đây là so điểm phát triển, chưa có kiểm định chênh lệch ba pipeline.
 
 **Quy trình Git, người dùng đồng ý 21/10:** nhánh `research/tft-regional` dùng cho phần TFT; commit/push mã và báo cáo, tạo PR vào `main` để review và tích hợp. `main` dùng chung cho cả nhánh giờ và nhánh ngày; dữ liệu/checkpoint tiếp tục ngoài Git.
 

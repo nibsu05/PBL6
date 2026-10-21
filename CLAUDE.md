@@ -41,6 +41,8 @@
 
 ## Nhánh 24–72 giờ được duyệt ngày 21/10/2026 — pilot và ma trận phát triển
 
+- **Quy ước trình bày mới theo yêu cầu người dùng:** mọi bảng xếp hạng mô hình phải đặt đủ LightGBM, TFT, Informer cạnh nhau cùng E/ngày/mẫu/nhãn/mùa/ngưỡng. [Bản hiện tại 47 slide và Word](reports/short_range_three_models_2026_10_21/README.md) có tám metrics, ba bảng E7 theo ngày, ba ma trận BSS và phụ lục đủ ba dòng mô hình mỗi E/ngày. Informer E1–E6 ghi chưa chạy, không điền 0 hoặc in đậm mô hình thắng khi chưa đủ ba. Có 54 vị trí đã có kết quả và 18 vị trí Informer thiếu; không đồng nhất số dòng kết quả với 114 lượt huấn luyện/pipeline. Lượt này chỉ cập nhật báo cáo từ aggregate, không fit mới hoặc mở 2025. Ví dụ công thức/hai quy tắc trong cùng mô hình và ablation trong TFT phải ghi rõ mục đích, không dùng chúng làm xếp hạng kiến trúc.
+
 - **Quy trình Git đã được người dùng đồng ý:** phát triển trên `research/tft-regional`, commit/push mã và báo cáo lên nhánh đó, tạo PR vào `main`. `main` là bản tích hợp chung cho các nhánh nghiên cứu sau review. Dữ liệu/checkpoint ngoài Git; nhánh Bi-LSTM do thành viên khác phụ trách.
 - Đã push commit đầu tiên `ad78de3`, mở [PR #1](https://github.com/nibsu05/PBL6/pull/1), chưa merge. Sau khi người dùng hỏi kết quả và cần báo cáo trong 30 phút, bổ sung [bản ngắn Word, 5 slide và lời trình bày 5 phút](reports/short_range_brief_2026_10_21/README.md) từ kết quả đã kiểm chứng. Không fit/chấm mô hình mới, không đổi dữ liệu hoặc mở 2025 trong bước tổng hợp này.
 - Người dùng duyệt [kế hoạch đầy đủ/Word/protocol](reports/short_range_plan_2026_10_21/README.md) và yêu cầu ưu tiên kết quả trong 3–4 giờ để báo cáo ngày mai. Đã tạo nhánh `research/tft-regional`, triển khai loader/TFT vùng/baseline/đánh giá và hoàn thành [bộ pilot có Word, 7 slide, hình, CI](reports/short_range_pilot_2026_10_21/README.md). Không tự thay ma trận nhánh6h.
@@ -101,7 +103,7 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
    - Đã có pilot Informer vùng E0/E7 × ba năm × ba seed (18 lượt, khoảng 5,3 phút fitting/save/calibration), độc lập phát lại đủ checkpoint. Ngày 1 E7: Informer có BSS/CSI/FAR tốt hơn, RMSE/POD kém hơn TFT; ngày 3 cả hai BSS âm. Chưa có đủ E1–E6, tuning hoặc kiểm định chênh lệch kiến trúc. Benchmark khác và R² cũ 0,04 không loại được Informer.
    - Informer có time marks; không nói hoàn toàn không nhận thông tin tương lai đã biết. Ưu thế tính toán chuỗi dài của nó chưa phải nút thắt rõ ở encoder 28 bước hiện tại.
    - TFT gốc có lựa chọn biến/gating và thiết kế nhiều hạn, là lý do để thử; chưa bảo đảm dự đoán tốt hơn. Bản vùng tự cài PyTorch giữ VSN/GRN/LSTM/attention, bỏ static context, dùng Tweedie/BCE, chưa xuất phân vị và chưa dùng forecast thật.
-   - Đối chứng đang có: LightGBM, khí hậu, luôn 0. So TFT/LightGBM là hai pipeline cùng nguyên liệu nhưng khác biểu diễn, chưa là phép so chỉ đổi kiến trúc. ECMWF/DLinear/Informer thuộc phép thử khác phải đăng ký, không gọi là đã chạy.
+   - Đối chứng đang có: LightGBM, khí hậu, luôn 0 và pilot Informer vùng E0/E7. Bảng xếp hạng phải có đủ LightGBM/TFT/Informer; Informer E1–E6 còn thiếu 54 lượt. Cùng nguyên liệu nhưng cây và mạng khác biểu diễn, chưa là phép so chỉ đổi kiến trúc. ECMWF/DLinear trên giao thức vùng này chưa được chấm, không gọi là đã chạy.
 6. **Không có dữ liệu Vrain** (người dùng xác nhận không xin được). Kiểm chứng độc lập chỉ dựa vào NOAA GSOD tại 10 trạm, đến 24/08/2025.
 7. **Những nhận định cũ đã bị bác bỏ:**
    - "Informer vượt Bi-LSTM 21 %": hai mô hình được chấm trên tập test khác nhau.
