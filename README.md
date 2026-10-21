@@ -16,6 +16,8 @@ Dự án nghiên cứu đóng góp của các nhóm đặc trưng dữ liệu ch
 
 **Slide báo cáo đầy đủ, cơ sở LightGBM và POD/FAR:** [34 slide PowerPoint, HTML, lời dẫn và phân tích](reports/short_range_presentation_2026_10_21/README.md) gồm 24 slide chính và 10 slide tra cứu. Có paper ứng dụng LightGBM với giới hạn từng bài, audit dev `fe27756`, ví dụ số đếm E7 và sáu bảng đủ 48 dòng. In đậm theo phép so ghi ở bảng, BSS âm màu đỏ; giữ rõ chưa có ý nghĩa thống kê chỉ từ số in đậm. Không thay protocol hoặc chấm thêm mô hình.
 
+**Bản mới theo phản hồi dễ hiểu hơn:** [42 slide, Word, HTML và lời dẫn](reports/short_range_revised_2026_10_21/README.md) có bảng đủ 8 metrics, bốn nhóm biến diễn đạt đầy đủ, giải thích 3 seed và kiểm chứng nhận định POD 0,4. Đã bổ sung [pilot Informer vùng 18 lượt](reports/informer_regional_pilot_2026_10_21/README.md) trên E0/E7 × ba năm × ba seed, cùng giao thức phát triển với TFT; độc lập phát lại đủ 18 checkpoint. Informer khả thi về tính toán, có ưu thế một số chỉ số ngày 1 nhưng chưa thay thế TFT hoặc chứng minh thắng toàn diện; không đọc test 2025.
+
 ---
 
 ## 🚀 Pipeline v2 (từ 11/10/2026) — bắt đầu từ đây
