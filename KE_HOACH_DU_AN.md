@@ -122,7 +122,9 @@ flowchart LR
 
 ## 4. Đang ở giai đoạn nào
 
-**Bản báo cáo hiện tại theo yêu cầu so đủ ba mô hình:** [47 slide, Word và bảng CSV](reports/short_range_three_models_2026_10_21/README.md), 32 slide chính và 15 tra cứu. Mọi bảng xếp hạng có LightGBM/TFT/Informer cùng E/ngày; E7 đủ tám metrics. Informer vẫn mới E0/E7, chưa E1–E6; không đánh dấu mô hình thắng ở phép so thiếu. Có 114 lượt đã được kiểm chứng nhưng chưa đủ ma trận ba mô hình. Không huấn luyện mới hoặc mở test 2025 khi cập nhật slide.
+**Cập nhật 28/10/2026, đã hoàn thành phần Informer còn thiếu:** thêm 54 lượt E1–E6 theo fit pilot, dùng lại 18 lượt E0/E7, đủ 72 Informer. Cùng 72 TFT và 24 pipeline LightGBM, đủ ma trận ba mô hình E0–E7. [Hồ sơ huấn luyện/kiểm chứng](reports/informer_regional_matrix_2026_10_28/README.md), [49 slide, Word và Excel chín sheet](reports/short_range_complete_2026_10_28/README.md). Độc lập tái lập 72 checkpoint trên 144 split, scaler/calibration/ensemble; các điểm cũ không đổi. Fit/save/replay của 54 lượt mới khoảng 22,4 phút. CI mới là mô tả 95% trên 20.000 bootstrap khối 7/14 ngày, chưa hiệu chỉnh nhiều phép; không thay family TFT chính. Nguồn verify 2233/2233, hai unittest Informer đạt; không mở 2025. Chưa hoàn tất ranh/QC nhãn hoặc kiểm chứng bước sáu giờ.
+
+**Bản báo cáo lịch sử 21/10:** [47 slide, Word và bảng CSV](reports/short_range_three_models_2026_10_21/README.md), 32 slide chính và 15 tra cứu. Ở thời điểm đó có 114 lượt đã kiểm chứng và Informer còn thiếu E1–E6; bản 28/10 phía trên đã hoàn tất phần thiếu. Giữ bản cũ để đối chiếu quá trình nghiên cứu.
 
 **Cập nhật 21/10, đã hoàn thành ma trận phát triển nhánh ngày:** người dùng làm TFT 24–72 giờ, ưu tiên kết quả trong 3–4 giờ. [Bộ mở rộng có Word, 8 slide, FAQ và danh mục biến](reports/short_range_ablation_2026_10_21/README.md) gồm 72 lượt TFT (E0–E7 × ba fold × ba seed) và 24 pipeline LightGBM, 27 kiểm tra đạt, 96/96 lượt tái lập calibration/evaluation. Đã giữ nguyên [pilot](reports/short_range_pilot_2026_10_21/README.md). TFT ngày 1: thêm riêng A hoặc M có CI điều chỉnh trên 0 trong gia đình 9 phép so, 20.000 bootstrap khối 7/14 ngày; SST và ngày 2–3 chưa có bằng chứng tương tự. E7 TFT ngày 3 BSS −0,038. Footprint vẫn xấp xỉ; chưa mở 2025 hoặc hoàn thiện ranh/kiểm chứng nhãn. Tiến trình ma trận khoảng 27,9 phút, không đồng nhất với thời gian hoàn thiện nghiên cứu.
 
@@ -176,6 +178,8 @@ flowchart LR
 ---
 
 ## 6. Lộ trình thực hiện tiếp
+
+**Ưu tiên sau ma trận hoàn chỉnh 28/10:** không cần chạy thêm E1–E6 Informer vì đã đủ. Dùng bảng ba mô hình cùng E/ngày; đọc mùa/năm/seed và CI mô tả, giữ nguyên thiết kế trước holdout. Tiếp theo là ranh/trọng số vùng, QC nhãn và kiểm tra độ nhạy 1h/3h/6h khi được triển khai thành thí nghiệm riêng. Không chọn E/kiến trúc hoặc thay ngưỡng theo test 2025. Informer E6 ngày 3 chỉ BSS +0,004; E7 cả ba vẫn âm, chưa khẳng định dự báo hữu ích tới 72 giờ. Các đoạn 21/10 dưới đây là lịch sử trước khi chạy nốt Informer.
 
 Theo yêu cầu mới, dùng bảng ba mô hình đồng thời để báo cáo; không tách cặp làm mất đối chứng LightGBM. Có thể so đầy đủ ở E0/E7 hiện tại. Nếu mở rộng ma trận Informer E1–E6 thì còn 54 lượt; bước cập nhật slide này chưa thực hiện mở rộng. Kết luận E7 ngày 1: LightGBM tốt hơn theo RMSE/BSS/FAR, Informer có CSI cao nhất, TFT có POD cao nhất; ngày 3 cả ba BSS âm. Đây là so điểm phát triển, chưa có kiểm định chênh lệch ba pipeline.
 

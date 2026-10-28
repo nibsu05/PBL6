@@ -1,7 +1,7 @@
 # PBL6 – Dự báo mưa: bối cảnh cho agent
 
 > **Đọc file này trước khi làm bất cứ việc gì.** Kế hoạch chi tiết, kèm số liệu bằng chứng, nằm ở
-> [`project_plan_v2.md`](project_plan_v2.md); đọc cùng phương án hiện tại và đối chiếu bằng chứng. Cập nhật lần cuối: 21/10/2026.
+> [`project_plan_v2.md`](project_plan_v2.md); đọc cùng phương án hiện tại và đối chiếu bằng chứng. Cập nhật lần cuối: 28/10/2026.
 > **Kế hoạch dành cho nhóm** (quy trình, giai đoạn hiện tại, lộ trình, phân công) nằm ở [`KE_HOACH_DU_AN.md`](KE_HOACH_DU_AN.md). Mỗi khi xong một giai đoạn hoặc chốt một quyết định, cập nhật các mục 4 và 6 của file đó.
 > `project_master_plan.md`, `SURFACE_BASELINE_REPORT.md`, `DATA_GAP_PLAN.md` và `reports/informer_baseline_report.md`
 > là tài liệu cũ, do agent khác viết. Chỉ dùng chúng để tham khảo lịch sử. Một số nhận định trong đó đã bị bác bỏ (xem mục "Quyết định").
@@ -41,7 +41,13 @@
 
 ## Nhánh 24–72 giờ được duyệt ngày 21/10/2026 — pilot và ma trận phát triển
 
-- **Quy ước trình bày mới theo yêu cầu người dùng:** mọi bảng xếp hạng mô hình phải đặt đủ LightGBM, TFT, Informer cạnh nhau cùng E/ngày/mẫu/nhãn/mùa/ngưỡng. [Bản hiện tại 47 slide và Word](reports/short_range_three_models_2026_10_21/README.md) có tám metrics, ba bảng E7 theo ngày, ba ma trận BSS và phụ lục đủ ba dòng mô hình mỗi E/ngày. Informer E1–E6 ghi chưa chạy, không điền 0 hoặc in đậm mô hình thắng khi chưa đủ ba. Có 54 vị trí đã có kết quả và 18 vị trí Informer thiếu; không đồng nhất số dòng kết quả với 114 lượt huấn luyện/pipeline. Lượt này chỉ cập nhật báo cáo từ aggregate, không fit mới hoặc mở 2025. Ví dụ công thức/hai quy tắc trong cùng mô hình và ablation trong TFT phải ghi rõ mục đích, không dùng chúng làm xếp hạng kiến trúc.
+- **Cập nhật ưu tiên 28/10/2026 — người dùng yêu cầu chạy nốt Informer:** đã chạy đủ 54 lượt E1–E6, dùng nguyên hàm fit pilot và dữ liệu/tham số/loss/calibration. Dùng lại 18 lượt E0/E7; tổng 72 Informer, cùng 72 TFT và 24 pipeline LightGBM = 168 lượt. [Hồ sơ đầy đủ](reports/informer_regional_matrix_2026_10_28/README.md), [49 slide/Word/Excel chín sheet](reports/short_range_complete_2026_10_28/README.md). Phần fit/save/replay mới khoảng 22,4 phút, tiến trình khoảng 22,8 phút; không gọi đây là thời gian hoàn tất nghiên cứu.
+- Kiểm chứng độc lập 72 checkpoint × calibration/evaluation = 144 split, tái tạo scaler train, calibration, ensemble và điểm số. Điểm Informer E0/E7 và TFT/LightGBM giữ nguyên; nguồn 2233/2233 file khớp; hai unittest Informer đạt. Không tuning hoặc mở test 2025. Code huấn luyện và báo cáo cũ giữ nguyên; mô hình/dữ liệu/dự đoán từng mốc nằm ngoài Git.
+- Cả ba mô hình có tín hiệu cải thiện BSS ngày 1 khi thêm M. Informer E6 ngày 1/2/3 có BSS 0,284/0,062/0,004; điểm dương ngày 3 rất nhỏ, chưa tự khẳng định kỹ năng chắc chắn. Cả ba E7 ngày 3 vẫn BSS âm. CI mới: 20.000 bootstrap paired, khối 7/14 ngày, CI95% mô tả, chưa hiệu chỉnh nhiều phép, có điều kiện trên mô hình đã fit; giữ riêng phép thử TFT chính có CI điều chỉnh. Không đổi phân tích mới thành holdout hoặc coi chọn E đẹp nhất trên development là kết luận cuối.
+- LightGBM là mô hình tham chiếu để so sánh, không bắt buộc TFT phải thắng; trọng tâm là đo đóng góp đặc trưng. Gộp sáu giờ vẫn là lựa chọn thiết kế chưa có đối chứng 1h/3h/6h. Footprint 93 toàn ô còn xấp xỉ, cần giao ranh và QC nhãn trước khóa/holdout.
+- Người dùng đã đổi tên và chỉnh sửa slide 21/10 ở working tree; không phục hồi/ghi đè/commit hộ tệp này. Bản mới xuất riêng vào thư mục 28/10. Chỉ stage mã/tài liệu/kết quả tổng hợp thuộc công việc mới.
+
+- **Quy ước trình bày (bản lịch sử 21/10):** mọi bảng xếp hạng mô hình phải đặt đủ LightGBM, TFT, Informer cạnh nhau cùng E/ngày/mẫu/nhãn/mùa/ngưỡng. [Bản 47 slide và Word](reports/short_range_three_models_2026_10_21/README.md) còn thiếu Informer E1–E6 ở thời điểm đó; bản 28/10 bên trên đã hoàn tất. Ví dụ công thức/hai quy tắc trong cùng mô hình và ablation trong TFT phải ghi rõ mục đích, không dùng chúng làm xếp hạng kiến trúc.
 
 - **Quy trình Git đã được người dùng đồng ý:** phát triển trên `research/tft-regional`, commit/push mã và báo cáo lên nhánh đó, tạo PR vào `main`. `main` là bản tích hợp chung cho các nhánh nghiên cứu sau review. Dữ liệu/checkpoint ngoài Git; nhánh Bi-LSTM do thành viên khác phụ trách.
 - Đã push commit đầu tiên `ad78de3`, mở [PR #1](https://github.com/nibsu05/PBL6/pull/1), chưa merge. Sau khi người dùng hỏi kết quả và cần báo cáo trong 30 phút, bổ sung [bản ngắn Word, 5 slide và lời trình bày 5 phút](reports/short_range_brief_2026_10_21/README.md) từ kết quả đã kiểm chứng. Không fit/chấm mô hình mới, không đổi dữ liệu hoặc mở 2025 trong bước tổng hợp này.
@@ -100,10 +106,10 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
    - Audit 93 ô Đà Nẵng 2021–2023: 67,6% tổng GC mùa 11–2 nằm ở giờ raw ≤0,01 mm; mùa 5–10 là 20,8%. Chỉ báo cho thấy phụ thuộc hiệu chỉnh mạnh, không chứng minh mọi giờ mưa mùa đông đều sai hoặc được trải đều.
    - Sản phẩm A chấm giờ/3 h chính trên tháng 5–10; mùa đông chỉ chấm 6 h như chỉ số phụ vẫn có bất định nhãn. Tổng 24 h dùng QC nhãn với trạm hoặc sản phẩm B, không biến mô hình 6 h thành dự báo 24 h. Tách mọi bảng theo mùa.
 5. **TFT là kiến trúc thử nghiệm chính nhánh ngày**, rà soát lại lý do 21/10/2026:
-   - Đã có pilot Informer vùng E0/E7 × ba năm × ba seed (18 lượt, khoảng 5,3 phút fitting/save/calibration), độc lập phát lại đủ checkpoint. Ngày 1 E7: Informer có BSS/CSI/FAR tốt hơn, RMSE/POD kém hơn TFT; ngày 3 cả hai BSS âm. Chưa có đủ E1–E6, tuning hoặc kiểm định chênh lệch kiến trúc. Benchmark khác và R² cũ 0,04 không loại được Informer.
+   - Đã đủ Informer E0–E7 × ba năm × ba seed (72 lượt), độc lập phát lại đủ checkpoint. Bổ sung 54 lượt ngày 28/10, giữ nguyên pilot E0/E7. Có CI chênh lệch mô tả với TFT/LightGBM, chưa tuning hoặc kiểm định cuối. Benchmark khác và R² cũ 0,04 không loại được Informer; không kết luận chọn kiến trúc từ điểm đơn lẻ.
    - Informer có time marks; không nói hoàn toàn không nhận thông tin tương lai đã biết. Ưu thế tính toán chuỗi dài của nó chưa phải nút thắt rõ ở encoder 28 bước hiện tại.
    - TFT gốc có lựa chọn biến/gating và thiết kế nhiều hạn, là lý do để thử; chưa bảo đảm dự đoán tốt hơn. Bản vùng tự cài PyTorch giữ VSN/GRN/LSTM/attention, bỏ static context, dùng Tweedie/BCE, chưa xuất phân vị và chưa dùng forecast thật.
-   - Đối chứng đang có: LightGBM, khí hậu, luôn 0 và pilot Informer vùng E0/E7. Bảng xếp hạng phải có đủ LightGBM/TFT/Informer; Informer E1–E6 còn thiếu 54 lượt. Cùng nguyên liệu nhưng cây và mạng khác biểu diễn, chưa là phép so chỉ đổi kiến trúc. ECMWF/DLinear trên giao thức vùng này chưa được chấm, không gọi là đã chạy.
+   - Đối chứng đang có: LightGBM, khí hậu, luôn 0 và Informer vùng đủ E0–E7. Bảng xếp hạng phải có đủ LightGBM/TFT/Informer. Cùng nguyên liệu nhưng cây và mạng khác biểu diễn, chưa là phép so chỉ đổi kiến trúc. ECMWF/DLinear trên giao thức vùng này chưa được chấm, không gọi là đã chạy.
 6. **Không có dữ liệu Vrain** (người dùng xác nhận không xin được). Kiểm chứng độc lập chỉ dựa vào NOAA GSOD tại 10 trạm, đến 24/08/2025.
 7. **Những nhận định cũ đã bị bác bỏ:**
    - "Informer vượt Bi-LSTM 21 %": hai mô hình được chấm trên tập test khác nhau.

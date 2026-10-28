@@ -31,6 +31,13 @@ reports/short_range_three_models_2026_10_21/*.html text eol=lf
 reports/informer_regional_pilot_2026_10_21/*.md text eol=lf
 reports/informer_regional_pilot_2026_10_21/*.json text eol=lf
 reports/informer_regional_pilot_2026_10_21/*.csv text eol=lf
+reports/informer_regional_matrix_2026_10_28/*.md text eol=lf
+reports/informer_regional_matrix_2026_10_28/*.json text eol=lf
+reports/informer_regional_matrix_2026_10_28/*.csv text eol=lf
+reports/short_range_complete_2026_10_28/*.md text eol=lf
+reports/short_range_complete_2026_10_28/*.json text eol=lf
+reports/short_range_complete_2026_10_28/*.csv text eol=lf
+reports/short_range_complete_2026_10_28/*.html text eol=lf
 # Frozen experiment code hashes must survive checkout on Windows.
 src/short_range*.py text eol=lf
 src/tft_regional.py text eol=lf

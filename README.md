@@ -6,7 +6,9 @@
 
 Dự án nghiên cứu đóng góp của các nhóm đặc trưng dữ liệu cho dự đoán mưa vùng trực tiếp tại Đà Nẵng mới (Đà Nẵng cũ + Quảng Nam).
 
-**Báo cáo hiện tại: so đồng thời ba mô hình:** [47 slide, Word, HTML và lời dẫn](reports/short_range_three_models_2026_10_21/README.md) đặt LightGBM, TFT, Informer trong cùng bảng E/ngày. Bảng E7 có đủ tám metrics; phụ lục E0–E7 ghi rõ Informer E1–E6 chưa chạy. TFT 72 lượt, LightGBM 24 pipeline, Informer 18 lượt E0/E7; chưa có ma trận ba mô hình hoàn chỉnh. Không huấn luyện thêm hoặc mở test 2025 trong bước cập nhật slide.
+**Cập nhật 28/10/2026, đủ ma trận ba mô hình:** [49 slide, Word và Excel chín sheet](reports/short_range_complete_2026_10_28/README.md). Đã bổ sung [54 lượt Informer E1–E6](reports/informer_regional_matrix_2026_10_28/README.md), dùng lại 18 lượt E0/E7; đủ 72 Informer, 72 TFT và 24 pipeline LightGBM. Độc lập phát lại 72 checkpoint Informer trên 144 tập hiệu chỉnh/đánh giá, giữ nguyên các điểm cũ. Có CI95% mô tả khối 7/14 ngày; chưa hiệu chỉnh nhiều phép, không thay phép thử TFT chính. Không mở test 2025; còn ranh/QC nhãn và đối chứng bước thời gian.
+
+**Bản lịch sử 21/10: so đồng thời ba mô hình:** [47 slide, Word, HTML và lời dẫn](reports/short_range_three_models_2026_10_21/README.md) đặt LightGBM, TFT, Informer trong cùng bảng E/ngày. Ở thời điểm đó Informer mới có E0/E7; bản 28/10 phía trên đã bổ sung đủ E1–E6. Giữ bản cũ để đối chiếu quá trình nghiên cứu.
 
 **Phạm vi hiện tại — 21/10/2026:** tổng hợp đầu vào và nhãn theo vùng trước mô hình, nghiên cứu thêm/bớt đặc trưng E0–E7. Nhóm triển khai hai nhánh: Bi-LSTM 1–6 giờ và TFT 24–72 giờ; mỗi nhánh có LightGBM đối chứng và giao thức riêng. Người dùng phụ trách TFT, thành viên khác phụ trách Bi-LSTM. App chưa phải trọng tâm. [Phương án vùng nền ngày 20/10](reports/regional_research_plan_2026_10_20/README.md) có Word và ma trận 18 quyết định × 6 tiêu chí; [báo cáo V1/V2](reports/regional_danang_v1_v2/README.md) và [rà soát Bi-LSTM trên dev](reports/research_rainfall/dev_bilstm_review_2026_10_20.md) lưu bằng chứng trước nhánh ngày. Chưa xác nhận Bi-LSTM vùng mới đã được thành viên hoàn tất; test 2025 tiếp tục giữ kín.
 
