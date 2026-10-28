@@ -1,0 +1,43 @@
+{
+  "review_date": "2026-10-21",
+  "ref": "fe27756ff57e90b09553f4e5c62d17aa74efee89",
+  "files": {
+    "experiments/bilstm_factorial_e0_e7_LOCAL.py": {
+      "sha256": "23fbbe6a7922e647f7098eaa2c2ff2a8419197e07e76dc87f6e39c66a3033459",
+      "bytes": 28909
+    },
+    "experiments/bilstm_factorial_e0_e7_LOCAL.ipynb": {
+      "sha256": "d4602b8ca32a5a2c0c30749c184042c8e011811a36ec898d546bc4c1d7548c35",
+      "bytes": 43018
+    },
+    "experiments/bilstm_factorial_tweedie_COLAB.ipynb": {
+      "sha256": "6fedad559d7ee2a048aa96988ae1058d0037a4a73b3666878ef8fd5a7f3e7970",
+      "bytes": 67010
+    },
+    "experiments/bilstm_factorial_summary_user.csv": {
+      "sha256": "1dc5d33bff3953ea7217effd9216faff9a2222c3aa83f66c94e85e242fba727c",
+      "bytes": 3135
+    }
+  },
+  "scope": "read_only_git_blobs; no branch switch, notebook execution, data load or retraining",
+  "local_script_event_lines": [
+    421,
+    443
+  ],
+  "local_script_early_stopping_lines": [
+    376,
+    385
+  ],
+  "tweedie_notebook_evaluation_cell": 21,
+  "tweedie_notebook_training_cell": 19,
+  "tweedie_notebook_probability_outputs": [
+    "BS",
+    "CSI_prob"
+  ],
+  "source_label": "precipitation",
+  "data_basename": "danang_full_features_2015_2026.parquet",
+  "categorical_rules": "amount>=rain_threshold; totals or hourly maximum depending on named metric",
+  "probability_rule_in_tweedie_evaluate": "p>=0.5",
+  "primary_selection_code": "elementwise RMSE on hourly output arrays; variable is named val_rmse_6h but no totals() is applied there",
+  "caution": "Do not equate displayed POD/FAR with the optimization criterion. Audit scope is these files at this commit, not unpublished member work."
+}

@@ -1,0 +1,71 @@
+{
+  "status": "complete",
+  "slides": 42,
+  "main_slides": 30,
+  "roles": {
+    "groups": 5,
+    "seeds": 7,
+    "three_threes": 8,
+    "metrics": 13,
+    "pod_04": 17,
+    "pod_sources": 18,
+    "rules": 23,
+    "informer": 27
+  },
+  "test2025_read": false,
+  "informer_runs": 18,
+  "completed_seeds": [
+    42,
+    43,
+    44
+  ],
+  "code_sha256": "7499ae306066f2f0850aaadf983636cab5104effc523dbb84975d6be59240f77",
+  "sources": {
+    "reports/short_range_presentation_2026_10_21/slide_scene.json": "dc770ee09ef54e0a5eeba2cec9a885eb50e34618dbfab3ff676974c295049ce6",
+    "reports/short_range_ablation_2026_10_21/scores_ensemble_pooled.csv": "32458005303c7f7cd9e53447c1bbbe2f6439ff238fe92b4ccac467aeb379c89f",
+    "reports/short_range_ablation_2026_10_21/scores_seed_pooled.csv": "ab31bd1a63e4df6378d85e14352bd219f2287ab56fa013cef1ed3c3e77b763c5",
+    "reports/short_range_ablation_2026_10_21/paired_bootstrap.csv": "34080e63d8d80b133144d53ee25f4ffcc3051909e12a12bb994632497cdf902c",
+    "reports/informer_regional_pilot_2026_10_21/run.json": "ca073dd9bfb73a61af41c8557b0426f73bece9311c36495fd716ba1818aa64ac",
+    "reports/informer_regional_pilot_2026_10_21/scores_pooled.csv": "5834e5b0156961a036c1e4ad557f3be3830d19c62f8ef6070a62482755be36dc",
+    "reports/short_range_revised_2026_10_21/DECISION_RULES_E7.csv": "f2c9a89356df882c872ce84704d4e7a8538fdd8b1b543443bd0c7b860896528c",
+    "reports/short_range_revised_2026_10_21/POD_SOURCES.json": "881b5d74dc84ccdc272b90dfab18c1b59a5d10239f7e21333c5a60561ff4dfc0"
+  },
+  "files": {
+    "DECISION_RULES_E7.csv": {
+      "sha256": "f2c9a89356df882c872ce84704d4e7a8538fdd8b1b543443bd0c7b860896528c",
+      "bytes": 1168
+    },
+    "POD_SOURCES.json": {
+      "sha256": "881b5d74dc84ccdc272b90dfab18c1b59a5d10239f7e21333c5a60561ff4dfc0",
+      "bytes": 2420
+    },
+    "PBL6_BAO_CAO_DE_HIEU.pptx": {
+      "sha256": "8915a0a5404cba3a581d7a5d26e48bc0c00eb4731c12395d4d70b16d5caa47ec",
+      "bytes": 232708
+    },
+    "PBL6_BAO_CAO_DE_HIEU.html": {
+      "sha256": "252c7802fff138f17a90309f45a24f23e5efc4f3f3c998926733b4c4e60f5f29",
+      "bytes": 287628
+    },
+    "slide_scene.json": {
+      "sha256": "15b44f0d38351c4461856896a54c5396325985cec96f33a3e7d4d7957b87fd41",
+      "bytes": 209394
+    },
+    "LOI_DAN.md": {
+      "sha256": "f5390bbcf0d5ba441b03b8dcff9539dfc31a08ec16af740e4a1b8141d9437472",
+      "bytes": 25666
+    },
+    "GIAI_THICH_THEO_CAU_HOI.md": {
+      "sha256": "54064af0464e710a3298b4c4a1293744cdfc0534ee1afbaf66489bdb7b6ee19d",
+      "bytes": 7723
+    },
+    "GIAI_THICH_THEO_CAU_HOI.docx": {
+      "sha256": "ec608cd459ec6b68c4fba269a523bf3ef81a811cea802e3711a596db9a1427a1",
+      "bytes": 42489
+    },
+    "README.md": {
+      "sha256": "80e507bf2585296796f424ea0c658f4bb85056ab4c91a5534ea68084c6bcd8f7",
+      "bytes": 1567
+    }
+  }
+}

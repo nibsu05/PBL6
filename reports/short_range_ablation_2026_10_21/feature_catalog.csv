@@ -1,0 +1,45 @@
+group,native_variable,v1_column,unit,description_from_source_code,input_availability
+B,t2m_c,mean__t2m_c,°C,Nhiệt độ 2 m,past reanalysis only
+B,td2m_c,mean__td2m_c,°C,Điểm sương 2 m,past reanalysis only
+B,rh2m_pct,mean__rh2m_pct,%,Độ ẩm tương đối 2 m,past reanalysis only
+B,sp_hpa,mean__sp_hpa,hPa,Áp suất bề mặt,past reanalysis only
+B,mslp_hpa,mean__mslp_hpa,hPa,Áp suất mực biển,past reanalysis only
+B,u10,mean__u10,m/s,Gió u 10 m,past reanalysis only
+B,v10,mean__v10,m/s,Gió v 10 m,past reanalysis only
+B,sin_hour,sin_hour,dimensionless,sin giờ địa phương,known calendar
+B,cos_hour,cos_hour,dimensionless,cos giờ địa phương,known calendar
+B,sin_doy,sin_doy,dimensionless,sin ngày-trong-năm,known calendar
+B,cos_doy,cos_doy,dimensionless,cos ngày-trong-năm,known calendar
+A,cape,mean__cape,J/kg,CAPE,past reanalysis only
+A,cin_capped,mean__cin_capped,J/kg,"CIN, NaN→500 (không có LFC)",past reanalysis only
+A,has_lfc,mean__has_lfc,0-1,Tỷ lệ nút có mực đối lưu tự do,past reanalysis only
+A,tcwv,mean__tcwv,kg/m²,Hơi nước cột,past reanalysis only
+A,kx,mean__kx,K,K-index,past reanalysis only
+A,tt,mean__tt,K,Total Totals,past reanalysis only
+A,blh,mean__blh,m,Độ cao lớp biên,past reanalysis only
+A,tcc,mean__tcc,0-1,Mây tổng,past reanalysis only
+A,lcc,mean__lcc,0-1,Mây thấp,past reanalysis only
+A,mcc,mean__mcc,0-1,Mây trung,past reanalysis only
+A,hcc,mean__hcc,0-1,Mây cao,past reanalysis only
+A,swvl1,mean__swvl1,m³/m³,Độ ẩm đất lớp 1,past reanalysis only
+M,u850,mean__u850,m/s,Gió u 850 hPa,past reanalysis only
+M,v850,mean__v850,m/s,Gió v 850 hPa,past reanalysis only
+M,q850_gkg,mean__q850_gkg,g/kg,Độ ẩm riêng 850 hPa,past reanalysis only
+M,t850_c,mean__t850_c,°C,Nhiệt độ 850 hPa,past reanalysis only
+M,rh850_pct,mean__rh850_pct,%,RH 850 hPa,past reanalysis only
+M,w850_pas,mean__w850_pas,Pa/s,Omega 850 hPa (âm = thăng),past reanalysis only
+M,u500,mean__u500,m/s,Gió u 500 hPa,past reanalysis only
+M,v500,mean__v500,m/s,Gió v 500 hPa,past reanalysis only
+M,q500_gkg,mean__q500_gkg,g/kg,Độ ẩm riêng 500 hPa,past reanalysis only
+M,t500_c,mean__t500_c,°C,Nhiệt độ 500 hPa,past reanalysis only
+M,w500_pas,mean__w500_pas,Pa/s,Omega 500 hPa,past reanalysis only
+M,shear_850_500,mean__shear_850_500,m/s,Đứt gió 850–500 hPa,past reanalysis only
+M,ivt_u,mean__ivt_u,kg/m/s,"Thông lượng ẩm tích phân, thành phần đông",past reanalysis only
+M,ivt_v,mean__ivt_v,kg/m/s,"Thông lượng ẩm tích phân, thành phần bắc",past reanalysis only
+M,ivt_mag,mean__ivt_mag,kg/m/s,Độ lớn IVT,past reanalysis only
+M,vimd_mmh,mean__vimd_mmh,mm/h,Phân kỳ thông lượng ẩm (âm = hội tụ),past reanalysis only
+M,ctx_tcwv,mean__ctx_tcwv,kg/m²,"TCWV trung bình 3×3 nút ERA5 (~0,75°)",past reanalysis only
+M,ctx_ivt_mag,mean__ctx_ivt_mag,kg/m/s,IVT trung bình 3×3 nút ERA5,past reanalysis only
+M,cold_surge_dp_hpa,mean__cold_surge_dp_hpa,hPa,MSLP Hà Nội − MSLP Đà Nẵng (chỉ số không khí lạnh),past reanalysis only
+M,dp_tonkin_south_hpa,mean__dp_tonkin_south_hpa,hPa,MSLP vịnh Bắc Bộ − MSLP Nam Trung Bộ,past reanalysis only
+C,sst_region_c,mean__sst_region_c,°C,"SST trung bình vùng biển 15,5–16,5°B, 108,75–109,5°Đ",past reanalysis only

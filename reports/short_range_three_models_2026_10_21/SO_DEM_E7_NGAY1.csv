@@ -1,0 +1,4 @@
+model,hits,miss,false_alarm,POD,FAR,CSI
+LightGBM,60,54,32,0.526,0.348,0.411
+TFT,73,41,66,0.640,0.475,0.406
+Informer,70,44,45,0.614,0.391,0.440

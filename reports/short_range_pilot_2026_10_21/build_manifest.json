@@ -1,0 +1,75 @@
+{
+  "status": "completed_exploratory_pilot",
+  "date_local": "2026-10-21",
+  "models_replayed": 12,
+  "code_checks_passed": 23,
+  "test2025_read": false,
+  "report_slides": 7,
+  "private_predictions_included": false,
+  "files": {
+    "PILOT_TRONG_4_GIO.md": {
+      "sha256": "b144c9963533a3921a3d825be4450d83a81c8c13fa07e0b7c007cbd5c0b8bbc5",
+      "bytes": 2666
+    },
+    "run.json": {
+      "sha256": "858e49c4d4b500d1d47d9d46885b8ae2dcd097be87755676b28c3f1e3a213b14",
+      "bytes": 107532
+    },
+    "scores.csv": {
+      "sha256": "7f943a5641327e6cf9c47c7165cc3eebd28811bfa74c575fecf4fc1bbcce7cfd",
+      "bytes": 129228
+    },
+    "scores_pooled.csv": {
+      "sha256": "c02d550af076cbf0e55c0d298ea6fecd8b7eb1b68379f69445ec1abb367e6074",
+      "bytes": 46756
+    },
+    "checkpoint_audit.json": {
+      "sha256": "fad9f37ce9034cc9e580b8da5e70808221169f878d6b9fd09a0bef7741231711",
+      "bytes": 4242
+    },
+    "paired_bootstrap.csv": {
+      "sha256": "4775b3d05095b0863f22091d1a320fd19261f75da250fe6f07f509cb0060a44c",
+      "bytes": 4101
+    },
+    "reliability16.csv": {
+      "sha256": "1e3723562635122852ed99155c883334e1ac2d022090fb833346f17a786264b3",
+      "bytes": 5484
+    },
+    "rmse_by_year.png": {
+      "sha256": "480f8a2d6baaf47c68fb6117bb824fb4954be7ac997887ad3b6812335910561a",
+      "bytes": 104763
+    },
+    "bss_by_year.png": {
+      "sha256": "322a3bbbc35d43279225b23fc7eb3dff78534e04bd2b08b85b08998970c924f8",
+      "bytes": 127030
+    },
+    "feature_effect_ci.png": {
+      "sha256": "624e50df28841255b4dcc03e03b9abc9ac41c6a998c2d60085a57466d333c9f5",
+      "bytes": 74873
+    },
+    "reliability16.png": {
+      "sha256": "3eb25fe8f107576fa9701d6d664579b5e6e39a39ab1ce24e4ea6f5b855e771b6",
+      "bytes": 151189
+    },
+    "fixed_example_2023.png": {
+      "sha256": "740e8813860129d7e3121887dcff4233a6e6ab1abdb16bea4f8f1d1c944c7e9a",
+      "bytes": 138986
+    },
+    "BAO_CAO_PILOT.md": {
+      "sha256": "e3f98a4a721500506f9370013a5a83da11b5671365fdde5b52f07236a345f815",
+      "bytes": 10952
+    },
+    "BAO_CAO_PILOT.docx": {
+      "sha256": "de02eef8d8205f487a396e1a62b7450f0361959b0dfcea29dbfe1d99fda9c810",
+      "bytes": 601501
+    },
+    "PBL6_TFT_24_72h_pilot_2026_10_21.pptx": {
+      "sha256": "97bbd4e0c61598bda628d60f38f22ba0975aaa45b5dcb476e101f014a6e386b9",
+      "bytes": 474949
+    },
+    "README.md": {
+      "sha256": "4a4322e6c87313622ec4c452e8ec0b02927a34b89d6939e14027f370de5e43f3",
+      "bytes": 1501
+    }
+  }
+}

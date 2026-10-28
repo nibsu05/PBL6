@@ -2,18 +2,18 @@
 
 > **Dành cho các thành viên trong nhóm.** File này trả lời bốn câu hỏi: dự án làm gì, quy trình ra sao, đang ở giai đoạn nào, và mỗi người cần làm gì tiếp theo.
 > Chi tiết kỹ thuật và số liệu đầy đủ nằm ở [`project_plan_v2.md`](project_plan_v2.md). Bối cảnh dành cho AI agent nằm ở [`CLAUDE.md`](CLAUDE.md).
-> **Cập nhật:** 20/10/2026. [Phương án nghiên cứu hợp nhất](reports/regional_research_plan_2026_10_20/PHUONG_AN_CUOI.md) là phạm vi hiện tại; các phần hai sản phẩm/app bên dưới giữ để tra cứu lịch sử. Khi chuyển sang giai đoạn mới hoặc chốt một quyết định, hãy sửa mục 4, mục 6 và ngày cập nhật.
+> **Cập nhật:** 21/10/2026. [Phương án nghiên cứu hợp nhất](reports/regional_research_plan_2026_10_20/PHUONG_AN_CUOI.md) là nền cho nhánh 6 giờ; người dùng đã duyệt thêm [nhánh TFT vùng 24–72 giờ](reports/short_range_plan_2026_10_21/README.md). Các phần hai sản phẩm/app trước đây giữ để tra cứu lịch sử. Khi chuyển giai đoạn hoặc chốt quyết định, sửa mục 4, mục 6 và ngày cập nhật.
 
 ---
 
 ## 1. Đọc nhanh trong 1 phút
 
-- **Mục tiêu hiện tại:** nghiên cứu thêm/bớt đặc trưng để **dự đoán vùng trực tiếp** cho Đà Nẵng mới. Chuỗi khí tượng/nhãn được tổng hợp theo diện tích trước mô hình; app không phải đầu ra chính. Giữ các quyết định có bằng chứng D1/D2/D9/D10/D14/D15 và đánh giá đủ sáu tiêu chí trong phương án hợp nhất. Hai sản phẩm sau là cấu hình trước đây:
-  - **Sản phẩm A**, 0–6 giờ tới, dùng **Bi-LSTM**.
-  - **Sản phẩm B**, 1–3 ngày tới, dùng **TFT** (Temporal Fusion Transformer).
+- **Mục tiêu hiện tại:** nghiên cứu thêm/bớt đặc trưng để **dự đoán vùng trực tiếp** cho Đà Nẵng mới. Chuỗi khí tượng/nhãn được tổng hợp theo diện tích trước mô hình; app không phải đầu ra chính. Giữ các quyết định có bằng chứng D1/D2/D9/D10/D14/D15 và đánh giá đủ sáu tiêu chí trong phương án hợp nhất. Hai nhánh được phân công:
+  - **Nhánh cực ngắn**, 1–6 giờ tới, dùng **Bi-LSTM**, thành viên khác phụ trách.
+  - **Nhánh hạn ngắn**, ba tổng mưa 24 giờ riêng, dùng **TFT**, người dùng phụ trách; giao thức nhánh ngày được duyệt ngày 21/10.
 - **Câu hỏi nghiên cứu:** nhóm đặc trưng và biểu diễn không gian nào cải thiện mưa vùng ngoài mẫu, ở mùa/hạn nào? Chấp nhận kết quả âm, không đặt trước phải thắng ECMWF.
-- **Đang ở đâu:** V1/V2 và pilot LightGBM vùng đã có trên main; dev có thí nghiệm E0–E7 dùng chuỗi cũ và các lỗi cần sửa. Đã tạo phương án cuối cùng, Word và ma trận 18 quyết định; chưa chạy Bi-LSTM vùng theo protocol mới.
-- **Việc cần làm ngay:** chốt ranh/trọng số/độ phủ, sửa loader và phép chấm, chạy tối thiểu trước E0–E7 ba fold. Giữ kín 2025; app/TFT/live để phần mở rộng.
+- **Đang ở đâu:** nhánh ngày đã có E0–E7, ba fold/ba seed TFT và LightGBM trên footprint xấp xỉ; xem bộ báo cáo mở rộng ở mục 4. V1/V2 và phương án hợp nhất đã có trên main; chưa xác nhận thành viên đã hoàn tất Bi-LSTM vùng mới sau bản rà soát dev.
+- **Việc cần làm ngay:** chốt ranh/trọng số/độ phủ và kiểm chứng nhãn; nếu đổi dữ liệu phải chạy lại phần phát triển liên quan. Rà soát nhánh Bi-LSTM riêng. Giữ kín 2025, khóa thiết kế trước đánh giá cuối; app/live chưa là ưu tiên.
 
 ---
 
@@ -122,6 +122,20 @@ flowchart LR
 
 ## 4. Đang ở giai đoạn nào
 
+**Cập nhật 28/10/2026, đã hoàn thành phần Informer còn thiếu:** thêm 54 lượt E1–E6 theo fit pilot, dùng lại 18 lượt E0/E7, đủ 72 Informer. Cùng 72 TFT và 24 pipeline LightGBM, đủ ma trận ba mô hình E0–E7. [Hồ sơ huấn luyện/kiểm chứng](reports/informer_regional_matrix_2026_10_28/README.md), [49 slide, Word và Excel chín sheet](reports/short_range_complete_2026_10_28/README.md). Độc lập tái lập 72 checkpoint trên 144 split, scaler/calibration/ensemble; các điểm cũ không đổi. Fit/save/replay của 54 lượt mới khoảng 22,4 phút. CI mới là mô tả 95% trên 20.000 bootstrap khối 7/14 ngày, chưa hiệu chỉnh nhiều phép; không thay family TFT chính. Nguồn verify 2233/2233, hai unittest Informer đạt; không mở 2025. Chưa hoàn tất ranh/QC nhãn hoặc kiểm chứng bước sáu giờ.
+
+**Bản báo cáo lịch sử 21/10:** [47 slide, Word và bảng CSV](reports/short_range_three_models_2026_10_21/README.md), 32 slide chính và 15 tra cứu. Ở thời điểm đó có 114 lượt đã kiểm chứng và Informer còn thiếu E1–E6; bản 28/10 phía trên đã hoàn tất phần thiếu. Giữ bản cũ để đối chiếu quá trình nghiên cứu.
+
+**Cập nhật 21/10, đã hoàn thành ma trận phát triển nhánh ngày:** người dùng làm TFT 24–72 giờ, ưu tiên kết quả trong 3–4 giờ. [Bộ mở rộng có Word, 8 slide, FAQ và danh mục biến](reports/short_range_ablation_2026_10_21/README.md) gồm 72 lượt TFT (E0–E7 × ba fold × ba seed) và 24 pipeline LightGBM, 27 kiểm tra đạt, 96/96 lượt tái lập calibration/evaluation. Đã giữ nguyên [pilot](reports/short_range_pilot_2026_10_21/README.md). TFT ngày 1: thêm riêng A hoặc M có CI điều chỉnh trên 0 trong gia đình 9 phép so, 20.000 bootstrap khối 7/14 ngày; SST và ngày 2–3 chưa có bằng chứng tương tự. E7 TFT ngày 3 BSS −0,038. Footprint vẫn xấp xỉ; chưa mở 2025 hoặc hoàn thiện ranh/kiểm chứng nhãn. Tiến trình ma trận khoảng 27,9 phút, không đồng nhất với thời gian hoàn thiện nghiên cứu.
+
+**Mốc báo cáo nhanh tiếp theo:** [Word ngắn, 5 slide và lời trình bày 5 phút](reports/short_range_brief_2026_10_21/README.md) đã tổng hợp từ kết quả này. Commit đầu tiên `ad78de3` đã push lên nhánh TFT, [PR #1](https://github.com/nibsu05/PBL6/pull/1) đang mở vào main. Đây là bước trình bày kết quả, không phải đợt thí nghiệm mới.
+
+**Bản giải thích đầy đủ theo yêu cầu tiếp theo:** [Word/Markdown và Excel 18 sheet](reports/short_range_explained_2026_10_21/README.md) có đủ 48 dòng kết quả chính, 44 biến, trạng thái 96 lượt và hướng dẫn từ mục tiêu đến metrics bằng ví dụ. Giải thích rõ ba tổng mưa vùng 24 giờ, vai trò TFT/Informer/LightGBM và khác biệt lượng mm/xác suất/quyết định sự kiện. Chỉ tổng hợp aggregate, không thêm lần huấn luyện hoặc chấm 2025.
+
+**Bộ slide tiếp theo:** [34 slide và hồ sơ phân tích LightGBM/POD/FAR](reports/short_range_presentation_2026_10_21/README.md), có cơ sở paper và giới hạn, audit dev theo commit, ví dụ E7 số đếm, công thức/ví dụ metrics và đủ 48 dòng phụ lục. In đậm có quy tắc, BSS âm màu đỏ. Giữ nguyên dữ liệu/protocol, không mở 2025 hoặc thêm lượt huấn luyện.
+
+**Bản sửa theo phản hồi dễ hiểu hơn:** [42 slide và tài liệu đi kèm](reports/short_range_revised_2026_10_21/README.md) có bảng 8 metrics, đủ mô tả bốn nhóm biến, giải thích ba seed và kiểm chứng POD 0,4 theo bối cảnh paper. Người dùng cho phép thử Informer trong 30 phút: đã chạy [18 lượt E0/E7 × ba năm × ba seed](reports/informer_regional_pilot_2026_10_21/README.md), khoảng 5,3 phút fitting/save/calibration, độc lập phát lại đủ checkpoint. Informer khả thi tính toán; ngày 1 E7 tốt hơn TFT ở BSS/CSI/FAR, kém hơn nhẹ ở RMSE/POD. Ngày 3 cả hai BSS âm. Không mở 2025, không sửa giao thức TFT hoặc bản kết quả cũ; chưa có đủ E1–E6 hay tuning/kiểm định chênh lệch để thay TFT.
+
 **Trạng thái hiện tại 20/10:** đã hoàn tất [tài liệu hợp nhất gửi nhóm](reports/regional_research_plan_2026_10_20/PHUONG_AN_CUOI.docx), với đầu ra vùng trực tiếp, E0–E7/Bi-LSTM/LightGBM, chính sách bằng chứng giữ nguyên và 18 quyết định × 6 tiêu chí. Dữ liệu vùng V1/V2 và pilot có trên main; chưa có Bi-LSTM vùng theo protocol cuối và chưa hoàn thiện giao ranh/kiểm chứng nhãn. Bảng 14/10 sau đây là kết quả của các giai đoạn trước, không phải trạng thái toàn bộ phương án mới.
 
 **Đổi trọng tâm20/10:** nghiên cứu thêm/bớt đặc trưng, không tập trung app. Đã tạo hai bộ vùng102.984giờ:V1/49predictor,V2/138predictor; nhãn cùngmeanGauge93ô, trọng số toàn ô xấp xỉ vùng. Đã chạy pilotLightGBM2021–2023; V2 có CI dương về cải thiện ởmộtsốphépso2021, chưa lặp chắc2022/2023. Verify2233/2233,22test vàparity thực đạt; không trainNN hoặc chấmtest2025. [Kết quả/CI](reports/regional_danang_v1_v2/README.md). Domain screen30ô/pilot93ô trước đây là các đợt khác.
@@ -159,15 +173,25 @@ flowchart LR
    - Sản phẩm A được chấm theo giờ chủ yếu trên tháng 5–10.
    - Mùa đông chấm tổng 6 giờ như chỉ số phụ; 24 giờ dùng QC nhãn với trạm hoặc sản phẩm B.
    - Quan trắc vệ tinh dự kiến ít giúp vào mùa đông.
-5. **Vì sao dùng TFT thay Informer:**
-   - Trên bộ dữ liệu chuẩn, Informer thua cả cách đoán "lặp lại giá trị gần nhất".
-   - Lần chạy cũ của nhóm chỉ đạt R² = 0,04.
-   - TFT được thiết kế đúng cho loại đầu vào của bài toán: dự báo số cho tương lai và đặc trưng tĩnh.
-   - Informer vẫn chạy một cấu hình để đối chiếu.
+5. **Vì sao thử TFT, cập nhật 21/10:** lựa chọn biến/gating và thiết kế nhiều hạn là cơ sở thiết kế. Đã có Informer vùng E0/E7 ba seed, chưa E1–E6; không dùng benchmark khác hoặc R² cũ để tuyên bố nó không khả thi. Bản TFT hiện chỉ nhận lịch tương lai, không có static context hay phân vị. LightGBM đã chạy đủ cùng nguyên liệu, là đối chứng thực nghiệm cần đọc cả khi có điểm tốt hơn TFT. Các bảng xếp hạng hiện tại phải đặt đủ LightGBM/TFT/Informer; điểm tốt hơn chưa là kết luận thắng có ý nghĩa thống kê.
 
 ---
 
 ## 6. Lộ trình thực hiện tiếp
+
+**Ưu tiên sau ma trận hoàn chỉnh 28/10:** không cần chạy thêm E1–E6 Informer vì đã đủ. Dùng bảng ba mô hình cùng E/ngày; đọc mùa/năm/seed và CI mô tả, giữ nguyên thiết kế trước holdout. Tiếp theo là ranh/trọng số vùng, QC nhãn và kiểm tra độ nhạy 1h/3h/6h khi được triển khai thành thí nghiệm riêng. Không chọn E/kiến trúc hoặc thay ngưỡng theo test 2025. Informer E6 ngày 3 chỉ BSS +0,004; E7 cả ba vẫn âm, chưa khẳng định dự báo hữu ích tới 72 giờ. Các đoạn 21/10 dưới đây là lịch sử trước khi chạy nốt Informer.
+
+Theo yêu cầu mới, dùng bảng ba mô hình đồng thời để báo cáo; không tách cặp làm mất đối chứng LightGBM. Có thể so đầy đủ ở E0/E7 hiện tại. Nếu mở rộng ma trận Informer E1–E6 thì còn 54 lượt; bước cập nhật slide này chưa thực hiện mở rộng. Kết luận E7 ngày 1: LightGBM tốt hơn theo RMSE/BSS/FAR, Informer có CSI cao nhất, TFT có POD cao nhất; ngày 3 cả ba BSS âm. Đây là so điểm phát triển, chưa có kiểm định chênh lệch ba pipeline.
+
+**Quy trình Git, người dùng đồng ý 21/10:** nhánh `research/tft-regional` dùng cho phần TFT; commit/push mã và báo cáo, tạo PR vào `main` để review và tích hợp. `main` dùng chung cho cả nhánh giờ và nhánh ngày; dữ liệu/checkpoint tiếp tục ngoài Git.
+
+Đã có PR #1 và bộ trình bày nhanh cho báo cáo. Các bước dữ liệu/holdout dưới đây vẫn còn nguyên; tài liệu ngắn không thay kết luận hoặc phạm vi của báo cáo đầy đủ.
+
+Đã bổ sung bản giải thích đầy đủ và Excel 18 sheet cho nhóm theo yêu cầu. Nhận định cần giữ: A/M có tín hiệu xác suất ngày 1; cả hai họ và mọi E hiện BSS âm ngày 3; chưa chứng minh TFT thắng LightGBM hoặc Informer. Khi dữ liệu/giao thức chưa đổi, dùng kết quả đã kiểm chứng để giải thích, không chạy lại chỉ vì cần báo cáo dài hơn. Nếu đổi tiêu chí chọn mô hình từ sự kiện sang RMSE, phải khóa trước holdout.
+
+Đã bổ sung 34 slide theo yêu cầu tiếp theo. POD/FAR tiếp tục cần thiết ở hạn ngày, đọc cùng CSI/BSS và sai số lượng mm; ưu tiên bỏ sót/báo nhầm phải có mục tiêu và chọn τ trên calibration. Không tự đổi tiêu chí sau khi thấy kết quả. Audit hai tệp dev chỉ ra báo cáo POD/FAR không đồng nghĩa đã tối ưu POD/FAR; việc sửa code dev thuộc nhánh của thành viên, chưa thực hiện trong lượt làm slide.
+
+**Nhánh ngày đã duyệt 21/10:** loader/baseline/TFT, pilot, ma trận E0–E7 ba seed và pilot Informer E0/E7 đã hoàn thành trên footprint 93 ô cố định, xấp xỉ. Giữ Informer làm đối chứng bổ sung, chưa cần mở rộng ma trận ngay để báo cáo đợt này. Tiếp theo chốt ranh/QC nhãn và tương thích định nghĩa vùng với Bi-LSTM; chạy lại development nếu vùng/nhãn thay đổi; sau khóa mới train/cal/test 2025 E0/E7. Không gọi ma trận phát triển là hoàn tất cổng dữ liệu hoặc nghiên cứu cuối. Bộ Word/slide/FAQ đã sẵn sàng.
 
 **Lộ trình hiện tại:** G0 chốt dữ liệu/nhãn/trọng số vùng → G1 sửa và kiểm tra loader/loss/baseline → G2 E0–E7 ba fold → G3 nhánh V2, raw và độ bền nhãn đã đăng ký → G4 khóa thiết kế, train/cal và chấm 2025 một lần. Phân công theo ba vai trò dữ liệu, mô hình, đánh giá; không tự gán người hoặc hạn nộp giả định. Giữ D9 CSI/BSS chính và D10 tách mùa; các mở rộng app/TFT/đa vùng không chặn nghiên cứu vùng trực tiếp. Chi tiết điều kiện hoàn thành ở mục 12 của phương án cuối.
 
@@ -197,6 +221,8 @@ Cuối mỗi tuần, cập nhật mục 4/6 và quyết định/trạng thái tr
 ## 7. Phân công gợi ý
 
 **Nhóm có 3 người, chưa chốt phân vai (13/10/2026).** Mỗi người vẫn nghiên cứu toàn bộ, nhưng nên có một người chịu trách nhiệm chính cho từng đầu ra:
+
+**Cập nhật phân công 21/10:** người dùng đảm nhiệm TFT 24–72 giờ; một thành viên khác đảm nhiệm Bi-LSTM 1–6 giờ. Bảng vai trò dưới đây là đề xuất cũ, chưa phải danh sách giao việc có tên. Các kết quả nhánh ngày không tự xác nhận tiến độ mã Bi-LSTM của thành viên khác.
 
 | Thành viên (tạm gọi) | Trách nhiệm chính | Người phản biện |
 | --- | --- | --- |
