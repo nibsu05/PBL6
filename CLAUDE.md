@@ -1,7 +1,7 @@
 # PBL6 – Dự báo mưa: bối cảnh cho agent
 
 > **Đọc file này trước khi làm bất cứ việc gì.** Kế hoạch chi tiết, kèm số liệu bằng chứng, nằm ở
-> [`project_plan_v2.md`](project_plan_v2.md); đọc cùng phương án hiện tại và đối chiếu bằng chứng. Cập nhật lần cuối: 28/10/2026.
+> [`project_plan_v2.md`](project_plan_v2.md); đọc cùng phương án hiện tại và đối chiếu bằng chứng. Cập nhật lần cuối: 04/11/2026.
 > **Kế hoạch dành cho nhóm** (quy trình, giai đoạn hiện tại, lộ trình, phân công) nằm ở [`KE_HOACH_DU_AN.md`](KE_HOACH_DU_AN.md). Mỗi khi xong một giai đoạn hoặc chốt một quyết định, cập nhật các mục 4 và 6 của file đó.
 > `project_master_plan.md`, `SURFACE_BASELINE_REPORT.md`, `DATA_GAP_PLAN.md` và `reports/informer_baseline_report.md`
 > là tài liệu cũ, do agent khác viết. Chỉ dùng chúng để tham khảo lịch sử. Một số nhận định trong đó đã bị bác bỏ (xem mục "Quyết định").
@@ -40,6 +40,13 @@
 - Tín hiệu không gian rõ hơn ở2021, không lặp chắc2022/2023; nhiều phép so chưa hiệu chỉnh. GiữV1 làm nền,V2 nhánh ablation, không tuyên bố bộ mới thắng chung. Persistence dùng nhãnGauge hồi cứu có RMSE3h thấp hơn các model khí tượng nhưng có thông tin mưa quá khứ khác đầu vào; cần phép so bổ sung đúng nguồn, chưa là baseline vận hành. Không lấy pilot này thay kiểm chứng nhãn/thực tế/khả năng toàn Việt Nam.
 
 ## Nhánh 24–72 giờ được duyệt ngày 21/10/2026 — pilot và ma trận phát triển
+
+- **Ưu tiên 04/11/2026:** người dùng giữ đầu ra toàn Đà Nẵng mới, đồng ý predictor ERA5 theo ngày và nhãn ưu tiên nguồn trạm; nhóm đang xin Vrain, chưa nhận dữ liệu. Đầu vào thí nghiệm cũ không chứa mưa vệ tinh; GSMaP là nhãn. Đã kiểm tra thêm NOAA: chỉ có một chuỗi trạm mưa gần vùng phủ thời kỳ hiện đại trong danh mục đã khảo sát, không đủ tạo quan trắc trung bình cả vùng. CPC là phân tích lưới từ trạm, không gọi là số đo trực tiếp toàn vùng.
+- Đã hoàn thành [thí nghiệm ngày riêng](reports/daily_gauge_2026_11_04/README.md): 24pipelineLightGBM,72TFT,72Informer =168lượt/E0–E7; phát lại độc lập144checkpointmạng/288đầuraLightGBM,336splitcal/eval đạt; nămtest2025giữkín. Giữ bảy ngày lịch sử nhưng gộp thành bảy bước ngày. B bỏ hai biến giờ hằng, số biến E0–E7 là9/21/29/10/41/22/30/42. Predictor không có mưa vệ tinh, mưa CPC quá khứ hoặc ERA5 giờ đích. Nhãn ba tổng CPC24hriêng; metadata chín ô ghiEOD12UTC nên chuyển issue và khối khí tượng về12–12UTC. EOD chưa xác minh toàn mạng, không gọi là mưa thực đo toàn vùng.
+- Có1.072mốcchung/hạn2021–2023,116/117/118sựkiện≥16mmngày1/2/3. E7 BSS ngày1 LightGBM/TFT/Informer=0,190/0,026/0,078; ngày2–3đềuâm. LightGBME6ngày1đạt0,206; ngày2chỉE2/E6LightGBMdươngrấtnhỏ0,006/0,002, ngày3mọiE/môhìnhđềuâm. Không khẳng định chỉ chuyển sang ngày sẽ dự báo hữu ích đến72h hoặc quy chênh điểm soGSMaPcũ cho một thay đổi. Phải đọc CI/mùa/năm và giữ nhãn/mốc/mẫu chung nếu đo riêng độ phân giải thời gian.
+- CI20.000bootstrapkhối7/14ngày, CI95%môtả và Bonferroni63phépΔBSS (7Ei−E0×3ngày×3môhình), chưa là holdout. ThêmMngày1cóΔBSSdươngcảba nhưngCI95%đềuchứa0. LightGBME6ngày2cóCIđiềuchỉnhΔsoE0trên0ởcả7/14ngày, nhưngBSS tuyệt đối≈0,002vàCI95%chứa0, nên chưa hơn khí hậu. E7ngày1LightGBM/InformerCI95%BSStrên0,TFTchứa0; CIso môhình là khám phá, không suy kiến trúc luôn thắng.
+- Đã tải CPC2015–2023 đủ3.287ngày, không thiếu chín ô; 13 probe khớp nguồn NOAA nhị phân và PSL. Ba trong chín ô có số trạm trong 13 probe, không suy thành ba trạm ở trong địa giới hoặc mạng trạm đầy đủ mọi ngày. Giữ footprint93toànô xấp xỉ, không giả định đã cắt ranh. Không so điểm CPC mới trực tiếp với điểm GSMaP cũ để tuyên bố cải thiện. Các hàm fit đã khóa, scheduler hai worker chỉ đổi cách chạy; năm2025giữkín. Không thay chính sách nhãn nhánh Bi-LSTM hoặc ghi đè báo cáo/slide người dùng.
+- **Phát hiện EOD04/11:** audit NOAA ISD gốc ID488550-99999 trong2015/2019/2021/2022/2023:1364/1365bản ghi24hđộ sâu không thiếu ở12UTC, một trace2023ở00UTC;1151cặp với GSODcờG cùng DATE khớp≤0,3mm. Lưu `reports/daily_gauge_2026_11_04/station_eod_audit.json`. Hỗ trợ mốc12UTC tại trạm, chưa xác minh toàn mạng CPC. Không tiếp tục giả định mọi mưaGSOD là tổng00–00UTC. Các bảng đối chiếu nhãn/trạm cũ cần rà soát mốc tích lũy; chưa tính lại hoặc ghi đè chúng, không tự phủ định thí nghiệm học nhãnGSMaP đã chạy.
 
 - **Cập nhật ưu tiên 28/10/2026 — người dùng yêu cầu chạy nốt Informer:** đã chạy đủ 54 lượt E1–E6, dùng nguyên hàm fit pilot và dữ liệu/tham số/loss/calibration. Dùng lại 18 lượt E0/E7; tổng 72 Informer, cùng 72 TFT và 24 pipeline LightGBM = 168 lượt. [Hồ sơ đầy đủ](reports/informer_regional_matrix_2026_10_28/README.md), [49 slide/Word/Excel chín sheet](reports/short_range_complete_2026_10_28/README.md). Phần fit/save/replay mới khoảng 22,4 phút, tiến trình khoảng 22,8 phút; không gọi đây là thời gian hoàn tất nghiên cứu.
 - Kiểm chứng độc lập 72 checkpoint × calibration/evaluation = 144 split, tái tạo scaler train, calibration, ensemble và điểm số. Điểm Informer E0/E7 và TFT/LightGBM giữ nguyên; nguồn 2233/2233 file khớp; hai unittest Informer đạt. Không tuning hoặc mở test 2025. Code huấn luyện và báo cáo cũ giữ nguyên; mô hình/dữ liệu/dự đoán từng mốc nằm ngoài Git.
@@ -110,7 +117,7 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
    - Informer có time marks; không nói hoàn toàn không nhận thông tin tương lai đã biết. Ưu thế tính toán chuỗi dài của nó chưa phải nút thắt rõ ở encoder 28 bước hiện tại.
    - TFT gốc có lựa chọn biến/gating và thiết kế nhiều hạn, là lý do để thử; chưa bảo đảm dự đoán tốt hơn. Bản vùng tự cài PyTorch giữ VSN/GRN/LSTM/attention, bỏ static context, dùng Tweedie/BCE, chưa xuất phân vị và chưa dùng forecast thật.
    - Đối chứng đang có: LightGBM, khí hậu, luôn 0 và Informer vùng đủ E0–E7. Bảng xếp hạng phải có đủ LightGBM/TFT/Informer. Cùng nguyên liệu nhưng cây và mạng khác biểu diễn, chưa là phép so chỉ đổi kiến trúc. ECMWF/DLinear trên giao thức vùng này chưa được chấm, không gọi là đã chạy.
-6. **Không có dữ liệu Vrain** (người dùng xác nhận không xin được). Kiểm chứng độc lập chỉ dựa vào NOAA GSOD tại 10 trạm, đến 24/08/2025.
+6. **Chưa có dữ liệu Vrain; cập nhật 04/11/2026:** nhóm đang xin quyền truy cập, thay cho nhận định trước đây là không xin được. Chưa dùng Vrain trong huấn luyện/kiểm chứng; không giả định đã có mạng trạm phủ Đà Nẵng mới. Dữ liệu GSOD sẵn có chỉ là mạng trạm đã chọn; danh mục GHCN-Daily vừa kiểm tra không tự tạo thêm chuỗi mưa hiện đại cho vùng.
 7. **Những nhận định cũ đã bị bác bỏ:**
    - "Informer vượt Bi-LSTM 21 %": hai mô hình được chấm trên tập test khác nhau.
    - "IMERG trễ 29 h nên không dùng được làm đầu vào": IMERG Early lấy trực tiếp từ NASA chỉ trễ khoảng 4 h.
@@ -219,7 +226,7 @@ Code cũ (`src/train_bilstm.py`, `src/informer/`, `src/rain_alert_model.py`, …
 - **Thời gian:** hàng `t` = khoảng `[t, t+1h)` UTC.
   - Open-Meteo và ERA5 ghi mưa ở *cuối* khoảng, nên phải dịch lùi 1 h.
   - GSMaP và IMERG ghi mưa ở *đầu* khoảng.
-  - Ngày của GSOD tính theo UTC, tức 07h–07h giờ Việt Nam.
+  - DATE của GSOD không tự xác định khoảng mưa00–00UTC. Audit04/11 của trạm488550 cho thấy các bản ghi24hchủ yếu kết thúc12UTC (19hViệtNam); kiểm tra EOD/cờ theo từng trạm/năm trước ghép nhãn. Quy ước07h–07htrước đây cần rà soát khi dùng cho mưaGSOD.
 - **CIN bị mask** nghĩa là không có mực đối lưu tự do: mã hóa thành `cin_capped = 500` và `has_lfc = 0`. Giờ thiếu hẳn ERA5 thì để NaN. **Không bao giờ điền 0.**
 - **ERA5 trên Earth Engine:** `getRegion` phải dùng `crsTransform=[0.25,0,-180.125,0,-0.25,90.125]`. Dùng `scale` sẽ lấy mẫu lệch nửa ô. Chỉ có tầng 850 và 500 hPa.
 - **pandas 3:** `date_range` dùng đơn vị micro giây, nên khi lưu mốc giờ phải ép kiểu `datetime64[ns]` tường minh.

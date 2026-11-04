@@ -6,6 +6,8 @@
 
 Dự án nghiên cứu đóng góp của các nhóm đặc trưng dữ liệu cho dự đoán mưa vùng trực tiếp tại Đà Nẵng mới (Đà Nẵng cũ + Quảng Nam).
 
+**Thí nghiệm mới 04/11/2026, đã hoàn tất 168 lượt:** [Word, Excel 11 sheet và kết quả đủ ba mô hình/E0–E7](reports/daily_gauge_2026_11_04/README.md). Predictor ERA5 theo ngày, nhãn CPC ngày từ phân tích trạm, mốc 12 UTC và bảy ngày quá khứ; đã phát lại 144 checkpoint mạng và 288 đầu ra LightGBM trên 336 split hiệu chỉnh/đánh giá. E7 BSS ngày 1 LightGBM/TFT/Informer = 0,190/0,026/0,078; ngày 2–3 đều âm. CPC chưa phải quan trắc trực tiếp trung bình vùng; footprint 93 ô vẫn xấp xỉ, Vrain đang xin. Có audit NOAA gốc hỗ trợ EOD12UTC tại trạm Đà Nẵng, cần rà soát giả định00UTC của các phép ghép trạm cũ. Giữ riêng kết quả GSMaP trước đây, không chấm 2025.
+
 **Cập nhật 28/10/2026, đủ ma trận ba mô hình:** [49 slide, Word và Excel chín sheet](reports/short_range_complete_2026_10_28/README.md). Đã bổ sung [54 lượt Informer E1–E6](reports/informer_regional_matrix_2026_10_28/README.md), dùng lại 18 lượt E0/E7; đủ 72 Informer, 72 TFT và 24 pipeline LightGBM. Độc lập phát lại 72 checkpoint Informer trên 144 tập hiệu chỉnh/đánh giá, giữ nguyên các điểm cũ. Có CI95% mô tả khối 7/14 ngày; chưa hiệu chỉnh nhiều phép, không thay phép thử TFT chính. Không mở test 2025; còn ranh/QC nhãn và đối chứng bước thời gian.
 
 **Bản lịch sử 21/10: so đồng thời ba mô hình:** [47 slide, Word, HTML và lời dẫn](reports/short_range_three_models_2026_10_21/README.md) đặt LightGBM, TFT, Informer trong cùng bảng E/ngày. Ở thời điểm đó Informer mới có E0/E7; bản 28/10 phía trên đã bổ sung đủ E1–E6. Giữ bản cũ để đối chiếu quá trình nghiên cứu.

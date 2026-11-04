@@ -47,3 +47,12 @@ tests/test_short_range*.py text eol=lf
 src/informer_regional_pilot.py text eol=lf
 scripts/*informer_regional*.py text eol=lf
 tests/test_informer_regional_pilot.py text eol=lf
+src/daily_gauge*.py text eol=lf
+# Keep the byte-for-byte source captured before fitting, including its final blank line.
+src/daily_gauge_dataset.py whitespace=-blank-at-eof
+scripts/*daily_gauge*.py text eol=lf
+scripts/fetch_cpc_daily_region.py text eol=lf
+tests/test_daily_gauge.py text eol=lf
+reports/daily_gauge_2026_11_04/*.md text eol=lf
+reports/daily_gauge_2026_11_04/*.json text eol=lf
+reports/daily_gauge_2026_11_04/*.csv text eol=lf

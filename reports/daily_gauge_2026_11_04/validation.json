@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "models_replayed": 168,
+  "neural_checkpoints_replayed": 144,
+  "lightgbm_heads_replayed": 288,
+  "calibration_and_evaluation_splits": 336,
+  "raw_predictor_hours_reconstructed": 504,
+  "train_scalers_reproduced": true,
+  "calibration_reproduced": true,
+  "source_rows_match": true,
+  "old_results_preserved": true,
+  "test2025_read": false,
+  "seconds": 61.766686700000264,
+  "validator_sha256": "9b717b66cb6df00ec77c010395937bf54eadf73170ba85160cd22e5ffd54213c"
+}

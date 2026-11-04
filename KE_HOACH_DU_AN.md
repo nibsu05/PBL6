@@ -2,7 +2,7 @@
 
 > **Dành cho các thành viên trong nhóm.** File này trả lời bốn câu hỏi: dự án làm gì, quy trình ra sao, đang ở giai đoạn nào, và mỗi người cần làm gì tiếp theo.
 > Chi tiết kỹ thuật và số liệu đầy đủ nằm ở [`project_plan_v2.md`](project_plan_v2.md). Bối cảnh dành cho AI agent nằm ở [`CLAUDE.md`](CLAUDE.md).
-> **Cập nhật:** 21/10/2026. [Phương án nghiên cứu hợp nhất](reports/regional_research_plan_2026_10_20/PHUONG_AN_CUOI.md) là nền cho nhánh 6 giờ; người dùng đã duyệt thêm [nhánh TFT vùng 24–72 giờ](reports/short_range_plan_2026_10_21/README.md). Các phần hai sản phẩm/app trước đây giữ để tra cứu lịch sử. Khi chuyển giai đoạn hoặc chốt quyết định, sửa mục 4, mục 6 và ngày cập nhật.
+> **Cập nhật:** 04/11/2026. [Phương án nghiên cứu hợp nhất](reports/regional_research_plan_2026_10_20/PHUONG_AN_CUOI.md) là nền cho nhánh 6 giờ; người dùng đã duyệt thêm [nhánh TFT vùng 24–72 giờ](reports/short_range_plan_2026_10_21/README.md) và thí nghiệm dữ liệu ngày với nhãn CPC từ trạm ở mục 4. Các phần hai sản phẩm/app trước đây giữ để tra cứu lịch sử. Khi chuyển giai đoạn hoặc chốt quyết định, sửa mục 4, mục 6 và ngày cập nhật.
 
 ---
 
@@ -12,7 +12,7 @@
   - **Nhánh cực ngắn**, 1–6 giờ tới, dùng **Bi-LSTM**, thành viên khác phụ trách.
   - **Nhánh hạn ngắn**, ba tổng mưa 24 giờ riêng, dùng **TFT**, người dùng phụ trách; giao thức nhánh ngày được duyệt ngày 21/10.
 - **Câu hỏi nghiên cứu:** nhóm đặc trưng và biểu diễn không gian nào cải thiện mưa vùng ngoài mẫu, ở mùa/hạn nào? Chấp nhận kết quả âm, không đặt trước phải thắng ECMWF.
-- **Đang ở đâu:** nhánh ngày đã có E0–E7, ba fold/ba seed TFT và LightGBM trên footprint xấp xỉ; xem bộ báo cáo mở rộng ở mục 4. V1/V2 và phương án hợp nhất đã có trên main; chưa xác nhận thành viên đã hoàn tất Bi-LSTM vùng mới sau bản rà soát dev.
+- **Đang ở đâu:** nhánh ngày đã đủ LightGBM/TFT/Informer E0–E7 trong hai thí nghiệm: predictor sáu giờ/nhãn GSMaP và predictor ngày/nhãn CPC. Mỗi thí nghiệm168lượt trên footprint xấp xỉ, giữ riêng kết quả và không so điểm khác nhãn như cải thiện trực tiếp; xem mục4. V1/V2 và phương án hợp nhất đã có trên main; chưa xác nhận thành viên đã hoàn tất Bi-LSTM vùng mới sau bản rà soát dev.
 - **Việc cần làm ngay:** chốt ranh/trọng số/độ phủ và kiểm chứng nhãn; nếu đổi dữ liệu phải chạy lại phần phát triển liên quan. Rà soát nhánh Bi-LSTM riêng. Giữ kín 2025, khóa thiết kế trước đánh giá cuối; app/live chưa là ưu tiên.
 
 ---
@@ -122,6 +122,8 @@ flowchart LR
 
 ## 4. Đang ở giai đoạn nào
 
+**Cập nhật 04/11/2026, đã hoàn thành:** [Word, Excel 11 sheet và đủ ba mô hình/E0–E7](reports/daily_gauge_2026_11_04/README.md). Nhãn CPC dựa trạm thay GSMaP, predictor ERA5 gộp ngày, bảy bước quá khứ và ba tổng24hriêng, mốc12UTCtheoEODnguồn. Đủ168lượt:24LightGBM/72TFT/72Informer; độc lập phát lại144checkpointmạng và288đầuraLightGBM,336splitcal/evalđạt. Số biến9/21/29/10/41/22/30/42. Nguồn3.287ngày2015–2023,13probePSL–NOAAkhớp;1.072mốcchung/hạn. E7BSSngày1=0,190/0,026/0,078; ngày2–3cảbaâm. AuditNOAA24h tại một trạm hỗ trợEOD12UTC, cần rà soát phép ghép00UTCcũ. Vrain đang xin; CPC chưa là quan trắc trực tiếp toàn vùng, footprint vẫn xấp xỉ. Không mở2025.
+
 **Cập nhật 28/10/2026, đã hoàn thành phần Informer còn thiếu:** thêm 54 lượt E1–E6 theo fit pilot, dùng lại 18 lượt E0/E7, đủ 72 Informer. Cùng 72 TFT và 24 pipeline LightGBM, đủ ma trận ba mô hình E0–E7. [Hồ sơ huấn luyện/kiểm chứng](reports/informer_regional_matrix_2026_10_28/README.md), [49 slide, Word và Excel chín sheet](reports/short_range_complete_2026_10_28/README.md). Độc lập tái lập 72 checkpoint trên 144 split, scaler/calibration/ensemble; các điểm cũ không đổi. Fit/save/replay của 54 lượt mới khoảng 22,4 phút. CI mới là mô tả 95% trên 20.000 bootstrap khối 7/14 ngày, chưa hiệu chỉnh nhiều phép; không thay family TFT chính. Nguồn verify 2233/2233, hai unittest Informer đạt; không mở 2025. Chưa hoàn tất ranh/QC nhãn hoặc kiểm chứng bước sáu giờ.
 
 **Bản báo cáo lịch sử 21/10:** [47 slide, Word và bảng CSV](reports/short_range_three_models_2026_10_21/README.md), 32 slide chính và 15 tra cứu. Ở thời điểm đó có 114 lượt đã kiểm chứng và Informer còn thiếu E1–E6; bản 28/10 phía trên đã hoàn tất phần thiếu. Giữ bản cũ để đối chiếu quá trình nghiên cứu.
@@ -178,6 +180,8 @@ flowchart LR
 ---
 
 ## 6. Lộ trình thực hiện tiếp
+
+**Ưu tiên sau ma trận ngày 04/11:** đã đủ168lượt và kiểm chứng, không cần chạy lại để điền E còn thiếu. Kiểm chứng thêm EOD/nhãn/ranh với mạng trạm phù hợp hoặc Vrain khi có; muốn đo riêng ngày so với sáu giờ phải cùng nhãnCPC,issue12UTC và mẫu. Ngày2–3chưa có kỹ năng xác suất đáng tin, không mặc định thêm độ phức tạp hay đổi nhãn sẽ giải quyết. Không dùng điểm đẹp để kết luận CPC đúng hơn; giữ kết quả trước và test2025kín. Rà soát các phép ghépGSOD00UTCcũ theo audit mới, chưa tự thay mọi bảng bằng một trạm.
 
 **Ưu tiên sau ma trận hoàn chỉnh 28/10:** không cần chạy thêm E1–E6 Informer vì đã đủ. Dùng bảng ba mô hình cùng E/ngày; đọc mùa/năm/seed và CI mô tả, giữ nguyên thiết kế trước holdout. Tiếp theo là ranh/trọng số vùng, QC nhãn và kiểm tra độ nhạy 1h/3h/6h khi được triển khai thành thí nghiệm riêng. Không chọn E/kiến trúc hoặc thay ngưỡng theo test 2025. Informer E6 ngày 3 chỉ BSS +0,004; E7 cả ba vẫn âm, chưa khẳng định dự báo hữu ích tới 72 giờ. Các đoạn 21/10 dưới đây là lịch sử trước khi chạy nốt Informer.
 
