@@ -56,3 +56,6 @@ tests/test_daily_gauge.py text eol=lf
 reports/daily_gauge_2026_11_04/*.md text eol=lf
 reports/daily_gauge_2026_11_04/*.json text eol=lf
 reports/daily_gauge_2026_11_04/*.csv text eol=lf
+reports/daily_gauge_slides_2026_11_04/*.md text eol=lf
+reports/daily_gauge_slides_2026_11_04/*.json text eol=lf
+reports/daily_gauge_slides_2026_11_04/*.html text eol=lf

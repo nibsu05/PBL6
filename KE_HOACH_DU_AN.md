@@ -122,6 +122,8 @@ flowchart LR
 
 ## 4. Đang ở giai đoạn nào
 
+**Bộ slide dữ liệu ngày đã hoàn thành 04/11:** [PowerPoint 44 trang, HTML và lời dẫn](reports/daily_gauge_slides_2026_11_04/README.md). Có 30 trang chính + 14 phụ lục; giải thích nguồn ERA5/CPC, mẫu ngày, E0–E7, seed, tám metrics và CI. Các bảng luôn có đủ ba mô hình; phụ lục đủ 72 dòng. Đã đối chiếu 720 ô metric và 24 ô CI với nguồn, kiểm tra bảng/notes PowerPoint và bố cục HTML; chưa render Office gốc. Không chạy lại mô hình hoặc mở 2025; giữ nguyên các slide cũ và bản người dùng sửa.
+
 **Cập nhật 04/11/2026, đã hoàn thành:** [Word, Excel 11 sheet và đủ ba mô hình/E0–E7](reports/daily_gauge_2026_11_04/README.md). Nhãn CPC dựa trạm thay GSMaP, predictor ERA5 gộp ngày, bảy bước quá khứ và ba tổng24hriêng, mốc12UTCtheoEODnguồn. Đủ168lượt:24LightGBM/72TFT/72Informer; độc lập phát lại144checkpointmạng và288đầuraLightGBM,336splitcal/evalđạt. Số biến9/21/29/10/41/22/30/42. Nguồn3.287ngày2015–2023,13probePSL–NOAAkhớp;1.072mốcchung/hạn. E7BSSngày1=0,190/0,026/0,078; ngày2–3cảbaâm. AuditNOAA24h tại một trạm hỗ trợEOD12UTC, cần rà soát phép ghép00UTCcũ. Vrain đang xin; CPC chưa là quan trắc trực tiếp toàn vùng, footprint vẫn xấp xỉ. Không mở2025.
 
 **Cập nhật 28/10/2026, đã hoàn thành phần Informer còn thiếu:** thêm 54 lượt E1–E6 theo fit pilot, dùng lại 18 lượt E0/E7, đủ 72 Informer. Cùng 72 TFT và 24 pipeline LightGBM, đủ ma trận ba mô hình E0–E7. [Hồ sơ huấn luyện/kiểm chứng](reports/informer_regional_matrix_2026_10_28/README.md), [49 slide, Word và Excel chín sheet](reports/short_range_complete_2026_10_28/README.md). Độc lập tái lập 72 checkpoint trên 144 split, scaler/calibration/ensemble; các điểm cũ không đổi. Fit/save/replay của 54 lượt mới khoảng 22,4 phút. CI mới là mô tả 95% trên 20.000 bootstrap khối 7/14 ngày, chưa hiệu chỉnh nhiều phép; không thay family TFT chính. Nguồn verify 2233/2233, hai unittest Informer đạt; không mở 2025. Chưa hoàn tất ranh/QC nhãn hoặc kiểm chứng bước sáu giờ.
@@ -180,6 +182,8 @@ flowchart LR
 ---
 
 ## 6. Lộ trình thực hiện tiếp
+
+Dùng [bộ slide dữ liệu ngày mới](reports/daily_gauge_slides_2026_11_04/README.md) cho báo cáo hiện tại. Bảng nhóm biến ở trang 10, metrics ở 16, BSS đủ E0–E7 ở 20–22, CI ở 26–28 và bảng đầy đủ ở 31–39. Phân biệt rõ điểm tốt hơn E0 với kỹ năng hơn khí hậu; chưa xem kết quả ngày 2–3 là dự báo đã đảm bảo.
 
 **Ưu tiên sau ma trận ngày 04/11:** đã đủ168lượt và kiểm chứng, không cần chạy lại để điền E còn thiếu. Kiểm chứng thêm EOD/nhãn/ranh với mạng trạm phù hợp hoặc Vrain khi có; muốn đo riêng ngày so với sáu giờ phải cùng nhãnCPC,issue12UTC và mẫu. Ngày2–3chưa có kỹ năng xác suất đáng tin, không mặc định thêm độ phức tạp hay đổi nhãn sẽ giải quyết. Không dùng điểm đẹp để kết luận CPC đúng hơn; giữ kết quả trước và test2025kín. Rà soát các phép ghépGSOD00UTCcũ theo audit mới, chưa tự thay mọi bảng bằng một trạm.
 
