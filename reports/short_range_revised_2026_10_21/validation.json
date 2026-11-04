@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "slides": 42,
+  "main_slides": 30,
+  "full_metrics_rows": 8,
+  "feature_groups": 4,
+  "original_numeric_values_checked": 336,
+  "informer_numeric_values_checked": 30,
+  "informer_full_replayed_runs": 18,
+  "old_publication_artifacts_unchanged": 78,
+  "html_text_overflows": 0,
+  "native_office_rendered": false,
+  "test2025_read": false
+}

@@ -1,0 +1,123 @@
+{
+  "status": "audited",
+  "station_id": "488550-99999",
+  "years": [
+    {
+      "year": 2015,
+      "source": "https://www.ncei.noaa.gov/pub/data/noaa/2015/488550-99999-2015.gz",
+      "source_sha256": "7567e5d33da48b36eb0a37b6f5f63d22d52427fbf7e69662943cfed55f59e0b5",
+      "raw_rows": 19977,
+      "nonmissing_depth_24h_records": 214,
+      "end_hours_utc": {
+        "12": 214
+      },
+      "condition_codes": {
+        "3": 155,
+        "2": 11,
+        "9": 48
+      },
+      "quality_codes": {
+        "2": 28,
+        "1": 186
+      },
+      "gsod_G_matches_at_same_marked_date": 189,
+      "fraction_G_matches_within_03mm": 1.0,
+      "median_absolute_rounding_difference_mm": 0.04999999999999716
+    },
+    {
+      "year": 2019,
+      "source": "https://www.ncei.noaa.gov/pub/data/noaa/2019/488550-99999-2019.gz",
+      "source_sha256": "5b7c836c6c4544591225974aee348acc2a8cc2129b8cd4fac1e5583b018607b1",
+      "raw_rows": 20258,
+      "nonmissing_depth_24h_records": 310,
+      "end_hours_utc": {
+        "12": 310
+      },
+      "condition_codes": {
+        "3": 166,
+        "9": 130,
+        "2": 14
+      },
+      "quality_codes": {
+        "1": 248,
+        "2": 62
+      },
+      "gsod_G_matches_at_same_marked_date": 252,
+      "fraction_G_matches_within_03mm": 1.0,
+      "median_absolute_rounding_difference_mm": 0.0
+    },
+    {
+      "year": 2021,
+      "source": "https://www.ncei.noaa.gov/pub/data/noaa/2021/488550-99999-2021.gz",
+      "source_sha256": "94bbbdd0d6bf3239a8c5227e2198a6a1b183adfb9abe7968e290ded9f1bceb04",
+      "raw_rows": 20088,
+      "nonmissing_depth_24h_records": 252,
+      "end_hours_utc": {
+        "12": 252
+      },
+      "condition_codes": {
+        "3": 165,
+        "2": 8,
+        "9": 79
+      },
+      "quality_codes": {
+        "1": 218,
+        "2": 34
+      },
+      "gsod_G_matches_at_same_marked_date": 219,
+      "fraction_G_matches_within_03mm": 1.0,
+      "median_absolute_rounding_difference_mm": 0.0239999999999998
+    },
+    {
+      "year": 2022,
+      "source": "https://www.ncei.noaa.gov/pub/data/noaa/2022/488550-99999-2022.gz",
+      "source_sha256": "0a77eae47e252d25f3b9af50bf8587e125a641e45273e571bb87b1b5c5c3567d",
+      "raw_rows": 20205,
+      "nonmissing_depth_24h_records": 347,
+      "end_hours_utc": {
+        "12": 347
+      },
+      "condition_codes": {
+        "3": 166,
+        "9": 162,
+        "2": 19
+      },
+      "quality_codes": {
+        "1": 293,
+        "2": 54
+      },
+      "gsod_G_matches_at_same_marked_date": 293,
+      "fraction_G_matches_within_03mm": 1.0,
+      "median_absolute_rounding_difference_mm": 0.0
+    },
+    {
+      "year": 2023,
+      "source": "https://www.ncei.noaa.gov/pub/data/noaa/2023/488550-99999-2023.gz",
+      "source_sha256": "5f68adaa3c1e928f330381799354381a1e95bc82164097f31c360d2e8a373be2",
+      "raw_rows": 20087,
+      "nonmissing_depth_24h_records": 242,
+      "end_hours_utc": {
+        "12": 241,
+        "0": 1
+      },
+      "condition_codes": {
+        "9": 42,
+        "3": 182,
+        "2": 18
+      },
+      "quality_codes": {
+        "1": 200,
+        "2": 42
+      },
+      "gsod_G_matches_at_same_marked_date": 198,
+      "fraction_G_matches_within_03mm": 1.0,
+      "median_absolute_rounding_difference_mm": 0.05399999999999999
+    }
+  ],
+  "records_24h": 1365,
+  "records_at_12UTC": 1364,
+  "interpretation": "Raw 24-hour accumulation timestamps predominantly end12UTC; GSOD G-date is not proof of a midnight-to-midnight rain interval",
+  "limits": "One station ID and five development years only; condition/quality codes retained, not a certification of every rain depth or of the entire CPC region",
+  "format_document": "https://www.ncei.noaa.gov/pub/data/noaa/isd-format-document.pdf",
+  "test2025_read": false
+}

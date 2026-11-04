@@ -1,0 +1,67 @@
+{
+  "source": "short_range_ablation_2026_10_21",
+  "test2025_read": false,
+  "development_runs": {
+    "tft": 72,
+    "lgbm": 24,
+    "replayed": 96
+  },
+  "bss_headers": [
+    "Ngày",
+    "TFT E0",
+    "TFT E7",
+    "LGBM E0",
+    "LGBM E7"
+  ],
+  "bss_rows": [
+    [
+      "1",
+      "0.135",
+      "0.246",
+      "0.144",
+      "0.303"
+    ],
+    [
+      "2",
+      "0.018",
+      "0.028",
+      "-0.015",
+      "0.043"
+    ],
+    [
+      "3",
+      "-0.034",
+      "-0.038",
+      "-0.053",
+      "-0.075"
+    ]
+  ],
+  "feature_effect_headers": [
+    "group",
+    "delta_BSS",
+    "adjusted_CI"
+  ],
+  "feature_effect_rows": [
+    [
+      "A: khí quyển/đối lưu/mây/đất",
+      "+0.085",
+      "[+0.002; +0.161]"
+    ],
+    [
+      "M: hoàn lưu và vận chuyển ẩm",
+      "+0.144",
+      "[+0.068; +0.233]"
+    ],
+    [
+      "C: SST vùng biển",
+      "-0.003",
+      "[-0.043; +0.033]"
+    ]
+  ],
+  "source_hashes": {
+    "scores_ensemble_pooled.csv": "32458005303c7f7cd9e53447c1bbbe2f6439ff238fe92b4ccac467aeb379c89f",
+    "paired_bootstrap.csv": "34080e63d8d80b133144d53ee25f4ffcc3051909e12a12bb994632497cdf902c",
+    "checkpoint_audit.json": "30ec7260c5b58046d3eabeec0ef5f344685d5f5c9de23a2c8cd72a98b7cc8fc6",
+    "run.json": "090995c725de83be332b3092d7d3db6405bf49d21449e18634bb2e803cb41c00"
+  }
+}

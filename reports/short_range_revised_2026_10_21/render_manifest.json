@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "method": "HTML shared scene, not native Office rendering",
+  "slides": 42,
+  "overflows": [],
+  "html_sha256": "252c7802fff138f17a90309f45a24f23e5efc4f3f3c998926733b4c4e60f5f29",
+  "pptx_sha256": "8915a0a5404cba3a581d7a5d26e48bc0c00eb4731c12395d4d70b16d5caa47ec",
+  "scene_sha256": "15b44f0d38351c4461856896a54c5396325985cec96f33a3e7d4d7957b87fd41",
+  "preview_sha256": "8606d162a5ee32a6c76e80175b3423f58a5b993e778e46ebb107b57566ff9a9d"
+}

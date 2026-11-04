@@ -1,0 +1,17 @@
+{
+  "status": "complete",
+  "bootstrap_repeats": 20000,
+  "block_days": [
+    7,
+    14
+  ],
+  "bootstrap_seed": 20261104,
+  "paired_rows": 432,
+  "absolute_rows": 144,
+  "scope": "Exploratory conditional on fitted models, not independent holdout or full training/label uncertainty",
+  "adjustment": "Bonferroni family63 for all 7 feature contrasts x 3 days x 3 models, BSS16 only; others pointwise95%",
+  "confirmatory": false,
+  "test2025_read": false,
+  "seconds": 11.436154100000294,
+  "code_sha256": "74089ef3f1b48709c49626a42f3e17c81fef347dc05a1ef3d9b774d9f3191a51"
+}

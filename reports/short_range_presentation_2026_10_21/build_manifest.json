@@ -1,0 +1,105 @@
+{
+  "status": "built_from_audited_aggregates",
+  "date": "2026-10-21",
+  "slides": 34,
+  "main_slides": 24,
+  "appendix_slides": 10,
+  "full_result_tables": [
+    {
+      "slide": 25,
+      "model": "tft",
+      "lead_day": 1
+    },
+    {
+      "slide": 26,
+      "model": "lgbm",
+      "lead_day": 1
+    },
+    {
+      "slide": 27,
+      "model": "tft",
+      "lead_day": 2
+    },
+    {
+      "slide": 28,
+      "model": "lgbm",
+      "lead_day": 2
+    },
+    {
+      "slide": 29,
+      "model": "tft",
+      "lead_day": 3
+    },
+    {
+      "slide": 30,
+      "model": "lgbm",
+      "lead_day": 3
+    }
+  ],
+  "training_runs_added": 0,
+  "test2025_read": false,
+  "source_sha256": {
+    "reports/short_range_ablation_2026_10_21/run.json": "090995c725de83be332b3092d7d3db6405bf49d21449e18634bb2e803cb41c00",
+    "reports/short_range_ablation_2026_10_21/checkpoint_audit.json": "30ec7260c5b58046d3eabeec0ef5f344685d5f5c9de23a2c8cd72a98b7cc8fc6",
+    "reports/short_range_ablation_2026_10_21/scores_ensemble_pooled.csv": "32458005303c7f7cd9e53447c1bbbe2f6439ff238fe92b4ccac467aeb379c89f",
+    "reports/short_range_ablation_2026_10_21/paired_bootstrap.csv": "34080e63d8d80b133144d53ee25f4ffcc3051909e12a12bb994632497cdf902c",
+    "reports/short_range_ablation_2026_10_21/feature_catalog.csv": "558568ef1417a4e2d147f7305472279b130cc43f0636dda44db828a73e67c585",
+    "reports/short_range_ablation_2026_10_21/primary_family_ci.png": "f26f4cd54f9299673981ce285148ef892a2ca62deca14bcf51fb945d562e0faa",
+    "reports/short_range_explained_2026_10_21/dinh_nghia_han_du_bao.png": "1a7b44c3dd46acd6559b71dc4598485752550ddb2feed4fcb5ad5b673ef3fd21"
+  },
+  "code_sha256": {
+    "scripts/build_short_range_presentation.py": "851b514ef059e19afa25d1c248c2b329d705dd4960d243c883c4d519a24a224c",
+    "scripts/presentation_layout.py": "57ca31ace87311dd80bd17f3642d8cefa21be884fff4e7cb87aa6dc3be77028f"
+  },
+  "dev_ref": "fe27756ff57e90b09553f4e5c62d17aa74efee89",
+  "files": {
+    "literature.json": {
+      "bytes": 4858,
+      "sha256": "d051c649943d721adbd50bffb8b089a3537fdb65712b7dd77dbc7b3da5c8696f"
+    },
+    "dev_metrics_audit.json": {
+      "bytes": 1680,
+      "sha256": "6131e5827bf83dc65df374eff159a46a7a1a22bc0fbcbb948749f179b21f80db"
+    },
+    "E7_CONTINGENCY_COUNTS.csv": {
+      "bytes": 237,
+      "sha256": "b351f6d3fc68aeb3f77ee4205468bd5df9b2b5977a2cc0dfe35162d5623adae0"
+    },
+    "performance_E7.png": {
+      "bytes": 97275,
+      "sha256": "e0ec835394ff00d4a8b4a4c0280d146b649a45c2c711a04fbc45b68e36a958f1"
+    },
+    "target_timeline.png": {
+      "bytes": 54327,
+      "sha256": "1a7b44c3dd46acd6559b71dc4598485752550ddb2feed4fcb5ad5b673ef3fd21"
+    },
+    "primary_family_ci.png": {
+      "bytes": 73651,
+      "sha256": "f26f4cd54f9299673981ce285148ef892a2ca62deca14bcf51fb945d562e0faa"
+    },
+    "PBL6_TFT_DAY_DU.pptx": {
+      "bytes": 359023,
+      "sha256": "4f2490ba1315a5a941bf1e12bd5baa2664d48d61cafca73501fc54ed0d2c9f42"
+    },
+    "PBL6_TFT_DAY_DU.html": {
+      "bytes": 478395,
+      "sha256": "ab71231d640df78e4ea0c6f9ff0fe489e734941f1cd9c781fd43e60f0f89f0d8"
+    },
+    "slide_scene.json": {
+      "bytes": 173589,
+      "sha256": "dc770ee09ef54e0a5eeba2cec9a885eb50e34618dbfab3ff676974c295049ce6"
+    },
+    "LOI_DAN_TRINH_BAY.md": {
+      "bytes": 21588,
+      "sha256": "edee2c0efb49c47af370e11b92063b015ecec658044b4fe55d7d21a88df79c0b"
+    },
+    "PHAN_TICH_LIGHTGBM_POD_FAR.md": {
+      "bytes": 11932,
+      "sha256": "80df98189c9772d35f9fd006f7e2c09db07e860c2b0cdfc7f3e3a7d80a06e0b6"
+    },
+    "README.md": {
+      "bytes": 2221,
+      "sha256": "f5bb7dd25598e87ee5d04d20708ab5f840ddd2a0d1940d87f9508966ca3576d6"
+    }
+  }
+}

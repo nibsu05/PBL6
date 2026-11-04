@@ -1,0 +1,45 @@
+{
+  "status": "built_from_audited_results",
+  "date_local": "2026-10-21",
+  "slides": 5,
+  "models_fitted_by_this_build": 0,
+  "test2025_read": false,
+  "word_explicit_page_breaks": 1,
+  "source_hashes": {
+    "scores_ensemble_pooled.csv": "32458005303c7f7cd9e53447c1bbbe2f6439ff238fe92b4ccac467aeb379c89f",
+    "paired_bootstrap.csv": "34080e63d8d80b133144d53ee25f4ffcc3051909e12a12bb994632497cdf902c",
+    "checkpoint_audit.json": "30ec7260c5b58046d3eabeec0ef5f344685d5f5c9de23a2c8cd72a98b7cc8fc6",
+    "run.json": "090995c725de83be332b3092d7d3db6405bf49d21449e18634bb2e803cb41c00"
+  },
+  "code_sha256": "182bfe5c6fd391778eedf0b371310599fa001fa298826bf8b136c5dbcd688de6",
+  "files": {
+    "BAO_CAO_NHANH.md": {
+      "bytes": 4390,
+      "sha256": "96cbbac4d6f05c37101bfef9f344e8688648096fc56ba23ed7ec97f230029153"
+    },
+    "LOI_DAN_5_PHUT.md": {
+      "bytes": 4189,
+      "sha256": "0413bca4d5f45bd31008fa4e5e60b480a13a1cc8abb967a296db71b1b8b435e6"
+    },
+    "BAO_CAO_NHANH.docx": {
+      "bytes": 40656,
+      "sha256": "dde86e656723a699bc1428b965fe28de5919d7ed3a72e9541abba19fc10aa4a0"
+    },
+    "primary_family_ci.png": {
+      "bytes": 73651,
+      "sha256": "f26f4cd54f9299673981ce285148ef892a2ca62deca14bcf51fb945d562e0faa"
+    },
+    "PBL6_TFT_5_PHUT.pptx": {
+      "bytes": 106982,
+      "sha256": "207d2f54587408e8fcdf8f9701f7416af23879f9de9f4302d40dabf8e9660269"
+    },
+    "brief_numbers.json": {
+      "bytes": 1327,
+      "sha256": "759a9ca9e49ffb79f11ec42514cd57f44eb5e57854a639b9e05d07c3adf18c72"
+    },
+    "README.md": {
+      "bytes": 1030,
+      "sha256": "74e735d41cf9378266e13f85efefa5d09a71c87d2433c488f043e47166a5e3ff"
+    }
+  }
+}

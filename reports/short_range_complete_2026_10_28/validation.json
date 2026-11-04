@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "slides": 49,
+  "main_slides": 34,
+  "complete_score_rows": 72,
+  "missing_score_rows": 0,
+  "informer_checkpoints_replayed": 72,
+  "csv_metric_values_checked": 576,
+  "slide_metric_values_checked": 720,
+  "ci_cells_checked": 18,
+  "styled_table_paragraphs_checked": 1569,
+  "bootstrap_regression_values_checked": 756,
+  "comparison_tables_include_all_three": true,
+  "excel_sheets": 9,
+  "legacy_files_verified": 103,
+  "historical_worktree_missing_verified_from_git": [
+    "reports/short_range_three_models_2026_10_21/PBL6_SO_SANH_3_MO_HINH.pptx"
+  ],
+  "user_slides_preserved": [
+    "reports/short_range_three_models_2026_10_21/Dự đoán ngắn hạn 21_10.pptx"
+  ],
+  "html_text_overflows": 0,
+  "native_office_rendered": false,
+  "test2025_read": false
+}

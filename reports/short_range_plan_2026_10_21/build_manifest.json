@@ -1,0 +1,40 @@
+{
+  "status": "approved_plan_with_completed_development_factorial_on_approximate_footprint",
+  "document_date": "2026-10-21",
+  "models_trained": false,
+  "test_2025_rows_analyzed": false,
+  "word_tables": 6,
+  "work_stages": 8,
+  "files": {
+    "KE_HOACH_TFT_24_72H.md": {
+      "sha256": "946a2511b2c8dea7ee1c1c6e61eea41e93d75da1d16245c2e998081f333dcd57",
+      "bytes": 36082
+    },
+    "KE_HOACH_TFT_24_72H.docx": {
+      "sha256": "6502db086c6317530e3aafe174352d35948c9aeca72e64601f15f96a25729b00",
+      "bytes": 53764
+    },
+    "preflight_development.json": {
+      "sha256": "0d0e02b1f82d13db6d783e5ca704c3b43450cad3c243b81d63cc3b315e980935",
+      "bytes": 5715
+    },
+    "protocol_proposed.json": {
+      "sha256": "f440a6435158504055e39a57f5b07742df9d3e88e65e6f127aa2aefc4cd712ab",
+      "bytes": 7317
+    },
+    "LICH_THUC_HIEN.csv": {
+      "sha256": "a77c7b38a7a7e43c41bc128822e936934347f15a8c8dde752e0f5f651b00b1c4",
+      "bytes": 1430
+    },
+    "README.md": {
+      "sha256": "1c7c41b65ccc1bb6383f1d46bd57dadc4d71742f7ba14dbd5b31b8b1662475d8",
+      "bytes": 2874
+    },
+    "approval.json": {
+      "sha256": "6d4a01a4cfffb4b5d8e886d826df1b10c543fc441f8d712a148f40d3f2df4e06",
+      "bytes": 820
+    }
+  },
+  "models_trained_by_this_build": false,
+  "pilot_report_reference": "../short_range_pilot_2026_10_21/README.md"
+}

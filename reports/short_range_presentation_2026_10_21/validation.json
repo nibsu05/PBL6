@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "slides": 34,
+  "main_slides": 24,
+  "appendix_slides": 10,
+  "full_result_rows": 48,
+  "result_values_checked": 336,
+  "numeric_bold_rules_checked": 336,
+  "contingency_rows_checked": 6,
+  "dev_blobs_verified": 4,
+  "frozen_artifacts_verified": 66,
+  "training_source_files_unchanged": 5,
+  "html_layout_render_verified": true,
+  "native_office_rendered": false,
+  "training_runs_added": 0,
+  "test2025_read": false,
+  "pptx_sha256": "4f2490ba1315a5a941bf1e12bd5baa2664d48d61cafca73501fc54ed0d2c9f42"
+}

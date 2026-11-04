@@ -1,0 +1,74 @@
+{
+  "status": "complete",
+  "new_informer_runs": 54,
+  "reused_informer_runs": 18,
+  "total_informer_runs": 72,
+  "test2025_read": false,
+  "files": {
+    "protocol_frozen.json": {
+      "sha256": "4c4e595f3eb9dcdf8dd10741c88416e1e183ade708c702d5c09d6fd55200a0b8",
+      "bytes": 4025
+    },
+    "run.json": {
+      "sha256": "84b3c9053c111b275206828c87fd36abd36a26abc9378b8b67153e1a04012203",
+      "bytes": 397200
+    },
+    "scores_ensemble.csv": {
+      "sha256": "fe12fb2e4ea0aebc59b527ac9b1d4ebb7b92c8cb1aa2c51996545cb223323f3f",
+      "bytes": 550445
+    },
+    "scores_ensemble_pooled.csv": {
+      "sha256": "910c44a475b9f12a3d6b311456c102b4166596b704253b8e1ccb27805c78d2cb",
+      "bytes": 198381
+    },
+    "scores_seed_pooled.csv": {
+      "sha256": "74fa25c077dce6dd1713e4e8eb202a3703ef6a63ee99652ffbea733d9391203a",
+      "bytes": 200438
+    },
+    "ensemble_calibration_thresholds.csv": {
+      "sha256": "98ad9c384ed18a1cf07f0210fc52d6b1651d86be161822578596e656c3908d9d",
+      "bytes": 8765
+    },
+    "seed_stability.csv": {
+      "sha256": "7f5aaa908558ae73f38bce2ea220eb3a208157b5ae850eab6296d77cea84a2d7",
+      "bytes": 75835
+    },
+    "paired_bootstrap_exploratory.csv": {
+      "sha256": "a6891d6f69f4615a304bf3e90c48780ce963230ec4590602be741997f42dcc9e",
+      "bytes": 93671
+    },
+    "absolute_skill_ci.csv": {
+      "sha256": "0c495c641cae006b9ad539cb859309e0b53264992cfef036b169df7bcca3cf1a",
+      "bytes": 4911
+    },
+    "reliability16.csv": {
+      "sha256": "22397cc38c009391d210409eec03e06016015f744c188be964be312df577881a",
+      "bytes": 29000
+    },
+    "evaluation.json": {
+      "sha256": "0a445951c5a978ba83b2c51cc88f85d73f7a054363c07e3fd5c39333408c5435",
+      "bytes": 435
+    },
+    "validation.json": {
+      "sha256": "996216d752070608d0a4a90f76712b77a4ccddbb3c1e7d1c538a3ce37c9f7ac4",
+      "bytes": 14212
+    },
+    "bss_three_models.csv": {
+      "sha256": "f05d9ed3f1317c300ccecf0700b58c5779a75caff6afca8567451fcfa9aad799",
+      "bytes": 1546
+    },
+    "calibration_thresholds_all_models.csv": {
+      "sha256": "79c2dddf705f81d21f9297b787980efde48b9a266e98a6e682992e0b2fd0eccc",
+      "bytes": 23497
+    },
+    "README.md": {
+      "sha256": "0028810b9208aef90b00aa05d8c9f9d0decac2594e1ab03615ebc9c065812588",
+      "bytes": 5299
+    },
+    "code_provenance.json": {
+      "sha256": "af14f07aad59301c27b6dbfc97e6d7e0df98c41f0c7a2140f88f2bcac677c8e8",
+      "bytes": 4370
+    }
+  },
+  "source_pilot_protocol_sha256": "1a8b38eab95e372f65bc9e66d1128aab2b9ac18966edafac363f4d25047bdda7"
+}

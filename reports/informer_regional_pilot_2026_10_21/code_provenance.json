@@ -1,0 +1,60 @@
+{
+  "note": "Protocol keeps exact bytes used at fit. Legacy Informer files used CRLF; normalized LF digests allow equivalent cross-platform source verification without modifying the frozen run or old modules.",
+  "files": {
+    "src/informer_regional_pilot.py": {
+      "workspace_sha256_at_fit": "90b1cec0c32c122443bcada3be77d76664af42147f3dc6a0d496e535faf25c53",
+      "normalized_lf_sha256": "90b1cec0c32c122443bcada3be77d76664af42147f3dc6a0d496e535faf25c53",
+      "crlf_lines_at_fit": 0
+    },
+    "scripts/pilot_informer_regional.py": {
+      "workspace_sha256_at_fit": "93b2a2f1d377b853ad94f21971a9079bcd821334b86a20afedf672a14520b5e4",
+      "normalized_lf_sha256": "93b2a2f1d377b853ad94f21971a9079bcd821334b86a20afedf672a14520b5e4",
+      "crlf_lines_at_fit": 0
+    },
+    "src/short_range_dataset.py": {
+      "workspace_sha256_at_fit": "542be8863962f64315269da2c093d19ed78de54a849b38a296c319f559759c39",
+      "normalized_lf_sha256": "542be8863962f64315269da2c093d19ed78de54a849b38a296c319f559759c39",
+      "crlf_lines_at_fit": 0
+    },
+    "src/short_range_evaluation.py": {
+      "workspace_sha256_at_fit": "674c650149283f59008d4f2a80a86ec226baec7b40e12143c663a170edf3ad1a",
+      "normalized_lf_sha256": "674c650149283f59008d4f2a80a86ec226baec7b40e12143c663a170edf3ad1a",
+      "crlf_lines_at_fit": 0
+    },
+    "src/tft_regional.py": {
+      "workspace_sha256_at_fit": "3b5c047f8d4c5cb42a512cee9a90db549ed711c29d66125747df15b6620df1bf",
+      "normalized_lf_sha256": "3b5c047f8d4c5cb42a512cee9a90db549ed711c29d66125747df15b6620df1bf",
+      "crlf_lines_at_fit": 0
+    },
+    "src/informer/attention.py": {
+      "workspace_sha256_at_fit": "cc54b5a8c5f82d3c88a147de148ce48bedddd8a3aea1a1c8c34b379ded70a3ff",
+      "normalized_lf_sha256": "fb6ef64cee373b1b796f1a87ce4c49213b3dc86379882c1e0c8d6a1564c94a07",
+      "crlf_lines_at_fit": 329
+    },
+    "src/informer/decoder.py": {
+      "workspace_sha256_at_fit": "7100decd79105e5d02fe2d17748d3c28446ad0b24fc73183c0957b55184ad793",
+      "normalized_lf_sha256": "d7060c518b0554f794dc8fac8c407064e66c50242274af78925b4c1abe2d1c4b",
+      "crlf_lines_at_fit": 70
+    },
+    "src/informer/embed.py": {
+      "workspace_sha256_at_fit": "91a025b1b3410841440fbbadf56606cf6d884d6a9bf5e6cb1a101e6b2709e95f",
+      "normalized_lf_sha256": "f0ba337feb9efd1220f8219e7866cb891dc0c79f05d04ae441ac00b54162c137",
+      "crlf_lines_at_fit": 103
+    },
+    "src/informer/encoder.py": {
+      "workspace_sha256_at_fit": "7c56a7486cb5d7bc993a82198b5d07b6149c14aae66d99205ce03542d3313486",
+      "normalized_lf_sha256": "240d1c02c4631bfc43ced32b18a901ba6ce3b4f898dba2f2d383962e482f1bef",
+      "crlf_lines_at_fit": 86
+    },
+    "src/informer/model.py": {
+      "workspace_sha256_at_fit": "6353062cc9d0dcb07ce03bbd18d7371bb1717d60fafe2473985d3880e43798e0",
+      "normalized_lf_sha256": "84faeb7e7cdcfb5d3ce6b97dcd23b2f02236bdc50605d7e9fc20a2245f8a52e0",
+      "crlf_lines_at_fit": 90
+    },
+    "src/informer/__init__.py": {
+      "workspace_sha256_at_fit": "9895c7af095a8ea28aa8e3cabf988d78f182bdc280c313fc8b5365531bb7ab93",
+      "normalized_lf_sha256": "09d837cafe47e8ce77cdb0fb92b8cf5cb10cd9e876d5aca3bbab01876ef63f1d",
+      "crlf_lines_at_fit": 3
+    }
+  }
+}
