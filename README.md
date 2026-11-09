@@ -1,84 +1,56 @@
-# PBL6: Dự Báo Lượng Mưa
+# PBL6 — bắt đầu từ đây
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-orange.svg)](https://pytorch.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+Nghiên cứu thêm/bớt đặc trưng để **dự đoán trực tiếp mưa trung bình vùng Đà Nẵng mới**. Bi-LSTM phụ trách 1–6 giờ; LightGBM/TFT/Informer phụ trách ba tổng mưa 24h riêng của ngày 1–3. ERA5 cung cấp khí tượng, Vrain đang được tải để xây nhãn vùng sau QC. Chưa có bộ huấn luyện Vrain hoàn chỉnh.
 
-Dự án nghiên cứu đóng góp của các nhóm đặc trưng dữ liệu cho dự đoán mưa vùng trực tiếp tại Đà Nẵng mới (Đà Nẵng cũ + Quảng Nam).
+## 1. Dữ liệu và tiến độ tải
 
-**09/11 — hướng Vrain mới:** [tài liệu đầy đủ và bản ngắn gửi nhóm, Excel hợp đồng dữ liệu/phân công](reports/vrain_research_plan_2026_11_09/README.md). Đã đăng nhập, đọc inventory và xuất XLSX lịch sử mẫu; V1 có82mục khớp mã lịch sử, V2 có86mục khác namespace. Mười probe cho thấy thiếu thay đổi theo trạm/thời gian, chưa kiểm kê toàn kho. Đề xuất giữ ERA5 làmX, xây nhãn vùng Vrain sau QC/ranh/panel/trọng số, thử mưa quá khứ như nhómR riêng. Chưa tạo nhãn huấn luyện Vrain/chưa train; giữ2025kín. Dữ liệu thô và thông tin truy cập ngoàiGit.
+Đợt này yêu cầu từng ngày **01/01/2015–31/12/2024**, tổng 3.653 ngày, không đọc 2025. Khoảng yêu cầu không có nghĩa nguồn có đủ từ 2015; ngày không có hàng giờ được ghi riêng.
 
-**Slide mới cho thí nghiệm ngày 04/11:** [PowerPoint 44 slide, HTML và lời dẫn](reports/daily_gauge_slides_2026_11_04/README.md), gồm 30 trang chính và 14 phụ lục. Giải thích ERA5/CPC, tạo mẫu ngày, bốn nhóm B/A/M/C, E0–E7, seed và tám metrics; mọi bảng mô hình có đủ LightGBM/TFT/Informer. Phụ lục chứa đủ 72 dòng kết quả; có CI và giới hạn của ngày 2–3. Giữ nguyên slide người dùng đã chỉnh sửa và các báo cáo trước.
+- [Trạng thái sống: progress.json](data/operational/vrain_2026_11_09/download/progress.json).
+- [Raw chia theo năm, mỗi ngày một JSON nén](data/operational/vrain_2026_11_09/download/raw).
+- [Manifest/checksum/counts](data/operational/vrain_2026_11_09/download/manifest.sqlite).
+- [Log lỗi](data/operational/vrain_2026_11_09/download/stderr.log).
 
-**Thí nghiệm mới 04/11/2026, đã hoàn tất 168 lượt:** [Word, Excel 11 sheet và kết quả đủ ba mô hình/E0–E7](reports/daily_gauge_2026_11_04/README.md). Predictor ERA5 theo ngày, nhãn CPC ngày từ phân tích trạm, mốc 12 UTC và bảy ngày quá khứ; đã phát lại 144 checkpoint mạng và 288 đầu ra LightGBM trên 336 split hiệu chỉnh/đánh giá. E7 BSS ngày 1 LightGBM/TFT/Informer = 0,190/0,026/0,078; ngày 2–3 đều âm. CPC chưa phải quan trắc trực tiếp trung bình vùng; footprint 93 ô vẫn xấp xỉ, Vrain đang xin. Có audit NOAA gốc hỗ trợ EOD12UTC tại trạm Đà Nẵng, cần rà soát giả định00UTC của các phép ghép trạm cũ. Giữ riêng kết quả GSMaP trước đây, không chấm 2025.
+Xem tiến độ trong PowerShell:
 
-**Cập nhật 28/10/2026, đủ ma trận ba mô hình:** [49 slide, Word và Excel chín sheet](reports/short_range_complete_2026_10_28/README.md). Đã bổ sung [54 lượt Informer E1–E6](reports/informer_regional_matrix_2026_10_28/README.md), dùng lại 18 lượt E0/E7; đủ 72 Informer, 72 TFT và 24 pipeline LightGBM. Độc lập phát lại 72 checkpoint Informer trên 144 tập hiệu chỉnh/đánh giá, giữ nguyên các điểm cũ. Có CI95% mô tả khối 7/14 ngày; chưa hiệu chỉnh nhiều phép, không thay phép thử TFT chính. Không mở test 2025; còn ranh/QC nhãn và đối chứng bước thời gian.
-
-**Bản lịch sử 21/10: so đồng thời ba mô hình:** [47 slide, Word, HTML và lời dẫn](reports/short_range_three_models_2026_10_21/README.md) đặt LightGBM, TFT, Informer trong cùng bảng E/ngày. Ở thời điểm đó Informer mới có E0/E7; bản 28/10 phía trên đã bổ sung đủ E1–E6. Giữ bản cũ để đối chiếu quá trình nghiên cứu.
-
-**Phạm vi hiện tại — 21/10/2026:** tổng hợp đầu vào và nhãn theo vùng trước mô hình, nghiên cứu thêm/bớt đặc trưng E0–E7. Nhóm triển khai hai nhánh: Bi-LSTM 1–6 giờ và TFT 24–72 giờ; mỗi nhánh có LightGBM đối chứng và giao thức riêng. Người dùng phụ trách TFT, thành viên khác phụ trách Bi-LSTM. App chưa phải trọng tâm. [Phương án vùng nền ngày 20/10](reports/regional_research_plan_2026_10_20/README.md) có Word và ma trận 18 quyết định × 6 tiêu chí; [báo cáo V1/V2](reports/regional_danang_v1_v2/README.md) và [rà soát Bi-LSTM trên dev](reports/research_rainfall/dev_bilstm_review_2026_10_20.md) lưu bằng chứng trước nhánh ngày. Chưa xác nhận Bi-LSTM vùng mới đã được thành viên hoàn tất; test 2025 tiếp tục giữ kín.
-
-**Nhánh ngày 21/10, đã có ma trận phát triển:** [TFT/LightGBM 24–72 giờ, E0–E7, ba seed](reports/short_range_ablation_2026_10_21/README.md) có Word, 8 slide, FAQ, danh mục 44 biến, CI 20.000 bootstrap và kiểm chứng 96/96 lượt. TFT thêm riêng A hoặc M có tín hiệu cải thiện ngày 1 sau hiệu chỉnh 9 phép so; chưa có bằng chứng tương tự ở ngày 2–3 hoặc SST. Giữ nguyên [pilot](reports/short_range_pilot_2026_10_21/README.md). [Kế hoạch đầy đủ](reports/short_range_plan_2026_10_21/README.md) còn ranh/QC nhãn và kiểm định cuối; footprint 93 ô vẫn xấp xỉ, năm 2025 chưa mở.
-
-**Chuẩn bị báo cáo trong 30 phút:** [bản ngắn Word, 5 slide và lời trình bày 5 phút](reports/short_range_brief_2026_10_21/README.md) tổng hợp từ số liệu đã kiểm chứng. Mã/báo cáo trên `research/tft-regional`, [PR #1 vào main](https://github.com/nibsu05/PBL6/pull/1) đang mở.
-
-**Giải thích đầy đủ cho thành viên nhóm:** [tài liệu Word/Markdown và Excel 18 sheet](reports/short_range_explained_2026_10_21/README.md) giải thích mục tiêu ba tổng mưa vùng 24 giờ, đủ 44 đặc trưng và E0–E7, lý do thử TFT, giới hạn so Informer, vai trò LightGBM, công thức/ví dụ đọc từng metric. Có đủ 48 dòng chính, chi tiết năm/mùa/seed/ngưỡng và bằng chứng 96 lượt; đây là tổng hợp development, không mở test 2025.
-
-**Slide báo cáo đầy đủ, cơ sở LightGBM và POD/FAR:** [34 slide PowerPoint, HTML, lời dẫn và phân tích](reports/short_range_presentation_2026_10_21/README.md) gồm 24 slide chính và 10 slide tra cứu. Có paper ứng dụng LightGBM với giới hạn từng bài, audit dev `fe27756`, ví dụ số đếm E7 và sáu bảng đủ 48 dòng. In đậm theo phép so ghi ở bảng, BSS âm màu đỏ; giữ rõ chưa có ý nghĩa thống kê chỉ từ số in đậm. Không thay protocol hoặc chấm thêm mô hình.
-
-**Bản mới theo phản hồi dễ hiểu hơn:** [42 slide, Word, HTML và lời dẫn](reports/short_range_revised_2026_10_21/README.md) có bảng đủ 8 metrics, bốn nhóm biến diễn đạt đầy đủ, giải thích 3 seed và kiểm chứng nhận định POD 0,4. Đã bổ sung [pilot Informer vùng 18 lượt](reports/informer_regional_pilot_2026_10_21/README.md) trên E0/E7 × ba năm × ba seed, cùng giao thức phát triển với TFT; độc lập phát lại đủ 18 checkpoint. Informer khả thi về tính toán, có ưu thế một số chỉ số ngày 1 nhưng chưa thay thế TFT hoặc chứng minh thắng toàn diện; không đọc test 2025.
-
----
-
-## 🚀 Pipeline v2 (từ 11/10/2026) — bắt đầu từ đây
-
-**Thành viên nhóm, đọc trước:** [`KE_HOACH_DU_AN.md`](KE_HOACH_DU_AN.md) (dự án làm gì, quy trình, đang ở giai đoạn nào, lộ trình, phân công).
-Chi tiết kỹ thuật: [`project_plan_v2.md`](project_plan_v2.md). Bối cảnh cho AI agent: [`CLAUDE.md`](CLAUDE.md).
-
-- Pipeline nguồn và cấu hình trước đây: Bi-LSTM (0–6 h), TFT (1–3 ngày), nhãn GSMaP v8 hiệu chỉnh trạm và lưới 0,1°, 2015 → 09/2026. Nghiên cứu hiện tại dùng các ô để tạo chuỗi vùng; cần chốt giao ranh và kiểm chứng nhãn trước huấn luyện đầy đủ.
-- Kiểm chứng: 10 trạm synop NOAA GSOD. Bảng baseline và Thí nghiệm 0 ở [`reports/station_benchmark/README.md`](reports/station_benchmark/README.md).
-- Dữ liệu nguồn v2 (khoảng 2,9 GB, file `pbl6_data_v2_2026-10-11.tar`) nằm trên Google Drive (đường dẫn bên dưới). Giải nén ở thư mục gốc repo rồi chạy:
-
-```bash
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-tar -xf pbl6_data_v2_2026-10-11.tar
-.venv/bin/python scripts/package_data.py verify
-.venv/bin/python scripts/build_dataset_v2.py --years 2015 2026
-.venv/bin/python -c "from src.dataloader_v2 import build_cell_major; build_cell_major()"
-.venv/bin/python scripts/inspect_dataloader_v2.py
+```powershell
+.venv\Scripts\python.exe -X utf8 scripts/download_vrain_archive.py --status
 ```
 
-Các tài liệu và kết quả trước 11/10/2026 (`project_master_plan.md`, `SURFACE_BASELINE_REPORT.md`, `reports/informer_baseline_report.md`…) được giữ lại để tham khảo lịch sử. Chúng dùng nhãn ERA5/Open-Meteo, mà nhãn này đã được chứng minh là bỏ sót mưa to.
+Dừng và tiếp tục:
 
----
-
-## 📌 Cấu Trúc Thư Mục Dự Án
-
-```text
-├── data/                                  # Dữ liệu mẫu & script thu thập dữ liệu
-│   ├── config.py                          # Cấu hình tập trung (tọa độ, bbox, tham số)
-│   ├── download_openmeteo.py              # Script thu thập dữ liệu bề mặt trạm
-│   ├── download_era5_features.py          # Script tải bổ sung CAPE, CIN, TCWV, Soil Moisture
-│   ├── create_merged_datasets.py          # Script hợp nhất dữ liệu (Bản baseline & Bản full features)
-│   ├── samples/                           # Dữ liệu mẫu kiểm thử nhanh cho code
-│   └── processed/                         # Báo cáo chẩn đoán (merge_diagnostics.json)
-├── demo/                                  # Web demo dự báo thời tiết Đà Nẵng
-├── experiments/                           # Cấu hình & kết quả thực nghiệm mô hình
-├── models/                                # Các mô hình đã huấn luyện (.pth, scaler.pkl)
-│   ├── best_bilstm_model.pth              # Model Bi-LSTM đa nguồn tốt nhất
-│   ├── informer/                          # Checkpoints mô hình Informer
-│   └── surface_only/                      # Các mô hình đối chứng nhánh bề mặt
-├── plots/                                 # Đồ thị đánh giá độ phân giải cao 300 DPI
-├── reports/                               # Báo cáo PDF 18 trang & slide PowerPoint
-├── scripts/                               # Các script đánh giá, kiểm toán & thực nghiệm
-├── src/                                   # Mã nguồn module pipeline cốt lõi
-├── tests/                                 # Unit tests
-├── run_full_pipeline.py                   # Script chạy trọn vẹn toàn bộ pipeline
-├── requirements.txt                       # Thư viện phụ thuộc
-├── DATA_GAP_PLAN.md                       # Kế hoạch và nhật ký xử lý dữ liệu khuyết
-└── SURFACE_BASELINE_REPORT.md             # Báo cáo đánh giá các mô hình cơ sở
+```powershell
+.venv\Scripts\python.exe -X utf8 scripts/download_vrain_archive.py --stop
+.venv\Scripts\python.exe -X utf8 scripts/download_vrain_archive.py --resume
 ```
 
----
+Tiếp tục sẽ kiểm tra checksum và bỏ qua ngày đã tải đúng. Nếu trạng thái là `login_required`, chạy cùng script với `--login` để nhập lại trong terminal, rồi `--resume`. Không ghi mật khẩu vào câu lệnh hoặc tệp. Phiên lưu bằng Windows DPAPI.
 
-Data: [Google Drive](https://drive.google.com/drive/folders/1FQtUt-nV7P2UCDxUuN5Poeub0Cc01pVl?usp=sharing)
+**Giữ mạng, cắm ổ D: và tránh Sleep/Hibernate; có thể tắt màn hình.** Không cần GPU hoặc mở Vrain trên trình duyệt. Chương trình giữ máy thức khi tải; sau khởi động lại cần chạy tiếp tục. Dự toán ban đầu 60–90 phút ở tối đa một request/giây, chưa tính QC/tạo nhãn.
+
+## 2. Chỉ đọc các tài liệu hiện hành này
+
+- [Word đầy đủ gửi nhóm](reports/vrain_research_plan_2026_11_09/PHUONG_AN_VRAIN_GUI_NHOM.docx), [Word ngắn](reports/vrain_research_plan_2026_11_09/TOM_TAT_GUI_NHOM.docx).
+- [Excel đặc trưng, hợp đồng cột và phân công](reports/vrain_research_plan_2026_11_09/DU_LIEU_VRAIN_VA_PHAN_CONG.xlsx).
+- [Kế hoạch công việc](KE_HOACH_DU_AN.md), [thiết kế kỹ thuật](project_plan_v2.md).
+
+## 3. Phân biệt các bộ dữ liệu
+
+| Bộ | Vị trí | Ý nghĩa |
+| --- | --- | --- |
+| Vrain đang tải | `data/operational/vrain_2026_11_09/download/` | Dữ liệu nguồn, chưa phải nhãn vùng sạch |
+| Inventory và mẫu ban đầu | `data/operational/vrain_2026_11_09/` | 82 ID V1 khớp lịch sử; không trộn với 86 mục V2 |
+| ERA5/bộ vùng cũ | `data/processed/regional_danang/` | 2015–09/2026, nhãn cũ và footprint xấp xỉ |
+| Nhãn Vrain trung bình vùng | Chưa xuất | Cần kỳ đo, polygon, panel và trọng số |
+
+Không đổi thiếu thành 0. Hàng tổng 0 khi không có hàng giờ chưa chứng minh ngày khô. Tải xong không đồng nghĩa đủ điều kiện huấn luyện.
+
+## 4. Kết quả cũ giữ để tham khảo
+
+- [Ma trận CPC ngày](reports/daily_gauge_2026_11_04/README.md) và [slide mới nhất, giữ bản người dùng sửa](reports/daily_gauge_slides_2026_11_04/README.md).
+- [Ma trận GSMaP đủ ba mô hình](reports/short_range_complete_2026_10_28/README.md).
+- [Phương án vùng và sáu tiêu chí](reports/regional_research_plan_2026_10_20/PHUONG_AN_CUOI.md), [bằng chứng V1/V2](reports/regional_danang_v1_v2/README.md).
+
+Ngày 09/11 đã xóa ba kế hoạch gốc lỗi thời và ba bộ trình bày bị thay thế, sau khi sao lưu. [Biên bản dọn](docs/cleanup_2026_11_09.json). Các bản gốc còn trong Git ở commit `a05f6c0`; công cụ báo cáo lịch sử cần checkout phiên bản đó để tái lập.
+
+Repo công khai chỉ chứa mã/cấu hình/thống kê; raw, inventory từng trạm, thông tin truy cập và mô hình nằm ngoài Git.
