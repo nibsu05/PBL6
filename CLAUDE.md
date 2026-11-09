@@ -27,6 +27,8 @@ Hoàn tất17:57VN09/11/2026,3653/3653response2015–2024; cảSHA256gzip/raw đ
 
 ## Bằng chứng và giới hạn Vrain
 
+- **Kiểm tra bổ sung09/11:** giới hạn2024chỉlàphạmvi collector đãchọn, không phải hết dữ liệuVrain. NhómV1cũ82trạm trả giờ ngày2026-01-15 nhưng rỗng vài ngày cuối2026; routewebmới đúng là `/api/kttv/private/v1/organizations/details` với `x-org-uuid` lấy từ groupOrgUuid của nhóm đã xác thực và tham số`i=_1h`/`_10m`. Đây là request như giao diện trong phạm vi tài khoản, không cần đoán UUID. Mới86trạm có bảng giờ với số thật ngày2026-10-15/2026-11-08; ngày2026-11-09có143mốc10phút tới18:50,85/86sốhợplệởmốccuối. Summaryhiểnthị18:51. Quan trọng: kênh mới cũng trả24hcho2024-10-14nhưng toàn thiếu, ngày2026-01-15chỉ24ô số=1trạm; không gọi đủ dữ liệu từ số hàng. Dữ liệu cũ2024vẫn ởkênhV1. Chưa audittoàn2026, không đọc2025, khôngtrain/tuning2026. Không coi kênhV1rỗng là mạng không đo; chưa có crosswalk82↔86. Metadata `docs/vrain_recent_check.json`, rawprivate `recent_check/`. Không tự mở giới hạncollector hoặc bỏholdout để cập nhật nguồn.
+
 - Inventory API V1 có82ID/UUID khớp history82/82; V2 có86mục khác namespace. Không cộng/ép nối theo tên. Không nhầm với V1/V2 bộ vùng cũ.
 - Mười probe ban đầu:7có24h;3ngày thử2015/2019/2020không có giờ. Trạm đủ24số50–81tùyprobe;490cặp tổng khớp1e-6 đơn vị nguồn. Không suy kho bắt đầu2021 hoặc mạng đầy đủ cả năm.
 - Clock20:00ngàytrước→19:00ngàyđượcchọn, XLSX tiêu đề kết thúc19:20. Chưa xác nhận đủ timezone/đầu-cuối kỳ/đơn vị/loại tích lũy; không áp12UTC củaCPC.

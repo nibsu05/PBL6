@@ -1,0 +1,130 @@
+{
+  "checked_date": "2026-11-09",
+  "scope": "Selected dates; no full 2025/2026 archive download",
+  "current_summary_displayed_to": "18:51 09/11",
+  "legacy_hourly_probe_2026_01_15": {
+    "hourly_rows": 24,
+    "stations": 82
+  },
+  "new_service": "kttv",
+  "new_inventory_stations": 86,
+  "new_service_hourly_probes": [
+    {
+      "date": "2026-10-15",
+      "hourly_rows": 24,
+      "stations": 86,
+      "numeric_hourly_cells": 2064
+    },
+    {
+      "date": "2026-11-08",
+      "hourly_rows": 24,
+      "stations": 86,
+      "numeric_hourly_cells": 2040
+    }
+  ],
+  "new_service_10min_probe": {
+    "date": "2026-11-09",
+    "clock_rows": 143,
+    "last_clock_label": "18:50 09/11",
+    "stations": 86,
+    "numeric_values_at_last_clock": 85
+  },
+  "other_new_service_probes": [
+    {
+      "date": "2026-01-15",
+      "hourly_rows": 24,
+      "station_count": 86,
+      "numeric_hourly_cells": 24
+    },
+    {
+      "date": "2024-10-14",
+      "hourly_rows": 24,
+      "station_count": 86,
+      "numeric_hourly_cells": 0
+    }
+  ],
+  "routing_requires_authenticated_org_context": true,
+  "station_id_crosswalk_confirmed": false,
+  "delivery_latency_guaranteed": false,
+  "test2025_read": false,
+  "training_performed": false,
+  "sources": [
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/context_all.json",
+      "sha256": "11e5f486f9abc4206a02b8933c382af7fd4f0b122061585cd8fbaa5f45fd2178"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/context_organizations.json",
+      "sha256": "9eea9da0f43e539d183f9022c7094e642c15f74108cbd31e6d89ac490e353ceb"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/context_stations.json",
+      "sha256": "07722dabd2440de6c5a7139f9461d3520b7b64a5973bb42788a9b1aaabb61891"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/current_v1_private.json",
+      "sha256": "652f56d43176975c10726fbcb32a8af665f74e8c299be8540885d41bf8af9ee0"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/current_v2_private.json",
+      "sha256": "b6e7a5e38583bb1009d439a0a4c03285e2b3e8ec4ac7b1adc27c5f94539ba8d1"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/history_2026-01-15.json",
+      "sha256": "8fee97e6526fd0ee264ce8819d2a2f87f51868c9c14c036c3a01c8a3148c7efe"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/history_2026-10-15.json",
+      "sha256": "80b73ff12713b0496763e64efbe69c62a86fab04541e4c4eab9eb7b9a7222d10"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/history_2026-11-08.json",
+      "sha256": "0328109202441c86113ec1e37bf9fbce75e957ab1ecdf398e0082b8b123dbe95"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/history_2026-11-09.json",
+      "sha256": "579272229d0160990ca2ac2999aba193443d740e4eb769a6cd9f6329bc6b0d00"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/kttv_2024-10-14_1h.json",
+      "sha256": "f686058a601cb6bab7c225bf77e45c53adfd3e19012d5c1f1275db871f1688c1"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/kttv_2026-01-15_1h.json",
+      "sha256": "44c08b0aec1f8c1686c7c33a41bbfdf5d98ed9e7aa7081bee1d69842306c7678"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/kttv_2026-10-15_1h.json",
+      "sha256": "803b0db133182d15de76a13a7d2a4b333720357748a01109bb2b5902dd6226fc"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/kttv_2026-11-08_1h.json",
+      "sha256": "22fd6c247455db85e45a2f9e3ff98d4d0f628c2ae407f1f3e276dac76c91b54d"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/kttv_2026-11-09_10m.json",
+      "sha256": "090f695b55af64c426b3cfeb0bdf51896d5a1cab14008d444160a0bc491baf3c"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/org_history_2026-01-15.json",
+      "sha256": "c0ddc814e3ae64d5edaa2a0304e920a2229ef53303dd67b48ae27dc09a424c83"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/org_history_2026-10-15.json",
+      "sha256": "c0ddc814e3ae64d5edaa2a0304e920a2229ef53303dd67b48ae27dc09a424c83"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/org_history_2026-11-08.json",
+      "sha256": "c0ddc814e3ae64d5edaa2a0304e920a2229ef53303dd67b48ae27dc09a424c83"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/org_history_2026-11-09.json",
+      "sha256": "c0ddc814e3ae64d5edaa2a0304e920a2229ef53303dd67b48ae27dc09a424c83"
+    },
+    {
+      "path": "data/operational/vrain_2026_11_09/recent_check/summary_private.json",
+      "sha256": "3069a60a83b69f678b26b52a75ce1db675502cc1d5dbfd6edbd396c1d28e0ec0"
+    }
+  ],
+  "historical_namespace_warning": "A returned 24-row table may be entirely missing: new-service 2024-10-14 has zero numeric hourly cells; use verified legacy observations for that period."
+}

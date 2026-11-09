@@ -20,6 +20,8 @@ Tải nguồn → kiểm kê/QC → chốt vùng và mạng trạm → tổng h�
 
 **Đã tải xong và kiểm tra checksum đủ 3.653 phản hồi; chưa có bộ huấn luyện Vrain.** Hoàn tất17:57VN09/11/2026. Có bảng giờ cho1.461ngày2021–2024; các ngày2015–2020không trả giờ. Trạm vẫn thiếu theo thời gian và có ba ngày cần kiểm tra tổng. [Thống kê sau tải](docs/vrain_archive_summary.json), [trạng thái](data/operational/vrain_2026_11_09/download/progress.json).
 
+Đã xác nhận thêm **Vrain có dữ liệu2026 và dữ liệu10phút gần hiện tại**, qua kênh tổ chức`kttv`86trạm. Đợt tải cũ chỉ chọn tới2024; không lấy đó làm giới hạn hệ thống. V1cũ82ID có thể rỗng khi kênh mới còn dữ liệu. [Kiểm tra gần đây](docs/vrain_recent_check.json). Chưa tải toàn bộ2026 hoặc đọc2025.
+
 - Yêu cầu3653ngày từ2015đến2024, tối đa1request/giây; không đọc2025.
 - Raw nén theo năm ở `data/operational/vrain_2026_11_09/download/raw/`.
 - Checksum/counts ở `download/manifest.sqlite`; lỗi/ngày không có giờ ghi riêng.
@@ -43,6 +45,7 @@ Cả nhóm thống nhất region/timezone/anchor/panel/mask/version. Không mỗ
 | --- | --- |
 | Tải nguồn — đã hoàn tất | Đủ3.653phản hồi, checksumgzip/raw đạt; không lỗi tải |
 | Kiểm kê — bước tiếp theo | Độ đầy đủ từng trạm/mùa, panel ổn định và ba ngày chênh tổng |
+| Nếu bổ sung dữ liệu gần đây | Dùng đúng kênh tổ chức, xác minh crosswalk82/86 và kỳ10phút/giờ; không tự đổi holdout2025 |
 | Xác minh/QC | Đơn vị, đầu/cuối kỳ, múi giờ, missing/trace/counter; xử lý trùng/lỗi |
 | Nhãn vùng | Polygon chungX/y, panel ổn định, trọng số cố định, coverage và độ bền nhãn |
 | Pilot | E0/E2/E7, thửR0/R1 trên cùng mask; baseline và kiểm tra leak |

@@ -6,6 +6,8 @@ Nghiên cứu thêm/bớt đặc trưng để **dự đoán trực tiếp mưa t
 
 **Hoàn tất lúc 17:57 ngày 09/11/2026:** đã lưu đủ 3.653/3.653 phản hồi ngày và kiểm tra SHA256 của cả bản nén/lẫn dữ liệu giải nén. Bảng giờ có ở toàn bộ 1.461 ngày từ 01/01/2021–31/12/2024; 2.192 ngày yêu cầu thuộc 2015–2020 không trả hàng giờ. Đây không phải bảo đảm mọi trạm/giờ đều đủ: có thiếu tại trạm và ba ngày cần rà soát tổng giờ so với hàng tổng. [Thống kê sau tải](docs/vrain_archive_summary.json).
 
+**Vrain có dữ liệu mới hơn 2024.** Phạm vi trên là đợt tải đã chọn, không phải giới hạn hệ thống. Kiểm tra thêm xác nhận dữ liệu2026 và kênh hiện hành86trạm (`kttv`, cần ngữ cảnh tổ chức của tài khoản) có bảng10phút tới18:50ngày09/11 và xuất được giờ. Kênh nhóm cũ82ID không trả một số ngày gần đây dù kênh mới có. [Bằng chứng kiểm tra mới](docs/vrain_recent_check.json). Chưa tải toàn bộ2026;2025vẫn giữ kín. Không tự trộn hai bộ mã trạm.
+
 Đợt này yêu cầu từng ngày **01/01/2015–31/12/2024**, tổng 3.653 ngày, không đọc 2025. Khoảng yêu cầu không có nghĩa nguồn có đủ từ 2015; ngày không có hàng giờ được ghi riêng.
 
 - [Trạng thái sống: progress.json](data/operational/vrain_2026_11_09/download/progress.json).
