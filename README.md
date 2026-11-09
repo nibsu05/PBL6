@@ -1,8 +1,10 @@
 # PBL6 — bắt đầu từ đây
 
-Nghiên cứu thêm/bớt đặc trưng để **dự đoán trực tiếp mưa trung bình vùng Đà Nẵng mới**. Bi-LSTM phụ trách 1–6 giờ; LightGBM/TFT/Informer phụ trách ba tổng mưa 24h riêng của ngày 1–3. ERA5 cung cấp khí tượng, Vrain đang được tải để xây nhãn vùng sau QC. Chưa có bộ huấn luyện Vrain hoàn chỉnh.
+Nghiên cứu thêm/bớt đặc trưng để **dự đoán trực tiếp mưa trung bình vùng Đà Nẵng mới**. Bi-LSTM phụ trách 1–6 giờ; LightGBM/TFT/Informer phụ trách ba tổng mưa 24h riêng của ngày 1–3. ERA5 cung cấp khí tượng; Vrain đã tải xong phản hồi nguồn, cần QC để xây nhãn vùng. Chưa có bộ huấn luyện Vrain hoàn chỉnh.
 
 ## 1. Dữ liệu và tiến độ tải
+
+**Hoàn tất lúc 17:57 ngày 09/11/2026:** đã lưu đủ 3.653/3.653 phản hồi ngày và kiểm tra SHA256 của cả bản nén/lẫn dữ liệu giải nén. Bảng giờ có ở toàn bộ 1.461 ngày từ 01/01/2021–31/12/2024; 2.192 ngày yêu cầu thuộc 2015–2020 không trả hàng giờ. Đây không phải bảo đảm mọi trạm/giờ đều đủ: có thiếu tại trạm và ba ngày cần rà soát tổng giờ so với hàng tổng. [Thống kê sau tải](docs/vrain_archive_summary.json).
 
 Đợt này yêu cầu từng ngày **01/01/2015–31/12/2024**, tổng 3.653 ngày, không đọc 2025. Khoảng yêu cầu không có nghĩa nguồn có đủ từ 2015; ngày không có hàng giờ được ghi riêng.
 
@@ -38,7 +40,7 @@ Tiếp tục sẽ kiểm tra checksum và bỏ qua ngày đã tải đúng. Nế
 
 | Bộ | Vị trí | Ý nghĩa |
 | --- | --- | --- |
-| Vrain đang tải | `data/operational/vrain_2026_11_09/download/` | Dữ liệu nguồn, chưa phải nhãn vùng sạch |
+| Vrain đã tải | `data/operational/vrain_2026_11_09/download/` | Đủ phản hồi yêu cầu; nguồn còn cần QC, chưa phải nhãn vùng |
 | Inventory và mẫu ban đầu | `data/operational/vrain_2026_11_09/` | 82 ID V1 khớp lịch sử; không trộn với 86 mục V2 |
 | ERA5/bộ vùng cũ | `data/processed/regional_danang/` | 2015–09/2026, nhãn cũ và footprint xấp xỉ |
 | Nhãn Vrain trung bình vùng | Chưa xuất | Cần kỳ đo, polygon, panel và trọng số |

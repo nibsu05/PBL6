@@ -11,7 +11,9 @@ Cập nhật 09/11/2026. Đọc trước file này, rồi `KE_HOACH_DU_AN.md` v�
 - Git: `git -c safe.directory=D:/PBL6_v2`. Làm trên `research/tft-regional`, push/PR vào main; không tự merge. Không commit raw, PDF, credential, checkpoint hoặc dự đoán từng mốc.
 - Dữ liệu cũ từ Google Drive `pbl6_data_v2_*.tar`; `scripts/package_data.py verify` chỉ bao phủ nguồn cũ, không phải Vrain.
 
-## Công việc hiện tại: tải Vrain
+## Trạng thái: tải xong, chuyển sang kiểm kê/QC
+
+Hoàn tất17:57VN09/11/2026,3653/3653response2015–2024; cảSHA256gzip/raw đều kiểm tra đạt. Có1461bảng24h cho tất cả ngày2021–2024,2192response2015–2020không có giờ. Không đồng nghĩa mọi trạm/giờ đủ; complete24trạm/ngày có thể0–82 và ba ngày có chênh tổng cần rà soát. Metadata ở `docs/vrain_archive_summary.json`, private `download/verification.json`. Worker đã kết thúc bình thường, không còn cần giữ máy thức để tải. Chưa tạo nhãn vùng hoặc train,2025chưađọc.
 
 Đã đăng nhập/xuất mẫu thật tại `https://www.vrain.vn/landing`. Không nhắc lại hoặc lưu password vào nguồn/tài liệu; web session không đồng nghĩa có Open API key/quyền toàn quốc.
 

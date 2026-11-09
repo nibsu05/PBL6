@@ -12,6 +12,8 @@ Dự đoán trực tiếp mưa trung bình theo diện tích của Đà Nẵng m
 
 ## 2. Thu thập và dữ liệu đã có
 
+Đợt tải hoàn tất17:57VN09/11/2026. Đã kiểm tra SHA256 của3.653tệp nén và dữ liệu giải nén. Có bảng24h cho toàn bộ ngày2021–2024, nhưng vẫn thiếu tại trạm;2015–2020không trả hàng giờ trong toàn bộ các ngày đã yêu cầu. Ba ngày có chênh tổng cầnQC. [Thống kê kiểm kê sau tải](docs/vrain_archive_summary.json). Tải đủresponse không đồng nghĩa nhãn vùng đã sẵn sàng.
+
 Collector yêu cầu3653ngày2015–2024, từ chối2025. Mỗi ngày một response giữ giờ; request nhiều ngày đã kiểm tra chỉ trả tổng ngày. Tối đa1request/s, retry/backoff, khóa mộtworker và resumechecksum.
 
 Trong `data/operational/vrain_2026_11_09/download/`: raw/YYYY/*.json.gz giữ nguồn, manifest.sqlite giữ SHA/counts/provenance, progress.json giữ trạng thái sống, session.dpapi giữ phiên mã hóa ngoàiGit. Không lưu mật khẩu. Khi tải xong vẫn phải QC và tạo nhãn.

@@ -18,7 +18,7 @@ Tải nguồn → kiểm kê/QC → chốt vùng và mạng trạm → tổng h�
 
 ## 4. Đang ở giai đoạn nào
 
-**Thu thập lịch sử Vrain, chưa có bộ huấn luyện Vrain.** [Trạng thái sống](data/operational/vrain_2026_11_09/download/progress.json).
+**Đã tải xong và kiểm tra checksum đủ 3.653 phản hồi; chưa có bộ huấn luyện Vrain.** Hoàn tất17:57VN09/11/2026. Có bảng giờ cho1.461ngày2021–2024; các ngày2015–2020không trả giờ. Trạm vẫn thiếu theo thời gian và có ba ngày cần kiểm tra tổng. [Thống kê sau tải](docs/vrain_archive_summary.json), [trạng thái](data/operational/vrain_2026_11_09/download/progress.json).
 
 - Yêu cầu3653ngày từ2015đến2024, tối đa1request/giây; không đọc2025.
 - Raw nén theo năm ở `data/operational/vrain_2026_11_09/download/raw/`.
@@ -41,7 +41,8 @@ Cả nhóm thống nhất region/timezone/anchor/panel/mask/version. Không mỗ
 
 | Bước | Bằng chứng cần có |
 | --- | --- |
-| Tải/kiểm kê | Mỗi ngày có phản hồi/checksum hoặc lỗi rõ; biết thời kỳ thực có giờ |
+| Tải nguồn — đã hoàn tất | Đủ3.653phản hồi, checksumgzip/raw đạt; không lỗi tải |
+| Kiểm kê — bước tiếp theo | Độ đầy đủ từng trạm/mùa, panel ổn định và ba ngày chênh tổng |
 | Xác minh/QC | Đơn vị, đầu/cuối kỳ, múi giờ, missing/trace/counter; xử lý trùng/lỗi |
 | Nhãn vùng | Polygon chungX/y, panel ổn định, trọng số cố định, coverage và độ bền nhãn |
 | Pilot | E0/E2/E7, thửR0/R1 trên cùng mask; baseline và kiểm tra leak |
