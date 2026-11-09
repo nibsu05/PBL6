@@ -19,23 +19,28 @@ Mỗi kiến trúc dự kiến dùng **một mô hình chung cho nhiều trạm*
 
 ## Nguồn nằm ở đâu, đã sẵn sàng train chưa?
 
-**Đã có nguồn, chưa có tập huấn luyện theo trạm hoàn thiện.** Vẫn phải xác nhận đơn vị, múi giờ, đầu/cuối kỳ đo; kiểm tra chất lượng, chọn trạm đủ lịch sử và trích ERA5 tại trạm.
+**Đã có bộ trạm v1 ghép và kiểm tra**, gồm cả giờ/ngày trong một file: `data/processed/station_v1/PBL6_TRAM_GIO_NGAY_V1.parquet` (dữ liệu private, ngoàiGit). Gửi nhóm cùng [bản mô tả Word](reports/station_data_handoff_2026_11_09/MO_TA_DU_LIEU.docx); [hướng dẫn loader](reports/station_data_handoff_2026_11_09/HUONG_DAN_TRAIN.md), [số liệu/checksum](reports/station_data_handoff_2026_11_09/dataset_summary.json), [kiểm tra toàn file](reports/station_data_handoff_2026_11_09/verification.json).
+
+82trạm có lịch sử;79trạm có cửa sổ train hợp lệ cho cả hai nhánh. Đã kiểm tra2.995.050hàng/2.480.367cửa sổ,34testsđạt. Chưa train mô hình trạm;24trạm có dưới180mẫu ngày train. Kết quả kiểm tra cấu trúc không phải chứng nhận cảm biến.
+
+Người dùng xác nhận10:00là tổng09–10hViệtNamUTC+7. Ngày là19→19h; ERA5 nội suy trực tiếp từ bốn nút gốc0,25° quanh trạm, không chép mean vùng93ô. Train2021–22/cal2023/dev2024;2025giữkín,2026chưa nhậptrain. E7+R có45kênh giờ/43kênh ngày; statictọađộ/IDriêng.
 
 | Nguồn | Vị trí riêng |
 | --- | --- |
 | Vrain lịch sử 2021–2024, raw/checksum/QC | `data/operational/vrain_2026_11_09/download/`, `freeze_work/` |
 | Registry 86 mã chuẩn và nguồn đóng gói | `data/operational/vrain_2026_11_09/handoff_v1/`, `PBL6_VRAIN_SOURCE_V1.zip` |
 | Vrain 02/01–08/11/2026, hai kênh riêng | `data/operational/vrain_2026_11_09/recent_archive/` |
-| ERA5 theo ô đã có, cần trích theo trạm | `data/processed/dataset_v2_danang/` |
+| ERA5 native, đã nội suy tại trạm trong bộ mới | `data/raw_data/gee/era5/grid/` |
+| Dữ liệu đã ghép theo trạm, hai độ phân giải | `data/processed/station_v1/PBL6_TRAM_GIO_NGAY_V1.parquet` |
 | Bộ trung bình vùng cũ, chỉ tham khảo | `data/processed/regional_danang/` |
 
 **Predictor 44 kênh trong ZIP nguồn cũ vẫn là trung bình vùng, chưa phải predictor tại trạm.** Không nhân bản nó và đổi tên thành dataset trạm. Các phản hồi 2015–2020 không có hàng giờ Vrain; không gọi đó là ngày khô. Năm 2025 vẫn giữ kín; chưa dùng 2026 để fit/tuning hoặc tự nối hai kênh.
 
 ## Công việc tiếp theo
 
-Chốt thời gian/QC/tập trạm → trích ERA5 tại trạm → dựng hai loader và split → pilot → mở rộng trạm đạt → E0–E7 và ba mô hình ngày. Thiếu tại một trạm không buộc loại mẫu hợp lệ ở trạm khác. Báo điểm từng trạm và trung bình giữa trạm, kèm thống kê gộp khi cần.
+**Pilot mô hình** trên một nhóm trạm có lịch sử train tốt → mở rộng trạm đạt → E0–E7 và ba mô hình ngày. Dùng loader `src/station_forecast_data.py`, không xóa các hàng thiếu rồi mới cắt chuỗi. Thiếu tại một trạm không buộc loại mẫu hợp lệ ở trạm khác. Báo điểm từng trạm và trung bình giữa trạm, kèm thống kê gộp khi cần.
 
-Mã kiểm kê/collector hiện có: `scripts/download_vrain_archive.py`, `scripts/download_vrain_recent.py`. Vrain có manifest riêng; nguồn cũ trên Drive kiểm bằng `scripts/package_data.py verify`. Có 26 tests Vrain đã đạt; chưa có kết quả train theo trạm.
+Tái tạo/kiểm tra: `scripts/build_station_forecast_data.py`, `scripts/validate_station_forecast_data.py`. Collector: `scripts/download_vrain_archive.py`, `scripts/download_vrain_recent.py`. Vrain có manifest riêng; nguồn cũ trên Drive kiểm bằng `scripts/package_data.py verify`. Chưa có kết quả train theo trạm.
 
 ## Bằng chứng và phương án cũ
 

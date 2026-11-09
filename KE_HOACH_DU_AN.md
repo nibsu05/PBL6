@@ -18,13 +18,13 @@ Mỗi kiến trúc dự kiến dùng một mô hình chung cho nhiều trạm. M
 - Vrain lịch sử2021–2024 theo trạm, source/QC ở `data/operational/vrain_2026_11_09/`.
 - Số trạm có ít nhất một số giờ sauQC theo năm: 57/79/79/82 cho2021/22/23/24; chưa nói đủ cả năm.
 - Bổ sung02/01–08/11/2026 đã tải riêng hai kênh, chưa ghép/fit;2025 giữ kín.
-- ERA5 theo ô đã có; **chưa dựng predictor theo tọa độ trạm**. Predictor trung bình vùng trong ZIP cũ không phải đầu vào trạm.
+- Đã dựng predictor tại tọa độ82trạm từ bốn nút ERA5 gốc0,25°, không dùng trung bình vùng trong ZIPcũ. Nguồn native ở `data/raw_data/gee/era5/grid/`.
 
 ## 3. Trạng thái hiện tại
 
-Đã đổi mục tiêu trong tài liệu và xác minh phạm vi danh mục. Đã có nguồn trạm, chưa có dataset/loader/train theo trạm đã nghiệm thu. Không còn phải đợi giải quyết trung bình diện tích vùng để làm nhãn chính.
+**Đã có dataset/loader theo trạm qua kiểm tra ghép.** Một file `data/processed/station_v1/PBL6_TRAM_GIO_NGAY_V1.parquet` chứa cả1h/24h. Có82trạm lịch sử,79trạm có cửa sổ train;2.995.050hàng và2.480.367cửa sổ đã kiểm tra.34testsđạt. Chưa train mô hình trạm; không coi kiểm tra cấu trúc là chứng nhận cảm biến.
 
-Vẫn cần xác nhận đơn vị, timezone, đầu/cuối kỳ và QC. Chưa có căn cứ nói số đo hai kênh2026 tương đương; không tự nối.
+Người dùng xác nhận10:00là tổng09–10hViệtNamUTC+7; nguồn hiển thị mm. Ngày giữ anchor19→19h, đủ24giờ. Chưa có căn cứ nói số đo hai kênh2026 tương đương; không tự nối.2025giữkín.24trạm có dưới180mẫungàytrain; đây là một giới hạn cho pilot.
 
 ## 4. Thứ tự thực hiện
 
@@ -38,6 +38,8 @@ Vẫn cần xác nhận đơn vị, timezone, đầu/cuối kỳ và QC. Chưa c
 | Mở rộng | Thêm trạm đạtQC, dùng mô hình chung; giữ cách đánh giá từng trạm và tổng hợp |
 | E0–E7 | Cùng mẫu/split; Rgiữcốđịnh; đủ ba mô hình nhánh ngày nếu pilot đủ dữ liệu |
 | Kiểm định cuối | Khóa protocol trước mở2025; không tuning2026 để chọn mô hình |
+
+Các bước dựng dữ liệu/loader đã đạt kiểm tra ghép; **bước tiếp theo là pilot mô hình**, không phải tải lại mọi nguồn. Dùng `sample_ready_r1` chung mọiE/model/R, fit scaler chỉtrain, báo từngtrạm/horizon/mùa. File Word ngắn gửi nhóm: `reports/station_data_handoff_2026_11_09/MO_TA_DU_LIEU.docx`; ví dụ loader ở `HUONG_DAN_TRAIN.md` cùng thư mục.
 
 ## 5. Đánh giá
 

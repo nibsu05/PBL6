@@ -40,6 +40,7 @@ data/processed/dataset_v2/*.npy
 data/processed/dataset_v2/index_cache/
 data/processed/dataset_v2_danang/
 data/processed/regional_danang/
+data/processed/station_v1/
 data/processed/pilot_bilstm_v2*/
 
 # Giữ lại dữ liệu mẫu (Sample data) trong data/samples/
