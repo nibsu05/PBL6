@@ -1,0 +1,28 @@
+{
+  "decision_date": "2026-11-09",
+  "decision_status": "station_targets_accepted_by_user",
+  "forecast_unit": "station_and_issue_time",
+  "provider_group_name": "Đà Nẵng",
+  "national_network": false,
+  "candidate_station_count": 86,
+  "final_training_station_count": null,
+  "legacy_alias_station_count": 82,
+  "modern_only_locations": 4,
+  "administrative_polygon_membership_confirmed": false,
+  "legacy_stations_with_any_qc_valid_hour_by_year": {
+    "2021": 57,
+    "2022": 79,
+    "2023": 79,
+    "2024": 82
+  },
+  "availability_note": "At least one numeric hour after current QC, not complete-year coverage or approved training eligibility",
+  "hourly_targets": "six separate next hourly depths at the same station",
+  "daily_targets": "three separate next 24-hour totals at the same station",
+  "proposed_training_design": "one pooled model per architecture across eligible stations",
+  "station_predictor_dataset_materialized": false,
+  "regional_predictors_are_station_predictors": false,
+  "source_time_semantics_confirmed": false,
+  "station_model_training_performed": false,
+  "test2025_read": false,
+  "recent2026_used_for_model_selection": false
+}

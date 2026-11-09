@@ -1,97 +1,76 @@
-# Thiết kế kỹ thuật hiện hành — ERA5 và Vrain
+# Thiết kế nghiên cứu hiện hành — dự báo mưa tại nhiều trạm
 
-Cập nhật09/11/2026. [README](README.md) chỉ vị trí dữ liệu/tiến độ; [kế hoạch công việc](KE_HOACH_DU_AN.md) chỉ giai đoạn. Lịch sử trước khi rút gọn còn trongGit a05f6c0.
+Người dùng đã chốt09/11/2026: cả hai nhánh dự báo theo trạm. Tài liệu này thay thiết kế dự báo trực tiếp mưa trung bình vùng trước đó. Đây là thiết kế để triển khai; chưa có kết quả train Vrain theo trạm.
 
-## 1. Bài toán
+## 1. Phạm vi: 86 là danh mục ứng viên ở nhóm Đà Nẵng
 
-Dự đoán trực tiếp mưa trung bình theo diện tích của Đà Nẵng mới. Một issue vùng là một mẫu. Polygon cuối và phần không được mạng trạm đại diện cần xác nhận; footprint93ô chưa phải ranh chính xác.
+API trả một nhóm tên “Đà Nẵng” với86 vị trí hiện hành; không phải toàn quốc. Chưa khẳng định mọi mục đã được đối chiếu với ranh hành chính cuối. Khi cần chọn trạm thuộc đúng khu vực, kiểm tra tọa độ/ranh trước chốt tập.
 
-- Giờ: X24giờ×F → sáu lượng mưa giờ tiếp theo.
-- Ngày: Xbảyngày×F → ba tổng24hriêng, không tích lũy24/48/72h.
-- Các độ dài lịch sử trên là lựa chọn ban đầu, chưa chứng minh tối ưu.
+Registry86 gồm82 vị trí có alias kênh cũ và bốn vị trí bổ sung. Chưa biết bốn vị trí được lắp mới hay bổ sung vào danh mục. Mã chuẩn STxxx giữ cố định, alias kênh lưu riêng. Chỉ khớp tọa độ hiện tại, chưa chứng minh số đo hai kênh liên tục/tương đương.
 
-## 2. Thu thập và dữ liệu đã có
+| Kho lịch sử đã tải | Trạm có ít nhất một số đo giờ sauQC |
+| --- | ---: |
+| 2021 | 57 |
+| 2022 | 79 |
+| 2023 | 79 |
+| 2024 | 82 |
 
-Đợt tải hoàn tất17:57VN09/11/2026. Đã kiểm tra SHA256 của3.653tệp nén và dữ liệu giải nén. Có bảng24h cho toàn bộ ngày2021–2024, nhưng vẫn thiếu tại trạm;2015–2020không trả hàng giờ trong toàn bộ các ngày đã yêu cầu. Ba ngày có chênh tổng cầnQC. [Thống kê kiểm kê sau tải](docs/vrain_archive_summary.json). Tải đủresponse không đồng nghĩa nhãn vùng đã sẵn sàng.
+Đây không phải số trạm đủ cả năm hoặc đã được chọn train. Số trạm cuối phụ thuộc lịch sử, QC và yêu cầu cửa sổ của từng nhánh. Bốn vị trí chỉ có trong danh mục mới không có lịch sử tự tạo trước khi nguồn trả số.
 
-Phạm vi cũ tới 2024 là quyết định thu thập, không phải giới hạn Vrain. Kênh hiện hành `kttv` có 86 mục; truy cập cần đúng ngữ cảnh tổ chức như giao diện. Kênh cũ rỗng không đủ kết luận mạng không đo; bảng mới có 24 hàng cũng có thể toàn thiếu. Probe ngày 09/11 có dữ liệu 10 phút tới 18:50, chưa chứng minh độ trễ truyền được bảo đảm. [Bằng chứng probe](docs/vrain_recent_check.json); kiểm kê bổ sung và registry hiện hành ở dưới.
+## 2. Một mô hình chung cho nhiều trạm
 
-Collector yêu cầu3653ngày2015–2024, từ chối2025. Mỗi ngày một response giữ giờ; request nhiều ngày đã kiểm tra chỉ trả tổng ngày. Tối đa1request/s, retry/backoff, khóa mộtworker và resumechecksum.
+Mỗi mẫu là `(station_id, issue_time)`; trạmA tại thờit là một mẫu, trạmB tại cùngt là mẫu khác. Nhãn luôn là mưa đo ở chính trạm đó. Mỗi kiến trúc dự kiến dùng một mô hình chung; dự đoán nhiều trạm bằng mộtbatch, không bắt buộc86 mô hình riêng.
 
-Trong `data/operational/vrain_2026_11_09/download/`: raw/YYYY/*.json.gz giữ nguồn, manifest.sqlite giữ SHA/counts/provenance, progress.json giữ trạng thái sống, session.dpapi giữ phiên mã hóa ngoàiGit. Không lưu mật khẩu. Khi tải xong vẫn phải QC và tạo nhãn.
+Đầu vào gồm khí tượng phù hợp vị trí trạm, lịch sử mưa chính trạm nếu dùngR, và metadata tĩnh như tọa độ/mãtrạm. Không cộng/gộp nhãn của các trạm thành một nhãn vùng. TrạmA thiếu một khoảng chỉ loại mẫuA không hợp lệ; không yêu cầu tất cả trạm đủ đồng thời.
 
-Đã đối chiếu inventory: 82 vị trí cũ khớp tọa độ chính xác và duy nhất với 82/86 mục mới, 81 tên giống và một tên khác; bốn vị trí bổ sung. Registry chuẩn 86 mã STxxx có alias riêng hai kênh, trong gói private. Chỉ khớp metadata hiện tại, chưa chứng minh thiết bị/vị trí lịch sử liên tục. Không ép nối theo tên hoặc tự cộng hai số đo cùng trạm.
+## 3. Hai nhánh dự báo
 
-Đã tải bổ sung 622 phản hồi cho 02/01–08/11/2026, hai kênh × 311 ngày. Kết quả SHA, số đo hợp lệ và so cặp trong [kiểm kê nguồn](docs/vrain_data_freeze.json). Không đọc 2025, không tuning 2026. Gói `PBL6_VRAIN_SOURCE_V1.zip` chỉ là nguồn đã kiểm kê, không phải nhãn vùng đã duyệt.
+| Nhánh | Lịch sử ban đầu | Đầu ra | Mô hình |
+| --- | --- | --- | --- |
+| Cực ngắn | 24giờ tại trạm | Sáu lượng mưa giờ tiếp theo | Bi-LSTM; persistence/LightGBM làm đối chiếu phù hợp |
+| Ngắn | Bảyngày tại trạm | Ba tổng24hriêng ngày1/2/3 | LightGBM, TFT, Informer cùng mẫu |
 
-ERA5/bộvùngV1/V2 ở `data/processed/regional_danang/`,102984giờ2015–09/2026UTC,49/138predictorứngviên, nhãnGSMaPcũ. Nguồn0,25°được biểu diễn0,1° không tăng thông tin vật lý; nội suy cũ có thể bỏ nútNaN. Không nhầm dữ liệu này với nhãnVrain.
+Độ dài lịch sử là cấu hình ban đầu, chưa tối ưu. Tensor chuỗi vẫn có dạng `[batch, thời gian, đặc trưng]`, nhưng mỗi phần tử batch thuộc một trạm và một issue. Statictrạm có thể đi nhánh riêng tùy kiến trúc; chưa chốt số kênh cuối.
 
-## 3. Chuẩn hóa và nhãn
+## 4. Nguồn và những phần phải dựng lại
 
-Xác nhận đơn vị, timezone, timestamp đầu/cuối kỳ, increment/counter/rate/tổngtrượt và mã thiếu/trace/reset trước ghépUTC. XLSX có tiêu đề19:20 nhưng cột cuối19:00; không tự áp mốcCPC12UTC.
+Vrain là số đo tại điểm, không có ô vuông mặc định quanh mỗi trạm. Nhãn lấy từ mưa trạm sauQC; nhãn ngày là tổng những giờ thuộc đúng cùng cửa sổ, đủ số lượng và chất lượng. Không chia mưa ngày thành giờ, không điền thiếu thành0, không lấp y bằngERA5/CPC/GSMaP.
 
-Lưu period_start/endUTC, mưa, QC, provenance/retrieved_at. available_at chỉ ghi khi biết thật. Tải hồi cứu hôm nay không chứng minh nguồn đã có tại giờforecast.
+Đồng hồ nguồn20:00hômtrước→19:00ngàyđượcchọn; XLSXmẫu ghi tiêu đề19:20. Phải xác nhận timezone/đầu-cuối kỳ/đơn vị/loại tích lũy trước chuẩn hóa và ghépERA5. Giữ raw, cờQC, thời gian lấy, nguồn và các khoảng đo. Dữ liệu đã tải không tự chứng minh có sẵn tại issue vận hành.
 
-Không cộng hàng tổng vào24h, không đổi dấu thiếu thành0. Cực trị/khácERA5 hoặc hàngxóm là cờ rà soát, không tự xóa. Raw cấu trúc lạ giữ và đánh dấu, không sửa âm thầm.
+**ERA5 phải trích theo tọa độ trạm hoặc nút lưới lân cận có quy tắc rõ.** Các trạm gần nhau có thể chia sẻ trường ERA5 vì nguồn0,25°; tọa độ, mưa quá khứ và metadata giúp mô hình phân biệt trạm. Nội suy không tạo thêm độ phân giải thật. Cao độ trạm hiện thiếu; DEM nếu bổ sung phải có nguồn, không tự nhận là cao độ đo tại trạm.
 
-Estimator nhãn chưa chốt. Với trường hợp mạng cố định đầy đủ, trọng số Thiessen cắt ranh trong CRS phẳng phù hợp có công thức:
+Cube theo ô ở `data/processed/dataset_v2_danang/`; phải kiểm tra trạm trong/ngoài miền và hành viNaN. Không ngoại suy âm thầm. Các cột context/SST dùng miền lớn hơn có chủ đích và provenance. Predictor44kênh trong `PBL6_VRAIN_SOURCE_V1.zip` vẫn là trung bình vùng cũ, chưa phải dataset theo trạm.
 
-`w_i = area(Voronoi_i intersect R) / area(R)`
+## 5. Nhóm biến và E0–E7
 
-`y_region(t) = sum_i w_i * rain_i(t)`
+Giữ catalogue khí tượng dự kiến B/A/M/C, xây lại giá trị phù hợp trạm:
 
-`coverage(t) = sum_i w_i * valid_i(t)`
+| Nhóm | Số kênh khí tượng/lịch giờ / ngày dự kiến | Nội dung |
+| --- | ---: | --- |
+| B | 11 / 9 | Nhiệt/ẩm/áp/gió gần mặt đất và lịch |
+| A | 12 / 12 | Đối lưu, mây, hơi nước, lớp biên và đất |
+| M | 20 / 20 | Trường850/500, shear, IVT/VIMD, context và chênháp |
+| C | 1 / 1 | SSThộpbiển; chưa phảiENSO/MJO đầy đủ |
+| R tùy chọn | Chưa chốt | Mưa quá khứ của chính trạm |
+| Statictrạm | Chưa chốt | Tọa độ/mãtrạm; địa hình nếu bổ sung được |
 
-Không chuẩn hóa lại theo trạm còn lại trong nhãn chính. Nếu thiếu quá nhiều, chọn panel bằngmetadata/development hoặc thử estimator mạngkhuyết riêng. Không lấp bằngCPC/GSMaP/ERA5 rồi gọi thuầnVrain.
+E0=B; E1=BA; E2=BM; E3=BC; E4=BAM; E5=BAC; E6=BMC; E7=BAMC. Static và lựa chọnR phải nhất quán giữa cácE/model. Các con số44/42 chưa bao gồm static/R, chưa bảo đảm mọi biến đã trích tại trạm.
 
-Quy tắc trên là đề xuất nghiêm ngặt ban đầu, chưa có nhãn chính được phê duyệt. Có thể nghiên cứu Thiessen tính lại/IDW theo mạng còn số nếu ghi rõ estimator, mạng, hỗ trợ không gian và bất định; không coi việc thay đổi có khai báo là tự động sai về phương pháp. Coverage theo mạng toàn bộ không đồng nghĩa phần diện tích thực sự được đo trực tiếp.
+Chỉ dùng đầu vào đã kết thúc trước issue và lịch tương lai biết trước; không dùng khí tượng ERA5 kỳ đích. Thiếu dự báo khí tượng tương lai có thể hạn chế skill ngày2–3; chấp nhận kết quả không cải thiện.
 
-**Bằng chứng mới sau kiểm kê:** toàn mạng 82 trạm trên R93 có coverage giờ tối đa năm 2021/2022/2023 khoảng 70,0%/83,5%/83,5%; không có ngày đủ 100% trong ba năm đó. Panel 45 trạm đạt ≥98% độ đầy đủ riêng từng năm 2021 và 2022 tạo được nhiều ngày hơn, nhưng khoảng cách tâm ô xa nhất tới trạm tăng khoảng 34→59 km; trung bình vùng núi khoảng 13→30 km. Do đó không chốt panel/nhãn chính chỉ theo tính đầy đủ. Chính sách nghiêm ngặt cũ chưa tạo được tập train toàn vùng; phải giải quyết lịch sử mạng và kiểm chứng estimator thay vì âm thầm nới coverage. Các số mẫu trong chẩn đoán chưa qua bộ chặn split cuối.
+## 6. Chia dữ liệu và đánh giá
 
-**Kiểm định tính khả thi sau đó:** 67 ngày đủ cả 82 trạm từ 21/08–31/12/2024, làm tham chiếu nội bộ. Che theo mẫu thiếu 2021–2023: NRMSE trung vị Thiessen toàn R93 21,4%/19,8%/16,3%; phần vùng núi 71,0%/69,3%/60,0%. Các nhóm ô không phải địa giới hành chính. Tham chiếu còn sai số lấy mẫu; phân vị qua mẫu thiếu không phải CI; point/block CV không chứng minh sai số diện tích thật. Giữ 2025 kín, chưa dùng số đo 2026 cho lựa chọn. [Tài liệu đánh giá](reports/vrain_data_handoff_2026_11_09/DANH_GIA_KHA_THI_VA_HUONG_DI.md).
+- Chia theo thời gian chung trên mọi trạm, toàn bộ nhãn nằm trongsplit; khôngrandom các cửa sổ chồng lấn. Lịch sử Vrain thực sauQC quyết định fold, không ép từ2015.
+- Fit scaler/imputer/climatology chỉtrain; earlystop/calibration/ngưỡng quyết định chỉcal. Trạm mới thiếu lịch sửtrain không được âm thầm học từ nămtest.
+- Khi soE/model/R0–R1, cùng danh sách mẫu và split. Một trạm thiếu dữ liệu không làm mất mẫu của toàn mạng.
+- 2025 vẫn giữ kín; không dùng2026 đểfit/tuning rồi gọi2025làtesttươnglai. Dữ liệu2026hai kênh đang giữ riêng vì chưa xác nhận tương đương.
+- Báo MAE/RMSE/Bias theo trạm/mùa/horizon; CSI/POD/FAR vàBS/BSS khi có xác suất. Ngưỡng16/50/100 từ nhãn vùng cũ chưa được tự động chuyển sang nhãntrạm; chốt ngưỡng đúngkỳ/đối tượng trướctest.
+- Báo macro-average giữa trạm cùngmicro khi cần, n/events rõ ràng. Bootstrap theo khối thời gian giữ cùng đợt mưa giữa các trạm; không coi nhiều trạm/ngày là nhiều mùa độc lập.
+- Nếu muốn nói tổng quát sang trạm chưa thấy, cần kiểm định giữ lại trạm/khối riêng; test tương lai ở trạm đã biết chưa chứng minh điều đó.
 
-Khuyến nghị: chưa chọn nhãn thuần Vrain toàn Đà Nẵng mới làm nhãn chính; ưu tiên nhánh ngày trên vùng cố định kiểm chứng được, có thể thu hẹp. Nếu không có vùng đạt, đề xuất đổi sang mô hình chung nhiều trạm, ghi đúng mục tiêu. Đây là đề xuất, chưa tự thay ranh dữ liệu hay kết quả thí nghiệm.
+## 7. Lộ trình
 
-Kiểm chứng rúttrạm/LOSO, nhạy panel/phương pháp, tổng giờ–ngày, cực trị và mẫu bị loại theo mùa. Sốtrạm/coverageThiessen chưa chứng nhận vùngnúi/đảo. XERA5 vày cùngpolygon; tải bổ sung khí tượng nếu ranh vượt cube.
+Xác minh thời gian/QC và tập trạm → tríchERA5trạm → dựngnhãn/ngàyđúnganchor → loader/split/replay → pilot nhómtrạmđạidiện → mở rộng trạm đạt → E0–E7 cùngba môhìnhngày → khóa trước2025.
 
-## 4. Đặc trưng và thí nghiệm
-
-| Nhóm | Số biến ngày/giờ | Nội dung |
-| --- | --- | --- |
-| B | 9/11 | Bảy biến bề mặt và lịch; giờ thêm sin/cosgiờ |
-| A | 12/12 | Đối lưu, hơi nước, mây, lớp biên và đất |
-| M | 20/20 | Trường850/500, shear, IVT/VIMD, context và chênháp |
-| C | 1/1 | SSThộpbiển, chưa đầyđủENSO/MJO |
-| Rđềxuất | 1/1 | Một kênh mưa vùng quákhứ, thử riêngR0/R1 |
-
-E0B/E1BA/E2BM/E3BC/E4BAM/E5BAC/E6BMC/E7BAMC.
-NgàyR0:9/21/29/10/41/22/30/42; R1mỗiEtăng1. Giờ thêm2mãhóa giờ. Đây là sốkênh, không phải sốcột cây sau tóm tắt.
-
-Pilot E0/E2/E7 cùngVrain/mask, thửR0/R1 riêng. Saupilot chọnR cốđịnh cho mọiE/model rồi chạy đủE0–E7. Nhánhngày so đồngthờiLightGBM/TFT/Informer, nhánhgiờBi-LSTM/LightGBM. Không ép mạng thắng hoặc chạyInformer chỉ để bác nó.
-
-Chỉ lịch tươnglai biết trước được dùng; khôngERA5/mưa giờđích trongX. Không nốiCPC trước năm cótrạm vàVrain sau đó thành nhãn đồng nhất; pretrain/fine-tune là thí nghiệm riêng. Nhiều hàng giờ không tạo thêm nhiều mùa độc lập.
-
-## 5. Split và đánh giá
-
-- Chia theo lịch sử Vrain thực sauQC; không ép train từ2015.
-- Ví dụ cóđiềukiện nếu2021–2024đủ: train2021/cal2022/eval2023; train2021–2022/cal2023/eval2024. Chưa chốt khi chưa kiểm kê.
-- Scaler/climatefittrain; earlystop/Platt/tau chỉcal. Toàn bộ y trongsplit, mask chungmọiE/model vàR0/R1 khi so.
-- 2025giữkín; không tuning2026 rồi gọi2025làtesttươnglai. Thiếu lịch sử thì đăng ký lại kế hoạch trước mởtest.
-- CSI/BSSchính; POD/FAR, RMSE/MAE/Bias/BS bổ sung; báo n/events/mùa/năm. Không có chuẩnPOD0,4tốtchung.
-- Ngưỡngngày16/50/100 là ngưỡngnghiêncứumưavùng; giờ cần ngưỡng đúngkỳ. Ngưỡng quyết định xác suất chọncal.
-- Bootstrap pairedkhối, kiểm tra độnhạy; khóa nhóm phépso/hiệuchỉnh. Chữđậm không thayCI; development chưaholdout.
-- ERA5 làhồi cứu; chưa chứng minh cósẵntạiissue. Nếu thêmNWP phải dùngrunđãphát trướcissue, khôngERA5tươnglai.
-
-## 6. Bằng chứng và công cụ
-
-- [Bàn giao Vrain hiện hành](reports/vrain_data_handoff_2026_11_09/CHOT_DU_LIEU_GUI_NHOM.md): registry 86, kiểm kê toàn kho, gói nguồn và giới hạn nhãn vùng.
-- [Phương án Vrain ban đầu](reports/vrain_research_plan_2026_11_09/PHUONG_AN_VRAIN_GUI_NHOM.md): nguồn sơ cấp, cổng G0–G6, sáu tiêu chí; bằng chứng khi đó mới 10 probe.
-- [CPCngày](reports/daily_gauge_2026_11_04/README.md):168fits, E7BSSngày1LG/TFT/IF0,190/0,026/0,078; ngày2–3âm. Không gọiVrain.
-- [GSMaPđủ ba mô hình](reports/short_range_complete_2026_10_28/README.md).
-- [Phương án hợp nhất](reports/regional_research_plan_2026_10_20/PHUONG_AN_CUOI.md):giữD1/D2/D9/D10/D14/D15đúngphạmvi. CóVrain mới chưa tự bác phépđo cũ.
-- [Danh mục biến](reports/daily_gauge_2026_11_04/feature_catalog_daily.csv); miềnSST/contextngoàiđấtliền cóchủđích.
-
-Kiểm thử mới: `python -m unittest tests.test_vrain_download tests.test_vrain_export_audit`.
-Nguồn cũ kiểm bằng `scripts/package_data.py verify`; Vrain cómanifest riêng.
-
-Không commitraw/PDF/credential/checkpoint/dựđoántừngmốc. Không thay/stageslide người dùng sửa. Các báo cáo trình bày/kế hoạch cũ bị xóa09/11cóZIPprivate vàGit a05f6c0; checkoutbảnđó khi tái lập công cụ lịch sử.
+Các báo cáo vùngCPC/GSMaP và kiểm định nhãn vùng được giữ để giải thích quyết định đổi mục tiêu. Chưa huấn luyện mô hình theo trạm; không đổi tên số đo/kết quả cũ.
