@@ -2,7 +2,7 @@
 
 > **Dành cho các thành viên trong nhóm.** File này trả lời bốn câu hỏi: dự án làm gì, quy trình ra sao, đang ở giai đoạn nào, và mỗi người cần làm gì tiếp theo.
 > Chi tiết kỹ thuật và số liệu đầy đủ nằm ở [`project_plan_v2.md`](project_plan_v2.md). Bối cảnh dành cho AI agent nằm ở [`CLAUDE.md`](CLAUDE.md).
-> **Cập nhật:** 04/11/2026. [Phương án nghiên cứu hợp nhất](reports/regional_research_plan_2026_10_20/PHUONG_AN_CUOI.md) là nền cho nhánh 6 giờ; người dùng đã duyệt thêm [nhánh TFT vùng 24–72 giờ](reports/short_range_plan_2026_10_21/README.md) và thí nghiệm dữ liệu ngày với nhãn CPC từ trạm ở mục 4. Các phần hai sản phẩm/app trước đây giữ để tra cứu lịch sử. Khi chuyển giai đoạn hoặc chốt quyết định, sửa mục 4, mục 6 và ngày cập nhật.
+> **Cập nhật:** 09/11/2026. [Phương án Vrain gửi nhóm](reports/vrain_research_plan_2026_11_09/README.md) bổ sung truy cập trạm thực, hợp đồng dữ liệu và các cổng trước huấn luyện. [Phương án nghiên cứu hợp nhất](reports/regional_research_plan_2026_10_20/PHUONG_AN_CUOI.md) vẫn là nền vùng trực tiếp; các thí nghiệm GSMaP/CPC và phần app trước đây giữ để tra cứu lịch sử. Khi chuyển giai đoạn hoặc chốt quyết định, sửa mục 4, mục 6 và ngày cập nhật.
 
 ---
 
@@ -122,6 +122,8 @@ flowchart LR
 
 ## 4. Đang ở giai đoạn nào
 
+**09/11 — đã có quyền Vrain và kiểm tra xuất mẫu, chưa train:** [tài liệu đầy đủ/bản ngắn/Excel gửi nhóm](reports/vrain_research_plan_2026_11_09/README.md). V1 có82mục, mã lịch sử khớp82/82; V2 có86mục với mã khác, không gộp theo tên. Mười probe gồm bảy ngày có24h và ba ngày thử2015/2019/2020 chưa có giờ; số trạm đủ24số biến thiên50–81. Đã tải/mở XLSX lịch sử;490cặp tổng giờ/tổng bảng khớp dung sai số học,10test parser đạt. Chưa xác nhận đủ thời gian/đơn vị/ranh/độ phủ hoặc kiểm kê lịch sử liên tục. Chưa có nhãn vùng Vrain và chưa đọc2025. Dữ liệu mẫu/raw/inventory/credential ngoàiGit; hai bản slide người dùng sửa giữ nguyên.
+
 **Bộ slide dữ liệu ngày đã hoàn thành 04/11:** [PowerPoint 44 trang, HTML và lời dẫn](reports/daily_gauge_slides_2026_11_04/README.md). Có 30 trang chính + 14 phụ lục; giải thích nguồn ERA5/CPC, mẫu ngày, E0–E7, seed, tám metrics và CI. Các bảng luôn có đủ ba mô hình; phụ lục đủ 72 dòng. Đã đối chiếu 720 ô metric và 24 ô CI với nguồn, kiểm tra bảng/notes PowerPoint và bố cục HTML; chưa render Office gốc. Không chạy lại mô hình hoặc mở 2025; giữ nguyên các slide cũ và bản người dùng sửa.
 
 **Cập nhật 04/11/2026, đã hoàn thành:** [Word, Excel 11 sheet và đủ ba mô hình/E0–E7](reports/daily_gauge_2026_11_04/README.md). Nhãn CPC dựa trạm thay GSMaP, predictor ERA5 gộp ngày, bảy bước quá khứ và ba tổng24hriêng, mốc12UTCtheoEODnguồn. Đủ168lượt:24LightGBM/72TFT/72Informer; độc lập phát lại144checkpointmạng và288đầuraLightGBM,336splitcal/evalđạt. Số biến9/21/29/10/41/22/30/42. Nguồn3.287ngày2015–2023,13probePSL–NOAAkhớp;1.072mốcchung/hạn. E7BSSngày1=0,190/0,026/0,078; ngày2–3cảbaâm. AuditNOAA24h tại một trạm hỗ trợEOD12UTC, cần rà soát phép ghép00UTCcũ. Vrain đang xin; CPC chưa là quan trắc trực tiếp toàn vùng, footprint vẫn xấp xỉ. Không mở2025.
@@ -182,6 +184,8 @@ flowchart LR
 ---
 
 ## 6. Lộ trình thực hiện tiếp
+
+**Ưu tiên09/11 — kiểm kê và xây nhãn Vrain trước mô hình:** xác minh đơn vị/múi giờ/kỳ tích lũy, inventory theo thời kỳ, ranh chung X/y, mạng lõi/trọng số, missing/QC và độ bền nhãn. ERA5 tiếp tục làmX; Vrain tạo y vùng, mưa quá khứ là nhómR thử riêng. Chỉ dùng khi vượt các cổng G1–G4 của [phương án mới](reports/vrain_research_plan_2026_11_09/PHUONG_AN_VRAIN_GUI_NHOM.md). Pilot E0/E2/E7 cùng mask trước rồi mới E0–E7/ba mô hình nhánh ngày; chọn split từ lịch sử thực có, không mặc định2015 hoặc tự đổi holdout2025. Phân công đề xuất: một người dữ liệu, một người Bi-LSTM, người dùng TFT. Lịch5–10ngày làm việc có điều kiện sau khi đủ metadata/quyền tải, không cam kết từ mười probe. Không viết lại điểm GSMaP/CPC hoặc quay lại ưu tiên app.
 
 Dùng [bộ slide dữ liệu ngày mới](reports/daily_gauge_slides_2026_11_04/README.md) cho báo cáo hiện tại. Bảng nhóm biến ở trang 10, metrics ở 16, BSS đủ E0–E7 ở 20–22, CI ở 26–28 và bảng đầy đủ ở 31–39. Phân biệt rõ điểm tốt hơn E0 với kỹ năng hơn khí hậu; chưa xem kết quả ngày 2–3 là dự báo đã đảm bảo.
 

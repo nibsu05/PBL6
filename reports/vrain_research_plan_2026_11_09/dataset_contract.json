@@ -1,0 +1,403 @@
+{
+  "status": "proposed_not_materialized",
+  "region_target": "direct_areal_rainfall",
+  "label_name": "vrain_areal_estimate_mm",
+  "primary_missing_policy": "fixed core panel, no implicit renormalization",
+  "time_metadata_confirmed": false,
+  "measurement_unit_confirmed": false,
+  "region_polygon_confirmed": false,
+  "sample_counts_known": false,
+  "test2025_read": false,
+  "fields": [
+    {
+      "layer": "station_inventory",
+      "field": "provider",
+      "required": "Có",
+      "meaning": "Khóa định danh; không nối V1/V2 bằng tên"
+    },
+    {
+      "layer": "station_inventory",
+      "field": "service",
+      "required": "Có",
+      "meaning": "Khóa định danh; không nối V1/V2 bằng tên"
+    },
+    {
+      "layer": "station_inventory",
+      "field": "id_namespace",
+      "required": "Có",
+      "meaning": "Khóa định danh; không nối V1/V2 bằng tên"
+    },
+    {
+      "layer": "station_inventory",
+      "field": "station_id",
+      "required": "Có",
+      "meaning": "Khóa định danh; không nối V1/V2 bằng tên"
+    },
+    {
+      "layer": "station_inventory",
+      "field": "station_uuid",
+      "required": "Có",
+      "meaning": "Khóa định danh; không nối V1/V2 bằng tên"
+    },
+    {
+      "layer": "station_inventory",
+      "field": "longitude",
+      "required": "Có",
+      "meaning": "Tọa độ và thời kỳ hiệu lực; chưa biết thì đánh dấu unknown, không bịa"
+    },
+    {
+      "layer": "station_inventory",
+      "field": "latitude",
+      "required": "Có",
+      "meaning": "Tọa độ và thời kỳ hiệu lực; chưa biết thì đánh dấu unknown, không bịa"
+    },
+    {
+      "layer": "station_inventory",
+      "field": "coordinate_crs",
+      "required": "Có",
+      "meaning": "Tọa độ và thời kỳ hiệu lực; chưa biết thì đánh dấu unknown, không bịa"
+    },
+    {
+      "layer": "station_inventory",
+      "field": "position_valid_from",
+      "required": "Có",
+      "meaning": "Tọa độ và thời kỳ hiệu lực; chưa biết thì đánh dấu unknown, không bịa"
+    },
+    {
+      "layer": "station_inventory",
+      "field": "position_valid_to",
+      "required": "Có",
+      "meaning": "Tọa độ và thời kỳ hiệu lực; chưa biết thì đánh dấu unknown, không bịa"
+    },
+    {
+      "layer": "station_inventory",
+      "field": "sensor_type",
+      "required": "Có",
+      "meaning": "Metadata cần xác nhận trước chuẩn hóa nhãn"
+    },
+    {
+      "layer": "station_inventory",
+      "field": "unit",
+      "required": "Có",
+      "meaning": "Metadata cần xác nhận trước chuẩn hóa nhãn"
+    },
+    {
+      "layer": "station_inventory",
+      "field": "source_timezone",
+      "required": "Có",
+      "meaning": "Metadata cần xác nhận trước chuẩn hóa nhãn"
+    },
+    {
+      "layer": "station_inventory",
+      "field": "timestamp_means",
+      "required": "Có",
+      "meaning": "Metadata cần xác nhận trước chuẩn hóa nhãn"
+    },
+    {
+      "layer": "station_inventory",
+      "field": "accumulation_semantics",
+      "required": "Có",
+      "meaning": "Metadata cần xác nhận trước chuẩn hóa nhãn"
+    },
+    {
+      "layer": "station_inventory",
+      "field": "reporting_interval",
+      "required": "Có",
+      "meaning": "Metadata cần xác nhận trước chuẩn hóa nhãn"
+    },
+    {
+      "layer": "source_manifest",
+      "field": "relative_path",
+      "required": "Có",
+      "meaning": "Nguồn nguyên gốc private; không token/cookie/signed URL"
+    },
+    {
+      "layer": "source_manifest",
+      "field": "sha256",
+      "required": "Có",
+      "meaning": "Nguồn nguyên gốc private; không token/cookie/signed URL"
+    },
+    {
+      "layer": "source_manifest",
+      "field": "retrieved_at_utc",
+      "required": "Có",
+      "meaning": "Nguồn nguyên gốc private; không token/cookie/signed URL"
+    },
+    {
+      "layer": "source_manifest",
+      "field": "requested_start",
+      "required": "Có",
+      "meaning": "Nguồn nguyên gốc private; không token/cookie/signed URL"
+    },
+    {
+      "layer": "source_manifest",
+      "field": "requested_end",
+      "required": "Có",
+      "meaning": "Nguồn nguyên gốc private; không token/cookie/signed URL"
+    },
+    {
+      "layer": "source_manifest",
+      "field": "schema_version",
+      "required": "Có",
+      "meaning": "Nguồn nguyên gốc private; không token/cookie/signed URL"
+    },
+    {
+      "layer": "station_intervals",
+      "field": "station_key",
+      "required": "Có",
+      "meaning": "Quan trắc theo khoảng; giữ missing khác 0"
+    },
+    {
+      "layer": "station_intervals",
+      "field": "period_start_utc",
+      "required": "Có",
+      "meaning": "Quan trắc theo khoảng; giữ missing khác 0"
+    },
+    {
+      "layer": "station_intervals",
+      "field": "period_end_utc",
+      "required": "Có",
+      "meaning": "Quan trắc theo khoảng; giữ missing khác 0"
+    },
+    {
+      "layer": "station_intervals",
+      "field": "rain_mm",
+      "required": "Có",
+      "meaning": "Quan trắc theo khoảng; giữ missing khác 0"
+    },
+    {
+      "layer": "station_intervals",
+      "field": "qc_flags",
+      "required": "Có",
+      "meaning": "Quan trắc theo khoảng; giữ missing khác 0"
+    },
+    {
+      "layer": "station_intervals",
+      "field": "source_sha256",
+      "required": "Có",
+      "meaning": "Quan trắc theo khoảng; giữ missing khác 0"
+    },
+    {
+      "layer": "station_intervals",
+      "field": "available_at_utc",
+      "required": "Có",
+      "meaning": "Chỉ ghi nếu được chứng minh; unknown không được giả thành giờ quan trắc"
+    },
+    {
+      "layer": "station_hourly_daily",
+      "field": "period_start_utc",
+      "required": "Có",
+      "meaning": "Giờ hoặc tổng ngày đúng anchor; không cộng hàng tổng lần nữa"
+    },
+    {
+      "layer": "station_hourly_daily",
+      "field": "period_end_utc",
+      "required": "Có",
+      "meaning": "Giờ hoặc tổng ngày đúng anchor; không cộng hàng tổng lần nữa"
+    },
+    {
+      "layer": "station_hourly_daily",
+      "field": "rain_mm",
+      "required": "Có",
+      "meaning": "Giờ hoặc tổng ngày đúng anchor; không cộng hàng tổng lần nữa"
+    },
+    {
+      "layer": "station_hourly_daily",
+      "field": "n_expected",
+      "required": "Có",
+      "meaning": "Giờ hoặc tổng ngày đúng anchor; không cộng hàng tổng lần nữa"
+    },
+    {
+      "layer": "station_hourly_daily",
+      "field": "n_observed",
+      "required": "Có",
+      "meaning": "Giờ hoặc tổng ngày đúng anchor; không cộng hàng tổng lần nữa"
+    },
+    {
+      "layer": "station_hourly_daily",
+      "field": "valid",
+      "required": "Có",
+      "meaning": "Giờ hoặc tổng ngày đúng anchor; không cộng hàng tổng lần nữa"
+    },
+    {
+      "layer": "region_definition",
+      "field": "region_version",
+      "required": "Có",
+      "meaning": "Cùng phạm vi cho X/y; phần chưa được mạng đại diện phải nêu rõ"
+    },
+    {
+      "layer": "region_definition",
+      "field": "polygon_sha256",
+      "required": "Có",
+      "meaning": "Cùng phạm vi cho X/y; phần chưa được mạng đại diện phải nêu rõ"
+    },
+    {
+      "layer": "region_definition",
+      "field": "source",
+      "required": "Có",
+      "meaning": "Cùng phạm vi cho X/y; phần chưa được mạng đại diện phải nêu rõ"
+    },
+    {
+      "layer": "region_definition",
+      "field": "crs_wkt",
+      "required": "Có",
+      "meaning": "Cùng phạm vi cho X/y; phần chưa được mạng đại diện phải nêu rõ"
+    },
+    {
+      "layer": "region_definition",
+      "field": "island_scope",
+      "required": "Có",
+      "meaning": "Cùng phạm vi cho X/y; phần chưa được mạng đại diện phải nêu rõ"
+    },
+    {
+      "layer": "station_weights",
+      "field": "region_version",
+      "required": "Có",
+      "meaning": "Trọng số cố định, không âm, tổng bằng 1; tính trong CRS phù hợp"
+    },
+    {
+      "layer": "station_weights",
+      "field": "network_version",
+      "required": "Có",
+      "meaning": "Trọng số cố định, không âm, tổng bằng 1; tính trong CRS phù hợp"
+    },
+    {
+      "layer": "station_weights",
+      "field": "weights_version",
+      "required": "Có",
+      "meaning": "Trọng số cố định, không âm, tổng bằng 1; tính trong CRS phù hợp"
+    },
+    {
+      "layer": "station_weights",
+      "field": "station_key",
+      "required": "Có",
+      "meaning": "Trọng số cố định, không âm, tổng bằng 1; tính trong CRS phù hợp"
+    },
+    {
+      "layer": "station_weights",
+      "field": "area_weight",
+      "required": "Có",
+      "meaning": "Trọng số cố định, không âm, tổng bằng 1; tính trong CRS phù hợp"
+    },
+    {
+      "layer": "region_hourly_daily",
+      "field": "period_start_utc",
+      "required": "Có",
+      "meaning": "Ước lượng diện tích; không tự chuẩn hóa mạng khuyết trong nhãn chính"
+    },
+    {
+      "layer": "region_hourly_daily",
+      "field": "period_end_utc",
+      "required": "Có",
+      "meaning": "Ước lượng diện tích; không tự chuẩn hóa mạng khuyết trong nhãn chính"
+    },
+    {
+      "layer": "region_hourly_daily",
+      "field": "vrain_areal_estimate_mm",
+      "required": "Có",
+      "meaning": "Ước lượng diện tích; không tự chuẩn hóa mạng khuyết trong nhãn chính"
+    },
+    {
+      "layer": "region_hourly_daily",
+      "field": "valid",
+      "required": "Có",
+      "meaning": "Ước lượng diện tích; không tự chuẩn hóa mạng khuyết trong nhãn chính"
+    },
+    {
+      "layer": "region_hourly_daily",
+      "field": "coverage_weight",
+      "required": "Có",
+      "meaning": "Ước lượng diện tích; không tự chuẩn hóa mạng khuyết trong nhãn chính"
+    },
+    {
+      "layer": "region_hourly_daily",
+      "field": "network_version",
+      "required": "Có",
+      "meaning": "Ước lượng diện tích; không tự chuẩn hóa mạng khuyết trong nhãn chính"
+    },
+    {
+      "layer": "region_hourly_daily",
+      "field": "weights_version",
+      "required": "Có",
+      "meaning": "Ước lượng diện tích; không tự chuẩn hóa mạng khuyết trong nhãn chính"
+    },
+    {
+      "layer": "predictors",
+      "field": "period_start_utc",
+      "required": "Có",
+      "meaning": "ERA5 B/A/M/C; miền SST/context riêng có provenance"
+    },
+    {
+      "layer": "predictors",
+      "field": "period_end_utc",
+      "required": "Có",
+      "meaning": "ERA5 B/A/M/C; miền SST/context riêng có provenance"
+    },
+    {
+      "layer": "predictors",
+      "field": "region_version",
+      "required": "Có",
+      "meaning": "ERA5 B/A/M/C; miền SST/context riêng có provenance"
+    },
+    {
+      "layer": "predictors",
+      "field": "features",
+      "required": "Có",
+      "meaning": "ERA5 B/A/M/C; miền SST/context riêng có provenance"
+    },
+    {
+      "layer": "predictors",
+      "field": "source_coverage",
+      "required": "Có",
+      "meaning": "ERA5 B/A/M/C; miền SST/context riêng có provenance"
+    },
+    {
+      "layer": "sample_index",
+      "field": "issue_time_utc",
+      "required": "Có",
+      "meaning": "Một issue vùng; toàn bộ nhãn nằm trong split và không có tương lai trong X"
+    },
+    {
+      "layer": "sample_index",
+      "field": "history_start_utc",
+      "required": "Có",
+      "meaning": "Một issue vùng; toàn bộ nhãn nằm trong split và không có tương lai trong X"
+    },
+    {
+      "layer": "sample_index",
+      "field": "history_end_utc",
+      "required": "Có",
+      "meaning": "Một issue vùng; toàn bộ nhãn nằm trong split và không có tương lai trong X"
+    },
+    {
+      "layer": "sample_index",
+      "field": "target_intervals",
+      "required": "Có",
+      "meaning": "Một issue vùng; toàn bộ nhãn nằm trong split và không có tương lai trong X"
+    },
+    {
+      "layer": "sample_index",
+      "field": "all_e_valid",
+      "required": "Có",
+      "meaning": "Một issue vùng; toàn bộ nhãn nằm trong split và không có tương lai trong X"
+    },
+    {
+      "layer": "sample_index",
+      "field": "split",
+      "required": "Có",
+      "meaning": "Một issue vùng; toàn bộ nhãn nằm trong split và không có tương lai trong X"
+    },
+    {
+      "layer": "sample_index",
+      "field": "dataset_version",
+      "required": "Có",
+      "meaning": "Một issue vùng; toàn bộ nhãn nằm trong split và không có tương lai trong X"
+    },
+    {
+      "layer": "sample_index",
+      "field": "rain_input_lag",
+      "required": "Có",
+      "meaning": "Một issue vùng; toàn bộ nhãn nằm trong split và không có tương lai trong X"
+    }
+  ]
+}

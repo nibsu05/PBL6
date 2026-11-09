@@ -1,12 +1,15 @@
 # PBL6 – Dự báo mưa: bối cảnh cho agent
 
 > **Đọc file này trước khi làm bất cứ việc gì.** Kế hoạch chi tiết, kèm số liệu bằng chứng, nằm ở
-> [`project_plan_v2.md`](project_plan_v2.md); đọc cùng phương án hiện tại và đối chiếu bằng chứng. Cập nhật lần cuối: 04/11/2026.
+> [`project_plan_v2.md`](project_plan_v2.md); đọc cùng phương án hiện tại và đối chiếu bằng chứng. Cập nhật lần cuối: 09/11/2026.
 > **Kế hoạch dành cho nhóm** (quy trình, giai đoạn hiện tại, lộ trình, phân công) nằm ở [`KE_HOACH_DU_AN.md`](KE_HOACH_DU_AN.md). Mỗi khi xong một giai đoạn hoặc chốt một quyết định, cập nhật các mục 4 và 6 của file đó.
 > `project_master_plan.md`, `SURFACE_BASELINE_REPORT.md`, `DATA_GAP_PLAN.md` và `reports/informer_baseline_report.md`
 > là tài liệu cũ, do agent khác viết. Chỉ dùng chúng để tham khảo lịch sử. Một số nhận định trong đó đã bị bác bỏ (xem mục "Quyết định").
 
 ## Người dùng và cách làm việc
+
+- **Ưu tiên 09/11/2026 — Vrain đã truy cập được:** [phương án dữ liệu/gửi nhóm, Word và Excel](reports/vrain_research_plan_2026_11_09/README.md). Đã đăng nhập website bằng thông tin người dùng cấp, đọc nhóm Đà Nẵng và tải một XLSX lịch sử thật; credential/cookie/signed URL ở ngoài Git. V1 inventory82 ID/UUID khớp lịch sử82/82; V2 inventory86 khác namespace, không nối bằng tên hoặc cộng hai số. Mười probe: bảy có24h, ba ngày thử2015/2019/2020 không có hàng giờ; số trạm đủ24giátrị50–81,490so tổng không lệch quá1e-6 đơn vị nguồn. Chưa kiểm kê toàn kho hoặc tạo nhãn Vrain; chưa xác nhận timezone/ý nghĩa kỳ/đơn vị/vị trí lịch sử/ranh/độ phủ. XLSX tiêu đề kết thúc19:20 trong khi cột cuối19:00, không tự gán12UTC nhưCPC. Đề xuất ERA5X + Vrain nhãn vùng sau QC/panel/trọng số; mưa quá khứ là nhómR riêng. Không train Vrain hoặc đọc2025. 10test parser đạt; source/counts/Word/Excel kiểm tra bằng validate_vrain_research_plan.py. Manifest nguồn cũ không bao phủ Vrain; thêm manifest riêng. Các đoạn Vrain chưa có ngày04/11 là lịch sử.
+- **Tệp người dùng sửa cần bảo vệ:** ngoài bản đổi tên slide21/10 còn có PowerPoint04/11 bị chỉnh sửa trong working tree. Không build lại/restore/stage các bản đó. SnapshotSHA mới ở `data/operational/vrain_2026_11_09/user_artifact_snapshot.json`; chỉ commit bộ tài liệu09/11 và mã mới.
 
 - Nhóm sinh viên Đại học Bách khoa Đà Nẵng làm đồ án PBL6. **Trao đổi bằng tiếng Việt.**
 - Người dùng muốn **đánh giá độc lập, có bằng chứng, trung thực**, kể cả khi kết quả âm. Không chiều theo tài liệu cũ một cách mù quáng.
@@ -119,7 +122,7 @@ Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
    - Informer có time marks; không nói hoàn toàn không nhận thông tin tương lai đã biết. Ưu thế tính toán chuỗi dài của nó chưa phải nút thắt rõ ở encoder 28 bước hiện tại.
    - TFT gốc có lựa chọn biến/gating và thiết kế nhiều hạn, là lý do để thử; chưa bảo đảm dự đoán tốt hơn. Bản vùng tự cài PyTorch giữ VSN/GRN/LSTM/attention, bỏ static context, dùng Tweedie/BCE, chưa xuất phân vị và chưa dùng forecast thật.
    - Đối chứng đang có: LightGBM, khí hậu, luôn 0 và Informer vùng đủ E0–E7. Bảng xếp hạng phải có đủ LightGBM/TFT/Informer. Cùng nguyên liệu nhưng cây và mạng khác biểu diễn, chưa là phép so chỉ đổi kiến trúc. ECMWF/DLinear trên giao thức vùng này chưa được chấm, không gọi là đã chạy.
-6. **Chưa có dữ liệu Vrain; cập nhật 04/11/2026:** nhóm đang xin quyền truy cập, thay cho nhận định trước đây là không xin được. Chưa dùng Vrain trong huấn luyện/kiểm chứng; không giả định đã có mạng trạm phủ Đà Nẵng mới. Dữ liệu GSOD sẵn có chỉ là mạng trạm đã chọn; danh mục GHCN-Daily vừa kiểm tra không tự tạo thêm chuỗi mưa hiện đại cho vùng.
+6. **Vrain đã truy cập/xuất mẫu ngày09/11/2026:** thay trạng thái đang xin ngày04/11; chi tiết ở ưu tiên đầu file. Có dữ liệu mẫu lịch sử, chưa có dataset huấn luyện/QC/nhãn vùng hoàn chỉnh và chưa train. Không giả định inventory82/86 là mạng đủ từ2015 hoặc phủ toàn Đà Nẵng mới. Dữ liệu GSOD sẵn có vẫn chỉ là mạng trạm đã chọn; danh mục GHCN-Daily không tự tạo thêm chuỗi mưa hiện đại cho vùng.
 7. **Những nhận định cũ đã bị bác bỏ:**
    - "Informer vượt Bi-LSTM 21 %": hai mô hình được chấm trên tập test khác nhau.
    - "IMERG trễ 29 h nên không dùng được làm đầu vào": IMERG Early lấy trực tiếp từ NASA chỉ trễ khoảng 4 h.

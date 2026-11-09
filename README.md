@@ -6,6 +6,8 @@
 
 Dự án nghiên cứu đóng góp của các nhóm đặc trưng dữ liệu cho dự đoán mưa vùng trực tiếp tại Đà Nẵng mới (Đà Nẵng cũ + Quảng Nam).
 
+**09/11 — hướng Vrain mới:** [tài liệu đầy đủ và bản ngắn gửi nhóm, Excel hợp đồng dữ liệu/phân công](reports/vrain_research_plan_2026_11_09/README.md). Đã đăng nhập, đọc inventory và xuất XLSX lịch sử mẫu; V1 có82mục khớp mã lịch sử, V2 có86mục khác namespace. Mười probe cho thấy thiếu thay đổi theo trạm/thời gian, chưa kiểm kê toàn kho. Đề xuất giữ ERA5 làmX, xây nhãn vùng Vrain sau QC/ranh/panel/trọng số, thử mưa quá khứ như nhómR riêng. Chưa tạo nhãn huấn luyện Vrain/chưa train; giữ2025kín. Dữ liệu thô và thông tin truy cập ngoàiGit.
+
 **Slide mới cho thí nghiệm ngày 04/11:** [PowerPoint 44 slide, HTML và lời dẫn](reports/daily_gauge_slides_2026_11_04/README.md), gồm 30 trang chính và 14 phụ lục. Giải thích ERA5/CPC, tạo mẫu ngày, bốn nhóm B/A/M/C, E0–E7, seed và tám metrics; mọi bảng mô hình có đủ LightGBM/TFT/Informer. Phụ lục chứa đủ 72 dòng kết quả; có CI và giới hạn của ngày 2–3. Giữ nguyên slide người dùng đã chỉnh sửa và các báo cáo trước.
 
 **Thí nghiệm mới 04/11/2026, đã hoàn tất 168 lượt:** [Word, Excel 11 sheet và kết quả đủ ba mô hình/E0–E7](reports/daily_gauge_2026_11_04/README.md). Predictor ERA5 theo ngày, nhãn CPC ngày từ phân tích trạm, mốc 12 UTC và bảy ngày quá khứ; đã phát lại 144 checkpoint mạng và 288 đầu ra LightGBM trên 336 split hiệu chỉnh/đánh giá. E7 BSS ngày 1 LightGBM/TFT/Informer = 0,190/0,026/0,078; ngày 2–3 đều âm. CPC chưa phải quan trắc trực tiếp trung bình vùng; footprint 93 ô vẫn xấp xỉ, Vrain đang xin. Có audit NOAA gốc hỗ trợ EOD12UTC tại trạm Đà Nẵng, cần rà soát giả định00UTC của các phép ghép trạm cũ. Giữ riêng kết quả GSMaP trước đây, không chấm 2025.
