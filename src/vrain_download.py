@@ -25,13 +25,17 @@ def utcnow():
     return datetime.now(timezone.utc).isoformat()
 
 
-def planned_dates(start: str, end: str):
+def planned_dates(start: str, end: str, allow_recent=False):
     first, last = date.fromisoformat(start), date.fromisoformat(end)
     if last < first:
         raise ValueError('End precedes start')
     if first <= date(2025, 12, 31) and last >= date(2025, 1, 1):
         raise ValueError('2025 is reserved; this collector refuses it')
-    if first < date(2015, 1, 1) or last > date(2024, 12, 31):
+    if allow_recent:
+        # A nominal 1 January gauge day can include observations from December 2025.
+        if first < date(2026,1,2) or last > date(2026,12,31):
+            raise ValueError('Recent archive must stay inside 2026 and exclude 1 January')
+    elif first < date(2015, 1, 1) or last > date(2024, 12, 31):
         raise ValueError('This collection is limited to 2015-2024')
     return [(first+timedelta(days=i)).isoformat() for i in range((last-first).days+1)]
 
@@ -113,9 +117,9 @@ def process_lock(path):
 
 
 class Archive:
-    def __init__(self, output, start, end):
+    def __init__(self, output, start, end, allow_recent=False):
         self.output = Path(output);self.output.mkdir(parents=True, exist_ok=True)
-        self.dates = planned_dates(start, end)
+        self.dates = planned_dates(start, end, allow_recent=allow_recent)
         self.date_set = set(self.dates)
         self.database = sqlite3.connect(self.output/'manifest.sqlite')
         self.database.execute('CREATE TABLE IF NOT EXISTS days(day TEXT PRIMARY KEY, record TEXT NOT NULL)')
@@ -157,6 +161,7 @@ class Archive:
             record.update(hourly_rows=details['hourly_rows'],
                           station_count=details['nstation_union'],
                           complete_24_station_count=details['all24_complete_station_count'],
+                          valid_numeric_cells=details['valid_numeric_cells'],
                           missing_cells=details['missing_cells'],
                           sum_mismatches=details['complete_station_sum_mismatches'])
         else:record['structure_flag_reason'] = reason

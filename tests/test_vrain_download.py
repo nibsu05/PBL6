@@ -23,6 +23,11 @@ class DownloadTests(unittest.TestCase):
         for first,last in [('2024-12-31','2025-01-01'),('2025-01-01','2025-01-02'),('2024-01-02','2024-01-01')]:
             with self.assertRaises(ValueError):planned_dates(first,last)
 
+    def test_recent_collection_does_not_open_holdout_or_cross_year(self):
+        self.assertEqual(len(planned_dates('2026-01-02','2026-11-08',allow_recent=True)),311)
+        for first,last in [('2025-12-31','2026-01-02'),('2026-01-01','2026-01-02')]:
+            with self.assertRaises(ValueError):planned_dates(first,last,allow_recent=True)
+
     def test_round_trip_and_corruption_requires_fetch(self):
         with tempfile.TemporaryDirectory() as directory:
             archive=Archive(directory,'2023-01-15','2023-01-15')
@@ -41,6 +46,18 @@ class DownloadTests(unittest.TestCase):
             self.assertEqual(r['status'],'no_hourly_data');self.assertFalse(r['training_ready'])
             progress=archive.progress('downloading');self.assertEqual(progress['days_without_hourly_rows'],1)
             self.assertEqual(progress['days_with_hourly_rows'],0)
+            archive.database.close()
+
+    def test_clock_rows_with_only_missing_values_are_not_observations(self):
+        with tempfile.TemporaryDirectory() as directory:
+            archive=Archive(directory,'2026-01-15','2026-01-15',allow_recent=True)
+            data=payload()
+            for row in data['stats']:
+                row['stations'][0]['depth']='-'
+            record=archive.store('2026-01-15',json.dumps(data).encode(),inventory(),inventory(),'test',.1)
+            self.assertEqual(record['hourly_rows'],24)
+            self.assertEqual(record['valid_numeric_cells'],0)
+            self.assertFalse(record['training_ready'])
             archive.database.close()
 
     def test_invalid_source_preserved_but_flagged(self):

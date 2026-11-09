@@ -11,9 +11,17 @@ Cập nhật 09/11/2026. Đọc trước file này, rồi `KE_HOACH_DU_AN.md` v�
 - Git: `git -c safe.directory=D:/PBL6_v2`. Làm trên `research/tft-regional`, push/PR vào main; không tự merge. Không commit raw, PDF, credential, checkpoint hoặc dự đoán từng mốc.
 - Dữ liệu cũ từ Google Drive `pbl6_data_v2_*.tar`; `scripts/package_data.py verify` chỉ bao phủ nguồn cũ, không phải Vrain.
 
-## Trạng thái: tải xong, chuyển sang kiểm kê/QC
+## Trạng thái: đã kiểm kê/đóng gói nguồn, nhãn vùng chưa chốt
 
-Hoàn tất17:57VN09/11/2026,3653/3653response2015–2024; cảSHA256gzip/raw đều kiểm tra đạt. Có1461bảng24h cho tất cả ngày2021–2024,2192response2015–2020không có giờ. Không đồng nghĩa mọi trạm/giờ đủ; complete24trạm/ngày có thể0–82 và ba ngày có chênh tổng cần rà soát. Metadata ở `docs/vrain_archive_summary.json`, private `download/verification.json`. Worker đã kết thúc bình thường, không còn cần giữ máy thức để tải. Chưa tạo nhãn vùng hoặc train,2025chưađọc.
+Kho cũ đủ 3.653 response 2015–2024, SHA gzip/raw đạt. Có 1.461 bảng 24h cho ngày 2021–2024; 2015–2020 không có hàng giờ. Ba station-day chênh tổng đã gắn cờ, giữ số gốc. Đã tải thêm 622 response cho 02/01–08/11/2026 (311 ngày × hai kênh), không bao gồm ngày 01/01 vì cửa sổ chứa 2025. Giữ kín 2025, không train/tuning 2026.
+
+**Bàn giao hiện hành:** `reports/vrain_data_handoff_2026_11_09/CHOT_DU_LIEU_GUI_NHOM.md`/docx, aggregate `docs/vrain_data_freeze.json`. Private `data/operational/vrain_2026_11_09/handoff_v1/`, ZIP `PBL6_VRAIN_SOURCE_V1.zip`. Gói là SOURCE, **không phải nhãn vùng đã duyệt**. ERA5 44 kênh giờ trước 2025 đã tách bỏ nhãn GSMaP; ngày 42 kênh chưa materialize khi chưa chốt anchor.
+
+**Đã đồng bộ metadata 82↔86:** 82 vị trí cũ khớp chính xác/duy nhất 82 mục mới, 81 tên giống và một tên khác; bốn vị trí bổ sung. Dùng registry 86 mã chuẩn + alias, không cộng hai mạng; chưa xác nhận lịch sử thiết bị/vị trí hoặc tự nối số đo. Giữ ID registry v1 khi bổ sung trạm sau này, không đánh số lại.
+
+2026 có số ở 87 ngày kênh cũ, 305 ngày kênh mới trong 311 ngày yêu cầu; có bảng không đồng nghĩa có số. Phần trùng hai kênh chỉ một vị trí/18 ngày/367 cặp, 46 cặp có mưa đều khác số; không suy tương đương toàn mạng. ERA5 bàn giao có 21 hàng thiếu kx/tt (42 ô), giữ NaN. 22 tests Vrain đạt; ZIP có 4.275 raw responses, không phiên đăng nhập.
+
+**Phát hiện cản trở nhãn:** toàn mạng cố định 82 trên R93 không có ngày đủ 100% coverage năm 2021–2023; coverage giờ tối đa khoảng 70,0%/83,5%/83,5%. Panel 45 trạm đầy đủ ≥98% từng năm 2021/22 làm khoảng cách tâm ô xa nhất tới trạm tăng 34→59 km, trung bình vùng núi 13→30 km. Chưa chọn panel/estimator nhãn chính. Không gọi dữ liệu đã bảo đảm chỉ vì đã tải đủ. Cần xác nhận kỳ đo và giải quyết tính đại diện không gian trước train.
 
 Đã đăng nhập/xuất mẫu thật tại `https://www.vrain.vn/landing`. Không nhắc lại hoặc lưu password vào nguồn/tài liệu; web session không đồng nghĩa có Open API key/quyền toàn quốc.
 
@@ -27,7 +35,7 @@ Hoàn tất17:57VN09/11/2026,3653/3653response2015–2024; cảSHA256gzip/raw đ
 
 ## Bằng chứng và giới hạn Vrain
 
-- **Kiểm tra bổ sung09/11:** giới hạn2024chỉlàphạmvi collector đãchọn, không phải hết dữ liệuVrain. NhómV1cũ82trạm trả giờ ngày2026-01-15 nhưng rỗng vài ngày cuối2026; routewebmới đúng là `/api/kttv/private/v1/organizations/details` với `x-org-uuid` lấy từ groupOrgUuid của nhóm đã xác thực và tham số`i=_1h`/`_10m`. Đây là request như giao diện trong phạm vi tài khoản, không cần đoán UUID. Mới86trạm có bảng giờ với số thật ngày2026-10-15/2026-11-08; ngày2026-11-09có143mốc10phút tới18:50,85/86sốhợplệởmốccuối. Summaryhiểnthị18:51. Quan trọng: kênh mới cũng trả24hcho2024-10-14nhưng toàn thiếu, ngày2026-01-15chỉ24ô số=1trạm; không gọi đủ dữ liệu từ số hàng. Dữ liệu cũ2024vẫn ởkênhV1. Chưa audittoàn2026, không đọc2025, khôngtrain/tuning2026. Không coi kênhV1rỗng là mạng không đo; chưa có crosswalk82↔86. Metadata `docs/vrain_recent_check.json`, rawprivate `recent_check/`. Không tự mở giới hạncollector hoặc bỏholdout để cập nhật nguồn.
+- Kênh cũ `/api/vrain/private/v1/groups/29/stats/details`; kênh hiện hành `/api/kttv/private/v1/organizations/details`, `x-org-uuid` từ groupOrgUuid đã xác thực, `i=_1h`/`_10m`. Không đoán UUID hoặc mở phạm vi tài khoản. Bảng có 24 clock có thể toàn dấu thiếu: đếm `valid_numeric_cells`, không chỉ đếm hàng. Kênh cũ rỗng không có nghĩa toàn mạng không đo. Probe 09/11/2026 có 143 mốc 10 phút tới 18:50; không suy SLA/độ trễ được bảo đảm.
 
 - Inventory API V1 có82ID/UUID khớp history82/82; V2 có86mục khác namespace. Không cộng/ép nối theo tên. Không nhầm với V1/V2 bộ vùng cũ.
 - Mười probe ban đầu:7có24h;3ngày thử2015/2019/2020không có giờ. Trạm đủ24số50–81tùyprobe;490cặp tổng khớp1e-6 đơn vị nguồn. Không suy kho bắt đầu2021 hoặc mạng đầy đủ cả năm.
@@ -68,4 +76,4 @@ SnapshotSHA: `data/operational/workspace_cleanup_2026_11_09/user_files.json`.
 
 ## Tiếp theo
 
-Theo dõi tải → kiểm kê/QC → xác minh kỳ đo/ranh/panel/trọng số → nhãn vùng → pilotE0/E2/E7/R0/R1 → ma trận → khóa trước test2025. Cập nhật mục4/6 của kế hoạch khi đổi giai đoạn, không lặp lại lịch sử cũ.
+Nguồn đã bàn giao → xác nhận kỳ đo/ranh/lịch sử vùng núi → kiểm chứng estimator và chốt nhãn vùng → loader/split → pilot E0/E2/E7/R0/R1 → ma trận → khóa trước test 2025. Không train toàn ma trận trước khi giải quyết cổng nhãn. Kiểm thử: tests.test_vrain_download, tests.test_vrain_export_audit, tests.test_vrain_station_identity, tests.test_vrain_spatial_panel.

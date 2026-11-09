@@ -18,16 +18,17 @@ Tải nguồn → kiểm kê/QC → chốt vùng và mạng trạm → tổng h�
 
 ## 4. Đang ở giai đoạn nào
 
-**Đã tải xong và kiểm tra checksum đủ 3.653 phản hồi; chưa có bộ huấn luyện Vrain.** Hoàn tất17:57VN09/11/2026. Có bảng giờ cho1.461ngày2021–2024; các ngày2015–2020không trả giờ. Trạm vẫn thiếu theo thời gian và có ba ngày cần kiểm tra tổng. [Thống kê sau tải](docs/vrain_archive_summary.json), [trạng thái](data/operational/vrain_2026_11_09/download/progress.json).
+**Đã kiểm kê nguồn và thống nhất danh mục; chưa có nhãn vùng được duyệt để train.** Kho cũ có 3.653 phản hồi đã kiểm tra SHA; có bảng giờ cho 1.461 ngày 2021–2024, 2015–2020 không trả giờ. Ba station-day chênh tổng đã gắn cờ loại, số gốc được giữ. [Bàn giao hiện hành](reports/vrain_data_handoff_2026_11_09/CHOT_DU_LIEU_GUI_NHOM.md).
 
-Đã xác nhận thêm **Vrain có dữ liệu2026 và dữ liệu10phút gần hiện tại**, qua kênh tổ chức`kttv`86trạm. Đợt tải cũ chỉ chọn tới2024; không lấy đó làm giới hạn hệ thống. V1cũ82ID có thể rỗng khi kênh mới còn dữ liệu. [Kiểm tra gần đây](docs/vrain_recent_check.json). Chưa tải toàn bộ2026 hoặc đọc2025.
+**Đã tải bổ sung 02/01–08/11/2026: 622/622 phản hồi, 311 ngày × hai kênh.** Không gọi đó là cả năm 2026. Kiểm kê phân biệt ngày có bảng với ngày có số thật. 2025 vẫn chưa đọc; ngày 01/01/2026 được bỏ vì chứa giờ 2025. [Thống kê đóng gói](docs/vrain_data_freeze.json).
 
 - Yêu cầu3653ngày từ2015đến2024, tối đa1request/giây; không đọc2025.
 - Raw nén theo năm ở `data/operational/vrain_2026_11_09/download/raw/`.
 - Checksum/counts ở `download/manifest.sqlite`; lỗi/ngày không có giờ ghi riêng.
 - Tải nền có resume, không cần GPU/trình duyệt. Giữ mạng/ổD/máy thức.
 - Ước tính ban đầu60–90phút chỉ tải. Ngày yêu cầu không đồng nghĩa có quan trắc.
-- V1có82IDkhớp lịch sử; V2có86mục khác namespace. Metadata kỳ đo, ranh và độ phủ chưa chốt.
+- Đã chốt registry chung 86: 82 cặp khớp tọa độ duy nhất, 81 tên giống và một tên khác; bốn vị trí bổ sung. Giữ nguồn số đo riêng, chưa tự nối chuỗi. Metadata kỳ đo và ranh chưa chốt.
+- Chẩn đoán R93: toàn mạng cố định không có ngày đủ 100% coverage trong 2021–2023; chọn panel 45 trạm đầy đủ lại làm khoảng cách lớn nhất từ tâm ô tới trạm tăng khoảng 34→59 km. Không tự nhận nhãn vùng đã bảo đảm.
 
 ## 5. Phân công đề xuất
 
@@ -44,10 +45,10 @@ Cả nhóm thống nhất region/timezone/anchor/panel/mask/version. Không mỗ
 | Bước | Bằng chứng cần có |
 | --- | --- |
 | Tải nguồn — đã hoàn tất | Đủ3.653phản hồi, checksumgzip/raw đạt; không lỗi tải |
-| Kiểm kê — bước tiếp theo | Độ đầy đủ từng trạm/mùa, panel ổn định và ba ngày chênh tổng |
-| Nếu bổ sung dữ liệu gần đây | Dùng đúng kênh tổ chức, xác minh crosswalk82/86 và kỳ10phút/giờ; không tự đổi holdout2025 |
+| Kiểm kê nguồn — đã thực hiện | Registry 86, thiếu theo năm, chênh tổng, SHA và gói nguồn riêng của nhóm |
+| Dữ liệu gần đây — đã thu thập phạm vi chọn | 622 phản hồi; số hợp lệ và so cặp hai kênh trong thống kê; chưa tự nối số đo |
 | Xác minh/QC | Đơn vị, đầu/cuối kỳ, múi giờ, missing/trace/counter; xử lý trùng/lỗi |
-| Nhãn vùng | Polygon chungX/y, panel ổn định, trọng số cố định, coverage và độ bền nhãn |
+| Nhãn vùng — việc cần giải quyết | Polygon chung X/y; lịch sử vùng núi; estimator mạng thiếu nếu cần phải kiểm chứng, không âm thầm đổi trọng số |
 | Pilot | E0/E2/E7, thửR0/R1 trên cùng mask; baseline và kiểm tra leak |
 | Ma trận | Rgiữcốđịnh, đủE0–E7 và ba mô hình ngày; split theo lịch sử thật |
 | Kiểm định cuối | Khóa protocol trước mở2025 |
@@ -56,9 +57,9 @@ Nếu nguồn/độ phủ chưa đủ, báo giới hạn và chỉnh thiết k�
 
 ## 7. Tài liệu gửi nhóm
 
-[Word đầy đủ](reports/vrain_research_plan_2026_11_09/PHUONG_AN_VRAIN_GUI_NHOM.docx), [Word ngắn](reports/vrain_research_plan_2026_11_09/TOM_TAT_GUI_NHOM.docx), [Excel dữ liệu/phân công](reports/vrain_research_plan_2026_11_09/DU_LIEU_VRAIN_VA_PHAN_CONG.xlsx).
+[Word bàn giao hiện hành](reports/vrain_data_handoff_2026_11_09/CHOT_DU_LIEU_GUI_NHOM.docx), [nội dung](reports/vrain_data_handoff_2026_11_09/CHOT_DU_LIEU_GUI_NHOM.md). Gói riêng: `data/operational/vrain_2026_11_09/PBL6_VRAIN_SOURCE_V1.zip`.
 
-Các tài liệu này ghi10probe ban đầu; tiến độ tải lớn nằm trong progress/manifest. Không viết lại báo cáo probe thành audit toàn kho.
+Tài liệu `vrain_research_plan_2026_11_09/` là kế hoạch ban đầu từ 10 probe, giữ làm lịch sử; không dùng nó thay kiểm kê toàn kho mới.
 
 ## 8. Quy tắc chung
 

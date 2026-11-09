@@ -14,13 +14,15 @@ Dự đoán trực tiếp mưa trung bình theo diện tích của Đà Nẵng m
 
 Đợt tải hoàn tất17:57VN09/11/2026. Đã kiểm tra SHA256 của3.653tệp nén và dữ liệu giải nén. Có bảng24h cho toàn bộ ngày2021–2024, nhưng vẫn thiếu tại trạm;2015–2020không trả hàng giờ trong toàn bộ các ngày đã yêu cầu. Ba ngày có chênh tổng cầnQC. [Thống kê kiểm kê sau tải](docs/vrain_archive_summary.json). Tải đủresponse không đồng nghĩa nhãn vùng đã sẵn sàng.
 
-Phạm vi tới2024là quyết định thu thập, không phải giới hạnVrain. Đã kiểm tra kênh hiện hành`kttv`86trạm có dữ liệu10phút ngày09/11/2026 và giờ ngày15/10,08/11/2026. Truy cập cần ngữ cảnh tổ chức như giao diện; nhómV1cũ82IDrỗng không đủ kết luận không có dữ liệu gần đây. Ngược lại, bảng mới2024-10-14có24hnhưng toàn thiếu, không đếm hàng thay số liệu hợp lệ; giai đoạn2024có số ởkênhcũ. [Bằng chứng](docs/vrain_recent_check.json). Chưa tải toàn2026, chưa đọc2025, chưa xác nhận crosswalk hai namespace hoặc độ trễ truyền được bảo đảm.
+Phạm vi cũ tới 2024 là quyết định thu thập, không phải giới hạn Vrain. Kênh hiện hành `kttv` có 86 mục; truy cập cần đúng ngữ cảnh tổ chức như giao diện. Kênh cũ rỗng không đủ kết luận mạng không đo; bảng mới có 24 hàng cũng có thể toàn thiếu. Probe ngày 09/11 có dữ liệu 10 phút tới 18:50, chưa chứng minh độ trễ truyền được bảo đảm. [Bằng chứng probe](docs/vrain_recent_check.json); kiểm kê bổ sung và registry hiện hành ở dưới.
 
 Collector yêu cầu3653ngày2015–2024, từ chối2025. Mỗi ngày một response giữ giờ; request nhiều ngày đã kiểm tra chỉ trả tổng ngày. Tối đa1request/s, retry/backoff, khóa mộtworker và resumechecksum.
 
 Trong `data/operational/vrain_2026_11_09/download/`: raw/YYYY/*.json.gz giữ nguồn, manifest.sqlite giữ SHA/counts/provenance, progress.json giữ trạng thái sống, session.dpapi giữ phiên mã hóa ngoàiGit. Không lưu mật khẩu. Khi tải xong vẫn phải QC và tạo nhãn.
 
-InventoryV1có82ID/UUIDkhớphistory. V2có86mục khác namespace, không ép nối theo tên. Metadata vị trí trong quá khứ cần xác minh. Mười probe ban đầu không chứng minh lịch sử liên tục hoặc phủ toàn vùng.
+Đã đối chiếu inventory: 82 vị trí cũ khớp tọa độ chính xác và duy nhất với 82/86 mục mới, 81 tên giống và một tên khác; bốn vị trí bổ sung. Registry chuẩn 86 mã STxxx có alias riêng hai kênh, trong gói private. Chỉ khớp metadata hiện tại, chưa chứng minh thiết bị/vị trí lịch sử liên tục. Không ép nối theo tên hoặc tự cộng hai số đo cùng trạm.
+
+Đã tải bổ sung 622 phản hồi cho 02/01–08/11/2026, hai kênh × 311 ngày. Kết quả SHA, số đo hợp lệ và so cặp trong [kiểm kê nguồn](docs/vrain_data_freeze.json). Không đọc 2025, không tuning 2026. Gói `PBL6_VRAIN_SOURCE_V1.zip` chỉ là nguồn đã kiểm kê, không phải nhãn vùng đã duyệt.
 
 ERA5/bộvùngV1/V2 ở `data/processed/regional_danang/`,102984giờ2015–09/2026UTC,49/138predictorứngviên, nhãnGSMaPcũ. Nguồn0,25°được biểu diễn0,1° không tăng thông tin vật lý; nội suy cũ có thể bỏ nútNaN. Không nhầm dữ liệu này với nhãnVrain.
 
@@ -41,6 +43,8 @@ Chốt polygonR và panel lõi, trọng số Thiessen cắt ranh trong CRSphẳn
 `coverage(t) = sum_i w_i * valid_i(t)`
 
 Không chuẩn hóa lại theo trạm còn lại trong nhãn chính. Nếu thiếu quá nhiều, chọn panel bằngmetadata/development hoặc thử estimator mạngkhuyết riêng. Không lấp bằngCPC/GSMaP/ERA5 rồi gọi thuầnVrain.
+
+**Bằng chứng mới sau kiểm kê:** toàn mạng 82 trạm trên R93 có coverage giờ tối đa năm 2021/2022/2023 khoảng 70,0%/83,5%/83,5%; không có ngày đủ 100% trong ba năm đó. Panel 45 trạm đạt ≥98% độ đầy đủ riêng từng năm 2021 và 2022 tạo được nhiều ngày hơn, nhưng khoảng cách tâm ô xa nhất tới trạm tăng khoảng 34→59 km; trung bình vùng núi khoảng 13→30 km. Do đó không chốt panel/nhãn chính chỉ theo tính đầy đủ. Chính sách nghiêm ngặt cũ chưa tạo được tập train toàn vùng; phải giải quyết lịch sử mạng và kiểm chứng estimator thay vì âm thầm nới coverage. Các số mẫu trong chẩn đoán chưa qua bộ chặn split cuối.
 
 Kiểm chứng rúttrạm/LOSO, nhạy panel/phương pháp, tổng giờ–ngày, cực trị và mẫu bị loại theo mùa. Sốtrạm/coverageThiessen chưa chứng nhận vùngnúi/đảo. XERA5 vày cùngpolygon; tải bổ sung khí tượng nếu ranh vượt cube.
 
@@ -74,7 +78,8 @@ Chỉ lịch tươnglai biết trước được dùng; khôngERA5/mưa giờđ�
 
 ## 6. Bằng chứng và công cụ
 
-- [Phương án Vrain đầy đủ](reports/vrain_research_plan_2026_11_09/PHUONG_AN_VRAIN_GUI_NHOM.md): nguồn sơ cấp, cổngG0–G6, sáutiêuchí.
+- [Bàn giao Vrain hiện hành](reports/vrain_data_handoff_2026_11_09/CHOT_DU_LIEU_GUI_NHOM.md): registry 86, kiểm kê toàn kho, gói nguồn và giới hạn nhãn vùng.
+- [Phương án Vrain ban đầu](reports/vrain_research_plan_2026_11_09/PHUONG_AN_VRAIN_GUI_NHOM.md): nguồn sơ cấp, cổng G0–G6, sáu tiêu chí; bằng chứng khi đó mới 10 probe.
 - [CPCngày](reports/daily_gauge_2026_11_04/README.md):168fits, E7BSSngày1LG/TFT/IF0,190/0,026/0,078; ngày2–3âm. Không gọiVrain.
 - [GSMaPđủ ba mô hình](reports/short_range_complete_2026_10_28/README.md).
 - [Phương án hợp nhất](reports/regional_research_plan_2026_10_20/PHUONG_AN_CUOI.md):giữD1/D2/D9/D10/D14/D15đúngphạmvi. CóVrain mới chưa tự bác phépđo cũ.

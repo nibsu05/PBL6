@@ -1,0 +1,346 @@
+{
+  "release": "VRAIN_SOURCE_V1_2026_11_09",
+  "status": "audited_sources_not_training_ready",
+  "legacy_stations": 82,
+  "modern_stations": 86,
+  "canonical_stations": 86,
+  "exact_unique_coordinate_matches": 82,
+  "unchanged_names": 81,
+  "renamed_matches": 1,
+  "modern_only_locations": 4,
+  "coordinate_identity_scope": "current metadata only; historical sensor/location continuity unconfirmed",
+  "legacy_archive_verification": {
+    "responses": 3653,
+    "days_with_clock_rows": 1461,
+    "days_with_numeric_values": 1461,
+    "sum_mismatches": 3
+  },
+  "legacy_observation_days": 1461,
+  "legacy_clock_rows": 35064,
+  "legacy_observation_marked_dates": [
+    "2021-01-01",
+    "2024-12-31"
+  ],
+  "recent_requested_marked_dates": [
+    "2026-01-02",
+    "2026-11-08"
+  ],
+  "recent": {
+    "legacy": {
+      "responses": 311,
+      "days_with_clock_rows": 87,
+      "days_with_numeric_values": 87,
+      "sum_mismatches": 0
+    },
+    "modern": {
+      "responses": 311,
+      "days_with_clock_rows": 311,
+      "days_with_numeric_values": 305,
+      "sum_mismatches": 0
+    }
+  },
+  "recent_source_comparison": {
+    "compared_numeric_cells": 367,
+    "wet_in_either": 46,
+    "different_over_1e_minus_6": 46,
+    "legacy_wet_modern_zero": 27,
+    "stations_compared": 1,
+    "days_compared": 18
+  },
+  "observations_merged": false,
+  "era5_predictor_rows": 35808,
+  "era5_hourly_channels": 44,
+  "era5_daily_channels_planned": 42,
+  "era5_rows_with_missing_predictors": 21,
+  "era5_missing_cells_by_feature": {
+    "mean__kx": 21,
+    "mean__tt": 21
+  },
+  "regional_footprint": "R93: union of 93 full 0.1-degree cells; approximate administrative extent",
+  "spatial_panel_diagnostics": [
+    {
+      "threshold": 0.0,
+      "spatial": {
+        "stations_with_positive_weight": 80,
+        "region_km2": 11074.034049576347,
+        "largest_weight": 0.10963310435757115,
+        "effective_weight_count": 25.48391833214642,
+        "max_distance_cell_center_km": 34.37132023736439,
+        "area_fraction_centers_over_20km": 0.10751714983199406,
+        "zones": {
+          "highland": 13.177615979028594,
+          "interior": 10.133029528239796,
+          "coastal": 4.319246864237674
+        }
+      },
+      "days_by_year": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 69
+      },
+      "daily_samples_R0": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 33
+      },
+      "daily_samples_R1": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    },
+    {
+      "threshold": 0.98,
+      "spatial": {
+        "stations_with_positive_weight": 44,
+        "region_km2": 11074.034049576347,
+        "largest_weight": 0.18960825696271205,
+        "effective_weight_count": 12.927620908267375,
+        "max_distance_cell_center_km": 59.17510396928067,
+        "area_fraction_centers_over_20km": 0.27957025926534823,
+        "zones": {
+          "highland": 29.913748231707256,
+          "interior": 12.39135466855095,
+          "coastal": 6.409028910420834
+        }
+      },
+      "days_by_year": {
+        "2021": 294,
+        "2022": 251,
+        "2023": 240,
+        "2024": 220
+      },
+      "daily_samples_R0": {
+        "2021": 212,
+        "2022": 193,
+        "2023": 149,
+        "2024": 140
+      },
+      "daily_samples_R1": {
+        "2021": 81,
+        "2022": 83,
+        "2023": 34,
+        "2024": 52
+      }
+    },
+    {
+      "threshold": 0.99,
+      "spatial": {
+        "stations_with_positive_weight": 41,
+        "region_km2": 11074.034049576347,
+        "largest_weight": 0.18960825696271205,
+        "effective_weight_count": 12.696291348802891,
+        "max_distance_cell_center_km": 59.17510396928067,
+        "area_fraction_centers_over_20km": 0.27957025926534823,
+        "zones": {
+          "highland": 29.913748231707256,
+          "interior": 12.421291516464159,
+          "coastal": 6.606864167895904
+        }
+      },
+      "days_by_year": {
+        "2021": 300,
+        "2022": 258,
+        "2023": 246,
+        "2024": 223
+      },
+      "daily_samples_R0": {
+        "2021": 220,
+        "2022": 203,
+        "2023": 157,
+        "2024": 144
+      },
+      "daily_samples_R1": {
+        "2021": 85,
+        "2022": 104,
+        "2023": 40,
+        "2024": 52
+      }
+    },
+    {
+      "threshold": 0.995,
+      "spatial": {
+        "stations_with_positive_weight": 36,
+        "region_km2": 11074.034049576347,
+        "largest_weight": 0.18960825696271205,
+        "effective_weight_count": 11.439773107522038,
+        "max_distance_cell_center_km": 59.17510396928067,
+        "area_fraction_centers_over_20km": 0.3011142233967362,
+        "zones": {
+          "highland": 30.331666837513353,
+          "interior": 13.778579980187082,
+          "coastal": 6.740686409711096
+        }
+      },
+      "days_by_year": {
+        "2021": 319,
+        "2022": 290,
+        "2023": 266,
+        "2024": 243
+      },
+      "daily_samples_R0": {
+        "2021": 250,
+        "2022": 257,
+        "2023": 187,
+        "2024": 173
+      },
+      "daily_samples_R1": {
+        "2021": 141,
+        "2022": 166,
+        "2023": 48,
+        "2024": 62
+      }
+    }
+  ],
+  "full_network_coverage_diagnostics": [
+    {
+      "threshold": 0.9,
+      "hourly_by_year": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 3361
+      },
+      "daily_by_year": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 138
+      },
+      "daily_samples_R0": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 132
+      },
+      "daily_samples_R1": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 115
+      }
+    },
+    {
+      "threshold": 0.95,
+      "hourly_by_year": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 3261
+      },
+      "daily_by_year": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 131
+      },
+      "daily_samples_R0": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 125
+      },
+      "daily_samples_R1": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 111
+      }
+    },
+    {
+      "threshold": 0.98,
+      "hourly_by_year": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 3158
+      },
+      "daily_by_year": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 118
+      },
+      "daily_samples_R0": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 94
+      },
+      "daily_samples_R1": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 44
+      }
+    },
+    {
+      "threshold": 0.99,
+      "hourly_by_year": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 3131
+      },
+      "daily_by_year": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 113
+      },
+      "daily_samples_R0": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 85
+      },
+      "daily_samples_R1": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 36
+      }
+    },
+    {
+      "threshold": 1.0,
+      "hourly_by_year": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 2542
+      },
+      "daily_by_year": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 69
+      },
+      "daily_samples_R0": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 33
+      },
+      "daily_samples_R1": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0
+      }
+    }
+  ],
+  "diagnostics_note": "Voronoi diagnostics conditional on R93/current station coordinates; sample counts are NOT final split-guarded training counts",
+  "source_timezone_interval_semantics_confirmed": false,
+  "regional_label_frozen": false,
+  "test2025_read": false,
+  "training_performed": false,
+  "training_ready": false,
+  "blockers": [
+    "Verify source clock timezone and interval start/end/units",
+    "Resolve missing mountain observations versus stable-label spatial representativeness",
+    "Confirm final footprint and use identical support for X and y"
+  ]
+}
