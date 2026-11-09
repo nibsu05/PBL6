@@ -23,6 +23,10 @@ Kho cũ đủ 3.653 response 2015–2024, SHA gzip/raw đạt. Có 1.461 bảng 
 
 **Phát hiện cản trở nhãn:** toàn mạng cố định 82 trên R93 không có ngày đủ 100% coverage năm 2021–2023; coverage giờ tối đa khoảng 70,0%/83,5%/83,5%. Panel 45 trạm đầy đủ ≥98% từng năm 2021/22 làm khoảng cách tâm ô xa nhất tới trạm tăng 34→59 km, trung bình vùng núi 13→30 km. Chưa chọn panel/estimator nhãn chính. Không gọi dữ liệu đã bảo đảm chỉ vì đã tải đủ. Cần xác nhận kỳ đo và giải quyết tính đại diện không gian trước train.
 
+**Đánh giá độc lập mới:** `DANH_GIA_KHA_THI_VA_HUONG_DI.md`/docx trong thư mục bàn giao. Đã spatial CV và che trạm theo lịch sử trên 67 ngày đủ cả 82 cuối 2024 (khác69ngàyđủtrạmtrọngsốdương). Thiessen toàn R93 NRMSE trung vị 2021/22/23 masks =21,4/19,8/16,3%; vùng núi71/69,3/60%. Tham chiếu nội bộ không phải chân lý; percentiles theo mask không phải CI; chưa train dự báo. Điều kiện100% là quy tắc lọc cũ, thiếu không tự động bất khả thi; có thể thử estimator mạng thiếu được khai báo/kiểm chứng.
+
+Khuyến nghị mới để người dùng chọn phạm vi: ưu tiên dự báo vùng trực tiếp theo ngày trên vùng cố định kiểm chứng được, có thể nhỏ hơn Đà Nẵng mới; toàn vùng mới là mở rộng có điều kiện. Dự phòng mô hình chung dự báo tại nhiều trạm nếu nhãn vùng không đạt. Chưa tự thay ranh/mục tiêu hiện có. Không chốt tên một vùng hành chính từ các zone R93; chúng chỉ là nhóm ô chẩn đoán. 26 tests Vrain đạt. Tái lập `scripts/assess_vrain_label_feasibility.py`, xuất `scripts/publish_vrain_feasibility.py`.
+
 Đã đăng nhập/xuất mẫu thật tại `https://www.vrain.vn/landing`. Không nhắc lại hoặc lưu password vào nguồn/tài liệu; web session không đồng nghĩa có Open API key/quyền toàn quốc.
 
 - Collector: `scripts/download_vrain_archive.py`; yêu cầu 2015-01-01→2024-12-31, 3653 ngày. Collector từ chối năm 2025.

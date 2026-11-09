@@ -4,6 +4,8 @@ Nghiên cứu thêm/bớt đặc trưng để **dự đoán trực tiếp mưa t
 
 ## Tài liệu hiện hành gửi nhóm
 
+**[Đánh giá khả thi và hướng đi sau kiểm định — Word](reports/vrain_data_handoff_2026_11_09/DANH_GIA_KHA_THI_VA_HUONG_DI.docx)**, [bản đọc](reports/vrain_data_handoff_2026_11_09/DANH_GIA_KHA_THI_VA_HUONG_DI.md), [biểu đồ độ nhạy nhãn](reports/vrain_data_handoff_2026_11_09/DO_NHAY_NHAN_VUNG.png). Đã thử che trạm theo lịch sử và giấu trạm/khối không gian; khuyến nghị chưa chốt toàn Đà Nẵng mới làm nhãn chính, ưu tiên kiểm chứng một vùng cố định nhỏ hơn cho nhánh ngày. Đây là đề xuất phạm vi, chưa tự thay đổi vùng hoặc train mô hình mới.
+
 **[Bàn giao dữ liệu và giải thích 82/86 trạm — Word](reports/vrain_data_handoff_2026_11_09/CHOT_DU_LIEU_GUI_NHOM.docx)**, [bản đọc trên GitHub](reports/vrain_data_handoff_2026_11_09/CHOT_DU_LIEU_GUI_NHOM.md), [thống kê kiểm kê](docs/vrain_data_freeze.json).
 
 **Đã chốt danh mục chung 86 vị trí:** 82 vị trí khớp tọa độ duy nhất giữa hai kênh, trong đó 81 tên giữ nguyên và một tên khác; bốn vị trí chỉ có ở danh mục mới. Không cộng thành 168 trạm. Danh mục 86 không có nghĩa cả 86 trạm đều có dữ liệu từ 2021.
@@ -34,6 +36,8 @@ Không đổi thiếu thành 0, không tự tạo lịch sử cho bốn trạm b
 - Manifest của nguồn cũ trên Drive kiểm bằng `scripts/package_data.py verify`; gói Vrain có manifest riêng.
 
 Việc tiếp theo là xác nhận thời gian/ranh và kiểm chứng nhãn vùng, sau đó pilot cùng nhãn/mask/split trước khi chạy lại toàn bộ E0–E7. Chưa có kết quả mô hình Vrain.
+
+Tái lập kiểm định nhãn: `scripts/assess_vrain_label_feasibility.py`; xuất tài liệu/biểu đồ từ aggregate: `scripts/publish_vrain_feasibility.py`. JSON/CSV trong thư mục bàn giao ghi rõ 67 ngày tham chiếu cuối 2024 không phải chân lý độc lập, và các phân vị qua mẫu thiếu không phải CI. Bộ kiểm thử thêm `tests.test_vrain_label_feasibility` (tổng 26 tests Vrain).
 
 ## Bằng chứng lịch sử
 

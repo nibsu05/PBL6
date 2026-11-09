@@ -30,6 +30,10 @@ Tải nguồn → kiểm kê/QC → chốt vùng và mạng trạm → tổng h�
 - Đã chốt registry chung 86: 82 cặp khớp tọa độ duy nhất, 81 tên giống và một tên khác; bốn vị trí bổ sung. Giữ nguồn số đo riêng, chưa tự nối chuỗi. Metadata kỳ đo và ranh chưa chốt.
 - Chẩn đoán R93: toàn mạng cố định không có ngày đủ 100% coverage trong 2021–2023; chọn panel 45 trạm đầy đủ lại làm khoảng cách lớn nhất từ tâm ô tới trạm tăng khoảng 34→59 km. Không tự nhận nhãn vùng đã bảo đảm.
 
+**Đã kiểm định thêm độ nhạy nhãn:** dùng 67 ngày đủ cả 82 trạm cuối 2024 làm tham chiếu nội bộ; che trạm theo lịch sử 2021–2023. Thiessen tính lại có NRMSE trung vị toàn R93 16,3–21,4%, phần vùng núi 60–71%. Đây không phải sai số thật của các năm lịch sử, không phải kết quả dự báo và không phải chứng nhận nhãn. Thiếu 100% không tự động là bất khả thi; vấn đề là sai lệch khi mạng thiếu. [Đánh giá và hướng đi](reports/vrain_data_handoff_2026_11_09/DANH_GIA_KHA_THI_VA_HUONG_DI.md).
+
+**Khuyến nghị đang đề xuất:** nhánh ngày 1–3 ngày, vùng cố định có thể kiểm chứng, có thể nhỏ hơn địa giới mới; toàn Đà Nẵng mới là mở rộng có điều kiện. Nếu không có nhãn vùng đạt, dự phòng mô hình chung dự báo tại nhiều trạm. Chưa tự đổi phạm vi, chưa train vùng khác. Ưu tiên chốt thời gian/ranh/phương pháp nhãn trước ma trận mô hình.
+
 ## 5. Phân công đề xuất
 
 | Người | Bàn giao |
@@ -48,7 +52,7 @@ Cả nhóm thống nhất region/timezone/anchor/panel/mask/version. Không mỗ
 | Kiểm kê nguồn — đã thực hiện | Registry 86, thiếu theo năm, chênh tổng, SHA và gói nguồn riêng của nhóm |
 | Dữ liệu gần đây — đã thu thập phạm vi chọn | 622 phản hồi; số hợp lệ và so cặp hai kênh trong thống kê; chưa tự nối số đo |
 | Xác minh/QC | Đơn vị, đầu/cuối kỳ, múi giờ, missing/trace/counter; xử lý trùng/lỗi |
-| Nhãn vùng — việc cần giải quyết | Polygon chung X/y; lịch sử vùng núi; estimator mạng thiếu nếu cần phải kiểm chứng, không âm thầm đổi trọng số |
+| Nhãn vùng — việc cần giải quyết | Chọn phạm vi có thể kiểm chứng; polygon chung X/y; lịch sử vùng núi; estimator mạng thiếu có khai báo và kiểm định, không đổi trọng số âm thầm |
 | Pilot | E0/E2/E7, thửR0/R1 trên cùng mask; baseline và kiểm tra leak |
 | Ma trận | Rgiữcốđịnh, đủE0–E7 và ba mô hình ngày; split theo lịch sử thật |
 | Kiểm định cuối | Khóa protocol trước mở2025 |

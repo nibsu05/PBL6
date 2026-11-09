@@ -34,7 +34,7 @@ Lưu period_start/endUTC, mưa, QC, provenance/retrieved_at. available_at chỉ 
 
 Không cộng hàng tổng vào24h, không đổi dấu thiếu thành0. Cực trị/khácERA5 hoặc hàngxóm là cờ rà soát, không tự xóa. Raw cấu trúc lạ giữ và đánh dấu, không sửa âm thầm.
 
-Chốt polygonR và panel lõi, trọng số Thiessen cắt ranh trong CRSphẳngphùhợp:
+Estimator nhãn chưa chốt. Với trường hợp mạng cố định đầy đủ, trọng số Thiessen cắt ranh trong CRS phẳng phù hợp có công thức:
 
 `w_i = area(Voronoi_i intersect R) / area(R)`
 
@@ -44,7 +44,13 @@ Chốt polygonR và panel lõi, trọng số Thiessen cắt ranh trong CRSphẳn
 
 Không chuẩn hóa lại theo trạm còn lại trong nhãn chính. Nếu thiếu quá nhiều, chọn panel bằngmetadata/development hoặc thử estimator mạngkhuyết riêng. Không lấp bằngCPC/GSMaP/ERA5 rồi gọi thuầnVrain.
 
+Quy tắc trên là đề xuất nghiêm ngặt ban đầu, chưa có nhãn chính được phê duyệt. Có thể nghiên cứu Thiessen tính lại/IDW theo mạng còn số nếu ghi rõ estimator, mạng, hỗ trợ không gian và bất định; không coi việc thay đổi có khai báo là tự động sai về phương pháp. Coverage theo mạng toàn bộ không đồng nghĩa phần diện tích thực sự được đo trực tiếp.
+
 **Bằng chứng mới sau kiểm kê:** toàn mạng 82 trạm trên R93 có coverage giờ tối đa năm 2021/2022/2023 khoảng 70,0%/83,5%/83,5%; không có ngày đủ 100% trong ba năm đó. Panel 45 trạm đạt ≥98% độ đầy đủ riêng từng năm 2021 và 2022 tạo được nhiều ngày hơn, nhưng khoảng cách tâm ô xa nhất tới trạm tăng khoảng 34→59 km; trung bình vùng núi khoảng 13→30 km. Do đó không chốt panel/nhãn chính chỉ theo tính đầy đủ. Chính sách nghiêm ngặt cũ chưa tạo được tập train toàn vùng; phải giải quyết lịch sử mạng và kiểm chứng estimator thay vì âm thầm nới coverage. Các số mẫu trong chẩn đoán chưa qua bộ chặn split cuối.
+
+**Kiểm định tính khả thi sau đó:** 67 ngày đủ cả 82 trạm từ 21/08–31/12/2024, làm tham chiếu nội bộ. Che theo mẫu thiếu 2021–2023: NRMSE trung vị Thiessen toàn R93 21,4%/19,8%/16,3%; phần vùng núi 71,0%/69,3%/60,0%. Các nhóm ô không phải địa giới hành chính. Tham chiếu còn sai số lấy mẫu; phân vị qua mẫu thiếu không phải CI; point/block CV không chứng minh sai số diện tích thật. Giữ 2025 kín, chưa dùng số đo 2026 cho lựa chọn. [Tài liệu đánh giá](reports/vrain_data_handoff_2026_11_09/DANH_GIA_KHA_THI_VA_HUONG_DI.md).
+
+Khuyến nghị: chưa chọn nhãn thuần Vrain toàn Đà Nẵng mới làm nhãn chính; ưu tiên nhánh ngày trên vùng cố định kiểm chứng được, có thể thu hẹp. Nếu không có vùng đạt, đề xuất đổi sang mô hình chung nhiều trạm, ghi đúng mục tiêu. Đây là đề xuất, chưa tự thay ranh dữ liệu hay kết quả thí nghiệm.
 
 Kiểm chứng rúttrạm/LOSO, nhạy panel/phương pháp, tổng giờ–ngày, cực trị và mẫu bị loại theo mùa. Sốtrạm/coverageThiessen chưa chứng nhận vùngnúi/đảo. XERA5 vày cùngpolygon; tải bổ sung khí tượng nếu ranh vượt cube.
 
