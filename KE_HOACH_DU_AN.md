@@ -1,8 +1,10 @@
 # Kế hoạch hiện hành — dự báo mưa tại trạm
 
+**Trạng thái mới nhất:** đãmở rộng NWP lên57trạm, cùngtiêuchí train và lịch mỗi7ngày; LightGBM A0–A3/GRUba seed đã chạy. [Báo cáo57](reports/gfs_station_57_2026_11_10/BAO_CAO_MO_RONG.md), [Word](reports/gfs_station_57_2026_11_10/BAO_CAO_MO_RONG.docx). Pilot20giữ nguyên.79trạm cótrain là nhóm rộng hơn,22trạm còn lịch sử ngắn chưatrain trongbản57. Mởrộng sốtrạm không bảo đảm tăngskill; đãso trên cùng20trạm vàcùngissue, không so hai trung bình kháccohort.
+
 **Cập nhật được duyệt 10/11/2026:** nhánh ngắn hạn triển khai NWP+Vrain, LightGBM chính và GRU nhỏ theo gatecal; TFT/Informer không còn bắt buộc. [Thiết kế mới](docs/short_range_nwp_design.md), protocol trướcfit ở `reports/gfs_station_pilot_2026_11_10/protocol.json`. Các mô tảERA5v1 bên dưới là dữ liệu đã bàn giao, không phải thí nghiệmNWP mới.
 
-Thứ tự hiện tại: khóa20trạm/theo train → trích208issueGFS lịch cố định mỗi7ngày → ghép đúng khoảng và cutoffquantrắc → replayraw/kiểmtra → đốichứng/A0–A3LightGBM → GRUnhỏnếugatecalđạt → báo cáo. Saupilot mới mở rộng hằng ngày nếu có cơ sở.2025giữkín,2026khôngtuning.
+Thứ tự triển khai pilot20trạm trước đó: khóa20trạm/theo train → trích208issueGFS lịch cố định mỗi7ngày → ghép đúng khoảng và cutoffquantrắc → replayraw/kiểmtra → đốichứng/A0–A3LightGBM → GRUnhỏnếugatecalđạt → báo cáo. Nay đã mở rộng57trạm như đầu file; mở rộng hằng ngày vẫn là bước kiểmchứng tiếp theo.2025giữkín,2026khôngtuning.
 
 **Pilot đã hoàn thành:**208issue,20trạm,1.774/902/983mẫu train/cal/dev; LightGBM A0–A3 vàGRU_A2ba seed đã chạy. [Báo cáo](reports/gfs_station_pilot_2026_11_10/BAO_CAO_PILOT.md), [Word](reports/gfs_station_pilot_2026_11_10/BAO_CAO_PILOT.docx). CI A2−GFS cả ba hạn còn chứa0, nên chưa khẳng định cải thiện ổn định.47tests vàreplaynguồn/môhìnhđạt. Bước tiếp: protocol mới để kiểmchứng bằng lịch hằng ngày, độnhạytrễ vàdrop-group; không thay pilotcũ hoặc mở2025.
 

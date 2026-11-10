@@ -18,10 +18,12 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 
 from src.gfs_station_dataset import FEATURES, macro_metrics, event_metrics
+from src.gfs_experiment import experiment_paths
 
-BASE = ROOT / "data/operational/gfs_station_pilot_2026_11_10"
-PUBLIC = ROOT / "reports/gfs_station_pilot_2026_11_10"
-DATA = ROOT / "data/processed/gfs_station_pilot/gfs_vrain_pilot.parquet"
+PATHS = experiment_paths(ROOT)
+BASE = PATHS.base
+PUBLIC = PATHS.public
+DATA = PATHS.dataset
 VRAIN = ROOT / "data/operational/vrain_2026_11_09"
 
 

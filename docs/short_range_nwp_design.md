@@ -1,5 +1,7 @@
 # Phương án được duyệt — dự báo mưa ngày 1–3 tại trạm
 
+**Mở rộng mới nhất:** từ20lên57trạm với cùngđiềukiệntrain, thêm37trạm có sẵn trong nguồn. [Protocol57](../reports/gfs_station_57_2026_11_10/protocol.json), [báo cáo57](../reports/gfs_station_57_2026_11_10/BAO_CAO_MO_RONG.md). Dataset/model/output ở phiên bản riêng; giữpilot20. Lịch vẫn mỗi7ngày; chưa gọi là thí nghiệm hằng ngày. So sánh ghép cặp trên cùng20trạm vàissue để tách ảnh hưởng thayđổicohortđánhgiá.
+
 Người dùng duyệt triển khai ngày **10/11/2026**, sau khi yêu cầu đánh giá độc lập với hướng cũ. Câu hỏi: **mưa quan trắc gần đây, khí tượng dự báo và thông tin địa phương có cải thiện dự báo tại trạm so với GFS nguyên bản không?**
 
 ## Mục tiêu và thời gian

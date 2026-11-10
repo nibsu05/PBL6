@@ -1,0 +1,20 @@
+{
+  "status": "audited",
+  "cycles": 208,
+  "messages": 3952,
+  "cycles_with_object_modification_after_issue": 7,
+  "modified_after_issue_by_cycle_year": {
+    "2021": 7,
+    "2022": 0,
+    "2023": 0,
+    "2024": 0
+  },
+  "last_modified_minus_init_hours_quantiles": [
+    3.551111111111111,
+    3.805138888888889,
+    4.0369166666666665,
+    28983.07138888889
+  ],
+  "interpretation": "Last-Modified can reflect archive recopy; does not prove late original dissemination or reforecast identity",
+  "actual_original_release_times_proven": false
+}

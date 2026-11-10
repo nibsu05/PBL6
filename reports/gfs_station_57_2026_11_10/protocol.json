@@ -1,0 +1,83 @@
+{
+  "version": "gfs_station_57_v1",
+  "approved_date": "2026-11-10",
+  "task": "same-station three separate next 24h rainfall totals and threshold probabilities",
+  "pilot_cadence_days": 7,
+  "first_issue_day": "2021-01-08",
+  "last_issue_day": "2024-12-28",
+  "cadence_reason": "initial pipeline/skill pilot, not full daily experiment; dates fixed independently of rain",
+  "forecast_init_hour_utc": 0,
+  "issue_hour_utc": 12,
+  "issue_hour_vietnam": 19,
+  "rain_cumulative_leads": [
+    12,
+    36,
+    60,
+    84
+  ],
+  "meteorological_midpoint_leads": [
+    24,
+    48,
+    72
+  ],
+  "gfs_availability_assumed_delay_hours": 8,
+  "init_to_issue_margin_hours": 12,
+  "actual_historical_release_availability_proven": false,
+  "gauge_availability_assumed_delay_hours": 1,
+  "daily_rain_history": "seven full 19--19 days ending yesterday, before observation cutoff",
+  "recent_rain": "1/6/24h totals ending at 18:00 Vietnam, one hour before issue",
+  "station_selection": "all stations meeting original train2021--2022 >=365 complete days and >=30 days >=1mm; no cal/dev score filtering",
+  "eligible_cohort_candidates": 57,
+  "selected_stations": 57,
+  "station_manifest_sha256": "8646ee7deb805c9f553344095a7baa54b40dd51acfe7a8a626279cd3320d0a2b",
+  "split": {
+    "train": "2021--2022",
+    "cal": "2023",
+    "dev": "2024, development only; not final test"
+  },
+  "full_target_interval_must_stay_within_fold": true,
+  "thresholds_mm_per24h": [
+    1.0,
+    50.0
+  ],
+  "thresholds_note": "1mm event and exploratory 50mm amount, not asserted universal warning standards",
+  "decision_probability_cutoff": 0.5,
+  "tuning_probability_cutoff": false,
+  "configurations": {
+    "A0": "GFS rain + future calendar + coordinates/station code",
+    "A1": "A0 + seven gauge-day lags + 1/6/24h recent rainfall",
+    "A2": "A1 + GFS midpoint T850/RH850/u850/v850/PWAT, q850 derived consistently from T/RH, and transport proxies",
+    "A3": "A2 + DEM neighborhood/elevation/slope and wind-upslope proxies"
+  },
+  "meteorology_note": "3 forecast midpoint states, not complete daily atmospheric means",
+  "common_mask": "all A0--A3 use identical complete station/issue/horizon samples",
+  "model_seeds": [
+    17,
+    29,
+    43
+  ],
+  "main_amount_objective": "Tweedie p=1.5",
+  "models": [
+    "monthly_shrunk_climatology",
+    "available_rain_persistence",
+    "raw_GFS",
+    "LightGBM_A0_A1_A2_A3"
+  ],
+  "neural_gate": "A2 cal macro-MAE below both raw GFS and climatology, >=50% stations improve over raw GFS, at least one horizon; then small GRU A2",
+  "reference_fit": "all QC-valid train-period daily gauge observations, no future folds",
+  "main_report": "macro station MAE/RMSE/bias, per horizon; Brier/BSS and CSI/POD/FAR at defined thresholds",
+  "uncertainty": "paired bootstrap by blocks of 4 consecutive weekly issue dates; keep all stations/horizons together",
+  "test2025_read": false,
+  "recent2026_used": false,
+  "ERA5_as_operational_current_input": false,
+  "parent_experiment": "gfs_station_pilot_2026_11_10",
+  "expansion_authorized_date": "2026-11-10",
+  "source_cache_shared_from": "gfs_station_pilot_2026_11_10",
+  "extra_GFS_download_required": false,
+  "purpose": "expand station coverage while holding date cadence, features, folds and model settings fixed",
+  "comparative_design": "report all57, original20 matched station/issue rows, and additional37 separately",
+  "dataset_cadence_changed": false,
+  "all_79_stations_trained": false,
+  "min_selected_complete_train_days": 479,
+  "max_selected_complete_train_days": 728
+}

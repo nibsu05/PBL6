@@ -13,11 +13,14 @@ import eccodes as ec
 
 from src.gfs_station_dataset import FEATURES, forecast_met
 from scripts.collect_gfs_station_pilot import range_bytes
+from src.gfs_experiment import experiment_paths
 
-BASE=ROOT / "data/operational/gfs_station_pilot_2026_11_10"
-PUBLIC=ROOT / "reports/gfs_station_pilot_2026_11_10"
+PATHS=experiment_paths(ROOT)
+BASE=PATHS.base
+SOURCE=PATHS.source
+PUBLIC=PATHS.public
 VRAIN=ROOT / "data/operational/vrain_2026_11_09"
-DATA=ROOT / "data/processed/gfs_station_pilot/gfs_vrain_pilot.parquet"
+DATA=PATHS.dataset
 
 
 def equal(a,b):np.testing.assert_allclose(a,b,rtol=3e-6,atol=3e-5,equal_nan=True)
@@ -42,7 +45,7 @@ def main():
         part=f[f.split.eq(fold)]
         a=pd.Timestamp(first,tz='Asia/Ho_Chi_Minh');b=pd.Timestamp(stop,tz='Asia/Ho_Chi_Minh')
         assert (part.target_start_utc>=a).all() and (part.target_end_utc<=b).all()
-    registry=pd.read_csv(BASE / 'registry_private.csv',dtype={'legacy_id':str})
+    registry=pd.read_csv(SOURCE / 'registry_private.csv',dtype={'legacy_id':str})
     aliases=dict(zip(registry.canonical_id,registry.legacy_id))
     coordinates=registry.set_index('canonical_id')
     z=np.load(VRAIN / 'freeze_work/station_matrices.npz')
@@ -50,9 +53,18 @@ def main():
     days=pd.DatetimeIndex(z['marked_day']);order={s:i for i,s in enumerate(z['station_ids'])}
     source_ends=pd.to_datetime(z['clock_end_naive']).tz_localize('Asia/Ho_Chi_Minh').tz_convert('UTC')
     source_ends=source_ends.as_unit('ns')
+    interval_cache={}
+    def interval_rows(end,hours):
+        key=(end.value,hours)
+        if key not in interval_cache:
+            mask=(source_ends>end-pd.Timedelta(hours=hours))&(source_ends<=end)
+            positions=np.flatnonzero(mask)
+            assert len(positions)==hours
+            interval_cache[key]=positions
+        return interval_cache[key]
     replayed=0; forecast_headers=0;packing=0;generators=set()
     for issue,part in f.groupby('issue_utc'):
-        name=issue.strftime('%Y%m%d');path=BASE / 'days' / (name+'.npz')
+        name=issue.strftime('%Y%m%d');path=SOURCE / 'days' / (name+'.npz')
         meta=json.loads(path.with_suffix('.json').read_text())
         assert hashlib.sha256(path.read_bytes()).hexdigest()==meta['sha256']
         archive=np.load(path);archive_order={s:i for i,s in enumerate(archive['station_ids'])}
@@ -70,19 +82,17 @@ def main():
             local_day=issue.tz_convert('Asia/Ho_Chi_Minh').tz_localize(None).normalize()
             di=days.get_loc(local_day)
             # Independently select intervals by their actual source clocks.
-            mask=(source_ends>row.target_start_utc)&(source_ends<=row.target_end_utc)
-            assert mask.sum()==24
-            equal(rain[mask,si].sum(),row.y_mm)
+            positions=interval_rows(row.target_end_utc,24)
+            equal(rain[positions,si].sum(),row.y_mm)
             for lag in range(1,8):
                 end=issue-pd.Timedelta(days=lag)
-                mask=(source_ends>end-pd.Timedelta(hours=24))&(source_ends<=end)
-                assert mask.sum()==24 and end<=row.observation_cutoff_utc
-                equal(rain[mask,si].sum(),getattr(row,f'rain_lag_day{lag}_mm'))
+                positions=interval_rows(end,24)
+                assert end<=row.observation_cutoff_utc
+                equal(rain[positions,si].sum(),getattr(row,f'rain_lag_day{lag}_mm'))
             for duration in (1,6,24):
                 cutoff=row.observation_cutoff_utc
-                mask=(source_ends>cutoff-pd.Timedelta(hours=duration))&(source_ends<=cutoff)
-                assert mask.sum()==duration
-                equal(rain[mask,si].sum(),getattr(row,f'rain_recent{duration}h_mm'))
+                positions=interval_rows(cutoff,duration)
+                equal(rain[positions,si].sum(),getattr(row,f'rain_recent{duration}h_mm'))
             h=row.horizon
             cumulative=archive['cumulative_mm']
             expected=max(float(cumulative[h,gi]-cumulative[h-1,gi]),0)
@@ -96,8 +106,11 @@ def main():
     sample_dates=[f[f.split.eq(fold)].issue_utc.sort_values().iloc[len(f[f.split.eq(fold)])//2].strftime('%Y%m%d') for fold in ['train','cal','dev']]
     with requests.Session() as session:
         for name in sample_dates:
-            meta=json.loads((BASE/'days'/(name+'.json')).read_text());archive=np.load(BASE/'days'/(name+'.npz'))
-            ids=archive['station_ids'];indices=[0,len(ids)//2,len(ids)-1]
+            meta=json.loads((SOURCE/'days'/(name+'.json')).read_text());archive=np.load(SOURCE/'days'/(name+'.npz'))
+            ids=archive['station_ids']
+            cohort=pd.read_csv(BASE/'pilot_stations_private.csv').canonical_id.tolist()
+            lookup={sid:k for k,sid in enumerate(ids)}
+            indices=[lookup[cohort[k]] for k in [0,len(cohort)//2,len(cohort)-1]]
             for message in meta['messages']:
                 data,_=range_bytes(session,message['source_url'],*message['range']);range_requests+=1
                 assert hashlib.sha256(data).hexdigest()==message['message_sha256']

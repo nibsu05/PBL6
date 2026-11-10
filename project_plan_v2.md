@@ -1,5 +1,7 @@
 # Thiết kế nghiên cứu — dự báo mưa tại nhiều trạm
 
+**Bản mở rộng hiện hành:**57trạm, giữtiêuchítraincủapilot, lịch7ngày và thiết lập môhình. [Báo cáo/phạmvi57](reports/gfs_station_57_2026_11_10/BAO_CAO_MO_RONG.md).20trạm là pilottrướcđó; chưatrain79hoặc86trạm. So sánh kết quả mởrộng trên đúngcohort/timecũ để tránh nhầm thay đổi độkhótậptrạm thànhskill.
+
 **Phương án ngắn hạn hiện hành được duyệt10/11/2026: [GFS + Vrain, LightGBM/GRU](docs/short_range_nwp_design.md).** Protocol khóa trướcfit: `reports/gfs_station_pilot_2026_11_10/protocol.json`. Câu hỏi nghiên cứu là giá trị lịch sửmưa/khítượngdựbáo/địaphương cho ba tổng24h tại trạm; không bắt buộc TFT/Informer.
 
 Phần dưới ghi thiết kế và giới hạn **bộVrain–ERA5v1 đã bàn giao09/11**. Giữ để diễn giải nguồn và hỗ trợ nhánh cực ngắn; không coi là thiết kếNWPmới hay bằng chứng khả dụng realtime.

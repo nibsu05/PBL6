@@ -16,14 +16,17 @@ import numpy as np
 import pandas as pd
 
 from src.gfs_station_dataset import FEATURES,macro_metrics
+from src.gfs_experiment import experiment_paths
 
-BASE=ROOT/'data/operational/gfs_station_pilot_2026_11_10'
-PUBLIC=ROOT/'reports/gfs_station_pilot_2026_11_10'
+PATHS=experiment_paths(ROOT)
+BASE=PATHS.base
+SOURCE=PATHS.source
+PUBLIC=PATHS.public
 
 
 def main():
     late=set();records=[];delays=[]
-    for path in sorted((BASE/'days').glob('*.json')):
+    for path in sorted((SOURCE/'days').glob('*.json')):
         d=json.loads(path.read_text());init=pd.Timestamp(d['init_utc']);issue=pd.Timestamp(d['issue_utc'])
         after=0
         for m in d['messages']:

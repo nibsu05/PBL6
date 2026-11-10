@@ -12,11 +12,14 @@ import pandas as pd
 from src.gfs_station import issue_contract
 from src.gfs_station_dataset import FEATURES, gauge_history, forecast_met, add_calendar
 from src.station_forecast_data import target_splits
+from src.gfs_experiment import experiment_paths
 
-BASE = ROOT / "data/operational/gfs_station_pilot_2026_11_10"
+PATHS = experiment_paths(ROOT)
+BASE = PATHS.base
+SOURCE = PATHS.source
 VRAIN = ROOT / "data/operational/vrain_2026_11_09"
-OUT = ROOT / "data/processed/gfs_station_pilot"
-PUBLIC = ROOT / "reports/gfs_station_pilot_2026_11_10"
+OUT = PATHS.data
+PUBLIC = PATHS.public
 
 
 def main():
@@ -30,12 +33,12 @@ def main():
     days = pd.DatetimeIndex(z["marked_day"])
     source_order = {s:j for j,s in enumerate(z["station_ids"])}
     expected = pd.date_range(protocol["first_issue_day"], protocol["last_issue_day"], freq=f"{protocol['pilot_cadence_days']}D").strftime("%Y%m%d")
-    missing = [d for d in expected if not (BASE / "days" / (d+".npz")).exists()]
+    missing = [d for d in expected if not (SOURCE / "days" / (d+".npz")).exists()]
     if missing:
         raise ValueError(f"Wait for complete fixed-cadence archive: {len(missing)} issues missing")
     rows = []; rejected = dict(boundary=0, incomplete_station_issue=0)
     for name in expected:
-        path = BASE / "days" / (name+".npz")
+        path = SOURCE / "days" / (name+".npz")
         meta = json.loads(path.with_suffix(".json").read_text())
         if hashlib.sha256(path.read_bytes()).hexdigest() != meta["sha256"]:
             raise ValueError("GFS day checksum mismatch")

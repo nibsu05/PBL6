@@ -16,9 +16,11 @@ from torch.utils.data import TensorDataset,DataLoader
 
 from src.gfs_station_dataset import FEATURES,HISTORY,macro_metrics
 from scripts.run_gfs_station_pilot import calibrate,report_predictions
+from src.gfs_experiment import experiment_paths
 
-BASE=ROOT/'data/operational/gfs_station_pilot_2026_11_10'
-PUBLIC=ROOT/'reports/gfs_station_pilot_2026_11_10'
+PATHS=experiment_paths(ROOT)
+BASE=PATHS.base
+PUBLIC=PATHS.public
 
 
 class RainGRU(nn.Module):

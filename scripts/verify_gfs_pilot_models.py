@@ -10,9 +10,11 @@ import numpy as np
 import pandas as pd
 
 from src.gfs_station_dataset import FEATURES,HISTORY
+from src.gfs_experiment import experiment_paths
 
-BASE=ROOT/'data/operational/gfs_station_pilot_2026_11_10'
-PUBLIC=ROOT/'reports/gfs_station_pilot_2026_11_10'
+PATHS=experiment_paths(ROOT)
+BASE=PATHS.base
+PUBLIC=PATHS.public
 
 
 def main():

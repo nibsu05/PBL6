@@ -1,8 +1,16 @@
 # PBL6 — dự báo lượng mưa tại nhiều trạm
 
-**Phương án được duyệt 10/11/2026:** dự báo ba tổng24h riêng tại trạm bằng **GFS + Vrain**, LightGBM chính và GRU nhỏ. [Thiết kế hiện hành](docs/short_range_nwp_design.md), [kế hoạch](KE_HOACH_DU_AN.md), [protocol trước fit](reports/gfs_station_pilot_2026_11_10/protocol.json). TFT/Informer là mở rộng tùy bằng chứng.
+**Phương án được duyệt 10/11/2026:** dự báo ba tổng24h riêng tại trạm bằng **GFS + Vrain**, LightGBM chính và GRU nhỏ. [Thiết kế hiện hành](docs/short_range_nwp_design.md), [kế hoạch](KE_HOACH_DU_AN.md), [protocol57trạm](reports/gfs_station_57_2026_11_10/protocol.json). TFT/Informer là mở rộng tùy bằng chứng.
 
-## Pilot đã chạy
+## Bản mở rộng hiện tại:57trạm
+
+**Đã tăng20→57trạm**, thêm37trạm có sẵn trong nguồn; cùng tiêu chuẩn train, nguồnGFS, lịch mỗi7ngày, đặc trưng và thiết lập mô hình. Đã chạy LightGBM A0–A3 vàGRUba seed;5.032/2.582/2.782mẫu train/cal/dev. [Báo cáo mở rộng](reports/gfs_station_57_2026_11_10/BAO_CAO_MO_RONG.md), [Word](reports/gfs_station_57_2026_11_10/BAO_CAO_MO_RONG.docx), [protocol57](reports/gfs_station_57_2026_11_10/protocol.json).
+
+Có79trạm có mẫutrain nhưng22trạm ngoài nhóm57có lịch sử ngắn; chưa gộp vào tập chính. Ba trạm chưa cótrain vàbốn vịtrí mới chưa có lịch sử cũ. Không tự nhận đủ86trạm đã sẵn sàng.
+
+Mở rộng không bảo đảm tăngđộchínhxác: trên cùng20trạm cũ, MAE A2ngày1/2/3 đổi6,15/7,37/7,75→5,91/7,40/8,66mm; cả3CIchênh lệch chứa0. Bản57mởrộng cảtrain/cal. Không so trung bình20với57trực tiếp.53tests vàreplaynguồn/môhìnhđạt;2025giữkín. Datasetprivate ở `data/processed/gfs_station_57_2026_11_10/gfs_vrain_pilot.parquet`.
+
+## Pilot20trạm trước khi mở rộng
 
 20 trạm, 208 chu kỳ GFS trong2021–2024, lịch issue cố định mỗi7ngày. Đã chạy khí hậu/persistence/GFS, LightGBM A0–A3 và GRU A2 với ba seed. Có1.774/902/983mẫu trạm–issue train/cal/dev, mỗi mẫu ba nhãn. **Chưa phải thí nghiệm hằng ngày đầy đủ hoặc test cuối;2025 vẫn giữ kín.**
 

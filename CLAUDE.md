@@ -2,6 +2,18 @@
 
 Cập nhật 10/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
 
+## Mở rộng trạm mới nhất — đã thực hiện
+
+Người dùng hỏi **“có thể mở rộng số lượng trạm được không”**. Đã mở rộng nhánh NWP từ20lên**57trạm**, thêm37trạm trong nguồn hiện có, giữ đúng tiêu chuẩn train>=365ngày đầy đủ và>=30ngày>=1mm.57trạm thực tế479–728ngàytrain;2trạm có<30cửa sổ tuầntrain (min18), cần báo giới hạn.
+
+- 79trạm có cửa sổ train theo lịch tuần, nhưng22trạm ngoài57có lịch sử ngắn; chưa train79.3trạm lịch sử chưa có train và4vịtrí hiện hành chưa có lịch sử cũ. Không ép đủ86.
+- Dataset57có5.032/2.582/2.782mẫu train/cal/dev, tổng31.188hàng3hạn. Lịch vẫn208issue mỗi7ngày.2025kín,2026khôngtuning. NguồnGFSđã trích82vịtrí dùng lại; chỉ tải một sốmessageđểreplay.
+- ĐãtrainLightGBM A0–A3ba seed vàGRU_A2ba seed (gatecalqua ngày3), cùnghyperparameterscũ. Dataset/source/modelverificationđạt;53testsđạt (6testmới vềpathisolation vàmatchedcohort).
+- Kết quả57trạm devmacroMAE: GFS5,83/7,41/10,30mm; A2 5,28/6,72/8,44; GRU_A2 6,94/7,56/8,00. Không so trực tiếp với trung bình20trạm.
+- Đãso cùng20trạm/cùngissue/nhãn/32đầu vào: A2train20=6,15/7,37/7,75; A2train57=5,91/7,40/8,66mm. Ngày1tốt lên,ngày2gầnngang,ngày3điểm xấu hơn;CI cả3chứa0. Mở rộng phạm vi không bảo đảm tăngđộchínhxác. So sánh mở rộng cảtrain/cal, không chỉtrain.
+- Bản20được giữ nguyên. Bản57 riêng `reports/gfs_station_57_2026_11_10/BAO_CAO_MO_RONG.md` vàWord; protocol/result_summary/cohort_scope_metrics/matched_original20_bootstrap cùngthưmục. Datasetprivate `data/processed/gfs_station_57_2026_11_10/gfs_vrain_pilot.parquet`; model/predsprivate thưmụcoperationalcùngtên.
+- Scriptprepare `scripts/prepare_gfs_station_expansion.py`; các bướcbuild/validate/run/GRU/verify dùngenv `PBL6_GFS_EXPERIMENT=gfs_station_57_2026_11_10`. `src/gfs_experiment.py` tách output khỏi nguồncache20chỉđọc. Publish `scripts/publish_gfs_station_expansion.py`. Không sửa cohort/protocol đãfit; phiênbảnmớinếuđổitiêuchí.
+
 ## Hướng ngắn hạn mới được người dùng duyệt 10/11/2026
 
 Người dùng yêu cầu đánh giá độc lập với hướng cũ, rồi nói **“ok hãy tiến hành thực hiện”** với phương án NWP + Vrain. Nhánh ngắn hạn ưu tiên **hậu xử lý GFS để dự báo ba tổng24h tại trạm**, LightGBM chính và GRU nhỏ theo điều kiện pilot. TFT/Informer không còn là bộ ba bắt buộc. Nghiên cứu giá trị đầu vào mưa trạm/khí tượng dự báo/địa hình; chưa làm app. Chi tiết: `docs/short_range_nwp_design.md`.
