@@ -2,6 +2,14 @@
 
 Cập nhật 10/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
 
+## Slide báo cáo 57 trạm — yêu cầu mới nhất
+
+Người dùng yêu cầu slide đầy đủ về đầu vào/đầu ra, chia dữ liệu, tinh chỉnh và kết quả. Bộ riêng `reports/gfs_station_slides_2026_11_10/`: `PBL6_DU_BAO_MUA_57_TRAM.pptx`/HTML, 43 slide chính + 12 phụ lục, ghi chú tiếng Việt trong PPTX và `GHI_CHU_THUYET_TRINH.md`. Hướng dẫn và lộ trình trình bày ở README cùng thư mục. PDF native PowerPoint ở private `data/operational/gfs_station_slides_2026_11_10/`, không commit PDF.
+
+Không train mới để làm slide, không mở 2025. Đối chiếu checkpoint cho thấy LightGBM dừng sớm theo **l1/MAE cal** (metric đầu, `first_metric_only=True`), không phải Tweedie; best 62–177 cây. GRU dừng theo loss chung cal. Tham số pilot cố định; chưa GridSearch/Optuna. Script build/render/validate có tiền tố `gfs_station_slides`, ghi chú riêng `scripts/gfs_station_slide_notes.py`; không chạy builder của hai deck người dùng đã sửa.
+
+Audit bổ sung từ dự báo đã lưu: chưa ràng buộc P(≥50)≤P(≥1). A2 vi phạm 188/8.346 dòng dev (2,25%), gap tối đa ~0,087; không có quyết định mâu thuẫn tại p≥0,5. A0/A1/A3 cũng có vi phạm; GRU không có trường hợp quan sát được nhưng mã cũng chưa ép thứ tự. `training_audit.json` trong thư mục slide có tổng hợp. Không sửa dự báo/điểm pilot; đề xuất giải quyết bằng protocol mới. Kiểm tra slide không chứng nhận kỹ năng cuối hoặc cảm biến.
+
 ## Mở rộng trạm mới nhất — đã thực hiện
 
 Người dùng hỏi **“có thể mở rộng số lượng trạm được không”**. Đã mở rộng nhánh NWP từ20lên**57trạm**, thêm37trạm trong nguồn hiện có, giữ đúng tiêu chuẩn train>=365ngày đầy đủ và>=30ngày>=1mm.57trạm thực tế479–728ngàytrain;2trạm có<30cửa sổ tuầntrain (min18), cần báo giới hạn.

@@ -4,6 +4,8 @@
 
 ## Bản mở rộng hiện tại:57trạm
 
+**Slide báo cáo chi tiết:** [PowerPoint 55 slide](reports/gfs_station_slides_2026_11_10/PBL6_DU_BAO_MUA_57_TRAM.pptx), [ghi chú thuyết trình](reports/gfs_station_slides_2026_11_10/GHI_CHU_THUYET_TRINH.md), [hướng dẫn đọc và nguồn](reports/gfs_station_slides_2026_11_10/README.md). Trình bày đầu vào/đầu ra, chia thời gian, tham số cố định và phần lựa chọn bằng cal, cùng bảng kết quả và giới hạn của thí nghiệm 57 trạm.
+
 **Đã tăng20→57trạm**, thêm37trạm có sẵn trong nguồn; cùng tiêu chuẩn train, nguồnGFS, lịch mỗi7ngày, đặc trưng và thiết lập mô hình. Đã chạy LightGBM A0–A3 vàGRUba seed;5.032/2.582/2.782mẫu train/cal/dev. [Báo cáo mở rộng](reports/gfs_station_57_2026_11_10/BAO_CAO_MO_RONG.md), [Word](reports/gfs_station_57_2026_11_10/BAO_CAO_MO_RONG.docx), [protocol57](reports/gfs_station_57_2026_11_10/protocol.json).
 
 Có79trạm có mẫutrain nhưng22trạm ngoài nhóm57có lịch sử ngắn; chưa gộp vào tập chính. Ba trạm chưa cótrain vàbốn vịtrí mới chưa có lịch sử cũ. Không tự nhận đủ86trạm đã sẵn sàng.
