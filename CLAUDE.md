@@ -2,6 +2,14 @@
 
 Cập nhật 10/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
 
+## Nhận xét độc lập mới — đọc kèm slide
+
+Người dùng yêu cầu đánh giá kết quả và đối chiếu nghiên cứu gần đây. Đã đọc nguồn gốc 2024–2026 và bổ sung **chẩn đoán hậu nghiệm trên dev**, không train hoặc mở 2025: `reports/gfs_station_review_2026_11_10/NHAN_XET_DOC_LAP.md`, `diagnostics.json`, `diagnostic_metrics.csv`; tái tạo bằng `scripts/review_gfs_station_results.py`.
+
+Phát hiện quan trọng: **luôn dự báo 0 mm có macro MAE 5,887/6,887/7,773**, nên ngày 3 cả A2/A3/GRU chưa vượt đối chứng này về MAE ở mức điểm. Tỷ lệ mẫu <1 mm khoảng 72,0%/66,6%/63,2%. Điều này không biến 0 mm thành dự báo hữu ích: GRU ngày 3 RMSE17,62 tốt hơn ZERO22,89/khí hậu19,98/GFS26,73. Trên riêng 114 mẫu thực tế ≥50mm ngày3 (12 issue), **micro MAE GFS76,44; A2 90,00; GRU60,10mm**. Đây là chẩn đoán có điều kiện theo y, không phải cách chọn mô hình vận hành, chưa có CI. A2 giảm MAE toàn tập nhưng còn yếu mưa lớn; không chỉ dẫn mức giảm18,1% MAE so GFS để kết luận thành công.
+
+Bộ slide đã gửi và kết quả đóng băng giữ nguyên; slide chưa có ZERO, cần dùng kèm nhận xét mới. Chưa có chứng cứ vượt nghiên cứu khác vì khác miền/nhãn/hạn/split. Dùng trạm, mô hình chung, LightGBM/GRU và thêm biến chưa tự tạo phương pháp mới; cần đối chứng cùng nguyên liệu khí tượng/địa hình để đo lợi ích của dẫn xuất vật lý, lịch hằng ngày, kiểm tra xác suất và kiểm định cuối. Không suy ra lỗi dataset hay overfitting chỉ từ các điểm mới.
+
 ## Slide báo cáo 57 trạm — yêu cầu mới nhất
 
 Người dùng yêu cầu slide đầy đủ về đầu vào/đầu ra, chia dữ liệu, tinh chỉnh và kết quả. Bộ riêng `reports/gfs_station_slides_2026_11_10/`: `PBL6_DU_BAO_MUA_57_TRAM.pptx`/HTML, 43 slide chính + 12 phụ lục, ghi chú tiếng Việt trong PPTX và `GHI_CHU_THUYET_TRINH.md`. Hướng dẫn và lộ trình trình bày ở README cùng thư mục. PDF native PowerPoint ở private `data/operational/gfs_station_slides_2026_11_10/`, không commit PDF.
