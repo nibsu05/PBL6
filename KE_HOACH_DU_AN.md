@@ -1,5 +1,11 @@
 # Kế hoạch hiện hành — dự báo mưa tại trạm
 
+**Cập nhật được duyệt 10/11/2026:** nhánh ngắn hạn triển khai NWP+Vrain, LightGBM chính và GRU nhỏ theo gatecal; TFT/Informer không còn bắt buộc. [Thiết kế mới](docs/short_range_nwp_design.md), protocol trướcfit ở `reports/gfs_station_pilot_2026_11_10/protocol.json`. Các mô tảERA5v1 bên dưới là dữ liệu đã bàn giao, không phải thí nghiệmNWP mới.
+
+Thứ tự hiện tại: khóa20trạm/theo train → trích208issueGFS lịch cố định mỗi7ngày → ghép đúng khoảng và cutoffquantrắc → replayraw/kiểmtra → đốichứng/A0–A3LightGBM → GRUnhỏnếugatecalđạt → báo cáo. Saupilot mới mở rộng hằng ngày nếu có cơ sở.2025giữkín,2026khôngtuning.
+
+**Pilot đã hoàn thành:**208issue,20trạm,1.774/902/983mẫu train/cal/dev; LightGBM A0–A3 vàGRU_A2ba seed đã chạy. [Báo cáo](reports/gfs_station_pilot_2026_11_10/BAO_CAO_PILOT.md), [Word](reports/gfs_station_pilot_2026_11_10/BAO_CAO_PILOT.docx). CI A2−GFS cả ba hạn còn chứa0, nên chưa khẳng định cải thiện ổn định.47tests vàreplaynguồn/môhìnhđạt. Bước tiếp: protocol mới để kiểmchứng bằng lịch hằng ngày, độnhạytrễ vàdrop-group; không thay pilotcũ hoặc mở2025.
+
 Người dùng chốt ngày09/11/2026: **cả cực ngắn và ngắn đều dự báo theo trạm**. Đây là mục tiêu hiện tại; các kế hoạch mưa trung bình vùng đã chuyển thành tài liệu lịch sử.
 
 ## 1. Phạm vi và phân công
@@ -9,7 +15,7 @@ Nhóm dữ liệu Đà Nẵng trong tài khoản Vrain, không phải toàn Vi�
 | Nhánh | Người phụ trách | Nhãn tại chính trạm |
 | --- | --- | --- |
 | Cực ngắn | Thành viên Bi-LSTM | Sáu lượng mưa giờ tiếp theo, 1–6h |
-| Ngắn | Người dùng, LightGBM/TFT/Informer | Ba tổng24hriêng của ngày1/2/3 |
+| Ngắn | Người dùng, GFS+LightGBM/GRU theo phương án mới | Ba tổng24hriêng của ngày1/2/3 |
 
 Mỗi kiến trúc dự kiến dùng một mô hình chung cho nhiều trạm. Một mẫu là `(trạm, thời điểm phát dự báo)`, không cần86 mô hình riêng cho mỗi kiến trúc.
 

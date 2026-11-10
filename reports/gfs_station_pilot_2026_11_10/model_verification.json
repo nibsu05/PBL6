@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "replayed_lightgbm_amount_estimators": 36,
+  "replayed_lightgbm_binary_estimators": 72,
+  "replayed_GRU_seeds_cpu": 3,
+  "independent_aggregate_metric_rows": 120,
+  "CI_point_estimates_match_metrics": true,
+  "GRU_normalizer_statistics_match_train_only": true,
+  "labels_not_in_X": true,
+  "test2025_read": false
+}

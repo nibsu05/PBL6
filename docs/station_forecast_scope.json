@@ -30,7 +30,16 @@
   "source_time_confirmation": "user explicit confirmation 2026-11-09: 10:00 is rain 09:00-10:00 Vietnam UTC+7",
   "daily_interval_local": "19:00 previous day to 19:00 marked day, all 24 hours required",
   "splits": {"train": "2021-2022", "cal": "2023", "dev_not_final_test": "2024"},
-  "station_model_training_performed": false,
+  "station_model_training_performed": true,
+  "station_ERA5_v1_model_training_performed": false,
+  "current_short_range_method": "archived GFS forecast + gauge history; LightGBM A0-A3 and small GRU_A2",
+  "short_range_approved_date": "2026-11-10",
+  "NWP_pilot_stations": 20,
+  "NWP_pilot_cadence_days": 7,
+  "NWP_pilot_complete": true,
+  "full_daily_NWP_experiment_complete": false,
+  "all_A2_vs_GFS_CI_include_zero": true,
+  "short_range_report": "reports/gfs_station_pilot_2026_11_10/BAO_CAO_PILOT.md",
   "test2025_read": false,
   "recent2026_used_for_model_selection": false
 }

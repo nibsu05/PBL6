@@ -1,0 +1,45 @@
+{
+  "status": "pilot_complete",
+  "weekly_cadence_days": 7,
+  "selected_stations": 20,
+  "forecast_issues_collected": 208,
+  "models_completed": [
+    "CLIM",
+    "PERSISTENCE",
+    "GFS",
+    "A0",
+    "A1",
+    "A2",
+    "A3",
+    "GRU_A2"
+  ],
+  "training_station_issue_samples": 1774,
+  "calibration_station_issue_samples": 902,
+  "development_station_issue_samples": 983,
+  "a2_vs_raw_gfs_development": [
+    {
+      "horizon": 1,
+      "gfs_mae": 6.397747140958039,
+      "a2_mae": 6.154053104285019,
+      "relative_mae_reduction_percent": 3.8090601473275405
+    },
+    {
+      "horizon": 2,
+      "gfs_mae": 8.133226236993476,
+      "a2_mae": 7.370999724234029,
+      "relative_mae_reduction_percent": 9.371760855397177
+    },
+    {
+      "horizon": 3,
+      "gfs_mae": 10.26519915323409,
+      "a2_mae": 7.754644698202767,
+      "relative_mae_reduction_percent": 24.456948350976347
+    }
+  ],
+  "gru_status": "complete",
+  "A2_vs_GFS_all_three_CI_include_zero": true,
+  "full_daily_experiment_complete": false,
+  "final_test_performed": false,
+  "test2025_read": false,
+  "conclusion": "Preliminary point skill; feature/probability gains not uniform. Daily replication and uncertainty checks required."
+}

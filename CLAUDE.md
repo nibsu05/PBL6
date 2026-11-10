@@ -1,13 +1,35 @@
 # PBL6 — bối cảnh hiện hành cho agent
 
-Cập nhật 09/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
+Cập nhật 10/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
+
+## Hướng ngắn hạn mới được người dùng duyệt 10/11/2026
+
+Người dùng yêu cầu đánh giá độc lập với hướng cũ, rồi nói **“ok hãy tiến hành thực hiện”** với phương án NWP + Vrain. Nhánh ngắn hạn ưu tiên **hậu xử lý GFS để dự báo ba tổng24h tại trạm**, LightGBM chính và GRU nhỏ theo điều kiện pilot. TFT/Informer không còn là bộ ba bắt buộc. Nghiên cứu giá trị đầu vào mưa trạm/khí tượng dự báo/địa hình; chưa làm app. Chi tiết: `docs/short_range_nwp_design.md`.
+
+- GFS00UTC, issue12UTC=19hVN; hiệu tổng0–12/36/60/84h tạo ba cửa sổ19–19h. Khí tượngGFS+24/+48/+72h là ba trạng thái giữa cửa sổ, không phải trung bình ngày.
+- Bản dự báo phải có trước issue theo giả định trễGFS8h và margin12h; chưa chứng minh thời điểm công bố lịch sử từng file. Trễtrạmgiảđịnh1h: summary1/6/24h kết thúc18h, bảy ngày đầy đủ kết thúc hôm trước; không dùng số đo19h ngay tại issue.
+- Pilot mỗi7ngày trong2021–2024,208issue, khác thí nghiệm hằng ngày đầy đủ. Chọn20trạm từ57ứng viên chỉ theo train2021–22 và địa lý/DEM; mỗi trạm565–728ngày train hợp lệ. Không chọn ngày/trạm theo điểmdev hoặc mưa cực đoan quan sát.
+- A0=mưaGFS+lịch+vịtrí/ID; A1 thêm lịch sửVrain; A2 thêm T/RH/gió850/PWAT vàproxyẩm; A3 thêmDEM/slope/tươngtácgió. MọiA cùng mẫu. Q850 tính từT/RH cùngcôngthức vì đầu2021thiếuSPFH trong sản phẩm thườngdùng.
+- DEMMapzen là proxy tại tọa độ hiện có, không phải cao độ đo tại trạm; gió·gradientđịa hình/ẩm là giả thuyết, không chứng minh nhân quả.
+- Protocol khóa trướcfit ở `reports/gfs_station_pilot_2026_11_10/protocol.json`; audit/verification/kết quả cùngthưmục. Private ở `data/operational/gfs_station_pilot_2026_11_10/`, `data/processed/gfs_station_pilot/`.
+- Collector `scripts/collect_gfs_station_pilot.py`: HTTPbyte-range,206/Content-Range, GRIBinit/lead/interval/unit, resume/SHA; đọcprogress/PIDthật. Windows ecCodes phải giải mã tuần tự quaLock, chỉ HTTP chạy song song. Optionalenv `requirements-nwp.txt`.
+- Ba seed17/29/43. GRU_A2chỉ chạy khi gatecal: A2macroMAE thấp hơn cảGFS/khíhậu và>=50%trạm cải thiện soGFS ở ít nhất một hạn. Không dùngdev để quyếtđịnhgate. Cal/earlystop2023,dev2024chưa làtestcuối;2025kín,2026khôngfit/tuning.
+- BộVrain–ERA5v1 và Bi-LSTM cựcngắn giữ phạmvi riêng. “Đã ghép/train được” không chứng minh khả dụngrealtime hoặc kỹnăng1–3ngày. Không gắnNWPpilot thànhthínghiệmhằngngàyđầyđủ.
+
+**Trạng thái sau triển khai:** NWPpilot đã hoàn thành208/208issue,20trạm,10.977hàng/3.659mẫu trạm–issue. Train/cal/dev=1.774/902/983mẫu, mỗi mẫu ba nhãn. Đãfit36estimatorlượng và72classifierLightGBM chính, GRU_A2ba seed7001tham số trênCUDA; không trainTFT/Informer. 47testsđạt; replay10.977hàng và171mẫu nội suyGRIB, replay36+72estimators vàbaGRUCPU, scalertrain-only/metricđạt.
+
+Trên dev2024, macroMAE GFS=6,40/8,13/10,27mm; A2=6,15/7,37/7,75; GRU_A2=7,81/8,35/8,46. **CI A2−GFS cả ba hạn chứa0**, không khẳng định cải thiện ổn định dù ngày3giảmđiểmkhoảng24%. GRU có MAE cao hơn nhưng RMSEngày3 thấp hơn A2 (18,31so20,17mm); không kết luậnGRUkémmọimặt. A3chưa có lợi ích rõ; BSSkhông cải thiện đồng đều. GateGRU chỉqua ngày3cal với chênhnhỏ; không dùngdevchọngate.
+
+AuditLast-Modified3952messages:7chu kỳ đầu2021có timestamp sửa/chéparchive sauissue, không ởcal/dev. Không suy ra phát hànhgốc muộn. Đã chạy thêmA2ba seed bỏ7chu kỳ train; devMAE6,09/7,42/7,88mm, hướng tương tự. Xemrelease_timestamp_audit.json/release_sensitivity_metrics.csv. Chưa chứng minh độtrễvậnhànhthật.
+
+Điểmvào kếtquả: `reports/gfs_station_pilot_2026_11_10/BAO_CAO_PILOT.md`, Wordcùngtên, `result_summary.json`. Datasetprivate `data/processed/gfs_station_pilot/gfs_vrain_pilot.parquet`. Côngviệctiếpđểkiểmchứng: protocolphiênbảnmới lịch hằng ngày/lag sensitivity/drop-group; không đổi pilot cũ hoặc mở2025tùy tiện.
 
 ## Quyết định mới nhất của người dùng — đã chốt
 
 **Chuyển cả hai nhánh sang dự báo lượng mưa tại trạm.** Người dùng nói: “nhóm tôi thực hiện dự đoán cực ngắn và ngắn theo trạm”. Quyết định này thay mục tiêu dự báo trực tiếp mưa trung bình diện tích toàn Đà Nẵng trước đây. Không tự đưa mục tiêu vùng trở lại hoặc ưu tiên app.
 
 - Thành viên khác: Bi-LSTM, sáu lượng mưa giờ tiếp theo tại từng trạm, 1–6h.
-- Người dùng: LightGBM/TFT/Informer, ba tổng 24h riêng của ngày 1/2/3 tại từng trạm.
+- Người dùng: ba tổng24h riêng tại trạm; **phương án mới NWP+LightGBM/GRU ở đầu file** thay bộbaTFT/Informer bắt buộc trước đây.
 - Đề xuất kỹ thuật: mỗi kiến trúc học một mô hình chung cho nhiều trạm; một mẫu là `(station_id, issue_time)`. Không cần 86 mô hình riêng cho một kiến trúc.
 - Nhãn là mưa Vrain tại chính trạm. Người dùng đã xác nhận: **10:00 = tổng mưa09:00–10:00 giờ Việt Nam, UTC+7**. Đơn vị hiển thị nguồn là mm. Không còn chờ xác nhận timezone hoặc nhãn vùng.
 
@@ -34,17 +56,17 @@ Private base `data/operational/vrain_2026_11_09/`:
 
 **ERA5 gốc vẫn có tại `data/raw_data/gee/era5/grid/*.parquet`.** Builder mới nội suy trực tiếp từ bốn nút0,25° quanh trạm; tất cả82trạm lịch sử có nút bao quanh. Không dùng đường vòng93ô hoặc sao chép mean vùng. Yêu cầu đủ mọi nút có trọng số dương; giữNaN nếu thiếu. Context/SST/chênháp có miền vùng có chủ đích. Không dùng các cột mưa ERA5/GSMaP làm X/y. CubeR93 và bộ vùng cũ giữ làm lịch sử.
 
-Kiểm tra đạt2.995.050hàng/2.480.367cửa sổ: nhãn Vrain gốc, tổng ngày, không vượt trạm/gap/split;45đối chiếu trườngERA5,328số mưa gốc,72mẫu qua loader. Đã có34tests (26Vrain+8mới). Chưa train mô hình trạm. Đây là kiểm tra ghép/cấu trúc, chưa chứng nhận cảm biến, vị trí lịch sử hay độ trễ vận hành.
+Kiểm traERA5v1đạt2.995.050hàng/2.480.367cửa sổ,45đốichiếutrườngERA5,328sốmưagốc,72mẫuqua loader;34testsởbảnđó. ChưatrainbằngbộERA5v1; NWPpilot10/11đãtrainriêngnhưđầu file. Đây là kiểm tra cấu trúc, chưa chứng nhận cảm biến/vịtrílịchsử/độtrễ.
 
 ## Hợp đồng thời gian và nghiên cứu
 
 - Người dùng xác nhận10:00là mưa09–10hViệtNam. Chuẩn hóa `period_start_utc=02:00`, `period_end_utc=03:00`; ERA5tức thời lấy02:00UTC. Clock20:00hômtrước→19:00ngàyđánhdấu tạo ngày19:00→19:00, không phải00–24. Không dùng tiêu đề XLSX19:20 để đổi các bin giờ đã xác nhận.
 - Lưu mưa theo khoảng đo, provenance, QC; không đổi thiếu thành0, không chia mưa ngày thành giờ, không lấp y bằng ERA5/CPC/GSMaP.
 - B/A/M/C đã dựng theo trạm: giờ11/12/20/1, ngày9/12/20/1. E7=44/42kênh; thêmR=45/43. Statictọađộ2kênh+IDđi riêng, cùng cách dùng giữa cácE. C chỉSST, chưa phảiENSO/MJO.
-- R là mưa quá khứ của chính trạm, thử R0/R1 riêng; khi ablation A/M/C phải giữ R và mask giống nhau. Chỉ lịch tương lai biết trước được dùng; không ERA5/mưa kỳ đích trong X.
+- BộERA5v1: Rlà mưa quákhứchínhtrạm, maskchungkhiablation, chỉlịchtươnglaiđãbiết. **BộNWP mới được dùng khí tượng/mưa GFS dự báo kỳ đích từ bản khởi tạo trướcissue; cấm số thực đo hoặcERA5kỳđích trongX.**
 - Split theo thời gian chung cho mọi trạm, toàn bộ nhãn nằm trong split. Fit scaler/reference trên train; earlystop/calibration/tau trên cal. Không random cửa sổ lẫn trạm/ngày.
 - Bảnv1: train2021–22, cal2023, dev2024 theo giờ Việt Nam;2024chưa phải testcuối. Mask `sample_ready_r1` dùng chung mọiE/model/R0–R1. Loader `src/station_forecast_data.py` giữ mọi hàng thời gian trước chọn issue; không dropNaNrồi cắtchuỗi. Chưafit bất kỳ scaler nào.
-- **2025 giữ kín.** Không tuning2026 rồi gọi2025 là test tương lai. Chưa train theo trạm hoặc đổi tên kết quả vùng cũ thành kết quả trạm.
+- **2025 giữ kín.** Không tuning2026 rồi gọi2025 là test tương lai. Không đổi tên kết quả vùng cũ thành kết quả trạm; NWPpilotđãtrainriêng, ERA5v1chưatrain.
 - Báo metric từng trạm và macro-average, kèm micro nếu cần; bootstrap theo khối thời gian giữ đồng thời các trạm. Không coi các trạm trong cùng trận mưa là mẫu khí hậu độc lập.
 - Ngưỡng mưa/POD/FAR phải chốt phù hợp trạm và kỳ giờ/ngày; không tự mang ngưỡng vùng16/50/100 sang. Không có POD0,4 tốt chung. ERA5 hồi cứu chưa chứng minh có sẵn tại issue vận hành.
 
@@ -66,4 +88,4 @@ Giữ nguyên, không restore/build/stage hai slide người dùng sửa: `repor
 - `reports/short_range_complete_2026_10_28/`: GSMaP ba mô hình, giữ nguyên nguồn/kết quả.
 - `reports/regional_research_plan_2026_10_20/PHUONG_AN_CUOI.md`: các quyết định có bằng chứng giữ đúng phạm vi cũ; không tự phủ nhận số đo cũ vì đổi mục tiêu.
 - Dọn tài liệu09/11 đã được phép, có ZIPprivate/Git a05f6c0, `docs/cleanup_2026_11_09.json`. Không xóa bằng chứng thí nghiệm.
-- Có dataset/loader trạm mới,34tests và kiểm tra toàn file; chưa train mô hình. Scripts: `build_station_forecast_data.py`, `validate_station_forecast_data.py`, `publish_station_data_handoff.py`. Không đổi số đo vùng cũ thành kết quả trạm.
+- Dataset/loaderERA5v1có34tests và kiểmtra toànfile; chưatrainv1. NWPpilotđãtrainnhưđầu file. Scriptsv1: `build_station_forecast_data.py`, `validate_station_forecast_data.py`, `publish_station_data_handoff.py`. Không đổi số đo vùng cũ thành kết quả trạm.

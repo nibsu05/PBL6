@@ -1,4 +1,8 @@
-# Thiết kế nghiên cứu hiện hành — dự báo mưa tại nhiều trạm
+# Thiết kế nghiên cứu — dự báo mưa tại nhiều trạm
+
+**Phương án ngắn hạn hiện hành được duyệt10/11/2026: [GFS + Vrain, LightGBM/GRU](docs/short_range_nwp_design.md).** Protocol khóa trướcfit: `reports/gfs_station_pilot_2026_11_10/protocol.json`. Câu hỏi nghiên cứu là giá trị lịch sửmưa/khítượngdựbáo/địaphương cho ba tổng24h tại trạm; không bắt buộc TFT/Informer.
+
+Phần dưới ghi thiết kế và giới hạn **bộVrain–ERA5v1 đã bàn giao09/11**. Giữ để diễn giải nguồn và hỗ trợ nhánh cực ngắn; không coi là thiết kếNWPmới hay bằng chứng khả dụng realtime.
 
 Người dùng đã chốt09/11/2026: cả hai nhánh dự báo theo trạm. Tài liệu này thay thiết kế dự báo trực tiếp mưa trung bình vùng trước đó. Đây là thiết kế để triển khai; chưa có kết quả train Vrain theo trạm.
 
