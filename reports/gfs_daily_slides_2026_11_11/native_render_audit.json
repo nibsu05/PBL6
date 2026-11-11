@@ -1,0 +1,13 @@
+﻿{
+    "renderer":  "Microsoft PowerPoint native COM",
+    "version":  "16.0",
+    "slide_count":  41,
+    "text_boxes_checked":  1189,
+    "overflow_tolerance_pt":  1.5,
+    "overflows":  [
+
+                  ],
+    "pdf_exported":  true,
+    "read_only_source":  true,
+    "pptx_sha256":  "a90ca9d0167bd4d5d00a7997d19de5100fc208308a24769e25d695066411b58f"
+}

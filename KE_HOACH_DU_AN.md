@@ -1,5 +1,7 @@
 # Kế hoạch hiện hành — dự báo mưa tại trạm
 
+**Báo cáo slide 11/11/2026:** [bản daily-v2 41 slide và ghi chú](reports/gfs_daily_slides_2026_11_11/README.md), diễn giải đầu vào/đầu ra, chia năm, tuning, N0–N5 và bảng kết quả dev 2024. Đã tách rõ 2025 là tập dành kiểm định cuối sau khóa phương án; làm slide không huấn luyện hoặc mở test.
+
 **Hoàn thành 11/11/2026:** cả bốn đề xuất theo [protocol hằng ngày v2](reports/gfs_station_daily_v2_2026_11_10/protocol.json): issue hằng ngày/độ trễ; ZERO/MOS và mean–median; N0–N5 tách biến thô khỏi dẫn xuất; xác suất lồng nhau/tuning chỉ train. 72.886 mẫu/218.658 hàng, 57 trạm, train/cal/dev 35.116/18.365/19.405. Đã train và replay288 estimatorLightGBM/6GRU, kiểm tra2.106 metric;179tests đạt. [Báo cáo](reports/gfs_station_daily_v2_2026_11_10/BAO_CAO_HANG_NGAY_V2.md), [kết luận](reports/gfs_station_daily_v2_2026_11_10/KET_LUAN.md). Chưa mở2025, chưa chứng minh latency vận hành. Bước tiếp theo là chọn/đóng băng cấu hình cuối theo mục tiêu hoặc định nghĩa protocol bổ sung; không tự mở test. Các đoạn dưới mô tả giai đoạn trước.
 
 **Trạng thái mới nhất:** đãmở rộng NWP lên57trạm, cùngtiêuchí train và lịch mỗi7ngày; LightGBM A0–A3/GRUba seed đã chạy. [Báo cáo57](reports/gfs_station_57_2026_11_10/BAO_CAO_MO_RONG.md), [Word](reports/gfs_station_57_2026_11_10/BAO_CAO_MO_RONG.docx). Pilot20giữ nguyên.79trạm cótrain là nhóm rộng hơn,22trạm còn lịch sử ngắn chưatrain trongbản57. Mởrộng sốtrạm không bảo đảm tăngskill; đãso trên cùng20trạm vàcùngissue, không so hai trung bình kháccohort.

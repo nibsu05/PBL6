@@ -1,0 +1,7331 @@
+{
+  "experiment": "gfs_station_daily_v2_2026_11_10",
+  "slides": 41,
+  "roles": {
+    "title": 1,
+    "takeaways": 2,
+    "target": 3,
+    "sample": 4,
+    "sources": 5,
+    "timing": 6,
+    "latency_evidence": 7,
+    "coverage": 8,
+    "split": 9,
+    "holdout": 10,
+    "mask": 11,
+    "cv": 12,
+    "baselines": 13,
+    "mean_median": 14,
+    "features": 15,
+    "contrasts": 16,
+    "models": 17,
+    "tuning_tree": 18,
+    "gru_seeds": 19,
+    "probabilities": 20,
+    "metrics": 21,
+    "uncertainty": 22,
+    "rmse": 23,
+    "mae": 24,
+    "bss50": 25,
+    "events": 26,
+    "raw_gain": 27,
+    "derived_gain": 28,
+    "latency": 29,
+    "heavy_amount": 30,
+    "validation": 31,
+    "conclusion": 32,
+    "full_rmse": 33,
+    "full_mae": 34,
+    "full_bias": 35,
+    "full_bs1": 36,
+    "full_bss1": 37,
+    "full_bs50": 38,
+    "full_bss50": 39,
+    "cutoff_comparison": 40,
+    "references": 41
+  },
+  "main_slides": 32,
+  "test2025_read": false,
+  "training_run": false,
+  "sources": {
+    "reports/gfs_station_daily_v2_2026_11_10/protocol.json": "f7b3e9d8d02538e7da8ac60278078ff95936f251e49fed0b1b556162a29abbc6",
+    "reports/gfs_station_daily_v2_2026_11_10/preparation.json": "f8acb7237e9f7b0350274d422e406a68ba96a495cc6fcabb51d4915e44fdda0c",
+    "reports/gfs_station_daily_v2_2026_11_10/collection_summary.json": "59385a0a719c9f444394e9dfe61e2d9830bce77b06d546b212386c5665b75cd0",
+    "reports/gfs_station_daily_v2_2026_11_10/source_coverage_policy.json": "9bc3b565c7e6fcb027bc0ab4f86eea99bf45c2d752f8d2e029cc454b44e1d585",
+    "reports/gfs_station_daily_v2_2026_11_10/source_latency_audit.json": "5073a269bb21d20077415d246bc5f8b782cb8c793d9acb5685b44c9c204304bf",
+    "reports/gfs_station_daily_v2_2026_11_10/dataset_audit.json": "8e88753ab77f2b68aa2556043cbf6813b8404c02cc02c4e8fb525114731071c1",
+    "reports/gfs_station_daily_v2_2026_11_10/dataset_verification.json": "e1a418e6f6fa9bc68bab39d91761cb0aa70aadfb2a08e34e79f3dacb65177972",
+    "reports/gfs_station_daily_v2_2026_11_10/training_provenance.json": "b73899e33b149d6c4527c5eb7f974e26712fd83cc809ed18a26570da4c2ec7f8",
+    "reports/gfs_station_daily_v2_2026_11_10/tree_tuning_trials.csv": "a370a68599ce723c3fa7460f058bc061ccfbf3c8a0b20bbaaa85c4737fb4e932",
+    "reports/gfs_station_daily_v2_2026_11_10/tree_selection.json": "1b8c887b4a0336b3781d8fc33f443465e9f72b0c5be6e4720ed95826b8feecf5",
+    "reports/gfs_station_daily_v2_2026_11_10/tree_fit_diagnostics.csv": "a500e3fa6b26ec85a86324b733f765855758adbf700304d03b8931d67c048868",
+    "reports/gfs_station_daily_v2_2026_11_10/tree_summary.json": "c1bfbbfdb14b05d0e5a1f9acdaea6b3c14559db21e33aa21cc64aaa8a5750cbd",
+    "reports/gfs_station_daily_v2_2026_11_10/gru_tuning_trials.csv": "7c62bafeafae88a756693119f7ee80e84a0e7d2e90a41e8cbc63ff88bd64006b",
+    "reports/gfs_station_daily_v2_2026_11_10/gru_learning_curves.csv": "9508545cc05ae49b844523343b1784b2a8ac1ebaa2dceb03a3391fc2d313bbf5",
+    "reports/gfs_station_daily_v2_2026_11_10/gru_selection.json": "db829feece0a53b23fa8ef25c6b02686fffffa064860255e614ac9e58ad33cdf",
+    "reports/gfs_station_daily_v2_2026_11_10/decision_cutoffs.json": "c5d0538dfb6ec888342c550b39d2b9c85191ad37bb512b4010f50e0249fcfe9a",
+    "reports/gfs_station_daily_v2_2026_11_10/gru_final_learning_curves.csv": "f52e7825629689af941c24a803a39cebd9c31109db64a48227b7318b46ac86a9",
+    "reports/gfs_station_daily_v2_2026_11_10/gru_summary.json": "b4f58c75c2836ee7511baae3c9eddd9d5442d01ebd13146ac4c21acca401d7f8",
+    "reports/gfs_station_daily_v2_2026_11_10/label_distribution.csv": "76988be66d7dd49c94fd8be31457441fe5b606870091b05addb162642193afdd",
+    "reports/gfs_station_daily_v2_2026_11_10/station_improvement_summary.csv": "af371b47c651e3a5551bdc9a9eecbff1e0b2dc2dadc0aa2395fe63cc23cf3a6f",
+    "reports/gfs_station_daily_v2_2026_11_10/point_metrics.csv": "4f0be85bb9830ab041f375080359929c7bd77fb292d6a705d11210a8680ed45a",
+    "reports/gfs_station_daily_v2_2026_11_10/probability_metrics.csv": "9132ac6d550e1ff7f007b9d916a554d21509179f6c52fc8e95cc5e174b20f48e",
+    "reports/gfs_station_daily_v2_2026_11_10/event_metrics.csv": "b99614ce04c6dc73ce91ea00e4247d64a37cf3797cf7cc51e4a86c608b9dc287",
+    "reports/gfs_station_daily_v2_2026_11_10/conditional_amount_metrics.csv": "6e9aa08a019261ff4c0598c1e55c63e5db0f1dbb8e6504b4f02e408c6d995946",
+    "reports/gfs_station_daily_v2_2026_11_10/monthly_point_metrics.csv": "2df28c195d7d0b8d5032b176a9b8433bb1114871063f083fdb37ecb8d0e90479",
+    "reports/gfs_station_daily_v2_2026_11_10/reliability.csv": "58d15e011277d79d36d3b93861f2a593a9fda1a218a1aad4c25a7005c85c6825",
+    "reports/gfs_station_daily_v2_2026_11_10/probability_coherence.csv": "1c01141a5ac9ba889393e0ebdac893e14e34dc475d62ed6fdbe790ad05b1add9",
+    "reports/gfs_station_daily_v2_2026_11_10/paired_bootstrap.csv": "9156980bfbb8511e6b47fc463eb9f35956496a0a82512512aa47050560c97ca3",
+    "reports/gfs_station_daily_v2_2026_11_10/result_summary.json": "deb50d524fb9e9df3b250b1fc607985b0de133d5194b02a66a24b39b155863a1",
+    "reports/gfs_station_daily_v2_2026_11_10/runtime_environment.json": "2aed7b6e567c5a34d920902b6e9ff866d2c470a299172557ee08fc5d680271d6",
+    "reports/gfs_station_daily_v2_2026_11_10/seed_metrics.csv": "1c3fc0975abbc6cef01a5879af00f24f612b6790a7a97e37f5c72b1f6628bbd8",
+    "reports/gfs_station_daily_v2_2026_11_10/model_verification.json": "422f52a7bb754dbbfb5a844d3e6ac995b72049ab0bf7dc2ccf89f2ffdb915cc1",
+    "reports/gfs_station_daily_v2_2026_11_10/KET_LUAN.md": "80169f921c7557dc2f6526ca54f09a8f75e2ba00fb3d9f9ac733a5166eb3e99d",
+    "reports/gfs_station_daily_v2_2026_11_10/BAO_CAO_HANG_NGAY_V2.md": "18e268b574848949ae197fa0bbcca3dd2f5aaa8f83008326edddde426a04f630",
+    "reports/gfs_station_daily_v2_2026_11_10/README.md": "e14bfb45397ea9c41c67cb9afc5b32ab01ad7b06337733f3d9cb91ea0bbce288",
+    "reports/gfs_station_daily_v2_2026_11_10/report_render_check.json": "db024297c443351bbfecf8b0dc88c6cd7e9a7e995cee0fdae08f03e73e6e7c72",
+    "reports/gfs_station_daily_v2_2026_11_10/release_validation.json": "94ee1347efe290da216c4c03167b6278e6724e0a59de0cd6df271a23b07ead35"
+  },
+  "numeric_checks": [
+    {
+      "tag": "seed_example",
+      "row": 0,
+      "col": 1,
+      "file": "seed_metrics.csv",
+      "filters": {
+        "model": "GRU_N5",
+        "seed": 17,
+        "horizon": 1
+      },
+      "key": "mean_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "seed_example",
+      "row": 0,
+      "col": 2,
+      "file": "seed_metrics.csv",
+      "filters": {
+        "model": "GRU_N5",
+        "seed": 17,
+        "horizon": 1
+      },
+      "key": "median_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "seed_example",
+      "row": 1,
+      "col": 1,
+      "file": "seed_metrics.csv",
+      "filters": {
+        "model": "GRU_N5",
+        "seed": 29,
+        "horizon": 1
+      },
+      "key": "mean_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "seed_example",
+      "row": 1,
+      "col": 2,
+      "file": "seed_metrics.csv",
+      "filters": {
+        "model": "GRU_N5",
+        "seed": 29,
+        "horizon": 1
+      },
+      "key": "median_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "seed_example",
+      "row": 2,
+      "col": 1,
+      "file": "seed_metrics.csv",
+      "filters": {
+        "model": "GRU_N5",
+        "seed": 43,
+        "horizon": 1
+      },
+      "key": "mean_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "seed_example",
+      "row": 2,
+      "col": 2,
+      "file": "seed_metrics.csv",
+      "filters": {
+        "model": "GRU_N5",
+        "seed": 43,
+        "horizon": 1
+      },
+      "key": "median_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "seed_example",
+      "row": 3,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "seed_example",
+      "row": 3,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 0,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 0,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 0,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 1,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 1,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 1,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 2,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 2,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 2,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 3,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 3,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 3,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 4,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 4,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 4,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 5,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 5,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 5,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 6,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 6,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 6,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 7,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 7,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "rmse",
+      "row": 7,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 0,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 0,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 0,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 1,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 1,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 1,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 2,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 2,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 2,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 3,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 3,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 3,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 4,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 4,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 4,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 5,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 5,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 5,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 6,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 6,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 6,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 7,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 7,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "mae",
+      "row": 7,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 0,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 0,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 0,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 1,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 1,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 1,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 2,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 2,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 2,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 3,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 3,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 3,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 4,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 4,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 4,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 5,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 5,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 5,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 6,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 6,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 6,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 7,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 7,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "bss50",
+      "row": 7,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 0,
+      "col": 2,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 0,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 0,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 0,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 1,
+      "col": 2,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 1,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 1,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 1,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 2,
+      "col": 2,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 2,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 2,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 2,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 3,
+      "col": 2,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 3,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 3,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 3,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 4,
+      "col": 2,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 4,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 4,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 4,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 5,
+      "col": 2,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 5,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 5,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 5,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 6,
+      "col": 2,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 6,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 6,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 6,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 7,
+      "col": 2,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 7,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 7,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 7,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 8,
+      "col": 2,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 8,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 8,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "events",
+      "row": 8,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "raw_gain",
+      "row": 0,
+      "col": 1,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "LGB_N1",
+        "reference": "LGB_N0",
+        "horizon": 1,
+        "functional": "mean",
+        "metric": "rmse"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "raw_gain",
+      "row": 0,
+      "col": 2,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "LGB_N1",
+        "reference": "LGB_N0",
+        "horizon": 1,
+        "functional": "median",
+        "metric": "mae"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "raw_gain",
+      "row": 1,
+      "col": 1,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "LGB_N1",
+        "reference": "LGB_N0",
+        "horizon": 2,
+        "functional": "mean",
+        "metric": "rmse"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "raw_gain",
+      "row": 1,
+      "col": 2,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "LGB_N1",
+        "reference": "LGB_N0",
+        "horizon": 2,
+        "functional": "median",
+        "metric": "mae"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "raw_gain",
+      "row": 2,
+      "col": 1,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "LGB_N1",
+        "reference": "LGB_N0",
+        "horizon": 3,
+        "functional": "mean",
+        "metric": "rmse"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "raw_gain",
+      "row": 2,
+      "col": 2,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "LGB_N1",
+        "reference": "LGB_N0",
+        "horizon": 3,
+        "functional": "median",
+        "metric": "mae"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "derived_gain",
+      "row": 0,
+      "col": 1,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "LGB_N5",
+        "reference": "LGB_N3",
+        "horizon": 1,
+        "functional": "mean",
+        "metric": "rmse"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "derived_gain",
+      "row": 0,
+      "col": 2,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "LGB_N5",
+        "reference": "LGB_N3",
+        "horizon": 1,
+        "functional": "median",
+        "metric": "mae"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "derived_gain",
+      "row": 1,
+      "col": 1,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "LGB_N5",
+        "reference": "LGB_N3",
+        "horizon": 2,
+        "functional": "mean",
+        "metric": "rmse"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "derived_gain",
+      "row": 1,
+      "col": 2,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "LGB_N5",
+        "reference": "LGB_N3",
+        "horizon": 2,
+        "functional": "median",
+        "metric": "mae"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "derived_gain",
+      "row": 2,
+      "col": 1,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "LGB_N5",
+        "reference": "LGB_N3",
+        "horizon": 3,
+        "functional": "mean",
+        "metric": "rmse"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "derived_gain",
+      "row": 2,
+      "col": 2,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "LGB_N5",
+        "reference": "LGB_N3",
+        "horizon": 3,
+        "functional": "median",
+        "metric": "mae"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "derived_gain",
+      "row": 3,
+      "col": 1,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "GRU_N5",
+        "reference": "GRU_N3",
+        "horizon": 1,
+        "functional": "mean",
+        "metric": "rmse"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "derived_gain",
+      "row": 3,
+      "col": 2,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "GRU_N5",
+        "reference": "GRU_N3",
+        "horizon": 1,
+        "functional": "median",
+        "metric": "mae"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "derived_gain",
+      "row": 4,
+      "col": 1,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "GRU_N5",
+        "reference": "GRU_N3",
+        "horizon": 2,
+        "functional": "mean",
+        "metric": "rmse"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "derived_gain",
+      "row": 4,
+      "col": 2,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "GRU_N5",
+        "reference": "GRU_N3",
+        "horizon": 2,
+        "functional": "median",
+        "metric": "mae"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "derived_gain",
+      "row": 5,
+      "col": 1,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "GRU_N5",
+        "reference": "GRU_N3",
+        "horizon": 3,
+        "functional": "mean",
+        "metric": "rmse"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "derived_gain",
+      "row": 5,
+      "col": 2,
+      "file": "paired_bootstrap.csv",
+      "filters": {
+        "model": "GRU_N5",
+        "reference": "GRU_N3",
+        "horizon": 3,
+        "functional": "median",
+        "metric": "mae"
+      },
+      "kind": "interval",
+      "digits": 3
+    },
+    {
+      "tag": "latency",
+      "row": 0,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "latency",
+      "row": 0,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "latency",
+      "row": 0,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "latency",
+      "row": 1,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3_delay3",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "latency",
+      "row": 1,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3_delay3",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "latency",
+      "row": 1,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3_delay3",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "latency",
+      "row": 2,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3_delay6",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "latency",
+      "row": 2,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3_delay6",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "latency",
+      "row": 2,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3_delay6",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "heavy_amount",
+      "row": 0,
+      "col": 1,
+      "file": "conditional_amount_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "horizon": 3,
+        "model": "GFS",
+        "functional": "mean",
+        "observed_rain_bin": "ge50"
+      },
+      "key": "micro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "heavy_amount",
+      "row": 0,
+      "col": 2,
+      "file": "conditional_amount_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "horizon": 3,
+        "model": "GFS",
+        "functional": "mean",
+        "observed_rain_bin": "ge50"
+      },
+      "key": "micro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "heavy_amount",
+      "row": 0,
+      "col": 3,
+      "file": "conditional_amount_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "horizon": 3,
+        "model": "GFS",
+        "functional": "mean",
+        "observed_rain_bin": "ge50"
+      },
+      "key": "micro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "heavy_amount",
+      "row": 1,
+      "col": 1,
+      "file": "conditional_amount_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "horizon": 3,
+        "model": "MOS",
+        "functional": "mean",
+        "observed_rain_bin": "ge50"
+      },
+      "key": "micro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "heavy_amount",
+      "row": 1,
+      "col": 2,
+      "file": "conditional_amount_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "horizon": 3,
+        "model": "MOS",
+        "functional": "mean",
+        "observed_rain_bin": "ge50"
+      },
+      "key": "micro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "heavy_amount",
+      "row": 1,
+      "col": 3,
+      "file": "conditional_amount_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "horizon": 3,
+        "model": "MOS",
+        "functional": "mean",
+        "observed_rain_bin": "ge50"
+      },
+      "key": "micro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "heavy_amount",
+      "row": 2,
+      "col": 1,
+      "file": "conditional_amount_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "horizon": 3,
+        "model": "LGB_N3",
+        "functional": "mean",
+        "observed_rain_bin": "ge50"
+      },
+      "key": "micro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "heavy_amount",
+      "row": 2,
+      "col": 2,
+      "file": "conditional_amount_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "horizon": 3,
+        "model": "LGB_N3",
+        "functional": "mean",
+        "observed_rain_bin": "ge50"
+      },
+      "key": "micro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "heavy_amount",
+      "row": 2,
+      "col": 3,
+      "file": "conditional_amount_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "horizon": 3,
+        "model": "LGB_N3",
+        "functional": "mean",
+        "observed_rain_bin": "ge50"
+      },
+      "key": "micro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "heavy_amount",
+      "row": 3,
+      "col": 1,
+      "file": "conditional_amount_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "horizon": 3,
+        "model": "GRU_N5",
+        "functional": "mean",
+        "observed_rain_bin": "ge50"
+      },
+      "key": "micro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "heavy_amount",
+      "row": 3,
+      "col": 2,
+      "file": "conditional_amount_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "horizon": 3,
+        "model": "GRU_N5",
+        "functional": "mean",
+        "observed_rain_bin": "ge50"
+      },
+      "key": "micro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "heavy_amount",
+      "row": 3,
+      "col": 3,
+      "file": "conditional_amount_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "horizon": 3,
+        "model": "GRU_N5",
+        "functional": "mean",
+        "observed_rain_bin": "ge50"
+      },
+      "key": "micro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 0,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 0,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 0,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 1,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 1,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 1,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 2,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 2,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 2,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 3,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 3,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 3,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 4,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 4,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 4,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 5,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 5,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 5,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 6,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 6,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 6,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 7,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 7,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 7,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 8,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 8,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 8,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 9,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 9,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 9,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 10,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 10,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 10,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 11,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 11,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 11,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 12,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 12,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_rmse",
+      "row": 12,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_rmse",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 0,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 0,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 0,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 1,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 1,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 1,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 2,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 2,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 2,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 3,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 3,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 3,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 4,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 4,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 4,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 5,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 5,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 5,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 6,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 6,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 6,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 7,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 7,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 7,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 8,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 8,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 8,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 9,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 9,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 9,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 10,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 10,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 10,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 11,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 11,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 11,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 12,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 12,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_mae",
+      "row": 12,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "functional": "median"
+      },
+      "key": "macro_mae",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 0,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 0,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 0,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 1,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 1,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 1,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 2,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 2,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 2,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 3,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 3,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 3,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 4,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 4,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 4,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 5,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 5,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 5,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 6,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 6,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 6,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 7,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 7,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 7,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 8,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 8,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 8,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 9,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 9,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 9,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 10,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 10,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 10,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 11,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 11,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 11,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 12,
+      "col": 1,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 12,
+      "col": 2,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bias",
+      "row": 12,
+      "col": 3,
+      "file": "point_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "functional": "mean"
+      },
+      "key": "macro_bias",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 0,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 0,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 0,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 1,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 1,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 1,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 2,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 2,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 2,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 3,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 3,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 3,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 4,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 4,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 4,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 5,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 5,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 5,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 6,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 6,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 6,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 7,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 7,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 7,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 8,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 8,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 8,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 9,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 9,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 9,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 10,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 10,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 10,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 11,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 11,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 11,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 12,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 12,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs1",
+      "row": 12,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 0,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 0,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 0,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 1,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 1,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 1,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 2,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 2,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 2,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 3,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 3,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 3,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 4,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 4,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 4,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 5,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 5,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 5,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 6,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 6,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 6,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 7,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 7,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 7,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 8,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 8,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 8,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 9,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 9,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 9,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 10,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 10,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 10,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 11,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 11,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 11,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 12,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 12,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss1",
+      "row": 12,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 1
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 0,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 0,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 0,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 1,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 1,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 1,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 2,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 2,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 2,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 3,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 3,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 3,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 4,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 4,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 4,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 5,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 5,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 5,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 6,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 6,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 6,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 7,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 7,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 7,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 8,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 8,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 8,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 9,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 9,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 9,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 10,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 10,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 10,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 11,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 11,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 11,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 12,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 12,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bs50",
+      "row": 12,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bs",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 0,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 0,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 0,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "ZERO",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 1,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 1,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 1,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "PERSISTENCE",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 2,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 2,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 2,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GFS",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 3,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 3,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 3,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "CLIM",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 4,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 4,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 4,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "MOS",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 5,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 5,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 5,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N0",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 6,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 6,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 6,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N1",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 7,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 7,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 7,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N2",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 8,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 8,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 8,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 9,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 9,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 9,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N4",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 10,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 10,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 10,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N5",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 11,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 11,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 11,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N3",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 12,
+      "col": 1,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 12,
+      "col": 2,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "full_bss50",
+      "row": 12,
+      "col": 3,
+      "file": "probability_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 50
+      },
+      "key": "macro_bss",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 0,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 0,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 0,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 0,
+      "col": 6,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 1,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 1,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 1,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 1,
+      "col": 6,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 2,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 2,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 2,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 2,
+      "col": 6,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 3,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 3,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 3,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 3,
+      "col": 6,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 4,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 4,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 4,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 4,
+      "col": 6,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 5,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 5,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 5,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 5,
+      "col": 6,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "LGB_N3",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 6,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 6,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 6,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 6,
+      "col": 6,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 7,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 7,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 7,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 7,
+      "col": 6,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 1,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 8,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 8,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 8,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 8,
+      "col": 6,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 9,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 9,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 9,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 9,
+      "col": 6,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 2,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 10,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 10,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 10,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 10,
+      "col": 6,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "fixed_0.5"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 11,
+      "col": 3,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "cutoff",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 11,
+      "col": 4,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_pod",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 11,
+      "col": 5,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_far",
+      "digits": 3,
+      "kind": "scalar"
+    },
+    {
+      "tag": "cutoff_comparison",
+      "row": 11,
+      "col": 6,
+      "file": "event_metrics.csv",
+      "filters": {
+        "fold": "dev",
+        "model": "GRU_N5",
+        "horizon": 3,
+        "threshold_mm": 50,
+        "decision_rule": "calibration_selected"
+      },
+      "key": "macro_csi",
+      "digits": 3,
+      "kind": "scalar"
+    }
+  ],
+  "code_sha256": {
+    "scripts/build_gfs_daily_slides.py": "328694c848265a3625c6209e8a1a4f5efe4db15e40c10b3688b7a2dba9aa2e11",
+    "scripts/presentation_layout.py": "57ca31ace87311dd80bd17f3642d8cefa21be884fff4e7cb87aa6dc3be77028f"
+  },
+  "files_sha256": {
+    "PBL6_MUA_TRAM_HANG_NGAY_V2.pptx": "a90ca9d0167bd4d5d00a7997d19de5100fc208308a24769e25d695066411b58f",
+    "PBL6_MUA_TRAM_HANG_NGAY_V2.html": "55f928291cd4041ea689f7b4d6ba3fd5f86edce0de12e456660752003ef7e782",
+    "slide_content.json": "7efde8eb6cb326e13de51db5d8b030bb2299472625083c696516c976939a868b",
+    "GHI_CHU_THUYET_TRINH.md": "b197f68382a775073d044fb321e20009efcfb1b5f1be6241df223940f5aa0b2b"
+  }
+}

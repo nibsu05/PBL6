@@ -1,5 +1,7 @@
 # PBL6 — dự báo lượng mưa tại nhiều trạm
 
+**Slide mới 11/11/2026:** [PowerPoint hằng ngày v2 — 41 slide](reports/gfs_daily_slides_2026_11_11/PBL6_MUA_TRAM_HANG_NGAY_V2.pptx), [ghi chú thuyết trình](reports/gfs_daily_slides_2026_11_11/GHI_CHU_THUYET_TRINH.md), [hướng dẫn và giải thích giữ lại 2025](reports/gfs_daily_slides_2026_11_11/README.md). Bảng đủ N0–N5, đối chứng, tuning, seed, metrics và giới hạn. Kết quả là dev 2024; chưa có bảng điểm kiểm định cuối 2025.
+
 **Đã hoàn thành 11/11/2026 — thí nghiệm lịch hằng ngày v2:** 57 trạm, 1.449 chu kỳ GFS hợp lệ trong 2021–2024; 72.886 mẫu trạm–issue. [Kết luận dễ đọc](reports/gfs_station_daily_v2_2026_11_10/KET_LUAN.md), [báo cáo đầy đủ](reports/gfs_station_daily_v2_2026_11_10/BAO_CAO_HANG_NGAY_V2.md), [Word gửi nhóm](reports/gfs_station_daily_v2_2026_11_10/BAO_CAO_HANG_NGAY_V2.docx), [bảng số và bằng chứng](reports/gfs_station_daily_v2_2026_11_10/README.md). LightGBM N0–N5 và GRU N3/N5, ba seed, đầu mean/median, xác suất nhất quán, ZERO/MOS và độ trễ 1/3/6 giờ; đã replay checkpoint và metric. Test 2025 giữ kín.
 
 Khí tượng thô bổ sung có ích; dẫn xuất chưa giúp rõ cho LightGBM nhưng có tín hiệu ở GRU ngày1–2. GRU_N5 có MAE median 6,314/6,754/6,870 mm; RMSE mean 17,386/18,750/19,277, so MOS19,169/20,124/20,445. Đây là dev2024, không phải test cuối hay bằng chứng vượt paper khác. BSS50 dương nhưng báo nhầm mưa lớn còn nhiều. Các kết quả lịch tuần bên dưới được giữ riêng, không so trực tiếp hai tập ngày khác nhau.

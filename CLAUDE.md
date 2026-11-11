@@ -4,6 +4,8 @@ Cập nhật 11/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` v�
 
 ## Thí nghiệm hằng ngày v2 — đã hoàn thành và kiểm chứng
 
+**Slide daily-v2 mới 11/11:** `reports/gfs_daily_slides_2026_11_11/PBL6_MUA_TRAM_HANG_NGAY_V2.pptx`/HTML, 32 slide chính + 9 phụ lục, ghi chú tiếng Việt; README giải thích “giữ kín 2025” và lộ trình trình bày. Builder/render/validator `scripts/*gfs_daily_slides*`; chỉ đọc aggregate của daily-v2, không train hay mở 2025. PDF private ở `data/operational/gfs_daily_slides_2026_11_11/`. Không chạy lại builder các deck cũ. Năm 2025 dành kiểm định sau khóa phương án; hiện dataset thí nghiệm mới dựng/kiểm chứng 2021–2024, chưa có bảng điểm 2025. Các phần “slide/nhận xét” phía dưới thuộc pilot lịch tuần, không thay kết quả mới này.
+
 Người dùng đã duyệt thực hiện cả bốn đề xuất sau nhận xét độc lập: lịch issue hằng ngày/độ trễ; ZERO/MOS và mục tiêu mean–median; tách biến thô khỏi dẫn xuất; xác suất nhất quán/tuning có kiểm soát. Thí nghiệm riêng `gfs_station_daily_v2_2026_11_10` (tên theo ngày duyệt, chạy tiếp 11/11). Không đổi các pilot cũ, slide đã bàn giao hoặc mở 2025.
 
 - Protocol đã khóa trước fit trong `reports/gfs_station_daily_v2_2026_11_10/protocol.json`; mã/data/source policy khóa tiếp bằng `src/gfs_daily_lock.py`. Không sửa protocol/huấn luyện sau khóa rồi dùng lại checkpoint.

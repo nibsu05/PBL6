@@ -77,3 +77,7 @@ reports/gfs_station_daily_v2_2026_11_10/*.json text eol=lf
 # These two JSON inputs were frozen with CRLF before fitting; no conversion.
 reports/gfs_station_daily_v2_2026_11_10/protocol.json -text whitespace=cr-at-eol
 reports/gfs_station_daily_v2_2026_11_10/source_coverage_policy.json -text whitespace=cr-at-eol
+reports/gfs_daily_slides_2026_11_11/*.md text eol=lf
+reports/gfs_daily_slides_2026_11_11/*.json text eol=lf
+reports/gfs_daily_slides_2026_11_11/*.html text eol=lf
+scripts/render_gfs_daily_slides.ps1 text eol=lf
