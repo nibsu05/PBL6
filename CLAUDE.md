@@ -1,6 +1,22 @@
 # PBL6 — bối cảnh hiện hành cho agent
 
-Cập nhật 10/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
+Cập nhật 11/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
+
+## Thí nghiệm hằng ngày v2 — đã hoàn thành và kiểm chứng
+
+Người dùng đã duyệt thực hiện cả bốn đề xuất sau nhận xét độc lập: lịch issue hằng ngày/độ trễ; ZERO/MOS và mục tiêu mean–median; tách biến thô khỏi dẫn xuất; xác suất nhất quán/tuning có kiểm soát. Thí nghiệm riêng `gfs_station_daily_v2_2026_11_10` (tên theo ngày duyệt, chạy tiếp 11/11). Không đổi các pilot cũ, slide đã bàn giao hoặc mở 2025.
+
+- Protocol đã khóa trước fit trong `reports/gfs_station_daily_v2_2026_11_10/protocol.json`; mã/data/source policy khóa tiếp bằng `src/gfs_daily_lock.py`. Không sửa protocol/huấn luyện sau khóa rồi dùng lại checkpoint.
+- Lịch 1.451 ngày 08/01/2021–28/12/2024; 1.449 chu kỳ GFS hợp lệ. Hai ngày 02/02/2021 (404 chỉ mục cả hai layout) và 30/11/2022 (chỉ mục không khớp byte GRIB, xác nhận tải lại) loại toàn issue chung mọi mô hình trước fit; bằng chứng `source_coverage_policy.json`. Không chọn theo mưa/điểm.
+- Dataset đã dựng: 57 trạm, 72.886 mẫu/218.658 hàng; train/cal/dev 35.116/18.365/19.405 mẫu, 717/362/363 ngày issue. Mask chung cả 3 hạn, N0–N5 và độ trễ trạm1/3/6h. File private `data/processed/gfs_station_daily_v2_2026_11_10/dataset.parquet`.
+- N0=16 biến nền gồm mưa GFS/lịch/vị trí/lịch sử Vrain; N1 thêm 5 khí tượng thô; N2 thêm 4 dẫn xuất ẩm/gió; N3=N1+5 địa hình; N4=N3+4 dẫn xuất; N5=N4+2 tương tác theo dốc. Tách mean/median và hai xác suất lồng nhau `p50=p1*q50givenwet`.
+- Tuning 3 ứng viên × 4 fold quý2022 (gap7 ngày), chỉ train2021–22; N3 là anchor; final fixed số cây/epoch theo CV. Cal2023 chỉ Platt/cutoff cross-fit theo quý; dev2024 đánh giá, chưa test. LightGBM N0–N5 + N3delay3/6; GRU N3/N5; ba seed17/29/43. Không tuyên bố GRU đủ sáu cấu hình.
+- Nguồn GFS hiện tại có Last-Modified~3,65–4,04h sau init; 48 chu kỳ lịch sử đầu2021 có timestamp sửa kho sauissue. Không chứng minh giờ phát hành gốc. API Vrain hiện hành có hàng giờ nhưng chưa chứng minh latency tiếp nhận. 8hGFS/1htrạm vẫn là giả định; có sensitivity3/6h, GFS16h không đủ cùngcycle. Không fit2026.
+- Pipeline `scripts/run_gfs_daily_pipeline.py`: build → validate → trees → GRU → evaluate; sau đó `verify_gfs_daily_models.py` → `publish_gfs_daily.py`. Đã hoàn tất; 179 tests đạt, replay218.658 hàng/81 mẫu nội suy độc lập, 288 estimator LightGBM/6GRU/186 calibrator/2.106 phép đối chiếu metric đạt; 56 artifact cũ/slide người dùng giữ nguyên. Kết quả mới nằm riêng, không thay các phần lịch sử bên dưới.
+- Báo cáo đầy đủ: `reports/gfs_station_daily_v2_2026_11_10/BAO_CAO_HANG_NGAY_V2.md` và `.docx`; `KET_LUAN.md` đọc nhanh, CSV đầy đủ/CI/seed/độ trễ cùng thư mục. LightGBM chọn mean/wet/conditional cấu hình small, median medium; GRU small hidden16/head24, 17epoch final, tuning chỉ train.
+- Dev2024 RMSE mean D1/2/3: GFS19,271/20,228/22,139; MOS19,169/20,124/20,445; LGB_N3 17,527/18,550/19,150; GRU_N5 17,386/18,750/19,277. MAE median GRU_N5 6,314/6,754/6,870, thấp nhất trong các model chính đã chạy. Hai model N3LGB/N5GRU đều vượt MOS về RMSEmean/MAEmedian với CI95% chênh dưới0, nhưng đây là dev/CI thăm dò chưa chỉnh nhiều so sánh.
+- N1−N0 thêm khí tượng thô giảmRMSE cả3hạn, CI dưới0. Dẫn xuất N5−N3: LGB chưa rõ cả3hạn; GRU giảmRMSE/MAEmedian ngày1–2 vớiCI dưới0, ngày3chưa rõ. GRU_N5 so LGB_N5 giảmMAEmedian nhưngCI chênhRMSE chứa0. Không gọi GRU thắng mọi mặt hoặc dẫn xuất luônvôích. Tăngkênh cũngtăng tham sốGRU, chưa tách hoàn toàn dung lượng.
+- BSS50 LGB_N3=0,280/0,227/0,164; GRU_N5=0,287/0,228/0,158. FAR cảnh báo50mm còn~0,5–0,7; PODcao chưađủ. Không quy chênh với pilot tuần cho riêng lịch hằng ngày; chưa chứng minh vận hành realtime/nguồn đúng giờ. 2025 vẫn kín; cần quyết định đóng băng cuối trước khi mở.
 
 ## Nhận xét độc lập mới — đọc kèm slide
 

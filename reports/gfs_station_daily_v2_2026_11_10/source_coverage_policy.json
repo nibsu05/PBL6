@@ -1,0 +1,157 @@
+{
+  "status": "confirmed",
+  "planned_cycles": 1451,
+  "available_cycles": 1449,
+  "confirmed_source_missing": [
+    {
+      "day": "20210202",
+      "checks": [
+        {
+          "lead": 12,
+          "available": false,
+          "http_status": [
+            404,
+            404
+          ]
+        },
+        {
+          "lead": 24,
+          "available": false,
+          "http_status": [
+            404,
+            404
+          ]
+        },
+        {
+          "lead": 36,
+          "available": false,
+          "http_status": [
+            404,
+            404
+          ]
+        },
+        {
+          "lead": 48,
+          "available": false,
+          "http_status": [
+            404,
+            404
+          ]
+        },
+        {
+          "lead": 60,
+          "available": false,
+          "http_status": [
+            404,
+            404
+          ]
+        },
+        {
+          "lead": 72,
+          "available": false,
+          "http_status": [
+            404,
+            404
+          ]
+        },
+        {
+          "lead": 84,
+          "available": false,
+          "http_status": [
+            404,
+            404
+          ]
+        }
+      ],
+      "framing_checks": [],
+      "reason": "required index missing in both official historical layouts",
+      "observations_used": false
+    },
+    {
+      "day": "20221130",
+      "checks": [
+        {
+          "lead": 12,
+          "available": true,
+          "http_status": [
+            200
+          ]
+        },
+        {
+          "lead": 24,
+          "available": true,
+          "http_status": [
+            200
+          ]
+        },
+        {
+          "lead": 36,
+          "available": true,
+          "http_status": [
+            200
+          ]
+        },
+        {
+          "lead": 48,
+          "available": true,
+          "http_status": [
+            200
+          ]
+        },
+        {
+          "lead": 60,
+          "available": true,
+          "http_status": [
+            200
+          ]
+        },
+        {
+          "lead": 72,
+          "available": true,
+          "http_status": [
+            200
+          ]
+        },
+        {
+          "lead": 84,
+          "available": true,
+          "http_status": [
+            200
+          ]
+        }
+      ],
+      "framing_checks": [
+        {
+          "lead": 36,
+          "field": "rain_cumulative",
+          "index_sha256": "2549e05ec66676ed1d67e6b126e5fae25fb0665f9d171f0081ed4a24849ff99a",
+          "range": [
+            436687487,
+            437244310
+          ],
+          "first_sha256": "1b3a2a978a53642f27751429126b1b1bd8c1cc3ae6af5befb6f277ab94b8600d",
+          "repeat_sha256": "1b3a2a978a53642f27751429126b1b1bd8c1cc3ae6af5befb6f277ab94b8600d",
+          "repeat_invalid": true
+        },
+        {
+          "lead": 84,
+          "field": "rain_cumulative",
+          "index_sha256": "faccfdb8678d196835bd1f8f13cf943152ae0d3d4737e7abc6925e6936f16f3f",
+          "range": [
+            430346279,
+            431021751
+          ],
+          "first_sha256": "b090a98efb37d86078e7a2c553eea96a7ef62fe79bb2a711544b08dc321e706c",
+          "repeat_sha256": "b090a98efb37d86078e7a2c553eea96a7ef62fe79bb2a711544b08dc321e706c",
+          "repeat_invalid": true
+        }
+      ],
+      "reason": "official index and object bytes disagree on GRIB framing, confirmed by repeated range retrieval",
+      "observations_used": false
+    }
+  ],
+  "unresolved": [],
+  "policy": "exclude only confirmed source-unavailable or structurally corrupt entire issue, identically for all models; do not replace source or choose days by rainfall",
+  "protocol_common_complete_mask": true,
+  "locked_before_fit": true
+}

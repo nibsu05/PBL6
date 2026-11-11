@@ -1,8 +1,12 @@
 # PBL6 — dự báo lượng mưa tại nhiều trạm
 
+**Đã hoàn thành 11/11/2026 — thí nghiệm lịch hằng ngày v2:** 57 trạm, 1.449 chu kỳ GFS hợp lệ trong 2021–2024; 72.886 mẫu trạm–issue. [Kết luận dễ đọc](reports/gfs_station_daily_v2_2026_11_10/KET_LUAN.md), [báo cáo đầy đủ](reports/gfs_station_daily_v2_2026_11_10/BAO_CAO_HANG_NGAY_V2.md), [Word gửi nhóm](reports/gfs_station_daily_v2_2026_11_10/BAO_CAO_HANG_NGAY_V2.docx), [bảng số và bằng chứng](reports/gfs_station_daily_v2_2026_11_10/README.md). LightGBM N0–N5 và GRU N3/N5, ba seed, đầu mean/median, xác suất nhất quán, ZERO/MOS và độ trễ 1/3/6 giờ; đã replay checkpoint và metric. Test 2025 giữ kín.
+
+Khí tượng thô bổ sung có ích; dẫn xuất chưa giúp rõ cho LightGBM nhưng có tín hiệu ở GRU ngày1–2. GRU_N5 có MAE median 6,314/6,754/6,870 mm; RMSE mean 17,386/18,750/19,277, so MOS19,169/20,124/20,445. Đây là dev2024, không phải test cuối hay bằng chứng vượt paper khác. BSS50 dương nhưng báo nhầm mưa lớn còn nhiều. Các kết quả lịch tuần bên dưới được giữ riêng, không so trực tiếp hai tập ngày khác nhau.
+
 **Phương án được duyệt 10/11/2026:** dự báo ba tổng24h riêng tại trạm bằng **GFS + Vrain**, LightGBM chính và GRU nhỏ. [Thiết kế hiện hành](docs/short_range_nwp_design.md), [kế hoạch](KE_HOACH_DU_AN.md), [protocol57trạm](reports/gfs_station_57_2026_11_10/protocol.json). TFT/Informer là mở rộng tùy bằng chứng.
 
-## Bản mở rộng hiện tại:57trạm
+## Bản trước đó: 57 trạm theo lịch tuần
 
 **Nhận xét độc lập mới:** [đánh giá kết quả và đối chiếu nghiên cứu 2024–2026](reports/gfs_station_review_2026_11_10/NHAN_XET_DOC_LAP.md). Chẩn đoán bổ sung cho thấy ngày 3 các mô hình chưa vượt phương án 0 mm về MAE, dù GRU giảm RMSE rõ ở mức điểm; A2 còn yếu trên nhóm mưa lớn. Dùng tài liệu này kèm slide để tránh kết luận quá mức từ MAE giảm so GFS. Không thay dự báo, train mới hoặc mở 2025.
 

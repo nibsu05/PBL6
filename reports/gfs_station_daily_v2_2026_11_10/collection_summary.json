@@ -1,0 +1,14 @@
+{
+  "state": "incomplete",
+  "pid": 4616,
+  "updated_utc": "2026-11-10T17:37:07.140526+00:00",
+  "planned_issues": 1451,
+  "completed_issues": 1449,
+  "failed_issues": 2,
+  "remaining_issues": 0,
+  "cadence_days": 1,
+  "new_transferred_bytes": 20203073503,
+  "reused_issues": 208,
+  "elapsed_seconds": 2177.2,
+  "test2025_read": false
+}

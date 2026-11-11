@@ -1,0 +1,9 @@
+{
+  "status": "protocol_frozen",
+  "protocol_sha256": "f7b3e9d8d02538e7da8ac60278078ff95936f251e49fed0b1b556162a29abbc6",
+  "station_count": 57,
+  "source_cache_days_reused": 208,
+  "copied_files": 416,
+  "earlier_public_files_preserved": 54,
+  "test2025_read": false
+}

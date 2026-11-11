@@ -43,6 +43,7 @@ data/processed/regional_danang/
 data/processed/station_v1/
 data/processed/gfs_station_pilot/
 data/processed/gfs_station_57_2026_11_10/
+data/processed/gfs_station_daily_v2_2026_11_10/
 data/processed/pilot_bilstm_v2*/
 
 # Giữ lại dữ liệu mẫu (Sample data) trong data/samples/

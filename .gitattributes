@@ -67,3 +67,13 @@ tests/test_vrain_download.py text eol=lf
 reports/vrain_research_plan_2026_11_09/*.md text eol=lf
 reports/vrain_research_plan_2026_11_09/*.csv text eol=lf
 reports/vrain_research_plan_2026_11_09/*.json text eol=lf
+# Daily-v2 training code is byte-locked; preserve it across Windows checkout.
+src/gfs_daily*.py text eol=lf
+scripts/*gfs_daily*.py text eol=lf
+tests/test_gfs_daily_v2.py text eol=lf
+reports/gfs_station_daily_v2_2026_11_10/*.md text eol=lf
+reports/gfs_station_daily_v2_2026_11_10/*.csv text eol=lf
+reports/gfs_station_daily_v2_2026_11_10/*.json text eol=lf
+# These two JSON inputs were frozen with CRLF before fitting; no conversion.
+reports/gfs_station_daily_v2_2026_11_10/protocol.json -text whitespace=cr-at-eol
+reports/gfs_station_daily_v2_2026_11_10/source_coverage_policy.json -text whitespace=cr-at-eol
