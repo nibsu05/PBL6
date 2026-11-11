@@ -1,0 +1,17 @@
+{
+  "status": "complete",
+  "architecture_comparisons_per_block": 27,
+  "feature_comparisons_per_block": 189,
+  "blocks": [
+    7,
+    14
+  ],
+  "replicates": 20000,
+  "confidence": 0.95,
+  "confirmatory": false,
+  "multiplicity_adjusted": false,
+  "old_primary_tft_family_unchanged": true,
+  "test2025_read": false,
+  "seconds": 12.761156300000039,
+  "code_sha256": "e1c444bab6cc6649802a9db7f3daef8e633f8a480fbb870c054a9dab7c327c99"
+}

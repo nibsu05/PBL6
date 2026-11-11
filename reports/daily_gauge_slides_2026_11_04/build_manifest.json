@@ -1,0 +1,103 @@
+{
+  "status": "complete",
+  "slides": 44,
+  "main_slides": 30,
+  "appendix_slides": 14,
+  "roles": {
+    "title": 1,
+    "target": 2,
+    "sources": 3,
+    "cpc": 4,
+    "spatial": 5,
+    "old_new": 6,
+    "daily_steps": 7,
+    "shapes": 8,
+    "eod": 9,
+    "groups": 10,
+    "experiments": 11,
+    "literature": 12,
+    "models": 13,
+    "folds": 14,
+    "seeds": 15,
+    "metrics": 16,
+    "bss_meaning": 17,
+    "event_counts": 18,
+    "sample_counts": 19,
+    "bss_day1": 20,
+    "bss_day2": 21,
+    "bss_day3": 22,
+    "e7_day1": 23,
+    "e7_day2": 24,
+    "e7_day3": 25,
+    "absolute_ci": 26,
+    "feature_ci": 27,
+    "relative_absolute": 28,
+    "conclusions": 29,
+    "next_steps": 30,
+    "full_1_1": 31,
+    "full_1_2": 32,
+    "full_1_3": 33,
+    "full_2_1": 34,
+    "full_2_2": 35,
+    "full_2_3": 36,
+    "full_3_1": 37,
+    "full_3_2": 38,
+    "full_3_3": 39,
+    "data_references": 40,
+    "model_references": 41,
+    "variables_BA": 42,
+    "variables_MC": 43,
+    "verification": 44
+  },
+  "complete_score_rows": 72,
+  "models": [
+    "lgbm",
+    "tft",
+    "informer"
+  ],
+  "training_performed": false,
+  "test2025_read": false,
+  "code_sha256": "89ad41cfaf39f8102067274056165e6dae8b1c2d14217b6a4647d34fca4e98ff",
+  "sources": {
+    "reports/daily_gauge_2026_11_04/publication_manifest.json": "b811c836f015a511e38e9b469b77addde36ab7d651b3b1932ce1a624a0dc0429",
+    "reports/daily_gauge_2026_11_04/KET_QUA_72.csv": "902766a48f916320923b505fe0979d84094d4aa84d54fc4523eebcbf424513f4",
+    "reports/daily_gauge_2026_11_04/scores_pooled.csv": "656777c8525924c95463fc3a40c019b2a648873c04d0c215a986067d70a5677c",
+    "reports/daily_gauge_2026_11_04/paired_bootstrap.csv": "9276c885acc749ce06d9db1e976c58af7274ddb81493f70d06fbfeb411ec7d0a",
+    "reports/daily_gauge_2026_11_04/absolute_bss_ci.csv": "3251999d600d19195c478a263f58c0c429454ed86b5c3dcd168a6a68113ad752",
+    "reports/daily_gauge_2026_11_04/feature_catalog_daily.csv": "aa62859bed49c28ffc5964f30aca6e9948a0df4ce589f2d987c14b6705a816cb",
+    "reports/daily_gauge_2026_11_04/cpc_spatial_support.csv": "2ef0acf5cc5692dcab15a589513cc2ecf4bd16db01586494ceae2e1c1264b098",
+    "reports/daily_gauge_2026_11_04/source_audit.json": "227e2561c262a3dd06d3d5769e21dbd0b37f8e3e8fdc4763c1fc4f543a81f99a",
+    "reports/daily_gauge_2026_11_04/station_eod_audit.json": "cf5fa1293db73d26f8c90ead48019d3b6059f8e90dfee9abb6928ba54c9c0845",
+    "reports/daily_gauge_2026_11_04/run.json": "2beeec2960b6172881c882d8f7c1b512f75259f824e9744359f6bf4be2e7a09c",
+    "reports/daily_gauge_2026_11_04/protocol_frozen.json": "e0d459821a90d5537eae048fafd2483d08d3e5fae77ebe2fd8bc1d07cffdfe15",
+    "reports/daily_gauge_2026_11_04/validation.json": "bf063e21c74e82055e70e18ff0b509db363c59e4c480542e743bd98e9684bca5",
+    "data/processed/regional_danang/cell_weights.parquet": "8eadf9ebaee72506f65599fba84821ec881383836e7f13ecef11ff030598bff6",
+    "scripts/daily_gauge_slide_notes.py": "5f2a55167d01ee0a83bb66029d444f2a9f62cb1c7ba04ca439618c8c293faf34"
+  },
+  "files": {
+    "FOOTPRINT_VA_CPC.png": {
+      "sha256": "f61bba0d1fba6b592fadd693e03fce2f86dcf99ff0f1a9bebd5f6590d1a1c95e",
+      "bytes": 68278
+    },
+    "PBL6_DU_LIEU_NGAY_3_MO_HINH.pptx": {
+      "sha256": "4f2701bdc107933ea4b76176896cd2d9423ccb07b146dbf3a8f68ab059c2263e",
+      "bytes": 253800
+    },
+    "PBL6_DU_LIEU_NGAY_3_MO_HINH.html": {
+      "sha256": "8e1357905bf1e3760981620d9e55ba8ea255c9f5dcb46d5c9098e2502fa52c66",
+      "bytes": 338871
+    },
+    "slide_scene.json": {
+      "sha256": "c72779a2b39ebcac2c19673d64fb105bd3dccc089e19aa4e2b3a1b105ebfb481",
+      "bytes": 267341
+    },
+    "LOI_DAN.md": {
+      "sha256": "cca6321ceb724f4ee57f2aff9081a840bf91e19312eeb46fe0c8f7001e8688ec",
+      "bytes": 27765
+    },
+    "README.md": {
+      "sha256": "025d9e2868ba5660b64d93dfb638a5bae384af706e4c4234a67157eaf1138908",
+      "bytes": 1312
+    }
+  }
+}

@@ -1,0 +1,1782 @@
+{
+  "slides": 55,
+  "main_slides": 43,
+  "appendix_slides": 12,
+  "roles": {
+    "title": 1,
+    "map": 2,
+    "target": 3,
+    "stations": 4,
+    "sources": 5,
+    "sample": 6,
+    "issue_time": 7,
+    "labels": 8,
+    "gfs_acc": 9,
+    "future": 10,
+    "rain_history": 11,
+    "spatial": 12,
+    "ablation": 13,
+    "a2_inputs": 14,
+    "split": 15,
+    "counts": 16,
+    "qc": 17,
+    "baselines": 18,
+    "lgb_io": 19,
+    "lgb_params": 20,
+    "lgb_earlystop": 21,
+    "calibration": 22,
+    "gru_gate": 23,
+    "gru_shape": 24,
+    "gru_train": 25,
+    "gru_params": 26,
+    "tuning_status": 27,
+    "seeds": 28,
+    "amount_metrics": 29,
+    "prob_metrics": 30,
+    "event_metrics": 31,
+    "macro_ci": 32,
+    "mae": 33,
+    "tradeoff": 34,
+    "bss": 35,
+    "event_wet": 36,
+    "event_heavy": 37,
+    "ci": 38,
+    "feature_ci": 39,
+    "expand": 40,
+    "limits": 41,
+    "answers": 42,
+    "next": 43,
+    "catalog_base": 44,
+    "catalog_physical": 45,
+    "all_rmse_bias": 46,
+    "full_prob_1": 47,
+    "full_prob_50": 48,
+    "coherence": 49,
+    "release": 50,
+    "checks": 51,
+    "faq_data": 52,
+    "faq_models": 53,
+    "references": 54,
+    "files": 55
+  },
+  "experiment": "gfs_station_57_2026_11_10",
+  "station_count": 57,
+  "training_performed_for_slides": false,
+  "test2025_read": false,
+  "code_sha256": "bf1714a5b5ba3f68bacfbcd8e2dec5582c0e07a8fe6738730d46e24c7c367511",
+  "notes_sha256": "3f20fe866cb55c93f5785dd44f3e2ef3ea42a95675df52c8c1042f6a7f5321c7",
+  "sources": {
+    "reports/gfs_station_57_2026_11_10/protocol.json": "20b6867852e0952a8fb54ac7eda71a1d2c385991ac53b782f30d3a3c59348aa9",
+    "reports/gfs_station_57_2026_11_10/cohort_expansion_audit.json": "e0ad222d1682fd942f60fa77bd8fce6fcc05a05ff0f0a33405161ee889cef577",
+    "reports/gfs_station_57_2026_11_10/dataset_audit.json": "ec803401a7836fcdd6f30896adae9a7814002054eb746919adef8fdcaca3ed40",
+    "reports/gfs_station_57_2026_11_10/verification.json": "c4f4fa60fa667903b0dece476396d508dbb4b5caf177007cb050d0ca5d32a8f6",
+    "reports/gfs_station_57_2026_11_10/point_metrics.csv": "680559b40a978e17d3530c7acb876197a1202ffe3fa7cefe6b1af111a02ead06",
+    "reports/gfs_station_57_2026_11_10/probability_metrics.csv": "0a2cb9c1204e9e26b05f6edb0ecbd1131b6913a4ba007c50fe08e9d99f4aaab3",
+    "reports/gfs_station_57_2026_11_10/event_metrics.csv": "2a55650ded6d87f48e1902e15a18de7a4c7162d8d8b3827e536dd071d5910c99",
+    "reports/gfs_station_57_2026_11_10/paired_bootstrap.csv": "cfc1eeaffe3634ccc1b4af37c28c06df0cf913aa9cd1c83d76afe4cf8b14f200",
+    "reports/gfs_station_57_2026_11_10/reliability.csv": "a3947c9a88bde32454675fdf2f9779c31e30449a42b6a4ad1dc78aeab8eb973c",
+    "reports/gfs_station_57_2026_11_10/seed_point_metrics.csv": "32431d835be2c9d47ad2d1cfc120ee2478027bf40388b8d45d418d96674f8f28",
+    "reports/gfs_station_57_2026_11_10/fit_diagnostics.csv": "6dba421049349497163ab5030efc9a5c0b42f87eba9435495ba040e34d6c261b",
+    "reports/gfs_station_57_2026_11_10/run_summary.json": "ea3b7b23ed635fc1c4df49025344c92d02334488ed9f9ebc29b7e3a09610498e",
+    "reports/gfs_station_57_2026_11_10/gru_summary.json": "8bf95ef4d1d80457230e263b7094d00903d7858e0d72a8544cbd4722aaa48fbd",
+    "reports/gfs_station_57_2026_11_10/model_verification.json": "f54b224a7754232c0fede8a5be6b34d3de2a8e66ef0f0ad31e19e2c993a1ba5a",
+    "reports/gfs_station_57_2026_11_10/release_timestamp_audit.json": "85449b5cb80870e22c97f550e9228dfeeffa5570ede23fed514aae252293a825",
+    "reports/gfs_station_57_2026_11_10/release_sensitivity_metrics.csv": "81fd9a0fbcc42f06276c69b08eebb4cccb3194c2e8456174f35b50c05c072ed7",
+    "reports/gfs_station_57_2026_11_10/cohort_scope_metrics.csv": "df15bdccd5b903a432d0c167dd46c864308fd45a267ae80b6656ea26943e0805",
+    "reports/gfs_station_57_2026_11_10/matched_original20_bootstrap.csv": "6bbc1d8cc8591b711598bd94edb2f0b454e52e4261045d533a0056f228cde28a",
+    "reports/gfs_station_57_2026_11_10/matched_original20.png": "e8194e129ab6ff186f508e59be207f587fac42dd4ba92b97b3fd4b536b719293",
+    "reports/gfs_station_57_2026_11_10/result_summary.json": "15f8b976a05ee9c0f9d562218930046a2e62f33988f7f57e60977a02a0ce7ee2",
+    "scripts/run_gfs_station_pilot.py": "552e878eabf72203728b5ab477fa04319bd9eca8214a84bbce81a349c4b58c11",
+    "scripts/run_gfs_station_gru.py": "527e813148fd674b20969fde59ebcea89f6d41f1d5660021ec68f2d38c64c89c",
+    "src/gfs_station_dataset.py": "289840a4efc8cc5ed76db0251bdf8bc3065a3fa18dec037ab8cbe987d913cb0a"
+  },
+  "private_pdf_expected": "data/operational/gfs_station_slides_2026_11_10/PBL6_DU_BAO_MUA_57_TRAM.pdf",
+  "metric_tables": {
+    "target_windows": {
+      "slide": 3,
+      "headers": [
+        "Đầu ra",
+        "Khoảng mưa theo giờ Việt Nam"
+      ],
+      "rows": [
+        [
+          "Ngày 1",
+          "19:00 D → 19:00 D+1"
+        ],
+        [
+          "Ngày 2",
+          "19:00 D+1 → 19:00 D+2"
+        ],
+        [
+          "Ngày 3",
+          "19:00 D+2 → 19:00 D+3"
+        ]
+      ]
+    },
+    "station_cohort": {
+      "slide": 4,
+      "headers": [
+        "Nhóm vị trí",
+        "Số",
+        "Cách xử lý"
+      ],
+      "rows": [
+        [
+          "Đạt tiêu chuẩn train",
+          "57",
+          "Đưa vào bản mở rộng chính"
+        ],
+        [
+          "Có mẫu train, lịch sử ngắn hơn",
+          "22",
+          "Dành cho thí nghiệm riêng"
+        ],
+        [
+          "Chưa có cửa sổ train hợp lệ",
+          "3",
+          "Chưa đánh giá như trạm đã biết"
+        ],
+        [
+          "Chỉ có ở danh mục mới",
+          "4",
+          "Chưa có lịch sử nguồn 2021–2024"
+        ]
+      ]
+    },
+    "sources": {
+      "slide": 5,
+      "headers": [
+        "Nguồn",
+        "Dùng cho việc gì?",
+        "Điều không được suy ra"
+      ],
+      "rows": [
+        [
+          "Vrain",
+          "Nhãn y và mưa quá khứ tại trạm",
+          "Không phải mưa trung bình cả vùng"
+        ],
+        [
+          "GFS 0,25°",
+          "Dự báo mưa / khí tượng làm đầu vào",
+          "Không phải quan trắc khí tượng tại trạm"
+        ],
+        [
+          "DEM Mapzen",
+          "Proxy địa hình và tương tác với gió",
+          "Không phải cao độ khảo sát cảm biến"
+        ]
+      ]
+    },
+    "label_rules": {
+      "slide": 8,
+      "headers": [
+        "Mốc nguồn",
+        "Khoảng đo tương ứng"
+      ],
+      "rows": [
+        [
+          "10:00 VN",
+          "09:00–10:00 VN"
+        ],
+        [
+          "24 mốc kết thúc 20h D … 19h D+1",
+          "Tổng mưa 19h D → 19h D+1"
+        ],
+        [
+          "Thiếu một giờ / station-day lỗi",
+          "y ngày = thiếu; mẫu liên quan bị loại"
+        ]
+      ]
+    },
+    "gfs_accumulation": {
+      "slide": 9,
+      "headers": [
+        "Predictor mưa GFS",
+        "Phép tính từ chu kỳ 00UTC",
+        "Ví dụ giả định"
+      ],
+      "rows": [
+        [
+          "Ngày 1: +12 → +36h",
+          "C36 − C12",
+          "22 − 10 = 12 mm"
+        ],
+        [
+          "Ngày 2: +36 → +60h",
+          "C60 − C36",
+          "37 − 22 = 15 mm"
+        ],
+        [
+          "Ngày 3: +60 → +84h",
+          "C84 − C60",
+          "42 − 37 = 5 mm"
+        ]
+      ]
+    },
+    "rain_history": {
+      "slide": 11,
+      "headers": [
+        "Phần lịch sử",
+        "Độ dài",
+        "Kết thúc ở đâu?"
+      ],
+      "rows": [
+        [
+          "Bảy tổng ngày đầy đủ",
+          "7 × 24h",
+          "Ngày gần nhất kết thúc 19h D−1"
+        ],
+        [
+          "Mưa rất gần issue",
+          "1h và 6h",
+          "18h D"
+        ],
+        [
+          "Mưa 24h gần nhất",
+          "24h",
+          "18h D"
+        ]
+      ]
+    },
+    "spatial_rules": {
+      "slide": 12,
+      "headers": [
+        "Đối tượng",
+        "Cách xử lý",
+        "Giới hạn"
+      ],
+      "rows": [
+        [
+          "GFS 0,25°",
+          "Nội suy song tuyến 4 nút quanh trạm",
+          "Không biến thành số đo tại trạm"
+        ],
+        [
+          "DEM Mapzen",
+          "Cao độ và 9 điểm trong ô ±5km",
+          "Không phải cao độ khảo sát cảm biến"
+        ],
+        [
+          "Trạm gần nhau",
+          "Có thể nhận predictor tương tự",
+          "Không phải mẫu thời tiết độc lập"
+        ]
+      ]
+    },
+    "feature_groups": {
+      "slide": 13,
+      "headers": [
+        "Cấu hình",
+        "Số biến",
+        "Thông tin mới"
+      ],
+      "rows": [
+        [
+          "A0",
+          "6",
+          "Mưa GFS + lịch + vị trí / ID"
+        ],
+        [
+          "A1",
+          "16",
+          "A0 + 7 ngày mưa + summary 1/6/24h"
+        ],
+        [
+          "A2",
+          "25",
+          "A1 + T/RH/gió 850, PWAT và dẫn xuất"
+        ],
+        [
+          "A3",
+          "32",
+          "A2 + DEM, gradient và tương tác với gió"
+        ]
+      ]
+    },
+    "a2_partition": {
+      "slide": 14,
+      "headers": [
+        "Thông tin A2",
+        "LightGBM",
+        "GRU"
+      ],
+      "rows": [
+        [
+          "Bảy ngày mưa",
+          "7 cột",
+          "Chuỗi [7, 1]"
+        ],
+        [
+          "GFS + lịch + tọa độ + summary gần đây",
+          "17 cột",
+          "Ngữ cảnh [3, 17]"
+        ],
+        [
+          "ID trạm",
+          "1 biến phân loại",
+          "Embedding 86 mã × 4 chiều"
+        ]
+      ]
+    },
+    "sample_counts": {
+      "slide": 16,
+      "headers": [
+        "Phần",
+        "Mẫu trạm–issue",
+        "Dòng theo 3 hạn",
+        "Issue có mẫu"
+      ],
+      "rows": [
+        [
+          "Train",
+          "5.032",
+          "15.096",
+          "102"
+        ],
+        [
+          "Cal",
+          "2.582",
+          "7.746",
+          "51"
+        ],
+        [
+          "Dev",
+          "2.782",
+          "8.346",
+          "52"
+        ],
+        [
+          "Tổng",
+          "10.396",
+          "31.188",
+          "205"
+        ]
+      ]
+    },
+    "baselines": {
+      "slide": 18,
+      "headers": [
+        "Phương pháp",
+        "Cách dự báo",
+        "Điều cần kiểm chứng"
+      ],
+      "rows": [
+        [
+          "Khí hậu",
+          "Trung bình / tần suất\ntháng–trạm từ train",
+          "Có hơn tham chiếu theo mùa?"
+        ],
+        [
+          "Persistence",
+          "Lặp lại tổng 24h khả dụng gần nhất",
+          "Có hơn cách giữ trạng thái gần đây?"
+        ],
+        [
+          "GFS gốc",
+          "Mưa dự báo trước hậu xử lý",
+          "Học máy thêm được giá trị gì?"
+        ],
+        [
+          "LightGBM / GRU",
+          "Học từ predictor và nhãn Vrain",
+          "Dữ liệu / cách học nào hữu ích?"
+        ]
+      ]
+    },
+    "lgb_parameters": {
+      "slide": 20,
+      "headers": [
+        "Tham số",
+        "Giá trị",
+        "Mục đích / cách hiểu"
+      ],
+      "rows": [
+        [
+          "learning_rate",
+          "0,04",
+          "Bước cập nhật mỗi cây"
+        ],
+        [
+          "num_leaves / max_depth",
+          "15 / 4",
+          "Giới hạn độ phức tạp"
+        ],
+        [
+          "min_child_samples",
+          "40",
+          "Không tạo lá quá ít mẫu"
+        ],
+        [
+          "reg_lambda",
+          "2,0",
+          "Regularization L2"
+        ],
+        [
+          "subsample / colsample",
+          "0,9 / 0,9",
+          "Lấy mẫu hàng / đặc trưng"
+        ],
+        [
+          "n_estimators",
+          "Tối đa 500",
+          "Số dùng thực tế do earlystop"
+        ],
+        [
+          "Amount / classifier",
+          "Tweedie p=1,5 / binary",
+          "Lượng mm / xác suất sự kiện"
+        ]
+      ]
+    },
+    "lgb_best_iterations": {
+      "slide": 21,
+      "headers": [
+        "A2 · số cây tốt nhất",
+        "Seed 17",
+        "Seed 29",
+        "Seed 43"
+      ],
+      "rows": [
+        [
+          "Ngày 1",
+          "66",
+          "67",
+          "76"
+        ],
+        [
+          "Ngày 2",
+          "155",
+          "140",
+          "177"
+        ],
+        [
+          "Ngày 3",
+          "160",
+          "125",
+          "111"
+        ]
+      ]
+    },
+    "calibration_steps": {
+      "slide": 22,
+      "headers": [
+        "Bước",
+        "Dữ liệu / quy tắc"
+      ],
+      "rows": [
+        [
+          "Xác suất thô",
+          "Classifier riêng cho từng hạn, ngưỡng và seed"
+        ],
+        [
+          "Platt calibration",
+          "Fit sigmoid(logit(p)) bằng cal 2023"
+        ],
+        [
+          "Gộp seed",
+          "Trung bình xác suất đã hiệu chỉnh của 3 seed"
+        ],
+        [
+          "Báo có / không",
+          "p ≥ 0,5; cutoff cố định, chưa tối ưu ngưỡng"
+        ]
+      ]
+    },
+    "gru_gate": {
+      "slide": 23,
+      "headers": [
+        "Hạn",
+        "MAE A2",
+        "MAE GFS",
+        "MAE khí hậu",
+        "Trạm tốt hơn GFS",
+        "Gate"
+      ],
+      "rows": [
+        [
+          "Ngày 1",
+          "8,775",
+          "8,517",
+          "13,401",
+          "43.9%",
+          "Chưa đạt"
+        ],
+        [
+          "Ngày 2",
+          "9,279",
+          "9,292",
+          "13,389",
+          "49.1%",
+          "Chưa đạt"
+        ],
+        [
+          "Ngày 3",
+          "9,761",
+          "10,048",
+          "13,162",
+          "52.6%",
+          "Đạt"
+        ]
+      ]
+    },
+    "gru_shapes": {
+      "slide": 24,
+      "headers": [
+        "Nhánh",
+        "Tensor / biểu diễn",
+        "Đi tiếp"
+      ],
+      "rows": [
+        [
+          "Mưa quá khứ",
+          "[batch, 7, 1]",
+          "GRU → vector 24"
+        ],
+        [
+          "ID trạm",
+          "[batch]",
+          "Embedding → vector 4"
+        ],
+        [
+          "Ngữ cảnh 3 hạn",
+          "[batch, 3, 17]",
+          "17 số cho mỗi head ngày"
+        ],
+        [
+          "Ghép từng ngày",
+          "24 + 4 + 17 = 45",
+          "MLP 45 → 32 → 3"
+        ]
+      ]
+    },
+    "gru_preprocess": {
+      "slide": 25,
+      "headers": [
+        "Thành phần",
+        "Cách làm"
+      ],
+      "rows": [
+        [
+          "Chuỗi 7 ngày",
+          "log1p(mưa) → chuẩn hóa bằng train"
+        ],
+        [
+          "17 biến ngữ cảnh",
+          "Chuẩn hóa mean/std chỉ từ train"
+        ],
+        [
+          "Lượng y",
+          "Chia scale=max(mean y train,1); dự báo nhân trả scale"
+        ],
+        [
+          "Loss chung",
+          "Tweedie p=1,5 + 0,5 × BCE sự kiện"
+        ],
+        [
+          "Đầu ra lượng",
+          "Softplus để không âm"
+        ]
+      ]
+    },
+    "gru_parameters": {
+      "slide": 26,
+      "headers": [
+        "Thiết lập",
+        "Giá trị"
+      ],
+      "rows": [
+        [
+          "GRU / head / dropout",
+          "24 / 32 / 0,1"
+        ],
+        [
+          "AdamW: LR / weight decay",
+          "0,001 / 0,001"
+        ],
+        [
+          "Batch / clip gradient",
+          "128 / 1,0"
+        ],
+        [
+          "Tối đa epoch / patience",
+          "80 / 12"
+        ],
+        [
+          "Chọn checkpoint",
+          "Loss chung trên cal 2023"
+        ]
+      ]
+    },
+    "tuning_status": {
+      "slide": 27,
+      "headers": [
+        "Đã cố định",
+        "Đã lựa chọn bằng cal",
+        "Chưa thực hiện"
+      ],
+      "rows": [
+        [
+          "Cửa sổ / A0–A3 / các seed",
+          "Số cây tốt nhất của LightGBM",
+          "Grid / Random Search / Optuna"
+        ],
+        [
+          "LR, depth, leaves; cấu trúc GRU",
+          "Epoch tốt nhất của GRU",
+          "Tuning loss weight / cửa sổ"
+        ],
+        [
+          "Cutoff xác suất 0,5",
+          "Platt calibration và gate GRU",
+          "Tối ưu ngưỡng / cân bằng lớp"
+        ]
+      ]
+    },
+    "amount_metric_definitions": {
+      "slide": 29,
+      "headers": [
+        "Chỉ số",
+        "Ý nghĩa dễ hiểu",
+        "Vì sao dùng?",
+        "Chiều tốt"
+      ],
+      "rows": [
+        [
+          "MAE",
+          "Trung bình sai lệch tuyệt đối bao nhiêu mm",
+          "Đọc được mức sai số điển hình",
+          "Nhỏ hơn"
+        ],
+        [
+          "RMSE",
+          "Sai số nhấn mạnh các lỗi lớn",
+          "Không che những lần dự báo sai nặng",
+          "Nhỏ hơn"
+        ],
+        [
+          "Bias",
+          "Dự báo thừa hay thiếu mưa trung bình",
+          "Phát hiện lệch có hệ thống",
+          "Gần 0"
+        ]
+      ]
+    },
+    "probability_metric_definitions": {
+      "slide": 30,
+      "headers": [
+        "Chỉ số",
+        "Công thức / cách hiểu",
+        "Chiều tốt"
+      ],
+      "rows": [
+        [
+          "BS",
+          "Trung bình (p − sự kiện 0/1)²",
+          "Nhỏ hơn"
+        ],
+        [
+          "BSS",
+          "1 − BS mô hình / BS khí hậu",
+          "Lớn hơn; >0 là hơn tham chiếu"
+        ]
+      ]
+    },
+    "event_metric_definitions": {
+      "slide": 31,
+      "headers": [
+        "Chỉ số",
+        "Công thức",
+        "Ý nghĩa",
+        "Chiều tốt"
+      ],
+      "rows": [
+        [
+          "POD",
+          "H / (H+M)",
+          "Bắt được bao nhiêu sự kiện thật?",
+          "Lớn hơn"
+        ],
+        [
+          "FAR",
+          "F / (H+F)",
+          "Trong các lần báo có, bao nhiêu bị nhầm?",
+          "Nhỏ hơn"
+        ],
+        [
+          "CSI",
+          "H / (H+M+F)",
+          "Cân nhắc trúng, bỏ sót và báo nhầm",
+          "Lớn hơn"
+        ]
+      ]
+    },
+    "result_mae": {
+      "slide": 33,
+      "headers": [
+        "Phương pháp",
+        "Ngày 1",
+        "Ngày 2",
+        "Ngày 3"
+      ],
+      "rows": [
+        [
+          "Khí hậu",
+          "10,75",
+          "10,26",
+          "10,93"
+        ],
+        [
+          "Persistence",
+          "7,83",
+          "9,43",
+          "11,19"
+        ],
+        [
+          "GFS gốc",
+          "5,83",
+          "7,41",
+          "10,30"
+        ],
+        [
+          "LightGBM A0",
+          "6,57",
+          "7,07",
+          "10,42"
+        ],
+        [
+          "LightGBM A1",
+          "5,50",
+          "6,92",
+          "9,86"
+        ],
+        [
+          "LightGBM A2",
+          "5,28",
+          "6,72",
+          "8,44"
+        ],
+        [
+          "LightGBM A3",
+          "5,24",
+          "6,75",
+          "8,34"
+        ],
+        [
+          "GRU A2",
+          "6,94",
+          "7,56",
+          "8,00"
+        ]
+      ]
+    },
+    "point_tradeoffs": {
+      "slide": 34,
+      "headers": [
+        "Ngày",
+        "Phương pháp",
+        "MAE ↓",
+        "RMSE ↓",
+        "Bias ≈0"
+      ],
+      "rows": [
+        [
+          "1",
+          "GFS gốc",
+          "5,83",
+          "12,36",
+          "+1,18"
+        ],
+        [
+          "1",
+          "LightGBM A2",
+          "5,28",
+          "11,35",
+          "+1,12"
+        ],
+        [
+          "1",
+          "GRU A2",
+          "6,94",
+          "13,51",
+          "+3,47"
+        ],
+        [
+          "2",
+          "GFS gốc",
+          "7,41",
+          "15,68",
+          "-0,51"
+        ],
+        [
+          "2",
+          "LightGBM A2",
+          "6,72",
+          "15,79",
+          "-1,68"
+        ],
+        [
+          "2",
+          "GRU A2",
+          "7,56",
+          "15,86",
+          "+0,20"
+        ],
+        [
+          "3",
+          "GFS gốc",
+          "10,30",
+          "26,73",
+          "+2,02"
+        ],
+        [
+          "3",
+          "LightGBM A2",
+          "8,44",
+          "23,77",
+          "-2,13"
+        ],
+        [
+          "3",
+          "GRU A2",
+          "8,00",
+          "17,62",
+          "+1,12"
+        ]
+      ]
+    },
+    "bss_1": {
+      "slide": 35,
+      "headers": [
+        "Phương pháp",
+        "Ngày 1",
+        "Ngày 2",
+        "Ngày 3"
+      ],
+      "rows": [
+        [
+          "Khí hậu",
+          "0,000",
+          "0,000",
+          "0,000"
+        ],
+        [
+          "LightGBM A0",
+          "0,302",
+          "0,128",
+          "0,065"
+        ],
+        [
+          "LightGBM A1",
+          "0,281",
+          "0,118",
+          "0,074"
+        ],
+        [
+          "LightGBM A2",
+          "0,228",
+          "0,207",
+          "0,120"
+        ],
+        [
+          "LightGBM A3",
+          "0,218",
+          "0,209",
+          "0,114"
+        ],
+        [
+          "GRU A2",
+          "0,192",
+          "0,187",
+          "0,151"
+        ]
+      ]
+    },
+    "bss_50": {
+      "slide": 35,
+      "headers": [
+        "Phương pháp",
+        "Ngày 1",
+        "Ngày 2",
+        "Ngày 3"
+      ],
+      "rows": [
+        [
+          "Khí hậu",
+          "0,000",
+          "0,000",
+          "0,000"
+        ],
+        [
+          "LightGBM A0",
+          "0,183",
+          "0,033",
+          "-0,097"
+        ],
+        [
+          "LightGBM A1",
+          "0,384",
+          "0,058",
+          "0,008"
+        ],
+        [
+          "LightGBM A2",
+          "0,344",
+          "0,012",
+          "0,057"
+        ],
+        [
+          "LightGBM A3",
+          "0,337",
+          "0,040",
+          "0,036"
+        ],
+        [
+          "GRU A2",
+          "0,092",
+          "-0,029",
+          "-0,210"
+        ]
+      ]
+    },
+    "event_wet": {
+      "slide": 36,
+      "headers": [
+        "Ngày",
+        "Phương pháp",
+        "CSI ↑",
+        "POD ↑",
+        "FAR ↓"
+      ],
+      "rows": [
+        [
+          "1",
+          "GFS gốc",
+          "0,400",
+          "0,958",
+          "0,591"
+        ],
+        [
+          "1",
+          "LightGBM A2",
+          "0,471",
+          "0,700",
+          "0,406"
+        ],
+        [
+          "1",
+          "GRU A2",
+          "0,392",
+          "0,534",
+          "0,400"
+        ],
+        [
+          "2",
+          "GFS gốc",
+          "0,456",
+          "0,948",
+          "0,532"
+        ],
+        [
+          "2",
+          "LightGBM A2",
+          "0,561",
+          "0,803",
+          "0,350"
+        ],
+        [
+          "2",
+          "GRU A2",
+          "0,526",
+          "0,650",
+          "0,261"
+        ],
+        [
+          "3",
+          "GFS gốc",
+          "0,482",
+          "0,959",
+          "0,507"
+        ],
+        [
+          "3",
+          "LightGBM A2",
+          "0,531",
+          "0,663",
+          "0,270"
+        ],
+        [
+          "3",
+          "GRU A2",
+          "0,500",
+          "0,636",
+          "0,294"
+        ]
+      ]
+    },
+    "event_heavy": {
+      "slide": 37,
+      "headers": [
+        "Ngày",
+        "Phương pháp",
+        "CSI",
+        "POD",
+        "FAR",
+        "N POD/FAR"
+      ],
+      "rows": [
+        [
+          "1",
+          "GFS gốc",
+          "0,390",
+          "0,541",
+          "0,385",
+          "47/52"
+        ],
+        [
+          "1",
+          "LightGBM A2",
+          "0,264",
+          "0,264",
+          "0,130",
+          "47/23"
+        ],
+        [
+          "1",
+          "GRU A2",
+          "0,373",
+          "0,468",
+          "0,384",
+          "47/53"
+        ],
+        [
+          "2",
+          "GFS gốc",
+          "0,066",
+          "0,067",
+          "0,562",
+          "51/16"
+        ],
+        [
+          "2",
+          "LightGBM A2",
+          "0,021",
+          "0,021",
+          "0,400",
+          "51/5"
+        ],
+        [
+          "2",
+          "GRU A2",
+          "0,064",
+          "0,069",
+          "0,409",
+          "51/11"
+        ],
+        [
+          "3",
+          "GFS gốc",
+          "0,115",
+          "0,148",
+          "0,745",
+          "55/55"
+        ],
+        [
+          "3",
+          "LightGBM A2",
+          "0,016",
+          "0,020",
+          "0,643",
+          "55/7"
+        ],
+        [
+          "3",
+          "GRU A2",
+          "0,400",
+          "0,694",
+          "0,509",
+          "55/55"
+        ]
+      ]
+    },
+    "a2_gfs_ci": {
+      "slide": 38,
+      "headers": [
+        "Hạn",
+        "MAE A2 − GFS (mm)",
+        "CI 95% (mm)",
+        "Chứa 0?"
+      ],
+      "rows": [
+        [
+          "Ngày 1",
+          "-0,553",
+          "[-1,510; +0,337]",
+          "Có"
+        ],
+        [
+          "Ngày 2",
+          "-0,684",
+          "[-1,495; +0,151]",
+          "Có"
+        ],
+        [
+          "Ngày 3",
+          "-1,867",
+          "[-6,924; +1,832]",
+          "Có"
+        ]
+      ]
+    },
+    "feature_addition_ci": {
+      "slide": 39,
+      "headers": [
+        "Thông tin thêm",
+        "Ngày",
+        "Δ MAE mm",
+        "CI 95% mm"
+      ],
+      "rows": [
+        [
+          "+ Mưa trạm",
+          "1",
+          "-1,065",
+          "[-2,584; +0,085]"
+        ],
+        [
+          "+ Mưa trạm",
+          "2",
+          "-0,151",
+          "[-0,691; +0,335]"
+        ],
+        [
+          "+ Mưa trạm",
+          "3",
+          "-0,563",
+          "[-1,541; +0,061]"
+        ],
+        [
+          "+ Khí tượng GFS",
+          "1",
+          "-0,228",
+          "[-0,629; +0,130]"
+        ],
+        [
+          "+ Khí tượng GFS",
+          "2",
+          "-0,197",
+          "[-0,650; +0,235]"
+        ],
+        [
+          "+ Khí tượng GFS",
+          "3",
+          "-1,424",
+          "[-3,631; -0,055]"
+        ],
+        [
+          "+ Địa hình",
+          "1",
+          "-0,032",
+          "[-0,091; +0,012]"
+        ],
+        [
+          "+ Địa hình",
+          "2",
+          "+0,031",
+          "[-0,016; +0,087]"
+        ],
+        [
+          "+ Địa hình",
+          "3",
+          "-0,095",
+          "[-0,239; +0,011]"
+        ]
+      ]
+    },
+    "defensible_conclusions": {
+      "slide": 42,
+      "headers": [
+        "Câu hỏi",
+        "Trả lời có bằng chứng"
+      ],
+      "rows": [
+        [
+          "Đã huấn luyện trên 57 trạm?",
+          "Có; dữ liệu, mô hình và phép chấm đã replay"
+        ],
+        [
+          "Thêm biến luôn cải thiện?",
+          "Chưa; phụ thuộc chỉ số, hạn và CI"
+        ],
+        [
+          "GRU hay LightGBM luôn tốt hơn?",
+          "Không; ngày 3 và lượng/xác suất có đánh đổi"
+        ],
+        [
+          "Đã chứng minh hơn GFS ổn định?",
+          "Chưa; CI A2−GFS còn chứa 0"
+        ]
+      ]
+    },
+    "catalog_A01": {
+      "slide": 44,
+      "headers": [
+        "Khối",
+        "Tên cột",
+        "Số"
+      ],
+      "rows": [
+        [
+          "Mưa dự báo",
+          "gfs_rain_mm",
+          "1"
+        ],
+        [
+          "Lịch + vị trí / ID",
+          "sin_doy, cos_doy; latitude, longitude; station_code",
+          "5"
+        ],
+        [
+          "Bảy ngày mưa",
+          "rain_lag_day1_mm … rain_lag_day7_mm",
+          "7"
+        ],
+        [
+          "Mưa gần issue",
+          "rain_recent1h_mm, rain_recent6h_mm, rain_recent24h_mm",
+          "3"
+        ]
+      ]
+    },
+    "catalog_A23": {
+      "slide": 45,
+      "headers": [
+        "Khối",
+        "Tên cột / công thức",
+        "Số"
+      ],
+      "rows": [
+        [
+          "Trạng thái GFS",
+          "gfs_t850_c, gfs_rh850_pct, gfs_u850,\ngfs_v850, gfs_pwat",
+          "5"
+        ],
+        [
+          "Dẫn xuất khí tượng",
+          "gfs_q850_gkg, gfs_qflux_e,\ngfs_qflux_n, gfs_wspd850",
+          "4"
+        ],
+        [
+          "DEM / gradient",
+          "dem_elev_m, dem_mean_5km_m, dem_std_5km_m,\ndem_slope_east, dem_slope_north",
+          "5"
+        ],
+        [
+          "Tương tác",
+          "wind_upslope = u·slopeE + v·slopeN\nmoist_upslope = wind_upslope × q",
+          "2"
+        ]
+      ]
+    },
+    "full_rmse": {
+      "slide": 46,
+      "headers": [
+        "Phương pháp",
+        "Ngày 1",
+        "Ngày 2",
+        "Ngày 3"
+      ],
+      "rows": [
+        [
+          "Khí hậu",
+          "18,38",
+          "17,35",
+          "19,98"
+        ],
+        [
+          "Persistence",
+          "18,94",
+          "21,65",
+          "26,34"
+        ],
+        [
+          "GFS gốc",
+          "12,36",
+          "15,68",
+          "26,73"
+        ],
+        [
+          "LightGBM A0",
+          "14,20",
+          "15,29",
+          "29,61"
+        ],
+        [
+          "LightGBM A1",
+          "11,28",
+          "15,86",
+          "27,32"
+        ],
+        [
+          "LightGBM A2",
+          "11,35",
+          "15,79",
+          "23,77"
+        ],
+        [
+          "LightGBM A3",
+          "11,30",
+          "15,86",
+          "23,43"
+        ],
+        [
+          "GRU A2",
+          "13,51",
+          "15,86",
+          "17,62"
+        ]
+      ]
+    },
+    "full_bias": {
+      "slide": 46,
+      "headers": [
+        "Phương pháp",
+        "Ngày 1",
+        "Ngày 2",
+        "Ngày 3"
+      ],
+      "rows": [
+        [
+          "Khí hậu",
+          "3,75",
+          "3,11",
+          "2,28"
+        ],
+        [
+          "Persistence",
+          "1,40",
+          "0,40",
+          "-0,49"
+        ],
+        [
+          "GFS gốc",
+          "1,18",
+          "-0,51",
+          "2,02"
+        ],
+        [
+          "LightGBM A0",
+          "0,99",
+          "-0,78",
+          "0,16"
+        ],
+        [
+          "LightGBM A1",
+          "1,11",
+          "-1,84",
+          "-0,39"
+        ],
+        [
+          "LightGBM A2",
+          "1,12",
+          "-1,68",
+          "-2,13"
+        ],
+        [
+          "LightGBM A3",
+          "1,00",
+          "-1,68",
+          "-2,21"
+        ],
+        [
+          "GRU A2",
+          "3,47",
+          "0,20",
+          "1,12"
+        ]
+      ]
+    },
+    "full_bs_1": {
+      "slide": 47,
+      "headers": [
+        "Phương pháp",
+        "Ngày 1",
+        "Ngày 2",
+        "Ngày 3"
+      ],
+      "rows": [
+        [
+          "Khí hậu",
+          "0,190",
+          "0,180",
+          "0,173"
+        ],
+        [
+          "LightGBM A0",
+          "0,133",
+          "0,157",
+          "0,161"
+        ],
+        [
+          "LightGBM A1",
+          "0,136",
+          "0,158",
+          "0,159"
+        ],
+        [
+          "LightGBM A2",
+          "0,144",
+          "0,143",
+          "0,152"
+        ],
+        [
+          "LightGBM A3",
+          "0,146",
+          "0,142",
+          "0,153"
+        ],
+        [
+          "GRU A2",
+          "0,151",
+          "0,146",
+          "0,148"
+        ]
+      ]
+    },
+    "full_bss_1": {
+      "slide": 47,
+      "headers": [
+        "Phương pháp",
+        "Ngày 1",
+        "Ngày 2",
+        "Ngày 3"
+      ],
+      "rows": [
+        [
+          "Khí hậu",
+          "0,000",
+          "0,000",
+          "0,000"
+        ],
+        [
+          "LightGBM A0",
+          "0,302",
+          "0,128",
+          "0,065"
+        ],
+        [
+          "LightGBM A1",
+          "0,281",
+          "0,118",
+          "0,074"
+        ],
+        [
+          "LightGBM A2",
+          "0,228",
+          "0,207",
+          "0,120"
+        ],
+        [
+          "LightGBM A3",
+          "0,218",
+          "0,209",
+          "0,114"
+        ],
+        [
+          "GRU A2",
+          "0,192",
+          "0,187",
+          "0,151"
+        ]
+      ]
+    },
+    "full_bs_50": {
+      "slide": 48,
+      "headers": [
+        "Phương pháp",
+        "Ngày 1",
+        "Ngày 2",
+        "Ngày 3"
+      ],
+      "rows": [
+        [
+          "Khí hậu",
+          "0,034",
+          "0,034",
+          "0,036"
+        ],
+        [
+          "LightGBM A0",
+          "0,028",
+          "0,032",
+          "0,035"
+        ],
+        [
+          "LightGBM A1",
+          "0,020",
+          "0,033",
+          "0,033"
+        ],
+        [
+          "LightGBM A2",
+          "0,019",
+          "0,033",
+          "0,031"
+        ],
+        [
+          "LightGBM A3",
+          "0,019",
+          "0,032",
+          "0,032"
+        ],
+        [
+          "GRU A2",
+          "0,020",
+          "0,032",
+          "0,035"
+        ]
+      ]
+    },
+    "full_bss_50": {
+      "slide": 48,
+      "headers": [
+        "Phương pháp",
+        "Ngày 1",
+        "Ngày 2",
+        "Ngày 3"
+      ],
+      "rows": [
+        [
+          "Khí hậu",
+          "0,000",
+          "0,000",
+          "0,000"
+        ],
+        [
+          "LightGBM A0",
+          "0,183",
+          "0,033",
+          "-0,097"
+        ],
+        [
+          "LightGBM A1",
+          "0,384",
+          "0,058",
+          "0,008"
+        ],
+        [
+          "LightGBM A2",
+          "0,344",
+          "0,012",
+          "0,057"
+        ],
+        [
+          "LightGBM A3",
+          "0,337",
+          "0,040",
+          "0,036"
+        ],
+        [
+          "GRU A2",
+          "0,092",
+          "-0,029",
+          "-0,210"
+        ]
+      ]
+    },
+    "prob_coherence": {
+      "slide": 49,
+      "headers": [
+        "Phương pháp",
+        "Dòng vi phạm",
+        "Tỷ lệ dev",
+        "Gap lớn nhất",
+        "Mâu thuẫn p≥0,5"
+      ],
+      "rows": [
+        [
+          "LightGBM A0",
+          "172",
+          "2,06%",
+          "0,022",
+          "0"
+        ],
+        [
+          "LightGBM A1",
+          "367",
+          "4,40%",
+          "0,039",
+          "0"
+        ],
+        [
+          "LightGBM A2",
+          "188",
+          "2,25%",
+          "0,087",
+          "0"
+        ],
+        [
+          "LightGBM A3",
+          "186",
+          "2,23%",
+          "0,120",
+          "0"
+        ],
+        [
+          "GRU A2",
+          "0",
+          "0,00%",
+          "0,000",
+          "0"
+        ]
+      ]
+    },
+    "release_sensitivity": {
+      "slide": 50,
+      "headers": [
+        "Hạn",
+        "A2 chính · MAE mm",
+        "Bỏ 7 chu kỳ train · MAE mm"
+      ],
+      "rows": [
+        [
+          "Ngày 1",
+          "5,28",
+          "5,37"
+        ],
+        [
+          "Ngày 2",
+          "6,72",
+          "6,76"
+        ],
+        [
+          "Ngày 3",
+          "8,44",
+          "8,34"
+        ]
+      ]
+    },
+    "verification_summary": {
+      "slide": 51,
+      "headers": [
+        "Bằng chứng",
+        "Kết quả / giới hạn"
+      ],
+      "rows": [
+        [
+          "Tests dữ liệu / thời gian / mô hình",
+          "53 tests đã đạt"
+        ],
+        [
+          "Dữ liệu và source forecast",
+          "31.188 dòng; replay 171 mẫu nội suy GRIB"
+        ],
+        [
+          "Checkpoint / metric",
+          "36 lượng +72 classifier +3 GRU; scaler train-only"
+        ],
+        [
+          "Chưa chứng nhận",
+          "Cảm biến, vị trí lịch sử, độ trễ, kỹ năng cuối"
+        ]
+      ]
+    },
+    "faq_data": {
+      "slide": 52,
+      "headers": [
+        "Câu hỏi",
+        "Cách trả lời ngắn"
+      ],
+      "rows": [
+        [
+          "57 trạm hay 57 ô?",
+          "57 điểm đo; GFS là lưới nội suy làm predictor."
+        ],
+        [
+          "Một mô hình hay 57 mô hình?",
+          "Học chung nhiều trạm, có đầu theo từng hạn."
+        ],
+        [
+          "Dự báo ngày, sao có đầu vào giờ?",
+          "Độ phân giải đầu vào và đầu ra không bắt buộc giống."
+        ],
+        [
+          "Dự báo GFS đã có, học máy để làm gì?",
+          "Học chuyển dự báo lưới thành dự báo phù hợp trạm."
+        ]
+      ]
+    },
+    "faq_models": {
+      "slide": 53,
+      "headers": [
+        "Câu hỏi",
+        "Cách trả lời ngắn"
+      ],
+      "rows": [
+        [
+          "Vì sao chưa cần TFT/Informer?",
+          "Chưa có điểm trên NWP57; ưu tiên kiểm chứng dữ liệu."
+        ],
+        [
+          "Đã tuning tối ưu chưa?",
+          "Chưa; cố định tham số, chọn checkpoint và Platt bằng cal."
+        ],
+        [
+          "POD 0,4 có tốt không?",
+          "Phụ thuộc ngưỡng/hạn; phải đọc kèm FAR và CSI."
+        ],
+        [
+          "Tại sao không gọi 2024 là test cuối?",
+          "Đã dùng phân tích phát triển; 2025 vẫn giữ kín."
+        ]
+      ]
+    },
+    "source_files": {
+      "slide": 55,
+      "headers": [
+        "Muốn xem gì?",
+        "File trong reports/gfs_station_57_2026_11_10/"
+      ],
+      "rows": [
+        [
+          "Chia dữ liệu / mô hình",
+          "protocol.json, dataset_audit.json, fit_diagnostics.csv"
+        ],
+        [
+          "Lượng / xác suất / sự kiện",
+          "point_metrics.csv, probability_metrics.csv, event_metrics.csv"
+        ],
+        [
+          "Bất định / mở rộng trạm",
+          "paired_bootstrap.csv, matched_original20_bootstrap.csv"
+        ],
+        [
+          "Tái tạo và kiểm tra",
+          "verification.json, model_verification.json, gru_summary.json"
+        ]
+      ]
+    }
+  },
+  "files": {
+    "PBL6_DU_BAO_MUA_57_TRAM.pptx": {
+      "sha256": "84c3d2c00c3de2fcc6c9a5f66d0c59ecbd7da43dc92d5e3b903a48765ca22795",
+      "bytes": 270111
+    },
+    "PBL6_DU_BAO_MUA_57_TRAM.html": {
+      "sha256": "87b36718cdab4d254b139f8f341211c58d73d532c7a93845d8a75c7ab94a2f76",
+      "bytes": 285127
+    },
+    "slide_scene.json": {
+      "sha256": "4da3faa0c1efab3d2bf469774e09096d2f545814bf68223ece2b58fba9ac21d8",
+      "bytes": 231694
+    },
+    "GHI_CHU_THUYET_TRINH.md": {
+      "sha256": "72ac7dfeae44433f4b881e42802b04b2630b9c8143b84d7b82d22d64e490f439",
+      "bytes": 46290
+    },
+    "training_audit.json": {
+      "sha256": "14f20a1779c6db844f4349ac7ab85986ddac60e4f495fd70f18a7b09d9cb67e1",
+      "bytes": 11409
+    }
+  }
+}

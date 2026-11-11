@@ -1,0 +1,36 @@
+{
+  "status": "cohort_frozen",
+  "source_stations": 82,
+  "train_quality_eligible": 57,
+  "initial_pilot": 20,
+  "added_stations": 37,
+  "broader_stations_with_train_windows": 79,
+  "broader_short_history_stations": 22,
+  "no_train_history_stations": 3,
+  "modern_only_without_legacy_history": 4,
+  "selected_train_day_range": [
+    479,
+    728
+  ],
+  "min_train_weekly_windows": 18,
+  "stations_below_30_train_weekly_windows": 2,
+  "selected_elevation_proxy_range_m": [
+    -2.993601279986943,
+    728.0743526399715
+  ],
+  "complete_station_issue_counts_57": {
+    "train": 5032,
+    "cal": 2582,
+    "dev": 2782
+  },
+  "complete_station_issue_counts_79": {
+    "train": 5491,
+    "cal": 3664,
+    "dev": 3899
+  },
+  "selection_used_only_train_and_static_metadata": true,
+  "models_unchanged": true,
+  "cadence_days": 7,
+  "original_pilot_preserved": true,
+  "test2025_read": false
+}

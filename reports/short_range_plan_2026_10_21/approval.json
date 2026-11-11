@@ -1,0 +1,17 @@
+{
+  "date_local": "2026-10-21",
+  "approved_by": "user_in_conversation",
+  "status": "approved_plan_with_completed_development_factorial_on_approximate_footprint",
+  "user_confirmation_excerpt": "tôi thấy ok",
+  "priority": "Obtain a preliminary report in approximately 3–4 hours",
+  "pilot_report": "../short_range_pilot_2026_10_21/README.md",
+  "development_report": "../short_range_ablation_2026_10_21/README.md",
+  "extension_request_excerpt": "hiện tại vẫn còn thời gian, bạn có dự tính làm gì tiếp theo",
+  "development_matrix_complete_on_approximate_footprint": true,
+  "development_tft_runs": 72,
+  "development_lgbm_pipelines": 24,
+  "checkpoint_runs_replayed": 96,
+  "geographic_and_label_validation_complete": false,
+  "full_research_complete": false,
+  "holdout_2025_opened": false
+}

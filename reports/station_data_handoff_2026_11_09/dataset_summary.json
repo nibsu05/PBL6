@@ -1,0 +1,70 @@
+{
+  "version": "station_v1",
+  "dataset": "PBL6_TRAM_GIO_NGAY_V1.parquet",
+  "candidate_stations": 86,
+  "historical_stations": 82,
+  "modern_only_without_legacy_history": 4,
+  "interval_start_local": "2020-12-31 19:00:00+07:00",
+  "first_interval_end_local": "2020-12-31 20:00:00+07:00",
+  "last_interval_end_local": "2024-12-31 19:00:00+07:00",
+  "source_marked_dates": "2021-01-01 through 2024-12-31",
+  "flagged_station_days": 3,
+  "weather_channels_hourly": 44,
+  "weather_channels_daily": 42,
+  "past_rain_channel_optional": 1,
+  "resolutions": {
+    "1h": {
+      "source_stations": 82,
+      "rows": 2875248,
+      "stations_with_train_samples": 79,
+      "weather_missing_rows": 1722,
+      "rain_valid_rows": 2468236,
+      "samples_r1": {
+        "train": 1032811,
+        "cal": 676870,
+        "dev": 679888
+      },
+      "stations_r1": {
+        "train": 79,
+        "cal": 79,
+        "dev": 79
+      },
+      "samples_r0_weather_only": {
+        "train": 1061229,
+        "cal": 686364,
+        "dev": 683536
+      }
+    },
+    "24h": {
+      "source_stations": 82,
+      "rows": 119802,
+      "stations_with_train_samples": 79,
+      "weather_missing_rows": 246,
+      "rain_valid_rows": 100875,
+      "samples_r1": {
+        "train": 37872,
+        "cal": 26200,
+        "dev": 26726
+      },
+      "stations_r1": {
+        "train": 79,
+        "cal": 79,
+        "dev": 79
+      },
+      "samples_r0_weather_only": {
+        "train": 40701,
+        "cal": 27553,
+        "dev": 27473
+      }
+    }
+  },
+  "spatial_method": "native_0.25_degree_strict_bilinear_at_station",
+  "all_history_stations_bracketed": true,
+  "merged": true,
+  "no_missing_values_in_ready_windows": true,
+  "test2025_read": false,
+  "recent2026_merged": false,
+  "station_model_training_performed": false,
+  "bytes": 432915887,
+  "sha256": "04e16e230111d71ec16367d287412beb156fcf3570049e5a5f0f4b846f03ad74"
+}

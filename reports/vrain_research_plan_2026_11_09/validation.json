@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "probes": 10,
+  "hourly_probes": 7,
+  "no_hourly_data_probes": 3,
+  "complete_station_sum_checks": 490,
+  "inventory_v1": 82,
+  "inventory_v2": 86,
+  "workbook_sheets": 8,
+  "contract_fields": 65,
+  "feature_rows_including_R_proposal": 45,
+  "docx_probe_table_matches_source": true,
+  "unit_semantics_still_unconfirmed": true,
+  "user_files_unchanged": 2,
+  "training_performed": false,
+  "test2025_read": false,
+  "native_office_rendered": false
+}

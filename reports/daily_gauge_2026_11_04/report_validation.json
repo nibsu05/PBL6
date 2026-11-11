@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "models": 168,
+  "main_rows": 72,
+  "excel_sheets": 11,
+  "workbook_numeric_cells_checked": 864,
+  "word_metric_cells_checked": 144,
+  "bold_cells_checked": 72,
+  "complete_three_model_tables": true,
+  "ci_rows_checked": 576,
+  "old_publications_and_user_slide_preserved": true,
+  "native_office_rendered": false,
+  "test2025_read": false,
+  "validator_sha256": "d5907e2717d313264df80ccabf0ce5c9ab95974661ecf0fb1dd1b5cc94ca435e"
+}

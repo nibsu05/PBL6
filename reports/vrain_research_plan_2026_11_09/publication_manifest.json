@@ -1,0 +1,67 @@
+{
+  "status": "published_plan_not_training",
+  "date": "2026-11-09",
+  "probe_count": 10,
+  "offline_report_rebuild": true,
+  "training_performed": false,
+  "test2025_read": false,
+  "code_hashes": {
+    "src/vrain_export_audit.py": "e87ce23a7e436ff529322ae2b8df29d38ab343519aa35ccaa7bd2bc6da0c0266",
+    "scripts/audit_vrain_exports.py": "ff875242f59fbf7b7d59e0fb2abddf46273870cf2242764d45aa647695a6886c",
+    "scripts/publish_vrain_research_plan.py": "4e6c2d7b06d0ae2b27711057892563c88cf3944474b0dfaa82581394b3a646ea",
+    "scripts/validate_vrain_research_plan.py": "6874117a2d4f3129cfebf0eebdec56d8757b406dc33a39fdbc739899eba7e411",
+    "tests/test_vrain_export_audit.py": "10ceb0c53e77e16a8643fb111721290bdef91b2725b8f3112f0c0087ad679076"
+  },
+  "sources": {
+    "reports/regional_research_plan_2026_10_20/feature_groups.json": "fedf0410bdc7f6d0776e7f8e3d2c4d1812e4ad19c998eca7728d2f2cf82ed46e"
+  },
+  "shared_code_lf_normalized_sha256": {
+    "scripts/build_final_regional_plan.py": "998370b200bfbc02a78245345955ec339798ac8722a6e8e2fc2d02225540ce79"
+  },
+  "files": {
+    "access_audit.json": {
+      "sha256": "deeb9c8f9d7f11afd8b7d795af974e945710ceaf5cce85d5834b38661ff4f340",
+      "bytes": 16341
+    },
+    "history_probe_summary.csv": {
+      "sha256": "4913b002c9caf7d94e379b085f3d30190d05ccadb717e9a2b23b63d2d2519d9d",
+      "bytes": 1914
+    },
+    "PHUONG_AN_VRAIN_GUI_NHOM.md": {
+      "sha256": "58132843ef4a4d3c1f180530fdb7da4704176275ed9e274e592b929464dd47a1",
+      "bytes": 39094
+    },
+    "web_access_check.json": {
+      "sha256": "b9bd35b2ee7c25cc3a9b2100dceb2ad221889a319c7951f1a8996da43fc9d674",
+      "bytes": 1362
+    },
+    "TOM_TAT_GUI_NHOM.md": {
+      "sha256": "39a8c81a474d6a9e53755af2761ec69222f6cb82d0b01d4cef2208e8dc6bb85c",
+      "bytes": 2722
+    },
+    "dataset_contract.json": {
+      "sha256": "49ac9d4bd53e0a6482039d4f09fd5005f09223ee14df60cfa7533fad414189af",
+      "bytes": 13184
+    },
+    "DATA_DICTIONARY.csv": {
+      "sha256": "282d826a1724e28fec877f3cf0856784c33be8ae5ae7c7d74750d27cad9bb973",
+      "bytes": 7052
+    },
+    "DU_LIEU_VRAIN_VA_PHAN_CONG.xlsx": {
+      "sha256": "2dee654985c1440f31aed3070e3db3adbe592b02391d39fbcdb3bf55e1156c3b",
+      "bytes": 16617
+    },
+    "PHUONG_AN_VRAIN_GUI_NHOM.docx": {
+      "sha256": "2874ff97d425a354fddfc7b423f472edc97a2f9b061945444205f8536bc40619",
+      "bytes": 55322
+    },
+    "TOM_TAT_GUI_NHOM.docx": {
+      "sha256": "543d1647441b7b2b2cbdafeae076f7acece8914fd8d1888993f843adb830586b",
+      "bytes": 39528
+    },
+    "README.md": {
+      "sha256": "f10eef4380b8af5b549038f3ef044f060e705afa7da6f69a8bbb03167dd09fb8",
+      "bytes": 1658
+    }
+  }
+}

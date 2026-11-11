@@ -1,0 +1,70 @@
+{
+  "status": "selected_from_train_only_cv",
+  "anchor": "N3",
+  "dataset_sha256": "9e5b6aed6a933d8be3deac9558976e953d14110e3e83159e381e760fc03865b4",
+  "selected": {
+    "mean": {
+      "candidate": {
+        "name": "small",
+        "num_leaves": 7,
+        "max_depth": 3,
+        "min_child_samples": 40,
+        "reg_lambda": 5.0
+      },
+      "trees": {
+        "1": 109,
+        "2": 109,
+        "3": 93
+      }
+    },
+    "median": {
+      "candidate": {
+        "name": "medium",
+        "num_leaves": 31,
+        "max_depth": 5,
+        "min_child_samples": 80,
+        "reg_lambda": 5.0
+      },
+      "trees": {
+        "1": 68,
+        "2": 40,
+        "3": 72
+      }
+    },
+    "wet": {
+      "candidate": {
+        "name": "small",
+        "num_leaves": 7,
+        "max_depth": 3,
+        "min_child_samples": 40,
+        "reg_lambda": 5.0
+      },
+      "trees": {
+        "1": 150,
+        "2": 169,
+        "3": 147
+      }
+    },
+    "conditional": {
+      "candidate": {
+        "name": "small",
+        "num_leaves": 7,
+        "max_depth": 3,
+        "min_child_samples": 40,
+        "reg_lambda": 5.0
+      },
+      "trees": {
+        "1": 162,
+        "2": 106,
+        "3": 85
+      }
+    }
+  },
+  "tuning_used_years": [
+    2021,
+    2022
+  ],
+  "cal2023_used_for_tuning": false,
+  "dev2024_used_for_tuning": false,
+  "test2025_read": false
+}

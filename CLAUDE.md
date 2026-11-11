@@ -1,220 +1,137 @@
-# PBL6 – Dự báo mưa: bối cảnh cho agent
+# PBL6 — bối cảnh hiện hành cho agent
 
-> **Đọc file này trước khi làm bất cứ việc gì.** Kế hoạch chi tiết, kèm số liệu bằng chứng, nằm ở
-> [`project_plan_v2.md`](project_plan_v2.md); đọc cùng phương án hiện tại và đối chiếu bằng chứng. Cập nhật lần cuối: 20/10/2026.
-> **Kế hoạch dành cho nhóm** (quy trình, giai đoạn hiện tại, lộ trình, phân công) nằm ở [`KE_HOACH_DU_AN.md`](KE_HOACH_DU_AN.md). Mỗi khi xong một giai đoạn hoặc chốt một quyết định, cập nhật các mục 4 và 6 của file đó.
-> `project_master_plan.md`, `SURFACE_BASELINE_REPORT.md`, `DATA_GAP_PLAN.md` và `reports/informer_baseline_report.md`
-> là tài liệu cũ, do agent khác viết. Chỉ dùng chúng để tham khảo lịch sử. Một số nhận định trong đó đã bị bác bỏ (xem mục "Quyết định").
+Cập nhật 11/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
 
-## Người dùng và cách làm việc
+## Thí nghiệm hằng ngày v2 — đã hoàn thành và kiểm chứng
 
-- Nhóm sinh viên Đại học Bách khoa Đà Nẵng làm đồ án PBL6. **Trao đổi bằng tiếng Việt.**
-- Người dùng muốn **đánh giá độc lập, có bằng chứng, trung thực**, kể cả khi kết quả âm. Không chiều theo tài liệu cũ một cách mù quáng.
-- Không phóng đại kết quả. Mọi so sánh phải trên cùng tập mẫu, kèm baseline và khoảng tin cậy.
-- Máy:
-  - MacBook M2 8 GB RAM: lưu dữ liệu, viết code, chạy pilot.
-  - Máy nhóm có RTX 4060 8 GB: chạy huấn luyện dài.
-  - Máy Windows đang thiết lập ngày 13/10/2026: RTX 3050 Ti Laptop 4 GB, driver 546.92; ổ C ít dung lượng. Python Windows ở `.venv\Scripts\python.exe` (không dùng Python MSYS2 có sẵn).
-  - Repo làm việc chuyển sang USB **`D:\PBL6_v2`** theo xác nhận của người dùng. `D:\PBL6` cũ giữ nguyên; bản trên C là bản nguồn/backup của lần chuyển này.
-- Repo `nibsu05/PBL6` là **repo công khai**. Không commit dữ liệu, file PDF bài báo hay thông tin đăng nhập.
+**Slide daily-v2 mới 11/11:** `reports/gfs_daily_slides_2026_11_11/PBL6_MUA_TRAM_HANG_NGAY_V2.pptx`/HTML, 32 slide chính + 9 phụ lục, ghi chú tiếng Việt; README giải thích “giữ kín 2025” và lộ trình trình bày. Builder/render/validator `scripts/*gfs_daily_slides*`; chỉ đọc aggregate của daily-v2, không train hay mở 2025. PDF private ở `data/operational/gfs_daily_slides_2026_11_11/`. Không chạy lại builder các deck cũ. Năm 2025 dành kiểm định sau khóa phương án; hiện dataset thí nghiệm mới dựng/kiểm chứng 2021–2024, chưa có bảng điểm 2025. Các phần “slide/nhận xét” phía dưới thuộc pilot lịch tuần, không thay kết quả mới này.
 
-## Quyết định hiện tại: nghiên cứu và dự đoán vùng trực tiếp (20/10/2026)
+Người dùng đã duyệt thực hiện cả bốn đề xuất sau nhận xét độc lập: lịch issue hằng ngày/độ trễ; ZERO/MOS và mục tiêu mean–median; tách biến thô khỏi dẫn xuất; xác suất nhất quán/tuning có kiểm soát. Thí nghiệm riêng `gfs_station_daily_v2_2026_11_10` (tên theo ngày duyệt, chạy tiếp 11/11). Không đổi các pilot cũ, slide đã bàn giao hoặc mở 2025.
 
-- Người dùng xác nhận **nghiên cứu đặc trưng là trọng tâm, đầu ra chính là dự đoán vùng trực tiếp**. Tổng hợp khí tượng/nhãn từ các ô trước khi học; một mẫu là một thời điểm của cả vùng. Không tự đổi sang dự đoán từng ô rồi mới gộp hoặc quay lại ưu tiên app.
-- Đã hợp nhất tài liệu nhóm TONG_HOP_DE_XUAT với phương án nghiên cứu: [phương án cuối](reports/regional_research_plan_2026_10_20/PHUONG_AN_CUOI.md), kèm Word, 18 quyết định, mỗi quyết định giải thích đủ sáu tiêu chí mục 13.
-- **Giữ D1/D2/D9/D10/D14/D15 có nhãn bằng chứng theo yêu cầu người dùng**; chưa có phép đo tốt hơn cùng giao thức để thay. Gauge chính/IMERG kiểm tra độ bền; CSI/BSS chính, RMSE/bias và MAE phụ; tách mùa, không gọi điểm giờ mùa đông là kết quả chính. Ghi rõ provenance Best Match và giới hạn nhãn giờ, không dùng phép tính khác mẫu để tự thay bảng của nhóm.
-- Phương án triển khai chọn lịch sử 24 giờ → 6 giờ, Bi-LSTM vùng và LightGBM, factorial E0–E7 trên V1; V2/S0/S7 và raw lag4/Q0/Q7 là nhánh phụ. Danh mục 11/12/20/1 cột B/A/M/C không chồng lấn lưu trong feature_groups.json. Không đưa ERA5 giờ đích vào nghiên cứu chính; không gọi SST là đã kiểm tra ENSO/MJO.
-- Ba fold phát triển eval 2021–2023; sau khóa thiết kế, train 2015–2023/cal 2024/test 2025. Không dùng 2026 để chọn mô hình chấm năm 2025. Giữ kín test 2025.
-- V1/V2 đã tạo ở main d3f3936, nhưng loader/huấn luyện Bi-LSTM vùng theo phương án cuối **chưa triển khai trong lượt viết tài liệu**. Cần sửa các lỗi trên dev theo [bản rà soát](reports/research_rainfall/dev_bilstm_review_2026_10_20.md), chốt giao ranh/ô biên và kiểm chứng nhãn trước chạy đầy đủ. 93 ô hiện là vùng xấp xỉ, không mặc định đúng toàn địa giới.
-- App, TFT 1–3 ngày, T-OPS và đa vùng là mở rộng; giữ code/kết quả đã có để tái dùng. Người dùng yêu cầu đưa toàn bộ thay đổi mới lên main; bộ tài liệu hợp nhất và rà soát được công bố trên main, không merge dữ liệu/checkpoint của dev.
-- Kiểm tra trước: đã quét93ô×87.672giờ2015–2024; ba cột kx/tt/era5_tp_mm mỗi cột thiếu1.953giátrịô–giờ; các cột khác hữu hạn. Lượt hiện tại verify nguồn2233/2233,22test đạt, kiểm tra parity V1/V2 và3mẫu tổng hợp trực tiếp nguồn. Hữu hạn không bảo đảm nhãn chính xác; test mô hình2025chưa mở.
+- Protocol đã khóa trước fit trong `reports/gfs_station_daily_v2_2026_11_10/protocol.json`; mã/data/source policy khóa tiếp bằng `src/gfs_daily_lock.py`. Không sửa protocol/huấn luyện sau khóa rồi dùng lại checkpoint.
+- Lịch 1.451 ngày 08/01/2021–28/12/2024; 1.449 chu kỳ GFS hợp lệ. Hai ngày 02/02/2021 (404 chỉ mục cả hai layout) và 30/11/2022 (chỉ mục không khớp byte GRIB, xác nhận tải lại) loại toàn issue chung mọi mô hình trước fit; bằng chứng `source_coverage_policy.json`. Không chọn theo mưa/điểm.
+- Dataset đã dựng: 57 trạm, 72.886 mẫu/218.658 hàng; train/cal/dev 35.116/18.365/19.405 mẫu, 717/362/363 ngày issue. Mask chung cả 3 hạn, N0–N5 và độ trễ trạm1/3/6h. File private `data/processed/gfs_station_daily_v2_2026_11_10/dataset.parquet`.
+- N0=16 biến nền gồm mưa GFS/lịch/vị trí/lịch sử Vrain; N1 thêm 5 khí tượng thô; N2 thêm 4 dẫn xuất ẩm/gió; N3=N1+5 địa hình; N4=N3+4 dẫn xuất; N5=N4+2 tương tác theo dốc. Tách mean/median và hai xác suất lồng nhau `p50=p1*q50givenwet`.
+- Tuning 3 ứng viên × 4 fold quý2022 (gap7 ngày), chỉ train2021–22; N3 là anchor; final fixed số cây/epoch theo CV. Cal2023 chỉ Platt/cutoff cross-fit theo quý; dev2024 đánh giá, chưa test. LightGBM N0–N5 + N3delay3/6; GRU N3/N5; ba seed17/29/43. Không tuyên bố GRU đủ sáu cấu hình.
+- Nguồn GFS hiện tại có Last-Modified~3,65–4,04h sau init; 48 chu kỳ lịch sử đầu2021 có timestamp sửa kho sauissue. Không chứng minh giờ phát hành gốc. API Vrain hiện hành có hàng giờ nhưng chưa chứng minh latency tiếp nhận. 8hGFS/1htrạm vẫn là giả định; có sensitivity3/6h, GFS16h không đủ cùngcycle. Không fit2026.
+- Pipeline `scripts/run_gfs_daily_pipeline.py`: build → validate → trees → GRU → evaluate; sau đó `verify_gfs_daily_models.py` → `publish_gfs_daily.py`. Đã hoàn tất; 179 tests đạt, replay218.658 hàng/81 mẫu nội suy độc lập, 288 estimator LightGBM/6GRU/186 calibrator/2.106 phép đối chiếu metric đạt; 56 artifact cũ/slide người dùng giữ nguyên. Kết quả mới nằm riêng, không thay các phần lịch sử bên dưới.
+- Báo cáo đầy đủ: `reports/gfs_station_daily_v2_2026_11_10/BAO_CAO_HANG_NGAY_V2.md` và `.docx`; `KET_LUAN.md` đọc nhanh, CSV đầy đủ/CI/seed/độ trễ cùng thư mục. LightGBM chọn mean/wet/conditional cấu hình small, median medium; GRU small hidden16/head24, 17epoch final, tuning chỉ train.
+- Dev2024 RMSE mean D1/2/3: GFS19,271/20,228/22,139; MOS19,169/20,124/20,445; LGB_N3 17,527/18,550/19,150; GRU_N5 17,386/18,750/19,277. MAE median GRU_N5 6,314/6,754/6,870, thấp nhất trong các model chính đã chạy. Hai model N3LGB/N5GRU đều vượt MOS về RMSEmean/MAEmedian với CI95% chênh dưới0, nhưng đây là dev/CI thăm dò chưa chỉnh nhiều so sánh.
+- N1−N0 thêm khí tượng thô giảmRMSE cả3hạn, CI dưới0. Dẫn xuất N5−N3: LGB chưa rõ cả3hạn; GRU giảmRMSE/MAEmedian ngày1–2 vớiCI dưới0, ngày3chưa rõ. GRU_N5 so LGB_N5 giảmMAEmedian nhưngCI chênhRMSE chứa0. Không gọi GRU thắng mọi mặt hoặc dẫn xuất luônvôích. Tăngkênh cũngtăng tham sốGRU, chưa tách hoàn toàn dung lượng.
+- BSS50 LGB_N3=0,280/0,227/0,164; GRU_N5=0,287/0,228/0,158. FAR cảnh báo50mm còn~0,5–0,7; PODcao chưađủ. Không quy chênh với pilot tuần cho riêng lịch hằng ngày; chưa chứng minh vận hành realtime/nguồn đúng giờ. 2025 vẫn kín; cần quyết định đóng băng cuối trước khi mở.
 
-### V1/V2 dữ liệu vùng và pilot so đầu vào (20/10/2026)
+## Nhận xét độc lập mới — đọc kèm slide
 
-- Đã tạo `data/processed/regional_danang/v1_hourly.parquet` và `v2_hourly.parquet` ngoài Git:102.984giờ2015-01-01→2026-09-30. V1 có49predictor ứng viên, V2 có138(=V1+89không gian); các cột datetime/nhãn/QC tách riêng. Giữ nguyên file full_features và cube gốc. 2025chỉ được xuất cơ học, không fit/chấm/thống kê pilot.
-- Trọng số là diện tích **toàn ô** trên cầu, footprint93ô~11.074km²; chưa có polygon giao ranh nên chưa gọi là trung bình địa giới chính xác. Tiểu vùng cố định không xem nhãn:23ô venbiển(proxy≤30km),26ô cao(≥600m,khôngvenbiển),44ô còn lại. Thiếu ô nào thì thống kê biến đóNaN, không thay vùng/điền0.
-- Code: `src/regional_dataset.py`, `scripts/build_regional_datasets.py`, `pilot_regional_datasets.py`, `report_regional_datasets.py`. [Báo cáo cùng dữ liệu/CI/hình/Word](reports/regional_danang_v1_v2/README.md). Chỉ public code/thống kê; raw/Parquet/model/dự báo từng dòng ngoài Git.
-- Pilot so OLD_COMMON,V1_COMMON,V2_COMMON,V1_FULL,V2_FULL trên cùng nhãn Gauge vùng và cửa sổ chung;3fold eval2021/2022/2023,calnămtrước,train2015→eval−2. Một seed LightGBM deterministic không bagging/feature sampling; không train NN mới. Không dùng cột mưa, ONI cũ hoặc CIN cũ trong đối chứng COMMON; FULL có CIN mới. Không đưa ERA5 giờ đích.
-- RMSE3h toàn năm OLD_COMMON/V1_FULL/V2_FULL:2021=2,569/2,488/2,403;2022=2,632/2,584/2,648;2023=2,156/2,142/2,082mm. V2_FULL−V1_FULL:−0,085/+0,064/−0,060; CI95%chỉ2021dưới0. 6h chưa có lợi ích ổn định. V1_COMMON−OLD_COMMON CIchứa0ởcả3fold/cả2hạn; chưa khẳng định chỉ gộp lưới giúp hơn.
-- Tín hiệu không gian rõ hơn ở2021, không lặp chắc2022/2023; nhiều phép so chưa hiệu chỉnh. GiữV1 làm nền,V2 nhánh ablation, không tuyên bố bộ mới thắng chung. Persistence dùng nhãnGauge hồi cứu có RMSE3h thấp hơn các model khí tượng nhưng có thông tin mưa quá khứ khác đầu vào; cần phép so bổ sung đúng nguồn, chưa là baseline vận hành. Không lấy pilot này thay kiểm chứng nhãn/thực tế/khả năng toàn Việt Nam.
+Người dùng yêu cầu đánh giá kết quả và đối chiếu nghiên cứu gần đây. Đã đọc nguồn gốc 2024–2026 và bổ sung **chẩn đoán hậu nghiệm trên dev**, không train hoặc mở 2025: `reports/gfs_station_review_2026_11_10/NHAN_XET_DOC_LAP.md`, `diagnostics.json`, `diagnostic_metrics.csv`; tái tạo bằng `scripts/review_gfs_station_results.py`.
 
-## Cấu hình sản phẩm trước đây (lịch sử, không thay định hướng trên)
+Phát hiện quan trọng: **luôn dự báo 0 mm có macro MAE 5,887/6,887/7,773**, nên ngày 3 cả A2/A3/GRU chưa vượt đối chứng này về MAE ở mức điểm. Tỷ lệ mẫu <1 mm khoảng 72,0%/66,6%/63,2%. Điều này không biến 0 mm thành dự báo hữu ích: GRU ngày 3 RMSE17,62 tốt hơn ZERO22,89/khí hậu19,98/GFS26,73. Trên riêng 114 mẫu thực tế ≥50mm ngày3 (12 issue), **micro MAE GFS76,44; A2 90,00; GRU60,10mm**. Đây là chẩn đoán có điều kiện theo y, không phải cách chọn mô hình vận hành, chưa có CI. A2 giảm MAE toàn tập nhưng còn yếu mưa lớn; không chỉ dẫn mức giảm18,1% MAE so GFS để kết luận thành công.
 
-- **Sản phẩm A:**
-  - Mô hình: Bi-LSTM.
-  - Hạn: t+1…t+6 h.
-  - Phát hành mỗi giờ.
-  - Hiển thị: tổng mưa 3 h và xác suất.
-- **Sản phẩm B:**
-  - Hạn: 1–3 ngày, có thể mở rộng đến 7 ngày.
-  - Phát hành lúc 00/06/12/18 UTC.
-  - Hiển thị: tổng mưa ngày và xác suất vượt 16/50/100 mm.
-  - Mô hình: **TFT** (Temporal Fusion Transformer), chốt ngày 11/10/2026 vì giảng viên không bắt buộc Informer. Chi tiết ở plan mục 4.4.
-- **Thuật ngữ** (Thông tư 08/2022): cực ngắn ≤12 h; ngắn 12–72 h; vừa 3–10 ngày. **Không gọi 24–72 h là "dài hạn".**
-- **Đơn vị không gian:** ô 0,1° (lưới GSMaP).
-  - Một tỉnh là tập các ô nằm trong ranh giới 34 tỉnh mới (Nghị quyết 202/2025). Đà Nẵng mới gồm Đà Nẵng cũ và Quảng Nam.
-  - Dùng **một mô hình chung** cho mọi ô, kèm đặc trưng tĩnh. Không huấn luyện riêng từng tỉnh.
-  - Vùng trọng tâm là Đà Nẵng mới. Thêm 2 vùng khí hậu khác để kiểm tra tổng quát hóa.
-- **Nhãn:** GSMaP v8 hiệu chỉnh trạm (`hourlyPrecipRateGC`), chốt ở Cổng 1 ngày 11/10/2026.
-  - IMERG Final là nhãn kiểm tra độ bền.
-  - GSMaP thô là đầu vào quan trắc (nhóm A1), dịch trễ L giờ.
-- **Vai trò của AI:** hậu xử lý cộng nowcasting. Đối thủ chính là **dự báo ECMWF thô**, không phải các mô hình AI khác.
-- **Nguyên tắc perfect prog:** khi train, giá trị tại giờ đích lấy từ ERA5; khi chạy thật, thay bằng ECMWF. Khoảng cách giữa hai chế độ đo bằng T-OPS.
+Bộ slide đã gửi và kết quả đóng băng giữ nguyên; slide chưa có ZERO, cần dùng kèm nhận xét mới. Chưa có chứng cứ vượt nghiên cứu khác vì khác miền/nhãn/hạn/split. Dùng trạm, mô hình chung, LightGBM/GRU và thêm biến chưa tự tạo phương pháp mới; cần đối chứng cùng nguyên liệu khí tượng/địa hình để đo lợi ích của dẫn xuất vật lý, lịch hằng ngày, kiểm tra xác suất và kiểm định cuối. Không suy ra lỗi dataset hay overfitting chỉ từ các điểm mới.
 
-## Quyết định và bằng chứng then chốt
+## Slide báo cáo 57 trạm — yêu cầu mới nhất
 
-Số liệu đầy đủ ở plan v2, các mục 1, 4.1, 4.1b, 0b và 1.7.
+Người dùng yêu cầu slide đầy đủ về đầu vào/đầu ra, chia dữ liệu, tinh chỉnh và kết quả. Bộ riêng `reports/gfs_station_slides_2026_11_10/`: `PBL6_DU_BAO_MUA_57_TRAM.pptx`/HTML, 43 slide chính + 12 phụ lục, ghi chú tiếng Việt trong PPTX và `GHI_CHU_THUYET_TRINH.md`. Hướng dẫn và lộ trình trình bày ở README cùng thư mục. PDF native PowerPoint ở private `data/operational/gfs_station_slides_2026_11_10/`, không commit PDF.
 
-1. **ERA5 không dùng làm nhãn.**
-   - Tại trạm Đà Nẵng, ERA5 chỉ bắt được 8 % số ngày ≥100 mm.
-   - Cùng bộ đặc trưng ERA5 cho R² 0,70 khi dự đoán mưa ERA5 nhưng chỉ 0,42 khi dự đoán mưa trạm, nghĩa là ablation dùng nhãn ERA5 sẽ thổi phồng giá trị đặc trưng.
-2. **Thí nghiệm 0 (10 trạm GSOD, 2021–2024):** CSI ≥50 mm của GSMaP hiệu chỉnh là 0,33; IMERG 0,22; ERA5 0,17.
-   - Lưu ý: GSMaP được hiệu chỉnh theo dữ liệu trạm NOAA CPC, có thể gồm chính các trạm kiểm chứng, nên điểm tại trạm cao hơn thực tế.
-3. **Mức sàn:** ECMWF dự báo trước 1 ngày ngang ERA5. Mọi dự báo tất định có BSS < 0 và FBI ≥50 mm khoảng 0,47.
-   - Vì vậy mô hình phải xuất xác suất đã hiệu chỉnh.
-   - MAE **không phải** chỉ số chính.
-4. **Chất lượng nhãn mưa giờ phụ thuộc mùa ở Đà Nẵng/Trung Bộ.**
-   - Audit 93 ô Đà Nẵng 2021–2023: 67,6% tổng GC mùa 11–2 nằm ở giờ raw ≤0,01 mm; mùa 5–10 là 20,8%. Chỉ báo cho thấy phụ thuộc hiệu chỉnh mạnh, không chứng minh mọi giờ mưa mùa đông đều sai hoặc được trải đều.
-   - Sản phẩm A chấm giờ/3 h chính trên tháng 5–10; mùa đông chỉ chấm 6 h như chỉ số phụ vẫn có bất định nhãn. Tổng 24 h dùng QC nhãn với trạm hoặc sản phẩm B, không biến mô hình 6 h thành dự báo 24 h. Tách mọi bảng theo mùa.
-5. **Chọn TFT thay Informer cho sản phẩm B** (chốt 11/10/2026). Informer là lựa chọn yếu vì:
-   - Trên bộ chuẩn Weather, Informer kém cả phương án lặp lại giá trị gần nhất (Zeng 2023).
-   - Lần chạy cũ của đồ án chỉ đạt R² = 0,04.
-   - Informer không có cơ chế riêng cho đầu vào tương lai và đặc trưng tĩnh.
-   - TFT có sẵn cơ chế cho đặc trưng tĩnh, dự báo số tương lai và chuỗi quá khứ, xuất được phân vị và trọng số chọn biến.
-   - Đối chứng bắt buộc: ECMWF thô, ECMWF + quantile mapping, LightGBM, DLinear, Bi-LSTM (bảng 2×2). Informer chỉ chạy một cấu hình.
-   - TFT được **tự cài đặt** bằng PyTorch, đọc từ `WindowSampler`; không dùng `pytorch-forecasting` vì không vừa 8 GB RAM.
-6. **Không có dữ liệu Vrain** (người dùng xác nhận không xin được). Kiểm chứng độc lập chỉ dựa vào NOAA GSOD tại 10 trạm, đến 24/08/2025.
-7. **Những nhận định cũ đã bị bác bỏ:**
-   - "Informer vượt Bi-LSTM 21 %": hai mô hình được chấm trên tập test khác nhau.
-   - "IMERG trễ 29 h nên không dùng được làm đầu vào": IMERG Early lấy trực tiếp từ NASA chỉ trễ khoảng 4 h.
-   - "Previous Runs có CAPE": thực tế các trường này rỗng.
-8. **Phạm vi và cách làm việc chốt ngày 13/10/2026:** tập trung nghiên cứu và thử nghiệm Đà Nẵng trước; chưa chọn vùng phía nam. Nhóm 3 người, chưa phân vai; ưu tiên đầu ra kiểm chứng được hằng tuần, không dùng hạn nộp giả định làm ràng buộc. Phân vai ở kế hoạch mục 7 chỉ là đề xuất.
+Không train mới để làm slide, không mở 2025. Đối chiếu checkpoint cho thấy LightGBM dừng sớm theo **l1/MAE cal** (metric đầu, `first_metric_only=True`), không phải Tweedie; best 62–177 cây. GRU dừng theo loss chung cal. Tham số pilot cố định; chưa GridSearch/Optuna. Script build/render/validate có tiền tố `gfs_station_slides`, ghi chú riêng `scripts/gfs_station_slide_notes.py`; không chạy builder của hai deck người dùng đã sửa.
 
-9. **Kết quả sau thay hàm mất mát (13/10):** cải thiện lớn nhất hiện thấy ở đầu lượng mưa Tweedie, không phải thêm nhiều tên mô hình. Giữ riêng điểm lượng mm và xác suất; chỉ chọn cấu hình app sau khi kiểm định T-OPS cùng ECMWF, bởi Tweedie Bi-LSTM làm BSS năm 2022 xấu hơn. Kết quả NO_TERRAIN/63 ô chưa đủ quy lợi ích chắc chắn cho địa hình.
-10. **Nguồn JAXA và an toàn credential:** máy chủ FTP không hỗ trợ FTPS; script yêu cầu `--allow-plain-ftp`, nhập credential tại prompt terminal, không đặt vào đối số lệnh hoặc chat. Đã xác minh login và tải raw/Gauge_NRT v8 10 UTC ngày 13/10, không lưu credential. Decoder đúng định dạng tài liệu JAXA và đủ 93 ô; popup web khác cả hai binary ở 3/3 ô có mưa đã kiểm, chưa rõ nguyên nhân. Popup không là nhãn hoặc đầu vào ML. Báo cáo `reports/followup_danang/jaxa_binary_audit.json`; raw/Gauge/checkpoint ở `data/operational/` ngoài Git.
+Audit bổ sung từ dự báo đã lưu: chưa ràng buộc P(≥50)≤P(≥1). A2 vi phạm 188/8.346 dòng dev (2,25%), gap tối đa ~0,087; không có quyết định mâu thuẫn tại p≥0,5. A0/A1/A3 cũng có vi phạm; GRU không có trường hợp quan sát được nhưng mã cũng chưa ép thứ tự. `training_audit.json` trong thư mục slide có tổng hợp. Không sửa dự báo/điểm pilot; đề xuất giải quyết bằng protocol mới. Kiểm tra slide không chứng nhận kỹ năng cuối hoặc cảm biến.
 
-11. **Pilot đối chứng ECMWF (13/10):** đã tải 56/56 run IFS qua Open-Meteo cho 30 ô, 01–14/10/2024; 1.680 cặp issue–ô có nhãn GC permanent và forecast 6 h. Run chính khởi tạo trước issue 12 h, bảo thủ theo độ trễ công bố thường 4–6 h nhưng `available_at` lịch sử chưa chứng thực. Mưa API ghi cuối khoảng nên dịch +1 h khi so nhãn GSMaP. 0–3 h: RMSE 3,950 mm, CSI≥10 0,089; luôn dự báo 0 cùng mẫu RMSE 3,878, CI95% của chênh RMSE ECMWF−0 chứa 0. Chỉ 4/14 ngày có sự kiện mạnh; không chọn mô hình hay tuyên bố ECMWF yếu từ pilot này. Đây là forecast ECMWF qua xử lý giờ/không gian Open-Meteo, chưa là GRIB gốc, và **chưa so AI cùng mẫu**. Chi tiết `reports/research_rainfall/ecmwf_pilot_14d/README.md`.
+## Mở rộng trạm mới nhất — đã thực hiện
 
-12. **Cổng NRT as-of cho app:** `scripts/audit_jaxa_nrt_history.py` kiểm 24 khoảng giờ `[issue−28h, issue−4h)` của sản phẩm A, SHA-256/URI JAXA, 93 ô và `first_recorded_at ≤ issue`. Đã tải 24 tệp liên tiếp 12 UTC 12/10 → 11 UTC 13/10; tất cả SHA-256/shape đúng và 93/93 ô hữu hạn. Ở issue thử 16 UTC với lag4, 24/24 tệp có mặt nhưng chỉ 21/24 được máy ghi trước issue vì lượt tải hàng loạt qua mốc 16:00. Ở issue thử 17 UTC với lag5, 24/24 đã được ghi trước issue; **mốc 17 UTC lúc kiểm còn trong tương lai, chưa phát forecast**. Lần tải backlog chỉ biết giờ máy nhận, không chứng thực lúc JAXA công bố. Checkpoint hiện train lag4 nên lag5 cần retrain/đánh giá riêng; không bật AI live chỉ vì cổng nguồn lag5 đạt. Chi tiết `reports/followup_danang/nrt_latency_sensitivity.json`.
+Người dùng hỏi **“có thể mở rộng số lượng trạm được không”**. Đã mở rộng nhánh NWP từ20lên**57trạm**, thêm37trạm trong nguồn hiện có, giữ đúng tiêu chuẩn train>=365ngày đầy đủ và>=30ngày>=1mm.57trạm thực tế479–728ngàytrain;2trạm có<30cửa sổ tuầntrain (min18), cần báo giới hạn.
 
-13. **Giá của quan trắc trễ thêm 1 giờ (13/10):** Sau audit24h, đã stress checkpoint Bi-LSTM RAW Tweedie lag4 với đầu vào lag5 và **train lại mô hình lag5** cùng30ô/index, 3seed, 30.000mẫu/fold, loss/budget; Platt/tau fit lại trên calibration. Validation tháng5–10 theo giờ VN, 0–3h: RMSE lag4→lag5 = 3,876→3,929 (2021), 4,581→4,624 (2022), 3,540→3,578 (2023) mm; CI95% hiệu RMSE lag5−lag4 dương ở cả3fold (xem `reports/followup_danang/bilstm_tweedie_lag5/`). CSI xác suất ≥10 giảm mô tả 2/3 năm nhưng CI từng năm chứa0; BSS≥1 giảm mô tả cả3. Đây là phép thử khám phá trên ERA5/GSMaP hồi cứu, chưa là T-OPS hay xác nhận độc lập. Không đổi app sang lag5 chỉ vì backfill24h qua cổng nguồn; cần logger live, đối chứng ECMWF và kiểm tra nguồn train→NRT.
+- 79trạm có cửa sổ train theo lịch tuần, nhưng22trạm ngoài57có lịch sử ngắn; chưa train79.3trạm lịch sử chưa có train và4vịtrí hiện hành chưa có lịch sử cũ. Không ép đủ86.
+- Dataset57có5.032/2.582/2.782mẫu train/cal/dev, tổng31.188hàng3hạn. Lịch vẫn208issue mỗi7ngày.2025kín,2026khôngtuning. NguồnGFSđã trích82vịtrí dùng lại; chỉ tải một sốmessageđểreplay.
+- ĐãtrainLightGBM A0–A3ba seed vàGRU_A2ba seed (gatecalqua ngày3), cùnghyperparameterscũ. Dataset/source/modelverificationđạt;53testsđạt (6testmới vềpathisolation vàmatchedcohort).
+- Kết quả57trạm devmacroMAE: GFS5,83/7,41/10,30mm; A2 5,28/6,72/8,44; GRU_A2 6,94/7,56/8,00. Không so trực tiếp với trung bình20trạm.
+- Đãso cùng20trạm/cùngissue/nhãn/32đầu vào: A2train20=6,15/7,37/7,75; A2train57=5,91/7,40/8,66mm. Ngày1tốt lên,ngày2gầnngang,ngày3điểm xấu hơn;CI cả3chứa0. Mở rộng phạm vi không bảo đảm tăngđộchínhxác. So sánh mở rộng cảtrain/cal, không chỉtrain.
+- Bản20được giữ nguyên. Bản57 riêng `reports/gfs_station_57_2026_11_10/BAO_CAO_MO_RONG.md` vàWord; protocol/result_summary/cohort_scope_metrics/matched_original20_bootstrap cùngthưmục. Datasetprivate `data/processed/gfs_station_57_2026_11_10/gfs_vrain_pilot.parquet`; model/predsprivate thưmụcoperationalcùngtên.
+- Scriptprepare `scripts/prepare_gfs_station_expansion.py`; các bướcbuild/validate/run/GRU/verify dùngenv `PBL6_GFS_EXPERIMENT=gfs_station_57_2026_11_10`. `src/gfs_experiment.py` tách output khỏi nguồncache20chỉđọc. Publish `scripts/publish_gfs_station_expansion.py`. Không sửa cohort/protocol đãfit; phiênbảnmớinếuđổitiêuchí.
 
-14. **Ghi latency thật:** `scripts/watch_gsmap_nrt.py` đã chuẩn bị và test bằng FTP giả; prompt credential một lần trong terminal, poll `latest/` mỗi 10 phút, bỏ qua baseline lúc bắt đầu, chỉ tải file raw v8 mới và ghi `first_seen_at_utc`/`first_recorded_at_utc`, SHA-256 ngoài Git. `first_seen` là cận trên thời điểm JAXA phát hành với độ phân giải poll; lỗi mạng làm khoảng bất định lớn hơn. Người dùng đã chạy phiên 12 giờ lúc 16:31 UTC 13/10. Lần poll2 (16:41 UTC) thấy file raw mới `gsmap_nrt.20261013.1200.dat.gz`, không lỗi; thời điểm JAXA phát hành nằm sau baseline và trước 16:41, age sau cuối khoảng mưa bị chặn bảo thủ [3,53;3,70] h. Một tệp chưa là phân phối latency. Cổng NRT lag4/issue thử17 UTC đã có 24/24 tệp máy nhận trước issue (lúc audit issue còn trong tương lai); AI vẫn tắt vì khí tượng as-of/T-OPS chưa đạt. Snapshot tĩnh `reports/followup_danang/jaxa_live_first_detection.json`; status động watcher bị Git bỏ qua, raw ngoài Git.
+## Hướng ngắn hạn mới được người dùng duyệt 10/11/2026
 
-15. **Báo cáo giảng viên 08:00 ngày 14/10:** Đã tạo bộ 8 slide PowerPoint chỉnh sửa được `reports/presentation_2026_10_14/PBL6_Da_Nang_2026_10_14.pptx` (7 slide chính, 1 slide đối chứng ECMWF) và rà soát nhu cầu từ tài liệu công `reports/research_rainfall/user_needs_desk_review_2026_10_14.md`. Trang người dùng là giả thuyết, **chưa có phỏng vấn**. Danang Smart City đã có theo dõi mưa/ngập; app PBL chỉ nhắm lớp dự báo mưa 0–6 giờ theo ô, chưa dự báo ngập đường hay cảnh báo chính thức. Các slide dùng validation lịch sử, nêu CI và giới hạn; AI live vẫn tắt. Nguồn đặt trong ghi chú từng slide.
+Người dùng yêu cầu đánh giá độc lập với hướng cũ, rồi nói **“ok hãy tiến hành thực hiện”** với phương án NWP + Vrain. Nhánh ngắn hạn ưu tiên **hậu xử lý GFS để dự báo ba tổng24h tại trạm**, LightGBM chính và GRU nhỏ theo điều kiện pilot. TFT/Informer không còn là bộ ba bắt buộc. Nghiên cứu giá trị đầu vào mưa trạm/khí tượng dự báo/địa hình; chưa làm app. Chi tiết: `docs/short_range_nwp_design.md`.
 
-16. **Slide khảo sát đề tài độc lập (14/10):** Đã tạo `reports/presentation_2026_10_14/Khao_sat_de_tai_1_slide_2026_10_14.pptx` để giải thích hạn 1–6 giờ, ưu tiên thử tổng mưa 3 giờ, sản phẩm đối chiếu và phạm vi công việc. Nguồn WMO xác nhận nowcasting 0–6 giờ; HKO MyObservatory có mưa 1–2 giờ; CWA Đài Loan có tổng mưa theo khoảng 3 giờ khi mưa lớn. Đây là tham chiếu thiết kế, **không chứng minh nhu cầu người dùng cao nhất ở 3 giờ**. Cần khảo sát quyết định thực tế và lựa chọn 1/3/6 giờ trước khi chốt giao diện. Ghi chú slide chứa URL và giới hạn diễn giải.
+- GFS00UTC, issue12UTC=19hVN; hiệu tổng0–12/36/60/84h tạo ba cửa sổ19–19h. Khí tượngGFS+24/+48/+72h là ba trạng thái giữa cửa sổ, không phải trung bình ngày.
+- Bản dự báo phải có trước issue theo giả định trễGFS8h và margin12h; chưa chứng minh thời điểm công bố lịch sử từng file. Trễtrạmgiảđịnh1h: summary1/6/24h kết thúc18h, bảy ngày đầy đủ kết thúc hôm trước; không dùng số đo19h ngay tại issue.
+- Pilot mỗi7ngày trong2021–2024,208issue, khác thí nghiệm hằng ngày đầy đủ. Chọn20trạm từ57ứng viên chỉ theo train2021–22 và địa lý/DEM; mỗi trạm565–728ngày train hợp lệ. Không chọn ngày/trạm theo điểmdev hoặc mưa cực đoan quan sát.
+- A0=mưaGFS+lịch+vịtrí/ID; A1 thêm lịch sửVrain; A2 thêm T/RH/gió850/PWAT vàproxyẩm; A3 thêmDEM/slope/tươngtácgió. MọiA cùng mẫu. Q850 tính từT/RH cùngcôngthức vì đầu2021thiếuSPFH trong sản phẩm thườngdùng.
+- DEMMapzen là proxy tại tọa độ hiện có, không phải cao độ đo tại trạm; gió·gradientđịa hình/ẩm là giả thuyết, không chứng minh nhân quả.
+- Protocol khóa trướcfit ở `reports/gfs_station_pilot_2026_11_10/protocol.json`; audit/verification/kết quả cùngthưmục. Private ở `data/operational/gfs_station_pilot_2026_11_10/`, `data/processed/gfs_station_pilot/`.
+- Collector `scripts/collect_gfs_station_pilot.py`: HTTPbyte-range,206/Content-Range, GRIBinit/lead/interval/unit, resume/SHA; đọcprogress/PIDthật. Windows ecCodes phải giải mã tuần tự quaLock, chỉ HTTP chạy song song. Optionalenv `requirements-nwp.txt`.
+- Ba seed17/29/43. GRU_A2chỉ chạy khi gatecal: A2macroMAE thấp hơn cảGFS/khíhậu và>=50%trạm cải thiện soGFS ở ít nhất một hạn. Không dùngdev để quyếtđịnhgate. Cal/earlystop2023,dev2024chưa làtestcuối;2025kín,2026khôngfit/tuning.
+- BộVrain–ERA5v1 và Bi-LSTM cựcngắn giữ phạmvi riêng. “Đã ghép/train được” không chứng minh khả dụngrealtime hoặc kỹnăng1–3ngày. Không gắnNWPpilot thànhthínghiệmhằngngàyđầyđủ.
 
-17. **Bộ slide giải thích đầy đủ (14/10):** Đã tạo `reports/presentation_2026_10_14/PBL6_Da_Nang_full_brief_2026_10_14.pptx` từ bộ 8 slide đã kiểm chứng, thêm bốn trang về đầu ra nghiên cứu, vai trò từng nguồn dữ liệu, phép so mô hình và luồng app. Tổng 12 slide, trong đó slide 12 ECMWF là dự phòng; ghi chú từng slide có nguồn/lời dẫn và `reports/presentation_2026_10_14/presenter_guide_full_2026_10_14.md` giúp trình bày 8–10 phút hoặc rút còn 5 phút. Không chạy thí nghiệm mới, không mở test 2025, không thay kết luận AI live/ECMWF.
+**Trạng thái sau triển khai:** NWPpilot đã hoàn thành208/208issue,20trạm,10.977hàng/3.659mẫu trạm–issue. Train/cal/dev=1.774/902/983mẫu, mỗi mẫu ba nhãn. Đãfit36estimatorlượng và72classifierLightGBM chính, GRU_A2ba seed7001tham số trênCUDA; không trainTFT/Informer. 47testsđạt; replay10.977hàng và171mẫu nội suyGRIB, replay36+72estimators vàbaGRUCPU, scalertrain-only/metricđạt.
 
-## Phản biện dữ liệu ngày 20/10/2026
+Trên dev2024, macroMAE GFS=6,40/8,13/10,27mm; A2=6,15/7,37/7,75; GRU_A2=7,81/8,35/8,46. **CI A2−GFS cả ba hạn chứa0**, không khẳng định cải thiện ổn định dù ngày3giảmđiểmkhoảng24%. GRU có MAE cao hơn nhưng RMSEngày3 thấp hơn A2 (18,31so20,17mm); không kết luậnGRUkémmọimặt. A3chưa có lợi ích rõ; BSSkhông cải thiện đồng đều. GateGRU chỉqua ngày3cal với chênhnhỏ; không dùngdevchọngate.
 
-Theo yêu cầu đánh giá độc lập của người dùng, đã rà code, tính lại cặp nhãn Đà Nẵng 2021–2023 và probe Single Runs; không huấn luyện hoặc mở test mô hình 2025. Báo cáo [phan_bien_du_lieu_2026_10_20.md](reports/research_rainfall/phan_bien_du_lieu_2026_10_20.md) cần đọc trước khi dùng các quyết định/số liệu cũ làm lập luận:
+AuditLast-Modified3952messages:7chu kỳ đầu2021có timestamp sửa/chéparchive sauissue, không ởcal/dev. Không suy ra phát hànhgốc muộn. Đã chạy thêmA2ba seed bỏ7chu kỳ train; devMAE6,09/7,42/7,88mm, hướng tương tự. Xemrelease_timestamp_audit.json/release_sensitivity_metrics.csv. Chưa chứng minh độtrễvậnhànhthật.
 
-- `fetch_openmeteo_baselines.py` không khóa `models=era5` cho Archive; `era5_om` là best_match, **không được quy bảng CSI 0,17 hoặc phát biểu 8% cho ERA5 thuần khi chưa truy lại nguồn**. Điều này không vô hiệu mọi bảng nguồn cũ, nhưng thay đổi cách diễn giải provenance.
-- Cùng1.042ngày Đà Nẵng 2021–2023: CSI≥50 của cube ERA5/GSMaP GC =0,352/0,438; bootstrap khối5ngày/1.000lần seed20261020, CI95% GC−ERA5=[−0,054;+0,230]. Tháng5–10:0,467/0,487, CI=[−0,204;+0,243]. Đây là kiểm tra khám phá trên ghép ngày hiện có, chưa xác nhận nhãn giờ hoặc tính độc lập trạm. Cần kiểm chứng EOD/cờ GSOD; không tự đổi ngày từ tài liệu quốc gia cũ.
-- Probe mới một tọa độ/run2024-10-01T00:00: IFS9km có mưa/bề mặt/TCWV/CAPE nhưng4trường850 toàn null; IFS025 trả400 runkhôngcó. Chưa thể tái tạo predictor850 bằng pipeline kho2024đã kiểm; không suy rằng mọi kho/ngày đều thiếu. BASE/RAW/DOMAIN chỉ dùng khí tượng quá khứ; S4 mới có ERA5 giờ đích; cả hai vẫn cần kiểm tra chuyển nguồn vận hành.
-- Đề xuất thu hẹp đường app sang hậu xử lý forecast thật với bộ biến đã xác minh; ERA5 giữ cho nghiên cứu/pretrain có kiểm định; NRT/tầngcao phải chứng minh giá trị và khả năng nguồn. **Đây là đề xuất phản biện, chưa thay quyết định mô hình/phạm vi của nhóm.** Bản định hướng dữ liệu và Word được gắn cảnh báo đọc cùng phản biện.
+Điểmvào kếtquả: `reports/gfs_station_pilot_2026_11_10/BAO_CAO_PILOT.md`, Wordcùngtên, `result_summary.json`. Datasetprivate `data/processed/gfs_station_pilot/gfs_vrain_pilot.parquet`. Côngviệctiếpđểkiểmchứng: protocolphiênbảnmới lịch hằng ngày/lag sensitivity/drop-group; không đổi pilot cũ hoặc mở2025tùy tiện.
 
-## Còn chờ chốt (hỏi người dùng trước khi làm phần liên quan)
+## Quyết định mới nhất của người dùng — đã chốt
 
-1. Hai vùng kiểm tra: Hà Nội, cùng TP.HCM **hoặc** Đắk Lắk.
-2. Phân vai cụ thể cho 3 thành viên. Người dùng ưu tiên tiến độ hằng tuần; chưa cần chốt hạn nộp để chạy thí nghiệm Đà Nẵng.
+**Chuyển cả hai nhánh sang dự báo lượng mưa tại trạm.** Người dùng nói: “nhóm tôi thực hiện dự đoán cực ngắn và ngắn theo trạm”. Quyết định này thay mục tiêu dự báo trực tiếp mưa trung bình diện tích toàn Đà Nẵng trước đây. Không tự đưa mục tiêu vùng trở lại hoặc ưu tiên app.
 
-## Trạng thái và việc tiếp theo
+- Thành viên khác: Bi-LSTM, sáu lượng mưa giờ tiếp theo tại từng trạm, 1–6h.
+- Người dùng: ba tổng24h riêng tại trạm; **phương án mới NWP+LightGBM/GRU ở đầu file** thay bộbaTFT/Informer bắt buộc trước đây.
+- Đề xuất kỹ thuật: mỗi kiến trúc học một mô hình chung cho nhiều trạm; một mẫu là `(station_id, issue_time)`. Không cần 86 mô hình riêng cho một kiến trúc.
+- Nhãn là mưa Vrain tại chính trạm. Người dùng đã xác nhận: **10:00 = tổng mưa09:00–10:00 giờ Việt Nam, UTC+7**. Đơn vị hiển thị nguồn là mm. Không còn chờ xác nhận timezone hoặc nhãn vùng.
 
-**Ưu tiên mới20/10:** nghiên cứu ablation đặc trưng trên dữ liệu lịch sử, theo định hướng người dùng ở đầu file. Các công việc app/logger/T-OPS bên dưới là lộ trình cũ, không tự tiếp tục như mục tiêu chính. Trước huấn luyện mới cần cố định đầu ra/hạn và giao thức so đặc trưng, kiểm chứng nhãn, giữ test2025 kín; không đưa ERA5 giờ đích vào phép so chính nếu gọi là dự báo từ quá khứ.
+## Phạm vi và số trạm
 
-**Trạng thái cập nhật 14/10/2026:**
-- Bộ slide mở rộng `reports/presentation_2026_10_14/PBL6_Da_Nang_full_brief_2026_10_14.pptx` gồm 11 trang chính và 1 trang ECMWF dự phòng, đã kiểm tra hiển thị. Lời dẫn tại `reports/presentation_2026_10_14/presenter_guide_full_2026_10_14.md`. Bộ 8 slide và slide khảo sát riêng vẫn giữ; nhu cầu người dùng mới là rà soát tài liệu, chưa phỏng vấn. Số mô hình không thay đổi; AI live chưa bật.
-- Repo làm việc `D:\PBL6_v2`; tác giả commit mới là `nibsu05 <168987662+nibsu05@users.noreply.github.com>`. Không viết lại lịch sử đã push. Dữ liệu verify 2233/2233, dataloader lệch 0; test 2025 giữ kín.
-- BASE/RAW/DOMAIN trên 30 ô/3 fold và đợt follow-up Tweedie LightGBM, Tweedie Bi-LSTM, NO_TERRAIN, 63 ô chưa train đã hoàn tất. Chi tiết cùng CI ở `reports/domain_screen_danang/` và `reports/followup_danang/`.
-- Tweedie LightGBM RAW giảm RMSE 3 h mùa 5–10 từ 4,607/4,841/4,205 xuống 3,947/4,534/3,610 mm ở 2021/2022/2023. Tweedie Bi-LSTM RAW từ 4,046/4,661/3,963 xuống 3,876/4,581/3,540. Đây là validation lịch sử, chưa là hiệu năng vận hành. Đầu xác suất của Bi-LSTM Tweedie kém đi trong 2022 (BSS ≥1: 0,148 so 0,186).
-- DOMAIN−RAW CSI quyết định ≥10 mm/3 h = +0,051/+0,007/+0,031 trên 30 ô; CI từng năm đều chứa 0. Bỏ proxy địa hình giảm CSI mô tả 0,025/0,009/0,051 nhưng CI chứa 0. Trên 63 ô chưa train, DOMAIN−RAW = +0,042/−0,003/+0,029, CI đều chứa 0. Chưa chốt biểu diễn domain là ưu thế đáng tin cậy.
-- Retrain Bi-LSTM RAW Tweedie lag5 cùng 30 ô/index/3 seed đã hoàn tất 2021–2023; 9 checkpoint và dự báo riêng ngoài Git. RMSE3h tăng +0,053/+0,043/+0,038 mm so lag4, CI bootstrap theo cặp từng năm đều dương; CSI xác suất≥10 giảm mô tả 2/3 năm nhưng CI chứa0. `reports/followup_danang/bilstm_tweedie_lag5/` ghi đầy đủ; chưa chọn lag5 cho app.
-- Demo `http://127.0.0.1:8766/` đang phục vụ checkpoint thật ở chế độ archive 2021–2023; 36 phép so HTTP với dự báo lưu đạt và 87 kiểm tra code đạt. Tab live chỉ hiển thị ECMWF nguồn/điểm JAXA công khai và cổng NRT lag4/issue thử17 UTC đạt 24/24 sau tệp mới watcher thấy 16:41 (lúc audit issue còn ở tương lai); lag4/issue16 của lần tải backlog chỉ 21/24, **không phải ML live**. Chưa so ECMWF trên cùng mẫu T-OPS. Single Runs `run` là giờ khởi tạo, không phải giờ công bố; phải chặn `available_at ≤ issue_at` (tài liệu Open-Meteo nêu trễ thường 4–6 h).
-- Có **4 snapshot forecast hoàn chỉnh cho 93 ô** trong tối 13/10 (`init_time_known=false`), chỉ kiểm tra nguồn; chưa có tập ECMWF Single Runs 2024 cho 93 ô hoặc điểm AI–ECMWF cùng mẫu. Đối chứng ECMWF đã có trước đó ở `reports/station_benchmark/` là 10 trạm/ngày/hạn 1–5 ngày, không phải benchmark Bi-LSTM 0–6 giờ. Sau probe 1 điểm, pilot 56/56 run Single Runs 01–14/10/2024 trên 30 ô đã chấm đủ 1.680 cặp issue–ô. ECMWF Open-Meteo 0–3 h RMSE 3,950 mm, CSI≥10 0,089; CI chênh RMSE so luôn 0 chứa 0 và chỉ 4 ngày có sự kiện mạnh. Giờ công bố run lịch sử chưa chứng thực; chưa có bộ 2024/93 ô hoặc điểm AI–ECMWF cùng mẫu. Artifact `reports/research_rainfall/ecmwf_pilot_14d/`. Logger từng chạy giới hạn 2,1 giờ, chưa có máy luôn bật. JAXA FTP đã xác minh đăng nhập: 24 tệp gần nhất; tải raw và Gauge_NRT v8 lúc 10 UTC ngày 13/10, SHA-256 và shape 1200×3600 đúng. Ingest raw tạo 93/93 ô hữu hạn, bảo toàn thời điểm tải từ manifest. Raw/Gauge tương quan 0,998 trên 93 ô; popup web khác cả hai ở 3/3 ô có mưa. Không lưu credential trong Git; `--allow-plain-ftp` là bắt buộc vì FTPS không hỗ trợ.
-- Ưu tiên tiếp theo: pilot ECMWF và retrain lag5 ba fold đã xong; kiểm tra đầu vào AI as-of (NRT lịch sử, past ERA5 thay bằng nguồn forecast có sẵn, đơn vị/lưới/giờ) trên cùng cửa sổ, sau đó mới so AI–ECMWF. Mở rộng thêm ngày/sự kiện và 93 ô khi phép ghép có chất lượng; checkpoint hiện dùng ERA5 hồi cứu + GSMaP lưu trữ nên chưa được gọi là so vận hành. Đồng thời để watcher NRT đang chạy tiếp tục ghi file mới nhiều giờ/ngày, theo dõi lỗi và phân phối latency trước chọn lag; xác định nguyên nhân popup khác binary hoặc bỏ popup khỏi phép so; kiểm tra dịch chuyển phân phối MVK/raw lưu trữ → NRT, rồi kiểm định T-OPS 2024 và ECMWF cùng mẫu trước AI live. Một tệp không đủ cửa sổ 24 giờ; test 2025 giữ kín. Brief sáng 14/10 ở `reports/research_rainfall/brief_giang_vien_2026_10_14.md`.
+86 là danh mục **nhóm “Đà Nẵng” mà tài khoản được truy cập**, không phải toàn Việt Nam. Chưa chứng nhận mọi mục nằm đúng ranh hành chính cuối; lọc theo tọa độ/ranh khi chốt tập trạm nếu cần. Không gọi danh mục là phủ kín diện tích hoặc cả đảo.
 
-**Đã xong (11/10/2026):**
-- Bộ đánh giá dùng chung.
-- Dữ liệu 10 trạm và bảng baseline (`reports/station_benchmark/README.md`).
-- Thí nghiệm 0.
-- Dataset v2: 296 ô đất, trong đó 214 ô thuộc Việt Nam (93 Đà Nẵng, 85 Quảng Ngãi, 32 Huế, 4 ô giáp ranh); giai đoạn 2015 → 09/2026; 51 đặc trưng.
-- Dataloader.
+- Kênh cũ có 82 vị trí, kênh hiện hành 86. 82 cặp tọa độ khớp chính xác/duy nhất, 81 tên giống và một tên khác; bốn vị trí bổ sung. Chưa biết thời điểm lắp đặt bốn trạm đó.
+- Registry private 86 mã STxxx + alias hai kênh; giữ mã v1 khi thêm trạm sau này. Khớp metadata không chứng minh số đo hai kênh tương đương.
+- Trong kho cũ, trạm có ít nhất một số giờ sau QC: 2021 **57**, 2022 **79**, 2023 **79**, 2024 **82**. Không đồng nghĩa đủ cả năm. Không mặc định cả 86 có lịch sử từ 2021 hoặc đã được chọn train.
+- Bản dataset trạm v1 có82trạm lịch sử;79trạm có cửa sổ train hợp lệ cho cả hai nhánh, ba trạm còn lại không vào đánh giá mặc định. Đây là điều kiện cấu trúc, chưa chứng nhận cảm biến;24trạm có dưới180mẫu ngày train. Pilot một nhóm đại diện trước; thiếu tại trạm A không loại mẫu hợp lệ của B.
 
-**Thiết lập máy Windows và pilot (13/10/2026):**
-- Đã khôi phục dữ liệu và xác minh **2233/2233 file khớp, thiếu 0, sai 0**; xóa bản tar sau verify theo đồng ý của người dùng để thu hồi dung lượng. Nguồn vẫn trên Drive.
-- GitHub đã đăng nhập bằng `gh auth login --web`, thông tin đăng nhập lưu trong keyring.
-- Python Windows 3.12.15; PyTorch 2.5.1+cu121; CUDA nhận RTX 3050 Ti và phép nhân ma trận GPU hữu hạn. `requirements_windows.txt` giữ các phiên bản tương thích.
-- Dataset riêng `data/processed/dataset_v2_danang/`: 93 ô, khoảng 2 GB; số giờ và tổng mưa từng năm khớp manifest gốc. Inspect bốn cấu hình: **0 mẫu lệch, batch hữu hạn**.
-- Sửa dataloader loại cửa sổ có nhãn vượt ranh giới năm train/validation; đổi phiên bản cache để không tái dùng chỉ số cũ.
-- Pilot dùng chung cửa sổ của S4 cho S0/S1/S4, 30 ô chọn theo địa hình/khoảng cách biển, 2 seed. Train 2015–2021; chọn epoch và hiệu chỉnh xác suất ở 2022; so cặp ở 2023. **Không chấm mô hình trên test 2025 trong pilot.**
-- Pilot 2 seed đã xong: BSS mùa hè–thu tổng 0–3 h S0/S1/S4 = 0,186/0,195/0,239; CSI ≥10 mm = 0,157/0,150/0,089. S4 giảm BS chắc hơn theo bootstrap, nhưng chưa phân biệt chắc CSI. Không tuyên bố thắng ECMWF hoặc TFT. Xem `reports/pilot_bilstm_v2/README.md`.
-- Thiết kế so kiến trúc và app được rà soát ở `reports/research_rainfall/README.md`: bảng 2×2 cùng dữ liệu/hạn; ablation thông tin tách riêng; ECMWF là đối chứng giá trị vận hành. TFT và T-OPS chưa triển khai trong lượt này.
-<!-- OFFLINE_BATCH_STATUS --> Batch 3 seed trên 93 ô đã hoàn tất; bảng số liệu ở `reports/pilot_bilstm_v2_93cells_3seeds/`. Đã diễn giải: S1 tăng CSI so S0; S4 tốt hơn về BS; chưa so kiến trúc hoặc kiểm định vận hành. Không chấm test 2025.
+## Nguồn đã có và trạng thái
 
-- Rà soát bài báo và chẩn đoán bổ sung ở `reports/research_rainfall/literature_domain_review.md`: ưu tiên kiểm tra nhãn, quy tắc quyết định mưa hiếm và giả thuyết gió–ẩm–địa hình trước khi nhân số kiến trúc. Chẩn đoán 30 ô/3 seed: CSI đầu xác suất S1 = 0,383 (ngưỡng chọn 2022, chấm 2023), FAR = 0,485; đây là khám phá validation, không thay CSI lượng mưa gốc hoặc chứng minh triển khai. Chưa train E0–E5/TFT.
+Private base `data/operational/vrain_2026_11_09/`:
 
-**Tiếp theo, theo thứ tự:**
-0. *(Ưu tiên)* Bộ ghi khí tượng93 ô đã có và chạy giới hạn2,1 giờ; cần chốt máy luôn bật và nguồn NRT để ghi lâu dài: dự báo ECMWF cho các ô Đà Nẵng và quan trắc GSMaP NRT/IMERG. Mùa mưa đang diễn ra, nên mỗi tuần chậm là mất một tuần dữ liệu để kiểm định thật.
-1. Đã xong pilot 3 seed trên 30 và 93 ô: S1 tăng CSI so S0 có khoảng tin cậy không chứa 0; S4 giảm BS so S0/S1. Chưa có cấu hình thắng mọi chỉ số. Đợt tiếp theo được đề xuất ở `reports/research_rainfall/next_experiment.md`: kiểm tra nguồn live, giữ Bi-LSTM để so riêng TCWV, CAPE/CIN, gió–ẩm 850 và độ ẩm đất trên nền A0+A1; thêm baseline cùng mẫu, sau đó kiểm tra kiến trúc và vận hành. Đã xong đợtBASE/RAW/DOMAIN 3 fold; xem reports/domain_screen_danang/ và reports/research_rainfall/execution_plan.md. Test 2025 giữ kín.
-2. Baseline khí hậu/LightGBM cùng3 fold đã có; bổ sung persistence đúng nguồn live và ECMWF thô/hiệu chỉnh khi T-OPS.
-3. Ablation A0–A5 và thí nghiệm độ trễ L ∈ {0,5; 2; 4; 8; 14; ∞} trên máy RTX 4060.
-4. Sản phẩm B: **TFT** (tự cài đặt; quantile loss cộng xác suất vượt ngưỡng ngày), ablation B0–B5 và LOGO; DLinear; Informer một cấu hình; bảng 2×2 Bi-LSTM với TFT.
-5. T-OPS:
-   - Single Runs ECMWF IFS 9 km: có mưa, CAPE, TCWV từ 03/2024; biến 850 hPa trả rỗng.
-   - Historical Forecast: có từ 2017.
-6. Tải thêm 2 vùng (cùng script, đổi `--bbox`) và chạy thí nghiệm "bỏ một vùng".
-7. App: một mô hình cho mọi ô; hiển thị cấp tỉnh và cấp xã; ghi log để kiểm định live.
+- `download/`: 3.653 response 2015–2024, SHA gzip/raw đạt; có bảng giờ cho 1.461 ngày 2021–2024; 2015–2020 không trả giờ, không phải ngày khô. Ba station-day chênh tổng đã gắn cờ, số gốc được giữ.
+- `recent_archive/`: 622 response cho 02/01–08/11/2026, 311 ngày × hai kênh. Bỏ 01/01 vì cửa sổ có giờ 2025. Có số ở 87 ngày kênh cũ, 305 ngày kênh mới; số hàng không bằng số đo hợp lệ.
+- `handoff_v1/`, `PBL6_VRAIN_SOURCE_V1.zip`: nguồn/registry/QC, **không phải tập train theo trạm đã dựng**. Predictor 44 kênh trong ZIP vẫn là trung bình vùng cũ; không đổi tên hoặc nhân bản thành đầu vào theo trạm. Có 21 hàng thiếu kx/tt (42 ô), giữ NaN.
+- `freeze_work/station_matrices.npz`: ma trận giờ nguồn 2021–2024, mask/QC; clock là cuối khoảng giờ Việt Nam, theo xác nhận mới. Không sửa file nguồn vì metadata cũ; áp dụng contract khi dựng dataset mới.
+- Hai kênh chỉ trùng số ở một vị trí/18 ngày/367 cặp, 46 cặp có mưa đều khác số. Không tự nối nguồn 2026 hoặc fit/tuning 2026.
 
-## Bản đồ code mới (pipeline v2)
+**Bộ trạm đã dựng và kiểm tra:** `data/processed/station_v1/PBL6_TRAM_GIO_NGAY_V1.parquet`, một file chứa1h/24h, raw/QC, X/y và chỉ số sample-ready; ngoàiGit. Tài liệu ngắn gửi nhóm: `reports/station_data_handoff_2026_11_09/MO_TA_DU_LIEU.docx`. Kỹ thuật: `HUONG_DAN_TRAIN.md`, `dataset_summary.json`, `verification.json` cùng thư mục báo cáo.
 
-| File | Vai trò |
-| --- | --- |
-| `src/verification.py` | Chỉ số dùng chung (ngưỡng `>=`), bootstrap khối theo cặp, chia fold cuốn chiếu theo năm |
-| `src/baselines.py` | Baseline khí hậu theo ngày trong năm, persistence |
-| `src/station_registry.py`, `src/admin_regions.py` | 12 trạm synop; ánh xạ 63 tỉnh cũ (GAUL) sang 34 tỉnh mới |
-| `src/dataset_v2.py` | Phép biến đổi thuần: nội suy ERA5 → ô, mã hóa CIN, thống kê lân cận 5×5, đặc trưng thời gian |
-| `src/domain_features.py`, `src/domain_inference.py`, `src/live_domain_inputs.py` | Biểu diễn vật lý, suy luận checkpoint và hợp đồng nguồn khí tượng |
-| `scripts/screen_danang_domain.py`, `collect_domain_live.py`, `predict_domain_archive.py` | Thí nghiệm3 fold, thu forecast và kiểm tra suy luận |
-| `demo/domain_api.py` | API archive từ checkpoint thật; chưa dự báo live |
-| `src/dataloader_v2.py` | `WindowConfig`, `product_a/b`, `FEATURE_GROUPS` A0–A5 / B0–B5, `sample_index`, `Normalizer`, `WindowSampler`, `epoch_subset`, `torch_dataset` |
-| `scripts/fetch_gsod_stations.py`, `fetch_openmeteo_baselines.py`, `station_daily_benchmark.py` | Dữ liệu trạm và bảng baseline / Thí nghiệm 0 |
-| `scripts/extract_gee_precip.py`, `extract_gee_era5.py`, `extract_gee_static.py` | Tải từ Earth Engine (cần `--project`) |
-| `scripts/build_dataset_v2.py`, `inspect_dataloader_v2.py` | Dựng dataset v2; kiểm tra dataloader |
-| `scripts/package_data.py`, `download_progress.py` | Đóng gói / kiểm tra dữ liệu khi chuyển máy; theo dõi tiến độ tải |
+**ERA5 gốc vẫn có tại `data/raw_data/gee/era5/grid/*.parquet`.** Builder mới nội suy trực tiếp từ bốn nút0,25° quanh trạm; tất cả82trạm lịch sử có nút bao quanh. Không dùng đường vòng93ô hoặc sao chép mean vùng. Yêu cầu đủ mọi nút có trọng số dương; giữNaN nếu thiếu. Context/SST/chênháp có miền vùng có chủ đích. Không dùng các cột mưa ERA5/GSMaP làm X/y. CubeR93 và bộ vùng cũ giữ làm lịch sử.
 
-Code cũ (`src/train_bilstm.py`, `src/informer/`, `src/rain_alert_model.py`, …) vẫn dùng lại được phần mô hình, nhưng **đầu vào và nhãn cũ thì không**.
+Kiểm traERA5v1đạt2.995.050hàng/2.480.367cửa sổ,45đốichiếutrườngERA5,328sốmưagốc,72mẫuqua loader;34testsởbảnđó. ChưatrainbằngbộERA5v1; NWPpilot10/11đãtrainriêngnhưđầu file. Đây là kiểm tra cấu trúc, chưa chứng nhận cảm biến/vịtrílịchsử/độtrễ.
 
-## Quy ước và các lỗi đã gặp (đọc trước khi sửa code dữ liệu)
+## Hợp đồng thời gian và nghiên cứu
 
-- **Thời gian:** hàng `t` = khoảng `[t, t+1h)` UTC.
-  - Open-Meteo và ERA5 ghi mưa ở *cuối* khoảng, nên phải dịch lùi 1 h.
-  - GSMaP và IMERG ghi mưa ở *đầu* khoảng.
-  - Ngày của GSOD tính theo UTC, tức 07h–07h giờ Việt Nam.
-- **CIN bị mask** nghĩa là không có mực đối lưu tự do: mã hóa thành `cin_capped = 500` và `has_lfc = 0`. Giờ thiếu hẳn ERA5 thì để NaN. **Không bao giờ điền 0.**
-- **ERA5 trên Earth Engine:** `getRegion` phải dùng `crsTransform=[0.25,0,-180.125,0,-0.25,90.125]`. Dùng `scale` sẽ lấy mẫu lệch nửa ô. Chỉ có tầng 850 và 500 hPa.
-- **pandas 3:** `date_range` dùng đơn vị micro giây, nên khi lưu mốc giờ phải ép kiểu `datetime64[ns]` tường minh.
-- **GSOD:** chỉ giữ cờ D/F/G (đủ 24 h) và I (ngày khô). Nội Bài và Cần Thơ báo toàn 0 nên bị loại tự động.
-- **Open-Meteo Previous Runs:**
-  - GFS `previous_day5` thấp khoảng 50 % ở mọi quý (lỗi nguồn), nên đã loại.
-  - Previous Runs không có CAPE/TCWV, còn Single Runs (`ecmwf_ifs`) thì có.
-- **IMERG V07 bản permanent** trên Earth Engine chỉ có đến 30/09/2025.
-- **Python Homebrew** chặn `pip install` toàn hệ thống, nên luôn dùng `.venv`. Test cũ cần `matplotlib` và `torch`.
+- Người dùng xác nhận10:00là mưa09–10hViệtNam. Chuẩn hóa `period_start_utc=02:00`, `period_end_utc=03:00`; ERA5tức thời lấy02:00UTC. Clock20:00hômtrước→19:00ngàyđánhdấu tạo ngày19:00→19:00, không phải00–24. Không dùng tiêu đề XLSX19:20 để đổi các bin giờ đã xác nhận.
+- Lưu mưa theo khoảng đo, provenance, QC; không đổi thiếu thành0, không chia mưa ngày thành giờ, không lấp y bằng ERA5/CPC/GSMaP.
+- B/A/M/C đã dựng theo trạm: giờ11/12/20/1, ngày9/12/20/1. E7=44/42kênh; thêmR=45/43. Statictọađộ2kênh+IDđi riêng, cùng cách dùng giữa cácE. C chỉSST, chưa phảiENSO/MJO.
+- BộERA5v1: Rlà mưa quákhứchínhtrạm, maskchungkhiablation, chỉlịchtươnglaiđãbiết. **BộNWP mới được dùng khí tượng/mưa GFS dự báo kỳ đích từ bản khởi tạo trướcissue; cấm số thực đo hoặcERA5kỳđích trongX.**
+- Split theo thời gian chung cho mọi trạm, toàn bộ nhãn nằm trong split. Fit scaler/reference trên train; earlystop/calibration/tau trên cal. Không random cửa sổ lẫn trạm/ngày.
+- Bảnv1: train2021–22, cal2023, dev2024 theo giờ Việt Nam;2024chưa phải testcuối. Mask `sample_ready_r1` dùng chung mọiE/model/R0–R1. Loader `src/station_forecast_data.py` giữ mọi hàng thời gian trước chọn issue; không dropNaNrồi cắtchuỗi. Chưafit bất kỳ scaler nào.
+- **2025 giữ kín.** Không tuning2026 rồi gọi2025 là test tương lai. Không đổi tên kết quả vùng cũ thành kết quả trạm; NWPpilotđãtrainriêng, ERA5v1chưatrain.
+- Báo metric từng trạm và macro-average, kèm micro nếu cần; bootstrap theo khối thời gian giữ đồng thời các trạm. Không coi các trạm trong cùng trận mưa là mẫu khí hậu độc lập.
+- Ngưỡng mưa/POD/FAR phải chốt phù hợp trạm và kỳ giờ/ngày; không tự mang ngưỡng vùng16/50/100 sang. Không có POD0,4 tốt chung. ERA5 hồi cứu chưa chứng minh có sẵn tại issue vận hành.
 
-## Môi trường, dữ liệu, lệnh
+## Quy ước làm việc và an toàn dữ liệu
 
-```bash
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt   # có torch, earthengine-api
-# Dữ liệu nguồn (khoảng 2,9 GB) nằm trên Google Drive của nhóm: pbl6_data_v2_2026-10-11.tar
-tar -xf pbl6_data_v2_2026-10-11.tar                   # chạy ở thư mục gốc repo
-.venv/bin/python scripts/package_data.py verify        # so với data/DATA_MANIFEST_v2.json
-.venv/bin/python scripts/build_dataset_v2.py --years 2015 2026                                    # khoảng 1,5 phút
-.venv/bin/python -c "from src.dataloader_v2 import build_cell_major; build_cell_major()"          # khoảng 1,5 phút
-.venv/bin/python scripts/inspect_dataloader_v2.py      # kiểm tra: 0 mẫu lệch, batch hữu hạn
-.venv/bin/python scripts/station_daily_benchmark.py    # tạo lại bảng baseline và Thí nghiệm 0
-for t in tests/test_*.py; do PYTHONPATH=.:scripts .venv/bin/python -m unittest $t; done
-```
+- Tiếng Việt, đánh giá độc lập và trung thực kể cả kết quả âm.
+- Workspace `D:\PBL6_v2`; Python `.venv\Scripts\python.exe -X utf8`; RTX4060Laptop8GB. Python inline qua PowerShell dùng ASCII; nguồn tiếng Việt dùng UTF-8/apply_patch.
+- Git `git -c safe.directory=D:/PBL6_v2`, nhánh `research/tft-regional`; đã được phép push/cập nhật PR#1, không tự merge main.
+- Repo công khai: không commit raw/PDF, registry/tọa độ từng trạm, credential/cookie, checkpoint hoặc dự đoán từng mốc. Dữ liệu nguồn cũ từ Drive `pbl6_data_v2_*.tar`, kiểm bằng `scripts/package_data.py verify`; Vrain có manifest riêng.
+- Vrain login `https://www.vrain.vn/landing`; không nhắc lại mật khẩu, không lưu vào nguồn. Phiên mã hóa DPAPI ở `download/session.dpapi`. Kênh cũ `/api/vrain/private/v1/groups/29/stats/details`; mới `/api/kttv/private/v1/organizations/details`, ngữ cảnh tổ chức từ group đã xác thực, không đoán UUID.
+- Tải nền dùng Start-Process `WindowStyle Hidden`, resume/checksum; đọc progress/PID thật trước nói tiến độ.
 
-Nếu muốn tải lại từ Earth Engine: chạy `earthengine authenticate` rồi dùng `--project <ID project của nhóm>` (hỏi người dùng ID). Mất khoảng 1–2 h.
+Giữ nguyên, không restore/build/stage hai slide người dùng sửa: `reports/daily_gauge_slides_2026_11_04/PBL6_DU_LIEU_NGAY_3_MO_HINH.pptx` và bản đổi tên `reports/short_range_three_models_2026_10_21/Dự đoán ngắn hạn 21_10.pptx` (bản tên gốc đã bị người dùng xóa). SnapshotSHA `data/operational/workspace_cleanup_2026_11_09/user_files.json`.
+
+## Bằng chứng lịch sử, không phải mục tiêu hiện tại
+
+- `reports/vrain_data_handoff_2026_11_09/DANH_GIA_KHA_THI_VA_HUONG_DI.md`: kiểm định nhãn vùng trước khi người dùng chốt theo trạm. 67 ngày tham chiếu nội bộ, NRMSE Thiessen toàn R93 16,3–21,4%, nhóm núi60–71%; không phải sai số dự báo hay chân lý diện tích.
+- `reports/daily_gauge_2026_11_04/`: CPC168fits,144checkpointNN/288đầu ra cây/336split; chưa là Vrain hoặc theo trạm.
+- `reports/short_range_complete_2026_10_28/`: GSMaP ba mô hình, giữ nguyên nguồn/kết quả.
+- `reports/regional_research_plan_2026_10_20/PHUONG_AN_CUOI.md`: các quyết định có bằng chứng giữ đúng phạm vi cũ; không tự phủ nhận số đo cũ vì đổi mục tiêu.
+- Dọn tài liệu09/11 đã được phép, có ZIPprivate/Git a05f6c0, `docs/cleanup_2026_11_09.json`. Không xóa bằng chứng thí nghiệm.
+- Dataset/loaderERA5v1có34tests và kiểmtra toànfile; chưatrainv1. NWPpilotđãtrainnhưđầu file. Scriptsv1: `build_station_forecast_data.py`, `validate_station_forecast_data.py`, `publish_station_data_handoff.py`. Không đổi số đo vùng cũ thành kết quả trạm.

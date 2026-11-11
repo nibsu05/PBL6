@@ -1,0 +1,92 @@
+{
+  "status": "complete",
+  "slides": 47,
+  "main_slides": 32,
+  "roles": {
+    "groups": 5,
+    "coverage": 6,
+    "seeds": 7,
+    "metrics": 13,
+    "counts": 19,
+    "bss_day1": 24,
+    "bss_day2": 25,
+    "bss_day3": 26,
+    "e7_day1": 27,
+    "e7_day2": 28,
+    "e7_day3": 29
+  },
+  "models": [
+    "lgbm",
+    "tft",
+    "informer"
+  ],
+  "comparison_metrics": [
+    "RMSE",
+    "MAE",
+    "bias",
+    "BS",
+    "BSS",
+    "CSI",
+    "POD",
+    "FAR"
+  ],
+  "completed_fits": {
+    "tft": 72,
+    "lgbm": 24,
+    "informer": 18
+  },
+  "planned_score_rows": 72,
+  "available_score_rows": 54,
+  "missing_informer_score_rows": 18,
+  "new_training_runs": 0,
+  "test2025_read": false,
+  "code_sha256": "11d333c2b5e85f83cd700aa60b695e107111ff3a56417ee68c9d6f0dec9375cd",
+  "sources": {
+    "reports/short_range_revised_2026_10_21/slide_scene.json": "15b44f0d38351c4461856896a54c5396325985cec96f33a3e7d4d7957b87fd41",
+    "reports/short_range_revised_2026_10_21/GIAI_THICH_THEO_CAU_HOI.md": "54064af0464e710a3298b4c4a1293744cdfc0534ee1afbaf66489bdb7b6ee19d",
+    "reports/short_range_ablation_2026_10_21/scores_ensemble_pooled.csv": "32458005303c7f7cd9e53447c1bbbe2f6439ff238fe92b4ccac467aeb379c89f",
+    "reports/informer_regional_pilot_2026_10_21/scores_pooled.csv": "5834e5b0156961a036c1e4ad557f3be3830d19c62f8ef6070a62482755be36dc",
+    "reports/short_range_ablation_2026_10_21/run.json": "090995c725de83be332b3092d7d3db6405bf49d21449e18634bb2e803cb41c00",
+    "reports/short_range_ablation_2026_10_21/checkpoint_audit.json": "30ec7260c5b58046d3eabeec0ef5f344685d5f5c9de23a2c8cd72a98b7cc8fc6",
+    "reports/informer_regional_pilot_2026_10_21/run.json": "ca073dd9bfb73a61af41c8557b0426f73bece9311c36495fd716ba1818aa64ac",
+    "reports/informer_regional_pilot_2026_10_21/validation.json": "6cf061ebaf028aeba71f9cb191cc641be044b13fd15e78380ee788f1f7386210"
+  },
+  "files": {
+    "GIAI_THICH_SO_SANH_3_MO_HINH.docx": {
+      "sha256": "f1c6cd5bd04129d48c81d09678cb79f0cba93268f69cbc13cc6b89a62477de30",
+      "bytes": 43171
+    },
+    "GIAI_THICH_SO_SANH_3_MO_HINH.md": {
+      "sha256": "4859d029ed5e436e5ebf5e22e38eed5108744a444bec7c541d5fc0f5cb2337bc",
+      "bytes": 9579
+    },
+    "KET_QUA_3_MO_HINH.csv": {
+      "sha256": "8c5abd8aa5b76c4fa3a34d3531dc380b91ccef8b2af5a325fb248cd93e6877cb",
+      "bytes": 10958
+    },
+    "LOI_DAN.md": {
+      "sha256": "cbf05cd86fa0347d355accc90ba7c4873868f7f6fa2d307d70ec628c46fe2d7f",
+      "bytes": 24394
+    },
+    "PBL6_SO_SANH_3_MO_HINH.html": {
+      "sha256": "bf4eaafc3b1df54345875f4b28b9ae1ca3b5a9de273613f9a9a3817c62afe3ad",
+      "bytes": 348647
+    },
+    "PBL6_SO_SANH_3_MO_HINH.pptx": {
+      "sha256": "f9ebda128ff80d835b06536a9b037e3047a92d669ffba6e5d8b378cebb88261a",
+      "bytes": 248988
+    },
+    "README.md": {
+      "sha256": "5d657f4e31e442a8726778a07dd88e8b8c053e8fc1ea1b96c72c9fed8eac8959",
+      "bytes": 1741
+    },
+    "slide_scene.json": {
+      "sha256": "8c8436e395e4514367bb0f99a5868cd8584eee9ab772fd3aa60369dac631fad5",
+      "bytes": 238973
+    },
+    "SO_DEM_E7_NGAY1.csv": {
+      "sha256": "99320e014a7bd14099ca0b9442b48f44151fbf6db076efdb5c3d85d1713338a2",
+      "bytes": 143
+    }
+  }
+}

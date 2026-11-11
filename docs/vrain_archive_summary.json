@@ -1,0 +1,46 @@
+{
+  "status": "verified_complete_raw_archive",
+  "requested_start": "2015-01-01",
+  "requested_end": "2024-12-31",
+  "requested_days": 3653,
+  "responses_saved": 3653,
+  "all_gzip_and_raw_sha256_verified": 3653,
+  "days_with_hourly_rows": 1461,
+  "first_day_with_hourly_rows": "2021-01-01",
+  "last_day_with_hourly_rows": "2024-12-31",
+  "hourly_day_gaps": 0,
+  "days_without_hourly_rows": 2192,
+  "structure_flagged_days": 0,
+  "years_with_hourly_rows": {
+    "2021": 365,
+    "2022": 365,
+    "2023": 365,
+    "2024": 366
+  },
+  "station_counts": [
+    82
+  ],
+  "complete24_station_count_range": [
+    0,
+    82
+  ],
+  "days_with_station_sum_mismatches": 3,
+  "failed_days": [],
+  "raw_bytes": 660731362,
+  "gzip_bytes": 19124895,
+  "training_ready": false,
+  "time_metadata_confirmed": false,
+  "measurement_units_confirmed": false,
+  "region_label_created": false,
+  "test2025_read": false,
+  "training_performed": false,
+  "verification_seconds": 40.29,
+  "days_with_station_sum_mismatch_dates": [
+    "2021-09-28",
+    "2022-10-06",
+    "2024-06-12"
+  ],
+  "hourly_days_with_no_complete24_station": 1,
+  "download_finished_at_utc": "2026-11-09T10:57:39.483087+00:00",
+  "scope_note": "Complete capture of requested daily responses, not complete valid observations at every station"
+}

@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "slides": 44,
+  "main_slides": 30,
+  "appendix_slides": 14,
+  "complete_score_rows": 72,
+  "metric_cells_checked": 720,
+  "ci_cells_checked": 24,
+  "complete_model_set_in_comparison_tables": true,
+  "native_tables_and_notes_verified": true,
+  "previous_publication_files_unchanged": 155,
+  "user_files_unchanged": 1,
+  "html_text_overflows": 0,
+  "native_office_rendered": false,
+  "training_performed": false,
+  "test2025_read": false
+}

@@ -1,0 +1,66 @@
+layer,field,required,meaning
+station_inventory,provider,Có,Khóa định danh; không nối V1/V2 bằng tên
+station_inventory,service,Có,Khóa định danh; không nối V1/V2 bằng tên
+station_inventory,id_namespace,Có,Khóa định danh; không nối V1/V2 bằng tên
+station_inventory,station_id,Có,Khóa định danh; không nối V1/V2 bằng tên
+station_inventory,station_uuid,Có,Khóa định danh; không nối V1/V2 bằng tên
+station_inventory,longitude,Có,"Tọa độ và thời kỳ hiệu lực; chưa biết thì đánh dấu unknown, không bịa"
+station_inventory,latitude,Có,"Tọa độ và thời kỳ hiệu lực; chưa biết thì đánh dấu unknown, không bịa"
+station_inventory,coordinate_crs,Có,"Tọa độ và thời kỳ hiệu lực; chưa biết thì đánh dấu unknown, không bịa"
+station_inventory,position_valid_from,Có,"Tọa độ và thời kỳ hiệu lực; chưa biết thì đánh dấu unknown, không bịa"
+station_inventory,position_valid_to,Có,"Tọa độ và thời kỳ hiệu lực; chưa biết thì đánh dấu unknown, không bịa"
+station_inventory,sensor_type,Có,Metadata cần xác nhận trước chuẩn hóa nhãn
+station_inventory,unit,Có,Metadata cần xác nhận trước chuẩn hóa nhãn
+station_inventory,source_timezone,Có,Metadata cần xác nhận trước chuẩn hóa nhãn
+station_inventory,timestamp_means,Có,Metadata cần xác nhận trước chuẩn hóa nhãn
+station_inventory,accumulation_semantics,Có,Metadata cần xác nhận trước chuẩn hóa nhãn
+station_inventory,reporting_interval,Có,Metadata cần xác nhận trước chuẩn hóa nhãn
+source_manifest,relative_path,Có,Nguồn nguyên gốc private; không token/cookie/signed URL
+source_manifest,sha256,Có,Nguồn nguyên gốc private; không token/cookie/signed URL
+source_manifest,retrieved_at_utc,Có,Nguồn nguyên gốc private; không token/cookie/signed URL
+source_manifest,requested_start,Có,Nguồn nguyên gốc private; không token/cookie/signed URL
+source_manifest,requested_end,Có,Nguồn nguyên gốc private; không token/cookie/signed URL
+source_manifest,schema_version,Có,Nguồn nguyên gốc private; không token/cookie/signed URL
+station_intervals,station_key,Có,Quan trắc theo khoảng; giữ missing khác 0
+station_intervals,period_start_utc,Có,Quan trắc theo khoảng; giữ missing khác 0
+station_intervals,period_end_utc,Có,Quan trắc theo khoảng; giữ missing khác 0
+station_intervals,rain_mm,Có,Quan trắc theo khoảng; giữ missing khác 0
+station_intervals,qc_flags,Có,Quan trắc theo khoảng; giữ missing khác 0
+station_intervals,source_sha256,Có,Quan trắc theo khoảng; giữ missing khác 0
+station_intervals,available_at_utc,Có,Chỉ ghi nếu được chứng minh; unknown không được giả thành giờ quan trắc
+station_hourly_daily,period_start_utc,Có,Giờ hoặc tổng ngày đúng anchor; không cộng hàng tổng lần nữa
+station_hourly_daily,period_end_utc,Có,Giờ hoặc tổng ngày đúng anchor; không cộng hàng tổng lần nữa
+station_hourly_daily,rain_mm,Có,Giờ hoặc tổng ngày đúng anchor; không cộng hàng tổng lần nữa
+station_hourly_daily,n_expected,Có,Giờ hoặc tổng ngày đúng anchor; không cộng hàng tổng lần nữa
+station_hourly_daily,n_observed,Có,Giờ hoặc tổng ngày đúng anchor; không cộng hàng tổng lần nữa
+station_hourly_daily,valid,Có,Giờ hoặc tổng ngày đúng anchor; không cộng hàng tổng lần nữa
+region_definition,region_version,Có,Cùng phạm vi cho X/y; phần chưa được mạng đại diện phải nêu rõ
+region_definition,polygon_sha256,Có,Cùng phạm vi cho X/y; phần chưa được mạng đại diện phải nêu rõ
+region_definition,source,Có,Cùng phạm vi cho X/y; phần chưa được mạng đại diện phải nêu rõ
+region_definition,crs_wkt,Có,Cùng phạm vi cho X/y; phần chưa được mạng đại diện phải nêu rõ
+region_definition,island_scope,Có,Cùng phạm vi cho X/y; phần chưa được mạng đại diện phải nêu rõ
+station_weights,region_version,Có,"Trọng số cố định, không âm, tổng bằng 1; tính trong CRS phù hợp"
+station_weights,network_version,Có,"Trọng số cố định, không âm, tổng bằng 1; tính trong CRS phù hợp"
+station_weights,weights_version,Có,"Trọng số cố định, không âm, tổng bằng 1; tính trong CRS phù hợp"
+station_weights,station_key,Có,"Trọng số cố định, không âm, tổng bằng 1; tính trong CRS phù hợp"
+station_weights,area_weight,Có,"Trọng số cố định, không âm, tổng bằng 1; tính trong CRS phù hợp"
+region_hourly_daily,period_start_utc,Có,Ước lượng diện tích; không tự chuẩn hóa mạng khuyết trong nhãn chính
+region_hourly_daily,period_end_utc,Có,Ước lượng diện tích; không tự chuẩn hóa mạng khuyết trong nhãn chính
+region_hourly_daily,vrain_areal_estimate_mm,Có,Ước lượng diện tích; không tự chuẩn hóa mạng khuyết trong nhãn chính
+region_hourly_daily,valid,Có,Ước lượng diện tích; không tự chuẩn hóa mạng khuyết trong nhãn chính
+region_hourly_daily,coverage_weight,Có,Ước lượng diện tích; không tự chuẩn hóa mạng khuyết trong nhãn chính
+region_hourly_daily,network_version,Có,Ước lượng diện tích; không tự chuẩn hóa mạng khuyết trong nhãn chính
+region_hourly_daily,weights_version,Có,Ước lượng diện tích; không tự chuẩn hóa mạng khuyết trong nhãn chính
+predictors,period_start_utc,Có,ERA5 B/A/M/C; miền SST/context riêng có provenance
+predictors,period_end_utc,Có,ERA5 B/A/M/C; miền SST/context riêng có provenance
+predictors,region_version,Có,ERA5 B/A/M/C; miền SST/context riêng có provenance
+predictors,features,Có,ERA5 B/A/M/C; miền SST/context riêng có provenance
+predictors,source_coverage,Có,ERA5 B/A/M/C; miền SST/context riêng có provenance
+sample_index,issue_time_utc,Có,Một issue vùng; toàn bộ nhãn nằm trong split và không có tương lai trong X
+sample_index,history_start_utc,Có,Một issue vùng; toàn bộ nhãn nằm trong split và không có tương lai trong X
+sample_index,history_end_utc,Có,Một issue vùng; toàn bộ nhãn nằm trong split và không có tương lai trong X
+sample_index,target_intervals,Có,Một issue vùng; toàn bộ nhãn nằm trong split và không có tương lai trong X
+sample_index,all_e_valid,Có,Một issue vùng; toàn bộ nhãn nằm trong split và không có tương lai trong X
+sample_index,split,Có,Một issue vùng; toàn bộ nhãn nằm trong split và không có tương lai trong X
+sample_index,dataset_version,Có,Một issue vùng; toàn bộ nhãn nằm trong split và không có tương lai trong X
+sample_index,rain_input_lag,Có,Một issue vùng; toàn bộ nhãn nằm trong split và không có tương lai trong X

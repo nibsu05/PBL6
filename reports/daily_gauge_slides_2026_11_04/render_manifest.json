@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "method": "HTML shared scene, not native Office rendering",
+  "slides": 44,
+  "overflows": [],
+  "files": {
+    "PBL6_DU_LIEU_NGAY_3_MO_HINH.html": "8e1357905bf1e3760981620d9e55ba8ea255c9f5dcb46d5c9098e2502fa52c66",
+    "PBL6_DU_LIEU_NGAY_3_MO_HINH.pptx": "4f2701bdc107933ea4b76176896cd2d9423ccb07b146dbf3a8f68ab059c2263e",
+    "slide_scene.json": "c72779a2b39ebcac2c19673d64fb105bd3dccc089e19aa4e2b3a1b105ebfb481",
+    "XEM_TRUOC.png": "3db1b94fd952fbebc8dfc2723b1d1aa29e2bf671035cac9d74fb66bb7bd24c5b"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "status": "complete",
+  "configurations": [
+    "N3",
+    "N5"
+  ],
+  "seeds": [
+    {
+      "config": "N3",
+      "seed": 17,
+      "epochs": 17,
+      "parameter_count": 4364,
+      "device": "cuda"
+    },
+    {
+      "config": "N3",
+      "seed": 29,
+      "epochs": 17,
+      "parameter_count": 4364,
+      "device": "cuda"
+    },
+    {
+      "config": "N3",
+      "seed": 43,
+      "epochs": 17,
+      "parameter_count": 4364,
+      "device": "cuda"
+    },
+    {
+      "config": "N5",
+      "seed": 17,
+      "epochs": 17,
+      "parameter_count": 4796,
+      "device": "cuda"
+    },
+    {
+      "config": "N5",
+      "seed": 29,
+      "epochs": 17,
+      "parameter_count": 4796,
+      "device": "cuda"
+    },
+    {
+      "config": "N5",
+      "seed": 43,
+      "epochs": 17,
+      "parameter_count": 4796,
+      "device": "cuda"
+    }
+  ],
+  "dataset_sha256": "9e5b6aed6a933d8be3deac9558976e953d14110e3e83159e381e760fc03865b4",
+  "train_only_selection": true,
+  "calibration_only_2023": true,
+  "test2025_read": false
+}

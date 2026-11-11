@@ -1,0 +1,4 @@
+# Additional spatial diagnostics; install after the main environment.
+shapely==2.2.0
+pyproj==3.8.0
+scipy>=1.10

@@ -1,0 +1,20 @@
+{
+  "python": "3.12.15",
+  "packages": {
+    "torch": "2.5.1+cu121",
+    "lightgbm": "4.5.0",
+    "numpy": "2.2.6",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.6.1",
+    "pyarrow": "18.1.0",
+    "netCDF4": "1.7.4"
+  },
+  "cuda": true,
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "new_tests": {
+    "command": "python -X utf8 -m unittest tests.test_daily_gauge -v",
+    "passed": 5,
+    "phase": "Before first fit; full console result recorded in session"
+  },
+  "test2025_values_read": false
+}
