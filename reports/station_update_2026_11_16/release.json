@@ -1,0 +1,39 @@
+{
+  "status": "complete_with_documented_gaps_and_source_transition",
+  "handoff_zip_sha256": "8aa51f689fc60eb91de7c19a85800e9f7b2164738ce601c0a0e44fbf0c9e07da",
+  "handoff_zip_bytes": 60914392,
+  "raw_data_private": true,
+  "training_performed": false,
+  "model_evaluation": false,
+  "last_source_day": "2026-11-15",
+  "last_issue_day": "2026-11-12",
+  "data_files": {
+    "PBL6_MUA_TRAM_GIO_2021_2026.parquet": "cba9b1f2788fc65f46cfe675ce5500e2cfd780ba0f5d5e21b21b596b24275d14",
+    "PBL6_GFS_VRAIN_NGAY_2021_2026.parquet": "17c6b220fa4b275cfde46f8ba52f3c068d42950fc0f272fcf8b2dd68dcfc1768",
+    "station_registry_private.csv": "453284ed4a914fd2607ec2ddb9683fa04c27e2b760c8b75a77cd9063297515a3",
+    "README.md": "d324120a0fd392d984db80de9c078a64d7c9ee9380445fd410995d2c5c5092a6",
+    "MO_TA_DU_LIEU.md": "4dec4551c25cf05fc07858ec981a207e58df26341a44fb3a1ae717e89529f86c",
+    "MO_TA_DU_LIEU.docx": "1b805236ca345f40cea987eade1ec8e3048f877f7cf98eb354fb579cb39366dc",
+    "feature_groups.json": "161475bde32553a757d0f05ee02d08f3567790bff157eb7767f84d5a0b8e9931",
+    "dataset_summary.json": "6ea51f9acc836d8257ebd42491c898304247307f6835ff45e24e260c80f807b9",
+    "verification.json": "0b571f276916055e5de15693c61d2fe341936ef8cd5f821098d4055ef9ddb979",
+    "fresh_source_verification.json": "08dffb359a588196950d366ddf82cc46acc978e979b177e74008880d36c51b87",
+    "unit_test_verification.json": "88cb85a812b46ec85afba2fc0648dae54754241079fd6231a1b6cf5a1ca5835d",
+    "data_contract.json": "a78dba34f73164a900999ad8771b32ffa01b6cee6c37c757756bdc9db2bbe736",
+    "coverage_by_year_channel.csv": "fe0587db0be3afb30545eb3c1180c401ff0a155143ab2d799b2a63c8a561c771",
+    "coverage_2026_by_month.csv": "6f08c71ef6eb60507792fc84fc84ee0c03463818a106223054e9dfd58c900d58",
+    "channel_overlap.csv": "0b3e0c7e122bfcd62bee3c84bbc23632cb44ad52861639865e7cceef8ac5977e",
+    "daily_sample_counts.csv": "4d20cc85300f14ad0ef14b1211822c8617f69684b97b18949e8193959d7a9d8e"
+  },
+  "code_sha256": {
+    "src/station_archive_update.py": "4251fb7d7c07254f83bf8efccd8c3d512a333c4af22cf0cd879f8cd08294be35",
+    "scripts/collect_gfs_station_update.py": "c41b96ee77b11adfe85719b3d99975cf34dda017e06c6a23d4f00ebaf0c9077c",
+    "scripts/prepare_station_update.py": "85d225abf13582490a232a150827ada13f67822db226ff5879f117518c66373b",
+    "scripts/build_station_update.py": "00eaccee8356e1fac1144e2b47ef18e6afe00d83355a09683cb3565d09b50940",
+    "scripts/validate_station_update.py": "165ea48b52bb0179f06132d7afc46cc489e4038ecf74b992b20842619f772082",
+    "scripts/publish_station_update.py": "a64681ce9dff5412cd4478fbcd1c727d5a355d7fd53220f7e3ae822b95217d12",
+    "scripts/run_station_update_pipeline.py": "de13879911792d3012c6b50c02fab6089cdf12ba2438821c3a072ca152782d8b",
+    "scripts/verify_gfs_station_update_sources.py": "8a9ecc9edfb0f95cfaa700ee97f6b326ebec49058e31e057af551b20b5e44bc2",
+    "scripts/update_station_archive.py": "45f6d3c9f7938a2f0306e4f3d840948d189073fda13824a05223a58c00d0f517"
+  }
+}

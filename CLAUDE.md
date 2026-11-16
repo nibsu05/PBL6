@@ -1,6 +1,19 @@
 # PBL6 — bối cảnh hiện hành cho agent
 
-Cập nhật 11/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
+Cập nhật 16/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
+
+## Dữ liệu cập nhật đến 2026 — hoàn thành 16/11/2026
+
+Người dùng đã yêu cầu thực hiện một bản dữ liệu đầy đủ tới 2026. Yêu cầu này cho phép thu thập/QC và dựng dữ liệu năm 2025–2026 trong **phiên bản mới**, thay giới hạn không đọc 2025 ở cấp kho nguồn trước đây. Chưa yêu cầu fit/tuning/chấm mô hình mới. Thí nghiệm và slide daily-v2 cũ vẫn phản ánh bộ 2021–2024; không đổi protocol đã khóa hay gắn dữ liệu mới vào checkpoint cũ.
+
+- Bản mới `station_update_2026_11_16`, hợp đồng `reports/station_update_2026_11_16/data_contract.json`; private raw/session/progress ở `data/operational/vrain_update_2026_11_16/`; dữ liệu bàn giao ở `data/processed/station_update_2026_11_16/` (ngoài Git).
+- Đã hoàn thành build/validate/publish và ZIP nội bộ ~61MB `PBL6_DATA_DEN_2026.zip`: mưa giờ 4.427.280 hàng; GFS–Vrain ngày 726.528 hàng, 427.746 hàng đủ X/y =142.582 mẫu trạm–issue đủ ba hạn. Các mẫu đủ theo vai trò: train38.222/cal26.030/dev27.773/reserved2025 27.307/external2026 23.250 (gồm2.437 legacy và20.813 modern); đây là toàn danh mục, không phải chỉ57. Tái hiện đúng218.658 hàng của cohort57 cũ. Verification toàn bộgiờ/ngày,115.584ôJSON độc lập,8rangeGRIB/688giá trị đạt. Mô tả Markdown/Word và JSON/CSV tổng hợp ở thư mục report cùng tên. Chưa fit/chấm mới.
+- Đã lấy đủ 1.368 phản hồi ngày–kênh cho 01/01/2025–15/11/2026, gồm 01/01/2026; hai namespace riêng, tái dùng nguồn 2026 đã kiểm SHA. GFS bổ sung 684/684 cycle 29/12/2024–12/11/2026, 19 trường/cycle, 86 vị trí; chưa có lỗi nguồn mới. Tái dùng GFS cũ 2021–2024, giữ hai ngày nguồn lỗi đã chốt.
+- Giữ mã STxxx, so alias/tọa độ current không đổi so registry 09/11: 82 legacy, 86 modern, bốn modern-only. Kênh cũ có số trong 365 ngày 2025; modern không có số 2025, bắt đầu có số 08/01/2026. Phần giao 2026 chỉ 367 cặp tại một vị trí/18 ngày, 46 cặp mưa khác nhau; chưa chứng minh tương đương hay liên tục. Tháng 1/2026 modern chỉ 23 ngày–trạm đủ24h, tháng10 2.652/2.666, 01–15/11 1.268/1.290.
+- Một Parquet mưa giờ giữ raw/QC hai kênh, `rain_mm` có mã nguồn; xung đột thành NaN, không cộng/trung bình hai nguồn. Một Parquet GFS–Vrain ngày có N0–N5, ba nhãn, từng namespace, mask đủ ba hạn và delay1/3/6. `recommended_sample` chọn tối đa một namespace hoàn chỉnh/trạm/issue; cả lịch sử và nhãn của mẫu dùng cùng namespace. Modern vẫn `continuity_with_legacy_confirmed=False`; đủ X/y chưa phải chứng nhận tính liên tục hoặc cảm biến.
+- Nguồn tới 15/11/2026; issue cuối đủ ba nhãn là 12/11/2026 lúc19h. Năm2026 chưa đủ năm. Bộ mới là GFS+Vrain, **chưa kéo dài 44 biến ERA5**. Mưa giờ là số nguồn, không chia mưa ngày.
+- Lệnh lần lượt: `prepare_station_update.py`, `update_station_archive.py`/`collect_gfs_station_update.py`, `build_station_update.py`, `validate_station_update.py`, `publish_station_update.py`; runner `run_station_update_pipeline.py` đợi hai collector. Xem `pipeline_progress.json` và log thật trước báo hoàn thành. Publish tái tải8rangeGRIB/688giá trị để kiểm chứng độc lập rồi đóng gói ZIP private. Bảo toàn87artifact cũ/slide;37tests nguồn/thời gian/nhãn đạt.
+- 2025 nay đã được thu thập/QC theo yêu cầu cập nhật; gọi là **chưa chấm mô hình**, không còn nói toàn kho chưa đọc năm2025. Vai trò mặc định vẫn train2021–22/cal2023/dev2024/reserved2025/external2026; muốn đổi tập train cần protocol mới. Mô tả “2025 kín” phía dưới là trạng thái của các bản đã đóng băng trước16/11.
 
 ## Thí nghiệm hằng ngày v2 — đã hoàn thành và kiểm chứng
 

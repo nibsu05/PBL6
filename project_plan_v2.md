@@ -1,5 +1,7 @@
 # Thiết kế nghiên cứu — dự báo mưa tại nhiều trạm
 
+**Bổ sung dữ liệu 16/11/2026:** [bản GFS–Vrain đến 2026 và hướng dẫn](reports/station_update_2026_11_16/README.md). Danh mục86, mưa nguồn tới15/11/2026; mẫu ngày đủ nhãn tớiissue12/11/2026. Tách rõ namespace cũ/mới và cờ mẫu; không xem hai kênh là tương đương khi chưa đủ bằng chứng. 2025 đã thu thập/QC trong lần cập nhật này nhưng chưa fit/tuning/chấm. Thiết kế split và kết quả 2021–2024 dưới đây vẫn thuộc thí nghiệm cũ; kéo dài thời gian train là một thí nghiệm mới.
+
 **Slide hiện hành:** [daily-v2 — 41 slide](reports/gfs_daily_slides_2026_11_11/README.md), có bảng đầy đủ và ghi chú. Điểm số thuộc dev 2024; “giữ kín 2025” là dành kiểm định cuối, không phải bảng điểm đã tính nhưng chưa công bố.
 
 **Phiên bản hoàn thành 11/11/2026:** [báo cáo hằng ngày v2](reports/gfs_station_daily_v2_2026_11_10/BAO_CAO_HANG_NGAY_V2.md), [kết luận](reports/gfs_station_daily_v2_2026_11_10/KET_LUAN.md), [protocol](reports/gfs_station_daily_v2_2026_11_10/protocol.json). 57 trạm, 1.449 chu kỳ nguồn hợp lệ, 72.886 mẫu trạm–issue. Hai đầu mean/median; LightGBM N0–N5, GRU N3/N5, ZERO/CLIM/persistence/GFS/MOS; tuning các quý2022, calibration2023, dev2024, chưa mở2025. [Kiểm chứng dữ liệu](reports/gfs_station_daily_v2_2026_11_10/dataset_verification.json) và [replay mô hình/metric](reports/gfs_station_daily_v2_2026_11_10/model_verification.json) đạt. Khí tượng thô có giá trị; dẫn xuất có tín hiệu tùy kiến trúc/hạn, không kết luận mọi đặc trưng bổ sung đều tốt. Đây là thí nghiệm riêng sau pilot tuần bên dưới.

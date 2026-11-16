@@ -1,0 +1,27 @@
+{
+  "status": "verified_with_documented_gaps_and_source_transition",
+  "station_inventory": 86,
+  "source_marked_days": 2145,
+  "first_marked_day": "2021-01-01",
+  "last_marked_day": "2026-11-15",
+  "last_daily_issue": "2026-11-12",
+  "hourly": {
+    "file": "PBL6_MUA_TRAM_GIO_2021_2026.parquet",
+    "rows": 4427280,
+    "sha256": "cba9b1f2788fc65f46cfe675ce5500e2cfd780ba0f5d5e21b21b596b24275d14",
+    "bytes": 3004348
+  },
+  "daily": {
+    "file": "PBL6_GFS_VRAIN_NGAY_2021_2026.parquet",
+    "rows": 726528,
+    "sha256": "17c6b220fa4b275cfde46f8ba52f3c068d42950fc0f272fcf8b2dd68dcfc1768",
+    "bytes": 57821744,
+    "new_gfs_source_errors": {}
+  },
+  "training_performed": false,
+  "model_evaluation": false,
+  "collection_2025_authorized": true,
+  "modern_continuity_confirmed": false,
+  "all_stations_complete": false,
+  "verification_sha256": "0b571f276916055e5de15693c61d2fe341936ef8cd5f821098d4055ef9ddb979"
+}
