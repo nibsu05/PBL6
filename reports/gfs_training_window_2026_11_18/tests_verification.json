@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "tests": 52,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsed_seconds": 12.64,
+  "completed_utc": "2026-11-17T18:00:36.946674+00:00",
+  "modules": [
+    "tests.test_gfs_window",
+    "tests.test_gfs_temporal",
+    "tests.test_gfs_temporal_models",
+    "tests.test_gfs_temporal_evaluation",
+    "tests.test_gfs_temporal_integration",
+    "tests.test_gfs_capacity_control",
+    "tests.test_gfs_final_evaluation",
+    "tests.test_gfs_daily_v2"
+  ]
+}

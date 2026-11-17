@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "completed_utc": "2026-11-17T18:27:08.205332+00:00",
+  "cv_estimators_checked": 72,
+  "mean_estimators_checked": 54,
+  "auxiliary_estimators_checked": 108,
+  "shared_candidate_rounds_and_actual_objectives": true,
+  "prospective_selection_train_CV_only": true,
+  "handoff_rows": 323466,
+  "handoff_files": 7,
+  "public_payload_private_fields_absent": true,
+  "git_index_bytes_checked": false
+}

@@ -118,3 +118,12 @@ reports/gfs_temporal_2026_11_17/*.csv text eol=lf
 src/gfs_station.py text eol=lf
 src/gfs_station_dataset.py text eol=lf
 scripts/collect_gfs_station_pilot.py text eol=lf
+
+# New window/loss experiment: set byte policy before locking training code.
+src/gfs_window*.py text eol=lf
+scripts/*gfs_window*.py text eol=lf
+scripts/*gfs_window*.ps1 text eol=lf
+tests/test_gfs_window*.py text eol=lf
+reports/gfs_training_window_2026_11_18/*.md text eol=lf
+reports/gfs_training_window_2026_11_18/*.json text eol=lf
+reports/gfs_training_window_2026_11_18/*.csv text eol=lf

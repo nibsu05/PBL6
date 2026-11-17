@@ -2,6 +2,22 @@
 
 Cập nhật 18/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
 
+## Hoàn thành hồi cứu 18/11 — số năm train/loss; đang chờ theo dõi tương lai
+
+Đã hoàn thành72CV và162estimatorLightGBM cuối cùng (54mean/108headphụ), MOS hai cửa sổ và hai bộ khí hậu;119artifact/cutoff khóa trước chấm. CV chọn small7lá,171/109/76cây, Tweedie cho ablation/candidate tương laiB. 2026modern RMSEmean D1/2/3: A15,708/18,029/20,677; B15,683/17,469/20,270; C15,627/17,736/21,356; D16,135/16,776/20,406; GFS20,445/19,738/24,953; MOSlong18,933/17,899/22,361. Thêm năm choTweedie giảm cả3điểm nhưng chưa đủ tiêu chí; D−Cngày3 là1/12phépA–D đạt tiêu chí thăm dò. N0/N1/N3:0/6; địa hình đổi rất nhỏ. L2 bớt thiếu mưa lớn nhưng báo thừa ngày khô, không thắng mọi hạn. Không chọn lại theo2026.
+
+Đã đối chiếu48.639hàng/3.000giátrịmetric,48hàngreplay/2.880giátrị,8quantilebootstrapbằngresample trực tiếp ngày,54budgetmean;52testsđạt.367mụcSHA tương ứng336file riêng biệt giữ nguyên (khácslash trongmanifestcũ); ghi rõ trongverification_notes. ArchiveDrive2233/2233khớp. Báo cáoWord/Markdown,28slide/14bảngWord vàCSV ởPUBLIC; nativePowerPoint khôngtrànchữ. Gói riêng `BASE/PBL6_NGAN_HAN_TRAIN_MOI.zip` ~12,34MB/7file, mộtParquet323.466hàng với26biến/cờrole rõ; khôngGit. Source83cột cũ vẫn giữ nguyên.
+
+Đã bật tiến trình giới hạn `scripts/track_gfs_window_issue.py --issue-day 2026-11-18`, chờ thu trước18:40VN/phát trước19h18/11; cả ba nhãn kết thúc19h21/11, kiểm tra từ20h21/11 và retry tối đa6h. Cần máy/mạng còn hoạt động. Đọc `BASE/live/tracker.json`, PIDthật/heartbeat vàstderr trước báo đangchạy; không spawn trùng khiturnmới. Tracker gia hạn session bằng tài khoản usercho phép trong DPAPIprivate, không plaintext/Git; metadata/registry cũ không đổi. Khi bàn giao mới ởwaiting_for_preissue_collection, **chưa phát dự báo/chưa có xác minh nhãn tươnglai**. Probe hiện đại thấy84vị trí cógiờ tại lúc đo, không đồng nghĩa đãtrain84. SnapshotPUBLIC chỉ trạng thái lúc xuất bản; trạng thái thật ởprivate. Không cần giữ turn chờ72h hoặc tự tạo goal.
+
+Người dùng đã duyệt “ok hãy thực hiện” sau đề xuất bốn cấu hình LightGBM: A=train2021–22/Tweedie, B=train2021–24/Tweedie, C=train2021–22/L2, D=train2021–24/L2; giữ57trạm/N3=26biến. Phiên bản riêng `gfs_training_window_2026_11_18`, public/private theo quy ước. **Phê duyệt mới cho phép đưa2023–24 vào train và dùng2025 hiệu chỉnh xác suất/cutoff trong phiên bản này**; không thay vai trò dữ liệu, checkpoint hay kết quả các nghiên cứu cũ. Không fit cây/mô hình dự báo chính hoặc early stopping trên2025/26; tham số Platt và cutoff được phép fit2025. 2026 đã xem nên chỉ đánh giá hồi cứu, tách API; không gọi lại test chưa dùng.
+
+Ba ứng viên × hai loss × bốn quý2022 × ba hạn =72CVfit, tối ưu macroRMSE sau clip0. Chọn chung candidate và số cây mỗi hạn (median qua hai loss/bốn quý), dùng giống nhau ở cảA–D/ba seed17/29/43. Loss dùng cho ablation N0/N1/N3 và dự báo tương lai chọn chỉ từCV2022; dùng cửa sổ train dài đã định trước, không chọn theo2026. Median và xác suất dùng chung A/C và B/D, tham số phụ chọn từtrain-onlyCVcũ. Nhãn không loại theo residual. Chưa triển khai Bi-LSTM.
+
+Đọc `reports/gfs_training_window_2026_11_18/protocol.json`, `progress.json` private và verification thực trước báo hoàn thành. `scripts/run_gfs_window.py` prepare/train/score; `scripts/verify_gfs_window.py` kiểm tra. Khóa mã trướcfit và artifact trước chấm2026; không sửa mã toán học sau lock, lỗi cần phiên bản mới. AtomicIO mới có retryWinError5; tránh dùngGet-Content đểpoll file đangghi.
+
+`scripts/record_gfs_window.py --probe` lưu snapshot nguồn hiện tại; `--issue-day YYYY-MM-DD --watch` là watcher có giới hạn một issue tương lai19hVN, ghi dự báo trướcissue, failclosed khi thiếu/nguồn chậm. `--verify-due` chỉ lấy nhãn sau72h+1h. Không nhận hồi phát là prospective, không khẳng định skill từ một issue. Dữ liệu/ledger/tọa độ/dự báo chi tiết ở private, khôngGit. Làm trênresearch/tft-regional, push/PR#1 được phép, không merge main; giữ nguyên ba thay đổi slide của người dùng.
+
 ## Hoàn thành 18/11 — thí nghiệm diễn biến GFS trong ngày
 
 Theo phê duyệt “ok hãy thực hiện, nhánh BI-LSTM thì bạn cứ để sau, hãy hoàn thiện tốt nhất có thể dự đoán ngắn hạn”. Phiên bản `gfs_temporal_2026_11_17`: public trong `reports/`, dữ liệu/checkpoint/nguồn trong `data/operational/` cùng tên. Không sửa nghiên cứu final/daily-v2 hoặc nhánh Bi-LSTM. Giữ 57 trạm, train2021–22/cal2023/dev2024. Không fit/tuning bằng2025–26; hai năm đã xem nên vòng mới là đánh giá hồi cứu, không gọi test chưa dùng.

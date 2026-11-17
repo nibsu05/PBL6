@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "files_matched": 2233,
+  "missing": 0,
+  "mismatched": 0,
+  "command": "scripts/package_data.py verify",
+  "verified_utc": "2026-11-17T18:15:15.806850+00:00"
+}
