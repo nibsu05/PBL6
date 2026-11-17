@@ -2,6 +2,22 @@
 
 Cập nhật 17/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
 
+## Kiểm chứng cuối — đã hoàn thành theo phê duyệt 17/11
+
+Người dùng đã duyệt toàn bộ kế hoạch năm bước bằng “ok, hãy thực hiện”: chốt protocol, đối chứng dung lượng GRU trên2021–2024, khóa mô hình/cutoff/mã chấm rồi kiểm định2025 và đánh giá riêng2026, sau đó báo cáo. Đây là **phê duyệt chấm2025/2026 sau khóa**, thay giới hạn chưa cho mở test ở các mục lịch sử bên dưới. Không yêu cầu hỏi lại sau mỗi bước. Không dùng2025/2026 để fit/tuning/chọn mô hình.
+
+Phiên bản `gfs_station_final_2026_11_17`, public ở `reports/` và private ở `data/operational/` cùng tên. Giữ57trạm cũ; LightGBM N3 là phương án lượng mưa chính, GRU N5 là ứng viên trung vị đã định trước. Đối chứng GRU N3_LINEAR6 thêm sáu tổ hợp tuyến tính dữ liệu thô, đúng4.796tham số nhưN5; N3_WIDE giữ đầu vàoN3, head27 có4.751tham số (gầnN5, lệch45). Giữ17epoch/3seed/chuẩn hóa train/hiệu chỉnh2023, không tìm siêu tham số mới.
+
+Protocol đã khóa trước fit trong `protocol.json`; `control_training_lock.json` khóa mã và dữ liệu. **Không sửa** `src/gfs_final.py`, `src/gfs_capacity_control.py`, `scripts/run_gfs_capacity_controls.py` sau khi đã bắt đầu fit. Nếu lỗi có ảnh hưởng toán học cần phiên bản mới. Script verify kiểm tra replayCPU, chuẩn hóa/projection train-only, thay nhãn tương lai không đổi đầu ra, và tái hiện toàn bộ dự báo cũ. `gfs_final_gate.py` chỉ cho đọc hàng kiểm định sau `control_verification` và tests passed, khóa111artifactcũ+12artifactmới và mã suy luận/chấm vào `final_manifest.json`; ghi `holdout_opened.json` trước lần đọc hàng test. Sau gate không sửa mô hình/cutoff/mã suy luận hoặc chấm.
+
+Chín đối chiếu đặc trưng chính: N1–N0/N3–N1 LightGBM và N5–LINEAR6 GRU ở3hạn theoRMSEmean. Sáu đối chiếu kỹ năng: LGBN3vsMOS(RMSEmean), GRUN5vsMOS(MAEmedian) ở3hạn. Bootstrap ghép khối14ngày,5.000lần, CIđồngthờiBonferroni từnghọ +pbootstrapđịnhtâm/Holm xấp xỉ; các so sánh khác thăm dò. 2026 táchlegacy/modern, chưa xác nhậnliêntục vàchưađủnăm. Không tuyên bố cơ chế vật lý nhân quả hoặc vận hànhrealtime.
+
+Đã hoàn thành cả năm bước:6fit đối chứng trênCUDA; khóa123artifact mô hình/hiệu chỉnh và mã trước mở test; chấm17phương án; kiểm chứng độc lập; xuất báo cáo Word/Markdown, ba hình và CSV. Test2025 có18.723mẫu trạm–issue/57trạm;2026legacy có1.725/56trạm (issue01/01–03/03), modern14.488/57trạm (06/02–12/11). Tổng104.808hàng kiểm định, 9.936đối chiếu metric,1.296seed,360bootstrap;181artifactcũ được bảo toàn,26tests đạt. `final_verification.json` passed, `release.json` complete. Cả2025 vàphần2026 này nay **đã chấm mô hình**; không gọi làtest chưa dùng cho các lần tuning tiếp theo.
+
+Kết luận test sau tiêu chí đã khóa: khí tượng thô LGBN1–N0 đủ tiêu chí cải thiện RMSE ngày2/3; địa hình N3–N1 và GRUN5–LINEAR6 chưa đủ cả3hạn. LGBN3vsMOS chỉ đủ RMSE ngày3; GRUN5vsMOS đủ MAEmedian ngày1/3. Không đổi mô hình chính theo test. RMSEmean test D1/2/3: GFS26,345/27,899/33,765; MOS26,131/28,683/32,346; LGBN3 26,035/29,203/30,645; GRUN5 24,812/26,711/30,233. MAEmedian GRUN5 7,969/8,724/9,399. BSS50 LGBN3=0,345/0,248/0,197; GRUN5=0,349/0,267/0,186; FAR vẫn khoảng0,46–0,58.
+
+Nguồn2025 có nhãn lớn nhất772,6mm/24h so dev2024 là366mm; đã hậu kiểm36nhãn lớn nhất từ JSON gốc, đủ24giờ/tổng nguồn khớp, chưa xác nhận cảm biến. Không bỏ nhãn/sửa điểm. Legacy2026 chỉ có2sự kiện trạm–ngày≥50 tại1issue mỗi hạn, không đánh giá ổn định cảnh báo mưa lớn từ nhóm này. Đọc báo cáo `BAO_CAO_KIEM_DINH.docx`/`.md`, `KET_LUAN.md` và CSV cùng thư mục. Mọi checkpoint/dự báo/registry nằm ngoàiGit; dữ liệu/báo cáo cũ và slide người dùng giữ nguyên.
+
 ## Bộ giờ ERA5 theo trạm — cập nhật 17/11/2026
 
 Người dùng yêu cầu bổ sung đầy đủ đặc trưng giờ đến2026 và cung cấp Cloud Project ID để tải. Bản mới `station_hourly_era5_2026_11_17`; không sửa bộV1 hay checkpoint/protocol cũ. ERA5 gốc đã có tới09/2026; tải thêm11khối tới23UTC10/11 (nguồn mới nhất tại lúc lấy). Toàn bộ86tọa độ được nội suy song tuyến trực tiếp bốn nút0,25°, giữ NaN khi thiếu góc cần thiết. Nguồn khí tượng là hồi cứu, không chứng minh sẵn tại issue realtime; GEE chưa cho biết expver final/ERA5T trong bản này.

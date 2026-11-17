@@ -94,3 +94,15 @@ tests/test_hourly_station_update.py text eol=lf
 reports/station_hourly_era5_2026_11_17/*.md text eol=lf
 reports/station_hourly_era5_2026_11_17/*.json text eol=lf
 reports/station_hourly_era5_2026_11_17/*.csv text eol=lf
+src/gfs_final.py text eol=lf
+src/gfs_final_*.py text eol=lf
+src/gfs_capacity_control.py text eol=lf
+scripts/*gfs_final*.py text eol=lf
+scripts/run_gfs_capacity_controls.py text eol=lf
+tests/test_gfs_capacity_control.py text eol=lf
+tests/test_gfs_final_evaluation.py text eol=lf
+reports/gfs_station_final_2026_11_17/*.md text eol=lf
+# Protocol/model manifests were frozen with CRLF before fitting/opening test.
+# Preserve their exact bytes, including report hashes generated from them.
+reports/gfs_station_final_2026_11_17/*.json -text whitespace=cr-at-eol
+reports/gfs_station_final_2026_11_17/*.csv text eol=lf
