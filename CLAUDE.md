@@ -1,6 +1,18 @@
 # PBL6 — bối cảnh hiện hành cho agent
 
-Cập nhật 16/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
+Cập nhật 17/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
+
+## Bộ giờ ERA5 theo trạm — cập nhật 17/11/2026
+
+Người dùng yêu cầu bổ sung đầy đủ đặc trưng giờ đến2026 và cung cấp Cloud Project ID để tải. Bản mới `station_hourly_era5_2026_11_17`; không sửa bộV1 hay checkpoint/protocol cũ. ERA5 gốc đã có tới09/2026; tải thêm11khối tới23UTC10/11 (nguồn mới nhất tại lúc lấy). Toàn bộ86tọa độ được nội suy song tuyến trực tiếp bốn nút0,25°, giữ NaN khi thiếu góc cần thiết. Nguồn khí tượng là hồi cứu, không chứng minh sẵn tại issue realtime; GEE chưa cho biết expver final/ERA5T trong bản này.
+
+- Private nguồn/cache/log/snapshot ở `data/operational/era5_station_hourly_2026_11_17/`. Private dữ liệu/ZIP ở `data/processed/station_hourly_era5_2026_11_17/`. Public aggregate/mô tả Word/Markdown ở `reports/station_hourly_era5_2026_11_17/`.
+- File chính `PBL6_TRAM_GIO_ERA5_2021_2026.parquet`:4.427.280hàng,44kênh khí tượng/lịch, mưa quá khứ, nhãn1–6h, raw/QC haiAPI vàcờ mẫu. Chỉresolution1h; fileGFSngày16/11khácphạmvi. Mưa tới19h15/11; khí tượng đầu khoảng tới06h11/11VN, nên hàng mưa06–07h11/11 là hàng khí tượng cuối.9.288hàngđuôi thiếuERA5 giữNaN/khôngready.
+- 86vị trí,79cótrain2021–22. `sample_complete` đủkỹthuật kểcảvịtríchưacótrain; `sample_ready_r1`/`recommended_sample` thêmđiềukiệntrạmcótrain. R0cốýcùngmaskR1bảothủ. Cả24giờlịchsử+6nhãnphảicùngmãAPI0hoặc1; khôngtựnối legacy/modern. Đây làhaiđườngAPIcủaVrain, khôngphảihaitầngchấtlượnghayxácnhậnhai cảm biến; nguyênnhân khácđộphủ vàtínhliêntục chưacóxácnhậnchínhthức.
+- Loader mới `src.hourly_station_update.HourlyStationData(path, split, experiment, ...)` hỗtrợtrain/cal/dev/reserved2025/external2026. LoaderV1giữnguyênchặn2025; khôngsửaguardcũ. Giữtoànbộtrụcthờigiantrướckhicắtchuỗi; khônglọc hàngreadytrước.
+- Train/cal/dev/reserved2025/external2026 có1.032.811/676.870/680.282/679.461/575.655mẫuready. Phần2024cóthêm394cửasổđuôivìnguồnV1kếtthúc19h31/12, naycóthêmnhãn trước ranh nửađêm; khôngthayđiểmcũ. Khôngfit/tuning/chấmmôhìnhtronglầncậpnhật.
+- Scripts `collect_hourly_era5_update.py`, `build_hourly_station_update.py`, `verify_hourly_station_update.py`, `publish_hourly_station_update.py`; kiểmtra trạngthái thật trong log/verification/release trước báohoànthành. Snapshotcũ76artifact và1128khốiERA5 khôngđượcghiđè. ZIPgửi nhóm chỉ5file:Parquet,Word,hướngdẫntrain,featuregroups,SHA256.
+- Mô tả16/11phíadướilàgóimưagiờthuần+GFSngày. Bộgiờ17/11 bổsungphầnERA5màgói16/11chưacó. Vai trò năm2025/2026khôngtựđổithànhtrain chỉvì đãchuẩnbịdữliệu.
 
 ## Dữ liệu cập nhật đến 2026 — hoàn thành 16/11/2026
 

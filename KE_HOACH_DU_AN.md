@@ -1,5 +1,7 @@
 # Kế hoạch hiện hành — dự báo mưa tại trạm
 
+**Bổ sung nhánh giờ 17/11/2026:** [bộ ERA5–Vrain theo trạm](reports/station_hourly_era5_2026_11_17/README.md), một file đã ghép 44 kênh khí tượng/lịch, mưa quá khứ và sáu nhãn giờ. Khí tượng ghép tới hàng mưa kết thúc 07h ngày 11/11/2026 giờ Việt Nam, mưa tới 19h ngày 15/11; giữ thiếu ở đuôi. Danh mục có 86 vị trí, 79 có train; mask chung yêu cầu cùng API trong 24 giờ lịch sử và 6 nhãn. Loader `HourlyStationData` trong module mới giữ nguyên guard V1. Không train/chấm mới; bộ ngày GFS 16/11 và các thí nghiệm cũ không đổi. Chưa xác nhận tính liên tục hai API là giới hạn nguồn, không gọi độ phủ là độ chính xác.
+
 **Cập nhật dữ liệu 16/11/2026:** theo yêu cầu mới, thu thập/QC 2025–2026 và dựng bản riêng [station_update_2026_11_16](reports/station_update_2026_11_16/README.md). Nguồn tới 15/11/2026; issue đủ ba nhãn tới 12/11/2026. Giữ nguyên thí nghiệm 2021–2024, chưa train/chấm mới. 2025 đã thu thập trong kho mới; mục tiêu tiếp theo là kiểm định sau khóa lựa chọn, không còn coi toàn bộ nguồn 2025 chưa được đọc. Dữ liệu2026 có đổi kênh và độ phủ không đều; chưa nối thành chuỗi đồng nhất để fit toàn bộ. Các trạng thái11/11 và trước đó phía dưới giữ bối cảnh phiên bản cũ.
 
 **Báo cáo slide 11/11/2026:** [bản daily-v2 41 slide và ghi chú](reports/gfs_daily_slides_2026_11_11/README.md), diễn giải đầu vào/đầu ra, chia năm, tuning, N0–N5 và bảng kết quả dev 2024. Đã tách rõ 2025 là tập dành kiểm định cuối sau khóa phương án; làm slide không huấn luyện hoặc mở test.

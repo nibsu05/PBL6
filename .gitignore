@@ -45,6 +45,7 @@ data/processed/gfs_station_pilot/
 data/processed/gfs_station_57_2026_11_10/
 data/processed/gfs_station_daily_v2_2026_11_10/
 data/processed/station_update_2026_11_16/
+data/processed/station_hourly_era5_2026_11_17/
 data/processed/pilot_bilstm_v2*/
 
 # Giữ lại dữ liệu mẫu (Sample data) trong data/samples/

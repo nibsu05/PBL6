@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "tests_run": 22,
+  "command": [
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "tests.test_hourly_station_update",
+    "tests.test_station_forecast_data",
+    "tests.test_station_archive_update",
+    "-q"
+  ],
+  "new_tests": 6
+}

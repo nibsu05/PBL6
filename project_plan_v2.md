@@ -1,5 +1,7 @@
 # Thiết kế nghiên cứu — dự báo mưa tại nhiều trạm
 
+**Bộ giờ mới 17/11/2026:** [mô tả ghép ERA5–Vrain](reports/station_hourly_era5_2026_11_17/README.md). Thay bộ mưa giờ thuần 16/11 khi thành viên cần đầu vào khí tượng Bi-LSTM: đầu vào 24 × 45 (44 khí tượng/lịch và R), nhãn là sáu giờ tại cùng trạm. Cả 86 tọa độ đều có bốn nút ERA5 bao quanh; 79 có train trong split cố định. Hai API đều Vrain, nhãn legacy/modern do dự án đặt; chưa xác nhận nguyên nhân khác độ phủ hay tính liên tục. Mẫu yêu cầu cùng nguồn cả lịch sử/nhãn. Mưa tới 15/11 nhưng hàng khí tượng đầy đủ cuối kết thúc 07h ngày 11/11 giờ Việt Nam; không điền đuôi. Chưa có huấn luyện/chấm mới. Phương án ngắn hạn GFS vẫn độc lập.
+
 **Bổ sung dữ liệu 16/11/2026:** [bản GFS–Vrain đến 2026 và hướng dẫn](reports/station_update_2026_11_16/README.md). Danh mục86, mưa nguồn tới15/11/2026; mẫu ngày đủ nhãn tớiissue12/11/2026. Tách rõ namespace cũ/mới và cờ mẫu; không xem hai kênh là tương đương khi chưa đủ bằng chứng. 2025 đã thu thập/QC trong lần cập nhật này nhưng chưa fit/tuning/chấm. Thiết kế split và kết quả 2021–2024 dưới đây vẫn thuộc thí nghiệm cũ; kéo dài thời gian train là một thí nghiệm mới.
 
 **Slide hiện hành:** [daily-v2 — 41 slide](reports/gfs_daily_slides_2026_11_11/README.md), có bảng đầy đủ và ghi chú. Điểm số thuộc dev 2024; “giữ kín 2025” là dành kiểm định cuối, không phải bảng điểm đã tính nhưng chưa công bố.
