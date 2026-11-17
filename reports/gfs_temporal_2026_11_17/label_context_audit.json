@@ -1,0 +1,26 @@
+{
+  "status": "complete",
+  "daily_matrix_replay_rows": 55327,
+  "no_labels_changed": true,
+  "spatial_rule": ">=200mm/24h, >=3 valid gauges within30km, neighbor median<=10mm, difference>=150mm and ratio>=10; diagnostic, not a standard or exclusion rule",
+  "hourly_rule": ">=50mm/24h and >=80percent in one hour; diagnostic only",
+  "satellite": {
+    "status": "available",
+    "source": "GSMaP hourlyPrecipRate_mm, not gauge-adjusted GC",
+    "complete_24h_required": true,
+    "grid_degrees": 0.1,
+    "files": 130,
+    "first_hour_utc": "2024-01-01 00:00:00+00:00",
+    "last_hour_utc": "2026-09-30 23:00:00+00:00",
+    "maximum_nearest_pixel_distance_km": 6.929797662574213,
+    "caveat": "independent product context, not point-gauge truth or proof of sensor accuracy"
+  },
+  "gsod_not_used": "UTC calendar-day summaries cannot validate the different19h-to19h Vietnam windows without hourly reaggregation",
+  "source_continuity": "two APIs from one provider, not independent sensors; cause of coverage transition remains unconfirmed",
+  "physical_sensor_validation_completed": false,
+  "references": [
+    "https://sharaku.eorc.jaxa.jp/GSMaP/faq/GSMaP_faq03.html",
+    "https://www.eorc.jaxa.jp/GPM/doc/product/format/en/07.GPM_GSMaP_Product_Format_E.pdf",
+    "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc%3AC00516"
+  ]
+}

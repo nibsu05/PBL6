@@ -106,3 +106,15 @@ reports/gfs_station_final_2026_11_17/*.md text eol=lf
 # Preserve their exact bytes, including report hashes generated from them.
 reports/gfs_station_final_2026_11_17/*.json -text whitespace=cr-at-eol
 reports/gfs_station_final_2026_11_17/*.csv text eol=lf
+# New temporal study uses explicit LF before freezing any checksums.
+src/gfs_temporal*.py text eol=lf
+scripts/*gfs_temporal*.py text eol=lf
+scripts/render_gfs_temporal.ps1 text eol=lf
+scripts/monitor_gfs_temporal.ps1 text eol=lf
+tests/test_gfs_temporal*.py text eol=lf
+reports/gfs_temporal_2026_11_17/*.md text eol=lf
+reports/gfs_temporal_2026_11_17/*.json text eol=lf
+reports/gfs_temporal_2026_11_17/*.csv text eol=lf
+src/gfs_station.py text eol=lf
+src/gfs_station_dataset.py text eol=lf
+scripts/collect_gfs_station_pilot.py text eol=lf

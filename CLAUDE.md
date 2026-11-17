@@ -1,6 +1,22 @@
 # PBL6 — bối cảnh hiện hành cho agent
 
-Cập nhật 17/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
+Cập nhật 18/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
+
+## Hoàn thành 18/11 — thí nghiệm diễn biến GFS trong ngày
+
+Theo phê duyệt “ok hãy thực hiện, nhánh BI-LSTM thì bạn cứ để sau, hãy hoàn thiện tốt nhất có thể dự đoán ngắn hạn”. Phiên bản `gfs_temporal_2026_11_17`: public trong `reports/`, dữ liệu/checkpoint/nguồn trong `data/operational/` cùng tên. Không sửa nghiên cứu final/daily-v2 hoặc nhánh Bi-LSTM. Giữ 57 trạm, train2021–22/cal2023/dev2024. Không fit/tuning bằng2025–26; hai năm đã xem nên vòng mới là đánh giá hồi cứu, không gọi test chưa dùng.
+
+Đã lấy đủ2.120ngày×39messageGFSbổsung, kiểm tra82.680header và tải lại24message/1.368giá trị nội suy độc lập. Dataset323.466hàng=107.822pack ba hạn, không mất mẫu; tái hiện đúng218.658hàng và toàn bộ dự báo T0 của bản cũ (chênh tối đa0). Số pack train/cal/dev2024/2025/2026legacy/2026modern:35.116/18.365/19.405/18.723/1.725/14.488. 2026 vẫn tách API và chưa đủ năm, nguồn nhãn tới15/11, issue tới12/11.
+
+T0=N3cũ26biến; T1 thêm8biến phân bố mưa6h; T2 thêm15biến diễn biến T/RH/u/v850/PWAT; T3 có49biến. GFS cùngcycle00UTC, issue19hVN; ba trạng thái khí tượng +6/+12/+18h từng cửa sổ, không gọi trung bình ngày. Đã chạy144estimator LightGBM và9GRU cuối cùng trênCUDA. GRU T0=4.364tham số; T3/LINEAR23=6.020, cùng17epoch/3seed. LINEAR23 chỉ thêm tổ hợp tuyến tính T0, không thêm thông tin. Không tìm lại siêu tham số; giữ ngân sách train-only CV cũ.
+
+Kết quả2025 RMSEmean D1/2/3: LGB T0=26,035/29,203/30,645; T3=25,869/29,163/30,683. GRU T0=24,667/27,184/30,620; T3=24,675/28,154/30,761; LINEAR23=24,916/26,874/30,089. **0/12 phép so chính** đạt cả CI đồng thời và Holm. Chưa có cơ sở chốt49biến làm đầu vào chính ở thiết kế/ngân sách này. Một sốCSI/FAR thay đổi theo cutoff, POD/BSS không tăng đồng đều; không gọi toàn bộ đặc trưng vô ích hoặc tuyên bố cải thiện chỉ theo CSI. Giữ phương án đã kiểm chứng trước làm tham chiếu. GRU N5 cũ được khớp lại đúng các hàng mới để tham khảo, không fit lại/chọn lại mô hình chính.
+
+Đã kiểm chứng163.023hàng đánh giá,4.320giá trịmetric,108hàng replay,1.944giá trịCPU, CI chính bằng lấy mẫu trực tiếp ngày. Perturb nhãn tương lai không đổi dự báo, scaler/projection chỉtrain;225artifactcũ và slide người dùng giữ nguyên.42tests đạt; archiveDrive2233/2233SHAkhớp. Nhãn cực đoan:136ngày–trạm≥200năm2025 đều có trạm trong30km≥50;128/136cóGSMaPraw≥50. Không sửa/loại nhãn, chưa chứng nhận cảm biến/API liên tục. GSOD ngàyUTC khác19–19VN nên không so thẳng.
+
+Mã và môi trường khóa trướcfit trong `training_lock.json`;67artifact/cutoff khóa trước chấm trong `model_freeze.json`. Không sửa các mã train/inference/metric trong lock hoặc các checkpoint. Lỗi có ảnh hưởng toán học cần phiên bản mới. Một lần va chạm đọc log trênWindows làm ngắt fit; đã resume đúng checkpoint/seed/ngân sách, không đổi mã toán học. Dùng `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/monitor_gfs_temporal.ps1` để đọc tiến độ với FileShare.Delete, tránh Get-Content giữ khóa làm os.replace lỗiWinError5.
+
+Pipeline `scripts/run_gfs_temporal_pipeline.py` có `--resume-verified` và `--publish-only`; đọc release/progress/PID thật trước báo trạng thái. Kết quả chính ở `BAO_CAO_CAI_TIEN_NGAN_HAN.docx`/`.md`, slide và CSV cùng thư mục. ZIP riêng gửi nhóm `PBL6_NGAN_HAN_GFS_VRAIN_2021_2026.zip` trong private BASE,6file gồm một Parquet đã ghép X/y (tên thân thiện), Word, catalogue49biến, protocol, hướng dẫn vàSHA. File canonical là `BASE/dataset_private.parquet`, SHA3497f0832313df953640a8d83229117bc2da51d2adae434a405edf66cdcda8a2. Không đưa ZIP/dataset/registry/checkpoint/dự báo theo mốc lên Git.
 
 ## Kiểm chứng cuối — đã hoàn thành theo phê duyệt 17/11
 

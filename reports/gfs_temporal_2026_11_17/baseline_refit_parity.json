@@ -1,0 +1,14 @@
+{
+  "rows": 218658,
+  "maximum_absolute_differences": {
+    "LGB_mean": 0.0,
+    "LGB_median": 0.0,
+    "LGB_p1": 0.0,
+    "LGB_p50": 0.0,
+    "GRU_mean": 0.0,
+    "GRU_median": 0.0,
+    "GRU_p1": 0.0,
+    "GRU_p50": 0.0
+  },
+  "note": "different common training rows would legitimately require a baseline refit; disclose any differences"
+}
