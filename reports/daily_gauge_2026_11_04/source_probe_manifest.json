@@ -1,0 +1,110 @@
+[
+  {
+    "file": "ghcnd-stations.txt",
+    "url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/ghcnd-stations.txt",
+    "bytes": 11441526,
+    "sha256": "437ee87f0343bcad408a492cf7a02163fb69255364c541b4006d5d76055d0dc3"
+  },
+  {
+    "file": "ghcnd-inventory.txt",
+    "url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/ghcnd-inventory.txt",
+    "bytes": 36400398,
+    "sha256": "93b6d9afa647121aa2724d7bba4f14dabcf2524e695dc45313ef2a22aec09f4b"
+  },
+  {
+    "file": "cpc_readme.txt",
+    "url": "https://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/GAUGE_GLB/DOCU/PRCP_CU_GAUGE_V1.0GLB_0.50deg_README.txt",
+    "bytes": 5479,
+    "sha256": "25805f396dce3ee073e77419a1203c8db896d88ea28fc8cf6ab532052b6e0e09"
+  },
+  {
+    "file": "cpc_eod.lnx",
+    "url": "https://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/GAUGE_GLB/DOCU/PRCP_CU_GAUGE_V1.0GLB_0.50deg_EOD.lnx",
+    "bytes": 1036800,
+    "sha256": "f61788d982b505a64cba8d5fb91acdb85feda9ec84dff223cadb31323dd88a59"
+  },
+  {
+    "file": "cpc_eod.ctl",
+    "url": "https://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/GAUGE_GLB/DOCU/PRCP_CU_GAUGE_V1.0GLB_0.50deg_EOD.lnx.ctl",
+    "bytes": 483,
+    "sha256": "c0fb74a2096e62474adf634f8fad253a690495c975c2bb279d8b1d2ff0958a81"
+  },
+  {
+    "file": "cpc_20150101.bin",
+    "url": "https://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/GAUGE_GLB/RT/2015/PRCP_CU_GAUGE_V1.0GLB_0.50deg.lnx.20150101.RT",
+    "bytes": 2073600,
+    "sha256": "ef253e201629fa86f531081a013e77874cb22d063fa180a0305a5652155bcff3"
+  },
+  {
+    "file": "cpc_20150401.bin",
+    "url": "https://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/GAUGE_GLB/RT/2015/PRCP_CU_GAUGE_V1.0GLB_0.50deg.lnx.20150401.RT",
+    "bytes": 2073600,
+    "sha256": "9290341ec337676c2a8de85d5531dd41ae87773db3636c016414c5347a1cda1e"
+  },
+  {
+    "file": "cpc_20150701.bin",
+    "url": "https://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/GAUGE_GLB/RT/2015/PRCP_CU_GAUGE_V1.0GLB_0.50deg.lnx.20150701.RT",
+    "bytes": 2073600,
+    "sha256": "1f85a48f9d06b49960cc631933528fe21f8999726e8c70f2f79e4583d9f1b1b5"
+  },
+  {
+    "file": "cpc_20151001.bin",
+    "url": "https://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/GAUGE_GLB/RT/2015/PRCP_CU_GAUGE_V1.0GLB_0.50deg.lnx.20151001.RT",
+    "bytes": 2073600,
+    "sha256": "46af2bf9b6b84ad272179cbc6af66ad88406df17a53a567f8a0ac14db1c0c8aa"
+  },
+  {
+    "file": "cpc_20190101.bin",
+    "url": "https://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/GAUGE_GLB/RT/2019/PRCP_CU_GAUGE_V1.0GLB_0.50deg.lnx.20190101.RT",
+    "bytes": 2073600,
+    "sha256": "825ee3a2dfa641870b230a112c9501ffeafdef3bd647774681fde89445fba07a"
+  },
+  {
+    "file": "cpc_20190401.bin",
+    "url": "https://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/GAUGE_GLB/RT/2019/PRCP_CU_GAUGE_V1.0GLB_0.50deg.lnx.20190401.RT",
+    "bytes": 2073600,
+    "sha256": "47303a225079edfc4d87d08dfd07ef2846f73afd97a7eecd6987d8ddf205ed24"
+  },
+  {
+    "file": "cpc_20190701.bin",
+    "url": "https://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/GAUGE_GLB/RT/2019/PRCP_CU_GAUGE_V1.0GLB_0.50deg.lnx.20190701.RT",
+    "bytes": 2073600,
+    "sha256": "275c9edcc971b74ef8af69fcd2e311563fa1b9506ed74ec3fdc5e980a53af751"
+  },
+  {
+    "file": "cpc_20191001.bin",
+    "url": "https://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/GAUGE_GLB/RT/2019/PRCP_CU_GAUGE_V1.0GLB_0.50deg.lnx.20191001.RT",
+    "bytes": 2073600,
+    "sha256": "c662e94104bf8b971b03ad7e6aaa42516488f4e310147953b7b4fed913ef7c8d"
+  },
+  {
+    "file": "cpc_20230101.bin",
+    "url": "https://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/GAUGE_GLB/RT/2023/PRCP_CU_GAUGE_V1.0GLB_0.50deg.lnx.20230101.RT",
+    "bytes": 2073600,
+    "sha256": "2b017b94f7b38ea8a38458004fe4b002cc0aef2b556d54e28f78553247909d1e"
+  },
+  {
+    "file": "cpc_20230401.bin",
+    "url": "https://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/GAUGE_GLB/RT/2023/PRCP_CU_GAUGE_V1.0GLB_0.50deg.lnx.20230401.RT",
+    "bytes": 2073600,
+    "sha256": "aa9b6b45ea3895d1ee98ce1669a518f32002384304b0fd496fa936eb2bcbf2a6"
+  },
+  {
+    "file": "cpc_20230701.bin",
+    "url": "https://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/GAUGE_GLB/RT/2023/PRCP_CU_GAUGE_V1.0GLB_0.50deg.lnx.20230701.RT",
+    "bytes": 2073600,
+    "sha256": "dd3d53e811c80928e6ef40758ef049771b515838fac83d0f773b6faa95336b18"
+  },
+  {
+    "file": "cpc_20231001.bin",
+    "url": "https://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/GAUGE_GLB/RT/2023/PRCP_CU_GAUGE_V1.0GLB_0.50deg.lnx.20231001.RT",
+    "bytes": 2073600,
+    "sha256": "b25ad4fb9352eab3191047cbe928ac166f2249989888f0c0433c063a1ae3d6ff"
+  },
+  {
+    "file": "cpc_20221014.bin",
+    "url": "https://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/GAUGE_GLB/RT/2022/PRCP_CU_GAUGE_V1.0GLB_0.50deg.lnx.20221014.RT",
+    "bytes": 2073600,
+    "sha256": "de3fcf9d2d8c21ad8f533e9c9ceaee4dd5e00a04fe60be38cb21a80158ee464b"
+  }
+]

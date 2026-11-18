@@ -1,0 +1,401 @@
+{
+  "version": "gfs_station_daily_v2_2026_11_10",
+  "authorized_date": "2026-11-10",
+  "parent_experiment": "gfs_station_57_2026_11_10",
+  "task": "three separate station-observed next-24h rainfall amounts, mean and median, plus nested exceedance probabilities",
+  "station_count": 57,
+  "station_manifest_sha256": "8646ee7deb805c9f553344095a7baa54b40dd51acfe7a8a626279cd3320d0a2b",
+  "cohort_selection": "unchanged train-only 57-station cohort",
+  "first_issue_day": "2021-01-08",
+  "last_issue_day": "2024-12-28",
+  "cadence_days": 1,
+  "init_hour_utc": 0,
+  "issue_hour_utc": 12,
+  "issue_hour_vietnam": 19,
+  "rain_leads": [
+    12,
+    36,
+    60,
+    84
+  ],
+  "met_leads": [
+    24,
+    48,
+    72
+  ],
+  "met_note": "instantaneous midpoint forecasts, not daily atmospheric means",
+  "gfs_delay_assumed_hours": 8,
+  "gfs_delay_scenarios_hours": [
+    8,
+    12,
+    16
+  ],
+  "unavailable_cycle_policy": "never use an unavailable cycle; delay16h has no same-cycle eligibility; earlier-cycle replacement requires another protocol",
+  "original_release_times_proven": false,
+  "gauge_delay_hours": [
+    1,
+    3,
+    6
+  ],
+  "primary_gauge_delay_hours": 1,
+  "common_mask": "all features, all three targets and all gauge-delay scenarios complete, identical examples for all primary models",
+  "history_days": 7,
+  "full_targets_within_fold": true,
+  "split": {
+    "train": "2021-2022",
+    "calibration": "2023",
+    "development": "2024; explored, not final test"
+  },
+  "tuning": {
+    "anchor": "N3 raw-only; shared selected hyperparameters across all feature ablations",
+    "folds": [
+      {
+        "start": "2022-01-01",
+        "end": "2022-04-01"
+      },
+      {
+        "start": "2022-04-01",
+        "end": "2022-07-01"
+      },
+      {
+        "start": "2022-07-01",
+        "end": "2022-10-01"
+      },
+      {
+        "start": "2022-10-01",
+        "end": "2023-01-01"
+      }
+    ],
+    "train_end_gap_days": 7,
+    "seed": 17,
+    "tree_candidates": [
+      {
+        "name": "small",
+        "num_leaves": 7,
+        "max_depth": 3,
+        "min_child_samples": 40,
+        "reg_lambda": 5.0
+      },
+      {
+        "name": "pilot",
+        "num_leaves": 15,
+        "max_depth": 4,
+        "min_child_samples": 40,
+        "reg_lambda": 2.0
+      },
+      {
+        "name": "medium",
+        "num_leaves": 31,
+        "max_depth": 5,
+        "min_child_samples": 80,
+        "reg_lambda": 5.0
+      }
+    ],
+    "max_trees": 600,
+    "learning_rate": 0.04,
+    "patience": 50,
+    "mean_objective": "Tweedie p1.5; choose hyperparameters by mean fold/horizon macro RMSE relative to raw GFS",
+    "median_objective": "quantile alpha0.5; choose by mean fold/horizon macro MAE relative to raw GFS",
+    "probability_objective": "wet binary plus heavy-given-wet binary; select by average threshold macro Brier ratios to train-frequency references",
+    "final_trees": "median best_iteration over train-only validation folds, per horizon and head",
+    "gru_candidates": [
+      {
+        "name": "small",
+        "hidden": 16,
+        "head": 24,
+        "lr": 0.001
+      },
+      {
+        "name": "pilot",
+        "hidden": 24,
+        "head": 32,
+        "lr": 0.001
+      },
+      {
+        "name": "wide",
+        "hidden": 48,
+        "head": 48,
+        "lr": 0.0007
+      }
+    ],
+    "gru_max_epochs": 60,
+    "gru_patience": 10,
+    "gru_batch": 256,
+    "gru_loss": "scaled Tweedie mean + pinball median +0.5*(BCE wet + BCE heavy conditional on wet)",
+    "gru_selection": "equal-weight average of normalized mean RMSE, median MAE, BS1 and BS50 on train-only folds",
+    "gru_final_epochs": "median best epoch over four train-only folds; fixed for N3 and N5"
+  },
+  "calibration": {
+    "period": "2023 only; no early stopping on this period",
+    "method": "Platt wet and Platt heavy-given-wet, then p50=p1*q50_given_wet",
+    "cutoff_selection": "four leave-quarter-out calibration folds, exclude 7-day neighborhoods; shared cutoff across both thresholds per model/horizon",
+    "cutoff_grid": [
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95
+    ],
+    "cutoff_score": "mean macro CSI over 1mm and 50mm on cross-fitted calibration probabilities",
+    "final_calibrator": "fit all 2023 after cutoff selection; calibration diagnostics are not independent forecast validation"
+  },
+  "features": {
+    "N0": [
+      "gfs_rain_mm",
+      "sin_doy",
+      "cos_doy",
+      "latitude",
+      "longitude",
+      "station_code",
+      "rain_lag_day1_mm",
+      "rain_lag_day2_mm",
+      "rain_lag_day3_mm",
+      "rain_lag_day4_mm",
+      "rain_lag_day5_mm",
+      "rain_lag_day6_mm",
+      "rain_lag_day7_mm",
+      "rain_recent1h_mm",
+      "rain_recent6h_mm",
+      "rain_recent24h_mm"
+    ],
+    "N1": [
+      "gfs_rain_mm",
+      "sin_doy",
+      "cos_doy",
+      "latitude",
+      "longitude",
+      "station_code",
+      "rain_lag_day1_mm",
+      "rain_lag_day2_mm",
+      "rain_lag_day3_mm",
+      "rain_lag_day4_mm",
+      "rain_lag_day5_mm",
+      "rain_lag_day6_mm",
+      "rain_lag_day7_mm",
+      "rain_recent1h_mm",
+      "rain_recent6h_mm",
+      "rain_recent24h_mm",
+      "gfs_t850_c",
+      "gfs_rh850_pct",
+      "gfs_u850",
+      "gfs_v850",
+      "gfs_pwat"
+    ],
+    "N2": [
+      "gfs_rain_mm",
+      "sin_doy",
+      "cos_doy",
+      "latitude",
+      "longitude",
+      "station_code",
+      "rain_lag_day1_mm",
+      "rain_lag_day2_mm",
+      "rain_lag_day3_mm",
+      "rain_lag_day4_mm",
+      "rain_lag_day5_mm",
+      "rain_lag_day6_mm",
+      "rain_lag_day7_mm",
+      "rain_recent1h_mm",
+      "rain_recent6h_mm",
+      "rain_recent24h_mm",
+      "gfs_t850_c",
+      "gfs_rh850_pct",
+      "gfs_u850",
+      "gfs_v850",
+      "gfs_pwat",
+      "gfs_q850_gkg",
+      "gfs_qflux_e",
+      "gfs_qflux_n",
+      "gfs_wspd850"
+    ],
+    "N3": [
+      "gfs_rain_mm",
+      "sin_doy",
+      "cos_doy",
+      "latitude",
+      "longitude",
+      "station_code",
+      "rain_lag_day1_mm",
+      "rain_lag_day2_mm",
+      "rain_lag_day3_mm",
+      "rain_lag_day4_mm",
+      "rain_lag_day5_mm",
+      "rain_lag_day6_mm",
+      "rain_lag_day7_mm",
+      "rain_recent1h_mm",
+      "rain_recent6h_mm",
+      "rain_recent24h_mm",
+      "gfs_t850_c",
+      "gfs_rh850_pct",
+      "gfs_u850",
+      "gfs_v850",
+      "gfs_pwat",
+      "dem_elev_m",
+      "dem_mean_5km_m",
+      "dem_std_5km_m",
+      "dem_slope_east",
+      "dem_slope_north"
+    ],
+    "N4": [
+      "gfs_rain_mm",
+      "sin_doy",
+      "cos_doy",
+      "latitude",
+      "longitude",
+      "station_code",
+      "rain_lag_day1_mm",
+      "rain_lag_day2_mm",
+      "rain_lag_day3_mm",
+      "rain_lag_day4_mm",
+      "rain_lag_day5_mm",
+      "rain_lag_day6_mm",
+      "rain_lag_day7_mm",
+      "rain_recent1h_mm",
+      "rain_recent6h_mm",
+      "rain_recent24h_mm",
+      "gfs_t850_c",
+      "gfs_rh850_pct",
+      "gfs_u850",
+      "gfs_v850",
+      "gfs_pwat",
+      "dem_elev_m",
+      "dem_mean_5km_m",
+      "dem_std_5km_m",
+      "dem_slope_east",
+      "dem_slope_north",
+      "gfs_q850_gkg",
+      "gfs_qflux_e",
+      "gfs_qflux_n",
+      "gfs_wspd850"
+    ],
+    "N5": [
+      "gfs_rain_mm",
+      "sin_doy",
+      "cos_doy",
+      "latitude",
+      "longitude",
+      "station_code",
+      "rain_lag_day1_mm",
+      "rain_lag_day2_mm",
+      "rain_lag_day3_mm",
+      "rain_lag_day4_mm",
+      "rain_lag_day5_mm",
+      "rain_lag_day6_mm",
+      "rain_lag_day7_mm",
+      "rain_recent1h_mm",
+      "rain_recent6h_mm",
+      "rain_recent24h_mm",
+      "gfs_t850_c",
+      "gfs_rh850_pct",
+      "gfs_u850",
+      "gfs_v850",
+      "gfs_pwat",
+      "dem_elev_m",
+      "dem_mean_5km_m",
+      "dem_std_5km_m",
+      "dem_slope_east",
+      "dem_slope_north",
+      "gfs_q850_gkg",
+      "gfs_qflux_e",
+      "gfs_qflux_n",
+      "gfs_wspd850",
+      "wind_upslope",
+      "moist_upslope"
+    ]
+  },
+  "feature_counts": {
+    "N0": 16,
+    "N1": 21,
+    "N2": 25,
+    "N3": 26,
+    "N4": 30,
+    "N5": 32
+  },
+  "feature_pairs": [
+    [
+      "N1",
+      "N0"
+    ],
+    [
+      "N2",
+      "N1"
+    ],
+    [
+      "N3",
+      "N1"
+    ],
+    [
+      "N4",
+      "N3"
+    ],
+    [
+      "N5",
+      "N4"
+    ],
+    [
+      "N5",
+      "N3"
+    ]
+  ],
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "sample_weighting": "uniform samples; station-macro evaluation",
+  "baselines": [
+    "ZERO",
+    "CLIM mean/weighted median and event frequencies",
+    "PERSISTENCE",
+    "GFS",
+    "MOS ridge mean/linear quantile median/logistic nested events"
+  ],
+  "gru_configurations": [
+    "N3",
+    "N5"
+  ],
+  "gauge_latency_retraining": "LightGBM N3 at 3h and 6h, shared primary hyperparameters, no retuning",
+  "probability_thresholds_mm24h": [
+    1.0,
+    50.0
+  ],
+  "heavy_threshold_status": "exploratory, not an asserted warning standard",
+  "probability_ordering": "p50<=p1 per seed, after calibration and after ensemble; same decision cutoff preserves event nesting",
+  "amount_primary_metrics": {
+    "mean": "macro RMSE",
+    "median": "macro MAE"
+  },
+  "reported_metrics": [
+    "MAE",
+    "RMSE",
+    "Bias",
+    "BS",
+    "BSS",
+    "CSI",
+    "POD",
+    "FAR"
+  ],
+  "uncertainty": {
+    "method": "paired circular moving blocks of 14 daily issue dates; keep all stations/horizons together",
+    "draws": 1000,
+    "seed": 1701
+  },
+  "heavy_analysis": "amount errors conditional on observed >=50mm and monthly summaries; descriptive only, no y-based operational routing",
+  "test2025_read": false,
+  "recent2026_used_for_fit": false,
+  "no_single_change_attribution": "daily-v2 changes several design choices; compare within this protocol, not unmatched old/new score averages"
+}

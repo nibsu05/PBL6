@@ -1,0 +1,18 @@
+{
+  "status": "complete",
+  "ensemble_issues_per_lead": 1075,
+  "seed_predictions_rows": 109650,
+  "ensemble_prediction_rows": 58050,
+  "bootstrap_repeats": 20000,
+  "blocks": [
+    7,
+    14
+  ],
+  "primary_family_size": 9,
+  "test2025_read": false,
+  "seconds": 21.220126000000164,
+  "evaluation_code_hashes": {
+    "src/short_range_ablation.py": "659f75dbda2ada809df42de6cc312d11d0a953362c1e9c458741f4eccf00930a",
+    "scripts/evaluate_short_range_matrix.py": "c87d24f7dc35f716f22398f1300da18de69b5a7b5ba910af39466d52a784d1b9"
+  }
+}

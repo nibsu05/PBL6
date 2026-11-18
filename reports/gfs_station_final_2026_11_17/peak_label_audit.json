@@ -1,0 +1,12 @@
+{
+  "status": "passed_structural_only",
+  "posthoc_diagnostic": true,
+  "labels_checked": 36,
+  "each_has24numeric_source_hours": true,
+  "hourly_sums_and_provider_totals_match": true,
+  "maximum_test2025_mm": 772.6000366210938,
+  "physical_sensor_validation": false,
+  "observations_removed": 0,
+  "predictions_or_scores_changed": false,
+  "source_replay_details_private": true
+}

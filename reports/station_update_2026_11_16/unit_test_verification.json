@@ -1,0 +1,6 @@
+{
+  "status": "passed",
+  "tests": 37,
+  "command": ".venv/Scripts/python.exe -X utf8 -m unittest tests.test_station_archive_update tests.test_gfs_daily_v2 tests.test_vrain_download tests.test_vrain_export_audit -q",
+  "scope": "new time/source/label guards and existing GFS/Vrain contracts; no training on the updated observational dataset"
+}

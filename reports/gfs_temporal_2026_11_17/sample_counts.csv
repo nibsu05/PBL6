@@ -1,0 +1,7 @@
+evaluation_set,gauge_namespace,packs,stations,issues
+cal2023,legacy,18365,57,362
+dev2024,legacy,19405,57,363
+retrospective2025_legacy,legacy,18723,57,362
+retrospective2026_legacy,legacy,1725,56,62
+retrospective2026_modern,modern,14488,57,280
+train2021_2022,legacy,35116,57,717

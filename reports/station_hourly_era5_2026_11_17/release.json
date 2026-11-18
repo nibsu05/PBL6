@@ -1,0 +1,22 @@
+{
+  "status": "complete_with_documented_gaps_and_source_transition",
+  "dataset_sha256": "51d215768370ecffc45f9bf275c3377745b643029926eaa2ec942f2d36488476",
+  "handoff_zip_sha256": "efafc047b72b99f68a954c178c5f303a104ba61b4dfca36a7d25b4e05424f59c",
+  "handoff_zip_bytes": 1058006874,
+  "zip_members": {
+    "PBL6_TRAM_GIO_ERA5_2021_2026.parquet": "51d215768370ecffc45f9bf275c3377745b643029926eaa2ec942f2d36488476",
+    "MO_TA_DU_LIEU.docx": "7574e1e4fb4a3a93c9f22379347c5f22393112cbc833056fa996e98385242e32",
+    "HUONG_DAN_TRAIN.md": "34a092b0c96e08779e8bc535f48290446611ebc9fd463bdb9273928344b60055",
+    "feature_groups.json": "b2f67c80140112b6f91a845b4cabc0f0be46126f93e9967165ca31267157c1a5"
+  },
+  "models_trained": false,
+  "models_scored": false,
+  "code_sha256": {
+    "src/hourly_station_update.py": "78cd43096f6b309bb140993daf235a13a09403f4da5b31c17facfba1e5d5ca40",
+    "scripts/collect_hourly_era5_update.py": "94e6c77cf27adcaa4601381eaab356be1caf5d8c328e2e83dfeaf084fbd94505",
+    "scripts/build_hourly_station_update.py": "b964f88006d93dc97302333779866de4903745d2894a4c2504281e5252809eb8",
+    "scripts/verify_hourly_station_update.py": "b803d47763f7c53fb4f73be06252192d6c464ac9bd915b6998b38f8895272d4f",
+    "scripts/publish_hourly_station_update.py": "e3ca509b15406d9218da2df0ec95a62c4e8c8718718bd167f7f61ee91b4bd956",
+    "tests/test_hourly_station_update.py": "7dd4cef4f9d5ed9a20705842722d4a29b15767f07d1de3534b4343df8207a15b"
+  }
+}

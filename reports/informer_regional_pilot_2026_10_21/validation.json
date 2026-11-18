@@ -1,0 +1,121 @@
+{
+  "status": "passed",
+  "independent_full_replayed_runs": 18,
+  "calibration_and_eval_splits_replayed": 36,
+  "train_scalers_reproduced": 18,
+  "same_completed_seeds_with_tft": true,
+  "tft_scores_match_original": true,
+  "scores_reproduced": true,
+  "test2025_read": false,
+  "seconds": 4.0257391000004645,
+  "results": [
+    {
+      "year": 2021,
+      "experiment": "E0",
+      "seed": 42,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2021,
+      "experiment": "E7",
+      "seed": 42,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2022,
+      "experiment": "E0",
+      "seed": 42,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2022,
+      "experiment": "E7",
+      "seed": 42,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2023,
+      "experiment": "E0",
+      "seed": 42,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2023,
+      "experiment": "E7",
+      "seed": 42,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2021,
+      "experiment": "E0",
+      "seed": 43,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2021,
+      "experiment": "E7",
+      "seed": 43,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2022,
+      "experiment": "E0",
+      "seed": 43,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2022,
+      "experiment": "E7",
+      "seed": 43,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2023,
+      "experiment": "E0",
+      "seed": 43,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2023,
+      "experiment": "E7",
+      "seed": 43,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2021,
+      "experiment": "E0",
+      "seed": 44,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2021,
+      "experiment": "E7",
+      "seed": 44,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2022,
+      "experiment": "E0",
+      "seed": 44,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2022,
+      "experiment": "E7",
+      "seed": 44,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2023,
+      "experiment": "E0",
+      "seed": 44,
+      "full_cal_eval_replayed": true
+    },
+    {
+      "year": 2023,
+      "experiment": "E7",
+      "seed": 44,
+      "full_cal_eval_replayed": true
+    }
+  ]
+}

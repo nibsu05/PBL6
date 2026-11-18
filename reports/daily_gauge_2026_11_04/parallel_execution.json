@@ -1,0 +1,8 @@
+{
+  "worker_processes": 2,
+  "training_functions": "Unchanged frozen run_daily_gauge_matrix.fit_network / pilot_short_range.fit_lgbm",
+  "completed_before_parallel": 13,
+  "pending": 155,
+  "code_sha256": "ceca47c75547b2d0ee1166ce5970690c20857493202140de4a785e29a7899826",
+  "test2025_read": false
+}

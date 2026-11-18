@@ -1,0 +1,24 @@
+{
+  "version": "station_v1",
+  "confirmed_on": "2026-11-09",
+  "evidence": "Explicit user confirmation of Vrain clock semantics; provider frontend labels depth in mm",
+  "timezone": "Asia/Ho_Chi_Minh",
+  "utc_offset_hours": 7,
+  "example": {
+    "source_clock_local": "2024-10-14 10:00:00+07:00",
+    "rain_interval_start_local": "2024-10-14 09:00:00+07:00",
+    "rain_interval_end_local": "2024-10-14 10:00:00+07:00",
+    "period_start_utc": "2024-10-14 02:00:00+00:00",
+    "period_end_utc": "2024-10-14 03:00:00+00:00",
+    "era5_instantaneous_state_used_at_utc": "2024-10-14 02:00:00+00:00"
+  },
+  "hourly_rain_unit": "mm accumulated over the preceding hour",
+  "daily_interval_local": "19:00 previous day to 19:00 marked day",
+  "daily_rain_rule": "sum all 24 QC-valid hours, else NaN",
+  "daily_weather_rule": "mean of 24 start-of-hour states, preserve any required missing value",
+  "issue_time": "end of last observed interval, not a claim of zero reporting latency",
+  "future_weather_used": false,
+  "2025_vrain_opened": false,
+  "formal_provider_written_confirmation_obtained": false,
+  "operational_availability_confirmed": false
+}

@@ -1,0 +1,35 @@
+{
+  "status": "complete",
+  "model": "GRU_A2",
+  "history_days": 7,
+  "history_channels": 1,
+  "known_forecast_channels": 17,
+  "hidden_units": 24,
+  "station_embedding": 4,
+  "parameter_count": 7001,
+  "seeds": [
+    {
+      "seed": 17,
+      "epochs": 30,
+      "best_epoch": 18,
+      "cal_loss": 3.0467214584350586
+    },
+    {
+      "seed": 29,
+      "epochs": 30,
+      "best_epoch": 18,
+      "cal_loss": 3.0535507202148438
+    },
+    {
+      "seed": 43,
+      "epochs": 32,
+      "best_epoch": 20,
+      "cal_loss": 3.043816566467285
+    }
+  ],
+  "device": "cuda",
+  "gate_based_only_on_cal": true,
+  "development_used_for_early_stopping": false,
+  "test2025_read": false,
+  "normalizers_fit_only_on_train": true
+}

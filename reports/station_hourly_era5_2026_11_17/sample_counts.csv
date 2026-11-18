@@ -1,0 +1,6 @@
+split,sample_complete,sample_ready,ready_legacy,ready_modern,stations_with_ready_samples
+train,1032811,1032811,1032811,0,79
+cal,676870,676870,676870,0,79
+dev,695203,680282,680282,0,79
+reserved2025,705262,679461,679461,0,79
+external2026,597123,575655,66194,509461,79

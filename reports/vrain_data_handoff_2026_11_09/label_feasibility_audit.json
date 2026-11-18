@@ -1,0 +1,84 @@
+{
+  "status": "development_label_feasibility_not_forecast_training",
+  "observation_dates": [
+    "2021-01-01",
+    "2024-12-31"
+  ],
+  "region": "R93 approximation; not the confirmed administrative polygon",
+  "source_time": "marked source day; timezone/interval alignment still unconfirmed",
+  "reference_not_independent_truth": true,
+  "reference_days": 67,
+  "reference_date_span": [
+    "2024-08-21",
+    "2024-12-31"
+  ],
+  "reference_days_by_month": {
+    "8": 4,
+    "9": 8,
+    "10": 20,
+    "11": 24,
+    "12": 11
+  },
+  "reference_events": {
+    "16": 24,
+    "50": 10,
+    "100": 1
+  },
+  "full_network_idw_vs_thiessen": {
+    "n": 67,
+    "mean_observed": 19.9959642154498,
+    "mae": 0.9388891016632943,
+    "rmse": 1.6693417689992354,
+    "bias": 0.21486159089706935,
+    "nrmse": 0.08348393460863594,
+    "volume_bias": 0.01074524782011066
+  },
+  "fixed_core45_vs_full_thiessen_by_duration": {
+    "hourly": {
+      "n": 2522,
+      "mean_observed": 0.7657597109530614,
+      "mae": 0.1836242836648946,
+      "rmse": 0.4898687529164348,
+      "bias": 0.05996221092858901,
+      "nrmse": 0.6397160178442218,
+      "volume_bias": 0.07830421223644723
+    },
+    "hourly_same_days": {
+      "n": 1608,
+      "mean_observed": 0.8331651756437416,
+      "mae": 0.1893286990045996,
+      "rmse": 0.4879451028272486,
+      "bias": 0.07975848169834913,
+      "nrmse": 0.5856523017182516,
+      "volume_bias": 0.09572949521890917
+    },
+    "daily": {
+      "n": 67,
+      "mean_observed": 19.9959642154498,
+      "mae": 2.6148668395766856,
+      "rmse": 4.627658681688289,
+      "bias": 1.9142035607603782,
+      "nrmse": 0.23142963409150072,
+      "volume_bias": 0.09572949521890894
+    },
+    "note": "hourly_same_days uses the same 67 complete days as daily; hourly uses all complete clock rows; internal network sensitivity, not forecast error"
+  },
+  "nrmse_definition": "RMSE / mean of dense-reference daily depth",
+  "percentile_definition": "10/50/90 percentiles over historical daily availability masks; NOT confidence intervals",
+  "limits": [
+    "67 days complete at all 82 gauges are concentrated in Aug-Dec 2024",
+    "Dense gauge reference can share systematic measurement and spatial sampling error",
+    "Spatial station holdout measures point reconstruction, not true area-average error",
+    "Nearest R93 cell zone is a proxy, not verified gauge elevation",
+    "No elevation covariate or independent radar used",
+    "No final acceptance threshold was selected from these outcomes"
+  ],
+  "test2025_read": false,
+  "recent2026_values_read": false,
+  "forecast_training_performed": false,
+  "input_sha256": {
+    "data/operational/vrain_2026_11_09/freeze_work/station_matrices.npz": "d0cc22efb6609e68c2b992843670ffe725389914df2b282f086ebd1b04e75fa3",
+    "data/operational/vrain_2026_11_09/freeze_work/station_inventory_qc.csv": "03e05a6fe724d3eb389123a49d89af92e551eafedcef1c460806507a65bfdfd2",
+    "data/processed/regional_danang/cell_weights.parquet": "8eadf9ebaee72506f65599fba84821ec881383836e7f13ecef11ff030598bff6"
+  }
+}

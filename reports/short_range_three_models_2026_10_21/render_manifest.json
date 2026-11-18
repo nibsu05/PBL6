@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "method": "HTML shared scene, not native Office rendering",
+  "slides": 47,
+  "overflows": [],
+  "files": {
+    "PBL6_SO_SANH_3_MO_HINH.html": "bf4eaafc3b1df54345875f4b28b9ae1ca3b5a9de273613f9a9a3817c62afe3ad",
+    "PBL6_SO_SANH_3_MO_HINH.pptx": "f9ebda128ff80d835b06536a9b037e3047a92d669ffba6e5d8b378cebb88261a",
+    "slide_scene.json": "8c8436e395e4514367bb0f99a5868cd8584eee9ab772fd3aa60369dac631fad5",
+    "XEM_TRUOC.png": "39321bc1f4cffef152a77e4ca6b2846f85b8f319afbd83d9b7af5a95ee7da9d1"
+  }
+}

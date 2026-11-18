@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "dataset_sha256": "04e16e230111d71ec16367d287412beb156fcf3570049e5a5f0f4b846f03ad74",
+  "station_resolution_groups_checked": 164,
+  "all_rows_checked": 2995050,
+  "all_ready_windows_checked": 2480367,
+  "native_surface_field_replays": 45,
+  "raw_rain_clock_replays": 328,
+  "loader_sample_replays": 72,
+  "no_target_or_future_weather_in_X": true,
+  "no_missing_values_in_ready_windows": true,
+  "exact_daily_24_hour_sums": true,
+  "no_station_or_time_gap_crossing": true,
+  "whole_targets_within_time_folds": true,
+  "no_2025_vrain_read": true,
+  "no_2026_model_selection": true,
+  "caveat": "Structural/merge checks do not certify instrument accuracy or operational data latency"
+}

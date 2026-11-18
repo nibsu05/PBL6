@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "rows_replayed": 218658,
+  "source_clock_replay": true,
+  "gauge_delays_replayed": [
+    1,
+    3,
+    6
+  ],
+  "forecast_headers_checked": 27398,
+  "raw_range_requests": 27,
+  "independent_grid_samples": 81,
+  "chronological_tuning_folds": [
+    {
+      "start": "2022-01-01",
+      "train_samples": 18044,
+      "validation_samples": 4526
+    },
+    {
+      "start": "2022-04-01",
+      "train_samples": 22713,
+      "validation_samples": 4427
+    },
+    {
+      "start": "2022-07-01",
+      "train_samples": 27263,
+      "validation_samples": 4308
+    },
+    {
+      "start": "2022-10-01",
+      "train_samples": 31933,
+      "validation_samples": 2945
+    }
+  ],
+  "common_mask": true,
+  "test2025_read": false,
+  "operational_delivery_latency_proven": false,
+  "dataset_sha256": "9e5b6aed6a933d8be3deac9558976e953d14110e3e83159e381e760fc03865b4"
+}

@@ -1,0 +1,247 @@
+{
+  "version": "gfs_station_final_2026_11_17",
+  "authorized_date": "2026-11-17",
+  "authorization": "User approved the five-step proposal, including lock then independent 2025 and separate 2026 scoring",
+  "original_protocol_sha256": "f7b3e9d8d02538e7da8ac60278078ff95936f251e49fed0b1b556162a29abbc6",
+  "original_dataset_sha256": "9e5b6aed6a933d8be3deac9558976e953d14110e3e83159e381e760fc03865b4",
+  "extended_dataset_sha256": "17c6b220fa4b275cfde46f8ba52f3c068d42950fc0f272fcf8b2dd68dcfc1768",
+  "station_cohort": "unchanged train-only 57 stations from daily-v2",
+  "station_count": 57,
+  "station_manifest_sha256": "8646ee7deb805c9f553344095a7baa54b40dd51acfe7a8a626279cd3320d0a2b",
+  "task": "three separate next-24h amounts at stations, issue19h Vietnam daily",
+  "controls": [
+    "GRU_N3_LINEAR6",
+    "GRU_N3_WIDE"
+  ],
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "epochs": 17,
+  "batch": 256,
+  "candidate_linear6": {
+    "name": "small",
+    "hidden": 16,
+    "head": 24,
+    "lr": 0.001
+  },
+  "candidate_wide": {
+    "name": "capacity_nearest",
+    "hidden": 16,
+    "head": 27,
+    "lr": 0.001
+  },
+  "parameter_counts": {
+    "GRU_N3": 4364,
+    "GRU_N5": 4796,
+    "GRU_N3_LINEAR6": 4796,
+    "GRU_N3_WIDE": 4751
+  },
+  "wide_selection": "nearest integer head width to N5 parameter count at fixed hidden16; no target-based tuning",
+  "linear_control": {
+    "source_names": [
+      "gfs_t850_c",
+      "gfs_rh850_pct",
+      "gfs_u850",
+      "gfs_v850",
+      "gfs_pwat",
+      "dem_elev_m",
+      "dem_mean_5km_m",
+      "dem_std_5km_m",
+      "dem_slope_east",
+      "dem_slope_north"
+    ],
+    "seed": 20261117,
+    "matrix": [
+      [
+        0.3162786662578583,
+        -0.2538479268550873,
+        0.2199605107307434,
+        -0.10967770218849182,
+        -0.12754535675048828,
+        0.21809111535549164,
+        0.0716044083237648,
+        -0.05859622731804848,
+        0.4746539890766144,
+        -0.690962016582489
+      ],
+      [
+        -0.10324215888977051,
+        -0.12754559516906738,
+        0.4245976209640503,
+        -0.13352705538272858,
+        0.09192334860563278,
+        -0.20691831409931183,
+        0.46888095140457153,
+        0.08518833667039871,
+        -0.7025090456008911,
+        0.05540864169597626
+      ],
+      [
+        -0.47169002890586853,
+        0.4680026173591614,
+        0.020583590492606163,
+        -0.1686875820159912,
+        -0.12624144554138184,
+        -0.28418993949890137,
+        0.28056037425994873,
+        -0.3599047362804413,
+        -0.03309554606676102,
+        -0.4728226065635681
+      ],
+      [
+        -0.042880453169345856,
+        -0.011825524270534515,
+        -0.005636035464704037,
+        -0.04064541310071945,
+        0.5919448137283325,
+        0.10035734623670578,
+        0.12874244153499603,
+        0.35807615518569946,
+        0.6812009811401367,
+        -0.1644367277622223
+      ],
+      [
+        -0.19579561054706573,
+        0.25391945242881775,
+        -0.37416672706604004,
+        0.2561286389827728,
+        0.3754071295261383,
+        0.2301105260848999,
+        0.3516567647457123,
+        -0.5594409704208374,
+        -0.1268817037343979,
+        -0.21205973625183105
+      ],
+      [
+        0.29389527440071106,
+        -0.09111107140779495,
+        0.2723942995071411,
+        -0.14034341275691986,
+        0.5310795903205872,
+        -0.4830706715583801,
+        0.4949631690979004,
+        0.1422717571258545,
+        -0.09641102701425552,
+        0.14663466811180115
+      ]
+    ],
+    "matrix_sha256": "0a195389c62242147988d71b831c17f54dd8b1608cd941440274ec64d8ab6f51",
+    "scaling": "fit only on 2021--2022; deterministic six redundant linear combinations of raw met/terrain",
+    "interpretation": "same nominal parameter count as N5, tests nonlinear representation beyond linear redundancy; not a proof of physical causality"
+  },
+  "fit_years": [
+    2021,
+    2022
+  ],
+  "calibration_year": 2023,
+  "development_year": 2024,
+  "dev2024_status": "already explored; new controls are development analyses",
+  "tuning": "reuse train-only CV-selected hyperparameters and 17 fixed epochs for all controls; no new search",
+  "calibration": "same nested Platt and quarter-crossfit cutoff method as original, using only2023",
+  "models": [
+    "LGB_N0",
+    "LGB_N1",
+    "LGB_N2",
+    "LGB_N3",
+    "LGB_N4",
+    "LGB_N5",
+    "LGB_N3_delay3",
+    "LGB_N3_delay6",
+    "ZERO",
+    "GFS",
+    "PERSISTENCE",
+    "CLIM",
+    "MOS",
+    "GRU_N3",
+    "GRU_N5",
+    "GRU_N3_LINEAR6",
+    "GRU_N3_WIDE"
+  ],
+  "primary_amount_model": "LGB_N3",
+  "secondary_median_model": "GRU_N5",
+  "primary_feature_contrasts": [
+    [
+      "LGB_N1",
+      "LGB_N0"
+    ],
+    [
+      "LGB_N3",
+      "LGB_N1"
+    ],
+    [
+      "GRU_N5",
+      "GRU_N3_LINEAR6"
+    ]
+  ],
+  "primary_feature_metric": "mean-head station-macro RMSE, each of three horizons; one family of9 comparisons",
+  "primary_skill_contrasts": [
+    [
+      "LGB_N3",
+      "MOS",
+      "mean_rmse"
+    ],
+    [
+      "GRU_N5",
+      "MOS",
+      "median_mae"
+    ]
+  ],
+  "primary_skill_family_size": 6,
+  "secondary_contrasts": [
+    [
+      "GRU_N5",
+      "GRU_N3"
+    ],
+    [
+      "GRU_N5",
+      "GRU_N3_WIDE"
+    ],
+    [
+      "GRU_N3_LINEAR6",
+      "GRU_N3"
+    ]
+  ],
+  "thresholds_mm24h": [
+    1,
+    50
+  ],
+  "threshold50_status": "exploratory, not an asserted warning standard",
+  "metrics": [
+    "RMSE mean",
+    "MAE median",
+    "Bias",
+    "BS",
+    "BSS",
+    "CSI",
+    "POD",
+    "FAR"
+  ],
+  "uncertainty": {
+    "draws": 5000,
+    "block_days": 14,
+    "seed": 1701,
+    "method": "paired circular calendar-date blocks, all stations and horizons together",
+    "primary_decision": "negative difference and Bonferroni simultaneous interval upper<0 within each fixed family",
+    "additional_p": "one-sided centered-bootstrap approximate p with Holm correction; not an exact randomization test",
+    "scope": "fixed trained three-seed ensembles; does not include sensor uncertainty or training-seed uncertainty"
+  },
+  "test2025": {
+    "source": "legacy API",
+    "cohort": "same57",
+    "mask": "recommended_sample & in_frozen_57_cohort & reserved2025",
+    "policy": "no refitting, retuning, recalibration, cutoff changes or winner selection after opening"
+  },
+  "external2026": {
+    "source": "legacy and modern reported separately",
+    "cohort": "same57",
+    "partial_year": true,
+    "continuity_confirmed": false,
+    "policy": "descriptive robustness with source caveats; never used to tune or select models"
+  },
+  "holdout_gate": "controls verified, all artifacts and inference/evaluation code SHA locked before reading test rows",
+  "future_fit_policy": "further model changes after test require a new development protocol and cannot reuse2025 as untouched test",
+  "original_availability_proven": false,
+  "no_new_observation_download_required": true
+}

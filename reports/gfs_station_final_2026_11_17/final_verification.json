@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "holdout_rows_checked": 104808,
+  "independent_metric_checks": 9936,
+  "seed_metric_checks": 1296,
+  "primary_bootstrap_checks": 360,
+  "primary_comparisons_reproduced": 60,
+  "production_replay_rows": 108,
+  "future_label_perturbation_invariant": true,
+  "final_manifest_verified": true,
+  "models_fit_after_opening": 0,
+  "old_artifacts_preserved": 181,
+  "holdout_predictions_sha256": "603ba7cf57e86ee9782c25f078e69a34ccf880e70662bab739b859823e3d9ac5",
+  "complete_source_frame_reproduced": true,
+  "no_source_2026_continuity_claim": true
+}

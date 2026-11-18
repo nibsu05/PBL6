@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "rows": 163023,
+  "replay_rows": 108,
+  "maximum_replay_absolute_difference": 7.62939453125e-06,
+  "future_label_perturbation_invariant": true,
+  "train_only_normalizers_and_projection": true,
+  "metric_values_independently_checked": 4320,
+  "protected_artifacts_unchanged": 225,
+  "ensemble_seed_arithmetic_checked": true,
+  "actual_checkpoint_cpu_values_replayed": 1944,
+  "primary_ci_independently_replayed": true,
+  "all_evaluation_inputs_and_labels_match_frozen_dataset": true,
+  "maximum_independent_point_metric_difference": 1.0658141036401503e-14,
+  "point_metric_float32_tolerance": 2e-06,
+  "point_metric_float64_tolerance": 1e-09
+}

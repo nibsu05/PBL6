@@ -1,0 +1,31 @@
+{
+  "status": "complete",
+  "created_utc": "2026-11-18T03:15:17.939196+00:00",
+  "slides": 67,
+  "main_slides": 33,
+  "appendix_slides": 34,
+  "talk_minutes": 28.0,
+  "models_refit": false,
+  "files": {
+    "reports/short_range_explained_v2_2026_11_18/PBL6_NGAN_HAN_GIAI_THICH_DE_HIEU.pptx": "115da32b1737ee87a32b55b595e95c116879c7b6c4de89a475c29d712315b496",
+    "reports/short_range_explained_v2_2026_11_18/GIAI_THICH_TU_DAU.docx": "6454ff9783851a5169b59b43212ba6ba72ecdd844808cbdf509d28f1cc7e113a",
+    "reports/short_range_explained_v2_2026_11_18/GIAI_THICH_TU_DAU.md": "8d5ef603bfc93754823e6f4bbb4794bef68ca9d29afb7b9c471113c1686403d8",
+    "reports/short_range_explained_v2_2026_11_18/NGUON_TAI_LIEU.md": "3280804093c69b46fd4356f6f8a14b9cef91f9f88a8e5c2ef3541d0f02bcb879",
+    "reports/short_range_explained_v2_2026_11_18/slide_manifest.json": "a44691152b2833ec564b25f21e9ad8cf8c77e05cd826d2e3a91b019e87d4f7da",
+    "reports/short_range_explained_v2_2026_11_18/numeric_bindings.json": "c1d9c898b92ec9fc70bcc98de5578d5061b701d6c1e4275c0081a2822926fe7b",
+    "reports/short_range_explained_v2_2026_11_18/derived_bindings.json": "775def6dd086a80a8e2c96d3b88aa4409c2627db212ff7767478657fcd0cc0e1",
+    "reports/short_range_explained_v2_2026_11_18/evidence_inputs.json": "37090ef86bbdf0c2459280477df646b19e10dd267b1475ca7fce18717c67907e",
+    "reports/short_range_explained_v2_2026_11_18/README.md": "37b15b2e68c8d0078d7515ab82684ef71c6b7f6be51379329188ac55be82aae3",
+    "reports/short_range_explained_v2_2026_11_18/content_verification.json": "b42e7c502b8d4cab09b9c6fd9fc3e946535194c951d7572151bc4127e9e0b1ea",
+    "reports/short_range_explained_v2_2026_11_18/slide_render_verification.json": "47c1192fe17dff05570e70cfb44d8ee3476d1f0341f1a2ff2e8f73f406827c77"
+  },
+  "code": {
+    "scripts/build_short_range_explained_v2.py": "8e0fa9e0fc2fbcb15b15f3e9c8c1135a847680b326211977440b3a150e1fff1f",
+    "scripts/validate_short_range_explained_v2.py": "0dfd9883d81510deb22d02d00c98681b42a3dc101362737e0477186d7927e2a4",
+    "scripts/finalize_short_range_explained_v2.py": "1affaddc99e768e384c6d29b171c7c577024e91544381d1c8720daf67d72e163",
+    "scripts/render_short_range_explained_v2.ps1": "f0453b8c8c9b3f64022890249c781bd60a0dce93124e4a696e513a8a366a4520"
+  },
+  "private_pdf_sha256": "b5e50fa284fc081ccc3dd1124aba314183f39007f603ed0196023637bd5c289a",
+  "private_package_sha256": "c9e1e3ee8899dff05e7825d579b2d9b45c4baa4d481c750b033f66f1f551085d",
+  "package_members": 6
+}

@@ -1,0 +1,9 @@
+﻿stage,task,completion_gate,hours_min,hours_max
+G0,"Khóa target, issue, nguồn/ranh/QC; kiểm kê và manifest",Vùng được mô tả trung thực; X/y cùng trọng số; split và nhãn không mâu thuẫn,4,6
+G1,"Loader 168h→3 tổng ngày; mask chung, scaler train-only; test thời gian/đơn vị",Sửa dữ liệu tương lai không đổi X; tự cộng nhãn khớp; không lọt năm/ô/nhãn vào feature,5,7
+G2,"Khí hậu/0, LightGBM E0/E7 F1, bộ chấm ngày",Mọi prediction ghép theo issue/lead; kiểm lại chỉ số và baseline độc lập,4,6
+G3,"TFT vùng, loss ngày, event heads, checkpoint/scaler",Thành phần TFT truy vết được; forward/backward hữu hạn; save/load tái lập,10,14
+G4,Pilot TFT E0/E7 F1 seed42; đo runtime/VRAM và khóa config,"Không leakage, không lỗi đơn vị/baseline; ghi thời gian epoch và dự toán mới",3,5
+G5,"Ma trận development 72 TFT/24 pipeline cây, calibration",Cùng mask/budget; run hoàn tất hoặc lỗi được công bố; không tự bỏ run điểm xấu,4,6
+G6,"Bảng theo lead/năm/mùa, bootstrap/reliability và QC nhãn giao dữ liệu",Chỉ kết luận theo hỗ trợ CI và nhãn; có danh sách giới hạn/số sự kiện,6,8
+G7,Khóa protocol; E0/E7 train/cal/test cuối; bản báo cáo và bàn giao,2025 chỉ mở sau khóa; chạy lại checkpoint tái lập bảng; đầy đủ hash/config,4,6

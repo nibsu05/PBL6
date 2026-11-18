@@ -1,0 +1,10 @@
+{
+    "status":  "passed",
+    "renderer":  "Microsoft PowerPoint native COM",
+    "slides":  28,
+    "text_boxes_checked":  484,
+    "overflows":  [
+
+                  ],
+    "pptx_sha256":  "44ac73323702764c9424e9c056e8d3800ad2a7a5d698254bb44c3f210504ea08"
+}

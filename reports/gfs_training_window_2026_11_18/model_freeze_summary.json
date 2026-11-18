@@ -1,0 +1,13 @@
+{
+  "frozen_utc": "2026-11-17T18:15:37.974324+00:00",
+  "artifact_count": 119,
+  "mean_estimators": 54,
+  "auxiliary_estimators": 108,
+  "total_lightgbm_estimators": 162,
+  "cv_mean_estimators": 72,
+  "model_freeze_sha256": "43d33cee87c3ff3a97d68fb1fe96b5ca8366be4eb84e03d772384db54ffd5d2a",
+  "training_lock_sha256": "4b37b8ab4cafb996d68efa4cb23f4a4991bca05c6c8dfa591bfdeb1e5617e368",
+  "objective": "tweedie",
+  "calibration_year": 2025,
+  "retrospective_is_not_untouched_test": true
+}

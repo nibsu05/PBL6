@@ -1,0 +1,244 @@
+{
+  "version": "gfs_training_window_2026_11_18",
+  "authorization": "User approved new training-window/loss study on 2026-11-18",
+  "task": "57 stations; three separate nonoverlapping 24-hour rainfall totals issued daily at19h Vietnam",
+  "issue_hour_utc": 12,
+  "init_hour_utc": 0,
+  "gauge_assumed_delay_hours": 1,
+  "gfs_original_release_proven": false,
+  "gauge_original_availability_proven": false,
+  "source_sha256": "3497f0832313df953640a8d83229117bc2da51d2adae434a405edf66cdcda8a2",
+  "cohort": "unchanged 57 stations selected using2021-2022 only",
+  "source": "frozen temporal-study rows; use only N0/N1/N3, no new satellite/ERA5 labels",
+  "boundaries": "retain original year-qualified windows and conservative purges; no window added between years",
+  "cases": {
+    "A": {
+      "training_years": [
+        2021,
+        2022
+      ],
+      "mean_objective": "tweedie",
+      "feature_set": "N3",
+      "features": 26
+    },
+    "B": {
+      "training_years": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "mean_objective": "tweedie",
+      "feature_set": "N3",
+      "features": 26
+    },
+    "C": {
+      "training_years": [
+        2021,
+        2022
+      ],
+      "mean_objective": "l2",
+      "feature_set": "N3",
+      "features": 26
+    },
+    "D": {
+      "training_years": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "mean_objective": "l2",
+      "feature_set": "N3",
+      "features": 26
+    }
+  },
+  "calibration_year": 2025,
+  "calibration_role": "probability calibration and warning cutoff only; never tree weights or early stopping",
+  "retrospective": "2026 legacy and modern separately; already seen, partial year, exploratory only",
+  "prospective": "new input snapshots and predictions recorded before issue; future truth only after target end",
+  "tuning": {
+    "years": [
+      2021,
+      2022
+    ],
+    "folds": [
+      {
+        "start": "2022-01-01",
+        "end": "2022-04-01"
+      },
+      {
+        "start": "2022-04-01",
+        "end": "2022-07-01"
+      },
+      {
+        "start": "2022-07-01",
+        "end": "2022-10-01"
+      },
+      {
+        "start": "2022-10-01",
+        "end": "2023-01-01"
+      }
+    ],
+    "gap_days": 7,
+    "full_72h_labels_within_fold": true,
+    "candidates": [
+      {
+        "name": "small",
+        "num_leaves": 7,
+        "max_depth": 3,
+        "min_child_samples": 40,
+        "reg_lambda": 5.0
+      },
+      {
+        "name": "pilot",
+        "num_leaves": 15,
+        "max_depth": 4,
+        "min_child_samples": 40,
+        "reg_lambda": 2.0
+      },
+      {
+        "name": "medium",
+        "num_leaves": 31,
+        "max_depth": 5,
+        "min_child_samples": 80,
+        "reg_lambda": 5.0
+      }
+    ],
+    "objectives": [
+      "tweedie",
+      "l2"
+    ],
+    "seed": 17,
+    "maximum_trees": 600,
+    "patience": 50,
+    "learning_rate": 0.04,
+    "validation_metric": "station-macro RMSE after nonnegative clipping",
+    "selection": "one shared candidate minimizes mean normalized macro RMSE over both losses/all folds/all horizons",
+    "final_rounds": "per-horizon median best iteration across both losses and four folds at shared candidate",
+    "final_loss": "choose objective for long-window ablation/prospective only from training-only CV at shared candidate",
+    "final_window": "long predeclared, not selected using2026",
+    "auxiliary_heads": "reuse old train-only candidate/rounds for median, wet, conditional; same by training window"
+  },
+  "ablation": {
+    "window": "long",
+    "selected_loss": "training-only CV",
+    "configs": [
+      "N0",
+      "N1",
+      "N3"
+    ],
+    "counts": [
+      16,
+      21,
+      26
+    ],
+    "retuning": false,
+    "N3": "alias of B or D; do not refit alias"
+  },
+  "probability": {
+    "wet": "P(y>=1)",
+    "conditional": "P(y>=50|y>=1)",
+    "heavy": "p50=p1*conditional",
+    "calibration": "Platt per seed/head on2025; leave-quarter-out with7day gap for cutoff",
+    "cutoff_grid": [
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95
+    ],
+    "cutoff": "one shared cutoff for1/50 per configuration/horizon",
+    "objective_effect": "A/C share auxiliary heads and calibrated probabilities; B/D share them"
+  },
+  "targets": {
+    "primary": "conditional mean, assessed by station-macro RMSE",
+    "secondary": "conditional median assessed by station-macro MAE; dry/heavy bias; BS/BSS and POD/FAR/CSI"
+  },
+  "loss_parameters": {
+    "tweedie_variance_power": 1.5,
+    "l2": "unweighted squared error",
+    "negative_prediction": "clip to0 for all regressors"
+  },
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "weighting": "uniform training rows; equal-station macro reporting",
+  "baselines": [
+    "ZERO",
+    "GFS",
+    "PERSIST",
+    "CLIM_SHORT",
+    "CLIM_LONG",
+    "MOS_SHORT",
+    "MOS_LONG"
+  ],
+  "bss_reference": "CLIM_LONG for every model on exactly the same rows",
+  "primary_factorial_contrasts": [
+    [
+      "B",
+      "A"
+    ],
+    [
+      "D",
+      "C"
+    ],
+    [
+      "C",
+      "A"
+    ],
+    [
+      "D",
+      "B"
+    ]
+  ],
+  "secondary_ablation_contrasts": [
+    [
+      "N1",
+      "N0"
+    ],
+    [
+      "N3",
+      "N1"
+    ]
+  ],
+  "uncertainty": {
+    "calendar_block_days": 14,
+    "draws": 5000,
+    "seed": 1701,
+    "factorial_family": 12,
+    "ablation_family": 6,
+    "correction": "Bonferroni simultaneous95%CI plus Holm centered-bootstrap approximate p",
+    "status": "exploratory retrospective; corrections do not undo prior examination of2026"
+  },
+  "label_policy": "no deletion/repair based on model residuals or extreme rainfall",
+  "prospective_candidates": "record all four A-D plus train-CV-selected long model; never select using2026 scores",
+  "live_truth": "same namespace as input; complete24h each day, sum QC, no cross-channel splicing",
+  "no_fit_years": [
+    2025,
+    2026
+  ],
+  "no_claims": [
+    "untouched2026 test",
+    "operational skill before prospective verification",
+    "cross-API continuity",
+    "spatial regional-average rainfall",
+    "improvement guaranteed"
+  ]
+}

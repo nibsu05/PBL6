@@ -1,0 +1,295 @@
+{
+  "captured_utc": "2026-11-10T22:27:40.731333+00:00",
+  "current_gfs": {
+    "captured_utc": "2026-11-10T22:27:40.731333+00:00",
+    "cycle_day": "20261110",
+    "method": "HEAD only, no forecast values",
+    "records": [
+      {
+        "lead": 12,
+        "status": 200,
+        "last_modified_utc": "2026-11-10T03:38:43+00:00",
+        "modified_minus_init_hours": 3.645277777777778
+      },
+      {
+        "lead": 24,
+        "status": 200,
+        "last_modified_utc": "2026-11-10T03:41:53+00:00",
+        "modified_minus_init_hours": 3.6980555555555554
+      },
+      {
+        "lead": 36,
+        "status": 200,
+        "last_modified_utc": "2026-11-10T03:44:48+00:00",
+        "modified_minus_init_hours": 3.7466666666666666
+      },
+      {
+        "lead": 48,
+        "status": 200,
+        "last_modified_utc": "2026-11-10T04:02:39+00:00",
+        "modified_minus_init_hours": 4.0441666666666665
+      },
+      {
+        "lead": 60,
+        "status": 200,
+        "last_modified_utc": "2026-11-10T03:55:16+00:00",
+        "modified_minus_init_hours": 3.921111111111111
+      },
+      {
+        "lead": 72,
+        "status": 200,
+        "last_modified_utc": "2026-11-10T03:54:48+00:00",
+        "modified_minus_init_hours": 3.9133333333333336
+      },
+      {
+        "lead": 84,
+        "status": 200,
+        "last_modified_utc": "2026-11-10T03:57:57+00:00",
+        "modified_minus_init_hours": 3.9658333333333333
+      }
+    ],
+    "interpretation": "object modification time is not a delivery SLA or proof for historical cycles"
+  },
+  "vrain": {
+    "status": "captured",
+    "query_day": "2026-11-11",
+    "captures": [
+      {
+        "namespace": "legacy",
+        "http_status": 200,
+        "retrieved_utc": "2026-11-10T22:27:43.718921+00:00",
+        "response_sha256": "66be12cb16cff81d973dd8e895048562d5f96d9bce71266ed8c438aa5b0b8c5c",
+        "top_level_fields": [
+          "detailUUID",
+          "groupID",
+          "stats"
+        ],
+        "hourly_rows": 0,
+        "row_fields": [
+          "stations",
+          "timePoint"
+        ],
+        "rainfall_ingestion_timestamp_available": "not established from response schema",
+        "interpretation": "hour-bin labels alone do not establish ingestion time; current channel also cannot prove 2021-2024 delivery delay"
+      },
+      {
+        "namespace": "modern",
+        "http_status": 200,
+        "retrieved_utc": "2026-11-10T22:27:43.840420+00:00",
+        "response_sha256": "3aeafd8105a4fbbadf5f0257c32ba6228b0d991ae9d3a082b87e250b431519e7",
+        "top_level_fields": [
+          "detailUUID",
+          "groupID",
+          "stats"
+        ],
+        "hourly_rows": 10,
+        "row_fields": [
+          "stations",
+          "timePoint"
+        ],
+        "rainfall_ingestion_timestamp_available": "not established from response schema",
+        "interpretation": "hour-bin labels alone do not establish ingestion time; current channel also cannot prove 2021-2024 delivery delay"
+      }
+    ],
+    "used_for_model_fit": false,
+    "historical_latency_proven": false
+  },
+  "historical_gfs": {
+    "cycles_checked": 1449,
+    "messages_with_timestamp": 27531,
+    "cycles_modified_after_issue": 48,
+    "late_by_year": {
+      "2021": 48,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0
+    },
+    "modified_minus_init_hours_quantiles": [
+      3.5283333333333333,
+      3.803611111111111,
+      4.048333333333333,
+      28983.07138888889
+    ],
+    "historical_original_release_proven": false,
+    "interpretation": "late archive modifications may reflect recopy; neither early nor late Last-Modified proves delivery to the user"
+  },
+  "source_coverage": {
+    "status": "confirmed",
+    "planned_cycles": 1451,
+    "available_cycles": 1449,
+    "confirmed_source_missing": [
+      {
+        "day": "20210202",
+        "checks": [
+          {
+            "lead": 12,
+            "available": false,
+            "http_status": [
+              404,
+              404
+            ]
+          },
+          {
+            "lead": 24,
+            "available": false,
+            "http_status": [
+              404,
+              404
+            ]
+          },
+          {
+            "lead": 36,
+            "available": false,
+            "http_status": [
+              404,
+              404
+            ]
+          },
+          {
+            "lead": 48,
+            "available": false,
+            "http_status": [
+              404,
+              404
+            ]
+          },
+          {
+            "lead": 60,
+            "available": false,
+            "http_status": [
+              404,
+              404
+            ]
+          },
+          {
+            "lead": 72,
+            "available": false,
+            "http_status": [
+              404,
+              404
+            ]
+          },
+          {
+            "lead": 84,
+            "available": false,
+            "http_status": [
+              404,
+              404
+            ]
+          }
+        ],
+        "framing_checks": [],
+        "reason": "required index missing in both official historical layouts",
+        "observations_used": false
+      },
+      {
+        "day": "20221130",
+        "checks": [
+          {
+            "lead": 12,
+            "available": true,
+            "http_status": [
+              200
+            ]
+          },
+          {
+            "lead": 24,
+            "available": true,
+            "http_status": [
+              200
+            ]
+          },
+          {
+            "lead": 36,
+            "available": true,
+            "http_status": [
+              200
+            ]
+          },
+          {
+            "lead": 48,
+            "available": true,
+            "http_status": [
+              200
+            ]
+          },
+          {
+            "lead": 60,
+            "available": true,
+            "http_status": [
+              200
+            ]
+          },
+          {
+            "lead": 72,
+            "available": true,
+            "http_status": [
+              200
+            ]
+          },
+          {
+            "lead": 84,
+            "available": true,
+            "http_status": [
+              200
+            ]
+          }
+        ],
+        "framing_checks": [
+          {
+            "lead": 36,
+            "field": "rain_cumulative",
+            "index_sha256": "2549e05ec66676ed1d67e6b126e5fae25fb0665f9d171f0081ed4a24849ff99a",
+            "range": [
+              436687487,
+              437244310
+            ],
+            "first_sha256": "1b3a2a978a53642f27751429126b1b1bd8c1cc3ae6af5befb6f277ab94b8600d",
+            "repeat_sha256": "1b3a2a978a53642f27751429126b1b1bd8c1cc3ae6af5befb6f277ab94b8600d",
+            "repeat_invalid": true
+          },
+          {
+            "lead": 84,
+            "field": "rain_cumulative",
+            "index_sha256": "faccfdb8678d196835bd1f8f13cf943152ae0d3d4737e7abc6925e6936f16f3f",
+            "range": [
+              430346279,
+              431021751
+            ],
+            "first_sha256": "b090a98efb37d86078e7a2c553eea96a7ef62fe79bb2a711544b08dc321e706c",
+            "repeat_sha256": "b090a98efb37d86078e7a2c553eea96a7ef62fe79bb2a711544b08dc321e706c",
+            "repeat_invalid": true
+          }
+        ],
+        "reason": "official index and object bytes disagree on GRIB framing, confirmed by repeated range retrieval",
+        "observations_used": false
+      }
+    ],
+    "unresolved": [],
+    "policy": "exclude only confirmed source-unavailable or structurally corrupt entire issue, identically for all models; do not replace source or choose days by rainfall",
+    "protocol_common_complete_mask": true,
+    "locked_before_fit": true
+  },
+  "gfs_delay_scenarios": [
+    {
+      "delay_hours": 8,
+      "same_cycle_eligible": true
+    },
+    {
+      "delay_hours": 12,
+      "same_cycle_eligible": true
+    },
+    {
+      "delay_hours": 16,
+      "same_cycle_eligible": false
+    }
+  ],
+  "gauge_delays": [
+    1,
+    3,
+    6
+  ],
+  "test2025_read": false,
+  "recent_observations_used_for_fit": false,
+  "production_schedule_reference": "https://www.nco.ncep.noaa.gov/pmb/nwprod/prodstat/production_status.html"
+}

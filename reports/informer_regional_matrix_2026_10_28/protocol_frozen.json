@@ -1,0 +1,111 @@
+{
+  "scope": "Complete Informer E0-E7 development matrix; frozen fit inherited from pilot",
+  "user_authorization_date": "2026-10-28",
+  "frozen_before_extension_fits": true,
+  "base_protocol": {
+    "scope": "Exploratory E0/E7 regional Informer adaptation, not a full architecture study",
+    "frozen_before_first_fit": true,
+    "experiments": [
+      "E0",
+      "E7"
+    ],
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "evaluation_years": [
+      2021,
+      2022,
+      2023
+    ],
+    "max_epochs": 40,
+    "patience": 6,
+    "batch": 64,
+    "hidden": 32,
+    "heads": 4,
+    "factor": 3,
+    "encoder_layers": 2,
+    "decoder_layers": 1,
+    "distil": true,
+    "label_len": 14,
+    "loss": "Same daily normalized Tweedie + BCE as TFT",
+    "selection": "raw calibration BS16 averaged over three days",
+    "optimizer": "AdamW lr0.001 weight_decay0.0001, gradient norm1",
+    "time_budget_minutes": 10.0,
+    "no_future_weather": true,
+    "no_past_rain": true,
+    "test2025_read": false,
+    "limitations": [
+      "Local Informer adaptation; not exact reproduction of paper benchmarks",
+      "Decoder prefix uses past meteorology; future meteorology zero",
+      "Corrected sparse query count; deterministic evaluation key samples",
+      "Only E0/E7; no hyperparameter tuning; development years already explored",
+      "Compare same completed seed set with TFT; no claim of superiority from point estimates"
+    ],
+    "code_sha256": {
+      "src/informer_regional_pilot.py": "90b1cec0c32c122443bcada3be77d76664af42147f3dc6a0d496e535faf25c53",
+      "scripts/pilot_informer_regional.py": "93b2a2f1d377b853ad94f21971a9079bcd821334b86a20afedf672a14520b5e4",
+      "src/short_range_dataset.py": "542be8863962f64315269da2c093d19ed78de54a849b38a296c319f559759c39",
+      "src/short_range_evaluation.py": "674c650149283f59008d4f2a80a86ec226baec7b40e12143c663a170edf3ad1a",
+      "src/tft_regional.py": "3b5c047f8d4c5cb42a512cee9a90db549ed711c29d66125747df15b6620df1bf",
+      "src/informer/attention.py": "cc54b5a8c5f82d3c88a147de148ce48bedddd8a3aea1a1c8c34b379ded70a3ff",
+      "src/informer/decoder.py": "7100decd79105e5d02fe2d17748d3c28446ad0b24fc73183c0957b55184ad793",
+      "src/informer/embed.py": "91a025b1b3410841440fbbadf56606cf6d884d6a9bf5e6cb1a101e6b2709e95f",
+      "src/informer/encoder.py": "7c56a7486cb5d7bc993a82198b5d07b6149c14aae66d99205ce03542d3313486",
+      "src/informer/model.py": "6353062cc9d0dcb07ce03bbd18d7371bb1717d60fafe2473985d3880e43798e0",
+      "src/informer/__init__.py": "9895c7af095a8ea28aa8e3cabf988d78f182bdc280c313fc8b5365531bb7ab93"
+    },
+    "source_sha256": "92a6bc6a527b25107761e85f0d14e64713a39dfd2930560a4498927c27dfc448"
+  },
+  "base_protocol_sha256": "1a8b38eab95e372f65bc9e66d1128aab2b9ac18966edafac363f4d25047bdda7",
+  "experiments": [
+    "E0",
+    "E1",
+    "E2",
+    "E3",
+    "E4",
+    "E5",
+    "E6",
+    "E7"
+  ],
+  "new_experiments": [
+    "E1",
+    "E2",
+    "E3",
+    "E4",
+    "E5",
+    "E6"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "evaluation_years": [
+    2021,
+    2022,
+    2023
+  ],
+  "expected_new_runs": 54,
+  "expected_reused_runs": 18,
+  "expected_total_informer_runs": 72,
+  "fit_function": "scripts.pilot_informer_regional.fit (unchanged)",
+  "no_hyperparameter_tuning": true,
+  "comparison": "LightGBM/TFT/Informer, same issue/target/reference/split/threshold procedure",
+  "exploratory_bootstrap": {
+    "repeats": 20000,
+    "block_days": [
+      7,
+      14
+    ],
+    "seed": 20261021,
+    "architecture_scope": "Three model pairs x three days at E7; BSS16, RMSE and CSI16, descriptive 95% CIs",
+    "feature_scope": "Each model Ei-E0, i=1..7; descriptive 95% CIs; previous TFT primary family remains separate",
+    "confirmatory": false,
+    "reason": "Development years and pilot E0/E7 already inspected"
+  },
+  "test2025_read": false,
+  "source_sha256": "92a6bc6a527b25107761e85f0d14e64713a39dfd2930560a4498927c27dfc448",
+  "extension_runner_sha256": "03bb9c88270d4e6780ef9b0c90ff23b490c19264a54aa6a30055c0e92e0799a9"
+}

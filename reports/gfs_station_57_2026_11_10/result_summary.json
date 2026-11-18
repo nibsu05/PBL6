@@ -1,0 +1,72 @@
+{
+  "status": "57_station_expansion_complete",
+  "stations": 57,
+  "added_stations": 37,
+  "wider_candidate_stations_with_train_windows": 79,
+  "not_in_main_due_short_history": 22,
+  "cadence_days": 7,
+  "original_experiment_unchanged": true,
+  "complete_station_issue_counts": {
+    "train": 5032,
+    "cal": 2582,
+    "dev": 2782
+  },
+  "models_completed": [
+    "CLIM",
+    "PERSISTENCE",
+    "GFS",
+    "A0",
+    "A1",
+    "A2",
+    "A3",
+    "GRU_A2"
+  ],
+  "matched_original20_rows": 10977,
+  "same_labels_and_all_inputs_verified": true,
+  "matched_A2_development": [
+    {
+      "fold": "dev",
+      "horizon": 1,
+      "model": "A2",
+      "matched_stations": 20,
+      "matched_rows": 983,
+      "mae_difference": -0.2390919191795687,
+      "ci95_low": -0.7569229713826053,
+      "ci95_high": 0.12839081056922028,
+      "sign": "negative favors first model",
+      "issue_dates": 52,
+      "bootstrap_draws": 1000,
+      "block_issues": 4
+    },
+    {
+      "fold": "dev",
+      "horizon": 2,
+      "model": "A2",
+      "matched_stations": 20,
+      "matched_rows": 983,
+      "mae_difference": 0.026269320565624914,
+      "ci95_low": -0.184906661233391,
+      "ci95_high": 0.24833527708098396,
+      "sign": "negative favors first model",
+      "issue_dates": 52,
+      "bootstrap_draws": 1000,
+      "block_issues": 4
+    },
+    {
+      "fold": "dev",
+      "horizon": 3,
+      "model": "A2",
+      "matched_stations": 20,
+      "matched_rows": 983,
+      "mae_difference": 0.9032022851244141,
+      "ci95_low": -0.11608670154228362,
+      "ci95_high": 2.5636440945215098,
+      "sign": "negative favors first model",
+      "issue_dates": 52,
+      "bootstrap_draws": 1000,
+      "block_issues": 4
+    }
+  ],
+  "test2025_read": false,
+  "full_daily_experiment_complete": false
+}

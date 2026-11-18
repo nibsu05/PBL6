@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "days": 2120,
+  "grib_headers_checked": 82680,
+  "remote_grib_messages_replayed": 24,
+  "independent_bilinear_station_values": 1368,
+  "original_caches_unchanged": true,
+  "protocol_sha256": "16e16576f386da0846acc293ff6e3721e5418b661a643baad1e62f3a814d4753",
+  "collection_plan_sha256": "5f476eb4c0d98b8c4d1d83d3b2695bb56d1225f4aeaaf5afd6912102f7f31b34"
+}

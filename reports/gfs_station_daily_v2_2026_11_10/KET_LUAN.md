@@ -1,0 +1,15 @@
+## Kết luận để nhóm đọc trước
+
+**Thí nghiệm mới có kết quả tích cực trên dev 2024, nhưng lợi ích phụ thuộc loại đặc trưng và mô hình.** Không có cơ sở gọi mọi thứ “đã ổn” hoặc khẳng định vượt các nghiên cứu khác; test cuối 2025 chưa mở.
+
+1. **Khí tượng dự báo thô có ích rõ hơn việc chỉ dùng mưa GFS + lịch sử trạm.** N1 so N0 giảm RMSE mean 1,078 / 1,162 / 0,537 mm ở ngày 1/2/3. CI95% ghép cặp đều dưới 0 trong phân tích dev này. Đây là bằng chứng cho giá trị thêm T/RH/u/v850 và PWAT, không phải bằng chứng riêng cho dẫn xuất vật lý.
+2. **Mô hình học máy vượt đối chứng hiệu chỉnh đơn giản, không chỉ vượt GFS thô.** RMSE mean của MOS là 19,169 / 20,124 / 20,445 mm; LightGBM N3 là 17,527 / 18,550 / 19,150; GRU N5 là 17,386 / 18,750 / 19,277. Chênh RMSE và MAE median của cả hai cấu hình này so MOS có CI95% dưới 0 ở cả ba hạn. Các CI là thăm dò trên dev, chưa hiệu chỉnh nhiều phép so sánh.
+3. **Dẫn xuất chưa mang lợi ích rõ cho LightGBM, nhưng có tín hiệu ở GRU ngày 1–2.** Với LightGBM, N5−N3 có CI chứa 0 cho RMSE mean và MAE median ở cả ba hạn. Với GRU, N5−N3 giảm RMSE 0,336 mm ở ngày 1 (CI −0,554 đến −0,084) và 0,204 mm ở ngày 2 (CI −0,373 đến −0,017); MAE median cũng giảm. Ngày 3 chưa phân biệt rõ. Không nên kết luận “dẫn xuất vô ích” cho mọi mô hình, cũng không nên kết luận “cứ thêm vật lý là tốt”.
+4. **GRU N5 nổi bật về đầu median, chưa thắng LightGBM trên mọi mục tiêu.** MAE median GRU N5 là 6,314 / 6,754 / 6,870 mm, thấp nhất trong các mô hình chính đã chạy. So với LightGBM N5, CI chênh MAE đều dưới 0; CI chênh RMSE đều chứa 0. LightGBM có điểm RMSE thấp hơn ở ngày 2–3. Không chọn một “mô hình thắng toàn diện” từ các bảng này.
+5. **Xác suất đã nhất quán và có kỹ năng so khí hậu tham chiếu, nhưng cảnh báo mưa lớn vẫn còn nhiều báo nhầm.** BSS ≥50 mm của LightGBM N3 là 0,280 / 0,227 / 0,164; GRU N5 là 0,287 / 0,228 / 0,158. Tuy vậy, GRU N5 có POD/FAR lần lượt khoảng 0,734/0,606; 0,486/0,506; 0,672/0,678 ở các cutoff chọn từ 2023. POD cao không đồng nghĩa cảnh báo đã đủ tin cậy để vận hành.
+
+**Hướng phù hợp lúc này:** giữ LightGBM dùng khí tượng thô (N1 hoặc N3) làm phương án đơn giản, mạnh và dễ giải thích; giữ GRU N5 làm ứng viên cho đầu median và phép kiểm chứng giá trị biểu diễn dẫn xuất. Quyết định mô hình cuối phải gắn với mục tiêu lượng/xác suất, không chỉ một metric. Không bổ sung kiến trúc lớn chỉ để có thêm tên mô hình.
+
+N5 thêm sáu biến suy ra từ cùng dữ liệu gốc, đồng thời làm GRU tăng số trọng số ở lớp đầu của các head. Vì vậy kết quả hỗ trợ **giá trị của cách biểu diễn trong thiết lập đã chạy**, chưa tách hoàn toàn lợi ích đặc trưng khỏi thay đổi dung lượng mạng và chưa chứng minh cơ chế vật lý nhân quả. Nếu tiếp tục nghiên cứu phần này, cần phép kiểm soát dung lượng mạng và protocol mới trước khi mở test cuối.
+
+Các điểm còn cần xử lý trước vận hành: độ trễ tiếp nhận Vrain chưa được đo đầy đủ; GFS Last-Modified không chứng minh giờ phát hành gốc; còn khoảng thiếu sau QC và sai số đại diện không gian của GFS; chỉ mới đánh giá phát triển trên một năm. Không so trực tiếp giá trị MAE mới với pilot lịch tuần vì tập ngày và mức độ khó đã đổi.

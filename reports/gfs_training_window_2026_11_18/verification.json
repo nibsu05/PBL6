@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "verified_utc": "2026-11-17T18:18:50.425133+00:00",
+  "evaluation_rows": 48639,
+  "independent_metric_values": 3000,
+  "replay_rows": 48,
+  "replayed_prediction_values": 2880,
+  "future_label_perturbation_invariant": true,
+  "matched_source_rows_and_labels": true,
+  "matched_same_window_auxiliary_predictions": true,
+  "mean_checkpoint_training_budgets_checked": 54,
+  "direct_calendar_bootstrap_quantiles_checked": 8,
+  "protected_artifacts_preserved": 367,
+  "training_max_year": 2024,
+  "calibration_year": 2025,
+  "retrospective_not_untouched": true
+}

@@ -1,0 +1,32 @@
+{
+  "probed_utc": "2026-11-17T18:00:28.200545+00:00",
+  "snapshots": [
+    {
+      "source": "legacy",
+      "status": "retrieved",
+      "retrieved_utc": "2026-11-17T18:00:24.840843+00:00",
+      "latest_observed_hour_end_utc": null,
+      "stations_with_any_hours": 0,
+      "most_recent_hour_lag_minutes": null,
+      "interpretation": "one snapshot; not a measured long-term latency distribution"
+    },
+    {
+      "source": "modern",
+      "status": "retrieved",
+      "retrieved_utc": "2026-11-17T18:00:26.019838+00:00",
+      "latest_observed_hour_end_utc": "2026-11-17 18:00:00+00:00",
+      "stations_with_any_hours": 84,
+      "most_recent_hour_lag_minutes": 0.4336639666666667,
+      "interpretation": "one snapshot; not a measured long-term latency distribution"
+    },
+    {
+      "source": "GFS_current00UTC_f084_index",
+      "status": "retrieved",
+      "http_status": 200,
+      "retrieved_utc": "2026-11-17T18:00:28.199548+00:00"
+    }
+  ],
+  "next_issue_utc": "2026-11-18 12:00:00+00:00",
+  "forecast_issued": false,
+  "prospective_verification_completed": false
+}

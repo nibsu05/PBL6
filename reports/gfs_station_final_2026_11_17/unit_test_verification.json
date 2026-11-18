@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "tests_run": 26,
+  "command": [
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "tests.test_gfs_capacity_control",
+    "tests.test_gfs_final_evaluation",
+    "tests.test_gfs_daily_v2",
+    "-q"
+  ],
+  "new_tests": 14,
+  "completed_before_holdout_opening": true
+}

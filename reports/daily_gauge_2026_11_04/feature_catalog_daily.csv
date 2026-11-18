@@ -1,0 +1,43 @@
+group,source_feature,daily_column,aggregation
+B,t2m_c,mean__t2m_c,strict 24-hour mean of hourly regional ERA5 feature
+B,td2m_c,mean__td2m_c,strict 24-hour mean of hourly regional ERA5 feature
+B,rh2m_pct,mean__rh2m_pct,strict 24-hour mean of hourly regional ERA5 feature
+B,sp_hpa,mean__sp_hpa,strict 24-hour mean of hourly regional ERA5 feature
+B,mslp_hpa,mean__mslp_hpa,strict 24-hour mean of hourly regional ERA5 feature
+B,u10,mean__u10,strict 24-hour mean of hourly regional ERA5 feature
+B,v10,mean__v10,strict 24-hour mean of hourly regional ERA5 feature
+B,sin_doy,sin_doy,annual calendar at period end
+B,cos_doy,cos_doy,annual calendar at period end
+A,cape,mean__cape,strict 24-hour mean of hourly regional ERA5 feature
+A,cin_capped,mean__cin_capped,strict 24-hour mean of hourly regional ERA5 feature
+A,has_lfc,mean__has_lfc,strict 24-hour mean of hourly regional ERA5 feature
+A,tcwv,mean__tcwv,strict 24-hour mean of hourly regional ERA5 feature
+A,kx,mean__kx,strict 24-hour mean of hourly regional ERA5 feature
+A,tt,mean__tt,strict 24-hour mean of hourly regional ERA5 feature
+A,blh,mean__blh,strict 24-hour mean of hourly regional ERA5 feature
+A,tcc,mean__tcc,strict 24-hour mean of hourly regional ERA5 feature
+A,lcc,mean__lcc,strict 24-hour mean of hourly regional ERA5 feature
+A,mcc,mean__mcc,strict 24-hour mean of hourly regional ERA5 feature
+A,hcc,mean__hcc,strict 24-hour mean of hourly regional ERA5 feature
+A,swvl1,mean__swvl1,strict 24-hour mean of hourly regional ERA5 feature
+M,u850,mean__u850,strict 24-hour mean of hourly regional ERA5 feature
+M,v850,mean__v850,strict 24-hour mean of hourly regional ERA5 feature
+M,q850_gkg,mean__q850_gkg,strict 24-hour mean of hourly regional ERA5 feature
+M,t850_c,mean__t850_c,strict 24-hour mean of hourly regional ERA5 feature
+M,rh850_pct,mean__rh850_pct,strict 24-hour mean of hourly regional ERA5 feature
+M,w850_pas,mean__w850_pas,strict 24-hour mean of hourly regional ERA5 feature
+M,u500,mean__u500,strict 24-hour mean of hourly regional ERA5 feature
+M,v500,mean__v500,strict 24-hour mean of hourly regional ERA5 feature
+M,q500_gkg,mean__q500_gkg,strict 24-hour mean of hourly regional ERA5 feature
+M,t500_c,mean__t500_c,strict 24-hour mean of hourly regional ERA5 feature
+M,w500_pas,mean__w500_pas,strict 24-hour mean of hourly regional ERA5 feature
+M,shear_850_500,mean__shear_850_500,strict 24-hour mean of hourly regional ERA5 feature
+M,ivt_u,mean__ivt_u,strict 24-hour mean of hourly regional ERA5 feature
+M,ivt_v,mean__ivt_v,strict 24-hour mean of hourly regional ERA5 feature
+M,ivt_mag,mean__ivt_mag,strict 24-hour mean of hourly regional ERA5 feature
+M,vimd_mmh,mean__vimd_mmh,strict 24-hour mean of hourly regional ERA5 feature
+M,ctx_tcwv,mean__ctx_tcwv,strict 24-hour mean of hourly regional ERA5 feature
+M,ctx_ivt_mag,mean__ctx_ivt_mag,strict 24-hour mean of hourly regional ERA5 feature
+M,cold_surge_dp_hpa,mean__cold_surge_dp_hpa,strict 24-hour mean of hourly regional ERA5 feature
+M,dp_tonkin_south_hpa,mean__dp_tonkin_south_hpa,strict 24-hour mean of hourly regional ERA5 feature
+C,sst_region_c,mean__sst_region_c,strict 24-hour mean of hourly regional ERA5 feature

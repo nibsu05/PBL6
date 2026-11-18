@@ -1,0 +1,65 @@
+[
+  {
+    "name": "B_RMSE_reduction_vs_GFS_day1",
+    "operation": "100*numerator/denominator",
+    "numerator": 4.762076286615603,
+    "denominator": 20.44524083245929,
+    "value": 23.291857139952253,
+    "display": "23,3%",
+    "digits": 1
+  },
+  {
+    "name": "B_RMSE_reduction_vs_GFS_day2",
+    "operation": "100*numerator/denominator",
+    "numerator": 2.2688720549119843,
+    "denominator": 19.73832581764589,
+    "value": 11.494754296150246,
+    "display": "11,5%",
+    "digits": 1
+  },
+  {
+    "name": "B_RMSE_reduction_vs_GFS_day3",
+    "operation": "100*numerator/denominator",
+    "numerator": 4.682708125223165,
+    "denominator": 24.952633011740605,
+    "value": 18.766388793598967,
+    "display": "18,8%",
+    "digits": 1
+  },
+  {
+    "name": "A_to_B_day2_RMSE_reduction",
+    "operation": "100*numerator/denominator",
+    "numerator": 0.5599326698067664,
+    "denominator": 18.029386432540672,
+    "value": 3.105666806254491,
+    "display": "3,1%",
+    "digits": 1
+  },
+  {
+    "name": "B_day1_micro_POD",
+    "operation": "100*numerator/denominator",
+    "numerator": 275,
+    "denominator": 600,
+    "value": 45.833333333333336,
+    "display": "45,8%",
+    "digits": 1
+  },
+  {
+    "name": "B_day1_micro_FAR",
+    "operation": "100*numerator/denominator",
+    "numerator": 123,
+    "denominator": 398,
+    "value": 30.90452261306533,
+    "display": "30,9%",
+    "digits": 1
+  },
+  {
+    "name": "B_day3_micro_FAR",
+    "operation": "100*numerator/denominator",
+    "numerator": 494,
+    "denominator": 849,
+    "value": 58.18610129564193,
+    "display": "58,2%",
+    "digits": 1
+  }
+]

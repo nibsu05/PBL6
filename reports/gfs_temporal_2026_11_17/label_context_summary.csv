@@ -1,0 +1,5 @@
+evaluation_set,unique_station_days,days_ge50,days_ge200,extreme_with_at_least3_neighbors,extreme_with_neighbor_ge50,spatial_review_flags,hour_concentration_flags,extreme_with_gsmap_context,extreme_with_gsmap_ge50,labels_removed
+dev2024,19683,892,38,38,38,0,36,38,31,0
+external2026_legacy,1841,2,0,0,0,0,0,0,0,0
+external2026_modern,14698,608,55,55,55,0,17,29,29,0
+test2025_legacy,19105,1085,136,133,136,0,43,136,128,0

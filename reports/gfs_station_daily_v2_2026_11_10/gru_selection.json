@@ -1,0 +1,19 @@
+{
+  "status": "selected_from_train_only_cv",
+  "candidate": {
+    "name": "small",
+    "hidden": 16,
+    "head": 24,
+    "lr": 0.001
+  },
+  "epochs": 17,
+  "dataset_sha256": "9e5b6aed6a933d8be3deac9558976e953d14110e3e83159e381e760fc03865b4",
+  "anchor": "N3",
+  "tuning_used_years": [
+    2021,
+    2022
+  ],
+  "cal2023_used_for_tuning": false,
+  "dev2024_used_for_tuning": false,
+  "test2025_read": false
+}

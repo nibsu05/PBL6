@@ -1,0 +1,14 @@
+year,channel,split,issue_days,gauge_ready_station_issues,ready_station_issues
+2021,legacy,train,358,18594,18539
+2022,legacy,boundary,3,215,0
+2022,legacy,train,362,19757,19683
+2023,legacy,boundary,3,213,0
+2023,legacy,cal,362,26030,26030
+2024,legacy,boundary,3,224,0
+2024,legacy,dev,363,27773,27773
+2025,legacy,boundary,3,222,0
+2025,legacy,reserved2025,362,27307,27307
+2025,modern,boundary,3,0,0
+2025,modern,reserved2025,362,0,0
+2026,legacy,external2026,316,2437,2437
+2026,modern,external2026,316,20813,20813
