@@ -136,3 +136,9 @@ reports/short_range_comprehensive_2026_11_18/*.md text eol=lf
 reports/short_range_comprehensive_2026_11_18/*.json text eol=lf
 reports/short_range_comprehensive_2026_11_18/*.csv text eol=lf
 reports/short_range_comprehensive_2026_11_18/*.html text eol=lf
+
+# Beginner explanation: separate from the frozen presentation and model code.
+scripts/*short_range_explained_v2*.py text eol=lf
+scripts/*short_range_explained_v2*.ps1 text eol=lf
+reports/short_range_explained_v2_2026_11_18/*.md text eol=lf
+reports/short_range_explained_v2_2026_11_18/*.json text eol=lf
