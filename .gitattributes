@@ -127,3 +127,12 @@ tests/test_gfs_window*.py text eol=lf
 reports/gfs_training_window_2026_11_18/*.md text eol=lf
 reports/gfs_training_window_2026_11_18/*.json text eol=lf
 reports/gfs_training_window_2026_11_18/*.csv text eol=lf
+
+# Comprehensive research presentation; keep evidence checksums portable.
+scripts/short_range_overview*.py text eol=lf
+scripts/*short_range_overview*.py text eol=lf
+scripts/render_short_range_overview.ps1 text eol=lf
+reports/short_range_comprehensive_2026_11_18/*.md text eol=lf
+reports/short_range_comprehensive_2026_11_18/*.json text eol=lf
+reports/short_range_comprehensive_2026_11_18/*.csv text eol=lf
+reports/short_range_comprehensive_2026_11_18/*.html text eol=lf

@@ -2,6 +2,16 @@
 
 Cập nhật 18/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
 
+## Báo cáo slide tổng hợp 18/11 — luồng chính 25–30 phút
+
+Người dùng yêu cầu slide đầy đủ, dễ hiểu từ ý tưởng/nhãn Vrain, đầu vào/đầu ra, mô hình và paper gốc, cách train, kết quả, độ đảm bảo, khó khăn và hướng tiếp. Đã xác nhận25–30phút. Bản riêng `reports/short_range_comprehensive_2026_11_18/`: `PBL6_BAO_CAO_DAY_DU_DU_BAO_MUA_NGAN_HAN.pptx` có31slide chính (~28,3phút) +31phụlục. Từng slide có Notes, Word `THUYET_MINH_SLIDE.docx`, Markdown vàHTML offline tự chứa hình. Tách đúng2025protocolcũ/2026hồicứu, khôngtrộn điểm. Trích211lượt số từCSV,31bảng/641ô, inđậm28ô; nativePowerPoint62slide/1.211hộpchữ,0overflow. Bản này chỉ đọc, khôngtrain/chấmlạimôhình;109filebáocáocũ/slideuser giữ nguyên.
+
+Nguồn gồm paper gốc LightGBM(Zhang&Ye2021), GRU+dựbáonền(Salehi2025), preprint2026chọnbiến/loss(ghi rõ chưa bìnhduyệt), Gneitingmean/median, TFT/Informer vàNOAA/ECMWF. `NGUON_TAI_LIEU.md` ghi rõ phạm vi đọc: một số trang publisher403, chỉ kiểm tra nội dung tóm tắt/phương pháp công khai được lập chỉ mục, không nhận đã đọc hết toàn văn. Không xếp hạng dự án bằng metric khác nguồn/nhãn. Predictor GFS tại trạm, GRUhistory7×1/context3×18(N3), không mô tả sai7×26. Chưa có TFT/Informer cùng bộtrạm để tuyên bố kém.
+
+PDF62trang private `data/operational/short_range_comprehensive_2026_11_18/native_render/report.pdf`; gói báo cáo7file ~1,2MB `PBL6_BAO_CAO_NGAN_HAN_DAY_DU.zip` cùng BASE. Gói này là báo cáo, không phải ZIPdữliệu train. Public cóevidence_inputs/numeric_bindings/content_verification/release vànguồn. Builder/renderer/validator/finalizer mới cótiềntốshort_range_overview; khôngchạybuildercũhoặc ghiđèdeckngườidùng.
+
+Lúc bắt đầu rà soát, haiPIDtrackerphiêntrướckhôngcònchạy/heartbeatđứngtừđê m; đãkiểmtrakhôngcótiếntrìnhtrùngvàkhởilạimộtissue18/11đãđượcduyệt. Launcher11208, PIDthật32436tại thời điểm khởi lại; phảiđọc`gfs_training_window_2026_11_18/live/tracker.json`/PIDhiệntạitrước báo. Chưa phát dự báo, vẫn chờ18:35gia hạnphiên/18:40thu/19hissue; nhãnđủtừ21/11tối. Snapshottrongslidekhôngthaythếtrạngtháiruntime. Không khởi chạy trùng hoặc gọi prospective đã kiểm chứng.
+
 ## Hoàn thành hồi cứu 18/11 — số năm train/loss; đang chờ theo dõi tương lai
 
 Đã hoàn thành72CV và162estimatorLightGBM cuối cùng (54mean/108headphụ), MOS hai cửa sổ và hai bộ khí hậu;119artifact/cutoff khóa trước chấm. CV chọn small7lá,171/109/76cây, Tweedie cho ablation/candidate tương laiB. 2026modern RMSEmean D1/2/3: A15,708/18,029/20,677; B15,683/17,469/20,270; C15,627/17,736/21,356; D16,135/16,776/20,406; GFS20,445/19,738/24,953; MOSlong18,933/17,899/22,361. Thêm năm choTweedie giảm cả3điểm nhưng chưa đủ tiêu chí; D−Cngày3 là1/12phépA–D đạt tiêu chí thăm dò. N0/N1/N3:0/6; địa hình đổi rất nhỏ. L2 bớt thiếu mưa lớn nhưng báo thừa ngày khô, không thắng mọi hạn. Không chọn lại theo2026.

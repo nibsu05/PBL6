@@ -1,0 +1,27 @@
+feature,group,unit,meaning,config
+gfs_rain_mm,Mưa GFS,mm/24h,Tổng mưa dự báo đúng cửa sổ đích,N0/N1/N3
+sin_doy,Lịch,1,Sin chu kỳ ngày trong năm,N0/N1/N3
+cos_doy,Lịch,1,Cos chu kỳ ngày trong năm,N0/N1/N3
+latitude,Vị trí/ID,độ,Vĩ độ trạm,N0/N1/N3
+longitude,Vị trí/ID,độ,Kinh độ trạm,N0/N1/N3
+station_code,Vị trí/ID,mã phân loại,"ID cho mô hình chung, không là phép đo khí tượng",N0/N1/N3
+rain_lag_day1_mm,Mưa quá khứ,mm/24h,Ngày mưa 19–19 h thứ 1 trước ngày issue,N0/N1/N3
+rain_lag_day2_mm,Mưa quá khứ,mm/24h,Ngày mưa 19–19 h thứ 2 trước ngày issue,N0/N1/N3
+rain_lag_day3_mm,Mưa quá khứ,mm/24h,Ngày mưa 19–19 h thứ 3 trước ngày issue,N0/N1/N3
+rain_lag_day4_mm,Mưa quá khứ,mm/24h,Ngày mưa 19–19 h thứ 4 trước ngày issue,N0/N1/N3
+rain_lag_day5_mm,Mưa quá khứ,mm/24h,Ngày mưa 19–19 h thứ 5 trước ngày issue,N0/N1/N3
+rain_lag_day6_mm,Mưa quá khứ,mm/24h,Ngày mưa 19–19 h thứ 6 trước ngày issue,N0/N1/N3
+rain_lag_day7_mm,Mưa quá khứ,mm/24h,Ngày mưa 19–19 h thứ 7 trước ngày issue,N0/N1/N3
+rain_recent1h_mm,Mưa quá khứ,mm/1h,Tổng 1 h kết thúc trước issue 1 h,N0/N1/N3
+rain_recent6h_mm,Mưa quá khứ,mm/6h,Tổng 6 h kết thúc trước issue 1 h,N0/N1/N3
+rain_recent24h_mm,Mưa quá khứ,mm/24h,Tổng 24 h kết thúc trước issue 1 h,N0/N1/N3
+gfs_t850_c,Khí tượng giữa ngày,°C,Nhiệt độ 850 hPa tại giữa cửa sổ đích,N1/N3
+gfs_rh850_pct,Khí tượng giữa ngày,%,Độ ẩm tương đối 850 hPa tại giữa cửa sổ đích,N1/N3
+gfs_u850,Khí tượng giữa ngày,m/s,Gió 850 hPa hướng Đông tại giữa cửa sổ đích,N1/N3
+gfs_v850,Khí tượng giữa ngày,m/s,Gió 850 hPa hướng Bắc tại giữa cửa sổ đích,N1/N3
+gfs_pwat,Khí tượng giữa ngày,kg/m²,Hơi nước toàn cột tại giữa cửa sổ đích,N1/N3
+dem_elev_m,Địa hình,m,"Cao độ DEM tại tọa độ, không phải đo cao độ cảm biến",N3
+dem_mean_5km_m,Địa hình,m,Cao độ DEM trung bình trong 5 km,N3
+dem_std_5km_m,Địa hình,m,Độ lệch chuẩn cao độ DEM trong 5 km,N3
+dem_slope_east,Địa hình,m/m,Gradient DEM về Đông,N3
+dem_slope_north,Địa hình,m/m,Gradient DEM về Bắc,N3

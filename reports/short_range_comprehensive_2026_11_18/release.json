@@ -1,0 +1,50 @@
+{
+  "status": "complete",
+  "published_utc": "2026-11-18T01:47:40.616080+00:00",
+  "slides": 62,
+  "main_slides": 31,
+  "appendix_slides": 31,
+  "planned_talk_minutes": 28.3,
+  "native_render": "Microsoft PowerPoint;no text overflow",
+  "pdf_pages": 62,
+  "content_verification_sha256": "98876f4f3fabf2c09ff93a9c1bec2e551ef65eb86c8c29aa891b0b745142930c",
+  "code": {
+    "scripts/short_range_overview_data.py": "deed55d83cd4c090484764affbac76f78cbbc3d9d9a18f07db0aa633508e0fab",
+    "scripts/short_range_overview_content.py": "e513c320ac94f0ecece3f302fd466fedd406121ee4ade4d05f7aed4e32bcea4b",
+    "scripts/short_range_overview_notes.py": "1dbc61841b8e7a8e65e4c2a127418cb2e10a3c669a89b574ab50dda44891aa95",
+    "scripts/build_short_range_overview.py": "713bdc59eb1e9330b61bfe060314a57a33f3fdcba86d165b382ea02ca400ddc7",
+    "scripts/validate_short_range_overview.py": "10a70ac421b5bcf0faee59e5b5c1027d0b3b57536608ef969505d47e915e1e36",
+    "scripts/render_short_range_overview.ps1": "573860d71447e9a8c3242b37950c093056c0c50387d4f471cd117b8603e41cd1",
+    "scripts/finalize_short_range_overview.py": "73d9e62d7049a040e994e02ee6f8d73d7bb97de364b0834f0b25c99b34c6ef6c"
+  },
+  "files": {
+    "loss_tradeoff.png": "8e845a18650b0a8cdc4ea8fd3b18c7b1b4b52c44baf7dae3ca5bbc1372a9127a",
+    "factorial_ci.png": "84b8236e30e79885fc131120854a5ec4cbb95654af1a5ea73b76e1141241955c",
+    "PBL6_BAO_CAO_DAY_DU_DU_BAO_MUA_NGAN_HAN.pptx": "4a58fbf733fbeccbab68225060cd69eff8c45b4d4155609603cf7daaf02c416b",
+    "THUYET_MINH_SLIDE.docx": "71abb4b50e744d28c123dcaf688719fdc1228e22e1cf4afc912d7cf580aa77e9",
+    "GHI_CHU_THUYET_TRINH.md": "427e60dd9207a358cce0a9d47a2de14aea9a751d53fc2a7d1ec9736795a21120",
+    "README.md": "331c6292479355915b926edc99feb6a4e97a0facc0117003d27a20e005c32ce8",
+    "NGUON_TAI_LIEU.md": "33d002016c56c82aa00fd3e6ffcb22c0ddf0d2a119ba2bb74abb71630c88e7c1",
+    "references.json": "31c25f38fe88d0d746ca852eb64a9529c0c4673f202dae52db81dc79d27c2458",
+    "BAN_DOC_OFFLINE.html": "41d607f9a1f26a011ba3e6064e3172f1879f62ed80144791ad8bfdfbfe3cb005",
+    "slide_manifest.json": "61700dffcc4acf788637d3527f5821d2d460b450a9f081e8a09a3e02f5ae8643",
+    "numeric_bindings.json": "7e25f2cbf1c7afe63f413522d19b6bff41b41c1feb2093d719e3d44d5649413a",
+    "evidence_inputs.json": "50dda334c993cf63d6da8d01447544ea66688b3f2840541acd74d00d6daef341",
+    "prospective_snapshot.json": "a29667a774a71f0289fc999f878c840578501a4d43c615a16f79805d2269ec1c",
+    "feature_catalog.csv": "e9bad62a94ba18223176645c9b0c5692325484835feb586d6afb3b2b8a28150e",
+    "slide_render_verification.json": "d0fef4f8468f25d7c7b5c9a9d9af24e3d8ec0a208ddfa609585006dbe008a298",
+    "content_verification.json": "98876f4f3fabf2c09ff93a9c1bec2e551ef65eb86c8c29aa891b0b745142930c"
+  },
+  "private_pdf": {
+    "path": "data/operational/short_range_comprehensive_2026_11_18/native_render/report.pdf",
+    "sha256": "61b47db4cfd3b406144e1ae558209325d78594237bb54f84a61e576b3de18c9e"
+  },
+  "report_bundle": {
+    "path": "data/operational/short_range_comprehensive_2026_11_18/PBL6_BAO_CAO_NGAN_HAN_DAY_DU.zip",
+    "sha256": "8ec380668d4732426d513fc56a1fd62b213de4f3af5aa7d00f739fc974434d63",
+    "bytes": 1198056,
+    "files": 7
+  },
+  "models_trained": false,
+  "old_studies_modified": false
+}

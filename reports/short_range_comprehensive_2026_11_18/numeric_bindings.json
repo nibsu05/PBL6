@@ -1,0 +1,2757 @@
+[
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "GFS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 26.345076297108637,
+    "display": "26,345",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "GFS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 27.898760067688094,
+    "display": "27,899",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "GFS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 33.76450895479358,
+    "display": "33,765",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "MOS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 26.13058466488873,
+    "display": "26,131",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "MOS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 28.68298771135684,
+    "display": "28,683",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "MOS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 32.3462161209891,
+    "display": "32,346",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "LGB_N3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 26.03532677806309,
+    "display": "26,035",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "LGB_N3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 29.203457866222987,
+    "display": "29,203",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "LGB_N3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 30.64504947245076,
+    "display": "30,645",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "GRU_N3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 24.66682125616709,
+    "display": "24,667",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "GRU_N3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 27.183587493278143,
+    "display": "27,184",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "GRU_N3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 30.61972782624525,
+    "display": "30,620",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "GRU_N5",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 24.81154438364593,
+    "display": "24,812",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "GRU_N5",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 26.710749775691863,
+    "display": "26,711",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "GRU_N5",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 30.23325046125548,
+    "display": "30,233",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "A",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 15.708121536987978,
+    "display": "15,708",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "A",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 18.029386432540672,
+    "display": "18,029",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "A",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 20.67725637249577,
+    "display": "20,677",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "B",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 15.683164545843688,
+    "display": "15,683",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "B",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 17.469453762733906,
+    "display": "17,469",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "B",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 20.26992488651744,
+    "display": "20,270",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "C",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 15.627479630381334,
+    "display": "15,627",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "C",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 17.736029591675916,
+    "display": "17,736",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "C",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 21.3555394755993,
+    "display": "21,356",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "D",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 16.135361080015326,
+    "display": "16,135",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "D",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 16.776159431873666,
+    "display": "16,776",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "D",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 20.406331454459757,
+    "display": "20,406",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "GFS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 20.44524083245929,
+    "display": "20,445",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "GFS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 19.73832581764589,
+    "display": "19,738",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "GFS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 24.952633011740605,
+    "display": "24,953",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "MOS_LONG",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 18.93257769264096,
+    "display": "18,933",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "MOS_LONG",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 17.898883135679196,
+    "display": "17,899",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "MOS_LONG",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 22.360575378194405,
+    "display": "22,361",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/event_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "B",
+      "threshold_mm": 50,
+      "decision_rule": "calibration_selected"
+    },
+    "column": "cutoff",
+    "numeric_value": 0.35,
+    "display": "0,35",
+    "digits": 2
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/event_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "B",
+      "threshold_mm": 50,
+      "decision_rule": "calibration_selected"
+    },
+    "column": "macro_pod",
+    "numeric_value": 0.46503034003034,
+    "display": "0,465",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/event_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "B",
+      "threshold_mm": 50,
+      "decision_rule": "calibration_selected"
+    },
+    "column": "macro_far",
+    "numeric_value": 0.3080709251761883,
+    "display": "0,308",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/event_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "B",
+      "threshold_mm": 50,
+      "decision_rule": "calibration_selected"
+    },
+    "column": "macro_csi",
+    "numeric_value": 0.3819018399278191,
+    "display": "0,382",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "B",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.3625399708638783,
+    "display": "0,363",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/event_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "B",
+      "threshold_mm": 50,
+      "decision_rule": "calibration_selected"
+    },
+    "column": "cutoff",
+    "numeric_value": 0.35,
+    "display": "0,35",
+    "digits": 2
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/event_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "B",
+      "threshold_mm": 50,
+      "decision_rule": "calibration_selected"
+    },
+    "column": "macro_pod",
+    "numeric_value": 0.4873821354084511,
+    "display": "0,487",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/event_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "B",
+      "threshold_mm": 50,
+      "decision_rule": "calibration_selected"
+    },
+    "column": "macro_far",
+    "numeric_value": 0.4555353029037239,
+    "display": "0,456",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/event_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "B",
+      "threshold_mm": 50,
+      "decision_rule": "calibration_selected"
+    },
+    "column": "macro_csi",
+    "numeric_value": 0.3415764594068325,
+    "display": "0,342",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "B",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.2914009802163272,
+    "display": "0,291",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/event_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "B",
+      "threshold_mm": 50,
+      "decision_rule": "calibration_selected"
+    },
+    "column": "cutoff",
+    "numeric_value": 0.2,
+    "display": "0,20",
+    "digits": 2
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/event_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "B",
+      "threshold_mm": 50,
+      "decision_rule": "calibration_selected"
+    },
+    "column": "macro_pod",
+    "numeric_value": 0.5914259230048704,
+    "display": "0,591",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/event_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "B",
+      "threshold_mm": 50,
+      "decision_rule": "calibration_selected"
+    },
+    "column": "macro_far",
+    "numeric_value": 0.5879910717168336,
+    "display": "0,588",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/event_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "B",
+      "threshold_mm": 50,
+      "decision_rule": "calibration_selected"
+    },
+    "column": "macro_csi",
+    "numeric_value": 0.3190387569265508,
+    "display": "0,319",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "B",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.1858019590998122,
+    "display": "0,186",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "GFS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 26.345076297108637,
+    "display": "26,345",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "GFS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 27.898760067688094,
+    "display": "27,899",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "GFS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 33.76450895479358,
+    "display": "33,765",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "MOS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 26.13058466488873,
+    "display": "26,131",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "MOS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 28.68298771135684,
+    "display": "28,683",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "MOS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 32.3462161209891,
+    "display": "32,346",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "LGB_N0",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 27.14207785369772,
+    "display": "27,142",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "LGB_N0",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 29.985488004242587,
+    "display": "29,985",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "LGB_N0",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 31.44683219653802,
+    "display": "31,447",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "LGB_N1",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 26.09178598960465,
+    "display": "26,092",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "LGB_N1",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 29.15687001734459,
+    "display": "29,157",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "LGB_N1",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 30.613797041237383,
+    "display": "30,614",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "LGB_N2",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 26.098014677674094,
+    "display": "26,098",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "LGB_N2",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 29.07795821367786,
+    "display": "29,078",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "LGB_N2",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 30.47326475886133,
+    "display": "30,473",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "LGB_N3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 26.03532677806309,
+    "display": "26,035",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "LGB_N3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 29.203457866222987,
+    "display": "29,203",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "LGB_N3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 30.64504947245076,
+    "display": "30,645",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "LGB_N4",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 26.155336420876896,
+    "display": "26,155",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "LGB_N4",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 29.09382087627601,
+    "display": "29,094",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "LGB_N4",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 30.43587601979784,
+    "display": "30,436",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "LGB_N5",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 26.079022056711963,
+    "display": "26,079",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "LGB_N5",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 29.129947063639527,
+    "display": "29,130",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "LGB_N5",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 30.47457146008703,
+    "display": "30,475",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "GRU_N3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 24.66682125616709,
+    "display": "24,667",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "GRU_N3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 27.183587493278143,
+    "display": "27,184",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "GRU_N3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 30.61972782624525,
+    "display": "30,620",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "GRU_N5",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 24.81154438364593,
+    "display": "24,812",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "GRU_N5",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 26.710749775691863,
+    "display": "26,711",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "GRU_N5",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 30.23325046125548,
+    "display": "30,233",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "GFS",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.768063887435767,
+    "display": "9,768",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "GFS",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 10.383243244557269,
+    "display": "10,383",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "GFS",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 11.743303007114648,
+    "display": "11,743",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "MOS",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.019357090012589,
+    "display": "9,019",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "MOS",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.403556854464098,
+    "display": "9,404",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "MOS",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 10.026058836714697,
+    "display": "10,026",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "LGB_N0",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 8.327776782121576,
+    "display": "8,328",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "LGB_N0",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.442158444928026,
+    "display": "9,442",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "LGB_N0",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.695130655813657,
+    "display": "9,695",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "LGB_N1",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 8.148337998949593,
+    "display": "8,148",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "LGB_N1",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.254121138516796,
+    "display": "9,254",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "LGB_N1",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.548675482243144,
+    "display": "9,549",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "LGB_N2",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 8.07432452106834,
+    "display": "8,074",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "LGB_N2",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.17259846902498,
+    "display": "9,173",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "LGB_N2",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.531604033439224,
+    "display": "9,532",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "LGB_N3",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 8.142491878854665,
+    "display": "8,142",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "LGB_N3",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.246491380653245,
+    "display": "9,246",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "LGB_N3",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.50136924260108,
+    "display": "9,501",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "LGB_N4",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 8.090576850727512,
+    "display": "8,091",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "LGB_N4",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.173227520902682,
+    "display": "9,173",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "LGB_N4",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.48174466418818,
+    "display": "9,482",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "LGB_N5",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 8.117482670768192,
+    "display": "8,117",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "LGB_N5",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.195341432152285,
+    "display": "9,195",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "LGB_N5",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.540445303628916,
+    "display": "9,540",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "GRU_N3",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 7.975444357008288,
+    "display": "7,975",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "GRU_N3",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 8.808183802612488,
+    "display": "8,808",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "GRU_N3",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.453875194931385,
+    "display": "9,454",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "GRU_N5",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 7.969426966470177,
+    "display": "7,969",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "GRU_N5",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 8.723710284705318,
+    "display": "8,724",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "GRU_N5",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 9.398766113247005,
+    "display": "9,399",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "GFS",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.0863092048281256,
+    "display": "0,086",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "GFS",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.0403934150749657,
+    "display": "0,040",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "GFS",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": -0.1657720968096124,
+    "display": "-0,166",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "MOS",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.2752292018593662,
+    "display": "0,275",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "MOS",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.2349478318909502,
+    "display": "0,235",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "MOS",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.0924926510363826,
+    "display": "0,092",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "LGB_N3",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.3449431823265569,
+    "display": "0,345",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "LGB_N3",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.2483068204833157,
+    "display": "0,248",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "LGB_N3",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.1968979147429384,
+    "display": "0,197",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "GRU_N3",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.3460008204133752,
+    "display": "0,346",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "GRU_N3",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.2570148135068522,
+    "display": "0,257",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "GRU_N3",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.1765180754652397,
+    "display": "0,177",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 1,
+      "model": "GRU_N5",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.3489567337824272,
+    "display": "0,349",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 2,
+      "model": "GRU_N5",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.2673201856104286,
+    "display": "0,267",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_station_final_2026_11_17/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "test2025_legacy",
+      "horizon": 3,
+      "model": "GRU_N5",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.1860695170097724,
+    "display": "0,186",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 1,
+      "model": "A",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 4.100977413822993,
+    "display": "4,101",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 2,
+      "model": "A",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 4.462414768429023,
+    "display": "4,462",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 3,
+      "model": "A",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 4.6585179092451545,
+    "display": "4,659",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 1,
+      "model": "B",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 3.888374710911593,
+    "display": "3,888",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 2,
+      "model": "B",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 4.290246053314404,
+    "display": "4,290",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 3,
+      "model": "B",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 4.5200005229533256,
+    "display": "4,520",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 1,
+      "model": "C",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 4.1345577595882,
+    "display": "4,135",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 2,
+      "model": "C",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 4.496801890154111,
+    "display": "4,497",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 3,
+      "model": "C",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 4.754817303113479,
+    "display": "4,755",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 1,
+      "model": "D",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 4.057806072088761,
+    "display": "4,058",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 2,
+      "model": "D",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 4.5289880872093,
+    "display": "4,529",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 3,
+      "model": "D",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 4.638535387866491,
+    "display": "4,639",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 1,
+      "model": "GFS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 4.319252883514806,
+    "display": "4,319",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 2,
+      "model": "GFS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 4.742869078611387,
+    "display": "4,743",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 3,
+      "model": "GFS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 4.533134612010779,
+    "display": "4,533",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 1,
+      "model": "MOS_LONG",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 5.819435789482256,
+    "display": "5,819",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 2,
+      "model": "MOS_LONG",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 6.177781404368413,
+    "display": "6,178",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_legacy",
+      "horizon": 3,
+      "model": "MOS_LONG",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 6.4155549088929815,
+    "display": "6,416",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "N0",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 16.05484878608541,
+    "display": "16,055",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "N0",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 17.887696800098954,
+    "display": "17,888",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "N0",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 20.833181705390285,
+    "display": "20,833",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "N1",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 15.710345281464525,
+    "display": "15,710",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "N1",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 17.450190082890938,
+    "display": "17,450",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "N1",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 20.28791917851966,
+    "display": "20,288",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "N3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 15.683164545843688,
+    "display": "15,683",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "N3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 17.469453762733906,
+    "display": "17,469",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "N3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 20.26992488651744,
+    "display": "20,270",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "GFS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 20.44524083245929,
+    "display": "20,445",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "GFS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 19.73832581764589,
+    "display": "19,738",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "GFS",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 24.952633011740605,
+    "display": "24,953",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "MOS_LONG",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 18.93257769264096,
+    "display": "18,933",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "MOS_LONG",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 17.898883135679196,
+    "display": "17,899",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "MOS_LONG",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 22.360575378194405,
+    "display": "22,361",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "A",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 5.901412789563097,
+    "display": "5,901",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "A",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 6.575367323292013,
+    "display": "6,575",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "A",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 7.15834729914104,
+    "display": "7,158",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "B",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 5.94554180126193,
+    "display": "5,946",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "B",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 6.540065915637819,
+    "display": "6,540",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "B",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 6.832482263277689,
+    "display": "6,832",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "N0",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 6.204812829607191,
+    "display": "6,205",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "N0",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 6.69873343143228,
+    "display": "6,699",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "N0",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 7.105088802042571,
+    "display": "7,105",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "N1",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 5.959395336035175,
+    "display": "5,959",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "N1",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 6.522543797402715,
+    "display": "6,523",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "N1",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 6.839505066697458,
+    "display": "6,840",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "GFS",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 7.590102184724016,
+    "display": "7,590",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "GFS",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 7.717638802349233,
+    "display": "7,718",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "GFS",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 8.832363535920594,
+    "display": "8,832",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "MOS_LONG",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 6.406873195807269,
+    "display": "6,407",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "MOS_LONG",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 6.838427103197374,
+    "display": "6,838",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "MOS_LONG",
+      "functional": "median"
+    },
+    "column": "macro_mae",
+    "numeric_value": 7.439818383163756,
+    "display": "7,440",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "A",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.328767216083687,
+    "display": "0,329",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "A",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.2541166463054781,
+    "display": "0,254",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "A",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.1238057661144234,
+    "display": "0,124",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "B",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.3625399708638783,
+    "display": "0,363",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "B",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.2914009802163272,
+    "display": "0,291",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "B",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.1858019590998122,
+    "display": "0,186",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "N0",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.3379781840834844,
+    "display": "0,338",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "N0",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.2991714198474499,
+    "display": "0,299",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "N0",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.1799050669645529,
+    "display": "0,180",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "N1",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.3641695333769372,
+    "display": "0,364",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "N1",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.292592083963804,
+    "display": "0,293",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "N1",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.186026267360828,
+    "display": "0,186",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "GFS",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.1198701384466398,
+    "display": "0,120",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "GFS",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.0491775549461006,
+    "display": "0,049",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "GFS",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": -0.2358730875180421,
+    "display": "-0,236",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "MOS_LONG",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.2969106481140407,
+    "display": "0,297",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 2,
+      "model": "MOS_LONG",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.2563558621247601,
+    "display": "0,256",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/probability_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 3,
+      "model": "MOS_LONG",
+      "threshold_mm": 50
+    },
+    "column": "macro_bss",
+    "numeric_value": 0.1038016268803855,
+    "display": "0,104",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_temporal_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2025_legacy",
+      "horizon": 1,
+      "model": "LGB_T0",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 26.03532677806309,
+    "display": "26,035",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_temporal_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2025_legacy",
+      "horizon": 2,
+      "model": "LGB_T0",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 29.203457866222987,
+    "display": "29,203",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_temporal_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2025_legacy",
+      "horizon": 3,
+      "model": "LGB_T0",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 30.64504947245076,
+    "display": "30,645",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_temporal_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2025_legacy",
+      "horizon": 1,
+      "model": "LGB_T3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 25.868617903948977,
+    "display": "25,869",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_temporal_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2025_legacy",
+      "horizon": 2,
+      "model": "LGB_T3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 29.16270558717829,
+    "display": "29,163",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_temporal_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2025_legacy",
+      "horizon": 3,
+      "model": "LGB_T3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 30.68306274657204,
+    "display": "30,683",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_temporal_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2025_legacy",
+      "horizon": 1,
+      "model": "GRU_T0",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 24.66682125616709,
+    "display": "24,667",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_temporal_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2025_legacy",
+      "horizon": 2,
+      "model": "GRU_T0",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 27.183587493278143,
+    "display": "27,184",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_temporal_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2025_legacy",
+      "horizon": 3,
+      "model": "GRU_T0",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 30.61972782624525,
+    "display": "30,620",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_temporal_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2025_legacy",
+      "horizon": 1,
+      "model": "GRU_T3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 24.675063814990544,
+    "display": "24,675",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_temporal_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2025_legacy",
+      "horizon": 2,
+      "model": "GRU_T3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 28.154336786589663,
+    "display": "28,154",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_temporal_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2025_legacy",
+      "horizon": 3,
+      "model": "GRU_T3",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 30.761327499992323,
+    "display": "30,761",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_temporal_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2025_legacy",
+      "horizon": 1,
+      "model": "GRU_LINEAR23",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 24.91634760339198,
+    "display": "24,916",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_temporal_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2025_legacy",
+      "horizon": 2,
+      "model": "GRU_LINEAR23",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 26.874083672702,
+    "display": "26,874",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_temporal_2026_11_17/point_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2025_legacy",
+      "horizon": 3,
+      "model": "GRU_LINEAR23",
+      "functional": "mean"
+    },
+    "column": "macro_rmse",
+    "numeric_value": 30.08945965542989,
+    "display": "30,089",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/dry_heavy_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "B",
+      "observed_bin": "under1"
+    },
+    "column": "micro_bias",
+    "numeric_value": 1.8844161316044876,
+    "display": "1,884",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/dry_heavy_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "D",
+      "observed_bin": "under1"
+    },
+    "column": "micro_bias",
+    "numeric_value": 2.6292898230715087,
+    "display": "2,629",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/dry_heavy_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "B",
+      "observed_bin": "ge50"
+    },
+    "column": "micro_bias",
+    "numeric_value": -46.40698770065173,
+    "display": "-46,407",
+    "digits": 3
+  },
+  {
+    "file": "reports/gfs_training_window_2026_11_18/dry_heavy_metrics.csv",
+    "filters": {
+      "evaluation_set": "retrospective2026_modern",
+      "horizon": 1,
+      "model": "D",
+      "observed_bin": "ge50"
+    },
+    "column": "micro_bias",
+    "numeric_value": -34.4332470317095,
+    "display": "-34,433",
+    "digits": 3
+  }
+]
