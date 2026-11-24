@@ -26,6 +26,12 @@ Khoảng đồng thời trên nhóm thực đo ≥50 mm là phân tích thăm d�
 
 Cấu hình điều chỉnh phù hợp để tiếp tục kiểm chứng khi ưu tiên sai số lượng ở ca mưa lớn. Nó chỉ tăng lượng khi B đã dự báo mưa vượt 5 mm, nên ít tác động tới các ca B bỏ sót sâu. Trong lượt phát 12/11, hai ca ngày 1 thực đo 50,6 và 52,4 mm chỉ tăng lần lượt khoảng 0,11 và 0,23 mm. Hồi cứu 2026 đã được xem ở vòng trước. Cần phát dự báo cả hai cấu hình và ghi thời gian trước khi nhãn xuất hiện để kiểm định trên các đợt mưa mới. Bằng chứng chính trong báo cáo cuối kỳ vẫn là chênh lệch giữa nhóm biến N1 và N0 trên [kiểm định 2025 đã khóa](../gfs_short_range_closeout_2026_11_24/KET_LUAN_NGAN_HAN.md).
 
+## Chẩn đoán mưa lớn bị bỏ sót
+
+Dùng cùng hồi cứu 2026 và ngưỡng xác suất đã khóa của B. Trong 325, 311 và 248 lượt bỏ sót mưa ≥50 mm ở ngày 1, 2 và 3, lần lượt có 45, 41 và 65 lượt cả GFS và B đều dự báo dưới 10 mm. Riêng ngày 3, GFS dự báo dưới 10 mm ở 158 trong 248 lượt bỏ sót. Đây là phép đếm theo ngưỡng đọc dữ liệu, không phải tham số mới của mô hình. Nhóm này phù hợp để thử thêm tín hiệu độc lập, chẳng hạn độ phân tán và tỷ lệ thành viên GEFS báo mưa, rồi so với B trên các kỳ đủ dữ liệu cùng giờ phát. [Bảng số](missed_signal.csv), [mã tính](../../scripts/diagnose_gfs_heavy_misses.py).
+
+Thử nguồn GEFS đã đọc được 24 chỉ mục mưa chọn ở bốn ngày mẫu thuộc các năm 2021, 2024, 2025 và 2026. Đã giải mã đủ 12 bản tin của ba thành viên trong lượt 12/11/2026, cộng bốn khoảng sáu giờ để lấy đúng cửa sổ ngày 1. Tại hai trạm thực đo ≥50 mm bị bỏ sót, có thành viên dự báo nhiều mưa hơn B và các thành viên đã thử đều dưới 50 mm. Đây là kiểm tra truy cập và cách cộng mưa theo kỳ. Độ phủ toàn giai đoạn và lợi ích mô hình cần kiểm tra trên tập đủ thành viên và nhiều ngày. [Nguồn GEFS của NOAA](https://www.ncei.noaa.gov/products/weather-climate-models/global-ensemble-forecast).
+
 ## Dấu vết thí nghiệm
 
 - GFS lân cận có [thiết kế](../gfs_neighborhood_2026_11_24/protocol.json), [RMSE và BS theo hạn](../gfs_neighborhood_2026_11_24/paired_comparisons.csv) và [kiểm chứng](../gfs_neighborhood_2026_11_24/verification.json).

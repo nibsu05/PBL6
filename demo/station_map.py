@@ -11,7 +11,7 @@ from urllib.parse import parse_qs, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from demo.station_map_accounts import AccountExists, Accounts
-from demo.station_map_status import SourceMonitor, export_csv, forecast_payload, replay, verification_payload
+from demo.station_map_status import SourceMonitor, available_forecasts, export_csv, forecast_payload, verification_payload
 
 
 STATIC = Path(__file__).with_name('station_map')
@@ -21,6 +21,7 @@ ROUTES = {
     '/login': (STATIC / 'login.html', 'text/html; charset=utf-8'),
     '/dashboard': (STATIC / 'dashboard.html', 'text/html; charset=utf-8'),
     '/map.css': (STATIC / 'map.css', 'text/css; charset=utf-8'),
+    '/explore.css': (STATIC / 'explore.css', 'text/css; charset=utf-8'),
     '/map.js': (STATIC / 'map.js', 'application/javascript; charset=utf-8'),
     '/portal.css': (STATIC / 'portal.css', 'text/css; charset=utf-8'),
     '/portal.js': (STATIC / 'portal.js', 'application/javascript; charset=utf-8'),
@@ -84,7 +85,7 @@ class MapHandler(BaseHTTPRequestHandler):
             if path == '/api/account':
                 self.reply_json(dict(username=user, setup_required=self.server.accounts.owner() is None))
             elif path == '/api/short-range':
-                self.reply_json(forecast_payload(replay(), bool(user)))
+                self.reply_json(forecast_payload(available_forecasts(), bool(user)))
             elif path == '/api/status':
                 self.reply_json(self.server.monitor.status())
             elif path == '/api/verification':

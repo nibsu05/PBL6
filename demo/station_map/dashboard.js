@@ -18,7 +18,10 @@
   let verification;
   let day = 1;
   let checking = false;
+  let updatingResults = false;
   let pollAfterProbe;
+  const query = new URLSearchParams(location.search);
+  if ([1, 2, 3].includes(Number(query.get("day")))) day = Number(query.get("day"));
 
   function add(parent, tag, value, className) {
     const node = document.createElement(tag);
@@ -51,11 +54,59 @@
     }
   }
 
+  function dayJob(job, fallback) {
+    if (!job) return fallback;
+    const labels = {
+      running: "Đang chạy",
+      recorded: "Đã lưu trước giờ phát",
+      already_recorded: "Đã có bản lưu",
+      verified: "Đã đối chiếu",
+      pending: "Đang chờ đủ số đo",
+      vrain_unavailable: "Dừng vì Vrain chưa trả dữ liệu",
+      vrain_18h_pending: "Chờ mưa trạm đến 18:00",
+      gfs_unavailable: "Chưa đủ trường GFS",
+      outside_forecast_window: "Đã qua khung thu dữ liệu",
+      no_due_issue: "Chưa có lượt đến hạn",
+      issue_record_error: "Thu hoặc lưu dự báo gặp lỗi",
+      job_error: "Lượt chạy gặp lỗi",
+      job_timeout: "Lượt chạy đã quá thời gian",
+    };
+    return (labels[job.reason] ?? labels[job.status] ?? fallback) + " · " + time(job.finished_utc ?? job.started_utc);
+  }
+
+  function renderDaily(daily, forecast) {
+    const schedule = daily?.schedule;
+    const badge = get("schedule-state");
+    const disabled = schedule?.task_state === "Disabled";
+    badge.textContent = disabled ? "Đã tắt" : schedule ? "Đã đăng ký" : "Chưa đăng ký";
+    badge.dataset.status = schedule && !disabled ? "ok" : "waiting";
+    const latestProbe = daily?.probe?.finished_utc;
+    const collection = daily?.forecast
+      ? "Lượt thu gần nhất " + time(daily.forecast.started_utc)
+      : latestProbe ? "Đã thử nguồn lúc " + time(latestProbe) : "Chưa chạy theo lịch";
+    get("collection-step").textContent = collection;
+    get("forecast-step").textContent = dayJob(daily?.forecast,
+      forecast ? "Đã ghi " + time(forecast.issue_utc) : "Chưa có dự báo mới");
+    get("truth-step").textContent = dayJob(daily?.verify, "Chờ lượt dự báo đầu tiên");
+    get("schedule-note").textContent = schedule
+      ? "Giờ Việt Nam. Tác vụ chạy khi máy còn bật và tài khoản Windows đang đăng nhập."
+      : "Có thể kiểm tra nguồn thủ công. Web hiện đọc các bản dự báo đã lưu trên máy.";
+    get("daily-schedule").hidden = false;
+  }
+
+  function channelText(channel) {
+    if (!channel) return "Chưa kiểm tra";
+    if (channel.status === "ok") return channel.stations + " trạm có số";
+    if (channel.status === "waiting") return "Chờ số đo";
+    return channel.http_status ? "HTTP " + channel.http_status : "Lấy dữ liệu lỗi";
+  }
+
   function renderStatus(data) {
     const {gfs, vrain} = data.sources;
     const forecast = data.last_recorded_issue;
+    renderDaily(data.daily, forecast);
     get("source-cards").replaceChildren();
-    get("status-refresh").textContent = "Hiển thị lúc " + time(data.checked_at) + " (VN). Bảng tự làm mới mỗi 30 giây.";
+    get("status-refresh").textContent = "Trạng thái lúc " + time(data.checked_at) + " (VN). Bảng đọc lại mỗi 30 giây.";
     sourceCard("GFS · Khí tượng dự báo", gfs?.status ?? "unknown",
                gfs?.status === "ok" ? (gfs.kind === "decode" ? "Đã tải và giải mã" : "Đủ chỉ mục") :
                  gfs?.status === "error" ? "Lấy dữ liệu lỗi" : "Chưa kiểm tra", [
@@ -70,6 +121,8 @@
                  ? (vrain.http_status ? "Lỗi HTTP " + vrain.http_status : "Lấy dữ liệu lỗi")
                  : vrain?.status === "waiting" ? "Chờ số đo" : "Chưa kiểm tra", [
       ["Lần kiểm tra gần nhất", time(vrain?.checked_at)],
+      ...(vrain?.channels ? [["Kênh hiện tại", channelText(vrain.channels.modern)],
+                            ["Kênh lịch sử", channelText(vrain.channels.legacy)]] : []),
       ["Ngày yêu cầu dữ liệu", vrain?.day ?? "Chưa rõ"],
       ["Số trạm có giá trị trả về", vrain?.stations ?? "Chưa rõ"],
       ["Giờ có số đo mới nhất trong lần kiểm tra", time(vrain?.last_hour)],
@@ -80,7 +133,6 @@
       ["Bản gần nhất ghi trước giờ phát", forecast ? time(forecast.issue_utc) : "Chưa ghi nhận"],
       ...(forecast ? [["Giờ lưu dự báo", time(forecast.recorded_utc)]] : []),
       ["Đối chiếu bản ghi mới với Vrain", forecast ? (forecast.verified ? "Có kết quả" : "Đang chờ") : "Chưa có lượt để chấm"],
-      ["Tín hiệu cuối của trình ghi dự báo", time(data.tracker_heartbeat)],
     ]);
     const button = get("source-check");
     button.disabled = data.source_probe_running;
@@ -113,6 +165,25 @@
     return value === null ? "—" : number.format(value);
   }
 
+  function renderErrors(window, issue) {
+    const parent = get("issue-errors");
+    parent.replaceChildren();
+    if (!window.largest_errors.length) {
+      add(parent, "p", "Chưa có cặp dự báo và thực đo hợp lệ.", "subtle");
+      return;
+    }
+    for (const item of window.largest_errors) {
+      const row = add(parent, "a", undefined, "issue-error");
+      row.href = "/?" + new URLSearchParams({
+        issue: issue.id, day: String(day), layer: "difference", station: item.station_id,
+      });
+      add(row, "strong", item.station_id);
+      add(row, "span", format(item.predicted_mm) + " dự báo · " + format(item.observed_mm) + " thực đo", "subtle");
+      const value = add(row, "strong", (item.error > 0 ? "+" : "") + format(item.error) + " mm", "issue-error-value");
+      value.dataset.sign = item.error < 0 ? "under" : "over";
+    }
+  }
+
   function renderIssue() {
     const issue = verification.replay_issues.find(({id}) => id === get("check-issue").value);
     const window = issue.windows.find(({horizon}) => day === horizon);
@@ -139,11 +210,14 @@
       add(row, "td", format(score.rmse), score.rmse === bestRMSE ? "best" : "");
       add(row, "td", format(score.bias));
     }
-    get("event-detail").textContent = "Mưa ≥50 mm/24 giờ ở ngưỡng báo " + percent.format(window.cutoff) +
-      " · Bỏ sót " + window.misses + " · Báo nhầm " + window.false_alarms + ".";
+    get("event-detail").textContent = window.stations
+      ? "Mưa ≥50 mm/24 giờ ở ngưỡng báo " + percent.format(window.cutoff) +
+        " · Bỏ sót " + window.misses + " · Báo nhầm " + window.false_alarms + "."
+      : "Kỳ này chưa đủ số đo đối chiếu.";
     const params = new URLSearchParams({issue: issue.id, day: String(day)});
     get("open-map").href = "/?" + params;
     get("download-issue").href = "/api/export.csv?" + params;
+    renderErrors(window, issue);
     for (const button of dayButtons) button.setAttribute("aria-pressed", String(Number(button.dataset.checkDay) === day));
   }
 
@@ -181,6 +255,12 @@
       add(entry, "span", "Ngày " + row.horizon + " · " + format(row.reference) + " → " + format(row.model));
       add(entry, "strong", "Giảm " + format(-row.difference) + " mm");
     }
+    for (const row of verification.heavy_amount_variant) {
+      const card = add(get("heavy-results"), "div", undefined, "result-stat");
+      add(card, "small", "Ngày " + row.horizon);
+      add(card, "strong", format(row.baseline) + " → " + format(row.adjusted));
+      add(card, "span", "Giảm " + format(-row.change) + " mm trên " + row.cases + " lượt");
+    }
   }
 
   get("source-check").addEventListener("click", async () => {
@@ -202,23 +282,36 @@
     renderIssue();
   });
 
-  async function start() {
-    refreshStatus();
-    window.setInterval(() => {
-      if (!document.hidden) refreshStatus();
-    }, 30000);
+  async function refreshVerification() {
+    if (updatingResults || document.hidden) return;
+    updatingResults = true;
     try {
-      verification = await api("/api/verification");
-      for (const issue of verification.replay_issues) {
-        add(get("check-issue"), "option", time(issue.issue_utc) + " · " + issue.label).value = issue.id;
+      const updated = await api("/api/verification");
+      if (JSON.stringify(updated) === JSON.stringify(verification)) return;
+      const firstLoad = !verification;
+      verification = updated;
+      const control = get("check-issue");
+      const selection = control.value || query.get("issue");
+      control.replaceChildren();
+      for (const issue of updated.replay_issues) {
+        add(control, "option", time(issue.issue_utc) + (issue.mode === "prospective" ? " · Đã ghi" : " · Phát lại")).value = issue.id;
       }
+      if (updated.replay_issues.some(({id}) => id === selection)) control.value = selection;
       renderIssue();
-      renderResearch();
+      if (firstLoad) renderResearch();
+      notify("");
     } catch (error) {
       if (error.status === 401) window.location.replace("/login");
-      else notify("Chưa đọc được bảng kiểm chứng. Hãy tải lại trang.");
+      else notify("Chưa đọc được bảng kiểm chứng mới. Trang sẽ thử lại.");
+    } finally {
+      updatingResults = false;
     }
   }
 
-  start();
+  refreshStatus();
+  refreshVerification();
+  window.setInterval(() => {
+    if (!document.hidden) refreshStatus();
+  }, 30000);
+  window.setInterval(refreshVerification, 90000);
 })();

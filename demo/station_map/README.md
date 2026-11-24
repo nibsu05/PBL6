@@ -1,8 +1,8 @@
 # Web dự báo mưa tại trạm
 
-Xem hai lần phát lại của **LightGBM B** trong danh mục 57 trạm Đà Nẵng. Bản đồ có ba cửa sổ 24 giờ, lớp lượng mưa LightGBM/GFS, lớp xác suất mưa ≥50 mm và ký hiệu trạm thiếu mẫu. Bấm vào điểm để xem biểu đồ qua ba ngày.
+Bản đồ **LightGBM B** phủ toàn cửa sổ, có ba khoảng 24 giờ, lớp LightGBM/GFS, xác suất mưa ≥50 mm và ký hiệu trạm thiếu mẫu. Mở **Công cụ** ở cạnh trái trên máy tính hoặc ở bảng trượt dưới trên điện thoại. Dùng thanh ngày để chọn khoảng thời gian và bấm vào một điểm để xem số, xác suất và biểu đồ qua ba ngày.
 
-Sau đăng nhập, có thêm Vrain thực đo, lớp sai lệch, tải CSV và trang theo dõi. Ba lớp lượng mưa dùng chung thang màu. Lớp **Sai lệch** tính LightGBM trừ Vrain. Xanh là dự báo thiếu, cam là dự báo thừa.
+Sau đăng nhập, có thêm Vrain thực đo, lớp sai lệch, tải CSV và trang theo dõi. Ba lớp lượng mưa dùng chung thang màu. Lớp **Sai lệch** tính LightGBM trừ Vrain. Xanh là dự báo thiếu, cam là dự báo thừa. Từ danh sách trạm có sai lệch lớn nhất có thể mở đúng lượt, ngày và trạm trên bản đồ.
 
 ## Mở web
 
@@ -18,22 +18,24 @@ Mở **http://127.0.0.1:8766/** và chọn **Đăng nhập**. Lần đầu, ch�
 
 ## Trang theo dõi
 
-- **Nguồn dữ liệu** hiển thị lúc kiểm tra GFS/Vrain, chu kỳ, số trường và thời điểm có số đo gần nhất. Nút **Kiểm tra nguồn** hỏi nguồn trong một lượt có giới hạn. GFS kiểm tra các chỉ mục, Vrain kiểm tra số đo của ngày hiện tại. Trang đọc lại trạng thái lưu trên máy mỗi 30 giây khi đang mở. Lượt kiểm tra này dùng phiên Vrain đã có trên máy chủ.
-- **Lần phát** hiển thị bản dự báo được ghi trước giờ phát nếu có, cùng giờ ghi nhận và tình trạng đối chiếu. Trạng thái hiện tại là **Phát lại lịch sử**. Giờ phát theo thiết kế là 19h Việt Nam.
+- **Cập nhật hằng ngày** hiển thị lịch đã đăng ký trên máy, kết quả của lần chạy gần nhất và trạng thái GFS/cả hai kênh Vrain. Nút **Kiểm tra nguồn** hỏi nguồn trong một lượt có giới hạn. GFS kiểm tra chỉ mục, Vrain kiểm tra số đo của ngày hiện tại. Trang đọc lại trạng thái lưu trên máy mỗi 30 giây khi đang mở.
+- **Lần phát** hiển thị bản dự báo được ghi trước giờ phát nếu có, cùng giờ ghi nhận và tình trạng đối chiếu. Mỗi bản hiện đúng ngày đã phát. Khi thiếu lượt trực tiếp, bản đồ mở **Phát lại lịch sử**. Giờ phát theo thiết kế là 19h Việt Nam.
 - **Đối chiếu** chấm LightGBM, GFS và MOS trên các trạm có đủ dự báo và thực đo cùng cửa sổ. Hiển thị MAE, RMSE, Bias và số trúng, bỏ sót, báo nhầm mưa ≥50 mm. Có thể mở đúng kỳ trên bản đồ hoặc tải CSV.
-- **Nghiên cứu** trình bày kết quả hồi cứu 2026 theo ba hạn và phép thử nhóm biến trên kiểm định 2025 theo từng kỳ.
+- **Nghiên cứu** trình bày RMSE hồi cứu 2026, kết quả nhóm biến trên kiểm định 2025 và MAE nhóm thực đo ≥50 mm của thử nghiệm điều chỉnh có điều kiện.
 
 ## Đầu ra cho giao diện
 
-`GET /api/short-range` đọc JSON phiên bản 1 từ thư mục riêng `data/operational/gfs_short_range_closeout_2026_11_24/`. API khách chỉ trả đầu ra dự báo cho bản đồ, còn Vrain thực đo và MOS cần phiên đăng nhập. Trạng thái nguồn, bảng kiểm chứng và CSV cũng cần đăng nhập. Tệp gốc nằm ngoài Git. Nhánh cực ngắn đang chờ đầu ra của mô hình theo giờ.
+`GET /api/short-range` ghép các lượt dự báo trực tiếp đã qua kiểm tra với hai bản phát lại lưu nội bộ. Bản đồ và bảng đối chiếu kiểm tra đầu ra mới mỗi 90 giây khi đang mở. Nếu đã chọn một lượt thì vẫn giữ đúng lượt đó. API khách chỉ trả đầu ra dự báo cho bản đồ. Vrain thực đo, MOS, trạng thái nguồn, bảng kiểm chứng và CSV cần phiên đăng nhập. Tệp dữ liệu và kết quả từng trạm nằm ngoài Git. Nhánh cực ngắn đang chờ đầu ra của mô hình theo giờ.
 
 ## Dự báo mỗi ngày
 
-Quy trình đã có mã ghi một lần dự báo trước 19 giờ Việt Nam. Khoảng 18h40, lấy GFS khởi tạo lúc 07h và mưa Vrain đến 18h. Kiểm tra lịch sử mưa từng trạm, chạy LightGBM đã huấn luyện và lưu ba tổng 24 giờ của các trạm đủ đầu vào. Lần phát được lưu kèm giờ nhận nguồn. Sau khi cả ba khoảng kết thúc và số đo đầy đủ, chạy bước đối chiếu với Vrain.
+Tác vụ **PBL6-DailyRainfall** trong Windows Task Scheduler chạy lúc 18h40 và 20h05 giờ Việt Nam khi máy hoạt động và tài khoản Windows còn đăng nhập. Tác vụ chạy độc lập với trình duyệt. Để thiết lập trên máy dự án khác có môi trường Python và dữ liệu nội bộ, chạy `scripts/install_station_map_daily.ps1`. Kiểm tra nguồn ngay bằng `.venv\Scripts\python.exe -X utf8 scripts/run_station_map_daily.py --job probe`.
 
-Ngày 24/11/2026, đã tải và giải mã đủ 19 trường GFS tại 57 trạm lúc giữa trưa trong khoảng 10 giây. Hai đường lấy Vrain đã dùng trong dự án trả HTTP 404 khi hỏi dữ liệu 23–24/11. Lỗi vẫn xảy ra sau lần làm mới phiên đăng nhập. Do thiếu mưa đầu vào, lần thử dừng ở bước nguồn và web đang dùng bản phát lại.
+Lượt 18h40 kiểm tra GFS khởi tạo 07h và Vrain tới mốc quan trắc 18h. Nếu đủ nguồn, trình ghi tạo 26 đặc trưng tại các trạm hợp lệ, chạy mô hình đã khóa và lưu đầu vào, dự báo, mã kiểm tra tệp và giờ thực nhận. Web chỉ nhận lượt ghi trước 19h, đúng ba cửa sổ 24 giờ, kể từ thời điểm phát. Khi thiếu nguồn hoặc hết hạn thu, nhật ký ghi nguyên nhân và vẫn xem được bản trước với ngày phát của nó.
 
-Sau khi Vrain hoạt động ổn định, thử vài lần phát đúng giờ bằng [trình ghi dự báo](../../scripts/record_gfs_window.py) và đo thời gian nhận nguồn. Khi nối lên web, giữ ngày phát và giờ hiệu lực của bản đã lưu. Ngày nguồn lỗi, hiển thị bản gần nhất với ngày phát của chính nó. GFS NOAA có chu kỳ 00, 06, 12 và 18 UTC. Thiết kế này sử dụng chu kỳ 00 UTC. [Sản phẩm GFS của NOAA](https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).
+Lượt 20h05 kiểm tra các lần phát đã đủ 72 giờ cộng 1 giờ chờ số đo. Nếu chưa có đủ nhãn, có thể kiểm tra lại vào ngày sau. Các lần tải dở được lưu riêng để truy vết. Nhật ký truy vấn, lần phát và đối chiếu nằm trong `data/operational/station_map_web/daily/` và thư mục `live/` của bản nghiên cứu. Không có bước huấn luyện lại tự động.
+
+Ngày 24/11/2026, đã tải và giải mã đủ 19 trường GFS tại 57 trạm. Lần kiểm tra lại khoảng 16h06 thấy đủ chỉ mục, nhưng cả hai kênh Vrain trả HTTP 404. Lần chạy thử tác vụ nhận diện đúng tình trạng chưa có lượt đến hạn đối chiếu. Chưa có dự báo trực tiếp đủ nguồn để đánh giá vận hành đầu cuối. Web hiển thị các lượt phát lại có ghi ngày phát. [Sản phẩm GFS của NOAA](https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).
 
 ## Tham khảo giao diện
 

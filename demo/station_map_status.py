@@ -2,36 +2,21 @@
 
 import csv
 from datetime import datetime, timedelta, timezone
-import hashlib
 import io
 import json
 import math
-from pathlib import Path
 from threading import Lock, Thread
 from urllib.error import HTTPError
 from urllib.request import urlopen
 
+from demo.station_map_live import LIVE, ROOT, VIETNAM, read_optional, recent_snapshots, timestamp
 
-ROOT = Path(__file__).resolve().parents[1]
 OPERATIONAL = ROOT / 'data' / 'operational'
 REPLAY_DIR = OPERATIONAL / 'gfs_short_range_closeout_2026_11_24'
 WINDOW_STUDY = 'gfs_training_window_2026_11_18'
-LIVE = OPERATIONAL / WINDOW_STUDY / 'live'
 RESULTS = ROOT / 'reports' / WINDOW_STUDY
 REFERENCE = ROOT / 'reports' / 'gfs_short_range_closeout_2026_11_24'
-VIETNAM = timezone(timedelta(hours=7))
 GFS_LEADS = (12, 24, 36, 48, 60, 72, 84)
-
-
-def read_optional(path):
-    try:
-        return json.loads(path.read_bytes())
-    except (OSError, ValueError):
-        return None
-
-
-def timestamp(value):
-    return datetime.fromisoformat(value).astimezone(timezone.utc)
 
 
 def read_csv(path):
@@ -41,6 +26,21 @@ def read_csv(path):
 
 def replay():
     return json.loads((REPLAY_DIR / 'station_map_private.json').read_bytes())
+
+
+def available_forecasts():
+    data = replay()
+    historical = data['snapshots']
+    for issue in historical:
+        issue.update(mode='historical_replay', has_truth=True)
+    if not any((LIVE / 'issuances').glob('*/issuance.json')):
+        return data
+    cutoffs = {int(row['horizon']): float(row['cutoff']) for row in read_csv(RESULTS / 'cutoffs.csv')
+               if row['model'] == 'B'}
+    actual = recent_snapshots({row['station_id'] for row in data['stations']}, cutoffs, live=LIVE)
+    if actual:
+        data.update(mode='prospective', snapshots=actual + historical)
+    return data
 
 
 def forecast_payload(data, signed_in):
@@ -79,15 +79,21 @@ def compare_window(window):
         hits += rain_ge50 and predicted_ge50
         misses += rain_ge50 and not predicted_ge50
         false_alarms += not rain_ge50 and predicted_ge50
+    largest_errors = sorted(
+        (dict(station_id=p['station_id'], predicted_mm=p['predicted_mm'], observed_mm=p['observed_mm'],
+              error=p['predicted_mm'] - p['observed_mm']) for p in completed),
+        key=lambda p: abs(p['error']), reverse=True,
+    )[:5]
     return dict(horizon=window['horizon'], start_utc=window['start_utc'], end_utc=window['end_utc'],
                 stations=len(completed), scores=scores, heavy_events=hits + misses, hits=hits, misses=misses,
-                false_alarms=false_alarms, cutoff=cutoff)
+                false_alarms=false_alarms, cutoff=cutoff, largest_errors=largest_errors)
 
 
 def verification_payload():
-    data = replay()
-    issues = [dict(id=case['id'], label=case['label'], issue_utc=case['issue_utc'],
-                   windows=[compare_window(window) for window in case['windows']]) for case in data['snapshots']]
+    data = available_forecasts()
+    issues = [dict(id=case['id'], label=case['label'], issue_utc=case['issue_utc'], mode=case['mode'],
+                   windows=[compare_window(window) for window in case['windows']])
+              for case in data['snapshots'] if case['has_truth']]
     aggregate = [
         dict(horizon=int(row['horizon']), model=row['model'], rmse=float(row['macro_rmse']))
         for row in read_csv(RESULTS / 'point_metrics.csv')
@@ -100,12 +106,17 @@ def verification_payload():
         for row in read_csv(REFERENCE / 'doi_chieu_kiem_dinh_2025.csv')
         if row['model'] == 'LGB_N1' and row['reference'] == 'LGB_N0'
     ]
+    heavy_cases = [
+        dict(horizon=int(row['horizon']), cases=int(row['events']), baseline=float(row['reference']),
+             adjusted=float(row['model']), change=float(row['difference']))
+        for row in read_csv(ROOT / 'reports/gfs_gated_amount_2026_11_24/tail_mae_paired.csv')
+    ]
     return dict(roster=len(data['stations']), replay_issues=issues, retrospective_rmse=aggregate,
-                feature_holdout=holdout)
+                feature_holdout=holdout, heavy_amount_variant=heavy_cases)
 
 
 def export_csv(issue_id, horizon):
-    data = replay()
+    data = available_forecasts()
     issue = next((case for case in data['snapshots'] if case['id'] == issue_id), None)
     if not issue:
         raise ValueError('unknown_issue')
@@ -117,9 +128,10 @@ def export_csv(issue_id, horizon):
     writer = csv.writer(output)
     writer.writerow(('issue_utc', 'start_utc', 'end_utc', *fields, 'lightgbm_minus_vrain_mm'))
     for point in window['points']:
-        difference = point['predicted_mm'] - point['observed_mm']
+        measured = point.get('observed_mm')
+        difference = round(point['predicted_mm'] - measured, 6) if measured is not None else None
         writer.writerow((issue['issue_utc'], window['start_utc'], window['end_utc'],
-                         *(point.get(field) for field in fields), round(difference, 6)))
+                         *(point.get(field) for field in fields), difference))
     return output.getvalue().encode('utf-8-sig'), f'pbl6-{issue_id}-ngay-{horizon}.csv'
 
 
@@ -149,25 +161,11 @@ def saved_sources():
 
 
 def recorded_issue():
-    now = datetime.now(timezone.utc)
-    for path in sorted((LIVE / 'issuances').glob('*/issuance.json'), reverse=True):
-        record = read_optional(path)
-        if not record or record.get('status') != 'recorded_before_issue':
-            continue
-        try:
-            if not timestamp(record['recorded_utc']) < timestamp(record['issue_utc']) <= now:
-                continue
-            saved = path.parent / 'predictions_private.parquet'
-            if not saved.is_file() or hashlib.sha256(saved.read_bytes()).hexdigest() != record['forecast_sha256']:
-                continue
-            verified = read_optional(LIVE / 'verification' / path.parent.name / 'verification.json')
-            return dict(issue_utc=record['issue_utc'], recorded_utc=record['recorded_utc'],
-                        station_count=record['station_count'], truth_due_utc=record['truth_due_utc'],
-                        verified=bool(verified and verified.get('forecast_sha256') == record.get('forecast_sha256')
-                                      and verified.get('valid_common_rows', 0) > 0))
-        except (OSError, TypeError, ValueError, KeyError):
-            continue
-    return None
+    latest = available_forecasts()['snapshots'][0]
+    if latest['mode'] != 'prospective':
+        return None
+    fields = ('id', 'issue_utc', 'recorded_utc', 'station_count', 'truth_due_utc')
+    return dict(**{key: latest[key] for key in fields}, verified=latest['has_truth'])
 
 
 def check_gfs(now):
@@ -199,24 +197,49 @@ def check_vrain(now):
 
     day = now.date().isoformat()
     registry, aliases, organization = source_context()
+    stations = registry.canonical_id.tolist()
+    channels = {}
     with load_session(VRAIN / 'session.dpapi') as session:
-        response = session.get(ORIGIN + '/api/kttv/private/v1/organizations/details',
-                               params={'from': day, 'to': day, 'i': '_1h'},
-                               headers={'x-org-uuid': organization}, timeout=(6, 12))
-        if response.status_code != requests.codes.ok:
-            return dict(status='error', kind='station_hours', day=day, http_status=response.status_code)
-        parsed = parse_live_day(response.json(), day, aliases['modern'], registry.canonical_id.tolist())
-    clocks = parsed['times'].tz_localize(VIETNAM)
-    received = datetime.now(VIETNAM)
-    released = (clocks <= received) & parsed['valid'].any(axis=1)
-    return dict(status='ok' if released.any() else 'waiting', kind='station_hours', day=day,
-                http_status=200, stations=int(parsed['valid'][released].any(axis=0).sum()),
-                last_hour=clocks[released].max().isoformat() if released.any() else None)
+        for channel, endpoint, headers, extra in [
+            ('modern', '/api/kttv/private/v1/organizations/details', {'x-org-uuid': organization}, {'i': '_1h'}),
+            ('legacy', '/api/vrain/private/v1/groups/29/stats/details', {}, {}),
+        ]:
+            try:
+                response = session.get(ORIGIN + endpoint, params={'from': day, 'to': day, **extra},
+                                       headers=headers, timeout=(6, 12))
+                status = response.status_code
+                if status != requests.codes.ok:
+                    channels[channel] = dict(status='error', http_status=status)
+                    continue
+                parsed = parse_live_day(response.json(), day, aliases[channel], stations)
+                clocks = parsed['times'].tz_localize(VIETNAM)
+                released = (clocks <= datetime.now(VIETNAM)) & parsed['valid'].any(axis=1)
+                channels[channel] = dict(status='ok' if released.any() else 'waiting', http_status=status,
+                                         stations=int(parsed['valid'][released].any(axis=0).sum()),
+                                         last_hour=clocks[released].max().isoformat() if released.any() else None)
+            except (requests.RequestException, ValueError, KeyError, TypeError) as error:
+                channels[channel] = dict(status='error', error_type=type(error).__name__)
+    representative = max(channels.values(),
+                         key=lambda item: (item.get('last_hour') or '', item['status'] == 'waiting'))
+    return dict(kind='station_hours', day=day, channels=channels, **representative)
+
+
+def probe_sources(started):
+    sources = {}
+    for key, check in [('gfs', check_gfs), ('vrain', check_vrain)]:
+        try:
+            result = check(started.astimezone(VIETNAM))
+        except (OSError, ImportError, ValueError, RuntimeError, KeyError, TypeError) as error:
+            result = dict(status='error', error_type=type(error).__name__,
+                          kind='index' if key == 'gfs' else 'station_hours')
+        sources[key] = dict(checked_at=datetime.now(timezone.utc).isoformat(), **result)
+    return dict(started_at=started.isoformat(), sources=sources)
 
 
 class SourceMonitor:
     def __init__(self, state_dir):
         self.path = state_dir / 'source_status.json'
+        self.daily = state_dir / 'daily'
         self.lock = Lock()
         self.started = None
         self.running = False
@@ -239,27 +262,26 @@ class SourceMonitor:
         try:
             from src.gfs_window import write_json
 
-            sources = {}
-            for key, check in [('gfs', check_gfs), ('vrain', check_vrain)]:
-                try:
-                    result = check(started.astimezone(VIETNAM))
-                except (OSError, ImportError, ValueError, RuntimeError, KeyError, TypeError):
-                    result = dict(status='error', kind='index' if key == 'gfs' else 'station_hours')
-                sources[key] = dict(checked_at=datetime.now(timezone.utc).isoformat(), **result)
-            write_json(self.path, dict(started_at=started.isoformat(), sources=sources))
+            write_json(self.path, probe_sources(started))
         finally:
             with self.lock:
                 self.running = False
 
     def status(self):
+        checked_at = datetime.now(timezone.utc)
         sources, decode = saved_sources()
-        saved = read_optional(self.path)
-        for key, record in (saved or {}).get('sources', {}).items():
-            if key not in sources or timestamp(record['checked_at']) >= timestamp(sources[key]['checked_at']):
-                sources[key] = record
-        tracker = read_optional(LIVE / 'tracker.json') or {}
+        for saved in (read_optional(self.daily / 'source_status.json'), read_optional(self.path)):
+            for key, record in (saved or {}).get('sources', {}).items():
+                if key not in sources or timestamp(record['checked_at']) >= timestamp(sources[key]['checked_at']):
+                    sources[key] = record
+        daily = {key: read_optional(self.daily / (key + '.json'))
+                 for key in ('schedule', 'forecast', 'verify', 'probe')}
+        for job in ('forecast', 'verify'):
+            last = daily[job]
+            if last and last.get('status') == 'running' and checked_at - timestamp(last['started_utc']) > timedelta(minutes=25):
+                daily[job] = dict(last, status='interrupted', reason='job_timeout')
         return dict(
-            checked_at=datetime.now(timezone.utc).isoformat(), sources=sources, last_gfs_decode=decode,
+            checked_at=checked_at.isoformat(), sources=sources, last_gfs_decode=decode,
             source_probe_running=self.running, last_recorded_issue=recorded_issue(),
-            tracker_heartbeat=tracker.get('updated_utc'), planned_issue_local='19:00',
+            planned_issue_local='19:00', daily=daily,
         )

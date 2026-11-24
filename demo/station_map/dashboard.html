@@ -34,13 +34,25 @@
     <section class="dashboard-section" aria-labelledby="source-title">
       <div class="section-top">
         <div>
-          <h2 id="source-title">Nguồn dữ liệu</h2>
-          <p id="status-refresh">Màn hình làm mới trạng thái lưu trên máy mỗi 30 giây.</p>
+          <h2 id="source-title">Cập nhật hằng ngày</h2>
+          <p id="status-refresh">Đang đọc trạng thái trên máy.</p>
         </div>
         <button id="source-check" class="action action-primary" type="button">Kiểm tra nguồn</button>
       </div>
       <p id="status-error" class="notice" role="alert" hidden></p>
       <p id="probe-feedback" class="feedback" role="status" hidden></p>
+      <div id="daily-schedule" class="card dashboard-card daily-schedule" hidden>
+        <div class="schedule-head">
+          <h3 id="schedule-heading">Lịch trên máy này</h3>
+          <span id="schedule-state" class="status-badge"></span>
+        </div>
+        <ol class="schedule-steps" aria-labelledby="schedule-heading">
+          <li><time datetime="18:40">18:40</time><strong>Kiểm tra và thu đầu vào</strong><span id="collection-step"></span></li>
+          <li><time datetime="19:00">19:00</time><strong>Mốc phát dự báo</strong><span id="forecast-step"></span></li>
+          <li><time datetime="20:05">20:05</time><strong>Đối chiếu lượt đã đủ ba ngày</strong><span id="truth-step"></span></li>
+        </ol>
+        <p id="schedule-note" class="subtle"></p>
+      </div>
       <div id="source-cards" class="source-grid"></div>
     </section>
 
@@ -54,7 +66,7 @@
       <div class="card dashboard-card">
         <div class="check-controls">
           <div class="issue-picker">
-            <label for="check-issue">Lượt phát lại</label>
+            <label for="check-issue">Lượt có số đo đối chiếu</label>
             <select id="check-issue"></select>
           </div>
           <div class="day-picker" aria-label="Chọn hạn đối chiếu">
@@ -73,6 +85,11 @@
         </div>
         <p class="subtle metric-note">MAE là sai lệch tuyệt đối trung bình. RMSE nhấn mạnh sai lệch lớn. Bias âm là thiên về dự báo thiếu. Đơn vị đều là mm/24 giờ.</p>
         <p class="subtle" id="event-detail"></p>
+        <section class="issue-errors" aria-labelledby="issue-errors-title">
+          <h3 id="issue-errors-title">Trạm có sai lệch lớn nhất</h3>
+          <p class="subtle">Chọn trạm để xem dự báo, thực đo và sai lệch trên bản đồ.</p>
+          <div id="issue-errors"></div>
+        </section>
         <div class="card-tools">
           <a class="action" id="open-map" href="/">Mở trên bản đồ</a>
           <a class="action" id="download-issue" href="/api/export.csv">Tải CSV</a>
@@ -97,6 +114,12 @@
           <h3>Kiểm định 2025 · Thêm khí tượng GFS</h3>
           <p class="subtle">So LightGBM trước và sau khi thêm nhiệt độ, độ ẩm, gió và hơi nước dự báo. Các hàng dưới là những hạn đạt tiêu chí cải thiện đã đặt trước.</p>
           <div id="feature-results" class="feature-results"></div>
+        </article>
+        <article class="card dashboard-card heavy-card">
+          <h3>Thử nghiệm giảm sai số lượng mưa lớn</h3>
+          <p class="subtle">MAE trên các lượt thực đo từ 50 mm/24 giờ trong hồi cứu 2026.</p>
+          <div id="heavy-results" class="heavy-results"></div>
+          <p class="subtle">RMSE toàn bộ chưa giảm nhất quán. Kết quả cần được kiểm chứng trên các đợt mưa mới.</p>
         </article>
       </div>
     </section>

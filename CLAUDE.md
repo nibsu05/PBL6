@@ -2,6 +2,14 @@
 
 Cập nhật 24/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
 
+## Bản đồ toàn màn hình, lịch cập nhật và Word chi tiết
+
+Web cục bộ `http://127.0.0.1:8766/` mở bản đồ toàn cửa sổ. Có bảng công cụ trái trên máy tính, bảng trượt dưới trên điện thoại, thanh ba ngày và bảng chi tiết khi chọn trạm. Trang Theo dõi có lịch 18h40/19h/20h05, trạng thái riêng từng kênh Vrain, trạm sai khác nhiều và MAE mưa lớn của thí nghiệm bổ sung. Đã kiểm thử bằng Edge ở 1440×900 và 390×844, tài khoản kiểm thử lưu riêng. API phát lượt ghi trước 19h sau khi kiểm tra thời gian hiệu lực, mô hình khóa và hàm kiểm tệp. Khi thiếu lượt trực tiếp, map dùng các bản phát lại có ngày thật. Khách không nhận thực đo hoặc MOS.
+
+Windows Task Scheduler đã đăng ký `PBL6-DailyRainfall` ở 18h40 và 20h05 giờ Việt Nam cho tài khoản đang đăng nhập. Đã chạy thử tác vụ và ghi trạng thái chưa có lượt đến hạn đối chiếu. Đọc lịch thật bằng `Get-ScheduledTaskInfo` và nhật ký trong `data/operational/station_map_web/daily/`. Lần kiểm tra 16h06 ngày 24/11 có đủ 19 chỉ mục GFS, nhưng hai kênh Vrain trả HTTP 404. Lượt kiểm tra các ngày 23/11 và 15/11 cũng 404. Chưa có dự báo trực tiếp đủ nguồn để xác nhận toàn bộ vận hành. Xem [luồng chạy](demo/station_map/README.md).
+
+Đã bổ sung chẩn đoán trên hồi cứu 2026. Trong 248 lượt bỏ sót mưa ≥50 mm ở ngày 3, 158 lượt GFS dưới 10 mm và 65 lượt cả GFS lẫn B dưới 10 mm. Dùng để xác định nhóm cần thử tín hiệu từ tổ hợp GEFS. Các phép thử trước và chỉ số năm 2025 giữ vai trò đã nêu. Xem [bảng số và cách tái hiện](reports/gfs_gated_amount_2026_11_24/KET_LUAN.md). Word về phần ngắn hạn phiên bản chi tiết hơn nằm trong `data/operational/pbl6_bao_cao_cuoi_ky_2026_11_24/PBL6_BAO_CAO_CUOI_KY_NGAN_HAN_CAP_NHAT.docx`.
+
 ## Bản thảo cuối kỳ và thử cải thiện ngày 24/11
 
 Bản thảo Word ngắn hạn theo mẫu Khoa CNTT nằm trong `data/operational/pbl6_bao_cao_cuoi_ky_2026_11_24/PBL6_BAO_CAO_CUOI_KY_PHAN_NGAN_HAN.docx`. Bìa chừa tên, chương 3 và 4 chừa phương pháp và kết quả cực ngắn. Nội dung dùng dữ liệu trạm Vrain, các đặc trưng dự báo GFS, kiểm định 2025, hồi cứu 2026 và mô tả web cục bộ.
@@ -18,7 +26,7 @@ Người dùng yêu cầu hoàn thành phần ngắn hạn, chỉ ra đóng góp
 
 [Trình xem bản đồ cục bộ](demo/station_map/README.md) đọc tệp `station_map_private.json` trong vùng riêng của bản chốt. Chế độ phát lại cho lần 12/11 và một lần có nhiều trạm ghi nhận mưa lớn. Hiển thị tọa độ trạm qua loopback, màu theo mm/24 giờ, ba khoảng ngày và số liệu đối chiếu. Đầu ra theo giờ sẽ được tích hợp khi thành viên cung cấp. Viết báo cáo cuối kỳ theo template người dùng gửi, dựa trên kiểm định 2025 và hồi cứu 2026 có nhãn rõ.
 
-Bản đồ có bốn lớp LightGBM, GFS, Vrain, sai lệch LightGBM−Vrain và biểu đồ ba ngày tại trạm. Ba lớp lượng mưa dùng chung thang màu. Edge đã kiểm tra cô lập ngày/lớp, dấu sai lệch, trạm thiếu và màn hình nhỏ. Phần chạy hằng ngày kiểm tra ngày 24/11: GFS 00 UTC đã tải và giải mã đủ 19 trường ở 57 trạm, nhưng hai đường lấy Vrain trả 404 cho 23–24/11, kể cả sau khi làm mới phiên. Báo cáo thử nguồn trong `data/operational/gfs_short_range_closeout_2026_11_24/daily_rehearsals/`. Chưa có lượt phát mới và chưa bật lịch chạy đều.
+Bản đồ ban đầu có bốn lớp LightGBM, GFS, Vrain, sai lệch LightGBM−Vrain và biểu đồ ba ngày tại trạm. Ba lớp lượng mưa dùng chung thang màu. Edge đã kiểm tra cô lập ngày/lớp, dấu sai lệch, trạm thiếu và màn hình nhỏ. Trong lần thử nguồn trước khi đăng ký lịch ngày 24/11, GFS 00 UTC đã tải và giải mã đủ 19 trường ở 57 trạm, nhưng hai đường lấy Vrain trả 404 cho 23–24/11, kể cả sau khi làm mới phiên. Báo cáo thử nguồn trong `data/operational/gfs_short_range_closeout_2026_11_24/daily_rehearsals/`.
 
 Web cục bộ đã bổ sung tài khoản riêng và trang Theo dõi. Khách xem dự báo LightGBM/GFS và xác suất ≥50 mm. Sau đăng nhập có Vrain thực đo, sai lệch, CSV, bảng 55 trạm và so sánh RMSE/MAE/Bias theo lượt, biểu đồ hồi cứu 2026, kết quả nhóm biến 2025. Tài khoản tạo lần đầu trên web và lưu băm ở `data/operational/station_map_web/`. Theo dõi đọc trạng thái lưu mỗi 30 giây khi mở trang. Nút kiểm tra nguồn có giới hạn một lượt mỗi 5 phút, ghi dấu thời gian và tình trạng nguồn. Kiểm tra bằng giao diện ngày 24/11 nhận đủ 19 chỉ mục GFS và HTTP 404 từ Vrain. Báo trạng thái ngày phát theo ledger, không suy từ lần kiểm tra nguồn. Xem [cách mở web](demo/station_map/README.md).
 

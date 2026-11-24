@@ -4,6 +4,8 @@
 
 **Thử cải thiện tiếp.** Điều chỉnh lượng có điều kiện là ứng viên kiểm định trong các đợt mưa mới. Hồi cứu 2026 cho thấy giảm sai số ở nhóm thực đo ≥50 mm, đồng thời sai số toàn bộ có đánh đổi. Xem [kết quả ba phép thử](reports/gfs_gated_amount_2026_11_24/KET_LUAN.md).
 
+**Chuẩn bị chạy hằng ngày.** Đã đăng ký tác vụ thử thu 18h40 và chấm lượt đến hạn lúc 20h05. Web nối vào các bản ghi dự báo thật sau khi kiểm tra tệp và thời hạn. Lần kiểm tra 24/11 cả hai đường lấy Vrain lỗi 404, nên cần khôi phục nguồn rồi theo dõi nhiều lượt, độ phủ và độ trễ. Bản Word cập nhật có bảng chi tiết xử lý, hình web và kiểm thử. Xem [web và lịch chạy](demo/station_map/README.md).
+
 **Bản trình bày dễ hiểu:** [slide/Word giải thích từ đầu](reports/short_range_explained_v2_2026_11_18/README.md), 33 slide chính (~28 phút) và 34 phụ lục. Tách rõ LightGBM/GRU, GFS, MOS và quy tắc đối chứng. Giải thích một mẫu, train/CV, Tweedie/L2 và ý nghĩa số; tách rõ ba mốc tốt hơn đối chứng, cải thiện ổn định và đủ dùng thực tế. Hồi cứu mới cho thấy giảm điểm lỗi; chưa chứng nhận sử dụng. Không huấn luyện/chấm mới hoặc sửa nghiên cứu cũ.
 
 **Slide tổng hợp 18/11:** [bộ báo cáo đầy đủ](reports/short_range_comprehensive_2026_11_18/README.md), 31 slide chính (~28 phút) và 31 phụ lục, Notes/Word dễ đọc. Chỉ đọc bằng chứng hiện có, không train/chấm mới hoặc đổi protocol. Paper gốc và giới hạn truy cập được ghi rõ. Giữ riêng kiểm định2025 cũ và hồi cứu2026 mới; tiến trình dự báo tương lai vẫn đang chờ, chưa có nhãn kiểm chứng.

@@ -51,6 +51,13 @@
 .section-top h2 { font-size: 22px; letter-spacing: -.02em; }
 .section-top p, .subtle { color: var(--muted); font-size: 13px; margin-top: 4px; line-height: 1.45; }
 .source-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.daily-schedule { margin-bottom: 12px; background: #fbfdfd; }
+.schedule-head { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 8px; }
+.schedule-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; padding: 0; margin: 12px 0 8px; gap: 8px; }
+.schedule-steps li { border-top: 3px solid #83bac1; background: #eef5f7; border-radius: 5px; padding: 10px; display: grid; align-content: start; gap: 4px; }
+.schedule-steps time { color: #175c69; font-size: 21px; font-weight: 760; font-variant-numeric: tabular-nums; }
+.schedule-steps strong { font-size: 13px; }
+.schedule-steps span { color: var(--muted); font-size: 12px; line-height: 1.4; }
 .source-card { padding: 17px; }
 .source-heading { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 11px; }
 .source-heading h3 { font-size: 16px; }
@@ -88,6 +95,17 @@
 .feature-results { display: grid; gap: 8px; margin-top: 14px; }
 .feature-line { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 10px; border-radius: 6px; background: #edf5f7; font-size: 14px; }
 .feature-line strong { color: var(--accent); }
+.issue-errors { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 12px; }
+#issue-errors { display: grid; gap: 4px; margin-top: 8px; }
+.issue-error { display: grid; grid-template-columns: 60px minmax(0, 1fr) auto; align-items: center; gap: 8px; padding: 7px 9px; color: var(--ink); background: #f4f8f9; border-radius: 6px; text-decoration: none; font-size: 13px; }
+.issue-error:hover { background: #eaf3f4; }
+.issue-error .subtle { margin-top: 0; }
+.issue-error-value { color: #a04e2b; }
+.issue-error-value[data-sign="under"] { color: #276382; }
+.heavy-card { grid-column: 1 / -1; }
+.heavy-results { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 10px 0; }
+.heavy-results small { display: block; color: var(--muted); margin-bottom: 4px; }
+.heavy-results strong { font-size: 19px; }
 @media (max-width: 820px) {
   .source-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .source-card:last-child { grid-column: 1 / -1; }
@@ -104,6 +122,9 @@
   .portal-top nav a { padding: 5px 0; }
   .portal-top .account-menu { margin-left: auto; }
   .source-grid { grid-template-columns: minmax(0, 1fr); }
+  .schedule-steps, .heavy-results { grid-template-columns: minmax(0, 1fr); }
+  .schedule-steps li { grid-template-columns: 65px minmax(0, 1fr); }
+  .schedule-steps time { grid-row: span 2; }
   .section-top { align-items: start; flex-direction: column; }
   .dashboard-card { padding: 12px; }
   .result-stat { padding: 8px; }
