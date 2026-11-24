@@ -1,5 +1,7 @@
 # Thiết kế nghiên cứu — dự báo mưa tại nhiều trạm
 
+**Kết quả cực ngắn ngày 24/11/2026.** [Bản 79 trạm và sáu hạn giờ](reports/station_nowcast_2026_11_24/README.md) có giao thức, các đối chứng, điểm kiểm định 2025 và phân tích gió 850 hPa. Một Bi-LSTM chung học trên 79 trạm đủ điều kiện lịch sử. Cấu hình LightGBM chỉ dùng mưa và lịch được chọn cho web phát lại theo tiêu chí RMSE trên 2023.
+
 **Kết luận ngắn hạn ngày 24/11/2026.** [Bản chốt và bảng số](reports/gfs_short_range_closeout_2026_11_24/KET_LUAN_NGAN_HAN.md) phân biệt kiểm định 2025 sau khóa và phân tích bổ sung trên hồi cứu 2026 đã xem. LightGBM B phục vụ bản xem thử bằng điểm trạm tô màu theo ba tổng 24 giờ. Xem [giao diện và hợp đồng đầu ra](demo/station_map/README.md).
 
 **Phép thử bổ sung ngày 24/11.** Đánh giá đặc trưng mưa GFS lân cận và hai cách tăng trọng số mẫu mưa lớn. Phương án có điều kiện giảm MAE trong nhóm thực đo ≥50 mm ở cả ba hạn trên cùng 43.464 lượt hồi cứu 2026. Kết quả dùng để đề xuất kiểm chứng tiếp, với B vẫn phục vụ web. Xem [thiết kế, giới hạn và bảng số](reports/gfs_gated_amount_2026_11_24/KET_LUAN.md).

@@ -1,6 +1,8 @@
 # Kế hoạch hiện hành — dự báo mưa tại trạm
 
-**Phần ngắn hạn đã chốt ngày 24/11.** Đóng góp chính là đo được lợi ích của nhóm khí tượng GFS ở ngày 2, 3 trên kiểm định 2025. Bản thảo Word đã có phần ngắn hạn theo mẫu Khoa CNTT trong thư mục nội bộ `data/operational/pbl6_bao_cao_cuoi_ky_2026_11_24/`. Phần cực ngắn sẽ tích hợp khi có đầu ra của thành viên. Xem [kết luận](reports/gfs_short_range_closeout_2026_11_24/KET_LUAN_NGAN_HAN.md), [kiểm chứng chạy lại](reports/gfs_short_range_closeout_2026_11_24/verification.json) và [bản đồ phát lại](demo/station_map/README.md).
+**Cực ngắn đã kiểm định trên 79 trạm.** Mô hình chung dự báo đủ sáu lượng mưa giờ. Thực hiện R/E0/E2, ba seed, đối chứng 0 mm, giữ mưa và LightGBM R. Kiểm định 2025 cho thấy LightGBM R giảm RMSE so với giữ mưa, còn lợi ích của nhóm gió 850 hPa tại giờ 6 chưa rõ. Web có phát lại riêng theo giờ. Xem [kết quả và phạm vi](reports/station_nowcast_2026_11_24/README.md).
+
+**Phần ngắn hạn đã chốt ngày 24/11.** Đóng góp chính là đo được lợi ích của nhóm khí tượng GFS ở ngày 2, 3 trên kiểm định 2025. Báo cáo Word hai nhánh theo mẫu Khoa CNTT nằm trong thư mục nội bộ `data/operational/pbl6_bao_cao_cuoi_ky_2026_11_24/`. Xem [kết luận](reports/gfs_short_range_closeout_2026_11_24/KET_LUAN_NGAN_HAN.md), [kiểm chứng chạy lại](reports/gfs_short_range_closeout_2026_11_24/verification.json) và [bản đồ phát lại](demo/station_map/README.md).
 
 **Thử cải thiện tiếp.** Điều chỉnh lượng có điều kiện là ứng viên kiểm định trong các đợt mưa mới. Hồi cứu 2026 cho thấy giảm sai số ở nhóm thực đo ≥50 mm, đồng thời sai số toàn bộ có đánh đổi. Xem [kết quả ba phép thử](reports/gfs_gated_amount_2026_11_24/KET_LUAN.md).
 

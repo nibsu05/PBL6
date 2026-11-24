@@ -12,6 +12,7 @@ from urllib.parse import parse_qs, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from demo.station_map_accounts import AccountExists, Accounts
+from demo.station_map_nowcast import REPLAY, nowcast_replay
 from demo.station_map_status import SourceMonitor, available_forecasts, export_csv, forecast_payload, verification_payload
 
 
@@ -20,6 +21,9 @@ STATE = ROOT / 'data' / 'operational' / 'station_map_web'
 WARD_BOUNDARIES = ROOT / 'data' / 'operational' / 'station_map_areas' / 'wards-48.geojson'
 ROUTES = {
     '/': (STATIC / 'index.html', 'text/html; charset=utf-8'),
+    '/cuc-ngan': (STATIC / 'nowcast.html', 'text/html; charset=utf-8'),
+    '/nowcast.css': (STATIC / 'nowcast.css', 'text/css; charset=utf-8'),
+    '/nowcast.js': (STATIC / 'nowcast.js', 'application/javascript; charset=utf-8'),
     '/login': (STATIC / 'login.html', 'text/html; charset=utf-8'),
     '/dashboard': (STATIC / 'dashboard.html', 'text/html; charset=utf-8'),
     '/map.css': (STATIC / 'map.css', 'text/css; charset=utf-8'),
@@ -91,6 +95,8 @@ class MapHandler(BaseHTTPRequestHandler):
                 self.reply_json(dict(username=user, setup_required=self.server.accounts.owner() is None))
             elif path == '/api/short-range':
                 self.reply_json(forecast_payload(available_forecasts(), bool(user)))
+            elif path == '/api/nowcast-replay':
+                self.reply_json(nowcast_replay(REPLAY, bool(user)))
             elif path == '/api/status':
                 self.reply_json(self.server.monitor.status())
             elif path == '/api/verification':

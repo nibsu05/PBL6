@@ -38,7 +38,13 @@ Nguồn ranh giới tham chiếu là tinhthanhpho.com, bản 2026.10.8 theo đơ
 
 ## Đầu ra cho giao diện
 
-`GET /api/short-range` ghép các lượt dự báo trực tiếp đã qua kiểm tra với hai bản phát lại lưu nội bộ. Bản đồ và bảng đối chiếu kiểm tra đầu ra mới mỗi 90 giây khi đang mở. Nếu đã chọn một lượt thì vẫn giữ đúng lượt đó. API khách chỉ trả đầu ra dự báo cho bản đồ. Vrain thực đo, MOS, trạng thái nguồn, bảng kiểm chứng và CSV cần phiên đăng nhập. Tệp dữ liệu và kết quả từng trạm nằm ngoài Git. Nhánh cực ngắn đang chờ đầu ra của mô hình theo giờ.
+`GET /api/short-range` ghép các lượt dự báo trực tiếp đã qua kiểm tra với các bản phát lại lưu nội bộ. Bản đồ và bảng đối chiếu kiểm tra đầu ra mới mỗi 90 giây khi đang mở. Nếu đã chọn một lượt thì vẫn giữ đúng lượt đó. API khách chỉ trả đầu ra dự báo cho bản đồ. Vrain thực đo, MOS, trạng thái nguồn, bảng kiểm chứng và CSV cần phiên đăng nhập. Tệp dữ liệu và kết quả từng trạm nằm ngoài Git.
+
+### Phát lại dự báo 1–6 giờ
+
+Mở **1–6 giờ** ở đầu bản đồ hoặc truy cập [trang cực ngắn](http://127.0.0.1:8766/cuc-ngan). Chọn lượt, giờ đích và mô hình. Đơn vị là lượng mm trong đúng một giờ. Bấm trạm để xem đủ sáu giờ. Khách xem dự báo lượng, tài khoản đăng nhập xem thêm mưa Vrain đã đo. Danh sách bên cạnh có tìm theo trạm và lọc theo lượng.
+
+API `GET /api/nowcast-replay` đọc bảy lượt hồi cứu 19h từ 04 đến 10/11/2026. Mỗi lượt có 78 trong 79 trạm đủ quan trắc kênh modern trong cửa sổ đầu vào. Tạo lại bản phát lại bằng `.venv\Scripts\python.exe -X utf8 scripts/prepare_station_nowcast_replay.py` khi có bộ trọng số đã khóa. [Kết quả kiểm định và cách chạy](../../reports/station_nowcast_2026_11_24/README.md).
 
 ## Dự báo mỗi ngày
 

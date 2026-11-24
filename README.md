@@ -1,5 +1,7 @@
 # PBL6 — dự báo lượng mưa tại nhiều trạm
 
+**Cực ngắn 1–6 giờ.** Đã huấn luyện và kiểm định tại 79 trạm, gồm cả 57 trạm dùng cho nhánh ngắn hạn. [Báo cáo, số liệu và cách chạy](reports/station_nowcast_2026_11_24/README.md). Dùng [trang 1–6 giờ](http://127.0.0.1:8766/cuc-ngan) để xem phát lại lịch sử sau khi mở web cục bộ.
+
 **Chốt phần ngắn hạn ngày 24/11/2026.** Kiểm định 2025 cho thấy nhóm biến khí tượng GFS giảm RMSE khoảng 0,83 mm ở cả ngày 2 và ngày 3. LightGBM B đã được chạy lại trên 43.464 lượt trạm và khoảng dự báo của hồi cứu 2026. Web cục bộ có bản đồ dự báo, xác suất mưa lớn, đăng nhập, theo dõi GFS/Vrain và bảng kiểm chứng. Xem [kết luận và bằng chứng](reports/gfs_short_range_closeout_2026_11_24/KET_LUAN_NGAN_HAN.md) và [cách mở web](demo/station_map/README.md).
 
 **Thử cải thiện lượng mưa lớn.** Điều chỉnh lượng có điều kiện giảm MAE 3,91–6,47 mm ở nhóm thực đo từ 50 mm/24 giờ trong hồi cứu 2026. RMSE toàn bộ chưa cải thiện nhất quán. Web tiếp tục dùng B. Xem [ba phép thử và bảng đối chiếu](reports/gfs_gated_amount_2026_11_24/KET_LUAN.md).

@@ -2,6 +2,14 @@
 
 Cập nhật 24/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
 
+## Kết quả dự báo cực ngắn trên 79 trạm
+
+[Giao thức, kết quả và lệnh tái chạy](reports/station_nowcast_2026_11_24/README.md). Bản này thay giai đoạn thử Bi-LSTM ba trạm khi cần kết luận về toàn bộ tập trạm đã học. Giữ 79/86 vị trí đủ cửa sổ train, gồm 57 trạm nhánh ngày và 22 trạm bổ sung. Một mẫu dùng 24 giờ tại trạm, nhãn là sáu lượng mưa 1 giờ riêng biệt. Đã huấn luyện 1.032.811 mẫu 2021–2022, chọn mô hình/epoch trên 676.870 mẫu 2023, chấm 680.282 mẫu 2024 và 679.461 mẫu 2025 sau khóa.
+
+Bi-LSTM chung cho mạng, chạy R/E0/E2 với ba seed. E2 chỉ thêm hai thành phần gió 850 hPa vào E0. Sửa bộ lọc để dùng lịch sử 24 giờ và chấm trên cùng sáu nhãn. Phép so chính CSI mưa ≥1 mm ở giờ 6 cho E2−E0 là +0,0131 ở 2024 và −0,0078 ở 2025. Khoảng tin cậy khối 7/14 ngày của 2025 đều chứa 0. LightGBM R giảm RMSE so với giữ mưa ở cả 79 trạm và sáu hạn trong kiểm định 2025. Ở ngưỡng ≥5 mm, giờ 6 vẫn bỏ sót phần lớn sự kiện.
+
+Trang [1–6 giờ](http://127.0.0.1:8766/cuc-ngan) dùng phát lại 04–10/11/2026, mỗi lượt 78/79 trạm có số. LightGBM R được chọn theo RMSE trên 2023. Trình xem có Bi-LSTM R và mốc giữ mưa để đối chiếu, quan trắc chỉ hiện sau đăng nhập. Chạy thực cần xác nhận độ trễ nguồn Vrain. Kết quả nghiên cứu, bản phát lại và trạng thái vận hành có phạm vi khác nhau. Các tệp mô hình, dự báo, tọa độ, Word và PDF nằm trong `data/operational/`; trạng thái nguồn và mô hình nhánh ngày được mô tả trong các mục dưới.
+
 ## Lịch sử bảy ngày và thông báo admin
 
 Thanh trượt ngang chọn ba hạn, ghi ngày kết thúc và khoảng hiệu lực. Dãy lượt lưu có **05–12/11/2026**, trích thêm 7 lượt từ Parquet B đã khóa bằng `scripts/prepare_station_map_history.py`. Nút Ngày gần đây hiện ngày thiếu bản hoặc chờ 19h. Trình đọc không gán hồi cứu thành lượt phát mới. Đã kiểm tra giao diện và quyền truy cập bằng Edge.
