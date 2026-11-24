@@ -10,6 +10,8 @@ Bản đồ tại `/` có một thanh 1–6 giờ và Ngày 1–3, cùng lớp x
 
 Vrain kiểm lại lúc 19h11 24/11 sau làm mới phiên. Danh mục 200, có nhóm Đà Nẵng, cả hai đường mưa giờ 404 cho 24/11 và ngày đã có dữ liệu 12/11. Kho hiện có đến 19h 15/11 và app đọc bản phát lại. GFS đủ 19 chỉ mục. Theo dõi trạng thái mới từ nhật ký, chưa suy nguyên nhân lỗi phía dịch vụ.
 
+Bản Word rà soát là `PBL6_BAO_CAO_CUOI_KY_RA_SOAT.docx` trong thư mục trên. Bản này ghép lại phần thí nghiệm chi tiết, chín kỳ trên một giao diện và lộ trình mở rộng. [Đề xuất thí điểm tại Huế](reports/station_forecast_reviewed_2026_11_24/DE_XUAT_MO_RONG.md) dựa trên nguồn công khai. Cần được cấp phạm vi dữ liệu Huế và xác minh độ phủ trước khi so sánh mô hình. Open API do Vrain cấp cho đối tác là một đường thu cần kiểm tra cho cả Đà Nẵng.
+
 ## Kết quả dự báo cực ngắn trên 79 trạm
 
 [Giao thức, kết quả và lệnh tái chạy](reports/station_nowcast_2026_11_24/README.md). Bản này thay giai đoạn thử Bi-LSTM ba trạm khi cần kết luận về toàn bộ tập trạm đã học. Giữ 79/86 vị trí đủ cửa sổ train, gồm 57 trạm nhánh ngày và 22 trạm bổ sung. Một mẫu dùng 24 giờ tại trạm, nhãn là sáu lượng mưa 1 giờ riêng biệt. Đã huấn luyện 1.032.811 mẫu 2021–2022, chọn mô hình/epoch trên 676.870 mẫu 2023, chấm 680.282 mẫu 2024 và 679.461 mẫu 2025 sau khóa.
