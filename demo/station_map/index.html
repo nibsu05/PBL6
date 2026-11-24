@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dự báo mưa tại trạm Đà Nẵng · PBL6</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/map.css">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+  <script defer src="/map.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="shell top-inner">
+      <p class="brand">PBL6 <span>·</span> Đà Nẵng</p>
+      <nav aria-label="Loại dự báo">
+        <span class="current" aria-current="page">Ngắn hạn 1–3 ngày</span>
+        <span class="pending">Cực ngắn 1–6 giờ <small>Đang chuẩn bị</small></span>
+      </nav>
+    </div>
+  </header>
+  <main class="shell">
+    <div class="intro">
+      <div>
+        <h1>Lượng mưa tại trạm</h1>
+        <p>Chọn một ngày dự báo, sau đó bấm vào trạm để xem số liệu.</p>
+      </div>
+      <span class="mode">Phát lại lịch sử</span>
+    </div>
+
+    <p id="load-error" role="alert" class="notice" hidden></p>
+    <section id="workspace" hidden aria-label="Dự báo theo ngày">
+      <div class="control-bar">
+        <div class="issue-picker">
+          <label for="issue">Lần phát trong bộ đánh giá</label>
+          <select id="issue"></select>
+        </div>
+        <div class="day-picker" aria-label="Chọn hạn dự báo">
+          <button data-day="1" type="button" aria-pressed="true">Ngày 1</button>
+          <button data-day="2" type="button" aria-pressed="false">Ngày 2</button>
+          <button data-day="3" type="button" aria-pressed="false">Ngày 3</button>
+        </div>
+      </div>
+
+      <div class="workspace-grid">
+        <section class="card map-card" aria-label="Bản đồ lượng mưa">
+          <div class="map-header">
+            <div>
+              <h2>Lượng mưa dự báo</h2>
+              <p id="period"></p>
+            </div>
+            <span id="coverage" class="coverage"></span>
+          </div>
+          <div id="map-error" class="notice" role="status" hidden></div>
+          <div id="map" aria-label="Vị trí các trạm mưa"></div>
+          <div class="legend">
+            <h3>Dải lượng mưa <span>mm/24 giờ</span></h3>
+            <ul id="legend-items" aria-label="Chú giải dải màu"></ul>
+          </div>
+        </section>
+
+        <aside class="card station-card" aria-label="Thông tin trạm">
+          <label for="station">Trạm đang xem</label>
+          <select id="station"></select>
+          <div id="station-detail" aria-live="polite"></div>
+        </aside>
+      </div>
+      <footer>
+        <p>LightGBM B · Dự báo điểm trạm từ GFS và lịch sử mưa Vrain. Màu biểu thị giá trị tại vị trí trạm.</p>
+        <p id="issue-meta"></p>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>

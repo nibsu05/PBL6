@@ -1,6 +1,16 @@
 # PBL6 — bối cảnh hiện hành cho agent
 
-Cập nhật 18/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
+Cập nhật 24/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
+
+## Chốt phần dự báo ngắn hạn ngày 24/11
+
+Người dùng yêu cầu hoàn thành phần ngắn hạn, chỉ ra đóng góp cụ thể, xem cách làm bản đồ màu và chuẩn bị báo cáo cuối kỳ trong ngày. Người dùng sẽ gửi template. Thành viên khác chuẩn bị đầu ra cực ngắn để tích hợp sau.
+
+[Kết luận chốt](reports/gfs_short_range_closeout_2026_11_24/KET_LUAN_NGAN_HAN.md) dùng kiểm định 2025 đã khóa làm bằng chứng chính. LightGBM N1 so N0 giảm RMSE ngày 2/3 lần lượt 0,829/0,833 mm, đạt tiêu chí đồng thời và Holm. N3 vượt MOS về RMSE ngày 3. GRU N5 vượt MOS về MAE trung vị ngày 1/3. Phép so địa hình, dẫn xuất và mở rộng đặc trưng còn giới hạn như nghiên cứu gốc. B là phương án trình diễn theo lựa chọn từ tập học, giữ 26 biến, train 2021–2024 và hiệu chỉnh xác suất 2025.
+
+`scripts/close_short_range.py` kiểm nguồn, 119 artifact đã khóa và chạy lại 43.464 lượt, đối chiếu 260.784 giá trị với chênh lệch lớn nhất bằng 0. Phân tích hồi cứu 2026 bổ sung dùng khoảng đồng thời cho 6 phép B–GFS/MOS theo khối 7/14/28 ngày, 5.000 lượt mỗi khối. Cả ba độ dài cho tín hiệu B giảm RMSE so GFS ngày 1, 2 và MOS ngày 1, 3. Đây là phân tích thăm dò trên giai đoạn đã xem. Lần theo dõi 18/11 dừng ở giai đoạn chờ, không tạo bản ghi lần phát. Tập huấn luyện, trọng số và kết quả đã khóa ở các phiên bản cũ giữ vai trò lịch sử.
+
+[Trình xem bản đồ cục bộ](demo/station_map/README.md) đọc tệp `station_map_private.json` trong vùng riêng của bản chốt. Chế độ phát lại cho lần 12/11 và một lần có nhiều trạm ghi nhận mưa lớn. Hiển thị tọa độ trạm qua loopback, màu theo mm/24 giờ, ba khoảng ngày và số liệu đối chiếu. Đầu ra theo giờ sẽ được tích hợp khi thành viên cung cấp. Viết báo cáo cuối kỳ theo template người dùng gửi, dựa trên kiểm định 2025 và hồi cứu 2026 có nhãn rõ.
 
 ## Bản giải thích từ đầu — người dùng cần hiểu train và mốc kết quả
 

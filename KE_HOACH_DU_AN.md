@@ -1,5 +1,7 @@
 # Kế hoạch hiện hành — dự báo mưa tại trạm
 
+**Phần ngắn hạn đã chốt ngày 24/11.** [Kết luận dùng cho báo cáo](reports/gfs_short_range_closeout_2026_11_24/KET_LUAN_NGAN_HAN.md), [kiểm chứng chạy lại](reports/gfs_short_range_closeout_2026_11_24/verification.json) và [bản đồ phát lại](demo/station_map/README.md). Đóng góp chính là đo được lợi ích của nhóm khí tượng GFS ở ngày 2, 3 trên kiểm định 2025. Đóng góp bổ sung là đánh giá các nhóm biến, số năm và hàm mất mát có đối chứng. Bước viết báo cáo cuối kỳ dùng template của người dùng. Phần cực ngắn sẽ tích hợp khi có đầu ra của thành viên.
+
 **Bản trình bày dễ hiểu:** [slide/Word giải thích từ đầu](reports/short_range_explained_v2_2026_11_18/README.md), 33 slide chính (~28 phút) và 34 phụ lục. Tách rõ LightGBM/GRU, GFS, MOS và quy tắc đối chứng. Giải thích một mẫu, train/CV, Tweedie/L2 và ý nghĩa số; tách rõ ba mốc tốt hơn đối chứng, cải thiện ổn định và đủ dùng thực tế. Hồi cứu mới cho thấy giảm điểm lỗi; chưa chứng nhận sử dụng. Không huấn luyện/chấm mới hoặc sửa nghiên cứu cũ.
 
 **Slide tổng hợp 18/11:** [bộ báo cáo đầy đủ](reports/short_range_comprehensive_2026_11_18/README.md), 31 slide chính (~28 phút) và 31 phụ lục, Notes/Word dễ đọc. Chỉ đọc bằng chứng hiện có, không train/chấm mới hoặc đổi protocol. Paper gốc và giới hạn truy cập được ghi rõ. Giữ riêng kiểm định2025 cũ và hồi cứu2026 mới; tiến trình dự báo tương lai vẫn đang chờ, chưa có nhãn kiểm chứng.

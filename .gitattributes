@@ -142,3 +142,8 @@ scripts/*short_range_explained_v2*.py text eol=lf
 scripts/*short_range_explained_v2*.ps1 text eol=lf
 reports/short_range_explained_v2_2026_11_18/*.md text eol=lf
 reports/short_range_explained_v2_2026_11_18/*.json text eol=lf
+
+# Short-range closeout artifacts have byte-level verification.
+reports/gfs_short_range_closeout_2026_11_24/*.csv text eol=lf
+reports/gfs_short_range_closeout_2026_11_24/*.json text eol=lf
+reports/gfs_short_range_closeout_2026_11_24/*.md text eol=lf

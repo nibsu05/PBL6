@@ -1,5 +1,7 @@
 # Web demo dự báo mưa Đà Nẵng — bản trình bày nhanh
 
+**Bản đồ nghiên cứu theo trạm ngày 24/11/2026** dùng đầu ra LightGBM B và mưa Vrain để đối chiếu. [Mở hướng dẫn bản đồ](station_map/README.md).
+
 Demo này là một website chạy bằng Python 3.10+ và thư viện chuẩn. Backend tự
 thu thập dự báo ECMWF IFS HRES qua Open-Meteo cho điểm nghiên cứu
 **16.0544°B, 108.2022°Đ** mỗi 30 phút. Mỗi lần lấy thành công được lưu thành

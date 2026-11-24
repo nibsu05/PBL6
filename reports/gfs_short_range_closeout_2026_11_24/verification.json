@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-11-24T05:21:31.982704+00:00",
+  "model": "B",
+  "fit_years": [
+    2021,
+    2024
+  ],
+  "calibration_year": 2025,
+  "evaluation_scope": "retrospective2026_modern",
+  "replay_rows": 43464,
+  "replayed_values": 260784,
+  "replay_input_includes_target": false,
+  "largest_absolute_replay_difference": 0.0,
+  "distinct_issue_dates": 280,
+  "stations": 57,
+  "model_freeze_sha256": "43d33cee87c3ff3a97d68fb1fe96b5ca8366be4eb84e03d772384db54ffd5d2a",
+  "frozen_model_artifacts": 119,
+  "preserved_files": 367,
+  "compared_blocks": [
+    7,
+    14,
+    28
+  ],
+  "draws_per_block": 5000,
+  "exploratory_contrasts_per_block": 6,
+  "comparison_2025_sha256": "87a7285881c2871e6bbe3b161d3343b17bd729df435f401b1c4844cdc98a095e",
+  "comparison_2026_sha256": "13e1570e80a0a4d664261d377b12ec9f29a80b59d10d2fa26ea777af6f58dcf7",
+  "source_sha256": {
+    "data/operational/gfs_training_window_2026_11_18/predictions_private.parquet": "ad0d123c431b627b4fada2ec613e82add8991de5ac81afef935017a16cf76dc6",
+    "data/operational/gfs_station_final_2026_11_17/holdout_predictions_private.parquet": "603ba7cf57e86ee9782c25f078e69a34ccf880e70662bab739b859823e3d9ac5",
+    "reports/gfs_station_final_2026_11_17/final_manifest.json": "456f745799a9c935acf36ba1d6aa47691dee1e0a58dbaa7e1c53ef6c766b81ec",
+    "reports/gfs_training_window_2026_11_18/point_metrics.csv": "20d23fbb197b95f44fc0080fdcf039c9ebe2c3d448cca8231f4733ccbf03f1de",
+    "reports/gfs_training_window_2026_11_18/event_metrics.csv": "f3826248791434921ce684ba45aaeae4f5b2ca8952ee700a3ca9df176166a1ae",
+    "reports/gfs_training_window_2026_11_18/probability_metrics.csv": "c508ff391be85ad8edae528e6660bc95e95aa36e3d5ea89d44c1a1ebe27b6def",
+    "reports/gfs_training_window_2026_11_18/selection.json": "fc3791b2a0ed2b5730d502b894b0a8f9c105a27e247990bd99073f15441802e1",
+    "reports/gfs_training_window_2026_11_18/protocol.json": "2647738ee9f5a4ae18b5e98aa8130ed93a83848e7190f219f1c1a4dd89294189",
+    "reports/gfs_training_window_2026_11_18/model_catalog.json": "9bae597386560b272301123420331430c592aefb06d9fc819c2239e8ec5f0488",
+    "reports/gfs_station_final_2026_11_17/point_metrics.csv": "e8a1c905d6505f207ddf74f20efb4516549250f5a660aa099eb081c836dc816d",
+    "reports/gfs_station_final_2026_11_17/paired_bootstrap.csv": "7e85b09b90b67f2aad98d0db4f3312bf43351a31fd4b25ec4318c08e3dbdf4de"
+  },
+  "model_refit": false,
+  "private_snapshot_sha256": "af893c2b65d40e0011da130b2096ca65c8b1ed8f12b9b14c56655013620c916e",
+  "private_snapshot_counts": [
+    55,
+    56
+  ]
+}
