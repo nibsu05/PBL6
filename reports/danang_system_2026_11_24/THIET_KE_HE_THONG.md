@@ -66,13 +66,17 @@ Sơ đồ dùng quan hệ logic. Parquet lưu bảng nghiên cứu và các bộ
 2. Lượt 20h05 tìm các bản đã đủ ba kỳ 24 giờ và thêm một giờ chờ số đo. Khi Vrain đủ, bước đối chiếu ghép đúng lượng thực đo của từng trạm và kỳ. Khi thiếu, nhật ký giữ trạng thái chờ.
 3. Bản giờ hiện có ở chế độ phát lại, với các lượt đã ghép được cùng giờ phát của bản ngày. Cần kiểm tra độ trễ Vrain và ghi lượt dự báo trước giờ phát để xác nhận chạy theo giờ thật.
 
-**Kiểm tra nguồn ngày 24/11/2026**
+**Nguyên nhân và kiểm tra phục hồi nguồn Vrain**
 
-| Kiểm tra | Kết quả | Ý nghĩa |
+| Mốc | Kết quả | Ý nghĩa |
 | --- | --- | --- |
-| Vrain cho ngày 24/11 lúc 20h20 và 22h20 | Danh mục 200 và có nhóm Đà Nẵng. Hai đường mưa giờ 404 | Phiên đọc được danh mục, tác vụ chưa lấy được số đo mới |
-| Vrain cho ngày 12/11 đã có trong kho | Hai đường xuất mưa giờ cũng trả 404 | Hiện tượng lặp lại với một ngày đã biết có số đo |
-| Kho mưa giờ trên máy | Mốc hợp lệ cuối là 19h 15/11, có số của 82 trạm | Web dùng các lượt đã lưu, với ngày phát và chế độ riêng |
-| GFS ở lần kiểm tra 22h20 | Đủ 19 chỉ mục cần thiết | Bước tra chỉ mục thành công. Kiểm tra và ghép nguồn Vrain vẫn là điều kiện phát |
+| Lần tải ngày 16/11/2026 | Đường cũ trả dữ liệu mưa. Ngày báo cáo 12/11 có 2.040 số đo giờ ở kênh hiện hành | Có mốc thành công và dữ liệu đối chiếu tại chỗ |
+| Lần kiểm tra đường cũ ngày 24/11 | Danh mục 200. Hai đường mưa giờ dưới /api trả 404 kèm trang HTML “Portal”, kể cả ngày 12/11 | Phản hồi tại bước lấy mưa là trang web thay cho bảng số đo |
+| Yêu cầu của giao diện Vrain hiện tại | Đường chi tiết dưới /d trả JSON phân trang với cột trạm và các hàng giờ | Bộ thu PBL6 chuyển sang đường mà giao diện hiện tại đang dùng |
+| Kiểm chứng ngày 24/11 lúc 22h41 | Cả hai đường mới trả 200. Kênh hiện hành có 84 trạm ở mốc 19h 24/11. GFS đủ 19 chỉ mục | Đã lấy lại được mưa giờ ở bước kiểm tra nguồn |
 
-Ưu tiên làm lại đường thu **Đà Nẵng**. Có thể đối chiếu một tuần đã có trong kho với file do Vrain xuất hoặc dữ liệu được cấp qua Open API. Đối chiếu theo từng trạm và giờ giúp xác nhận đơn vị, độ đầy đủ và độ trễ trước khi ghép vào luồng phát. [VRain Open API](https://dev.vrain.vn/)
+Đã đối chiếu theo trạm và giờ trên hai ngày 14/10/2025 và 12/11/2026. Cả 4.008 giá trị có số và các vị trí thiếu đều khớp kho cũ. Một trạm đổi mã xuất. UUID, số sê-ri và tọa độ trong danh mục vẫn khớp, nên bộ thu giữ mã chuẩn của dự án. Các trang phản hồi gốc và dấu kiểm tra tệp được lưu riêng cùng dữ liệu đã chuẩn hóa.
+
+Tệp bổ sung mưa giờ cho chín ngày báo cáo 16–24/11 có 18.576 hàng trạm–giờ. Trong đó 18.216 hàng có số đạt kiểm tra và 360 hàng thiếu. Mưa hợp lệ trải từ giờ kết thúc 20h ngày 15/11 tới 19h ngày 24/11. Tệp lưu tại `data/operational/vrain_recent_danang_2026_11_24/PBL6_MUA_TRAM_GIO_BO_SUNG_2026_11_16_24.parquet`.
+
+Tác vụ kiểm tra nguồn, thu đầu vào nhánh ngày và đối chiếu dùng đường mới. Mốc kiểm tra phục hồi diễn ra sau 19h. Việc kiểm chứng một lần phát trực tiếp cần thực hiện khi đến kỳ tiếp theo và ghi giờ thực nhận trước giờ phát. Open API là lựa chọn để tích hợp dài hạn theo khóa được cấp nếu nhóm cần một giao diện dành riêng cho hệ thống tự động. [VRain Open API](https://dev.vrain.vn/)

@@ -20,7 +20,7 @@ Chạy lệnh ở thư mục gốc dự án.
 
 Mở **http://127.0.0.1:8766/** và chọn **Đăng nhập**. Lần đầu, chọn tên và mật khẩu riêng cho web. Các lần sau dùng đúng tài khoản này. Nếu thiếu tệp phát lại, chạy `.venv\Scripts\python.exe -X utf8 scripts/close_short_range.py` để tạo lại từ bản nghiên cứu đã khóa. Bản đồ nền cần kết nối mạng.
 
-Tạo lịch sử ngày bằng `.venv\Scripts\python.exe -X utf8 scripts/prepare_station_map_history.py`. Sau đó chạy `.venv\Scripts\python.exe -X utf8 scripts/prepare_station_nowcast_replay.py --align-daily` để xuất bản giờ từ trọng số đã khóa, cùng giờ phát với các lượt ngày lưu sẵn. Hai nhánh hiện có **9 lượt chung**, gồm **05–12/11/2026** và lượt minh họa mưa lớn **07/10/2026**. Vrain trong kho cục bộ có số hợp lệ tới **19h ngày 15/11/2026**.
+Tạo lịch sử ngày bằng `.venv\Scripts\python.exe -X utf8 scripts/prepare_station_map_history.py`. Sau đó chạy `.venv\Scripts\python.exe -X utf8 scripts/prepare_station_nowcast_replay.py --align-daily` để xuất bản giờ từ trọng số đã khóa, cùng giờ phát với các lượt ngày lưu sẵn. Hai nhánh hiện có **9 lượt chung**, gồm **05–12/11/2026** và lượt minh họa mưa lớn **07/10/2026**. Tệp mưa giờ bổ sung ở `data/operational/vrain_recent_danang_2026_11_24/` có số hợp lệ đến **19h ngày 24/11/2026**.
 
 Ứng dụng hiện nghe trên máy này qua `127.0.0.1`. Tài khoản được lưu dưới dạng băm có salt. Phiên đăng nhập hết hạn sau 8 giờ hoặc khi khởi động lại máy chủ. Hồ sơ tài khoản tại `data/operational/station_map_web/` nằm ngoài Git.
 
@@ -52,7 +52,7 @@ Lượt 18h40 kiểm tra GFS khởi tạo 07h và Vrain tới mốc quan trắc 
 
 Lượt 20h05 kiểm tra các lần phát đã đủ 72 giờ cộng 1 giờ chờ số đo. Nếu chưa có đủ nhãn, có thể kiểm tra lại vào ngày sau. Các lần tải dở được lưu riêng để truy vết. Nhật ký truy vấn, lần phát và đối chiếu nằm trong `data/operational/station_map_web/daily/` và thư mục `live/` của bản nghiên cứu. Không có bước huấn luyện lại tự động.
 
-Ngày 24/11/2026, đã tải và giải mã đủ 19 trường GFS tại 57 trạm. Lần kiểm tra lúc 17h19 thấy đủ chỉ mục. Sau khi làm mới phiên Vrain, danh mục có quyền xem nhóm Đà Nẵng vẫn trả HTTP 200, còn cả hai kênh xuất mưa giờ trả HTTP 404. Tác vụ hằng ngày có thể thử làm mới phiên nếu danh mục trả 401/403. Lỗi đường xuất còn tồn tại sau làm mới phiên nên chưa bổ sung được số đo gần đây. Web hiển thị các lượt phát lại có ghi ngày phát. [Sản phẩm GFS của NOAA](https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).
+Ngày 24/11/2026, đã tải và giải mã đủ 19 trường GFS tại 57 trạm. Đường chi tiết Vrain cũ trả 404, trong khi giao diện hiện tại dùng báo cáo phân trang trên đường mới. Tác vụ đã đọc thành công cả hai kênh mới lúc 22h41. Kênh hiện hành có số ở 84 trạm tại mốc 19h. Web có thể xem các lượt phát lại với ngày phát gốc. Kiểm tra lần phát trực tiếp cần số đo đến đúng giờ trong kỳ theo lịch. [Bằng chứng phục hồi Vrain](../../reports/danang_system_2026_11_24/THIET_KE_HE_THONG.md#khi-nguồn-thiếu-hệ-thống-xử-lý-thế-nào) · [Sản phẩm GFS của NOAA](https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).
 
 ## Tham khảo giao diện
 

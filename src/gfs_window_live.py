@@ -15,7 +15,8 @@ import pandas as pd
 import requests
 
 from src.gfs_window import ROOT, BASE, PUBLIC, VRAIN, OLD, FEATURES, now, sha, write_json, read_json, save_parquet
-from src.vrain_download import load_session, ORIGIN, process_lock
+from src.vrain_download import load_session, process_lock
+from src.vrain_station_hours import current_modern_aliases, fetch_station_hours, fetch_station_inventory
 from src.gfs_station import (RAIN_LEADS,MET_LEADS,MET_FIELDS,choose_records,parse_index,
     range_groups,regular_grid_weights,rainfall_windows)
 from src.gfs_daily import gauge_history
@@ -75,29 +76,47 @@ def parse_live_day(payload,day,aliases,station_ids):
     return dict(raw=values.astype('float32'),valid=np.isfinite(values)&~bad[None,:],times=times,bad=bad)
 
 
-def source_context():
-    registry=pd.read_csv(VRAIN/'station_registry_private.csv',dtype={'legacy_id':str,'modern_id':str})
+def source_context(inventory=None):
+    registry=pd.read_csv(VRAIN/'station_registry_private.csv',dtype={'legacy_id':str,'modern_id':str},
+        float_precision='round_trip')
     aliases={c:dict(zip(registry.loc[registry[c+'_id'].notna(),c+'_id'],registry.loc[registry[c+'_id'].notna(),'canonical_id'])) for c in ('legacy','modern')}
     groups=read_json(VRAIN/'groups_modern_current_private.json')
     group=[g for g in groups if any(int(s.get('groupId',-1))==29 for s in g.get('stats',[]))]
     if len(group)!=1 or not group[0].get('groupOrgUuid'):raise ValueError('Authorized organization absent')
-    return registry,aliases,group[0]['groupOrgUuid']
+    organization=group[0]['groupOrgUuid']
+    if inventory is not None:
+        aliases['modern']=current_modern_aliases(registry,inventory,organization)
+    return registry,aliases,organization
+
+
+def load_live_sources(session):
+    try:
+        return source_context(fetch_station_inventory(session))
+    except requests.HTTPError as error:
+        if error.response is not None and error.response.status_code in (401,403):
+            raise PermissionError('Vrain session requires renewal') from error
+        raise
 
 
 def fetch_gauge(session,org,channel,day,directory):
     started=now()
-    if channel=='legacy':
-        response=session.get(ORIGIN+'/api/vrain/private/v1/groups/29/stats/details',params={'from':day,'to':day},timeout=(15,45))
-    else:
-        response=session.get(ORIGIN+'/api/kttv/private/v1/organizations/details',params={'from':day,'to':day,'i':'_1h'},headers={'x-org-uuid':org},timeout=(15,45))
+    try:
+        payload,raw=fetch_station_hours(session,day,channel,org,timeout=(15,45))
+    except requests.HTTPError as error:
+        if error.response is not None and error.response.status_code in (401,403):
+            raise PermissionError('Vrain session requires renewal') from error
+        raise
     received=now()
-    if response.status_code in (401,403):raise PermissionError('Vrain session requires renewal')
-    response.raise_for_status();payload=response.json()
-    # Store response body privately, never headers/cookies/credentials.
+    # Keep the unmodified pages as well as the normalized table used for QC.
+    source_pages=[]
+    for index,page in enumerate(raw,1):
+        source=directory/f'{channel}_{day}.page{index}.json.gz'
+        source.write_bytes(gzip.compress(page))
+        source_pages.append(dict(file=source.name,sha256=sha(source)))
     path=directory/f'{channel}_{day}.json.gz'
-    path.write_bytes(gzip.compress(response.content))
+    path.write_bytes(gzip.compress(json.dumps(payload,ensure_ascii=False).encode('utf-8')))
     record=dict(channel=channel,day=day,request_started_utc=started,retrieved_utc=received,
-        http_status=response.status_code,sha256=sha(path),file=path.name)
+        http_status=200,sha256=sha(path),file=path.name,route='paged_web',source_pages=source_pages)
     return payload,record
 
 
@@ -188,13 +207,13 @@ def record_issue(day):
     dest=root/'issuances'/issue.strftime('%Y%m%dT%H%M%SZ')
     if dest.exists():raise FileExistsError('Immutable issuance already exists')
     attempt=root/'attempts'/(pd.Timestamp.now(tz='UTC').strftime('%Y%m%dT%H%M%S')+'_'+uuid.uuid4().hex[:8]);attempt.mkdir(parents=True)
-    registry,aliases,org=source_context();ids=registry.canonical_id.tolist()
-    cohort=registry[registry.canonical_id.isin(pd.read_csv(OLD/'cohort_private.csv').canonical_id)].sort_values('canonical_id').reset_index(drop=True)
     parsed={};records=[]
     with process_lock(root/'record.lock'):
         try:
-            gfs,gfs_record=fetch_gfs(issue.strftime('%Y%m%d'),cohort,attempt)
             session=load_session(VRAIN/'session.dpapi')
+            registry,aliases,org=load_live_sources(session);ids=registry.canonical_id.tolist()
+            cohort=registry[registry.canonical_id.isin(pd.read_csv(OLD/'cohort_private.csv').canonical_id)].sort_values('canonical_id').reset_index(drop=True)
+            gfs,gfs_record=fetch_gfs(issue.strftime('%Y%m%d'),cohort,attempt)
             dates=pd.date_range(pd.Timestamp(day)-pd.Timedelta(days=7),pd.Timestamp(day)).strftime('%Y-%m-%d')
             for d in dates:
                 for channel in ('legacy','modern'):
@@ -230,8 +249,9 @@ def probe():
     """One current successful/failed retrieval is evidence of availability now only."""
     directory=BASE/'live/probes'/(pd.Timestamp.now(tz='UTC').strftime('%Y%m%dT%H%M%S')+'_'+uuid.uuid4().hex[:8])
     directory.mkdir(parents=True)
-    registry,aliases,org=source_context();day=pd.Timestamp.now(tz='Asia/Ho_Chi_Minh').strftime('%Y-%m-%d')
-    session=load_session(VRAIN/'session.dpapi');rows=[]
+    session=load_session(VRAIN/'session.dpapi')
+    registry,aliases,org=load_live_sources(session);day=pd.Timestamp.now(tz='Asia/Ho_Chi_Minh').strftime('%Y-%m-%d')
+    rows=[]
     for channel in ('legacy','modern'):
         try:
             payload,r=fetch_gauge(session,org,channel,day,directory)
@@ -260,7 +280,8 @@ def probe():
 def verify_due():
     """Observe future truth only after all three windows close; never refit models."""
     from src.gfs_final_metrics import summary_tables
-    registry,aliases,org=source_context();session=load_session(VRAIN/'session.dpapi')
+    session=load_session(VRAIN/'session.dpapi')
+    registry,aliases,org=load_live_sources(session)
     results=[]
     for folder in sorted((BASE/'live/issuances').glob('*')):
         manifest=read_json(folder/'issuance.json')

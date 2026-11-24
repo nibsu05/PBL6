@@ -205,50 +205,41 @@ def check_vrain(now):
     import requests
     from src.gfs_window import VRAIN
     from src.gfs_window_live import parse_live_day, source_context
-    from src.vrain_download import ORIGIN, load_session
+    from src.vrain_download import load_session
+    from src.vrain_station_hours import fetch_station_hours, fetch_station_inventory
 
     day = now.date().isoformat()
-    registry, aliases, organization = source_context()
-    stations = registry.canonical_id.tolist()
     channels = {}
-    access = {}
+    access = dict(kind='station_hours', day=day, route='paged_web', channels=channels)
     with load_session(VRAIN / 'session.dpapi') as session:
-        for channel, endpoint, headers, extra in [
-            ('modern', '/api/kttv/private/v1/organizations/details', {'x-org-uuid': organization}, {'i': '_1h'}),
-            ('legacy', '/api/vrain/private/v1/groups/29/stats/details', {}, {}),
-        ]:
+        try:
+            inventory = fetch_station_inventory(session)
+            access['inventory_http_status'] = 200
+            registry, aliases, organization = source_context(inventory)
+        except requests.HTTPError as error:
+            status = error.response.status_code if error.response is not None else None
+            return dict(**access, status='error', inventory_http_status=status, authorized_group=False)
+        except (requests.RequestException, ValueError, KeyError, TypeError) as error:
+            return dict(**access, status='error', authorized_group=False, error_type=type(error).__name__)
+        access['authorized_group'] = True
+        stations = registry.canonical_id.tolist()
+        for channel in ('modern', 'legacy'):
             try:
-                response = session.get(ORIGIN + endpoint, params={'from': day, 'to': day, **extra},
-                                       headers=headers, timeout=(6, 12))
-                status = response.status_code
-                if status != requests.codes.ok:
-                    channels[channel] = dict(status='error', http_status=status)
-                    continue
-                parsed = parse_live_day(response.json(), day, aliases[channel], stations)
+                payload, _ = fetch_station_hours(session, day, channel, organization)
+                parsed = parse_live_day(payload, day, aliases[channel], stations)
                 clocks = parsed['times'].tz_localize(VIETNAM)
                 released = (clocks <= datetime.now(VIETNAM)) & parsed['valid'].any(axis=1)
-                channels[channel] = dict(status='ok' if released.any() else 'waiting', http_status=status,
+                channels[channel] = dict(status='ok' if released.any() else 'waiting', http_status=200,
                                          stations=int(parsed['valid'][released].any(axis=0).sum()),
                                          last_hour=clocks[released].max().isoformat() if released.any() else None)
+            except requests.HTTPError as error:
+                status = error.response.status_code if error.response is not None else None
+                channels[channel] = dict(status='error', http_status=status)
             except (requests.RequestException, ValueError, KeyError, TypeError) as error:
                 channels[channel] = dict(status='error', error_type=type(error).__name__)
-        if any(item.get('http_status') == 404 for item in channels.values()):
-            # Export routes can return 404 even with an expired session. Check the
-            # authenticated inventory separately using its established endpoint.
-            try:
-                inventory = session.get(ORIGIN + '/api/vrain/private/v2/stats/summary', timeout=(6, 12))
-                access['inventory_http_status'] = inventory.status_code
-                if inventory.ok:
-                    groups = inventory.json()
-                    access['authorized_group'] = isinstance(groups, list) and any(
-                        str(row.get('groupId')) == '29' for group in groups if isinstance(group, dict)
-                        for row in group.get('stats', []) if isinstance(row, dict)
-                    )
-            except (requests.RequestException, ValueError, TypeError):
-                access['authorized_group'] = None
     representative = max(channels.values(),
                          key=lambda item: (item.get('last_hour') or '', item['status'] == 'waiting'))
-    return dict(kind='station_hours', day=day, channels=channels, **access, **representative)
+    return dict(**access, **representative)
 
 
 def probe_sources(started):
