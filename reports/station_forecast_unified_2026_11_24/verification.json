@@ -1,0 +1,45 @@
+{
+  "status": "verified_locked_inputs_and_paired_keys",
+  "stations": 57,
+  "hourly_19h_origins": 20358,
+  "daily_19h_origins": 18723,
+  "aligned_origins": 18719,
+  "aligned_issues": 362,
+  "aligned_hourly_outputs": 112314,
+  "aligned_daily_outputs": 56157,
+  "replay_count": 10,
+  "replay_joint": 9,
+  "daily_capacity": {
+    "stations_with_structural_window": 79,
+    "extra_hourly_station_count": 22,
+    "extra_with_structural_daily_train": 22,
+    "extra_daily_train_windows": 3106,
+    "extra_min_windows": 75,
+    "extra_max_windows": 160,
+    "extra_min_complete_days": 136,
+    "extra_max_complete_days": 191,
+    "extra_below_365_days": 22,
+    "extra_below_30_wet_days": 0
+  },
+  "consistency_2025": {
+    "n": 18719,
+    "forecasts_exceed": 0.3077621667824136,
+    "forecasts_exceed_count": 5761,
+    "forecasts_exceed_by_1mm": 732,
+    "max_forecast_excess_mm": 52.31906985461652,
+    "observations_exceed_by_tolerance": 0
+  },
+  "consistency_replay_2026": {
+    "n": 501,
+    "forecasts_exceed": 0.023952095808383235,
+    "forecasts_exceed_count": 12,
+    "forecasts_exceed_by_1mm": 3,
+    "max_forecast_excess_mm": 9.471855477807338,
+    "observations_exceed_by_tolerance": 0
+  },
+  "source_sha256": {
+    "hourly_2025": "453370121e5863b576ec37ace490b3d43fa9ce3024876af9d1b32095b8f2f924",
+    "daily_holdout": "603ba7cf57e86ee9782c25f078e69a34ccf880e70662bab739b859823e3d9ac5",
+    "daily_full_candidate_data": "17c6b220fa4b275cfde46f8ba52f3c068d42950fc0f272fcf8b2dd68dcfc1768"
+  }
+}

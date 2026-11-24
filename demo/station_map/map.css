@@ -9,6 +9,8 @@
   --accent-light: #e6f3f1;
   --series-lightgbm: #167981;
   --series-gfs: #6378a6;
+  --series-bilstm: #6378a6;
+  --series-persistence: #8b7139;
   --series-vrain: #b76934;
 }
 * { box-sizing: border-box; }

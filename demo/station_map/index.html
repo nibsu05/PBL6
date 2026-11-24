@@ -25,10 +25,9 @@
     <header class="map-top">
       <a class="map-brand" href="/">
         <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span>Mưa Đà Nẵng <small>Dự báo 1–3 ngày</small></span>
+        <span>Mưa Đà Nẵng <small>Dự báo theo giờ và theo ngày</small></span>
       </a>
       <div class="map-account">
-        <a class="map-nav" href="/cuc-ngan">1–6 giờ</a>
         <a class="map-nav" href="/dashboard" id="monitor-link" hidden>Theo dõi <span id="admin-badge" class="admin-count" hidden></span></a>
         <a class="map-login" id="account-link" href="/login">Đăng nhập</a>
         <span id="account-name" hidden></span>
@@ -63,6 +62,11 @@
         <label for="issue">Lần phát dự báo</label>
         <select id="issue"></select>
         <p id="issue-meta" class="source-caption"></p>
+        <label for="station-scope">Phạm vi trạm</label>
+        <select id="station-scope">
+          <option value="common">Trạm chung của hai nhánh</option>
+          <option value="all">Toàn bộ trạm theo hạn</option>
+        </select>
         <div class="map-view-picker" role="group" aria-label="Cách hiển thị">
           <button data-view="area" type="button" aria-pressed="true">Theo khu vực</button>
           <button data-view="station" type="button" aria-pressed="false">Theo trạm</button>
@@ -70,6 +74,8 @@
         <p id="layer-label" class="map-label">Lớp hiển thị</p>
         <div class="map-layers" role="group" aria-labelledby="layer-label">
           <button data-layer="lightgbm" style="--layer-color: #1387a0" type="button" aria-pressed="true">LightGBM</button>
+          <button data-layer="bilstm" style="--layer-color: #5f75ae" type="button" aria-pressed="false" hidden>Bi-LSTM R</button>
+          <button data-layer="persistence" style="--layer-color: #9a7534" type="button" aria-pressed="false" hidden>Giữ mưa vừa đo</button>
           <button data-layer="gfs" style="--layer-color: #5f75ae" type="button" aria-pressed="false">GFS</button>
           <button data-layer="probability" style="--layer-color: #cb7e32" type="button" aria-pressed="false">Xác suất mưa ≥50 mm</button>
           <button data-layer="vrain" style="--layer-color: #30796c" type="button" aria-pressed="false" hidden>Vrain thực đo</button>
@@ -88,7 +94,7 @@
           <select id="station"></select>
           <button id="open-station" class="map-tool" type="button">Xem</button>
         </div>
-        <a class="map-secondary-link" id="export-forecast" href="/api/export.csv" hidden>Tải bảng của ngày đang xem ↓</a>
+        <a class="map-secondary-link" id="export-forecast" href="/api/export-forecast.csv" hidden>Tải bảng của kỳ đang xem ↓</a>
       </aside>
 
       <aside id="rain-panel" class="map-panel rain-panel" aria-labelledby="rain-title" hidden>
@@ -105,7 +111,7 @@
             <input id="area-search" type="search" aria-label="Tìm xã, phường" placeholder="Tìm xã, phường">
             <select id="area-filter" aria-label="Lọc khu vực">
               <option value="rain">Có mưa</option>
-              <option value="10">Từ 10 mm</option>
+              <option value="heavy" id="area-heavy-filter">Từ 10 mm</option>
               <option value="data">Có số liệu</option>
               <option value="missing">Chưa có số</option>
               <option value="all">Tất cả</option>
@@ -115,14 +121,14 @@
             <table class="rain-table">
               <thead><tr>
                 <th scope="col">Xã, phường</th>
-                <th scope="col">Cao nhất<small>mm/24 giờ</small></th>
+                <th scope="col">Cao nhất<small id="area-unit">mm/24 giờ</small></th>
                 <th scope="col">Trạm<small>có số / tổng</small></th>
               </tr></thead>
               <tbody id="rain-rows"></tbody>
             </table>
             <p id="rain-empty" class="rain-empty" hidden></p>
           </div>
-          <p class="rain-note">Danh sách có mưa khi ít nhất một trạm được dự báo từ 1 mm/24 giờ. Số liệu theo LightGBM.</p>
+          <p class="rain-note" id="area-note"></p>
         </div>
         <div id="area-detail" class="area-detail" hidden>
           <button id="back-to-rain" class="rain-back" type="button">← Danh sách khu vực</button>
@@ -138,7 +144,7 @@
           <button id="close-station" class="panel-close" type="button" aria-label="Đóng thông tin trạm">×</button>
         </div>
         <div id="station-detail" aria-live="polite"></div>
-        <figure id="station-chart" class="station-chart" aria-label="Lượng mưa ba ngày tại trạm" hidden></figure>
+        <figure id="station-chart" class="station-chart" aria-label="Lượng mưa dự báo tại trạm" hidden></figure>
         <a class="map-secondary-link" id="station-verify" href="/dashboard" hidden>Xem thông tin đối chiếu →</a>
       </aside>
 
@@ -157,14 +163,11 @@
         <div class="timeline-summary">
           <h2 id="map-title">Lượng mưa dự báo · LightGBM</h2>
           <p id="period" aria-live="polite"></p>
+          <p id="period-note"></p>
         </div>
-        <input id="horizon-slider" class="horizon-slider" type="range" min="1" max="3" step="1" value="1"
+        <input id="horizon-slider" class="horizon-slider" type="range" min="1" max="9" step="1" value="1"
                aria-label="Chọn hạn dự báo">
-        <div class="timeline-days" role="group" aria-label="Chọn hạn dự báo">
-          <button data-day="1" type="button" aria-pressed="true">Ngày 1 <small></small></button>
-          <button data-day="2" type="button" aria-pressed="false">Ngày 2 <small></small></button>
-          <button data-day="3" type="button" aria-pressed="false">Ngày 3 <small></small></button>
-        </div>
+        <div id="period-steps" class="timeline-steps" role="group" aria-label="Chọn hạn dự báo"></div>
       </section>
     </section>
   </main>

@@ -47,7 +47,7 @@ window.PBL6Areas = (() => {
     return {shapes, unmatched};
   }
 
-  function summarizeArea(area, points, read, magnitude = false) {
+  function summarizeArea(area, points, read, magnitude = false, rainThreshold = 1) {
     const readings = area.stationIds.map((id) => ({id, value: read(points.get(id))}));
     const valid = readings.filter(({value}) => Number.isFinite(value));
     const best = valid.reduce((peak, item) => {
@@ -56,7 +56,7 @@ window.PBL6Areas = (() => {
     }, null);
     return {readings, valid: valid.length, value: best?.value ?? null,
             minimum: valid.length ? Math.min(...valid.map(({value}) => value)) : null,
-            rainy: valid.filter(({value}) => value >= 1).length};
+            rainy: valid.filter(({value}) => value >= rainThreshold).length};
   }
 
   function simplifyName(value) {

@@ -35,3 +35,11 @@ test("the difference view preserves the sign of the largest error", () => {
   strictEqual(summarizeArea(area, points, (value) => value, true).value, -44);
   strictEqual(simplifyName("Đà Nẵng"), "da nang");
 });
+
+test("a one-hour display can use an independent rain threshold", () => {
+  const area = {stationIds: ["trace", "dry", "missing"]};
+  const points = new Map([["trace", .2], ["dry", 0]]);
+  strictEqual(summarizeArea(area, points, (value) => value).rainy, 0);
+  const hour = summarizeArea(area, points, (value) => value, false, .1);
+  deepStrictEqual([hour.rainy, hour.valid, hour.value], [1, 2, .2]);
+});

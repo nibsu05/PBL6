@@ -1,12 +1,14 @@
 # Web dự báo mưa tại trạm
 
-Bản đồ **LightGBM B** mở mặc định theo xã, phường, với bảng **Nơi dự kiến có mưa** ở bên phải. Trên điện thoại, bấm **Nơi có mưa** để mở bảng trượt từ dưới. Dùng thanh ngày để chọn một trong ba khoảng 24 giờ. Có thể tìm theo tên, lọc nơi từ 10 mm hoặc xem các khu vực chưa có số. Bấm tên để xem khu vực và các trạm bên trong. Mở **Công cụ → Theo trạm** để xem mọi điểm và biểu đồ ba ngày.
+Bản đồ dùng một thanh **1h, 2h, 3h, 4h, 5h, 6h, Ngày 1, Ngày 2, Ngày 3**. Mỗi ô giờ là lượng của 1 giờ riêng. Ngày 1 tính đủ 24 giờ từ lúc phát và bao gồm sáu giờ đầu. Giờ hiệu lực, đơn vị, trạng thái và số trạm có số thay đổi theo hạn đã chọn.
 
-Thanh trượt ngang ở cuối bản đồ chọn **Ngày 1, 2 hoặc 3**, ghi ngày kết thúc và giờ hiệu lực của từng khoảng. Dãy **Lượt đã lưu** gồm ngày phát mới nhất có dữ liệu và bảy ngày trước đó. Bấm **Ngày gần đây** để xem tình trạng các lượt quanh ngày hiện tại. Ngày thiếu bản được đánh dấu và không chọn được. Ngày hiện tại trước 19h có nhãn **Chờ 19h**. Một lượt hồi cứu đã chọn vẫn mang ngày và nhãn phát lại khi chuyển dãy.
+Giao diện mặc định dùng **57 trạm chung** và lớp xã, phường cho cả hai nhánh. Mở **Công cụ → Phạm vi trạm** để hiện toàn bộ 79 trạm giờ hoặc 57 trạm ngày. **Nơi có mưa** mở danh sách khu vực, có tìm tên, lọc ngưỡng theo kỳ và xem số trạm. Chọn **Theo trạm** để xem dự báo từng mô hình và đối chiếu tổng sáu giờ với Ngày 1. Trên màn hình nhỏ, bảng khu vực mở từ dưới.
 
-Màu khu vực dùng lượng cao nhất trong các trạm hợp lệ nằm trong ranh giới. Bảng xếp theo lượng LightGBM cao nhất và lọc **Có mưa** khi có ít nhất một trạm đạt 1 mm/24 giờ. Cột Trạm cho biết số có dự báo trên tổng số trạm thuộc khu vực. Vùng xám chưa có số cho lớp đang xem. Lớp xác suất lấy giá trị cao nhất tại trạm, còn lớp sai lệch lấy giá trị tại trạm có độ lệch tuyệt đối lớn nhất, giữ dấu. Các đại lượng này tóm tắt kết quả tại các điểm trạm trong ranh giới.
+Dãy **Lượt đã lưu** chọn lượt mới nhất và bảy ngày trước. Bấm **Ngày gần đây** để xem lịch quanh ngày hiện tại. Khi một lượt chỉ có một nhánh, các kỳ còn lại hiển thị thiếu và có số trạm bằng 0. Các lượt phát lại có ngày thật và nhãn riêng từng kỳ.
 
-Sau đăng nhập, có thêm Vrain thực đo, lớp sai lệch, tải CSV và trang theo dõi. Ba lớp lượng mưa dùng chung thang màu. Lớp **Sai lệch** tính LightGBM trừ Vrain. Xanh là dự báo thiếu, cam là dự báo thừa. Từ danh sách trạm có sai lệch lớn nhất có thể mở đúng lượt, ngày và trạm trên bản đồ.
+Màu khu vực dùng lượng cao nhất trong các trạm hợp lệ nằm trong ranh giới. Lọc **Có mưa** theo mức 0,1 mm trong giờ hoặc 1 mm trong 24 giờ tại ít nhất một trạm. Vùng xám chưa có số cho lớp đang xem. Lớp xác suất ngày lấy giá trị cao nhất tại trạm, lớp sai lệch lấy độ lệch tuyệt đối lớn nhất và giữ dấu.
+
+Nhánh giờ có LightGBM R, Bi-LSTM R và giữ mưa vừa đo. Nhánh ngày có LightGBM B, GFS và xác suất đạt 50 mm trong 24 giờ. Sau đăng nhập có Vrain thực đo, sai lệch và CSV của đúng kỳ, phạm vi đang xem. Trang Theo dõi vẫn cho đối chiếu theo lượt ngày và xem trạng thái nguồn.
 
 ## Mở web
 
@@ -18,7 +20,7 @@ Chạy lệnh ở thư mục gốc dự án.
 
 Mở **http://127.0.0.1:8766/** và chọn **Đăng nhập**. Lần đầu, chọn tên và mật khẩu riêng cho web. Các lần sau dùng đúng tài khoản này. Nếu thiếu tệp phát lại, chạy `.venv\Scripts\python.exe -X utf8 scripts/close_short_range.py` để tạo lại từ bản nghiên cứu đã khóa. Bản đồ nền cần kết nối mạng.
 
-Lấy bảy lượt phát lại liền trước bằng `.venv\Scripts\python.exe -X utf8 scripts/prepare_station_map_history.py`. Trình tạo kiểm tra tệp dự báo đã khóa và lưu `past_week_private.json` cùng thư mục bản phát lại. Bộ hiện có các lượt ghi ngày phát từ **05–12/11/2026**. Nguồn Vrain đối chiếu có số hợp lệ tới **19h ngày 15/11/2026**.
+Tạo lịch sử ngày bằng `.venv\Scripts\python.exe -X utf8 scripts/prepare_station_map_history.py`. Sau đó chạy `.venv\Scripts\python.exe -X utf8 scripts/prepare_station_nowcast_replay.py --align-daily` để xuất bản giờ từ trọng số đã khóa, cùng giờ phát với các lượt ngày lưu sẵn. Hai nhánh hiện có **9 lượt chung**, gồm **05–12/11/2026** và lượt minh họa mưa lớn **07/10/2026**. Vrain trong kho cục bộ có số hợp lệ tới **19h ngày 15/11/2026**.
 
 Ứng dụng hiện nghe trên máy này qua `127.0.0.1`. Tài khoản được lưu dưới dạng băm có salt. Phiên đăng nhập hết hạn sau 8 giờ hoặc khi khởi động lại máy chủ. Hồ sơ tài khoản tại `data/operational/station_map_web/` nằm ngoài Git.
 
@@ -38,13 +40,9 @@ Nguồn ranh giới tham chiếu là tinhthanhpho.com, bản 2026.10.8 theo đơ
 
 ## Đầu ra cho giao diện
 
-`GET /api/short-range` ghép các lượt dự báo trực tiếp đã qua kiểm tra với các bản phát lại lưu nội bộ. Bản đồ và bảng đối chiếu kiểm tra đầu ra mới mỗi 90 giây khi đang mở. Nếu đã chọn một lượt thì vẫn giữ đúng lượt đó. API khách chỉ trả đầu ra dự báo cho bản đồ. Vrain thực đo, MOS, trạng thái nguồn, bảng kiểm chứng và CSV cần phiên đăng nhập. Tệp dữ liệu và kết quả từng trạm nằm ngoài Git.
+`GET /api/forecast` ghép theo thời điểm phát, đưa đủ chín vị trí trên thanh và giữ riêng trường thời lượng, chế độ và khoảng hiệu lực của mỗi kỳ. Khách xem dự báo. CSV ở `/api/export-forecast.csv` và thực đo cần phiên đăng nhập. Bản đồ kiểm tra cập nhật mỗi 90 giây khi mở trang. Đường dẫn cũ `/cuc-ngan` mở trực tiếp Giờ 1 ở bản đồ chung. Dashboard tiếp tục dùng đầu ra ngày tại `/api/short-range`.
 
-### Phát lại dự báo 1–6 giờ
-
-Mở **1–6 giờ** ở đầu bản đồ hoặc truy cập [trang cực ngắn](http://127.0.0.1:8766/cuc-ngan). Chọn lượt, giờ đích và mô hình. Đơn vị là lượng mm trong đúng một giờ. Bấm trạm để xem đủ sáu giờ. Khách xem dự báo lượng, tài khoản đăng nhập xem thêm mưa Vrain đã đo. Danh sách bên cạnh có tìm theo trạm và lọc theo lượng.
-
-API `GET /api/nowcast-replay` đọc bảy lượt hồi cứu 19h từ 04 đến 10/11/2026. Mỗi lượt có 78 trong 79 trạm đủ quan trắc kênh modern trong cửa sổ đầu vào. Tạo lại bản phát lại bằng `.venv\Scripts\python.exe -X utf8 scripts/prepare_station_nowcast_replay.py` khi có bộ trọng số đã khóa. [Kết quả kiểm định và cách chạy](../../reports/station_nowcast_2026_11_24/README.md).
+Xem [báo cáo và so sánh hai nhánh trên 57 trạm](../../reports/station_forecast_unified_2026_11_24/BAO_CAO_CHI_TIET.md).
 
 ## Dự báo mỗi ngày
 

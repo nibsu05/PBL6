@@ -9,12 +9,26 @@ const rainBins = [
   {limit: 100, label: "50–<100", color: "#355597"},
   {limit: Infinity, label: "≥100", color: "#332552"},
 ];
+const hourlyRainBins = [
+  {limit: .1, label: "<0,1", color: "#d7edf4"},
+  {limit: 1, label: "0,1–<1", color: "#9ad5df"},
+  {limit: 5, label: "1–<5", color: "#50b4bd"},
+  {limit: 10, label: "5–<10", color: "#147f92"},
+  {limit: Infinity, label: "≥10", color: "#355597"},
+];
 const differenceBins = [
   {match: (value) => value <= -50, label: "Thiếu ≥50", color: "#28577a"},
   {match: (value) => value < -10, label: "Thiếu >10 đến <50", color: "#89beda"},
   {match: (value) => value <= 10, label: "Lệch ≤10", color: "#e7eff2"},
   {match: (value) => value < 50, label: "Thừa >10 đến <50", color: "#f0ad73"},
   {match: () => true, label: "Thừa ≥50", color: "#aa451e"},
+];
+const hourlyDifferenceBins = [
+  {match: (value) => value <= -5, label: "Thiếu ≥5", color: "#28577a"},
+  {match: (value) => value < -1, label: "Thiếu >1 đến <5", color: "#89beda"},
+  {match: (value) => value <= 1, label: "Lệch ≤1", color: "#e7eff2"},
+  {match: (value) => value < 5, label: "Thừa >1 đến <5", color: "#f0ad73"},
+  {match: () => true, label: "Thừa ≥5", color: "#aa451e"},
 ];
 const probabilityBins = [
   {limit: 20, label: "0–<20", color: "#f4ebd8"},
@@ -25,24 +39,29 @@ const probabilityBins = [
 ];
 const rainLayers = {
   lightgbm: {title: "Lượng mưa dự báo · LightGBM", label: "LightGBM", field: "predicted_mm"},
+  bilstm: {title: "Lượng mưa dự báo · Bi-LSTM R", label: "Bi-LSTM R", field: "bilstm_mm"},
+  persistence: {title: "Giữ nguyên mưa giờ vừa đo", label: "Giữ mưa", field: "persistence_mm"},
   gfs: {title: "Lượng mưa dự báo · GFS", label: "GFS", field: "gfs_mm"},
   vrain: {title: "Lượng mưa thực đo · Vrain", label: "Vrain", field: "observed_mm"},
 };
 const privateLayers = ["vrain", "difference"];
-const stationSeries = Object.entries(rainLayers).map(([key, info]) => ({...info, key}));
 const amount = new Intl.NumberFormat("vi-VN", {maximumFractionDigits: 1});
+const hourAmount = new Intl.NumberFormat("vi-VN", {maximumFractionDigits: 2});
 const percent = new Intl.NumberFormat("vi-VN", {style: "percent", maximumFractionDigits: 1});
 const clockTime = new Intl.DateTimeFormat("vi-VN", {
-  timeZone: "Asia/Ho_Chi_Minh", hour: "2-digit", minute: "2-digit", hour12: false,
+  timeZone: "Asia/Ho_Chi_Minh", hour: "2-digit", minute: "2-digit", hourCycle: "h23",
   day: "2-digit", month: "2-digit", year: "numeric",
 });
 const calendarDate = new Intl.DateTimeFormat("vi-VN", {
   timeZone: "Asia/Ho_Chi_Minh", day: "2-digit", month: "2-digit", year: "numeric",
 });
+const timelineClock = new Intl.DateTimeFormat("vi-VN", {
+  timeZone: "Asia/Ho_Chi_Minh", hour: "2-digit", minute: "2-digit", hourCycle: "h23",
+});
 const mapError = element("map-error");
 const issueControl = element("issue");
 const stationControl = element("station");
-const dayButtons = Array.from(document.querySelectorAll("[data-day]"));
+const scopeControl = element("station-scope");
 const layerButtons = Array.from(document.querySelectorAll("[data-layer]"));
 const viewButtons = Array.from(document.querySelectorAll("[data-view]"));
 const {prepareAreas, summarizeArea, simplifyName} = window.PBL6Areas;
@@ -74,6 +93,44 @@ function localTime(iso) {
   return clockTime.format(new Date(iso));
 }
 
+function hourly() {
+  return currentWindow().hours === 1;
+}
+
+function periodName(window) {
+  return (window.hours === 1 ? "Giờ " : "Ngày ") + window.horizon;
+}
+
+function periodUnit() {
+  return hourly() ? "mm/1 giờ" : "mm/24 giờ";
+}
+
+function forecastModel() {
+  return hourly() ? "LightGBM R" : "LightGBM B";
+}
+
+function modelLayers() {
+  return hourly() ? ["lightgbm", "bilstm", "persistence"] : ["lightgbm", "gfs"];
+}
+
+function layerAllowed(key) {
+  if (privateLayers.includes(key)) return state.member;
+  return modelLayers().includes(key) || (key === "probability" && !hourly());
+}
+
+function layerLabel(key) {
+  return key === "lightgbm" ? forecastModel() : rainLayers[key].label;
+}
+
+function namedStation(id) {
+  const station = state.stationById.get(id);
+  return station && station.name !== id ? station.name + " · " + id : id;
+}
+
+function thresholds() {
+  return hourly() ? [.1, 5] : [1, 10];
+}
+
 function unitValue(value, unit = " mm", signed = false) {
   return value === null ? "—" : formatAmount(value, signed) + unit;
 }
@@ -99,16 +156,21 @@ function mapValue(point) {
 
 function formatAmount(value, signed = false) {
   if (value === null) return "—";
-  const rounded = Math.round(Math.abs(value) * 10) / 10;
+  const divisor = hourly() ? 100 : 10;
+  const rounded = Math.round(Math.abs(value) * divisor) / divisor;
   const sign = rounded === 0 ? "" : value < 0 ? "−" : signed ? "+" : "";
-  return sign + amount.format(rounded);
+  return sign + (hourly() ? hourAmount : amount).format(rounded);
+}
+
+function binsFor(kind) {
+  if (kind === "probability") return probabilityBins;
+  if (kind === "difference") return hourly() ? hourlyDifferenceBins : differenceBins;
+  return hourly() ? hourlyRainBins : rainBins;
 }
 
 function binFor(value, kind = state.mapLayer) {
   if (value === null) return null;
-  if (kind === "difference") return differenceBins.find(({match}) => match(value));
-  const bins = kind === "probability" ? probabilityBins : rainBins;
-  return bins.find(({limit}) => value < limit);
+  return binsFor(kind).find((bin) => bin.match ? bin.match(value) : value < bin.limit);
 }
 
 function makeLegend() {
@@ -116,17 +178,17 @@ function makeLegend() {
   list.replaceChildren();
   const showDifference = state.mapLayer === "difference";
   const showProbability = state.mapLayer === "probability";
-  const bins = showDifference ? differenceBins : showProbability ? probabilityBins : rainBins;
+  const bins = binsFor(state.mapLayer);
   const areaView = state.view === "area";
-  element("legend-title").textContent = showDifference ? "Sai lệch LightGBM − Vrain"
+  element("legend-title").textContent = showDifference ? "Sai lệch " + forecastModel() + " − Vrain"
     : showProbability ? "Xác suất dự báo" : areaView ? "Mưa cao nhất tại trạm" : "Dải lượng mưa";
-  element("legend-unit").textContent = showProbability ? "%" : "mm/24 giờ";
+  element("legend-unit").textContent = showProbability ? "%" : periodUnit();
   const note = element("legend-note");
   note.textContent = showDifference
     ? (areaView ? "Lấy độ lệch lớn nhất tại trạm. Xanh là thiếu, cam là thừa." : "Xanh là dự báo thiếu. Cam là dự báo thừa.")
     : showProbability
       ? (areaView ? "Màu theo xác suất cao nhất trong các trạm thuộc khu vực." : "Khả năng đạt 50 mm trong 24 giờ tại mỗi trạm.")
-      : areaView ? "Tổng hợp các trạm nằm trong ranh giới. Vùng xám chưa có số." : "Mỗi điểm biểu thị lượng mưa tại một trạm.";
+      : areaView ? "Màu theo trạm có lượng cao nhất trong xã, phường. Vùng xám chưa có số." : "Mỗi điểm biểu thị lượng mưa tại một trạm.";
   for (const bin of bins) {
     const item = add(list, "li");
     add(item, "span", "", "swatch").style.setProperty("--rain", bin.color);
@@ -186,8 +248,8 @@ function fitMap() {
   if (!map) return;
   const coordinates = state.view === "area"
     ? state.areas.filter(({code}) => code !== hoangSaCode).flatMap(({bounds: [w, s, e, n]}) => [[s, w], [n, e]])
-    : state.data.stations.map(({latitude, longitude}) => [latitude, longitude]);
-  map.fitBounds(coordinates, {...mapPadding(), maxZoom: 12, animate: false});
+    : state.activeStations.map(({latitude, longitude}) => [latitude, longitude]);
+  if (coordinates.length) map.fitBounds(coordinates, {...mapPadding(), maxZoom: 12, animate: false});
 }
 
 function showTools(open, focus = false) {
@@ -222,6 +284,7 @@ function changeView(view, fit = true) {
 }
 
 function showStation(id, pan = false) {
+  if (!state.stationById.has(id)) return;
   state.stationId = id;
   changeView("station", false);
   if (narrow.matches) showTools(false);
@@ -246,7 +309,10 @@ function syncUrl() {
   const url = new URL(window.location.href);
   if (!state.followLatest) url.searchParams.set("issue", state.selectedIssue.id);
   else url.searchParams.delete("issue");
-  url.searchParams.set("day", String(state.day));
+  url.searchParams.set("lead", currentWindow().lead);
+  url.searchParams.delete("day");
+  if (state.scope === "all") url.searchParams.set("scope", "all");
+  else url.searchParams.delete("scope");
   if (state.view === "station" && state.areas.length) url.searchParams.set("view", "station");
   else url.searchParams.delete("view");
   if (state.view === "area" && state.areaCode) url.searchParams.set("area", state.areaCode);
@@ -261,7 +327,28 @@ function syncUrl() {
 }
 
 function currentWindow() {
-  return state.selectedIssue.windows.find((window) => window.horizon === state.day);
+  return state.selectedIssue.windows[state.step - 1];
+}
+
+function updateScope() {
+  const shared = new Set(state.data.shared_stations);
+  const useShared = state.scope === "common" && shared.size > 0;
+  scopeControl.options[0].disabled = shared.size === 0;
+  scopeControl.options[0].textContent = shared.size ? "Trạm chung · " + shared.size : "Chưa có tập trạm chung";
+  scopeControl.value = useShared ? "common" : "all";
+  const branch = hourly() ? "hourly" : "daily";
+  state.activeStations = state.data.stations.filter(({station_id, [branch]: supported}) =>
+    useShared ? shared.has(station_id) : supported);
+  const active = new Set(state.activeStations.map(({station_id}) => station_id));
+  const signature = state.activeStations.map(({station_id}) => station_id).join(",");
+  if (signature === state.scopeSignature) return;
+  state.scopeSignature = signature;
+  state.areas = state.geometry.shapes.map((area) => ({...area, stationIds: area.stationIds.filter((id) => active.has(id))}));
+  state.areaByCode = new Map(state.areas.map((area) => [area.code, area]));
+  state.unmatched = state.geometry.unmatched.filter((id) => active.has(id));
+  stationControl.replaceChildren();
+  option(stationControl, "", "Chọn trạm");
+  for (const {station_id} of state.activeStations) option(stationControl, station_id, namedStation(station_id));
 }
 
 function vietnamDay(value) {
@@ -328,24 +415,25 @@ function renderHistory() {
   rail.scrollLeft = scopeChanged ? rail.scrollWidth : previous;
 }
 
-function chooseDay(day) {
-  if (state.day === day) return;
-  state.day = day;
+function chooseStep(step) {
+  if (state.step === step) return;
+  state.step = step;
   render();
 }
 
 function renderChart() {
   const chart = element("station-chart");
   chart.replaceChildren();
-  const days = state.selectedIssue.windows.map(({horizon, points}) => ({
-    horizon, point: points.find((point) => point.station_id === state.stationId),
-  }));
-  const series = stationSeries.filter(({key}) => state.member || key !== "vrain");
-  const values = days.flatMap(({point}) => series.map(({field}) => measurement(point, field)));
+  const windows = state.selectedIssue.windows.filter((window) => window.hours === currentWindow().hours)
+    .map((window) => ({...window, point: window.points.find((point) => point.station_id === state.stationId)}));
+  const keys = state.member ? [...modelLayers(), "vrain"] : modelLayers();
+  const series = keys.map((key) => ({key, field: rainLayers[key].field, label: layerLabel(key)}));
+  const values = windows.flatMap(({point}) => series.map(({field}) => measurement(point, field)));
   chart.hidden = values.every((value) => value === null);
   if (chart.hidden) return;
-  const max = Math.max(10, Math.ceil(Math.max(...values.filter((value) => value !== null)) / 10) * 10);
-  add(chart, "figcaption", "So sánh ba ngày");
+  const tick = hourly() ? 1 : 10;
+  const max = Math.max(tick, Math.ceil(Math.max(...values.filter((value) => value !== null)) / tick) * tick);
+  add(chart, "figcaption", hourly() ? "So sánh mưa từng giờ" : "So sánh mưa mỗi ngày");
   const key = add(chart, "div", undefined, "chart-key");
   for (const {label, key: source} of series) {
     const item = add(key, "span");
@@ -354,17 +442,18 @@ function renderChart() {
   }
   const axis = add(chart, "div", undefined, "chart-axis");
   add(axis, "span", "0");
-  add(axis, "span", amount.format(max) + " mm");
-  for (const {horizon, point} of days) {
+  add(axis, "span", amount.format(max) + " " + periodUnit());
+  for (const window of windows) {
+    const {point} = window;
     const day = add(chart, "div", undefined, "chart-day");
-    day.setAttribute("aria-current", String(horizon === state.day));
-    const dayLabel = "Ngày " + horizon;
+    day.setAttribute("aria-current", String(window.lead === currentWindow().lead));
+    const dayLabel = periodName(window);
     add(day, "span", dayLabel);
     const group = add(day, "div", undefined, "chart-series");
     for (const {label, field, key: source} of series) {
       const value = measurement(point, field);
       const row = add(group, "div", undefined, "chart-row");
-      const desc = dayLabel + " · " + label + " · " + (value === null ? "Thiếu mẫu" : formatAmount(value) + " mm/24 giờ");
+      const desc = dayLabel + " · " + label + " · " + (value === null ? "Thiếu mẫu" : formatAmount(value) + " " + periodUnit());
       row.title = desc;
       row.setAttribute("role", "img");
       row.setAttribute("aria-label", desc);
@@ -389,12 +478,13 @@ function highlightStation() {
 }
 
 function renderStation() {
+  const window = currentWindow();
   stationControl.value = state.stationId;
-  element("station-title").textContent = "Trạm " + state.stationId;
-  element("station-day").textContent = "Ngày " + state.day + " · 24 giờ";
+  element("station-title").textContent = namedStation(state.stationId);
+  element("station-day").textContent = periodName(window) + " · " + window.hours + " giờ";
   const link = element("station-verify");
-  link.hidden = !state.member || !state.selectedIssue.has_truth;
-  link.href = "/dashboard?" + new URLSearchParams({issue: state.selectedIssue.id, day: String(state.day)});
+  link.hidden = !state.member || hourly() || !window.has_truth;
+  link.href = "/dashboard?" + new URLSearchParams({issue: state.selectedIssue.id, day: String(window.horizon)});
   const point = state.points.get(state.stationId);
   const detail = element("station-detail");
   detail.replaceChildren();
@@ -406,20 +496,18 @@ function renderStation() {
     const view = mapValue(point);
     const isProbability = state.mapLayer === "probability";
     const signed = state.mapLayer === "difference";
-    const currentLabel = signed ? "Sai lệch LightGBM − Vrain" : isProbability ? "Xác suất mưa ≥50 mm"
-      : rainLayers[state.mapLayer].title;
+    const currentLabel = signed ? "Sai lệch " + forecastModel() + " − Vrain" : isProbability ? "Xác suất mưa ≥50 mm"
+      : layerLabel(state.mapLayer);
     add(detail, "p", currentLabel, "amount-label");
     const main = add(detail, "p", formatAmount(view, signed), "amount");
-    if (view !== null) add(main, "span", isProbability ? " %" : " mm/24 giờ");
+    if (view !== null) add(main, "span", isProbability ? " %" : " " + periodUnit());
     const list = add(detail, "dl");
-    const facts = [
-      ["lightgbm", "LightGBM B", unitValue(measurement(point, "predicted_mm"))],
-      ["gfs", "GFS nguyên bản", unitValue(measurement(point, "gfs_mm"))],
-      ["probability", "Xác suất mưa ≥50 mm", probability === null ? "—" : percent.format(probability)],
-    ];
+    const facts = modelLayers().map((key) => [key, layerLabel(key), unitValue(measurement(point, rainLayers[key].field))]);
+    if (!hourly()) facts.push(
+      ["probability", "Xác suất mưa ≥50 mm", probability === null ? "—" : percent.format(probability)]);
     if (state.member) facts.unshift(
       ["vrain", "Vrain thực đo", unitValue(observed)],
-      ["difference", "Sai lệch LightGBM − Vrain", unitValue(difference(point), " mm", true)],
+      ["difference", "Sai lệch " + forecastModel() + " − Vrain", unitValue(difference(point), " mm", true)],
     );
     for (const [type, name, value] of facts) {
       if (type === state.mapLayer) continue;
@@ -428,16 +516,30 @@ function renderStation() {
       add(pair, "dd", value);
     }
     if (state.member && observed === null) add(detail, "p", "Chưa có số đo đối chiếu cho kỳ này.", "detail-note");
+    if (hourly() || window.lead === "d1") showOverlap(detail);
   }
   renderChart();
   highlightStation();
+}
+
+function showOverlap(detail) {
+  const forecasts = state.selectedIssue.windows.slice(0, 7).map(({points}) =>
+    measurement(points.find(({station_id}) => station_id === state.stationId), "predicted_mm"));
+  if (!forecasts.every(Number.isFinite)) return;
+  const [day] = forecasts.slice(-1);
+  const hours = forecasts.slice(0, 6).reduce((total, value) => total + value, 0);
+  const panel = add(detail, "details", undefined, "period-overlap");
+  add(panel, "summary", "Đối chiếu sáu giờ đầu và Ngày 1");
+  add(panel, "p", "Cộng sáu dự báo giờ của LightGBM R được " + hourAmount.format(hours) +
+    " mm. LightGBM B dự báo " + hourAmount.format(day) + " mm cho 24 giờ từ cùng mốc phát.");
+  if (hours - day > 1) add(panel, "p", "Hai mô hình dự báo độc lập. Tổng sáu giờ ở lượt này cao hơn dự báo Ngày 1.");
 }
 
 function renderPoints() {
   if (!layer) return;
   layer.clearLayers();
   markers = new Map();
-  for (const station of state.data.stations) {
+  for (const station of state.activeStations) {
     const id = station.station_id;
     const value = mapValue(state.points.get(id));
     const showDifference = state.mapLayer === "difference";
@@ -448,7 +550,7 @@ function renderPoints() {
       iconSize: [16, 16], iconAnchor: [8, 8],
     });
     const suffix = showProbability ? "%" : " mm";
-    const name = id + (bin ? " · " + formatAmount(value, showDifference) + suffix : " · Thiếu mẫu");
+    const name = namedStation(id) + (bin ? " · " + formatAmount(value, showDifference) + suffix : " · Thiếu mẫu");
     const marker = L.marker([station.latitude, station.longitude], {icon, title: name});
     marker.on("click", () => showStation(id, narrow.matches));
     marker.addTo(layer);
@@ -487,12 +589,13 @@ function renderRainRows() {
   const rows = element("rain-rows");
   rows.replaceChildren();
   const filter = element("area-filter").value;
+  const [wet, heavy] = thresholds();
   const query = simplifyName(element("area-search").value);
   const matches = state.areas.filter((area) => {
     if (query && !simplifyName(area.name).includes(query)) return false;
     const summary = state.forecastAreas.get(area.code);
     return filter === "all" || (filter === "rain" && summary.rainy > 0) ||
-      (filter === "10" && summary.value !== null && summary.value >= 10) ||
+      (filter === "heavy" && summary.value !== null && summary.value >= heavy) ||
       (filter === "data" && summary.valid > 0) || (filter === "missing" && !summary.valid);
   }).sort((a, b) => (state.forecastAreas.get(b.code).value ?? -1) -
     (state.forecastAreas.get(a.code).value ?? -1) || areaCollator.compare(a.name, b.name));
@@ -505,7 +608,7 @@ function renderRainRows() {
     name.addEventListener("click", () => pickArea(area.code));
     const value = add(row, "td");
     if (summary.valid) {
-      add(value, "i", undefined, "rain-sample-dot").style.setProperty("--rain", binFor(summary.value, "lightgbm").color);
+      add(value, "i", undefined, "rain-sample-dot").style.setProperty("--rain", binFor(summary.value, state.listLayer).color);
     }
     add(value, "span", formatAmount(summary.value));
     add(row, "td", summary.valid + "/" + area.stationIds.length);
@@ -513,7 +616,7 @@ function renderRainRows() {
   const message = element("rain-empty");
   message.hidden = matches.length > 0;
   message.textContent = query ? "Không tìm thấy khu vực trong bộ lọc này."
-    : filter === "rain" ? "Kỳ này chưa có trạm nào được dự báo từ 1 mm."
+    : filter === "rain" ? "Kỳ này chưa có trạm nào được dự báo từ " + formatAmount(wet) + " mm."
       : "Không có khu vực phù hợp với bộ lọc.";
 }
 
@@ -530,9 +633,10 @@ function renderAreaDetail() {
   stations.replaceChildren();
   const summary = state.forecastAreas.get(area.code);
   if (summary.valid) {
-    add(description, "p", "Lượng LightGBM cao nhất tại trạm", "area-detail-label");
-    add(add(description, "div", formatAmount(summary.value), "area-amount"), "small", "mm/24 giờ");
-    add(description, "p", summary.rainy + "/" + summary.valid + " trạm có số dự kiến từ 1 mm.");
+    add(description, "p", layerLabel(state.listLayer) + " · lượng cao nhất tại trạm", "area-detail-label");
+    add(add(description, "div", formatAmount(summary.value), "area-amount"), "small", periodUnit());
+    add(description, "p", summary.rainy + "/" + summary.valid + " trạm có số dự kiến từ " +
+      formatAmount(thresholds()[0]) + " mm.");
     if (summary.valid > 1) add(description, "p",
       "Các trạm dự báo từ " + formatAmount(summary.minimum) + " đến " + formatAmount(summary.value) + " mm.");
     else add(description, "p", "Kỳ này chỉ có số từ một trạm.");
@@ -541,12 +645,12 @@ function renderAreaDetail() {
       : "Khu vực chưa có trạm trong bộ dữ liệu.");
   }
   if (!summary.readings.length) return;
-  add(stations, "p", "Chọn trạm để xem dự báo ba ngày");
+  add(stations, "p", "Chọn trạm để xem các hạn của trạm");
   const list = add(stations, "ul", undefined, "area-station-list");
   for (const {id, value} of summary.readings) {
     const button = add(add(list, "li"), "button");
     button.type = "button";
-    add(button, "span", id);
+    add(button, "span", namedStation(id));
     add(button, "strong", unitValue(value));
     button.addEventListener("click", () => showStation(id, true));
   }
@@ -570,8 +674,15 @@ function pickArea(code) {
 }
 
 function renderAreaPanel() {
+  const [wet, heavy] = thresholds();
+  state.listLayer = modelLayers().includes(state.mapLayer) ? state.mapLayer : "lightgbm";
+  const field = rainLayers[state.listLayer].field;
+  element("area-unit").textContent = periodUnit();
+  element("area-heavy-filter").textContent = "Từ " + formatAmount(heavy) + " mm";
+  element("area-note").textContent = "Bảng " + layerLabel(state.listLayer) + " · có mưa từ " +
+    formatAmount(wet) + " " + periodUnit() + " tại ít nhất một trạm.";
   state.forecastAreas = new Map(state.areas.map((area) => [
-    area.code, summarizeArea(area, state.points, (p) => measurement(p, "predicted_mm")),
+    area.code, summarizeArea(area, state.points, (p) => measurement(p, field), false, wet),
   ]));
   const sources = [...state.forecastAreas.values()];
   const withData = sources.filter((item) => item.valid > 0).length;
@@ -582,7 +693,7 @@ function renderAreaPanel() {
   add(summary, "strong", withRain + " khu vực có tín hiệu mưa");
   add(summary, "span", " · " + withData + "/" + state.areas.length + " khu vực có số");
   element("area-coverage").textContent = withData + "/" + state.areas.length +
-    " khu vực có số cho kỳ đã chọn. Số khu vực tính theo LightGBM." +
+    " khu vực có số theo " + layerLabel(state.listLayer) + "." +
     (state.unmatched.length ? " Có " + state.unmatched.length + " trạm chưa ghép được ranh giới." : "");
   renderRainRows();
   renderAreaDetail();
@@ -601,7 +712,7 @@ function highlightList() {
   for (const [id, value] of ranked.slice(0, 3)) {
     const button = add(add(list, "li"), "button", undefined, "scan-point");
     button.type = "button";
-    add(button, "span", id);
+    add(button, "span", namedStation(id));
     add(button, "strong", unitValue(value, suffix, signed));
     button.addEventListener("click", () => showStation(id, true));
   }
@@ -610,11 +721,18 @@ function highlightList() {
 function renderMapLayer() {
   const byArea = state.view === "area";
   element("map-title").textContent = state.mapLayer === "difference"
-    ? "Sai lệch dự báo · LightGBM − Vrain" : state.mapLayer === "probability"
-      ? "Xác suất mưa ≥50 mm/24 giờ" : rainLayers[state.mapLayer].title;
-  const available = [...state.points.values()].filter((point) => mapValue(point) !== null).length;
-  element("coverage").textContent = available + "/" + state.data.stations.length + " trạm có số";
+    ? "Sai lệch · " + forecastModel() + " − Vrain" : state.mapLayer === "probability"
+      ? "Xác suất mưa ≥50 mm/24 giờ" : state.mapLayer === "lightgbm"
+        ? "Lượng mưa dự báo · " + forecastModel() : rainLayers[state.mapLayer].title;
+  const available = state.activeStations.filter(({station_id}) => mapValue(state.points.get(station_id)) !== null).length;
+  const count = available + "/" + state.activeStations.length + " trạm có số";
+  element("coverage").textContent = count;
+  element("period-note").textContent = count + " · " + periodUnit() +
+    (state.scope === "common" && state.data.shared_stations.length ? " · Trạm chung" : "") +
+    (currentWindow().lead === "d1" ? " · Tính từ giờ phát" : "");
   for (const button of layerButtons) {
+    button.hidden = !layerAllowed(button.dataset.layer);
+    if (button.dataset.layer === "lightgbm") button.textContent = forecastModel();
     button.setAttribute("aria-pressed", String(button.dataset.layer === state.mapLayer));
   }
   for (const button of viewButtons) {
@@ -633,7 +751,7 @@ function renderMapLayer() {
   if (byArea) {
     layer?.clearLayers();
     markers = new Map();
-    state.displayAreas = state.mapLayer === "lightgbm" ? state.forecastAreas
+    state.displayAreas = state.mapLayer === state.listLayer ? state.forecastAreas
       : new Map(state.areas.map((area) => [
         area.code, summarizeArea(area, state.points, mapValue, state.mapLayer === "difference"),
       ]));
@@ -651,30 +769,42 @@ function renderMapLayer() {
 
 function render() {
   const window = currentWindow();
-  state.points = new Map(window.points.map((point) => [point.station_id, point]));
+  updateScope();
+  const active = new Set(state.activeStations.map(({station_id}) => station_id));
+  state.points = new Map(window.points.filter(({station_id}) => active.has(station_id))
+    .map((point) => [point.station_id, point]));
+  if (!layerAllowed(state.mapLayer)) state.mapLayer = "lightgbm";
   issueControl.value = state.selectedIssue.id;
   const selected = state.selectedIssue;
   const mode = element("map-mode");
-  const archived = selected.mode === "prospective" && Date.now() >= new Date(selected.issue_utc).getTime() + 86400000;
-  mode.dataset.mode = archived ? "archived" : selected.mode;
-  mode.textContent = selected.mode === "historical_replay" ? "Phát lại lịch sử" : archived ? "Dự báo đã lưu" : "Lần phát đã ghi";
-  element("mode-date").textContent = calendarDate.format(new Date(selected.issue_utc));
+  const archived = window.mode === "prospective" && Date.now() >= new Date(window.end_utc).getTime();
+  mode.dataset.mode = archived ? "archived" : window.mode;
+  mode.textContent = window.mode === "missing" ? "Chưa có dự báo" :
+    window.mode === "historical_replay" ? "Phát lại lịch sử" : archived ? "Dự báo đã lưu" : "Lần phát đã ghi";
+  element("mode-date").textContent = localTime(selected.issue_utc);
   element("latest-issue").hidden = state.followLatest || selected.id === state.data.snapshots[0].id;
   element("period").textContent = localTime(window.start_utc) + " → " + localTime(window.end_utc) + " (VN)";
-  element("rain-period").textContent = "Ngày " + state.day + " · " + element("period").textContent;
-  element("issue-meta").textContent = "GFS khởi tạo lúc " + localTime(state.selectedIssue.gfs_init_utc) + " (VN).";
-  element("export-forecast").href = "/api/export.csv?" + new URLSearchParams({
-    issue: state.selectedIssue.id, day: String(state.day),
+  element("rain-period").textContent = periodName(window) + " · " + element("period").textContent;
+  element("issue-meta").textContent = window.mode === "missing" ? "Lượt này chưa có dữ liệu cho hạn đã chọn." :
+    hourly() ? "Đầu vào phát lại từ 24 giờ mưa Vrain." :
+      selected.gfs_init_utc ? "GFS khởi tạo lúc " + localTime(selected.gfs_init_utc) + " (VN)." : "Dự báo lượng mưa ngày.";
+  const csv = element("export-forecast");
+  csv.hidden = !state.member || window.mode === "missing";
+  csv.href = "/api/export-forecast.csv?" + new URLSearchParams({
+    issue: state.selectedIssue.id, lead: window.lead, scope: scopeControl.value,
   });
   const slider = element("horizon-slider");
-  slider.value = state.day;
-  slider.setAttribute("aria-valuetext", "Ngày " + state.day + " · " + element("period").textContent);
-  for (const button of dayButtons) {
-    const h = Number(button.dataset.day);
-    const end = state.selectedIssue.windows.find((span) => span.horizon === h).end_utc;
-    button.querySelector("small").textContent = shortDate(end);
-    button.setAttribute("aria-label", "Ngày " + h + " · Kết thúc " + localTime(end));
-    button.setAttribute("aria-pressed", String(h === state.day));
+  slider.value = state.step;
+  slider.setAttribute("aria-valuetext", periodName(window) + " · " + element("period").textContent);
+  for (const [i, button] of [...element("period-steps").children].entries()) {
+    const span = selected.windows[i];
+    const missing = span.mode === "missing";
+    button.dataset.missing = String(missing);
+    button.querySelector("small").textContent = missing ? "Thiếu" :
+      span.hours === 1 ? timelineClock.format(new Date(span.end_utc)) : shortDate(span.end_utc);
+    button.setAttribute("aria-label", periodName(span) + " · Kết thúc " + localTime(span.end_utc) +
+      (missing ? " · Chưa có dự báo" : ""));
+    button.setAttribute("aria-pressed", String(i + 1 === state.step));
   }
   renderHistory();
   renderMapLayer();
@@ -683,19 +813,16 @@ function render() {
 }
 
 async function loadForecasts() {
-  const data = await window.PBL6Portal.api("/api/short-range");
-  if (data.schema_version !== 1 || data.product !== "short_range" ||
-      data.window_hours !== 24 || !data.snapshots.length) throw new Error("Unexpected forecast format");
+  const data = await window.PBL6Portal.api("/api/forecast");
+  if (data.schema_version !== 1 || data.product !== "station_forecast" ||
+      !data.snapshots.length || !data.snapshots.every(({windows}) => windows.length === 9)) {
+    throw new Error("Unexpected forecast format");
+  }
   return data;
 }
 
 function applyViewer() {
-  for (const button of layerButtons) {
-    if (privateLayers.includes(button.dataset.layer)) button.hidden = !state.member;
-  }
-  if (!state.member && privateLayers.includes(state.mapLayer)) state.mapLayer = "lightgbm";
   element("monitor-link").hidden = !state.member;
-  element("export-forecast").hidden = !state.member;
   if (!state.member) {
     element("account-link").hidden = false;
     element("account-name").hidden = true;
@@ -706,8 +833,8 @@ function applyViewer() {
 function fillIssues() {
   issueControl.replaceChildren();
   for (const issue of state.data.snapshots) {
-    const label = issue.mode === "prospective" ? "Lần phát đã ghi" : issue.label;
-    option(issueControl, issue.id, calendarDate.format(new Date(issue.issue_utc)) + " · " + label);
+    const label = issue.mode === "prospective" ? "Lần phát đã ghi" : "Phát lại";
+    option(issueControl, issue.id, localTime(issue.issue_utc) + " · " + label);
   }
 }
 
@@ -720,9 +847,15 @@ async function refreshForecasts() {
       renderHistory();
       return;
     }
+    if (state.boundaries && JSON.stringify(data.stations) !== JSON.stringify(state.data.stations)) {
+      state.geometry = prepareAreas(state.boundaries, data.stations);
+      state.scopeSignature = null;
+    }
     state.data = data;
+    state.stationById = new Map(data.stations.map((station) => [station.station_id, station]));
     state.member = data.viewer === "member";
-    state.selectedIssue = (state.followLatest ? null : data.snapshots.find(({id}) => id === state.selectedIssue.id)) ?? data.snapshots[0];
+    state.selectedIssue = (state.followLatest ? null :
+      data.snapshots.find(({issue_utc}) => issue_utc === state.selectedIssue.issue_utc)) ?? data.snapshots[0];
     applyViewer();
     fillIssues();
     render();
@@ -741,23 +874,34 @@ async function start() {
         .then((value) => value.type === "FeatureCollection" ? value : null)
         .catch(() => null),
     ]);
-    const matched = boundaries ? prepareAreas(boundaries, data.stations) : {shapes: [], unmatched: []};
-    const areaByCode = new Map(matched.shapes.map((area) => [area.code, area]));
+    const geometry = boundaries ? prepareAreas(boundaries, data.stations) : {shapes: [], unmatched: []};
     const query = new URLSearchParams(location.search);
     const pinned = data.snapshots.find(({id}) => id === query.get("issue"));
     const selectedIssue = pinned ?? data.snapshots[0];
-    const day = [1, 2, 3].includes(Number(query.get("day"))) ? Number(query.get("day")) : 1;
+    const legacy = ["1", "2", "3"].includes(query.get("day")) ? "d" + query.get("day") : null;
+    const indexed = selectedIssue.windows.findIndex(({lead}) => lead === (query.get("lead") ?? legacy));
+    const step = 1 + (indexed >= 0 ? indexed : selectedIssue.windows.findIndex(({mode}) => mode !== "missing"));
     const stationId = data.stations.find(({station_id}) => station_id === query.get("station"))?.station_id;
     const requestedLayer = layerButtons.find((button) => button.dataset.layer === query.get("layer"))?.dataset.layer;
-    const view = matched.shapes.length && !stationId && query.get("view") !== "station" ? "area" : "station";
-    const areaCode = view === "area" && areaByCode.has(query.get("area")) ? query.get("area") : null;
-    state = {data, selectedIssue, day, stationId, mapLayer: requestedLayer ?? "lightgbm",
+    const view = geometry.shapes.length && !stationId && query.get("view") !== "station" ? "area" : "station";
+    const areaCode = view === "area" && geometry.shapes.some(({code}) => code === query.get("area")) ? query.get("area") : null;
+    const scope = query.get("scope") === "all" || (stationId && !data.shared_stations.includes(stationId)) ? "all" : "common";
+    state = {data, selectedIssue, step: Math.max(1, step), stationId, scope, mapLayer: requestedLayer ?? "lightgbm",
              member: data.viewer === "member", followLatest: !pinned,
              historyScope: query.get("history") === "recent" ? "recent" : "saved",
-             view, areaCode, areaByCode, areas: matched.shapes, unmatched: matched.unmatched};
+             view, areaCode, boundaries, geometry,
+             stationById: new Map(data.stations.map((station) => [station.station_id, station]))};
     applyViewer();
     fillIssues();
-    for (const station of data.stations) option(stationControl, station.station_id, station.station_id);
+    updateScope();
+    for (const [i, window] of selectedIssue.windows.entries()) {
+      const title = window.hours === 1 ? window.horizon + "h" : periodName(window);
+      const button = add(element("period-steps"), "button", title);
+      button.type = "button";
+      button.dataset.lead = window.lead;
+      add(button, "small", "");
+      button.addEventListener("click", () => chooseStep(i + 1));
+    }
     element("map-loading").hidden = true;
     element("workspace").hidden = false;
     showTools(!narrow.matches && view === "station");
@@ -769,6 +913,10 @@ async function start() {
     if (areaCode) pickArea(areaCode);
     issueControl.addEventListener("change", () => {
       chooseIssue(state.data.snapshots.find((issue) => issue.id === issueControl.value));
+    });
+    scopeControl.addEventListener("change", () => {
+      state.scope = scopeControl.value;
+      render();
     });
     element("latest-issue").addEventListener("click", () => {
       chooseIssue(state.data.snapshots[0], true);
@@ -813,8 +961,7 @@ async function start() {
       else if (!element("tools-panel").hidden) showTools(false, true);
       else if (!element("rain-panel").hidden) showRain(false, true);
     });
-    element("horizon-slider").addEventListener("input", (event) => chooseDay(Number(event.target.value)));
-    for (const button of dayButtons) button.addEventListener("click", () => chooseDay(Number(button.dataset.day)));
+    element("horizon-slider").addEventListener("input", (event) => chooseStep(Number(event.target.value)));
     for (const button of layerButtons) {
       button.addEventListener("click", () => {
         state.mapLayer = button.dataset.layer;

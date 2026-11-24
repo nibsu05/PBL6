@@ -1,5 +1,7 @@
 # Thiết kế nghiên cứu — dự báo mưa tại nhiều trạm
 
+**Tổng hợp hai nhánh ngày 24/11.** [Thiết kế chi tiết và so sánh chung](reports/station_forecast_unified_2026_11_24/BAO_CAO_CHI_TIET.md). Có 57 trạm giao nhau và 18.719 khóa trạm–19h chung năm 2025. Web dùng cùng một thanh và cùng cách tổng hợp xã, phường. Phần mở rộng 22 trạm nhánh ngày cần một phép thử riêng với nhóm ít lịch sử. Phép thử ràng buộc 6–24 giờ giữ kết quả ở phạm vi thăm dò.
+
 **Kết quả cực ngắn ngày 24/11/2026.** [Bản 79 trạm và sáu hạn giờ](reports/station_nowcast_2026_11_24/README.md) có giao thức, các đối chứng, điểm kiểm định 2025 và phân tích gió 850 hPa. Một Bi-LSTM chung học trên 79 trạm đủ điều kiện lịch sử. Cấu hình LightGBM chỉ dùng mưa và lịch được chọn cho web phát lại theo tiêu chí RMSE trên 2023.
 
 **Kết luận ngắn hạn ngày 24/11/2026.** [Bản chốt và bảng số](reports/gfs_short_range_closeout_2026_11_24/KET_LUAN_NGAN_HAN.md) phân biệt kiểm định 2025 sau khóa và phân tích bổ sung trên hồi cứu 2026 đã xem. LightGBM B phục vụ bản xem thử bằng điểm trạm tô màu theo ba tổng 24 giờ. Xem [giao diện và hợp đồng đầu ra](demo/station_map/README.md).

@@ -16,6 +16,7 @@ from scripts.evaluate_station_nowcast import bilstm_forecasts, rain_tree_forecas
 
 
 REGISTRY = ns.ROOT / "data/operational/vrain_update_2026_11_16/station_registry_private.csv"
+ALIGNED = ns.ROOT / "data/operational/station_map_unified_2026_11_24/station_map_hourly_private.json"
 METHODS = {
     "BiLSTM_R": "Bi-LSTM · mưa trạm",
     "LightGBM_R": "LightGBM · mưa trạm",
@@ -27,12 +28,12 @@ def to_depth(values):
     return [round(float(value), 3) if np.isfinite(value) else None for value in values]
 
 
-def export(source, out, registry, device):
+def export(source, out, registry, device, dates=None, destination=None):
     fit, transform = read_fit(out)
     if ns.sha256(source) != fit["training"]["dataset_sha256"]:
         raise ValueError("Replay requires the verified hourly archive")
     config = ns.PROTOCOL["replay"]
-    knots = pd.DatetimeIndex(config["dates_local"]).tz_localize(ns.ZONE).tz_convert("UTC")
+    knots = pd.DatetimeIndex(dates or config["dates_local"]).tz_localize(ns.ZONE).tz_convert("UTC")
     issues = knots + pd.Timedelta(hours=config["issue_hour_local"])
     active = transform["train_stations"]
     columns = ["station_id", "period_end_utc", "latitude", "longitude", "rain_mm", "gauge_source_code"]
@@ -92,7 +93,8 @@ def export(source, out, registry, device):
     payload = dict(schema_version=1, mode=config["mode"], time_zone=ns.ZONE, unit="mm",
                    lead_hours=ns.LEADS, source="Vrain modern",
                    default_method=fit["replay_method"], methods=METHODS, stations=view, issues=snapshots)
-    path = out / "station_nowcast_replay_private.json"
+    path = destination or out / "station_nowcast_replay_private.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
     ns.write_json(path, payload)
     summary = dict(sha256=ns.sha256(path), fit_manifest_sha256=ns.sha256(out / "fit_manifest.json"),
                    source="Vrain modern", mode=config["mode"], method=fit["replay_method"],
@@ -101,7 +103,7 @@ def export(source, out, registry, device):
                                   observed_hours=sum(sum(value is not None for value in r["observed"])
                                                      for r in rows.values()))
                              for issue, rows in by_issue.items()])
-    ns.write_json(out / "replay_summary.json", summary)
+    ns.write_json(path.parent / "replay_summary.json", summary)
     print("Vrain-only historical replay", [(item["issue_time"], item["stations"])
                                           for item in summary["coverage"]], flush=True)
 
@@ -112,9 +114,23 @@ def main():
     parser.add_argument("--out", type=Path, default=ns.PRIVATE)
     parser.add_argument("--registry", type=Path, default=REGISTRY)
     parser.add_argument("--device", choices=["cuda", "cpu"], default="cpu")
+    parser.add_argument("--align-daily", action="store_true",
+                        help="Export a separate hourly replay at the saved daily issue times")
     args = parser.parse_args()
     torch.set_num_threads(8)
-    export(args.source, args.out, args.registry, torch.device(args.device))
+    dates = None
+    if args.align_daily:
+        from demo.station_map_status import available_forecasts
+
+        policy = ns.PROTOCOL["replay"]
+        dates = set(policy["dates_local"])
+        for case in available_forecasts()["snapshots"]:
+            issue = pd.Timestamp(case["issue_utc"]).tz_convert(ns.ZONE)
+            if case["mode"] == "historical_replay" and issue == issue.normalize() + pd.Timedelta(hours=policy["issue_hour_local"]):
+                dates.add(issue.date().isoformat())
+        dates = sorted(dates)
+    export(args.source, args.out, args.registry, torch.device(args.device), dates,
+           ALIGNED if args.align_daily else None)
 
 
 if __name__ == "__main__":

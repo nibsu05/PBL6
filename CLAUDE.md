@@ -2,6 +2,14 @@
 
 Cập nhật 24/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
 
+## Bản đồ chung và báo cáo chi tiết hai nhánh
+
+Bản đồ tại `/` có một thanh 1–6 giờ và Ngày 1–3, cùng lớp xã/phường và mặc định 57 trạm chung. Phạm vi toàn bộ theo hạn là 79 trạm cho giờ và 57 cho ngày. Mốc 19h 12/11 có 57/57 trạm giờ và 55/57 trạm ngày trên tập chung. API `/api/forecast` ghép theo giờ phát chính xác, ghi chế độ và kỳ hiệu lực riêng rồi ẩn thực đo với khách. `/cuc-ngan` dẫn về thanh chung ở Giờ 1. Thêm bản giờ phát lại cùng các mốc ngày trong tệp private, tổng 9 lượt đủ hai nhánh. Kiểm Edge 1440×900, 390×844 và 320×780, gồm CSV sau đăng nhập, thiếu ra màu xám và chuyển đơn vị.
+
+[Đối chiếu và báo cáo](reports/station_forecast_unified_2026_11_24/BAO_CAO_CHI_TIET.md) dùng 18.719 khóa trạm–19h chung năm 2025. Dữ liệu ngày có cửa sổ cấu trúc ở cả 22 trạm bổ sung, 75–160 lượt/trạm nhưng dưới tiêu chí 365 ngày quan trắc đủ dùng. Hai thử nghiệm hiệu chỉnh 6–24 giờ là phân tích lại trên dự báo đã khóa. Có 732/18.719 lượt dự báo sáu giờ cao hơn tổng ngày 1 hơn 1 mm. Nâng tổng ngày giảm nhẹ RMSE trên phần giao, co giờ làm giảm POD mưa ≥5 mm ở giờ 6. Web giữ giá trị gốc và có mục đối chiếu tại trạm. Báo cáo Word chi tiết theo mẫu Khoa nằm trong `data/operational/pbl6_bao_cao_cuoi_ky_2026_11_24/`.
+
+Vrain kiểm lại lúc 19h11 24/11 sau làm mới phiên. Danh mục 200, có nhóm Đà Nẵng, cả hai đường mưa giờ 404 cho 24/11 và ngày đã có dữ liệu 12/11. Kho hiện có đến 19h 15/11 và app đọc bản phát lại. GFS đủ 19 chỉ mục. Theo dõi trạng thái mới từ nhật ký, chưa suy nguyên nhân lỗi phía dịch vụ.
+
 ## Kết quả dự báo cực ngắn trên 79 trạm
 
 [Giao thức, kết quả và lệnh tái chạy](reports/station_nowcast_2026_11_24/README.md). Bản này thay giai đoạn thử Bi-LSTM ba trạm khi cần kết luận về toàn bộ tập trạm đã học. Giữ 79/86 vị trí đủ cửa sổ train, gồm 57 trạm nhánh ngày và 22 trạm bổ sung. Một mẫu dùng 24 giờ tại trạm, nhãn là sáu lượng mưa 1 giờ riêng biệt. Đã huấn luyện 1.032.811 mẫu 2021–2022, chọn mô hình/epoch trên 676.870 mẫu 2023, chấm 680.282 mẫu 2024 và 679.461 mẫu 2025 sau khóa.

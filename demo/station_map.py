@@ -12,6 +12,7 @@ from urllib.parse import parse_qs, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from demo.station_map_accounts import AccountExists, Accounts
+from demo.station_map_forecast import export_period, station_forecasts
 from demo.station_map_nowcast import REPLAY, nowcast_replay
 from demo.station_map_status import SourceMonitor, available_forecasts, export_csv, forecast_payload, verification_payload
 
@@ -21,9 +22,6 @@ STATE = ROOT / 'data' / 'operational' / 'station_map_web'
 WARD_BOUNDARIES = ROOT / 'data' / 'operational' / 'station_map_areas' / 'wards-48.geojson'
 ROUTES = {
     '/': (STATIC / 'index.html', 'text/html; charset=utf-8'),
-    '/cuc-ngan': (STATIC / 'nowcast.html', 'text/html; charset=utf-8'),
-    '/nowcast.css': (STATIC / 'nowcast.css', 'text/css; charset=utf-8'),
-    '/nowcast.js': (STATIC / 'nowcast.js', 'application/javascript; charset=utf-8'),
     '/login': (STATIC / 'login.html', 'text/html; charset=utf-8'),
     '/dashboard': (STATIC / 'dashboard.html', 'text/html; charset=utf-8'),
     '/map.css': (STATIC / 'map.css', 'text/css; charset=utf-8'),
@@ -36,7 +34,7 @@ ROUTES = {
     '/portal.js': (STATIC / 'portal.js', 'application/javascript; charset=utf-8'),
     '/dashboard.js': (STATIC / 'dashboard.js', 'application/javascript; charset=utf-8'),
 }
-MEMBER_APIS = ('/api/status', '/api/verification', '/api/export.csv', '/api/admin/alerts')
+MEMBER_APIS = ('/api/status', '/api/verification', '/api/export.csv', '/api/export-forecast.csv', '/api/admin/alerts')
 AUTH_COMMANDS = ('/api/account/setup', '/api/account/login', '/api/account/logout')
 
 
@@ -80,6 +78,9 @@ class MapHandler(BaseHTTPRequestHandler):
             return
         requested = urlsplit(self.path)
         path = requested.path
+        if path == '/cuc-ngan':
+            self.redirect('/?lead=h1')
+            return
         user = self.user()
         if path == '/dashboard' and not user:
             self.redirect('/login')
@@ -95,6 +96,8 @@ class MapHandler(BaseHTTPRequestHandler):
                 self.reply_json(dict(username=user, setup_required=self.server.accounts.owner() is None))
             elif path == '/api/short-range':
                 self.reply_json(forecast_payload(available_forecasts(), bool(user)))
+            elif path == '/api/forecast':
+                self.reply_json(station_forecasts(bool(user)))
             elif path == '/api/nowcast-replay':
                 self.reply_json(nowcast_replay(REPLAY, bool(user)))
             elif path == '/api/status':
@@ -108,6 +111,16 @@ class MapHandler(BaseHTTPRequestHandler):
                 query = parse_qs(requested.query)
                 try:
                     body, filename = export_csv(query.get('issue', [''])[0], int(query.get('day', ['0'])[0]))
+                except ValueError:
+                    self.reply_json({'error': 'unknown_issue_or_horizon'}, 404)
+                else:
+                    self.respond(200, body, 'text/csv; charset=utf-8',
+                                 {'Content-Disposition': f'attachment; filename="{filename}"'})
+            elif path == '/api/export-forecast.csv':
+                query = parse_qs(requested.query)
+                try:
+                    body, filename = export_period(station_forecasts(True), query.get('issue', [''])[0],
+                                                   query.get('lead', [''])[0], query.get('scope', ['common'])[0])
                 except ValueError:
                     self.reply_json({'error': 'unknown_issue_or_horizon'}, 404)
                 else:
