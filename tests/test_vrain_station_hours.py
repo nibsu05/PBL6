@@ -63,6 +63,25 @@ class PagedVrainTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "JSON report"):
             fetch_station_hours(session, "2026-11-24", "legacy", "test-org")
 
+    def test_excludes_the_terminal_partial_hour_from_completed_bins(self):
+        def row(label, depth, stamp=None):
+            return dict(timePoint=label, ts=stamp, stations=[dict(id="meter-a", depth=depth)])
+
+        daily = [
+            row("Tổng", 2.3),
+            row("20:00 24/11", 1.4, "2026-11-24T20:00:00"),
+            row("20:50 24/11", .9, "2026-11-24T20:50:00"),
+        ]
+        parsed = parse_live_day({"stats": daily}, "2026-11-25", {"meter-a": "A"}, ["A"])
+        self.assertEqual(int(parsed["valid"].sum()), 1)
+        self.assertAlmostEqual(float(parsed["raw"][0, 0]), 1.4)
+        with self.assertRaisesRegex(ValueError, "Invalid partial source clock"):
+            parse_live_day({"stats": [daily[0], daily[2], daily[1]]},
+                           "2026-11-25", {"meter-a": "A"}, ["A"])
+        daily[2]["ts"] = "2026-11-24T20:40:00"
+        with self.assertRaisesRegex(ValueError, "Invalid partial source clock"):
+            parse_live_day({"stats": daily}, "2026-11-25", {"meter-a": "A"}, ["A"])
+
     def test_checks_uuid_and_coordinates_before_accepting_new_id(self):
         registry = pd.DataFrame([dict(modern_id="old", modern_uuid="sensor-1", canonical_id="A",
                                       latitude=16.25, longitude=108.25)])

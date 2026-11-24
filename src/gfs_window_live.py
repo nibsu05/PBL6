@@ -30,24 +30,34 @@ def parse_live_day(payload,day,aliases,station_ids):
     """Same source/QC rules as station_archive_update.parse_day, without its old date fence.
 
     A partial current day is retained, never zero-filled; complete-day sum mismatch
-    invalidates that station-day. Future clocks are subsequently excluded as-of.
+    invalidates that station-day. The paged report may end in a reading from the
+    hour still in progress. That reading stays in the raw response for auditing.
     """
     marked=pd.Timestamp(day);times=pd.date_range(marked-pd.Timedelta(hours=4),periods=24,freq='h')
     if not isinstance(payload,dict) or not isinstance(payload.get('stats'),list):raise ValueError('Invalid daily schema')
     pos={s:i for i,s in enumerate(station_ids)};values=np.full((24,len(pos)),np.nan);total=np.full(len(pos),np.nan)
     seen_times=set();summaries=0;membership=None
-    for row in payload['stats']:
+    for row_number, row in enumerate(payload['stats']):
         if not isinstance(row,dict) or not isinstance(row.get('stations'),list):raise ValueError('Invalid source row')
         match=CLOCK.fullmatch(row.get('timePoint','').strip());index=None
         if match:
             hh,mm,dd,month=map(int,match.groups())
-            if hh>23 or mm!=0:raise ValueError('Invalid source clock')
+            if hh>23:raise ValueError('Invalid source clock')
             possible=[]
             for year in (marked.year-1,marked.year,marked.year+1):
                 try:possible.append(pd.Timestamp(datetime(year,month,dd,hh,mm)))
                 except ValueError:pass
             if not possible:raise ValueError('Invalid source date')
             tick=min(possible,key=lambda t:abs(t-marked))
+            if mm:
+                # Accept only the terminal partial row backed by the local timestamp
+                # supplied by the paged endpoint, inside this report's hour bins.
+                stamp=row.get('ts')
+                if (row_number!=len(payload['stats'])-1 or not isinstance(stamp,str)
+                        or pd.Timestamp(stamp)!=tick or tick.ceil('h') not in times
+                        or any(previous>=tick for previous in seen_times)):
+                    raise ValueError('Invalid partial source clock')
+                continue
             if tick not in times or tick in seen_times:raise ValueError('Duplicate/shifted clock')
             seen_times.add(tick);index=times.get_loc(tick)
         else:

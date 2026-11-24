@@ -80,3 +80,13 @@ Sơ đồ dùng quan hệ logic. Parquet lưu bảng nghiên cứu và các bộ
 Tệp bổ sung mưa giờ cho chín ngày báo cáo 16–24/11 có 18.576 hàng trạm–giờ. Trong đó 18.216 hàng có số đạt kiểm tra và 360 hàng thiếu. Mưa hợp lệ trải từ giờ kết thúc 20h ngày 15/11 tới 19h ngày 24/11. Tệp lưu tại `data/operational/vrain_recent_danang_2026_11_24/PBL6_MUA_TRAM_GIO_BO_SUNG_2026_11_16_24.parquet`.
 
 Tác vụ kiểm tra nguồn, thu đầu vào nhánh ngày và đối chiếu dùng đường mới. Mốc kiểm tra phục hồi diễn ra sau 19h. Việc kiểm chứng một lần phát trực tiếp cần thực hiện khi đến kỳ tiếp theo và ghi giờ thực nhận trước giờ phát. Open API là lựa chọn để tích hợp dài hạn theo khóa được cấp nếu nhóm cần một giao diện dành riêng cho hệ thống tự động. [VRain Open API](https://dev.vrain.vn/)
+
+### Khả thi của nhánh phát theo giờ
+
+Trong 216 mốc giờ của kho bổ sung, có từ 75 đến 78 trong 79 trạm có đủ 24 giờ quan trắc liên tiếp, trung vị 77. Với 57 trạm chung, phạm vi là 55–57. Đây là độ phủ từ dữ liệu đã lưu. Thời gian số đo thực sự đến cần được đo trong từng lượt thí điểm.
+
+Lúc 22h58 ngày 24/11, Vrain trả số đo giờ kết thúc 22h ở 84 trạm khi đọc báo cáo đề ngày 25/11. Phản hồi còn có dòng 22h50. Bộ đọc dùng các giờ đã chốt và giữ dòng giữa giờ trong tệp nguồn. Khi ghép đủ 24 giờ đã qua, LightGBM R đã chạy thử sáu hạn cho 77 trạm trên CPU, gồm cả 57 trạm chung. Phần đọc mô hình và suy luận trong lượt thử mất khoảng 0,11 giây.
+
+Lần kiểm tra tiếp theo lúc 23h00:19 đã đọc được mốc 23h ở 84 trạm. Đây là một lần quan sát độ trễ nguồn. Các lượt thí điểm cần lưu phản hồi lúc dự báo và theo dõi cả trường hợp số đo được bổ sung muộn.
+
+Phương án thí điểm dùng tác vụ riêng chạy mỗi giờ. Tác vụ lấy đúng 24 kỳ đã chốt, ghi giờ nhận số đo, mốc dữ liệu, giờ tạo bản dự báo và số trạm đủ. Ví dụ, bản dự báo với mốc dữ liệu 22h có Giờ 1 từ 22h đến 23h. Nếu số đo đến lúc 22h08, cần hiện giờ tạo và khoảng hiệu lực để người xem hiểu thời gian còn lại. Sáu kỳ được chấm khi đã thu đủ số đo đích. Trên thanh chín kỳ, nhóm giờ có thể dùng bản mới nhất của nó và nhóm ngày giữ mốc 19h gần nhất, cùng ghi thời gian tương ứng từng nhóm.
