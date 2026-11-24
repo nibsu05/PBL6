@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đăng nhập · PBL6 Đà Nẵng</title>
+  <link rel="stylesheet" href="/map.css">
+  <link rel="stylesheet" href="/portal.css">
+  <script defer src="/portal.js"></script>
+</head>
+<body>
+  <header class="top portal-top">
+    <div class="shell top-inner">
+      <a class="brand" href="/">PBL6 <span>·</span> Đà Nẵng</a>
+      <nav aria-label="Điều hướng ứng dụng"><a href="/">Bản đồ</a></nav>
+    </div>
+  </header>
+  <main class="shell">
+    <div class="signin-layout">
+      <section class="signin-context">
+        <p>Mưa tại trạm Đà Nẵng</p>
+        <h1>Theo dõi dữ liệu và kiểm chứng dự báo</h1>
+        <ul>
+          <li>Xem lần kiểm tra gần nhất của GFS và Vrain.</li>
+          <li>Đối chiếu dự báo với số đo ở từng trạm và từng ngày.</li>
+          <li>Tải bảng số liệu cho kỳ dự báo đang xem.</li>
+        </ul>
+      </section>
+      <section class="card signin-card" aria-labelledby="signin-title">
+        <h2 id="signin-title">Đăng nhập</h2>
+        <p id="signin-description">Tài khoản của web dự báo trên máy này.</p>
+        <form id="signin-form" action="/api/account/login" method="post" hidden>
+          <label for="username">Tên đăng nhập</label>
+          <input name="username" id="username" autocomplete="username" maxlength="32" required>
+          <label for="password">Mật khẩu</label>
+          <input type="password" name="password" id="password" autocomplete="current-password" maxlength="128" required>
+          <div id="confirm-password" hidden>
+            <label for="password-repeat">Nhập lại mật khẩu</label>
+            <input type="password" id="password-repeat" autocomplete="new-password" maxlength="128">
+          </div>
+          <button class="action action-primary" id="signin-submit" type="submit">Đăng nhập</button>
+        </form>
+        <p id="signin-message" class="notice auth-message" role="alert" hidden></p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

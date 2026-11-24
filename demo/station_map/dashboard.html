@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Theo dõi dự báo · PBL6 Đà Nẵng</title>
+  <link rel="stylesheet" href="/map.css">
+  <link rel="stylesheet" href="/portal.css">
+  <script defer src="/portal.js"></script>
+  <script defer src="/dashboard.js"></script>
+</head>
+<body>
+  <header class="top portal-top">
+    <div class="shell top-inner">
+      <a class="brand" href="/">PBL6 <span>·</span> Đà Nẵng</a>
+      <nav aria-label="Điều hướng ứng dụng">
+        <a href="/">Bản đồ</a>
+        <a class="current" href="/dashboard" aria-current="page">Theo dõi</a>
+      </nav>
+      <div class="account-menu">
+        <span id="account-name" hidden></span>
+        <button class="action" id="sign-out" type="button" hidden>Đăng xuất</button>
+      </div>
+    </div>
+  </header>
+  <main class="shell dashboard">
+    <div class="intro">
+      <div>
+        <h1>Theo dõi dự báo</h1>
+        <p>Tình trạng nguồn, lần phát và kết quả đối chiếu tại trạm.</p>
+      </div>
+    </div>
+    <p id="dashboard-error" class="notice" role="alert" hidden></p>
+    <section class="dashboard-section" aria-labelledby="source-title">
+      <div class="section-top">
+        <div>
+          <h2 id="source-title">Nguồn dữ liệu</h2>
+          <p id="status-refresh">Màn hình làm mới trạng thái lưu trên máy mỗi 30 giây.</p>
+        </div>
+        <button id="source-check" class="action action-primary" type="button">Kiểm tra nguồn</button>
+      </div>
+      <p id="status-error" class="notice" role="alert" hidden></p>
+      <p id="probe-feedback" class="feedback" role="status" hidden></p>
+      <div id="source-cards" class="source-grid"></div>
+    </section>
+
+    <section class="dashboard-section" aria-labelledby="check-title">
+      <div class="section-top">
+        <div>
+          <h2 id="check-title">Đối chiếu một lượt dự báo</h2>
+          <p>So ba cách dự báo với mưa thực đo Vrain trên cùng trạm và giờ hiệu lực.</p>
+        </div>
+      </div>
+      <div class="card dashboard-card">
+        <div class="check-controls">
+          <div class="issue-picker">
+            <label for="check-issue">Lượt phát lại</label>
+            <select id="check-issue"></select>
+          </div>
+          <div class="day-picker" aria-label="Chọn hạn đối chiếu">
+            <button type="button" data-check-day="1" aria-pressed="true">Ngày 1</button>
+            <button type="button" data-check-day="2" aria-pressed="false">Ngày 2</button>
+            <button type="button" data-check-day="3" aria-pressed="false">Ngày 3</button>
+          </div>
+        </div>
+        <p id="check-period" class="subtle"></p>
+        <div id="check-stats" class="result-strip"></div>
+        <div class="table-scroll" tabindex="0" aria-label="Bảng sai số dự báo">
+          <table class="comparison-table">
+            <thead><tr><th scope="col">Phương pháp</th><th scope="col">MAE</th><th scope="col">RMSE</th><th scope="col">Bias</th></tr></thead>
+            <tbody id="issue-metrics"></tbody>
+          </table>
+        </div>
+        <p class="subtle metric-note">MAE là sai lệch tuyệt đối trung bình. RMSE nhấn mạnh sai lệch lớn. Bias âm là thiên về dự báo thiếu. Đơn vị đều là mm/24 giờ.</p>
+        <p class="subtle" id="event-detail"></p>
+        <div class="card-tools">
+          <a class="action" id="open-map" href="/">Mở trên bản đồ</a>
+          <a class="action" id="download-issue" href="/api/export.csv">Tải CSV</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-section" aria-labelledby="research-title">
+      <div class="section-top">
+        <div>
+          <h2 id="research-title">Kết quả nghiên cứu</h2>
+          <p>Đọc cùng kỳ kiểm định và chỉ số của từng phép so.</p>
+        </div>
+      </div>
+      <div class="research-grid">
+        <article class="card dashboard-card">
+          <h3>Hồi cứu 2026 · RMSE theo hạn</h3>
+          <p class="subtle">Chấm từng trạm rồi lấy trung bình. Đơn vị mm/24 giờ.</p>
+          <div id="retrospective-chart"></div>
+        </article>
+        <article class="card dashboard-card">
+          <h3>Kiểm định 2025 · Thêm khí tượng GFS</h3>
+          <p class="subtle">So LightGBM trước và sau khi thêm nhiệt độ, độ ẩm, gió và hơi nước dự báo. Các hàng dưới là những hạn đạt tiêu chí cải thiện đã đặt trước.</p>
+          <div id="feature-results" class="feature-results"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

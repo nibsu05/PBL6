@@ -16,6 +16,13 @@ const differenceBins = [
   {match: (value) => value < 50, label: "Thừa >10 đến <50", color: "#f0ad73"},
   {match: () => true, label: "Thừa ≥50", color: "#aa451e"},
 ];
+const probabilityBins = [
+  {limit: 20, label: "0–<20", color: "#f4ebd8"},
+  {limit: 40, label: "20–<40", color: "#efd093"},
+  {limit: 60, label: "40–<60", color: "#d89d50"},
+  {limit: 80, label: "60–<80", color: "#ac6532"},
+  {limit: Infinity, label: "80–100", color: "#742c35"},
+];
 const rainLayers = {
   lightgbm: {title: "Lượng mưa dự báo · LightGBM", label: "LightGBM", field: "predicted_mm"},
   gfs: {title: "Lượng mưa dự báo · GFS", label: "GFS", field: "gfs_mm"},
@@ -66,7 +73,12 @@ function difference(point) {
 }
 
 function mapValue(point) {
-  return state.mapLayer === "difference" ? difference(point) : measurement(point, rainLayers[state.mapLayer].field);
+  if (state.mapLayer === "difference") return difference(point);
+  if (state.mapLayer === "probability") {
+    const value = measurement(point, "probability_ge50");
+    return value === null ? null : value * 100;
+  }
+  return measurement(point, rainLayers[state.mapLayer].field);
 }
 
 function formatAmount(value, signed = false) {
@@ -80,11 +92,15 @@ function makeLegend() {
   const list = element("legend-items");
   list.replaceChildren();
   const showDifference = state.mapLayer === "difference";
-  const bins = showDifference ? differenceBins : rainBins;
-  element("legend-title").textContent = showDifference ? "Sai lệch LightGBM − Vrain" : "Dải lượng mưa";
+  const showProbability = state.mapLayer === "probability";
+  const bins = showDifference ? differenceBins : showProbability ? probabilityBins : rainBins;
+  element("legend-title").textContent = showDifference ? "Sai lệch LightGBM − Vrain"
+    : showProbability ? "Xác suất dự báo" : "Dải lượng mưa";
+  element("legend-unit").textContent = showProbability ? "%" : "mm/24 giờ";
   const note = element("legend-note");
-  note.hidden = !showDifference;
-  note.textContent = showDifference ? "Xanh biểu thị dự báo thiếu. Cam biểu thị dự báo thừa." : "";
+  note.hidden = !showDifference && !showProbability;
+  note.textContent = showDifference ? "Xanh biểu thị dự báo thiếu. Cam biểu thị dự báo thừa."
+    : "Xác suất lượng mưa đạt 50 mm trong 24 giờ tại vị trí trạm.";
   for (const bin of bins) {
     const item = add(list, "li");
     add(item, "span", "", "swatch").style.setProperty("--rain", bin.color);
@@ -128,13 +144,14 @@ function renderChart() {
   const days = state.selectedIssue.windows.map(({horizon, points}) => ({
     horizon, point: points.find((point) => point.station_id === state.stationId),
   }));
-  const values = days.flatMap(({point}) => stationSeries.map(({field}) => measurement(point, field)));
+  const series = stationSeries.filter(({key}) => state.member || key !== "vrain");
+  const values = days.flatMap(({point}) => series.map(({field}) => measurement(point, field)));
   chart.hidden = values.every((value) => value === null);
   if (chart.hidden) return;
   const max = Math.max(10, Math.ceil(Math.max(...values.filter((value) => value !== null)) / 10) * 10);
   add(chart, "figcaption", "So sánh ba ngày");
   const key = add(chart, "div", undefined, "chart-key");
-  for (const {label, key: source} of stationSeries) {
+  for (const {label, key: source} of series) {
     const item = add(key, "span");
     add(item, "i").style.setProperty("--series", "var(--series-" + source + ")");
     add(item, "span", label);
@@ -148,7 +165,7 @@ function renderChart() {
     const dayLabel = "Ngày " + horizon;
     add(day, "span", dayLabel);
     const group = add(day, "div", undefined, "chart-series");
-    for (const {label, field, key: source} of stationSeries) {
+    for (const {label, field, key: source} of series) {
       const value = measurement(point, field);
       const row = add(group, "div", undefined, "chart-row");
       const desc = dayLabel + " · " + label + " · " + (value === null ? "Thiếu mẫu" : formatAmount(value) + " mm/24 giờ");
@@ -187,17 +204,20 @@ function renderStation() {
     const main = add(detail, "p", formatAmount(measurement(point, "predicted_mm")), "amount");
     add(main, "span", " mm/24 giờ");
     const list = add(detail, "dl");
-    for (const [name, value] of [
-      ["Vrain thực đo", formatAmount(measurement(point, "observed_mm")) + " mm"],
+    const facts = [
       ["GFS nguyên bản", formatAmount(measurement(point, "gfs_mm")) + " mm"],
-      ["Sai lệch LightGBM − Vrain", formatAmount(difference(point), true) + " mm"],
       ["Xác suất mưa ≥50 mm", percent.format(point.probability_ge50)],
-    ]) {
+    ];
+    if (state.member) facts.unshift(
+      ["Vrain thực đo", formatAmount(measurement(point, "observed_mm")) + " mm"],
+      ["Sai lệch LightGBM − Vrain", formatAmount(difference(point), true) + " mm"],
+    );
+    for (const [name, value] of facts) {
       const pair = add(list, "div");
       add(pair, "dt", name);
       add(pair, "dd", value);
     }
-    add(detail, "p", "Số đo dùng để đối chiếu sau khi khoảng dự báo kết thúc.", "detail-note");
+    if (state.member) add(detail, "p", "Số đo dùng để đối chiếu sau khi khoảng dự báo kết thúc.", "detail-note");
   }
   renderChart();
   highlightStation();
@@ -211,14 +231,17 @@ function renderPoints() {
     const id = station.station_id;
     const value = mapValue(state.points.get(id));
     const showDifference = state.mapLayer === "difference";
+    const showProbability = state.mapLayer === "probability";
+    const bands = showProbability ? probabilityBins : rainBins;
     const bin = value === null ? null : showDifference
       ? differenceBins.find(({match}) => match(value))
-      : rainBins.find(({limit}) => value < limit);
+      : bands.find(({limit}) => value < limit);
     const icon = L.divIcon({
       className: "map-point" + (bin ? "" : " missing"),
       iconSize: [16, 16], iconAnchor: [8, 8],
     });
-    const name = id + (bin ? " · " + formatAmount(value, showDifference) + " mm" : " · Thiếu mẫu");
+    const suffix = showProbability ? "%" : " mm";
+    const name = id + (bin ? " · " + formatAmount(value, showDifference) + suffix : " · Thiếu mẫu");
     const marker = L.marker([station.latitude, station.longitude], {icon, title: name});
     marker.on("click", () => {
       state.stationId = id;
@@ -235,7 +258,8 @@ function renderPoints() {
 
 function renderMapLayer() {
   element("map-title").textContent = state.mapLayer === "difference"
-    ? "Sai lệch dự báo · LightGBM − Vrain" : rainLayers[state.mapLayer].title;
+    ? "Sai lệch dự báo · LightGBM − Vrain" : state.mapLayer === "probability"
+      ? "Xác suất mưa ≥50 mm/24 giờ" : rainLayers[state.mapLayer].title;
   const available = [...state.points.values()].filter((point) => mapValue(point) !== null).length;
   element("coverage").textContent = available + " / " + state.data.stations.length + " trạm đủ mẫu";
   for (const button of layerButtons) {
@@ -256,6 +280,9 @@ function render() {
   }
   element("period").textContent = localTime(window.start_utc) + " → " + localTime(window.end_utc) + " (VN)";
   element("issue-meta").textContent = "GFS khởi tạo lúc " + localTime(state.selectedIssue.gfs_init_utc) + " (VN).";
+  element("export-forecast").href = "/api/export.csv?" + new URLSearchParams({
+    issue: state.selectedIssue.id, day: String(state.day),
+  });
   for (const button of dayButtons) button.setAttribute("aria-pressed", String(Number(button.dataset.day) === state.day));
   renderMapLayer();
   renderStation();
@@ -270,8 +297,19 @@ async function start() {
         data.product !== "short_range" || data.window_hours !== 24 || !data.snapshots.length) {
       throw new Error("Unexpected forecast format");
     }
-    state = {data, selectedIssue: data.snapshots[0], day: 1, stationId: null, mapLayer: "lightgbm"};
+    const query = new URLSearchParams(window.location.search);
+    const selectedIssue = data.snapshots.find(({id}) => id === query.get("issue")) ?? data.snapshots[0];
+    const requestedDay = Number(query.get("day"));
+    const day = selectedIssue.windows.some(({horizon}) => horizon === requestedDay) ? requestedDay : 1;
+    const member = data.viewer === "member";
+    state = {data, selectedIssue, day, stationId: null, mapLayer: "lightgbm", member};
     for (const issue of data.snapshots) option(issueControl, issue.id, localTime(issue.issue_utc) + " · " + issue.label);
+    issueControl.value = selectedIssue.id;
+    for (const button of layerButtons) {
+      if (["vrain", "difference"].includes(button.dataset.layer)) button.hidden = !member;
+    }
+    element("export-forecast").hidden = !member;
+    element("member-prompt").hidden = member;
     for (const station of data.stations) option(stationControl, station.station_id, station.station_id);
     element("workspace").hidden = false;
     initMap(data.stations);

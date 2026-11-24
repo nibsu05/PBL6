@@ -7,25 +7,32 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
   <link rel="stylesheet" href="/map.css">
+  <link rel="stylesheet" href="/portal.css">
   <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
           integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
   <script defer src="/map.js"></script>
+  <script defer src="/portal.js"></script>
 </head>
 <body>
-  <header class="top">
+  <header class="top portal-top">
     <div class="shell top-inner">
-      <p class="brand">PBL6 <span>·</span> Đà Nẵng</p>
-      <nav aria-label="Loại dự báo">
-        <span class="current" aria-current="page">Ngắn hạn 1–3 ngày</span>
-        <span class="pending">Cực ngắn 1–6 giờ <small>Đang chuẩn bị</small></span>
+      <a class="brand" href="/">PBL6 <span>·</span> Đà Nẵng</a>
+      <nav aria-label="Điều hướng ứng dụng">
+        <a class="current" href="/" aria-current="page">Bản đồ</a>
+        <a href="/dashboard">Theo dõi</a>
       </nav>
+      <div class="account-menu">
+        <a class="action action-primary" id="account-link" href="/login">Đăng nhập</a>
+        <span id="account-name" hidden></span>
+        <button class="action" id="sign-out" type="button" hidden>Đăng xuất</button>
+      </div>
     </div>
   </header>
   <main class="shell">
     <div class="intro">
       <div>
         <h1>Lượng mưa tại trạm</h1>
-        <p>Chọn ngày và lớp dữ liệu. Bấm vào một trạm để so sánh kết quả qua ba ngày.</p>
+        <p>Dự báo ngắn hạn 1–3 ngày cho nhóm trạm Đà Nẵng.</p>
       </div>
       <span class="mode">Phát lại lịch sử</span>
     </div>
@@ -42,6 +49,7 @@
           <button data-day="2" type="button" aria-pressed="false">Ngày 2</button>
           <button data-day="3" type="button" aria-pressed="false">Ngày 3</button>
         </div>
+        <a class="action export-action" id="export-forecast" href="/api/export.csv" hidden>Tải CSV</a>
       </div>
 
       <div class="workspace-grid">
@@ -58,14 +66,15 @@
             <div class="layer-picker" role="group" aria-labelledby="layer-label">
               <button data-layer="lightgbm" type="button" aria-pressed="true">LightGBM</button>
               <button data-layer="gfs" type="button" aria-pressed="false">GFS</button>
-              <button data-layer="vrain" type="button" aria-pressed="false">Vrain thực đo</button>
-              <button data-layer="difference" type="button" aria-pressed="false">Sai lệch</button>
+              <button data-layer="probability" type="button" aria-pressed="false">Xác suất ≥50 mm</button>
+              <button data-layer="vrain" type="button" aria-pressed="false" hidden>Vrain thực đo</button>
+              <button data-layer="difference" type="button" aria-pressed="false" hidden>Sai lệch</button>
             </div>
           </div>
           <div id="map-error" class="notice" role="status" hidden></div>
           <div id="map" aria-label="Vị trí các trạm mưa"></div>
           <div class="legend">
-            <h3><strong id="legend-title">Dải lượng mưa</strong> <span>mm/24 giờ</span></h3>
+            <h3><strong id="legend-title">Dải lượng mưa</strong> <span id="legend-unit">mm/24 giờ</span></h3>
             <ul id="legend-items" aria-label="Chú giải dải màu"></ul>
             <p id="legend-note" hidden></p>
           </div>
@@ -76,6 +85,7 @@
           <select id="station"></select>
           <div id="station-detail" aria-live="polite"></div>
           <figure id="station-chart" class="station-chart" aria-label="Lượng mưa ba ngày tại trạm" hidden></figure>
+          <a class="member-prompt" id="member-prompt" href="/login" hidden>Đăng nhập để mở số đo Vrain, sai lệch và trạng thái nguồn.</a>
         </aside>
       </div>
       <footer>
