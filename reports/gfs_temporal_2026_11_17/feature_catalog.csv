@@ -1,0 +1,50 @@
+feature,group,unit,meaning
+gfs_rain_mm,Mưa GFS,mm/24h,Tổng mưa dự báo đúng cửa sổ đích
+sin_doy,Lịch,1,Sin chu kỳ ngày trong năm
+cos_doy,Lịch,1,Cos chu kỳ ngày trong năm
+latitude,Vị trí/ID,độ,Vĩ độ trạm
+longitude,Vị trí/ID,độ,Kinh độ trạm
+station_code,Vị trí/ID,mã phân loại,"ID cho mô hình chung, không là phép đo khí tượng"
+rain_lag_day1_mm,Mưa quá khứ,mm/24h,Ngày mưa 19–19 h thứ 1 trước ngày issue
+rain_lag_day2_mm,Mưa quá khứ,mm/24h,Ngày mưa 19–19 h thứ 2 trước ngày issue
+rain_lag_day3_mm,Mưa quá khứ,mm/24h,Ngày mưa 19–19 h thứ 3 trước ngày issue
+rain_lag_day4_mm,Mưa quá khứ,mm/24h,Ngày mưa 19–19 h thứ 4 trước ngày issue
+rain_lag_day5_mm,Mưa quá khứ,mm/24h,Ngày mưa 19–19 h thứ 5 trước ngày issue
+rain_lag_day6_mm,Mưa quá khứ,mm/24h,Ngày mưa 19–19 h thứ 6 trước ngày issue
+rain_lag_day7_mm,Mưa quá khứ,mm/24h,Ngày mưa 19–19 h thứ 7 trước ngày issue
+rain_recent1h_mm,Mưa quá khứ,mm/1h,Tổng 1 h kết thúc trước issue 1 h
+rain_recent6h_mm,Mưa quá khứ,mm/6h,Tổng 6 h kết thúc trước issue 1 h
+rain_recent24h_mm,Mưa quá khứ,mm/24h,Tổng 24 h kết thúc trước issue 1 h
+gfs_t850_c,Khí tượng giữa ngày,°C,Nhiệt độ 850 hPa tại giữa cửa sổ đích
+gfs_rh850_pct,Khí tượng giữa ngày,%,Độ ẩm tương đối 850 hPa tại giữa cửa sổ đích
+gfs_u850,Khí tượng giữa ngày,m/s,Gió 850 hPa hướng Đông tại giữa cửa sổ đích
+gfs_v850,Khí tượng giữa ngày,m/s,Gió 850 hPa hướng Bắc tại giữa cửa sổ đích
+gfs_pwat,Khí tượng giữa ngày,kg/m²,Hơi nước toàn cột tại giữa cửa sổ đích
+dem_elev_m,Địa hình,m,"Cao độ DEM tại tọa độ, không phải đo cao độ cảm biến"
+dem_mean_5km_m,Địa hình,m,Cao độ DEM trung bình trong 5 km
+dem_std_5km_m,Địa hình,m,Độ lệch chuẩn cao độ DEM trong 5 km
+dem_slope_east,Địa hình,m/m,Gradient DEM về Đông
+dem_slope_north,Địa hình,m/m,Gradient DEM về Bắc
+gfs_rain6h_1_mm,Diễn biến mưa,mm/6h,Mưa dự báo từ 0 đến 6 h trong cửa sổ đích
+gfs_rain6h_2_mm,Diễn biến mưa,mm/6h,Mưa dự báo từ 6 đến 12 h trong cửa sổ đích
+gfs_rain6h_3_mm,Diễn biến mưa,mm/6h,Mưa dự báo từ 12 đến 18 h trong cửa sổ đích
+gfs_rain6h_4_mm,Diễn biến mưa,mm/6h,Mưa dự báo từ 18 đến 24 h trong cửa sổ đích
+gfs_rain6h_max_mm,Diễn biến mưa,mm/6h,Tổng 6 h lớn nhất trong bốn khoảng
+gfs_rain6h_max_fraction,Diễn biến mưa,1,Tỷ trọng của khoảng 6 h có mưa lớn nhất
+gfs_rain_centroid,Diễn biến mưa,1,"Trọng tâm thời gian với tâm khoảng 0,125/0,375/0,625/0,875"
+gfs_rain_first_half_fraction,Diễn biến mưa,1,Tỷ trọng mưa trong 12 h đầu cửa sổ đích
+gfs_t850_c_sample_mean,Diễn biến khí tượng,°C,Nhiệt độ 850 hPa: Trung bình ba mẫu +6/+12/+18 h
+gfs_t850_c_sample_range,Diễn biến khí tượng,°C,Nhiệt độ 850 hPa: Max−min của ba mẫu
+gfs_t850_c_late_minus_early,Diễn biến khí tượng,°C,Nhiệt độ 850 hPa: Mẫu +18 h trừ mẫu +6 h
+gfs_rh850_pct_sample_mean,Diễn biến khí tượng,%,Độ ẩm tương đối 850 hPa: Trung bình ba mẫu +6/+12/+18 h
+gfs_rh850_pct_sample_range,Diễn biến khí tượng,điểm phần trăm,Độ ẩm tương đối 850 hPa: Max−min của ba mẫu
+gfs_rh850_pct_late_minus_early,Diễn biến khí tượng,điểm phần trăm,Độ ẩm tương đối 850 hPa: Mẫu +18 h trừ mẫu +6 h
+gfs_u850_sample_mean,Diễn biến khí tượng,m/s,Gió 850 hPa hướng Đông: Trung bình ba mẫu +6/+12/+18 h
+gfs_u850_sample_range,Diễn biến khí tượng,m/s,Gió 850 hPa hướng Đông: Max−min của ba mẫu
+gfs_u850_late_minus_early,Diễn biến khí tượng,m/s,Gió 850 hPa hướng Đông: Mẫu +18 h trừ mẫu +6 h
+gfs_v850_sample_mean,Diễn biến khí tượng,m/s,Gió 850 hPa hướng Bắc: Trung bình ba mẫu +6/+12/+18 h
+gfs_v850_sample_range,Diễn biến khí tượng,m/s,Gió 850 hPa hướng Bắc: Max−min của ba mẫu
+gfs_v850_late_minus_early,Diễn biến khí tượng,m/s,Gió 850 hPa hướng Bắc: Mẫu +18 h trừ mẫu +6 h
+gfs_pwat_sample_mean,Diễn biến khí tượng,kg/m²,Hơi nước toàn cột: Trung bình ba mẫu +6/+12/+18 h
+gfs_pwat_sample_range,Diễn biến khí tượng,kg/m²,Hơi nước toàn cột: Max−min của ba mẫu
+gfs_pwat_late_minus_early,Diễn biến khí tượng,kg/m²,Hơi nước toàn cột: Mẫu +18 h trừ mẫu +6 h

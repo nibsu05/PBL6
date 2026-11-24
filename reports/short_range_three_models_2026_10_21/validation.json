@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "slides": 47,
+  "main_slides": 32,
+  "complete_model_set_in_comparison_tables": true,
+  "full_metrics_rows": 8,
+  "feature_groups": 4,
+  "csv_values_checked": 432,
+  "slide_metric_values_checked": 504,
+  "missing_informer_cells_verified": 144,
+  "old_artifacts_unchanged": 94,
+  "html_text_overflows": 0,
+  "native_office_rendered": false,
+  "new_training_runs": 0,
+  "test2025_read": false
+}

@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "dataset_sha256": "51d215768370ecffc45f9bf275c3377745b643029926eaa2ec942f2d36488476",
+  "all_rows_checked": 4427280,
+  "all_ready_windows_checked": 3645079,
+  "old_v1_hourly_rows_identical": 2875248,
+  "old_v1_identical_scope": "all hourly weather/rain values and old finite labels; new edge labels recorded separately",
+  "old_v1_ready_windows_preserved": 2389569,
+  "additional_windows_at_old_truncated_tail": 394,
+  "source_field_replays": 27520,
+  "fresh_gee_source_cells": 396,
+  "loader_samples_checked": 50,
+  "protected_artifacts_unchanged": 76,
+  "last_ready_issue_local": {
+    "train": "2022-12-31 18:00:00+07:00",
+    "cal": "2023-12-31 18:00:00+07:00",
+    "dev": "2024-12-31 18:00:00+07:00",
+    "reserved2025": "2025-12-31 18:00:00+07:00",
+    "external2026": "2026-11-11 07:00:00+07:00"
+  },
+  "native_source_chunks_checked": 564,
+  "models_trained": false,
+  "models_scored": false
+}

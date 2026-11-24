@@ -1,0 +1,7517 @@
+[
+  {
+    "number": 1,
+    "title": "Dự báo mưa 1–3 ngày tại 57 trạm",
+    "section": "BÁO CÁO HẰNG NGÀY V2 · 11/11/2026",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json",
+    "note": "Mở đầu bằng mục tiêu nghiên cứu: dùng khí tượng dự báo và lịch sử mưa tại trạm để dự báo ba lượng mưa 24 giờ. Nhóm đánh giá giá trị bổ sung đặc trưng và so với các đối chứng đơn giản. Đây là bản hằng ngày mới, có kiểm soát tuning và xác suất; không phải bộ kết quả cũ dùng 208 issue cách nhau một tuần.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "BÁO CÁO HẰNG NGÀY V2 · 11/11/2026",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "01",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Dự báo mưa 1–3 ngày tại 57 trạm",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.75,
+        "y": 1.7,
+        "w": 11.8,
+        "h": 1.2,
+        "text": "GFS + Vrain → LightGBM / GRU\nDữ liệu, cách học, kết quả và giới hạn",
+        "size": 31,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.7,
+        "y": 3.4,
+        "w": 3.65,
+        "h": 1.75,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.87,
+        "y": 3.54,
+        "w": 3.31,
+        "h": 0.55,
+        "text": "57 trạm",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.87,
+        "y": 4.27,
+        "w": 3.31,
+        "h": 0.75,
+        "text": "Dự báo tại từng điểm đo",
+        "size": 19,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 4.85,
+        "y": 3.4,
+        "w": 3.65,
+        "h": 1.75,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 5.02,
+        "y": 3.54,
+        "w": 3.31,
+        "h": 0.55,
+        "text": "3 ngày",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 5.02,
+        "y": 4.27,
+        "w": 3.31,
+        "h": 0.75,
+        "text": "Ba tổng 24h riêng",
+        "size": 19,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 9.0,
+        "y": 3.4,
+        "w": 3.65,
+        "h": 1.75,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 9.17,
+        "y": 3.54,
+        "w": 3.31,
+        "h": 0.55,
+        "text": "2024: dev",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 9.17,
+        "y": 4.27,
+        "w": 3.31,
+        "h": 0.75,
+        "text": "2025: dành kiểm định cuối",
+        "size": 19,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 5.8,
+        "w": 12.25,
+        "h": 0.64,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 5.8999999999999995,
+        "w": 11.95,
+        "h": 0.52,
+        "text": "Báo cáo kết quả đã chạy và đã đối chiếu lại checkpoint.",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "title"
+  },
+  {
+    "number": 2,
+    "title": "Ba điều cần nhớ trước khi xem các bảng",
+    "section": "KẾT QUẢ CHÍNH",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · KET_LUAN.md",
+    "note": "Tránh mở đầu bằng một loạt con số chưa có bối cảnh. Thông điệp thứ nhất là khí tượng thô dự báo có giá trị. Thứ hai, giá trị dẫn xuất không giống nhau ở LightGBM và GRU. Thứ ba, điểm trung bình cải thiện không đồng nghĩa cảnh báo mưa lớn đã đủ tin cậy. Các kết luận thống kê đều nằm trong phạm vi dev 2024 và khoảng tin cậy thăm dò.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "KẾT QUẢ CHÍNH",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "02",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Ba điều cần nhớ trước khi xem các bảng",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · KET_LUAN.md",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 1.65,
+        "w": 11.9,
+        "h": 1.03,
+        "text": "• **Thêm khí tượng GFS thô:** giảm sai số trong phép thử này.",
+        "size": 25,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 2.77,
+        "w": 11.9,
+        "h": 1.03,
+        "text": "• **Thêm dẫn xuất:** có tín hiệu ở GRU ngày 1–2; chưa rõ ở LightGBM.",
+        "size": 25,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 3.89,
+        "w": 11.9,
+        "h": 1.03,
+        "text": "• **Mưa lớn:** xác suất có ích hơn khí hậu, nhưng báo nhầm còn nhiều.",
+        "size": 25,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "2024 giúp lựa chọn hướng nghiên cứu; 2025 dành cho phép kiểm tra cuối.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "takeaways"
+  },
+  {
+    "number": 3,
+    "title": "Dự báo điều gì tại mỗi trạm?",
+    "section": "I. BÀI TOÁN",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json",
+    "note": "Ngày dự báo là cửa sổ 19 giờ đến 19 giờ hôm sau, không phải ngày lịch 0–24 giờ. Mỗi nhãn là tổng 24 giờ tại đúng trạm. Ba nhãn không chồng nhau. Không dùng tổng các trạm hay mưa trung bình diện tích. Một mô hình chung học nhiều trạm, còn giá trị đầu ra vẫn riêng cho từng trạm.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "I. BÀI TOÁN",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "03",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Dự báo điều gì tại mỗi trạm?",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.65,
+        "w": 12.25,
+        "h": 3.6,
+        "headers": [
+          "Nhãn",
+          "Khoảng thời gian theo giờ Việt Nam"
+        ],
+        "rows": [
+          [
+            "y₁ · ngày 1",
+            "19:00 D → 19:00 D+1"
+          ],
+          [
+            "y₂ · ngày 2",
+            "19:00 D+1 → 19:00 D+2"
+          ],
+          [
+            "y₃ · ngày 3",
+            "19:00 D+2 → 19:00 D+3"
+          ]
+        ],
+        "row_h": 0.9,
+        "widths": [
+          3.0,
+          9.25
+        ],
+        "size": 24,
+        "styles": {},
+        "tag": "windows"
+      },
+      {
+        "kind": "text",
+        "x": 0.8,
+        "y": 5.25,
+        "w": 11.7,
+        "h": 0.55,
+        "text": "**Đơn vị: mm/24h tại trạm.** D là ngày phát dự báo.",
+        "size": 24,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "Đích là ba tổng 24h riêng; không phải tổng tích lũy 24/48/72h.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "target"
+  },
+  {
+    "number": 4,
+    "title": "Một mẫu = một trạm + một thời điểm phát tin",
+    "section": "I. BÀI TOÁN",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json",
+    "note": "Ví dụ trên slide chỉ minh họa, không phải số đo một trạm thật. Trong lúc train, nhãn tương lai dùng để tính lỗi và cập nhật mô hình. Khi phát dự báo, chỉ đưa X vào mô hình. Cùng một issue có thể có nhiều mẫu tương ứng nhiều trạm; trạm thiếu dữ liệu chỉ làm mất mẫu của trạm đó, không làm mất toàn mạng.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "I. BÀI TOÁN",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "04",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Một mẫu = một trạm + một thời điểm phát tin",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.6,
+        "y": 1.7,
+        "w": 5.9,
+        "h": 3.8,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.77,
+        "y": 1.8399999999999999,
+        "w": 5.5600000000000005,
+        "h": 0.55,
+        "text": "X: thông tin đã có ở thời điểm D",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.77,
+        "y": 2.57,
+        "w": 5.5600000000000005,
+        "h": 2.8,
+        "text": "• Mưa quá khứ tại chính trạm\n• GFS dự báo cho ba ngày tới\n• Lịch, tọa độ và ID trạm\n• Địa hình / dẫn xuất tùy cấu hình",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 6.85,
+        "y": 1.7,
+        "w": 5.85,
+        "h": 3.8,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 7.02,
+        "y": 1.8399999999999999,
+        "w": 5.51,
+        "h": 0.55,
+        "text": "y: mưa trạm tương lai",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 7.02,
+        "y": 2.57,
+        "w": 5.51,
+        "h": 2.8,
+        "text": "[y₁, y₂, y₃]\n\nVí dụ giả định: [18, 20, 7] mm\n\nBa nhãn để học và kiểm chứng.",
+        "size": 23,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "Mưa Vrain kỳ đích không nằm trong X; không cần 57 mô hình tách biệt.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "sample"
+  },
+  {
+    "number": 5,
+    "title": "Ba nguồn dữ liệu có ba vai trò",
+    "section": "II. DỮ LIỆU",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json",
+    "note": "Vrain cung cấp nhãn thực đo sau QC và lịch sử mưa. GFS là dự báo khí tượng số, lấy bốn nút lưới 0,25 độ nội suy về vị trí trạm; nội suy không tạo thêm độ phân giải thật. DEM từ Mapzen chỉ là proxy địa hình tại tọa độ hiện có, không phải cao độ đo bằng khảo sát tại cảm biến. Mean/std địa hình lấy chín điểm trong ô ±5 km.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "II. DỮ LIỆU",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "05",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Ba nguồn dữ liệu có ba vai trò",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.65,
+        "w": 12.25,
+        "h": 4.08,
+        "headers": [
+          "Nguồn",
+          "Vai trò",
+          "Giới hạn cần nhớ"
+        ],
+        "rows": [
+          [
+            "Vrain",
+            "Mưa quá khứ + nhãn mưa tương lai",
+            "Số đo tại điểm, có thiếu / QC"
+          ],
+          [
+            "GFS 0,25°",
+            "Mưa và khí tượng dự báo tương lai",
+            "Nội suy 4 nút, không phải số đo"
+          ],
+          [
+            "DEM Mapzen",
+            "Cao độ, địa hình và độ dốc",
+            "Proxy; không phải khảo sát trạm"
+          ]
+        ],
+        "row_h": 1.02,
+        "widths": [
+          2.1,
+          5.1,
+          5.05
+        ],
+        "size": 20,
+        "styles": {},
+        "tag": "sources"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "Không chia mưa vệ tinh ngày thành giờ; không lấy ERA5 làm nhãn.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "sources"
+  },
+  {
+    "number": 6,
+    "title": "07h → 18h → 19h: đầu vào phải có trước issue",
+    "section": "II. DỮ LIỆU",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json",
+    "note": "Issue nghĩa là thời điểm phát hành dự báo. Chu kỳ GFS 00UTC tương ứng 07 giờ Việt Nam; khoảng cách đến issue là 12 giờ. Với giả định trễ trạm một giờ, chỉ dùng số đo kết thúc 18 giờ, không dùng số đo kết thúc 19 giờ ngay lúc phát tin. Bảy tổng ngày đầy đủ gần nhất kết thúc ở 19 giờ hôm trước. Giả định độ trễ khác với việc đã xác minh khoảng đo giờ.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "II. DỮ LIỆU",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "06",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "07h → 18h → 19h: đầu vào phải có trước issue",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.6,
+        "y": 2.0,
+        "w": 3.9,
+        "h": 2.35,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.77,
+        "y": 2.14,
+        "w": 3.56,
+        "h": 0.55,
+        "text": "07:00",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.77,
+        "y": 2.87,
+        "w": 3.56,
+        "h": 1.35,
+        "text": "GFS 00UTC khởi tạo\nDự báo cho tương lai",
+        "size": 21,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 4.7,
+        "y": 2.0,
+        "w": 3.9,
+        "h": 2.35,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 4.87,
+        "y": 2.14,
+        "w": 3.56,
+        "h": 0.55,
+        "text": "18:00",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 4.87,
+        "y": 2.87,
+        "w": 3.56,
+        "h": 1.35,
+        "text": "Cuối số đo Vrain\nđược dùng ở kịch bản 1h",
+        "size": 21,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 8.8,
+        "y": 2.0,
+        "w": 3.9,
+        "h": 2.35,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 8.97,
+        "y": 2.14,
+        "w": 3.56,
+        "h": 0.55,
+        "text": "19:00",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 8.97,
+        "y": 2.87,
+        "w": 3.56,
+        "h": 1.35,
+        "text": "Phát dự báo\nBắt đầu kỳ mưa cần đoán",
+        "size": 21,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.8,
+        "y": 4.9,
+        "w": 11.8,
+        "h": 0.85,
+        "text": "Mưa GFS từng ngày: **C36−C12; C60−C36; C84−C60**.\nKhí tượng ở +24/+48/+72h là trạng thái giữa mỗi cửa sổ.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "GFS dự báo tương lai được dùng; quan trắc / ERA5 kỳ đích thì không.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "timing"
+  },
+  {
+    "number": 7,
+    "title": "Đã kiểm tra nguồn, nhưng chưa chứng minh realtime",
+    "section": "II. DỮ LIỆU",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · source_latency_audit.json",
+    "note": "GFS Last-Modified chỉ là giờ sửa đối tượng trên kho, không phải lịch sử thời điểm người dùng nhận được bản tin. Có 48 chu kỳ đầu 2021 mang timestamp sửa archive sau issue, có thể do chép lại kho; không suy diễn chắc chắn là phát hành gốc muộn hoặc sớm. API Vrain hiện tại trả hàng giờ nhưng chưa chứng minh độ trễ tiếp nhận từng số đo lịch sử. Không đưa dữ liệu 2026 của lần kiểm tra API vào train.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "II. DỮ LIỆU",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "07",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Đã kiểm tra nguồn, nhưng chưa chứng minh realtime",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · source_latency_audit.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.65,
+        "w": 12.25,
+        "h": 4.0,
+        "headers": [
+          "Điều kiểm tra",
+          "Bằng chứng",
+          "Diễn giải đúng"
+        ],
+        "rows": [
+          [
+            "Kho GFS hiện tại",
+            "Last-Modified ~3,65–4,04h sau init",
+            "Hỗ trợ tính khả thi, chưa là cam kết"
+          ],
+          [
+            "Lịch sử GFS",
+            "48 chu kỳ đầu 2021 sửa kho sau issue",
+            "Chưa chứng minh giờ phát hành gốc"
+          ],
+          [
+            "API Vrain",
+            "Có các hàng giờ ở kênh hiện hành",
+            "Nhãn giờ ≠ giờ số đo đến hệ thống"
+          ]
+        ],
+        "row_h": 1.0,
+        "widths": [
+          2.65,
+          4.6,
+          5.0
+        ],
+        "size": 20,
+        "styles": {},
+        "tag": "latency_evidence"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "Trễ GFS 8h và Vrain 1h vẫn là giả định; đã thử thêm trễ Vrain 3h/6h.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "latency_evidence"
+  },
+  {
+    "number": 8,
+    "title": "57 trạm và 1.449 chu kỳ dùng được",
+    "section": "II. DỮ LIỆU",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · dataset_audit.json / source_coverage_policy.json",
+    "note": "Có 86 vị trí trong danh mục nhóm Đà Nẵng của tài khoản, không phải toàn quốc hay chứng nhận phủ kín diện tích. Cohort 57 giữ điều kiện chọn chỉ bằng train: ít nhất 365 ngày đủ và 30 ngày mưa ≥1 mm. Lịch mới là mỗi ngày, không phải mỗi tuần. Hai ngày nguồn lỗi bị loại trước fit, đồng đều cho mọi mô hình, dựa trên 404 và đối chiếu byte GRIB, không dựa trên lượng mưa.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "II. DỮ LIỆU",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "08",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "57 trạm và 1.449 chu kỳ dùng được",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · dataset_audit.json / source_coverage_policy.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.6,
+        "y": 1.8,
+        "w": 3.9,
+        "h": 2.05,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.77,
+        "y": 1.94,
+        "w": 3.56,
+        "h": 0.55,
+        "text": "57 trạm",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.77,
+        "y": 2.67,
+        "w": 3.56,
+        "h": 1.0499999999999998,
+        "text": "Đủ điều kiện train\nKhông ép đủ danh mục 86",
+        "size": 20,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 4.7,
+        "y": 1.8,
+        "w": 3.9,
+        "h": 2.05,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 4.87,
+        "y": 1.94,
+        "w": 3.56,
+        "h": 0.55,
+        "text": "1.451 ngày",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 4.87,
+        "y": 2.67,
+        "w": 3.56,
+        "h": 1.0499999999999998,
+        "text": "Lịch cố định\n08/01/2021–28/12/2024",
+        "size": 20,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 8.8,
+        "y": 1.8,
+        "w": 3.9,
+        "h": 2.05,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 8.97,
+        "y": 1.94,
+        "w": 3.56,
+        "h": 0.55,
+        "text": "1.449 chu kỳ",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 8.97,
+        "y": 2.67,
+        "w": 3.56,
+        "h": 1.0499999999999998,
+        "text": "Có đủ trường GFS\nHai chu kỳ nguồn lỗi",
+        "size": 20,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.8,
+        "y": 4.25,
+        "w": 11.9,
+        "h": 1.25,
+        "text": "• 02/02/2021: thiếu index trong hai bố cục kho nguồn.\n• 30/11/2022: index và byte GRIB không khớp khi tải lại.\n• Loại cùng issue ở mọi cấu hình, trước khi fit.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "Không gọi kho này là đủ 100%; không chọn ngày theo điểm dự báo.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "coverage"
+  },
+  {
+    "number": 9,
+    "title": "Mỗi giai đoạn có một nhiệm vụ khác nhau",
+    "section": "III. CHIA DỮ LIỆU",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · dataset_audit.json / protocol.json",
+    "note": "Train 2021–2022 dùng học trọng số, scaler và tham chiếu khí hậu; tuning cũng chỉ diễn ra bên trong giai đoạn này. Cal 2023 dùng hiệu chỉnh xác suất và chọn cutoff, không chọn checkpoint như pilot cũ. Dev 2024 dùng đọc kết quả và định hướng phát triển, nên chưa phải test cuối. Mẫu trạm–issue có ba nhãn; dữ liệu dạng bảng dài có ba hàng cho một mẫu.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "III. CHIA DỮ LIỆU",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "09",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Mỗi giai đoạn có một nhiệm vụ khác nhau",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · dataset_audit.json / protocol.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.65,
+        "w": 12.25,
+        "h": 4.1,
+        "headers": [
+          "Giai đoạn",
+          "Mẫu trạm–issue",
+          "Vai trò"
+        ],
+        "rows": [
+          [
+            "2021–22 · Train",
+            "35.116",
+            "Học mô hình; tuning nội bộ"
+          ],
+          [
+            "2023 · Cal",
+            "18.365",
+            "Hiệu chỉnh xác suất / cutoff"
+          ],
+          [
+            "2024 · Dev",
+            "19.405",
+            "Đánh giá để phát triển"
+          ],
+          [
+            "2025 · Test cuối",
+            "Chưa chấm",
+            "Dành kiểm tra sau khi chốt phương án"
+          ]
+        ],
+        "row_h": 0.82,
+        "widths": [
+          3.1,
+          2.8,
+          6.35
+        ],
+        "size": 22,
+        "styles": {},
+        "tag": "split_counts"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "Tổng: 72.886 mẫu → 218.658 hàng theo ba hạn; không random chia cửa sổ.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "split"
+  },
+  {
+    "number": 10,
+    "title": "“Giữ kín 2025” có nghĩa là gì?",
+    "section": "III. CHIA DỮ LIỆU",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json · scikit-learn: cross-validation",
+    "note": "Giữ kín là giữ lại một năm để kiểm định cuối, không phải giấu một bảng kết quả đã có. Năm 2025 đã qua về lịch, nhưng chưa tham gia chọn đặc trưng, tham số, cutoff hoặc chấm điểm trong pipeline hiện tại. Nếu liên tục xem điểm 2025 rồi sửa mô hình cho đẹp, năm đó trở thành dữ liệu phát triển. Hiện dataset thí nghiệm mới chỉ được dựng và kiểm chứng cho 2021–2024; không khẳng định đã có sẵn bộ test 2025 hoàn chỉnh.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "III. CHIA DỮ LIỆU",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "10",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "“Giữ kín 2025” có nghĩa là gì?",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json · scikit-learn: cross-validation",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.6,
+        "y": 1.7,
+        "w": 5.9,
+        "h": 3.65,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.77,
+        "y": 1.8399999999999999,
+        "w": 5.5600000000000005,
+        "h": 0.55,
+        "text": "Ví dụ như học và làm bài thi",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.77,
+        "y": 2.57,
+        "w": 5.5600000000000005,
+        "h": 2.65,
+        "text": "2021–22: học và luyện tập\n2023: hiệu chỉnh cách dự báo\n2024: xem lỗi để phát triển\n2025: bài kiểm tra cuối để dành",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 6.85,
+        "y": 1.7,
+        "w": 5.85,
+        "h": 3.65,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 7.02,
+        "y": 1.8399999999999999,
+        "w": 5.51,
+        "h": 0.55,
+        "text": "Trạng thái thực tế hiện nay",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 7.02,
+        "y": 2.57,
+        "w": 5.51,
+        "h": 2.65,
+        "text": "Chưa dùng điểm / nhãn 2025\nđể chọn hoặc chỉnh mô hình.\n\nChưa có bảng kết quả 2025\ntrong thí nghiệm này.",
+        "size": 23,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "2025 đã qua về thời gian, nhưng vẫn có thể dành làm dữ liệu kiểm định.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "holdout"
+  },
+  {
+    "number": 11,
+    "title": "So sánh công bằng và tránh nhầm tương lai",
+    "section": "III. CHIA DỮ LIỆU",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · dataset_verification.json",
+    "note": "Dùng cùng mẫu có đủ nhãn cả ba hạn và đủ đặc trưng cho mọi cấu hình, kể cả ba kịch bản trễ trạm. Không điền nhãn thiếu thành 0. Toàn bộ 72 giờ nhãn phải thuộc cùng split, còn lịch sử được phép lấy từ quá khứ trước ranh. Scaler chỉ fit train. Số mẫu còn lại có thể không đại diện các đợt cảm biến bị lỗi, nhất là nếu thiếu số liên quan mưa lớn.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "III. CHIA DỮ LIỆU",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "11",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "So sánh công bằng và tránh nhầm tương lai",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · dataset_verification.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 1.65,
+        "w": 11.9,
+        "h": 0.6900000000000001,
+        "text": "• Cùng mẫu cho N0–N5, LightGBM / GRU và trễ 1/3/6h.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 2.4299999999999997,
+        "w": 11.9,
+        "h": 0.6900000000000001,
+        "text": "• Cả ba nhãn và lịch sử hợp lệ; thiếu không được thay bằng 0.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 3.21,
+        "w": 11.9,
+        "h": 0.6900000000000001,
+        "text": "• Toàn bộ 72h nhãn nằm cùng train / cal / dev.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 3.9899999999999998,
+        "w": 11.9,
+        "h": 0.6900000000000001,
+        "text": "• Trạm thiếu một cửa sổ chỉ mất mẫu của chính trạm đó.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 4.77,
+        "w": 11.9,
+        "h": 0.6900000000000001,
+        "text": "• Các mẫu cùng đợt mưa không được xem là hoàn toàn độc lập.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "Scalers và tham chiếu khí hậu chỉ học từ train.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "mask"
+  },
+  {
+    "number": 12,
+    "title": "Tuning: bốn lần học quá khứ → kiểm tra quý kế",
+    "section": "III. CHIA DỮ LIỆU",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json / tree_tuning_trials.csv",
+    "note": "Đây là rolling validation bên trong train 2021–2022, không dùng năm 2024 để early stop. Ở mỗi fold, nhãn train phải kết thúc ít nhất bảy ngày trước đầu quý validation; ba nhãn validation nằm trong quý. Bốn quý gồm các điều kiện mùa khác nhau. Sau khi chọn cấu hình, fit lại toàn train với số cây hoặc epoch cố định lấy trung vị từ CV.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "III. CHIA DỮ LIỆU",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "12",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Tuning: bốn lần học quá khứ → kiểm tra quý kế",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json / tree_tuning_trials.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.65,
+        "w": 12.25,
+        "h": 3.75,
+        "headers": [
+          "Fold",
+          "Phần được học",
+          "Phần dùng chọn tham số"
+        ],
+        "rows": [
+          [
+            "1",
+            "Quá khứ trước quý 1/2022",
+            "Quý 1/2022"
+          ],
+          [
+            "2",
+            "Quá khứ trước quý 2/2022",
+            "Quý 2/2022"
+          ],
+          [
+            "3",
+            "Quá khứ trước quý 3/2022",
+            "Quý 3/2022"
+          ],
+          [
+            "4",
+            "Quá khứ trước quý 4/2022",
+            "Quý 4/2022"
+          ]
+        ],
+        "row_h": 0.75,
+        "widths": [
+          1.1,
+          6.1,
+          5.05
+        ],
+        "size": 22,
+        "styles": {},
+        "tag": "cv_folds"
+      },
+      {
+        "kind": "text",
+        "x": 0.8,
+        "y": 5.6,
+        "w": 11.8,
+        "h": 0.45,
+        "text": "**Gap 7 ngày tính từ cuối nhãn train**, không chỉ từ issue.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.22,
+        "w": 12.25,
+        "h": 0.5,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.319999999999999,
+        "w": 11.95,
+        "h": 0.38,
+        "text": "2023 chỉ calibration; 2024 không dùng để chọn số cây / epoch.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "cv"
+  },
+  {
+    "number": 13,
+    "title": "Vì sao cần cả 0 mm, GFS thô và MOS?",
+    "section": "IV. CÁCH HỌC VÀ ĐỐI CHỨNG",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json",
+    "note": "ZERO kiểm tra trường hợp nhiều ngày khô khiến MAE trông dễ đạt; nó không phải cảnh báo hữu ích. Khí hậu là thông tin tháng–trạm từ train. Persistence lặp tổng 24 giờ đã có. GFS là dự báo trước học máy. MOS chỉ dùng lượng mưa GFS và sin/cos mùa, với mô hình tuyến tính/phân vị/logistic; nếu mô hình phức tạp không hơn nó thì chưa chứng minh cần sự phức tạp. LightGBM cũng là mô hình dự báo thật, không phải đối chứng được cố tình làm yếu.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "IV. CÁCH HỌC VÀ ĐỐI CHỨNG",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "13",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Vì sao cần cả 0 mm, GFS thô và MOS?",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.65,
+        "w": 12.25,
+        "h": 4.199999999999999,
+        "headers": [
+          "Đối chứng",
+          "Cách dự báo",
+          "Câu hỏi kiểm tra"
+        ],
+        "rows": [
+          [
+            "0 mm",
+            "Luôn dự báo khô",
+            "MAE thấp có chỉ vì nhiều ngày khô?"
+          ],
+          [
+            "Khí hậu",
+            "Tháng–trạm từ train",
+            "Có hơn thông tin mùa đơn giản?"
+          ],
+          [
+            "Persistence",
+            "Lặp mưa 24h khả dụng gần nhất",
+            "Có hơn giữ trạng thái gần đây?"
+          ],
+          [
+            "GFS thô",
+            "Lượng GFS đúng cửa sổ",
+            "Học máy có giúp hiệu chỉnh?"
+          ],
+          [
+            "MOS",
+            "Hiệu chỉnh GFS tuyến tính / logistic",
+            "Có cần mô hình nhiều biến hơn?"
+          ]
+        ],
+        "row_h": 0.7,
+        "widths": [
+          2.1,
+          5.1,
+          5.05
+        ],
+        "size": 20,
+        "styles": {},
+        "tag": "baselines"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "So trên cùng trạm, cùng issue và cùng nhãn, không làm yếu đối chứng.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "baselines"
+  },
+  {
+    "number": 14,
+    "title": "Vì sao có hai cách trả lời “mưa bao nhiêu mm”?",
+    "section": "IV. CÁCH HỌC VÀ ĐỐI CHỨNG",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json · Gneiting (2011)",
+    "note": "Mean là kỳ vọng, median là trung vị của lượng mưa có điều kiện theo đầu vào. Ví dụ hoàn toàn giả định: xác suất 80% không mưa và 20% mưa 50 mm; kỳ vọng là 10 mm nhưng trung vị là 0. MAE và sai số bình phương khuyến khích các đại lượng khác nhau. Vì thế hai đầu được định nghĩa trước khi chấm dev; không chọn đầu đẹp theo từng metric rồi gọi là một dự báo duy nhất. Cơ sở: Gneiting, Making and Evaluating Point Forecasts.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "IV. CÁCH HỌC VÀ ĐỐI CHỨNG",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "14",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Vì sao có hai cách trả lời “mưa bao nhiêu mm”?",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json · Gneiting (2011)",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.65,
+        "w": 12.25,
+        "h": 2.58,
+        "headers": [
+          "Đầu dự đoán",
+          "Cách hiểu",
+          "Học / đánh giá chính"
+        ],
+        "rows": [
+          [
+            "Mean",
+            "Lượng mưa kỳ vọng theo thông tin X",
+            "Tweedie → RMSE"
+          ],
+          [
+            "Median",
+            "Mức mưa trung vị theo thông tin X",
+            "Quantile 0,5 → MAE"
+          ]
+        ],
+        "row_h": 0.86,
+        "widths": [
+          2.0,
+          5.4,
+          4.85
+        ],
+        "size": 23,
+        "styles": {},
+        "tag": "functionals"
+      },
+      {
+        "kind": "text",
+        "x": 0.9,
+        "y": 4.55,
+        "w": 11.7,
+        "h": 1.15,
+        "text": "Ví dụ giả định: **80% mưa 0 mm; 20% mưa 50 mm**.\nMean = 10 mm; median = 0 mm. Cả hai trả lời đúng mục tiêu riêng.",
+        "size": 24,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "Vẫn chỉ có ba nhãn thật y₁/y₂/y₃; mỗi nhãn có hai đầu lượng để ước lượng.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "mean_median"
+  },
+  {
+    "number": 15,
+    "title": "N0–N5: thêm thông tin gì vào mô hình?",
+    "section": "IV. CÁCH HỌC VÀ ĐỐI CHỨNG",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json · tree_summary.json",
+    "note": "Các cấu hình này thuộc thí nghiệm trạm hằng ngày v2, không phải E0–E7 của bộ vùng trước đây. N0 có 16 đặc trưng gồm mưa GFS, mùa, tọa độ, ID và 10 biến mưa lịch sử. N1 thêm khí tượng thô. N2 và N4 thêm biến được tính từ cùng T, RH, u, v, không phải nguồn quan trắc mới. N3 thêm năm biến địa hình. N5 thêm tương tác giữa gió/ẩm và độ dốc. q là độ ẩm riêng suy ra từ nhiệt độ, độ ẩm tương đối ở 850 hPa; q*u và q*v là dòng ẩm một mực, không phải tích phân vận chuyển ẩm IVT.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "IV. CÁCH HỌC VÀ ĐỐI CHỨNG",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "15",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "N0–N5: thêm thông tin gì vào mô hình?",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json · tree_summary.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.65,
+        "w": 12.25,
+        "h": 4.2,
+        "headers": [
+          "Nhóm",
+          "Số biến",
+          "Thông tin được đưa vào"
+        ],
+        "rows": [
+          [
+            "N0",
+            "16",
+            "Mưa GFS + mùa / vị trí / ID + lịch sử mưa trạm"
+          ],
+          [
+            "N1",
+            "21",
+            "N0 + T, RH, u, v tại 850 hPa + hơi nước cột"
+          ],
+          [
+            "N2",
+            "25",
+            "N1 + q, q×u, q×v, tốc độ gió"
+          ],
+          [
+            "N3",
+            "26",
+            "N1 + cao độ, trung bình / độ lệch cao độ, hai độ dốc"
+          ],
+          [
+            "N4",
+            "30",
+            "N3 + bốn dẫn xuất khí tượng của N2"
+          ],
+          [
+            "N5",
+            "32",
+            "N4 + gió·độ dốc và dòng ẩm·độ dốc"
+          ]
+        ],
+        "row_h": 0.6,
+        "widths": [
+          1.05,
+          1.35,
+          9.85
+        ],
+        "size": 20,
+        "styles": {},
+        "tag": "features"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "N1 thêm khí tượng; N3 thêm địa hình; N2/N4/N5 kiểm tra cách biểu diễn.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "features"
+  },
+  {
+    "number": 16,
+    "title": "Mỗi phép so sánh trả lời một câu hỏi",
+    "section": "IV. CÁCH HỌC VÀ ĐỐI CHỨNG",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json · paired_bootstrap.csv",
+    "note": "Không chỉ so N0 với N5 rồi quy hết cải thiện cho các dẫn xuất. N1 so N0 tách phần thông tin khí tượng mới. N3 so N1 tách địa hình. N2 so N1 và N4 so N3 tách cách biểu diễn gió ẩm. N5 so N4 tách tương tác địa hình; N5 so N3 là hiệu quả toàn bộ gói dẫn xuất. LightGBM chạy đủ N0–N5. GRU chỉ chạy N3 và N5 để kiểm tra xem gói dẫn xuất có tác dụng trong một họ mô hình khác. Cấu hình, mẫu, seed và tiêu chí đánh giá được giữ chung trong từng họ.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "IV. CÁCH HỌC VÀ ĐỐI CHỨNG",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "16",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Mỗi phép so sánh trả lời một câu hỏi",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json · paired_bootstrap.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.65,
+        "w": 12.25,
+        "h": 4.32,
+        "headers": [
+          "So sánh",
+          "Câu hỏi nghiên cứu"
+        ],
+        "rows": [
+          [
+            "N1 − N0",
+            "Dự báo khí tượng thô có bổ sung ích lợi ngoài mưa GFS?"
+          ],
+          [
+            "N3 − N1",
+            "Thông tin địa hình có giúp không?"
+          ],
+          [
+            "N2 − N1; N4 − N3",
+            "Các dẫn xuất gió–ẩm có giúp biểu diễn dễ học hơn?"
+          ],
+          [
+            "N5 − N4",
+            "Tương tác gió–ẩm–độ dốc có thêm ích lợi?"
+          ],
+          [
+            "N5 − N3",
+            "Cả gói dẫn xuất có ích ở LightGBM và GRU không?"
+          ]
+        ],
+        "row_h": 0.72,
+        "widths": [
+          3.0,
+          9.25
+        ],
+        "size": 22,
+        "styles": {},
+        "tag": "contrasts"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "Dẫn xuất từ cùng dữ liệu không đồng nghĩa đã có thêm nguồn thông tin. ",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "contrasts"
+  },
+  {
+    "number": 17,
+    "title": "Hai cách học trên cùng bài toán trạm",
+    "section": "IV. CÁCH HỌC VÀ ĐỐI CHỨNG",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · gru_summary.json · tree_summary.json",
+    "note": "LightGBM là mô hình dự báo đầy đủ, mạnh với dữ liệu bảng và là đối chứng cần thiết. Nó học riêng từng hạn và từng đầu ra. GRU là mạng tuần tự nhỏ đọc chuỗi bảy tổng mưa ngày, ghép với ngữ cảnh dự báo khí tượng từng hạn và embedding trạm. Cả hai học chung nhiều trạm; không huấn luyện 57 mô hình độc lập. Ngữ cảnh GRU N3 có 18 số liên tục, N5 có 24; lịch sử và embedding được xử lý riêng nên không thể so số chiều này trực tiếp với 26/32 cột LightGBM. TFT/Informer cũ dùng bài toán, nhãn và protocol khác; bộ kết quả đó không thể đưa vào bảng so sánh hiện tại. Đây không phải bằng chứng TFT hay Informer không khả thi.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "IV. CÁCH HỌC VÀ ĐỐI CHỨNG",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "17",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Hai cách học trên cùng bài toán trạm",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · gru_summary.json · tree_summary.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.6,
+        "y": 1.65,
+        "w": 5.9,
+        "h": 3.85,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.77,
+        "y": 1.79,
+        "w": 5.5600000000000005,
+        "h": 0.55,
+        "text": "LightGBM: học bảng đặc trưng",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.77,
+        "y": 2.52,
+        "w": 5.5600000000000005,
+        "h": 2.85,
+        "text": "X mỗi hạn: 16–32 cột tùy nhóm\nHọc riêng ngày 1 / 2 / 3\nChạy đủ N0–N5\nBốn đầu ra mỗi hạn\nCấu hình nhỏ, dễ kiểm tra",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 6.85,
+        "y": 1.65,
+        "w": 5.85,
+        "h": 3.85,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 7.02,
+        "y": 1.79,
+        "w": 5.51,
+        "h": 0.55,
+        "text": "GRU: học chuỗi mưa quá khứ",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 7.02,
+        "y": 2.52,
+        "w": 5.51,
+        "h": 2.85,
+        "text": "Lịch sử: [mẫu, 7 ngày, 1]\nNgữ cảnh N3: [mẫu, 3 hạn, 18]\nNgữ cảnh N5: [mẫu, 3 hạn, 24]\nEmbedding ID trạm\nChạy N3 và N5",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "TFT / Informer cũ khác nhãn và protocol → chưa có so sánh công bằng ở v2.",
+        "size": 18,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "models"
+  },
+  {
+    "number": 18,
+    "title": "LightGBM: chỉnh trên train, khóa trước calibration",
+    "section": "IV. CÁCH HỌC VÀ ĐỐI CHỨNG",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · tree_selection.json · tree_tuning_trials.csv",
+    "note": "Mỗi đầu ra có ba ứng viên nhỏ/pilot/vừa, thử trên bốn fold thời gian trong train, với N3 làm cấu hình neo. Chọn ứng viên theo điểm CV rồi dùng trung vị số cây tối ưu giữa các fold cho fit cuối. Mỗi cấu hình N0–N5 dùng chung lựa chọn này, tránh tăng cơ hội tuning riêng cho nhóm nhiều biến. Learning rate 0,04; subsample và colsample 0,9; L2 bằng 5. Tối đa 600 cây, patience 50 chỉ trong CV train. Đầu mean dùng Tweedie power 1,5; median dùng quantile 0,5; hai đầu xác suất dùng binary loss. Tổng 144 fit CV và 288 bộ ước lượng cuối bao gồm các thí nghiệm độ trễ. Không early stopping bằng 2023 hay 2024.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "IV. CÁCH HỌC VÀ ĐỐI CHỨNG",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "18",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "LightGBM: chỉnh trên train, khóa trước calibration",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · tree_selection.json · tree_tuning_trials.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.65,
+        "w": 12.25,
+        "h": 3.65,
+        "headers": [
+          "Đầu ra",
+          "Lá",
+          "Độ sâu",
+          "Mẫu/lá",
+          "Số cây ngày 1 / 2 / 3"
+        ],
+        "rows": [
+          [
+            "Mean",
+            "7",
+            "3",
+            "40",
+            "109/109/93"
+          ],
+          [
+            "Median",
+            "31",
+            "5",
+            "80",
+            "68/40/72"
+          ],
+          [
+            "P(mưa ≥1)",
+            "7",
+            "3",
+            "40",
+            "150/169/147"
+          ],
+          [
+            "P(≥50 | ≥1)",
+            "7",
+            "3",
+            "40",
+            "162/106/85"
+          ]
+        ],
+        "row_h": 0.73,
+        "widths": [
+          2.5,
+          1.1,
+          1.35,
+          1.5,
+          5.8
+        ],
+        "size": 22,
+        "styles": {},
+        "tag": "tree_config"
+      },
+      {
+        "kind": "text",
+        "x": 0.8,
+        "y": 5.55,
+        "w": 11.8,
+        "h": 0.5,
+        "text": "Learning rate **0,04** · L2 **5** · Ba seed **17 / 29 / 43**.",
+        "size": 23,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "Chọn trên CV 2021–2022; dùng cùng lựa chọn cho các nhóm đặc trưng.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "tuning_tree"
+  },
+  {
+    "number": 19,
+    "title": "GRU và “ba seed”: chạy lặp để giảm may rủi",
+    "section": "IV. CÁCH HỌC VÀ ĐỐI CHỨNG",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · gru_selection.json · seed_metrics.csv",
+    "note": "Seed điều khiển khởi tạo trọng số, trộn mẫu và các thành phần ngẫu nhiên. Ba seed không phải ba năm hay ba lần chia test. Bảng minh họa GRU N5 ngày 1; ensemble là trung bình dự báo trước khi tính metric, không phải trung bình ba metric. GRU chọn hidden 16, head 24, learning rate 0,001, fit cuối 17 epoch qua CV train; dropout 0,1, batch 256, AdamW weight decay 0,001, gradient clip 1. Loss gộp Tweedie đã chuẩn hóa, pinball và 0,5 lần hai BCE. N3 có 4.364 tham số và N5 có 4.796: gói dẫn xuất tăng 432 tham số, nên chưa tách hoàn toàn tác động biểu diễn khỏi dung lượng mạng.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "IV. CÁCH HỌC VÀ ĐỐI CHỨNG",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "19",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "GRU và “ba seed”: chạy lặp để giảm may rủi",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · gru_selection.json · seed_metrics.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.75,
+        "y": 1.6,
+        "w": 11.8,
+        "h": 0.95,
+        "text": "Hidden **16** · head **24** · learning rate **0,001** · **17 epoch**\nChọn qua CV train; chạy lại seed 17 / 29 / 43.",
+        "size": 23,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 2.7,
+        "w": 12.25,
+        "h": 3.1,
+        "headers": [
+          "GRU N5 · ngày 1",
+          "RMSE mean ↓",
+          "MAE median ↓"
+        ],
+        "rows": [
+          [
+            "17",
+            "17,481",
+            "6,316"
+          ],
+          [
+            "29",
+            "17,434",
+            "6,344"
+          ],
+          [
+            "43",
+            "17,395",
+            "6,346"
+          ],
+          [
+            "Trung bình dự báo",
+            "17,386",
+            "6,314"
+          ]
+        ],
+        "row_h": 0.62,
+        "widths": [
+          5.25,
+          3.5,
+          3.5
+        ],
+        "size": 22,
+        "styles": {
+          "4,1": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "4,2": {
+            "bold": true,
+            "color": "087E8B"
+          }
+        },
+        "tag": "seed_example"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "Ba seed kiểm tra biến thiên do học; không thay thế kiểm định trên năm mới.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "gru_seeds"
+  },
+  {
+    "number": 20,
+    "title": "Xác suất phải hợp lý trước khi dùng cảnh báo",
+    "section": "IV. CÁCH HỌC VÀ ĐỐI CHỨNG",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · probability_coherence.csv · decision_cutoffs.json",
+    "note": "Hai sự kiện lồng nhau: mọi ngày mưa ít nhất 50 mm cũng phải là ngày mưa ít nhất 1 mm. Mô hình học P1 và xác suất có điều kiện Q50 trên các mẫu wet. Sau hiệu chỉnh Platt trên 2023, tính P50=P1×Q50. Cách làm giữ P50 không vượt P1 ở từng seed và cả ensemble. Ngưỡng quyết định tau được chọn bằng quarter cross-fitting trên 2023, cách ly ±7 ngày; cùng tau cho hai sự kiện tại mỗi mô hình/hạn. Quarter cross-fit chỉ là công cụ calibration lịch sử, không phải giả lập dự báo thời gian thực năm 2023. Chấm 2024 bằng calibrator fit trên toàn bộ 2023 và tau đã chọn. Mốc 50 mm ở đây là ngưỡng nghiên cứu thăm dò, không tự động là chuẩn cảnh báo hành chính.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "IV. CÁCH HỌC VÀ ĐỐI CHỨNG",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "20",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Xác suất phải hợp lý trước khi dùng cảnh báo",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · probability_coherence.csv · decision_cutoffs.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.8,
+        "y": 1.7,
+        "w": 11.7,
+        "h": 1.02,
+        "text": "P₁ = P(mưa ≥1 mm)\nP₅₀ = P₁ × P(mưa ≥50 mm | mưa ≥1 mm)",
+        "size": 26,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.7,
+        "y": 2.85,
+        "w": 5.8,
+        "h": 2.25,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.87,
+        "y": 2.99,
+        "w": 5.46,
+        "h": 0.55,
+        "text": "Ví dụ giả định",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.87,
+        "y": 3.72,
+        "w": 5.46,
+        "h": 1.25,
+        "text": "P₁ = 0,60; Q₅₀ = 0,20\n→ P₅₀ = 0,12 ≤ P₁",
+        "size": 25,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 6.85,
+        "y": 2.85,
+        "w": 5.8,
+        "h": 2.25,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 7.02,
+        "y": 2.99,
+        "w": 5.46,
+        "h": 0.55,
+        "text": "Calibration khác cảnh báo",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 7.02,
+        "y": 3.72,
+        "w": 5.46,
+        "h": 1.25,
+        "text": "Hiệu chỉnh xác suất: dùng 2023\nChọn tau báo có/không: 2023",
+        "size": 21,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.8,
+        "y": 5.45,
+        "w": 11.7,
+        "h": 0.48,
+        "text": "Cùng tau cho ≥1 và ≥50 giúp quyết định cảnh báo cũng nhất quán.",
+        "size": 21,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "Xác suất 0,30 không phải lượng mưa 0,30 mm.",
+        "size": 21,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "probabilities"
+  },
+  {
+    "number": 21,
+    "title": "Đọc các chỉ số như thế nào?",
+    "section": "V. ĐÁNH GIÁ",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · MET Appendix C · protocol.json",
+    "note": "RMSE phạt mạnh sai số lớn và là tiêu chí chính của đầu mean; MAE dễ diễn đạt theo mm và là tiêu chí chính của đầu median. Bias là dự báo trừ quan trắc: âm nghĩa dự báo thiếu trung bình. BS là sai số bình phương giữa xác suất và nhãn 0/1. BSS=1−BS/BS khí hậu, với cùng tập mẫu và tham chiếu khí hậu học từ train; âm nghĩa kém hơn tham chiếu đó theo BS. H là báo trúng, M là bỏ sót, F là báo nhầm. POD=H/(H+M), FAR=F/(H+F), CSI=H/(H+M+F). FAR ở đây là false alarm ratio, không phải false positive rate. Không có quy tắc POD 0,4 luôn tốt; cần cùng ngưỡng mưa, hạn dự báo, mẫu và FAR/CSI để so sánh. Các bảng lượng ghi rõ đầu dự báo, các bảng sự kiện ghi rõ ngưỡng và tau.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "V. ĐÁNH GIÁ",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "21",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Đọc các chỉ số như thế nào?",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · MET Appendix C · protocol.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.58,
+        "w": 12.25,
+        "h": 4.59,
+        "headers": [
+          "Chỉ số",
+          "Ý nghĩa dễ hiểu",
+          "Vì sao dùng?",
+          "Chiều tốt"
+        ],
+        "rows": [
+          [
+            "RMSE",
+            "Sai số mm; phạt mạnh lỗi lớn",
+            "Kiểm tra dự báo sai nặng",
+            "Nhỏ hơn"
+          ],
+          [
+            "MAE",
+            "Trung bình lệch bao nhiêu mm",
+            "Dễ hiểu mức sai số lượng",
+            "Nhỏ hơn"
+          ],
+          [
+            "Bias",
+            "Trung bình dự báo − thực tế",
+            "Nhận biết thừa / thiếu mưa",
+            "Gần 0"
+          ],
+          [
+            "BS",
+            "Sai số của xác suất dự báo",
+            "Chấm xác suất, chưa cần tau",
+            "Nhỏ hơn"
+          ],
+          [
+            "BSS",
+            "BS cải thiện so với khí hậu",
+            ">0: hơn; <0: kém khí hậu",
+            "Lớn hơn"
+          ],
+          [
+            "CSI",
+            "H / (H + M + F)",
+            "Cân đối trúng, sót và nhầm",
+            "Lớn hơn"
+          ],
+          [
+            "POD",
+            "H / (H + M)",
+            "Bắt được bao nhiêu mưa thật",
+            "Lớn hơn"
+          ],
+          [
+            "FAR",
+            "F / (H + F)",
+            "Trong lần báo có, bao nhiêu sai",
+            "Nhỏ hơn"
+          ]
+        ],
+        "row_h": 0.51,
+        "widths": [
+          1.0,
+          4.35,
+          5.15,
+          1.75
+        ],
+        "size": 18,
+        "styles": {},
+        "tag": "metrics"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.3,
+        "w": 12.25,
+        "h": 0.42,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.3999999999999995,
+        "w": 11.95,
+        "h": 0.3,
+        "text": "H: báo trúng · M: bỏ sót · F: báo nhầm. Luôn đọc POD cùng FAR và CSI.",
+        "size": 17,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "metrics"
+  },
+  {
+    "number": 22,
+    "title": "Một con số chung và khoảng tin cậy nói gì?",
+    "section": "V. ĐÁNH GIÁ",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · paired_bootstrap.csv · protocol.json",
+    "note": "Macro: tính metric tại từng trạm rồi lấy trung bình 57 trạm; mỗi trạm có trọng số bằng nhau. Macro RMSE không phải căn của MSE gộp toàn mạng. Macro BSS là trung bình skill từng trạm, không tính lại bằng tỷ số hai macro BS. So sánh cặp dùng cùng ngày và trạm, lấy mẫu lại 1.000 lần theo khối tròn 14 ngày để giữ một phần phụ thuộc thời gian và đồng biến các trạm. Chênh lệch A−B âm tốt hơn cho sai số. CI chứa 0 nghĩa chưa có bằng chứng rõ theo phép thử này, không chứng minh hai mô hình bằng nhau. Đây là CI thăm dò chưa điều chỉnh nhiều phép so sánh, điều kiện trên các mô hình đã fit; không bao quát độ bất định cảm biến hay thay đổi khi train lại.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "V. ĐÁNH GIÁ",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "22",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Một con số chung và khoảng tin cậy nói gì?",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · paired_bootstrap.csv · protocol.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 1.65,
+        "w": 11.9,
+        "h": 0.75,
+        "text": "• **Macro:** tính tại từng trạm, rồi trung bình; trạm có vai trò ngang nhau.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 2.4899999999999998,
+        "w": 11.9,
+        "h": 0.75,
+        "text": "• **So sánh cặp:** A và B gặp đúng cùng mẫu, không khác độ khó.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 3.33,
+        "w": 11.9,
+        "h": 0.75,
+        "text": "• **CI 95%:** lấy mẫu lại 1.000 lần theo khối 14 ngày.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 4.17,
+        "w": 11.9,
+        "h": 0.75,
+        "text": "• **Sai số A − B:** CI nằm dưới 0 → tín hiệu A tốt hơn trong dev này.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 5.01,
+        "w": 11.9,
+        "h": 0.75,
+        "text": "• **CI chứa 0:** chưa đủ bằng chứng rõ; không kết luận “bằng nhau”.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "CI thăm dò trên 2024; chưa phải chứng cứ độc lập trên 2025.",
+        "size": 21,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "uncertainty"
+  },
+  {
+    "number": 23,
+    "title": "Sai số lượng mưa: RMSE của đầu mean ↓",
+    "section": "VI. KẾT QUẢ DEV 2024",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · point_metrics.csv",
+    "note": "Các giá trị có đơn vị mm/24h, macro theo trạm. In đậm giá trị thấp nhất trong những dòng đang hiển thị; bảng toàn bộ cấu hình ở phụ lục. Mô hình có điểm thấp nhất từng ngày không nhất thiết thắng có ý nghĩa thống kê. ZERO thấp ở MAE nhưng RMSE cao cho thấy tác hại của bỏ qua mưa. So với MOS, các mô hình nhiều biến có tín hiệu cải thiện trên dev.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "VI. KẾT QUẢ DEV 2024",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "23",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Sai số lượng mưa: RMSE của đầu mean ↓",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · point_metrics.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.6,
+        "w": 12.25,
+        "h": 4.32,
+        "headers": [
+          "Phương pháp",
+          "Ngày 1",
+          "Ngày 2",
+          "Ngày 3"
+        ],
+        "rows": [
+          [
+            "Luôn 0 mm",
+            "24,398",
+            "24,299",
+            "24,293"
+          ],
+          [
+            "GFS thô",
+            "19,271",
+            "20,228",
+            "22,139"
+          ],
+          [
+            "Khí hậu",
+            "22,347",
+            "22,286",
+            "22,280"
+          ],
+          [
+            "MOS đơn giản",
+            "19,169",
+            "20,124",
+            "20,445"
+          ],
+          [
+            "LGB N1",
+            "17,497",
+            "18,586",
+            "19,151"
+          ],
+          [
+            "LGB N3",
+            "17,527",
+            "18,550",
+            "19,150"
+          ],
+          [
+            "GRU N3",
+            "17,722",
+            "18,954",
+            "19,368"
+          ],
+          [
+            "GRU N5",
+            "17,386",
+            "18,750",
+            "19,277"
+          ]
+        ],
+        "row_h": 0.48,
+        "widths": [
+          4.9,
+          2.45,
+          2.45,
+          2.45
+        ],
+        "size": 21,
+        "styles": {
+          "1,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,1": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "1,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,2": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "7,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "1,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,3": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "7,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,3": {
+            "bold": false,
+            "color": "123047"
+          }
+        },
+        "tag": "rmse"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.18,
+        "w": 12.25,
+        "h": 0.52,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.279999999999999,
+        "w": 11.95,
+        "h": 0.4,
+        "text": "In đậm: tốt nhất trong bảng này. Bảng đầy đủ N0–N5 nằm ở phụ lục.",
+        "size": 18,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "rmse"
+  },
+  {
+    "number": 24,
+    "title": "Sai số điển hình: MAE của đầu median ↓",
+    "section": "VI. KẾT QUẢ DEV 2024",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · point_metrics.csv",
+    "note": "Đầu median được huấn luyện để tối ưu trung vị, nên được so theo MAE chính. Không lấy MAE từ median rồi dùng như cùng một dự báo mean trong bảng RMSE. GRU N5 có MAE median thấp nhất trong các cấu hình chính, nhưng đó vẫn là kết quả dev. Phụ lục có toàn bộ N0–N5.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "VI. KẾT QUẢ DEV 2024",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "24",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Sai số điển hình: MAE của đầu median ↓",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · point_metrics.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.6,
+        "w": 12.25,
+        "h": 4.32,
+        "headers": [
+          "Phương pháp",
+          "Ngày 1",
+          "Ngày 2",
+          "Ngày 3"
+        ],
+        "rows": [
+          [
+            "Luôn 0 mm",
+            "8,291",
+            "8,232",
+            "8,249"
+          ],
+          [
+            "GFS thô",
+            "8,014",
+            "8,664",
+            "9,299"
+          ],
+          [
+            "Khí hậu",
+            "8,061",
+            "8,001",
+            "8,011"
+          ],
+          [
+            "MOS đơn giản",
+            "7,306",
+            "7,585",
+            "7,554"
+          ],
+          [
+            "LGB N1",
+            "6,461",
+            "7,142",
+            "7,138"
+          ],
+          [
+            "LGB N3",
+            "6,444",
+            "7,116",
+            "7,095"
+          ],
+          [
+            "GRU N3",
+            "6,444",
+            "6,865",
+            "6,912"
+          ],
+          [
+            "GRU N5",
+            "6,314",
+            "6,754",
+            "6,870"
+          ]
+        ],
+        "row_h": 0.48,
+        "widths": [
+          4.9,
+          2.45,
+          2.45,
+          2.45
+        ],
+        "size": 21,
+        "styles": {
+          "1,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,1": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "1,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,2": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "1,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,3": {
+            "bold": true,
+            "color": "087E8B"
+          }
+        },
+        "tag": "mae"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.18,
+        "w": 12.25,
+        "h": 0.52,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.279999999999999,
+        "w": 11.95,
+        "h": 0.4,
+        "text": "In đậm: tốt nhất trong bảng này. Bảng đầy đủ N0–N5 nằm ở phụ lục.",
+        "size": 18,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "mae"
+  },
+  {
+    "number": 25,
+    "title": "Xác suất mưa ≥50 mm: BSS so với khí hậu ↑",
+    "section": "VI. KẾT QUẢ DEV 2024",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · probability_metrics.csv",
+    "note": "BSS dương nghĩa tốt hơn khí hậu tham chiếu theo BS; âm nghĩa kém hơn. GFS thô ở đây bị chuyển thành xác suất 0 hoặc 1 từ một lượng dự báo tất định; đó không phải hệ dự báo tổ hợp GFS và không nên diễn giải là năng lực xác suất của một ensemble. MOS và CLIM là đối chứng xác suất phù hợp hơn. BSS là macro của skill từng trạm. In đậm là cao nhất trong các dòng hiển thị, không phải mọi cấu hình trong phụ lục.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "VI. KẾT QUẢ DEV 2024",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "25",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Xác suất mưa ≥50 mm: BSS so với khí hậu ↑",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · probability_metrics.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.6,
+        "w": 12.25,
+        "h": 4.32,
+        "headers": [
+          "Phương pháp",
+          "Ngày 1",
+          "Ngày 2",
+          "Ngày 3"
+        ],
+        "rows": [
+          [
+            "Luôn 0 mm",
+            "-0,073",
+            "-0,071",
+            "-0,071"
+          ],
+          [
+            "GFS thô",
+            "-0,067",
+            "-0,034",
+            "-0,234"
+          ],
+          [
+            "Khí hậu",
+            "0,000",
+            "0,000",
+            "0,000"
+          ],
+          [
+            "MOS đơn giản",
+            "0,162",
+            "0,170",
+            "0,103"
+          ],
+          [
+            "LGB N1",
+            "0,278",
+            "0,230",
+            "0,163"
+          ],
+          [
+            "LGB N3",
+            "0,280",
+            "0,227",
+            "0,164"
+          ],
+          [
+            "GRU N3",
+            "0,269",
+            "0,208",
+            "0,160"
+          ],
+          [
+            "GRU N5",
+            "0,287",
+            "0,228",
+            "0,158"
+          ]
+        ],
+        "row_h": 0.48,
+        "widths": [
+          4.9,
+          2.45,
+          2.45,
+          2.45
+        ],
+        "size": 21,
+        "styles": {
+          "1,1": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "2,1": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "3,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,1": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "1,2": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "2,2": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "3,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,2": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "6,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "1,3": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "2,3": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "3,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,3": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "7,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,3": {
+            "bold": false,
+            "color": "123047"
+          }
+        },
+        "tag": "bss50"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.18,
+        "w": 12.25,
+        "h": 0.52,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.279999999999999,
+        "w": 11.95,
+        "h": 0.4,
+        "text": "In đậm: tốt nhất trong bảng này. Bảng đầy đủ N0–N5 nằm ở phụ lục.",
+        "size": 18,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "bss50"
+  },
+  {
+    "number": 26,
+    "title": "Bắt được mưa lớn nhiều hơn, nhưng báo nhầm còn cao",
+    "section": "VI. KẾT QUẢ DEV 2024",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · event_metrics.csv",
+    "note": "Bảng là sự kiện ≥50 mm/24h, với tau chọn trên calibration 2023 và đóng băng khi chấm 2024. Mỗi dòng hiển thị ngày dự báo, mô hình, cutoff, POD, FAR, CSI. Không thể so POD riêng rồi kết luận: hạ tau thường bắt được nhiều mưa hơn nhưng cũng tăng báo nhầm. Ngày 1 có 890 station-day mưa lớn trên 96 issue; ngày 2 là 886/95; ngày 3 là 884/94. Đây không phải hàng trăm trận mưa độc lập vì nhiều trạm có thể gặp cùng hệ thời tiết. Bảng dùng macro; không diễn giải phép nhân POD với tổng số sự kiện như thể đó là micro.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "VI. KẾT QUẢ DEV 2024",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "26",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Bắt được mưa lớn nhiều hơn, nhưng báo nhầm còn cao",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · event_metrics.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.58,
+        "w": 12.25,
+        "h": 4.5,
+        "headers": [
+          "Ngày",
+          "Mô hình",
+          "Tau",
+          "POD ↑",
+          "FAR ↓",
+          "CSI ↑"
+        ],
+        "rows": [
+          [
+            "1",
+            "MOS đơn giản",
+            "0,350",
+            "0,355",
+            "0,532",
+            "0,241"
+          ],
+          [
+            "1",
+            "LGB N3",
+            "0,150",
+            "0,742",
+            "0,643",
+            "0,317"
+          ],
+          [
+            "1",
+            "GRU N5",
+            "0,200",
+            "0,734",
+            "0,606",
+            "0,344"
+          ],
+          [
+            "2",
+            "MOS đơn giản",
+            "0,250",
+            "0,361",
+            "0,585",
+            "0,228"
+          ],
+          [
+            "2",
+            "LGB N3",
+            "0,250",
+            "0,551",
+            "0,571",
+            "0,308"
+          ],
+          [
+            "2",
+            "GRU N5",
+            "0,300",
+            "0,486",
+            "0,506",
+            "0,319"
+          ],
+          [
+            "3",
+            "MOS đơn giản",
+            "0,150",
+            "0,565",
+            "0,655",
+            "0,267"
+          ],
+          [
+            "3",
+            "LGB N3",
+            "0,200",
+            "0,586",
+            "0,664",
+            "0,268"
+          ],
+          [
+            "3",
+            "GRU N5",
+            "0,200",
+            "0,672",
+            "0,678",
+            "0,279"
+          ]
+        ],
+        "row_h": 0.45,
+        "widths": [
+          1.0,
+          2.5,
+          1.8,
+          2.25,
+          2.25,
+          2.45
+        ],
+        "size": 20,
+        "styles": {
+          "1,4": {
+            "bold": true,
+            "color": "AD3434"
+          },
+          "2,4": {
+            "bold": true,
+            "color": "AD3434"
+          },
+          "3,4": {
+            "bold": true,
+            "color": "AD3434"
+          },
+          "4,4": {
+            "bold": true,
+            "color": "AD3434"
+          },
+          "5,4": {
+            "bold": true,
+            "color": "AD3434"
+          },
+          "6,4": {
+            "bold": true,
+            "color": "AD3434"
+          },
+          "7,4": {
+            "bold": true,
+            "color": "AD3434"
+          },
+          "8,4": {
+            "bold": true,
+            "color": "AD3434"
+          },
+          "9,4": {
+            "bold": true,
+            "color": "AD3434"
+          }
+        },
+        "tag": "events"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.25,
+        "w": 12.25,
+        "h": 0.46,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.35,
+        "w": 11.95,
+        "h": 0.34,
+        "text": "Không có chuẩn “POD 0,4 là tốt” cho mọi bài toán. Cần xem FAR, CSI và ngưỡng.",
+        "size": 18,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "events"
+  },
+  {
+    "number": 27,
+    "title": "Khí tượng thô bổ sung: tín hiệu cải thiện rõ hơn",
+    "section": "VI. KẾT QUẢ DEV 2024",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · paired_bootstrap.csv",
+    "note": "So LightGBM N1 với N0 giữ cùng mô hình và quy trình, chỉ thêm T/RH/u/v 850 hPa và PWAT dự báo. Các khoảng RMSE dưới 0 ở cả ba ngày cho thấy ích lợi của thông tin khí tượng dự báo ngoài lượng mưa GFS và lịch sử mưa. Bảng cũng cho chênh MAE median để người đọc không nhầm chức năng đầu ra. Đây là bằng chứng trên cùng dev 2024 và bootstrap thăm dò, không phải bằng chứng nhân quả hay đánh bại một paper khác có dữ liệu khác.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "VI. KẾT QUẢ DEV 2024",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "27",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Khí tượng thô bổ sung: tín hiệu cải thiện rõ hơn",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · paired_bootstrap.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.65,
+        "w": 12.25,
+        "h": 3.6,
+        "headers": [
+          "Ngày",
+          "Δ RMSE mean [CI 95%]",
+          "Δ MAE median [CI 95%]"
+        ],
+        "rows": [
+          [
+            "1",
+            "-1,078 [-1,950; -0,370]",
+            "-0,308 [-0,509; -0,125]"
+          ],
+          [
+            "2",
+            "-1,162 [-1,841; -0,496]",
+            "-0,160 [-0,264; -0,075]"
+          ],
+          [
+            "3",
+            "-0,537 [-0,912; -0,152]",
+            "-0,093 [-0,245; 0,057]"
+          ]
+        ],
+        "row_h": 0.9,
+        "widths": [
+          1.1,
+          5.55,
+          5.6
+        ],
+        "size": 22,
+        "styles": {
+          "1,1": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "1,2": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "2,1": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "2,2": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "3,1": {
+            "bold": true,
+            "color": "087E8B"
+          }
+        },
+        "tag": "raw_gain"
+      },
+      {
+        "kind": "text",
+        "x": 0.8,
+        "y": 5.55,
+        "w": 11.7,
+        "h": 0.48,
+        "text": "Δ = N1 − N0; âm là giảm sai số. Đơn vị mm/24h.",
+        "size": 23,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "Có cơ sở giữ khí tượng GFS thô làm phần đầu vào quan trọng.",
+        "size": 21,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "raw_gain"
+  },
+  {
+    "number": 28,
+    "title": "N5 − N3: dẫn xuất giúp ích khác nhau giữa mô hình",
+    "section": "VI. KẾT QUẢ DEV 2024",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · paired_bootstrap.csv",
+    "note": "N5 so N3 giữ cùng nguồn khí tượng thô và địa hình, bổ sung sáu dẫn xuất gió–ẩm–địa hình. LightGBM chưa có chênh lệch RMSE hoặc MAE rõ ở cả ba ngày theo CI này. GRU có CI âm ở ngày 1–2, còn ngày 3 chứa 0. Không gọi mọi con số giảm nhỏ là cải thiện được chứng minh. GRU N5 đồng thời tăng 432 tham số nên cần thí nghiệm khớp dung lượng nếu muốn quy kết riêng cho cách biểu diễn. Các cấu hình được khảo sát trên dev 2024; cần kiểm định 2025 sau khi khóa lựa chọn.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "VI. KẾT QUẢ DEV 2024",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "28",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "N5 − N3: dẫn xuất giúp ích khác nhau giữa mô hình",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · paired_bootstrap.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.6,
+        "w": 12.25,
+        "h": 4.13,
+        "headers": [
+          "Mô hình · ngày",
+          "Δ RMSE mean [CI 95%]",
+          "Δ MAE median [CI 95%]"
+        ],
+        "rows": [
+          [
+            "LGB · 1",
+            "-0,006 [-0,212; 0,171]",
+            "-0,005 [-0,079; 0,058]"
+          ],
+          [
+            "LGB · 2",
+            "0,041 [-0,056; 0,122]",
+            "-0,012 [-0,057; 0,034]"
+          ],
+          [
+            "LGB · 3",
+            "0,015 [-0,186; 0,205]",
+            "0,002 [-0,056; 0,058]"
+          ],
+          [
+            "GRU · 1",
+            "-0,336 [-0,554; -0,084]",
+            "-0,130 [-0,243; -0,045]"
+          ],
+          [
+            "GRU · 2",
+            "-0,204 [-0,373; -0,017]",
+            "-0,110 [-0,225; -0,029]"
+          ],
+          [
+            "GRU · 3",
+            "-0,091 [-0,281; 0,109]",
+            "-0,042 [-0,134; 0,025]"
+          ]
+        ],
+        "row_h": 0.59,
+        "widths": [
+          2.2,
+          5.0,
+          5.05
+        ],
+        "size": 19,
+        "styles": {
+          "4,1": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "4,2": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "5,1": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "5,2": {
+            "bold": true,
+            "color": "087E8B"
+          }
+        },
+        "tag": "derived_gain"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "GRU N5 cũng tăng 432 tham số: chưa tách hết tác động của dung lượng mạng.",
+        "size": 18,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "derived_gain"
+  },
+  {
+    "number": 29,
+    "title": "Nếu mưa trạm đến chậm hơn thì sao?",
+    "section": "VI. KẾT QUẢ DEV 2024",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · point_metrics.csv · source_latency_audit.json",
+    "note": "LightGBM N3 được fit và chấm lại với lịch sử mưa trạm bị cắt sớm 1, 3 hoặc 6 giờ trước issue 19h; dùng chung mẫu hoàn chỉnh giữa ba trường hợp. Tổng mưa 1/6/24h gần nhất thay theo cutoff, chuỗi bảy ngày hoàn chỉnh vẫn là thông tin trước issue. Kết quả không suy giảm lớn trong kiểm tra này; không suy ra API thực tế luôn sẵn sàng hoặc chậm luôn có lợi. Trễ GFS 8h được giả định; nếu thực tế trễ 16h thì cycle 00UTC không kịp issue 19h, protocol này chưa có fallback cycle cũ. Cần kiểm chứng receipt-time thực tế khi vận hành.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "VI. KẾT QUẢ DEV 2024",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "29",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Nếu mưa trạm đến chậm hơn thì sao?",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · point_metrics.csv · source_latency_audit.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.8,
+        "w": 12.25,
+        "h": 3.2,
+        "headers": [
+          "Phương pháp",
+          "Ngày 1",
+          "Ngày 2",
+          "Ngày 3"
+        ],
+        "rows": [
+          [
+            "LGB N3",
+            "17,527",
+            "18,550",
+            "19,150"
+          ],
+          [
+            "LGB N3 · trễ 3h",
+            "17,425",
+            "18,559",
+            "19,152"
+          ],
+          [
+            "LGB N3 · trễ 6h",
+            "17,437",
+            "18,532",
+            "19,117"
+          ]
+        ],
+        "row_h": 0.8,
+        "widths": [
+          4.9,
+          2.45,
+          2.45,
+          2.45
+        ],
+        "size": 23,
+        "styles": {
+          "1,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,1": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "3,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "1,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,2": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "1,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,3": {
+            "bold": true,
+            "color": "087E8B"
+          }
+        },
+        "tag": "latency"
+      },
+      {
+        "kind": "text",
+        "x": 0.8,
+        "y": 5.25,
+        "w": 11.6,
+        "h": 0.6,
+        "text": "Bảng: RMSE mean (mm) khi mưa trạm đến trễ **1 / 3 / 6 giờ**.",
+        "size": 23,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "GFS trễ 16 giờ: cycle hiện tại không kịp phát tin; chưa có thử nghiệm thay cycle.",
+        "size": 18,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "latency"
+  },
+  {
+    "number": 30,
+    "title": "Mưa lớn vẫn là phần khó của bài toán",
+    "section": "VI. KẾT QUẢ DEV 2024",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · conditional_amount_metrics.csv",
+    "note": "Bảng lọc theo lượng quan trắc ≥50 mm ở ngày 3 để chẩn đoán: 884 station-day trên 94 issue. Các sai số là micro trên tập con này, không trộn với macro của bảng toàn bộ. Bias âm cho thấy trên những ngày thực sự mưa lớn, lượng kỳ vọng thường thấp hơn quan trắc. Vì đang điều kiện trên Y lớn, ngay một dự báo kỳ vọng đúng cũng có thể có bias âm ở tập con; riêng bảng này không chứng minh xác suất đã sai calibration. Không được dùng ngưỡng quan trắc tương lai để chọn mô hình khi phát tin. Cần xem đồng thời reliability, BS/BSS và sai số theo mức mưa.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "VI. KẾT QUẢ DEV 2024",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "30",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Mưa lớn vẫn là phần khó của bài toán",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · conditional_amount_metrics.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.65,
+        "w": 12.25,
+        "h": 3.7,
+        "headers": [
+          "Ngày 3 · đầu mean",
+          "MAE (mm)",
+          "RMSE (mm)",
+          "Bias (mm)"
+        ],
+        "rows": [
+          [
+            "GFS thô",
+            "68,959",
+            "85,287",
+            "-60,122"
+          ],
+          [
+            "MOS đơn giản",
+            "72,154",
+            "87,675",
+            "-71,137"
+          ],
+          [
+            "LGB N3",
+            "64,892",
+            "81,237",
+            "-64,424"
+          ],
+          [
+            "GRU N5",
+            "62,025",
+            "78,957",
+            "-58,985"
+          ]
+        ],
+        "row_h": 0.74,
+        "widths": [
+          4.3,
+          2.65,
+          2.65,
+          2.65
+        ],
+        "size": 22,
+        "styles": {
+          "1,3": {
+            "bold": true,
+            "color": "AD3434"
+          },
+          "2,3": {
+            "bold": true,
+            "color": "AD3434"
+          },
+          "3,3": {
+            "bold": true,
+            "color": "AD3434"
+          },
+          "4,3": {
+            "bold": true,
+            "color": "AD3434"
+          }
+        },
+        "tag": "heavy_amount"
+      },
+      {
+        "kind": "text",
+        "x": 0.8,
+        "y": 5.65,
+        "w": 11.7,
+        "h": 0.44,
+        "text": "Chỉ những mẫu thực tế ≥50 mm: **884 mẫu trạm–ngày, 94 ngày issue**.",
+        "size": 21,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "Cải thiện điểm chung chưa đủ để nói đã dự báo tốt cực đoan.",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "heavy_amount"
+  },
+  {
+    "number": 31,
+    "title": "Đã kiểm tra gì, còn điều gì chưa biết?",
+    "section": "VII. ĐỘ TIN CẬY VÀ BƯỚC TIẾP",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · release_validation.json · model_verification.json",
+    "note": "Kết quả công bố của daily-v2 đã qua 179 unit tests, đối chiếu lại 218.658 dòng station-issue-horizon, replay checkpoint 288 mô hình cây và sáu GRU, 186 calibrator và 2.106 giá trị metric; 27 đoạn GRIB được lấy mới để kiểm tra độc lập 81 phép nội suy bốn nút. Kiểm tra này hỗ trợ tính đúng của pipeline, không phải chứng nhận chất lượng cảm biến. Năm 2025 chưa nằm trong tập kết quả thí nghiệm này. Dữ liệu chỉ có hai năm train, một năm calibration, một năm dev; complete-case có thể thiên lệch khi mất số liệu trong mưa lớn. Địa hình dùng DEM và tọa độ hiện tại, không có lịch sử di dời trạm đầy đủ. Khi áp dụng nơi khác phải kiểm tra nguồn và train/validation lại.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "VII. ĐỘ TIN CẬY VÀ BƯỚC TIẾP",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "31",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Đã kiểm tra gì, còn điều gì chưa biết?",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · release_validation.json · model_verification.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.6,
+        "y": 1.7,
+        "w": 5.9,
+        "h": 3.95,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.77,
+        "y": 1.8399999999999999,
+        "w": 5.5600000000000005,
+        "h": 0.55,
+        "text": "Đã đối chiếu",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.77,
+        "y": 2.57,
+        "w": 5.5600000000000005,
+        "h": 2.95,
+        "text": "179 kiểm thử đã qua\n218.658 dòng được kiểm tra lại\n288 bộ cây + 6 GRU từ checkpoint\nXác suất lồng nhau sau hiệu chỉnh\nBảng số lấy từ tệp kết quả gốc",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 6.85,
+        "y": 1.7,
+        "w": 5.85,
+        "h": 3.95,
+        "fill": "E9F3F5"
+      },
+      {
+        "kind": "text",
+        "x": 7.02,
+        "y": 1.8399999999999999,
+        "w": 5.51,
+        "h": 0.55,
+        "text": "Chưa thể khẳng định",
+        "size": 22,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 7.02,
+        "y": 2.57,
+        "w": 5.51,
+        "h": 2.95,
+        "text": "Chưa có điểm độc lập 2025\nChưa chứng nhận cảm biến trạm\nChưa chứng minh độ trễ lịch sử\nMất mẫu có thể không ngẫu nhiên\nChưa chứng minh chuyển vùng",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "Kiểm tra code giúp tin vào phép tính; chưa thay được kiểm định dữ liệu và năm mới.",
+        "size": 18,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "validation"
+  },
+  {
+    "number": 32,
+    "title": "Chốt hiện tại và cách mở kiểm định 2025",
+    "section": "VII. ĐỘ TIN CẬY VÀ BƯỚC TIẾP",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json",
+    "note": "Kết luận hợp lý hiện tại: thông tin khí tượng thô có ích; dẫn xuất có tín hiệu ở GRU ngày 1–2 nhưng không đồng đều giữa họ mô hình; vẫn phải cải thiện dự báo mưa lớn và báo nhầm. Không kết luận hơn các paper khác nếu chưa có cùng bài toán và protocol. Trước khi đánh giá 2025 cần đóng băng cấu hình được chọn, baseline, đầu lượng, ngưỡng sự kiện, cutoff, quy tắc QC và cách tính metric; chuẩn bị dữ liệu 2025 theo đúng quy tắc, kiểm tra độ phủ và availability không dựa trên điểm mô hình; sau đó chấm và báo cáo cả kết quả không đẹp. Nếu xem điểm 2025 rồi tiếp tục tuning theo nó, 2025 trở thành dev và phải có tập kiểm định mới. Khi replay 2025 vẫn được dùng mưa quá khứ đã có trước từng issue làm đầu vào, nhưng không được fit bằng nhãn tương lai. Bản slide này chỉ đọc các tổng hợp 2021–2024, không mở hoặc chấm test 2025.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "VII. ĐỘ TIN CẬY VÀ BƯỚC TIẾP",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "32",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Chốt hiện tại và cách mở kiểm định 2025",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · protocol.json",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 1.65,
+        "w": 11.9,
+        "h": 0.76,
+        "text": "• **Giữ:** GFS khí tượng thô + mưa quá khứ; so với MOS và khí hậu.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 2.5,
+        "w": 11.9,
+        "h": 0.76,
+        "text": "• **Chưa tuyên bố:** mọi dẫn xuất đều cải thiện, hoặc cảnh báo mưa lớn đã tốt.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 3.3499999999999996,
+        "w": 11.9,
+        "h": 0.76,
+        "text": "• **Bước 1:** khóa mô hình, dữ liệu, ngưỡng và chỉ số trước khi xem điểm test.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 4.199999999999999,
+        "w": 11.9,
+        "h": 0.76,
+        "text": "• **Bước 2:** chuẩn bị / QC dữ liệu 2025 theo quy tắc đã khóa.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.72,
+        "y": 5.05,
+        "w": 11.9,
+        "h": 0.76,
+        "text": "• **Bước 3:** kiểm định, báo cáo đầy đủ; không sửa mô hình theo điểm 2025.",
+        "size": 22,
+        "bold": false,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "“Giữ kín 2025” = giữ độc lập để kiểm định; không phải giấu một bảng điểm đã có.",
+        "size": 19,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "conclusion"
+  },
+  {
+    "number": 33,
+    "title": "Toàn bộ cấu hình: RMSE đầu mean (mm) ↓",
+    "section": "PHỤ LỤC · ĐỦ N0–N5 VÀ CÁC ĐỐI CHỨNG",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · point_metrics.csv",
+    "note": "Bảng đủ năm đối chứng và sáu cấu hình LightGBM, hai GRU. Cùng tập mẫu dev 2024, macro theo trạm. In đậm giá trị tốt nhất trong bảng; Bias chọn giá trị gần 0 nhất. Không suy ra thắng thống kê chỉ từ in đậm. Đối chứng tất định được chuyển sang xác suất 0/1 để chấm BS, nên MOS và khí hậu là tham chiếu xác suất quan trọng hơn. Các thí nghiệm độ trễ được trình bày riêng, không lẫn vào phép so đặc trưng.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "PHỤ LỤC · ĐỦ N0–N5 VÀ CÁC ĐỐI CHỨNG",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "33",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Toàn bộ cấu hình: RMSE đầu mean (mm) ↓",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · point_metrics.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.5,
+        "w": 12.25,
+        "h": 5.18,
+        "headers": [
+          "Phương pháp",
+          "Ngày 1",
+          "Ngày 2",
+          "Ngày 3"
+        ],
+        "rows": [
+          [
+            "Luôn 0 mm",
+            "24,398",
+            "24,299",
+            "24,293"
+          ],
+          [
+            "Lặp mưa gần nhất",
+            "27,030",
+            "29,742",
+            "30,572"
+          ],
+          [
+            "GFS thô",
+            "19,271",
+            "20,228",
+            "22,139"
+          ],
+          [
+            "Khí hậu",
+            "22,347",
+            "22,286",
+            "22,280"
+          ],
+          [
+            "MOS đơn giản",
+            "19,169",
+            "20,124",
+            "20,445"
+          ],
+          [
+            "LGB N0",
+            "18,574",
+            "19,749",
+            "19,688"
+          ],
+          [
+            "LGB N1",
+            "17,497",
+            "18,586",
+            "19,151"
+          ],
+          [
+            "LGB N2",
+            "17,523",
+            "18,589",
+            "19,145"
+          ],
+          [
+            "LGB N3",
+            "17,527",
+            "18,550",
+            "19,150"
+          ],
+          [
+            "LGB N4",
+            "17,522",
+            "18,579",
+            "19,133"
+          ],
+          [
+            "LGB N5",
+            "17,521",
+            "18,590",
+            "19,164"
+          ],
+          [
+            "GRU N3",
+            "17,722",
+            "18,954",
+            "19,368"
+          ],
+          [
+            "GRU N5",
+            "17,386",
+            "18,750",
+            "19,277"
+          ]
+        ],
+        "row_h": 0.37,
+        "widths": [
+          4.9,
+          2.45,
+          2.45,
+          2.45
+        ],
+        "size": 18,
+        "styles": {
+          "1,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "11,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,1": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "1,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,2": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "10,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "11,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "1,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,3": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "11,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,3": {
+            "bold": false,
+            "color": "123047"
+          }
+        },
+        "tag": "full_rmse"
+      }
+    ],
+    "role": "full_rmse"
+  },
+  {
+    "number": 34,
+    "title": "Toàn bộ cấu hình: MAE đầu median (mm) ↓",
+    "section": "PHỤ LỤC · ĐỦ N0–N5 VÀ CÁC ĐỐI CHỨNG",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · point_metrics.csv",
+    "note": "Bảng đủ năm đối chứng và sáu cấu hình LightGBM, hai GRU. Cùng tập mẫu dev 2024, macro theo trạm. In đậm giá trị tốt nhất trong bảng; Bias chọn giá trị gần 0 nhất. Không suy ra thắng thống kê chỉ từ in đậm. Đối chứng tất định được chuyển sang xác suất 0/1 để chấm BS, nên MOS và khí hậu là tham chiếu xác suất quan trọng hơn. Các thí nghiệm độ trễ được trình bày riêng, không lẫn vào phép so đặc trưng.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "PHỤ LỤC · ĐỦ N0–N5 VÀ CÁC ĐỐI CHỨNG",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "34",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Toàn bộ cấu hình: MAE đầu median (mm) ↓",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · point_metrics.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.5,
+        "w": 12.25,
+        "h": 5.18,
+        "headers": [
+          "Phương pháp",
+          "Ngày 1",
+          "Ngày 2",
+          "Ngày 3"
+        ],
+        "rows": [
+          [
+            "Luôn 0 mm",
+            "8,291",
+            "8,232",
+            "8,249"
+          ],
+          [
+            "Lặp mưa gần nhất",
+            "10,520",
+            "12,041",
+            "12,469"
+          ],
+          [
+            "GFS thô",
+            "8,014",
+            "8,664",
+            "9,299"
+          ],
+          [
+            "Khí hậu",
+            "8,061",
+            "8,001",
+            "8,011"
+          ],
+          [
+            "MOS đơn giản",
+            "7,306",
+            "7,585",
+            "7,554"
+          ],
+          [
+            "LGB N0",
+            "6,768",
+            "7,302",
+            "7,231"
+          ],
+          [
+            "LGB N1",
+            "6,461",
+            "7,142",
+            "7,138"
+          ],
+          [
+            "LGB N2",
+            "6,419",
+            "7,133",
+            "7,111"
+          ],
+          [
+            "LGB N3",
+            "6,444",
+            "7,116",
+            "7,095"
+          ],
+          [
+            "LGB N4",
+            "6,420",
+            "7,109",
+            "7,106"
+          ],
+          [
+            "LGB N5",
+            "6,440",
+            "7,104",
+            "7,097"
+          ],
+          [
+            "GRU N3",
+            "6,444",
+            "6,865",
+            "6,912"
+          ],
+          [
+            "GRU N5",
+            "6,314",
+            "6,754",
+            "6,870"
+          ]
+        ],
+        "row_h": 0.37,
+        "widths": [
+          4.9,
+          2.45,
+          2.45,
+          2.45
+        ],
+        "size": 18,
+        "styles": {
+          "1,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "11,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,1": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "1,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "11,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,2": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "1,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "11,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,3": {
+            "bold": true,
+            "color": "087E8B"
+          }
+        },
+        "tag": "full_mae"
+      }
+    ],
+    "role": "full_mae"
+  },
+  {
+    "number": 35,
+    "title": "Toàn bộ cấu hình: Bias đầu mean (mm) → 0",
+    "section": "PHỤ LỤC · ĐỦ N0–N5 VÀ CÁC ĐỐI CHỨNG",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · point_metrics.csv",
+    "note": "Bảng đủ năm đối chứng và sáu cấu hình LightGBM, hai GRU. Cùng tập mẫu dev 2024, macro theo trạm. In đậm giá trị tốt nhất trong bảng; Bias chọn giá trị gần 0 nhất. Không suy ra thắng thống kê chỉ từ in đậm. Đối chứng tất định được chuyển sang xác suất 0/1 để chấm BS, nên MOS và khí hậu là tham chiếu xác suất quan trọng hơn. Các thí nghiệm độ trễ được trình bày riêng, không lẫn vào phép so đặc trưng.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "PHỤ LỤC · ĐỦ N0–N5 VÀ CÁC ĐỐI CHỨNG",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "35",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Toàn bộ cấu hình: Bias đầu mean (mm) → 0",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · point_metrics.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.5,
+        "w": 12.25,
+        "h": 5.18,
+        "headers": [
+          "Phương pháp",
+          "Ngày 1",
+          "Ngày 2",
+          "Ngày 3"
+        ],
+        "rows": [
+          [
+            "Luôn 0 mm",
+            "-8,291",
+            "-8,232",
+            "-8,249"
+          ],
+          [
+            "Lặp mưa gần nhất",
+            "-0,001",
+            "0,059",
+            "0,041"
+          ],
+          [
+            "GFS thô",
+            "-1,131",
+            "-0,889",
+            "0,161"
+          ],
+          [
+            "Khí hậu",
+            "1,595",
+            "1,693",
+            "1,715"
+          ],
+          [
+            "MOS đơn giản",
+            "0,386",
+            "-0,296",
+            "0,048"
+          ],
+          [
+            "LGB N0",
+            "-0,114",
+            "-0,962",
+            "-0,784"
+          ],
+          [
+            "LGB N1",
+            "-0,405",
+            "-0,971",
+            "-0,736"
+          ],
+          [
+            "LGB N2",
+            "-0,513",
+            "-1,065",
+            "-0,760"
+          ],
+          [
+            "LGB N3",
+            "-0,416",
+            "-0,964",
+            "-0,740"
+          ],
+          [
+            "LGB N4",
+            "-0,513",
+            "-1,057",
+            "-0,708"
+          ],
+          [
+            "LGB N5",
+            "-0,493",
+            "-1,064",
+            "-0,767"
+          ],
+          [
+            "GRU N3",
+            "0,305",
+            "-0,078",
+            "0,283"
+          ],
+          [
+            "GRU N5",
+            "0,323",
+            "-0,227",
+            "0,197"
+          ]
+        ],
+        "row_h": 0.37,
+        "widths": [
+          4.9,
+          2.45,
+          2.45,
+          2.45
+        ],
+        "size": 18,
+        "styles": {
+          "1,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,1": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "3,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "11,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "1,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,2": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "3,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "11,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "1,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,3": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "3,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "11,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,3": {
+            "bold": false,
+            "color": "123047"
+          }
+        },
+        "tag": "full_bias"
+      }
+    ],
+    "role": "full_bias"
+  },
+  {
+    "number": 36,
+    "title": "Toàn bộ cấu hình: BS cho mưa ≥1 mm ↓",
+    "section": "PHỤ LỤC · ĐỦ N0–N5 VÀ CÁC ĐỐI CHỨNG",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · probability_metrics.csv",
+    "note": "Bảng đủ năm đối chứng và sáu cấu hình LightGBM, hai GRU. Cùng tập mẫu dev 2024, macro theo trạm. In đậm giá trị tốt nhất trong bảng; Bias chọn giá trị gần 0 nhất. Không suy ra thắng thống kê chỉ từ in đậm. Đối chứng tất định được chuyển sang xác suất 0/1 để chấm BS, nên MOS và khí hậu là tham chiếu xác suất quan trọng hơn. Các thí nghiệm độ trễ được trình bày riêng, không lẫn vào phép so đặc trưng.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "PHỤ LỤC · ĐỦ N0–N5 VÀ CÁC ĐỐI CHỨNG",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "36",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Toàn bộ cấu hình: BS cho mưa ≥1 mm ↓",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · probability_metrics.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.5,
+        "w": 12.25,
+        "h": 5.18,
+        "headers": [
+          "Phương pháp",
+          "Ngày 1",
+          "Ngày 2",
+          "Ngày 3"
+        ],
+        "rows": [
+          [
+            "Luôn 0 mm",
+            "0,368",
+            "0,367",
+            "0,368"
+          ],
+          [
+            "Lặp mưa gần nhất",
+            "0,266",
+            "0,328",
+            "0,343"
+          ],
+          [
+            "GFS thô",
+            "0,338",
+            "0,368",
+            "0,390"
+          ],
+          [
+            "Khí hậu",
+            "0,190",
+            "0,190",
+            "0,189"
+          ],
+          [
+            "MOS đơn giản",
+            "0,159",
+            "0,171",
+            "0,169"
+          ],
+          [
+            "LGB N0",
+            "0,136",
+            "0,154",
+            "0,155"
+          ],
+          [
+            "LGB N1",
+            "0,133",
+            "0,147",
+            "0,148"
+          ],
+          [
+            "LGB N2",
+            "0,133",
+            "0,147",
+            "0,147"
+          ],
+          [
+            "LGB N3",
+            "0,133",
+            "0,147",
+            "0,148"
+          ],
+          [
+            "LGB N4",
+            "0,132",
+            "0,147",
+            "0,147"
+          ],
+          [
+            "LGB N5",
+            "0,132",
+            "0,146",
+            "0,147"
+          ],
+          [
+            "GRU N3",
+            "0,139",
+            "0,152",
+            "0,149"
+          ],
+          [
+            "GRU N5",
+            "0,138",
+            "0,151",
+            "0,149"
+          ]
+        ],
+        "row_h": 0.37,
+        "widths": [
+          4.9,
+          2.45,
+          2.45,
+          2.45
+        ],
+        "size": 18,
+        "styles": {
+          "1,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,1": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "11,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "1,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "11,2": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "12,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "1,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,3": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "9,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "11,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,3": {
+            "bold": false,
+            "color": "123047"
+          }
+        },
+        "tag": "full_bs1"
+      }
+    ],
+    "role": "full_bs1"
+  },
+  {
+    "number": 37,
+    "title": "Toàn bộ cấu hình: BSS cho mưa ≥1 mm ↑",
+    "section": "PHỤ LỤC · ĐỦ N0–N5 VÀ CÁC ĐỐI CHỨNG",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · probability_metrics.csv",
+    "note": "Bảng đủ năm đối chứng và sáu cấu hình LightGBM, hai GRU. Cùng tập mẫu dev 2024, macro theo trạm. In đậm giá trị tốt nhất trong bảng; Bias chọn giá trị gần 0 nhất. Không suy ra thắng thống kê chỉ từ in đậm. Đối chứng tất định được chuyển sang xác suất 0/1 để chấm BS, nên MOS và khí hậu là tham chiếu xác suất quan trọng hơn. Các thí nghiệm độ trễ được trình bày riêng, không lẫn vào phép so đặc trưng.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "PHỤ LỤC · ĐỦ N0–N5 VÀ CÁC ĐỐI CHỨNG",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "37",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Toàn bộ cấu hình: BSS cho mưa ≥1 mm ↑",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · probability_metrics.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.5,
+        "w": 12.25,
+        "h": 5.18,
+        "headers": [
+          "Phương pháp",
+          "Ngày 1",
+          "Ngày 2",
+          "Ngày 3"
+        ],
+        "rows": [
+          [
+            "Luôn 0 mm",
+            "-0,926",
+            "-0,930",
+            "-0,938"
+          ],
+          [
+            "Lặp mưa gần nhất",
+            "-0,398",
+            "-0,732",
+            "-0,812"
+          ],
+          [
+            "GFS thô",
+            "-0,799",
+            "-0,968",
+            "-1,083"
+          ],
+          [
+            "Khí hậu",
+            "0,000",
+            "0,000",
+            "0,000"
+          ],
+          [
+            "MOS đơn giản",
+            "0,165",
+            "0,099",
+            "0,105"
+          ],
+          [
+            "LGB N0",
+            "0,283",
+            "0,186",
+            "0,177"
+          ],
+          [
+            "LGB N1",
+            "0,300",
+            "0,224",
+            "0,217"
+          ],
+          [
+            "LGB N2",
+            "0,300",
+            "0,224",
+            "0,220"
+          ],
+          [
+            "LGB N3",
+            "0,300",
+            "0,224",
+            "0,217"
+          ],
+          [
+            "LGB N4",
+            "0,302",
+            "0,224",
+            "0,220"
+          ],
+          [
+            "LGB N5",
+            "0,302",
+            "0,225",
+            "0,220"
+          ],
+          [
+            "GRU N3",
+            "0,270",
+            "0,199",
+            "0,213"
+          ],
+          [
+            "GRU N5",
+            "0,273",
+            "0,204",
+            "0,213"
+          ]
+        ],
+        "row_h": 0.37,
+        "widths": [
+          4.9,
+          2.45,
+          2.45,
+          2.45
+        ],
+        "size": 18,
+        "styles": {
+          "1,1": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "2,1": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "3,1": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "4,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,1": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "11,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "1,2": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "2,2": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "3,2": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "4,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "11,2": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "12,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "1,3": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "2,3": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "3,3": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "4,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,3": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "9,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "11,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,3": {
+            "bold": false,
+            "color": "123047"
+          }
+        },
+        "tag": "full_bss1"
+      }
+    ],
+    "role": "full_bss1"
+  },
+  {
+    "number": 38,
+    "title": "Toàn bộ cấu hình: BS cho mưa ≥50 mm ↓",
+    "section": "PHỤ LỤC · ĐỦ N0–N5 VÀ CÁC ĐỐI CHỨNG",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · probability_metrics.csv",
+    "note": "Bảng đủ năm đối chứng và sáu cấu hình LightGBM, hai GRU. Cùng tập mẫu dev 2024, macro theo trạm. In đậm giá trị tốt nhất trong bảng; Bias chọn giá trị gần 0 nhất. Không suy ra thắng thống kê chỉ từ in đậm. Đối chứng tất định được chuyển sang xác suất 0/1 để chấm BS, nên MOS và khí hậu là tham chiếu xác suất quan trọng hơn. Các thí nghiệm độ trễ được trình bày riêng, không lẫn vào phép so đặc trưng.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "PHỤ LỤC · ĐỦ N0–N5 VÀ CÁC ĐỐI CHỨNG",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "38",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Toàn bộ cấu hình: BS cho mưa ≥50 mm ↓",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · probability_metrics.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.5,
+        "w": 12.25,
+        "h": 5.18,
+        "headers": [
+          "Phương pháp",
+          "Ngày 1",
+          "Ngày 2",
+          "Ngày 3"
+        ],
+        "rows": [
+          [
+            "Luôn 0 mm",
+            "0,046",
+            "0,046",
+            "0,046"
+          ],
+          [
+            "Lặp mưa gần nhất",
+            "0,069",
+            "0,078",
+            "0,081"
+          ],
+          [
+            "GFS thô",
+            "0,045",
+            "0,043",
+            "0,050"
+          ],
+          [
+            "Khí hậu",
+            "0,042",
+            "0,042",
+            "0,042"
+          ],
+          [
+            "MOS đơn giản",
+            "0,035",
+            "0,035",
+            "0,037"
+          ],
+          [
+            "LGB N0",
+            "0,034",
+            "0,035",
+            "0,036"
+          ],
+          [
+            "LGB N1",
+            "0,030",
+            "0,032",
+            "0,035"
+          ],
+          [
+            "LGB N2",
+            "0,030",
+            "0,032",
+            "0,035"
+          ],
+          [
+            "LGB N3",
+            "0,030",
+            "0,032",
+            "0,035"
+          ],
+          [
+            "LGB N4",
+            "0,030",
+            "0,032",
+            "0,035"
+          ],
+          [
+            "LGB N5",
+            "0,030",
+            "0,032",
+            "0,035"
+          ],
+          [
+            "GRU N3",
+            "0,031",
+            "0,033",
+            "0,035"
+          ],
+          [
+            "GRU N5",
+            "0,030",
+            "0,032",
+            "0,035"
+          ]
+        ],
+        "row_h": 0.37,
+        "widths": [
+          4.9,
+          2.45,
+          2.45,
+          2.45
+        ],
+        "size": 18,
+        "styles": {
+          "1,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "11,1": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "12,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "1,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,2": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "11,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "1,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "2,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "3,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "4,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,3": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "10,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "11,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,3": {
+            "bold": false,
+            "color": "123047"
+          }
+        },
+        "tag": "full_bs50"
+      }
+    ],
+    "role": "full_bs50"
+  },
+  {
+    "number": 39,
+    "title": "Toàn bộ cấu hình: BSS cho mưa ≥50 mm ↑",
+    "section": "PHỤ LỤC · ĐỦ N0–N5 VÀ CÁC ĐỐI CHỨNG",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · probability_metrics.csv",
+    "note": "Bảng đủ năm đối chứng và sáu cấu hình LightGBM, hai GRU. Cùng tập mẫu dev 2024, macro theo trạm. In đậm giá trị tốt nhất trong bảng; Bias chọn giá trị gần 0 nhất. Không suy ra thắng thống kê chỉ từ in đậm. Đối chứng tất định được chuyển sang xác suất 0/1 để chấm BS, nên MOS và khí hậu là tham chiếu xác suất quan trọng hơn. Các thí nghiệm độ trễ được trình bày riêng, không lẫn vào phép so đặc trưng.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "PHỤ LỤC · ĐỦ N0–N5 VÀ CÁC ĐỐI CHỨNG",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "39",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Toàn bộ cấu hình: BSS cho mưa ≥50 mm ↑",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · probability_metrics.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.5,
+        "w": 12.25,
+        "h": 5.18,
+        "headers": [
+          "Phương pháp",
+          "Ngày 1",
+          "Ngày 2",
+          "Ngày 3"
+        ],
+        "rows": [
+          [
+            "Luôn 0 mm",
+            "-0,073",
+            "-0,071",
+            "-0,071"
+          ],
+          [
+            "Lặp mưa gần nhất",
+            "-0,655",
+            "-0,871",
+            "-0,928"
+          ],
+          [
+            "GFS thô",
+            "-0,067",
+            "-0,034",
+            "-0,234"
+          ],
+          [
+            "Khí hậu",
+            "0,000",
+            "0,000",
+            "0,000"
+          ],
+          [
+            "MOS đơn giản",
+            "0,162",
+            "0,170",
+            "0,103"
+          ],
+          [
+            "LGB N0",
+            "0,179",
+            "0,155",
+            "0,130"
+          ],
+          [
+            "LGB N1",
+            "0,278",
+            "0,230",
+            "0,163"
+          ],
+          [
+            "LGB N2",
+            "0,288",
+            "0,234",
+            "0,158"
+          ],
+          [
+            "LGB N3",
+            "0,280",
+            "0,227",
+            "0,164"
+          ],
+          [
+            "LGB N4",
+            "0,287",
+            "0,234",
+            "0,158"
+          ],
+          [
+            "LGB N5",
+            "0,289",
+            "0,233",
+            "0,156"
+          ],
+          [
+            "GRU N3",
+            "0,269",
+            "0,208",
+            "0,160"
+          ],
+          [
+            "GRU N5",
+            "0,287",
+            "0,228",
+            "0,158"
+          ]
+        ],
+        "row_h": 0.37,
+        "widths": [
+          4.9,
+          2.45,
+          2.45,
+          2.45
+        ],
+        "size": 18,
+        "styles": {
+          "1,1": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "2,1": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "3,1": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "4,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "11,1": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "12,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,1": {
+            "bold": false,
+            "color": "123047"
+          },
+          "1,2": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "2,2": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "3,2": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "4,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "10,2": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "11,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,2": {
+            "bold": false,
+            "color": "123047"
+          },
+          "1,3": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "2,3": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "3,3": {
+            "bold": false,
+            "color": "AD3434"
+          },
+          "4,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "5,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "6,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "7,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "8,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "9,3": {
+            "bold": true,
+            "color": "087E8B"
+          },
+          "10,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "11,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "12,3": {
+            "bold": false,
+            "color": "123047"
+          },
+          "13,3": {
+            "bold": false,
+            "color": "123047"
+          }
+        },
+        "tag": "full_bss50"
+      }
+    ],
+    "role": "full_bss50"
+  },
+  {
+    "number": 40,
+    "title": "Cùng mô hình: đổi tau làm POD / FAR thay đổi",
+    "section": "PHỤ LỤC · NGƯỠNG CẢNH BÁO",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · event_metrics.csv",
+    "note": "Chỉ sự kiện ≥50 mm/24h. Tau 0,5 được đặt cố định; tau chọn bằng 2023 được áp dụng nguyên trạng lên 2024. Cả hai phải báo cáo để cho thấy POD cao có thể do chính sách quyết định chứ không chỉ do xác suất tốt hơn. CSI cũng chưa mô tả hết chi phí thực tế của bỏ sót và báo nhầm; protocol hiện chưa tối ưu hàm chi phí vận hành. So ngưỡng cần cùng sự kiện và hạn dự báo.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "PHỤ LỤC · NGƯỠNG CẢNH BÁO",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "40",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Cùng mô hình: đổi tau làm POD / FAR thay đổi",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · event_metrics.csv",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "table",
+        "x": 0.55,
+        "y": 1.5,
+        "w": 12.25,
+        "h": 5.07,
+        "headers": [
+          "Mô hình",
+          "Ngày",
+          "Cách chọn",
+          "Tau",
+          "POD ↑",
+          "FAR ↓",
+          "CSI ↑"
+        ],
+        "rows": [
+          [
+            "LGB N3",
+            "1",
+            "Cố định",
+            "0,500",
+            "0,262",
+            "0,391",
+            "0,222"
+          ],
+          [
+            "LGB N3",
+            "1",
+            "Từ 2023",
+            "0,150",
+            "0,742",
+            "0,643",
+            "0,317"
+          ],
+          [
+            "LGB N3",
+            "2",
+            "Cố định",
+            "0,500",
+            "0,119",
+            "0,345",
+            "0,111"
+          ],
+          [
+            "LGB N3",
+            "2",
+            "Từ 2023",
+            "0,250",
+            "0,551",
+            "0,571",
+            "0,308"
+          ],
+          [
+            "LGB N3",
+            "3",
+            "Cố định",
+            "0,500",
+            "0,078",
+            "0,541",
+            "0,070"
+          ],
+          [
+            "LGB N3",
+            "3",
+            "Từ 2023",
+            "0,200",
+            "0,586",
+            "0,664",
+            "0,268"
+          ],
+          [
+            "GRU N5",
+            "1",
+            "Cố định",
+            "0,500",
+            "0,256",
+            "0,373",
+            "0,219"
+          ],
+          [
+            "GRU N5",
+            "1",
+            "Từ 2023",
+            "0,200",
+            "0,734",
+            "0,606",
+            "0,344"
+          ],
+          [
+            "GRU N5",
+            "2",
+            "Cố định",
+            "0,500",
+            "0,110",
+            "0,181",
+            "0,106"
+          ],
+          [
+            "GRU N5",
+            "2",
+            "Từ 2023",
+            "0,300",
+            "0,486",
+            "0,506",
+            "0,319"
+          ],
+          [
+            "GRU N5",
+            "3",
+            "Cố định",
+            "0,500",
+            "0,041",
+            "0,630",
+            "0,039"
+          ],
+          [
+            "GRU N5",
+            "3",
+            "Từ 2023",
+            "0,200",
+            "0,672",
+            "0,678",
+            "0,279"
+          ]
+        ],
+        "row_h": 0.39,
+        "widths": [
+          2.1,
+          0.85,
+          1.9,
+          1.5,
+          1.95,
+          1.95,
+          2.0
+        ],
+        "size": 17.5,
+        "styles": {},
+        "tag": "cutoff_comparison"
+      }
+    ],
+    "role": "cutoff_comparison"
+  },
+  {
+    "number": 41,
+    "title": "Nguồn để kiểm tra lại phương pháp và con số",
+    "section": "PHỤ LỤC · TÀI LIỆU",
+    "source": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · Tài liệu gốc · bản ghi kết quả dự án",
+    "note": "Số liệu trong slide lấy từ các CSV/JSON daily-v2 được lưu cùng báo cáo; build_manifest ghi SHA-256 và ánh xạ từng ô số về dòng nguồn. Cross-validation trong tài liệu scikit-learn giải thích vì sao test phải độc lập khỏi tuning. Gneiting giải thích ghép đại lượng dự báo với hàm mất mát. MET Appendix C định nghĩa các metric kiểm định. LightGBM 4.5.0 là tài liệu tham số phù hợp môi trường đã chạy. Tài liệu phương pháp không phải bằng chứng rằng dữ liệu dự án đã đạt độ tin cậy vận hành.\n\nBối cảnh: thí nghiệm hằng ngày tại 57 trạm; kết quả đang trình bày là phát triển trên 2024. Chưa có điểm kiểm định cuối 2025. Không dùng số liệu pilot lịch tuần để thay số liệu ở đây.",
+    "shapes": [
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.18,
+        "w": 11,
+        "h": 0.22,
+        "text": "PHỤ LỤC · TÀI LIỆU",
+        "size": 11,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 12.05,
+        "y": 0.18,
+        "w": 0.7,
+        "h": 0.22,
+        "text": "41",
+        "size": 11,
+        "bold": false,
+        "color": "536877",
+        "align": "right"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 0.6,
+        "w": 12.25,
+        "h": 0.82,
+        "text": "Nguồn để kiểm tra lại phương pháp và con số",
+        "size": 29,
+        "bold": true,
+        "color": "123047",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.55,
+        "y": 6.92,
+        "w": 12.25,
+        "h": 0.25,
+        "text": "57 trạm · Lịch hằng ngày · Dev 2024 · Chưa chấm 2025 · Tài liệu gốc · bản ghi kết quả dự án",
+        "size": 10.5,
+        "bold": false,
+        "color": "536877",
+        "align": "left"
+      },
+      {
+        "kind": "text",
+        "x": 0.8,
+        "y": 1.7,
+        "w": 11.7,
+        "h": 0.64,
+        "text": "Dự án: protocol, điểm số, khoảng tin cậy và audit",
+        "size": 22,
+        "bold": false,
+        "color": "087E8B",
+        "align": "left",
+        "url": "https://github.com/nibsu05/PBL6/tree/research/tft-regional/reports/gfs_station_daily_v2_2026_11_10"
+      },
+      {
+        "kind": "text",
+        "x": 0.8,
+        "y": 2.53,
+        "w": 11.7,
+        "h": 0.64,
+        "text": "scikit-learn: chia train / validation / test và tránh rò rỉ",
+        "size": 22,
+        "bold": false,
+        "color": "087E8B",
+        "align": "left",
+        "url": "https://scikit-learn.org/stable/modules/cross_validation.html"
+      },
+      {
+        "kind": "text",
+        "x": 0.8,
+        "y": 3.36,
+        "w": 11.7,
+        "h": 0.64,
+        "text": "Gneiting: Making and Evaluating Point Forecasts",
+        "size": 22,
+        "bold": false,
+        "color": "087E8B",
+        "align": "left",
+        "url": "https://arxiv.org/abs/0912.0902"
+      },
+      {
+        "kind": "text",
+        "x": 0.8,
+        "y": 4.1899999999999995,
+        "w": 11.7,
+        "h": 0.64,
+        "text": "NCAR / DTC MET: định nghĩa các chỉ số kiểm định",
+        "size": 22,
+        "bold": false,
+        "color": "087E8B",
+        "align": "left",
+        "url": "https://metplus.readthedocs.io/projects/met/en/latest/Users_Guide/appendixC.html"
+      },
+      {
+        "kind": "text",
+        "x": 0.8,
+        "y": 5.02,
+        "w": 11.7,
+        "h": 0.64,
+        "text": "LightGBM 4.5.0: mục tiêu học và tham số",
+        "size": 22,
+        "bold": false,
+        "color": "087E8B",
+        "align": "left",
+        "url": "https://lightgbm.readthedocs.io/en/v4.5.0/Parameters.html"
+      },
+      {
+        "kind": "rect",
+        "x": 0.55,
+        "y": 6.12,
+        "w": 12.25,
+        "h": 0.6,
+        "fill": "EAF1F5"
+      },
+      {
+        "kind": "text",
+        "x": 0.7,
+        "y": 6.22,
+        "w": 11.95,
+        "h": 0.48,
+        "text": "Các tiêu đề là liên kết. Ghi chú thuyết trình giải thích thêm từng slide.",
+        "size": 20,
+        "bold": true,
+        "color": "087E8B",
+        "align": "left"
+      }
+    ],
+    "role": "references"
+  }
+]

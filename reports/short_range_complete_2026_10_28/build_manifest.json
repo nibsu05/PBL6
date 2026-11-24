@@ -1,0 +1,91 @@
+{
+  "status": "complete",
+  "slides": 49,
+  "main_slides": 34,
+  "roles": {
+    "groups": 5,
+    "coverage": 6,
+    "seeds": 7,
+    "metrics": 13,
+    "counts": 19,
+    "bss_day1": 24,
+    "bss_day2": 25,
+    "bss_day3": 26,
+    "e7_day1": 27,
+    "e7_day2": 28,
+    "e7_day3": 29,
+    "e7_skill_ci": 30,
+    "feature_skill_ci": 31
+  },
+  "models": [
+    "lgbm",
+    "tft",
+    "informer"
+  ],
+  "complete_score_rows": 72,
+  "missing_score_rows": 0,
+  "completed_fits": {
+    "tft": 72,
+    "lgbm": 24,
+    "informer": 72
+  },
+  "new_informer_fits": 54,
+  "reused_informer_fits": 18,
+  "test2025_read": false,
+  "code_sha256": "23ff1a17affe2cfe59342f054ec441449a740509cc7ab1e7aff25a4846467a8b",
+  "sources": {
+    "reports/short_range_three_models_2026_10_21/slide_scene.json": "8c8436e395e4514367bb0f99a5868cd8584eee9ab772fd3aa60369dac631fad5",
+    "reports/informer_regional_matrix_2026_10_28/scores_ensemble_pooled.csv": "910c44a475b9f12a3d6b311456c102b4166596b704253b8e1ccb27805c78d2cb",
+    "reports/informer_regional_matrix_2026_10_28/paired_bootstrap_exploratory.csv": "a6891d6f69f4615a304bf3e90c48780ce963230ec4590602be741997f42dcc9e",
+    "reports/informer_regional_matrix_2026_10_28/absolute_skill_ci.csv": "0c495c641cae006b9ad539cb859309e0b53264992cfef036b169df7bcca3cf1a",
+    "reports/informer_regional_matrix_2026_10_28/run.json": "84b3c9053c111b275206828c87fd36abd36a26abc9378b8b67153e1a04012203",
+    "reports/informer_regional_matrix_2026_10_28/validation.json": "996216d752070608d0a4a90f76712b77a4ccddbb3c1e7d1c538a3ce37c9f7ac4",
+    "reports/informer_regional_matrix_2026_10_28/evaluation.json": "0a445951c5a978ba83b2c51cc88f85d73f7a054363c07e3fd5c39333408c5435",
+    "reports/regional_research_plan_2026_10_20/feature_groups.json": "fedf0410bdc7f6d0776e7f8e3d2c4d1812e4ad19c998eca7728d2f2cf82ed46e",
+    "reports/informer_regional_matrix_2026_10_28/bss_three_models.csv": "f05d9ed3f1317c300ccecf0700b58c5779a75caff6afca8567451fcfa9aad799",
+    "reports/informer_regional_matrix_2026_10_28/calibration_thresholds_all_models.csv": "79c2dddf705f81d21f9297b787980efde48b9a266e98a6e682992e0b2fd0eccc",
+    "reports/informer_regional_matrix_2026_10_28/ensemble_calibration_thresholds.csv": "98ad9c384ed18a1cf07f0210fc52d6b1651d86be161822578596e656c3908d9d",
+    "reports/informer_regional_matrix_2026_10_28/reliability16.csv": "22397cc38c009391d210409eec03e06016015f744c188be964be312df577881a",
+    "reports/informer_regional_matrix_2026_10_28/scores_ensemble.csv": "fe12fb2e4ea0aebc59b527ac9b1d4ebb7b92c8cb1aa2c51996545cb223323f3f",
+    "reports/informer_regional_matrix_2026_10_28/scores_seed_pooled.csv": "74fa25c077dce6dd1713e4e8eb202a3703ef6a63ee99652ffbea733d9391203a",
+    "reports/informer_regional_matrix_2026_10_28/seed_stability.csv": "7f5aaa908558ae73f38bce2ea220eb3a208157b5ae850eab6296d77cea84a2d7"
+  },
+  "files": {
+    "PBL6_SO_SANH_3_MO_HINH_DAY_DU.pptx": {
+      "sha256": "5e15bed65e41b15b4a3d73b753ee981fe4da351e7a5aa5da3d6bf4702b77c37b",
+      "bytes": 257061
+    },
+    "PBL6_SO_SANH_3_MO_HINH_DAY_DU.html": {
+      "sha256": "1c672a83cef62ca9e7f3efa05e3d220e9e64b144ced1029a78eb4b3e9ac7fef9",
+      "bytes": 356408
+    },
+    "slide_scene.json": {
+      "sha256": "0b4bc9ee8fa0fdb639cdca59abb2653027f275a6e32eac3c2502bdf9901fedeb",
+      "bytes": 260539
+    },
+    "LOI_DAN.md": {
+      "sha256": "f338122271a915b37534d88f361d750abc8dba67c1b61579a16590867bf1f1e0",
+      "bytes": 25423
+    },
+    "KET_QUA_72.csv": {
+      "sha256": "014126d76821bfbd2eccc110ae4521d1c480c63fbafd970a3b90cd92b72e7e30",
+      "bytes": 12247
+    },
+    "BANG_KET_QUA_DAY_DU.xlsx": {
+      "sha256": "f40d671caa0b46d1153166c2c7965ca338a4ceada623d7a5b431a651cd2a995e",
+      "bytes": 695811
+    },
+    "GIAI_THICH_KET_QUA_DAY_DU.md": {
+      "sha256": "8f796db8c101eea03901ab130c07e95d20f45feb5f8549d08dd007b6264708a0",
+      "bytes": 5968
+    },
+    "GIAI_THICH_KET_QUA_DAY_DU.docx": {
+      "sha256": "ded000b61e2f005e3387a19890e76adc196e2ef227a2365b98b4ec33e890e147",
+      "bytes": 41392
+    },
+    "README.md": {
+      "sha256": "2ca84ecef4897e9d478736ccc043cb8a422e373c8a61e5eda947db8f51ddb0b4",
+      "bytes": 1443
+    }
+  }
+}

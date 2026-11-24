@@ -1,0 +1,65 @@
+[
+  {
+    "model": "GRU_T0",
+    "seed": 17,
+    "epochs": 17,
+    "parameters": 4364,
+    "device": "cuda"
+  },
+  {
+    "model": "GRU_T0",
+    "seed": 29,
+    "epochs": 17,
+    "parameters": 4364,
+    "device": "cuda"
+  },
+  {
+    "model": "GRU_T0",
+    "seed": 43,
+    "epochs": 17,
+    "parameters": 4364,
+    "device": "cuda"
+  },
+  {
+    "model": "GRU_T3",
+    "seed": 17,
+    "epochs": 17,
+    "parameters": 6020,
+    "device": "cuda"
+  },
+  {
+    "model": "GRU_T3",
+    "seed": 29,
+    "epochs": 17,
+    "parameters": 6020,
+    "device": "cuda"
+  },
+  {
+    "model": "GRU_T3",
+    "seed": 43,
+    "epochs": 17,
+    "parameters": 6020,
+    "device": "cuda"
+  },
+  {
+    "model": "GRU_LINEAR23",
+    "seed": 17,
+    "epochs": 17,
+    "parameters": 6020,
+    "device": "cuda"
+  },
+  {
+    "model": "GRU_LINEAR23",
+    "seed": 29,
+    "epochs": 17,
+    "parameters": 6020,
+    "device": "cuda"
+  },
+  {
+    "model": "GRU_LINEAR23",
+    "seed": 43,
+    "epochs": 17,
+    "parameters": 6020,
+    "device": "cuda"
+  }
+]

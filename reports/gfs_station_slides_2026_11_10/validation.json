@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "slides": 55,
+  "main_slides": 43,
+  "appendix_slides": 12,
+  "csv_numeric_cells_checked": 306,
+  "source_hashes_checked": 23,
+  "editable_pptx_and_notes_checked": true,
+  "foreground_geometry_checked": true,
+  "native_powerpoint_text_boxes": 1282,
+  "native_overflows": [],
+  "browser_layout": {
+    "checked": true,
+    "overflows": []
+  },
+  "protected_user_files_unchanged": true,
+  "training_performed": false,
+  "test2025_read": false,
+  "pdf_private_sha256": "5b0380f0959eb720bfd78dc28f5351fc2aaa4c73979f95a6f0cbd02ce01a3a01",
+  "previews": [
+    "XEM_TRUOC_01.png",
+    "XEM_TRUOC_02.png",
+    "XEM_TRUOC_03.png"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "files": {
+    "reports/gfs_training_window_2026_11_18/selection.json": "fc3791b2a0ed2b5730d502b894b0a8f9c105a27e247990bd99073f15441802e1",
+    "reports/gfs_training_window_2026_11_18/verification.json": "a56b36bc8ef97e6e6b2b38a309f056027d64d1fa2909161ae136cbd4565b6095",
+    "reports/gfs_training_window_2026_11_18/feature_sets.json": "de2bf12456531b061d85bb72b52c1f0657b4697b31ddf7d0661ea38a37ec2d8b",
+    "reports/gfs_station_daily_v2_2026_11_10/gru_selection.json": "db829feece0a53b23fa8ef25c6b02686fffffa064860255e614ac9e58ad33cdf",
+    "reports/gfs_training_window_2026_11_18/role_counts.csv": "dcfa09ccf18bf504491d27889494fe909d95cb256923cb148fdf5abdba925ef4",
+    "reports/gfs_training_window_2026_11_18/label_distribution.csv": "c959bccb53182b90753d3cadefa5b74239983f4d1778e95950d685dae2268beb",
+    "reports/gfs_station_final_2026_11_17/paired_bootstrap.csv": "7e85b09b90b67f2aad98d0db4f3312bf43351a31fd4b25ec4318c08e3dbdf4de",
+    "reports/gfs_training_window_2026_11_18/paired_comparisons.csv": "a375f28c288b18079477d4171ac4b9ea45f4c8de54e271e35e330aa34ed672da",
+    "reports/gfs_station_final_2026_11_17/point_metrics.csv": "e8a1c905d6505f207ddf74f20efb4516549250f5a660aa099eb081c836dc816d",
+    "reports/gfs_training_window_2026_11_18/point_metrics.csv": "20d23fbb197b95f44fc0080fdcf039c9ebe2c3d448cca8231f4733ccbf03f1de",
+    "reports/gfs_training_window_2026_11_18/event_metrics.csv": "f3826248791434921ce684ba45aaeae4f5b2ca8952ee700a3ca9df176166a1ae",
+    "reports/gfs_training_window_2026_11_18/probability_metrics.csv": "c508ff391be85ad8edae528e6660bc95e95aa36e3d5ea89d44c1a1ebe27b6def",
+    "reports/gfs_station_daily_v2_2026_11_10/tree_selection.json": "1b8c887b4a0336b3781d8fc33f443465e9f72b0c5be6e4720ed95826b8feecf5",
+    "reports/gfs_station_final_2026_11_17/probability_metrics.csv": "4c71989739b1eb44e6406f460a87df23df6e8e285ebd7863e4896ed3af4f8ffe",
+    "reports/gfs_training_window_2026_11_18/seed_metrics.csv": "16090c01085661632af3b6c3bc7e94eebc3bd90bbd834fb2a7662d1338b940d0",
+    "reports/gfs_temporal_2026_11_17/point_metrics.csv": "b72873b6f9d2d6f984cec98b22f92778511fc3d931e2688c4e25f280c54d9ae8",
+    "reports/gfs_temporal_2026_11_17/paired_comparisons.csv": "bfa559da13dc20d5bf793051b81535c4557a678420be46ba00430dd862386331",
+    "reports/station_update_2026_11_16/dataset_summary.json": "6ea51f9acc836d8257ebd42491c898304247307f6835ff45e24e260c80f807b9",
+    "reports/gfs_temporal_2026_11_17/model_verification.json": "96e4ede1339163e27f3dd65f3b02a67c54cbd2248112bfb9070aa034defa6f3d",
+    "reports/gfs_training_window_2026_11_18/tests_verification.json": "dfcd7a5effa34c7fcc128a6f59563fb83dbd30b24e1202e0722ad77359267758",
+    "reports/gfs_training_window_2026_11_18/dry_heavy_metrics.csv": "54016a30446bde530b986e0611b9d772e8a8379237cfd0ac1731c1b546831805",
+    "reports/gfs_training_window_2026_11_18/feature_catalog.csv": "e9bad62a94ba18223176645c9b0c5692325484835feb586d6afb3b2b8a28150e",
+    "reports/short_range_comprehensive_2026_11_18/slide_manifest.json": "61700dffcc4acf788637d3527f5821d2d460b450a9f081e8a09a3e02f5ae8643"
+  },
+  "models_refit": false,
+  "metrics_rescored": false
+}

@@ -1,0 +1,241 @@
+{
+  "date": "2026-11-09",
+  "reason": "User requested removing obsolete clutter and keeping one current entry point",
+  "removed_targets": [
+    "project_master_plan.md",
+    "SURFACE_BASELINE_REPORT.md",
+    "DATA_GAP_PLAN.md",
+    "reports/short_range_brief_2026_10_21",
+    "reports/short_range_presentation_2026_10_21",
+    "reports/short_range_revised_2026_10_21"
+  ],
+  "removed_tracked_files": 40,
+  "removed_bytes": 5336204,
+  "restore_from_git_commit": "a05f6c0a316904ba325db946e912400fbf44adb0",
+  "private_backup": "data\\operational\\workspace_cleanup_2026_11_09\\superseded_documents.zip",
+  "temporary_web_assets_removed": 19,
+  "root_documents_shortened": [
+    "README.md",
+    "CLAUDE.md",
+    "KE_HOACH_DU_AN.md",
+    "project_plan_v2.md"
+  ],
+  "protected_user_files": [
+    {
+      "path": "reports/daily_gauge_slides_2026_11_04/PBL6_DU_LIEU_NGAY_3_MO_HINH.pptx",
+      "sha256": "d243b0c9ae09139bcb7a6a2be28b23828221f39085d79c64acc6541ddae133f6"
+    },
+    {
+      "path": "reports/short_range_three_models_2026_10_21/Dự đoán ngắn hạn 21_10.pptx",
+      "sha256": "7ec22d959cf7c873e8c9dbb0b43b2a5049fa3c7b77b9dd251aa1c893b3277b44"
+    }
+  ],
+  "kept": [
+    "source ERA5/GSMaP/CPC/Vrain data",
+    "model checkpoints and aggregate results",
+    "latest edited slides",
+    "current Vrain plan and workbook"
+  ],
+  "files": [
+    {
+      "path": "project_master_plan.md",
+      "bytes": 20366,
+      "sha256": "31fed8b305eca6a2d52ef2e4ad9f890e3af11fa6295a41ce7652ac1bde2726dd"
+    },
+    {
+      "path": "SURFACE_BASELINE_REPORT.md",
+      "bytes": 6667,
+      "sha256": "3868fc2136f26578263b19f9b7182fa4c4ee0e4da5e3554880d11841fa498d37"
+    },
+    {
+      "path": "DATA_GAP_PLAN.md",
+      "bytes": 8280,
+      "sha256": "2ccabad5e656fec3abfd219bf86aec0d53c5eb1c799ffb1ced44361691cf43b5"
+    },
+    {
+      "path": "reports/short_range_brief_2026_10_21/BAO_CAO_NHANH.docx",
+      "bytes": 40656,
+      "sha256": "dde86e656723a699bc1428b965fe28de5919d7ed3a72e9541abba19fc10aa4a0"
+    },
+    {
+      "path": "reports/short_range_brief_2026_10_21/BAO_CAO_NHANH.md",
+      "bytes": 4390,
+      "sha256": "96cbbac4d6f05c37101bfef9f344e8688648096fc56ba23ed7ec97f230029153"
+    },
+    {
+      "path": "reports/short_range_brief_2026_10_21/brief_numbers.json",
+      "bytes": 1327,
+      "sha256": "759a9ca9e49ffb79f11ec42514cd57f44eb5e57854a639b9e05d07c3adf18c72"
+    },
+    {
+      "path": "reports/short_range_brief_2026_10_21/build_manifest.json",
+      "bytes": 1661,
+      "sha256": "1a46669a3f1db42636a2c620eccbcd9a1d9d9952f8df4101723532b3a1724712"
+    },
+    {
+      "path": "reports/short_range_brief_2026_10_21/LOI_DAN_5_PHUT.md",
+      "bytes": 4189,
+      "sha256": "0413bca4d5f45bd31008fa4e5e60b480a13a1cc8abb967a296db71b1b8b435e6"
+    },
+    {
+      "path": "reports/short_range_brief_2026_10_21/PBL6_TFT_5_PHUT.pptx",
+      "bytes": 106982,
+      "sha256": "207d2f54587408e8fcdf8f9701f7416af23879f9de9f4302d40dabf8e9660269"
+    },
+    {
+      "path": "reports/short_range_brief_2026_10_21/primary_family_ci.png",
+      "bytes": 73651,
+      "sha256": "f26f4cd54f9299673981ce285148ef892a2ca62deca14bcf51fb945d562e0faa"
+    },
+    {
+      "path": "reports/short_range_brief_2026_10_21/README.md",
+      "bytes": 1030,
+      "sha256": "74e735d41cf9378266e13f85efefa5d09a71c87d2433c488f043e47166a5e3ff"
+    },
+    {
+      "path": "reports/short_range_presentation_2026_10_21/build_manifest.json",
+      "bytes": 3658,
+      "sha256": "0fcb09e433e904e4c1d42e006131d582a0343a0a20b24585f59884fc790915c7"
+    },
+    {
+      "path": "reports/short_range_presentation_2026_10_21/dev_metrics_audit.json",
+      "bytes": 1680,
+      "sha256": "6131e5827bf83dc65df374eff159a46a7a1a22bc0fbcbb948749f179b21f80db"
+    },
+    {
+      "path": "reports/short_range_presentation_2026_10_21/E7_CONTINGENCY_COUNTS.csv",
+      "bytes": 237,
+      "sha256": "b351f6d3fc68aeb3f77ee4205468bd5df9b2b5977a2cc0dfe35162d5623adae0"
+    },
+    {
+      "path": "reports/short_range_presentation_2026_10_21/literature.json",
+      "bytes": 4858,
+      "sha256": "d051c649943d721adbd50bffb8b089a3537fdb65712b7dd77dbc7b3da5c8696f"
+    },
+    {
+      "path": "reports/short_range_presentation_2026_10_21/LOI_DAN_TRINH_BAY.md",
+      "bytes": 21588,
+      "sha256": "edee2c0efb49c47af370e11b92063b015ecec658044b4fe55d7d21a88df79c0b"
+    },
+    {
+      "path": "reports/short_range_presentation_2026_10_21/PBL6_TFT_DAY_DU.html",
+      "bytes": 478395,
+      "sha256": "ab71231d640df78e4ea0c6f9ff0fe489e734941f1cd9c781fd43e60f0f89f0d8"
+    },
+    {
+      "path": "reports/short_range_presentation_2026_10_21/PBL6_TFT_DAY_DU.pptx",
+      "bytes": 359023,
+      "sha256": "4f2490ba1315a5a941bf1e12bd5baa2664d48d61cafca73501fc54ed0d2c9f42"
+    },
+    {
+      "path": "reports/short_range_presentation_2026_10_21/performance_E7.png",
+      "bytes": 97275,
+      "sha256": "e0ec835394ff00d4a8b4a4c0280d146b649a45c2c711a04fbc45b68e36a958f1"
+    },
+    {
+      "path": "reports/short_range_presentation_2026_10_21/PHAN_TICH_LIGHTGBM_POD_FAR.md",
+      "bytes": 11932,
+      "sha256": "80df98189c9772d35f9fd006f7e2c09db07e860c2b0cdfc7f3e3a7d80a06e0b6"
+    },
+    {
+      "path": "reports/short_range_presentation_2026_10_21/primary_family_ci.png",
+      "bytes": 73651,
+      "sha256": "f26f4cd54f9299673981ce285148ef892a2ca62deca14bcf51fb945d562e0faa"
+    },
+    {
+      "path": "reports/short_range_presentation_2026_10_21/README.md",
+      "bytes": 2221,
+      "sha256": "f5bb7dd25598e87ee5d04d20708ab5f840ddd2a0d1940d87f9508966ca3576d6"
+    },
+    {
+      "path": "reports/short_range_presentation_2026_10_21/render_manifest.json",
+      "bytes": 521,
+      "sha256": "d81bf169a7f6fa23d9236281bd90e74dd90aa2c9becc3535eb3c42f8eba28bc7"
+    },
+    {
+      "path": "reports/short_range_presentation_2026_10_21/slide_scene.json",
+      "bytes": 173589,
+      "sha256": "dc770ee09ef54e0a5eeba2cec9a885eb50e34618dbfab3ff676974c295049ce6"
+    },
+    {
+      "path": "reports/short_range_presentation_2026_10_21/target_timeline.png",
+      "bytes": 54327,
+      "sha256": "1a7b44c3dd46acd6559b71dc4598485752550ddb2feed4fcb5ad5b673ef3fd21"
+    },
+    {
+      "path": "reports/short_range_presentation_2026_10_21/validation.json",
+      "bytes": 529,
+      "sha256": "b685867f926d9642bc8b1876685ca9d59fc47e7858cb673c888be352520d0d0e"
+    },
+    {
+      "path": "reports/short_range_presentation_2026_10_21/XEM_TRUOC.png",
+      "bytes": 1272591,
+      "sha256": "e5cd6652e68e860c483cf67244e35ffa1172ece7c29c796b4ee2c993fda11775"
+    },
+    {
+      "path": "reports/short_range_revised_2026_10_21/build_manifest.json",
+      "bytes": 2809,
+      "sha256": "97289a16229701a8f6b073ea81d4a555c2f6d83c14f3d3831629ceafde75fc7d"
+    },
+    {
+      "path": "reports/short_range_revised_2026_10_21/DECISION_RULES_E7.csv",
+      "bytes": 1168,
+      "sha256": "f2c9a89356df882c872ce84704d4e7a8538fdd8b1b543443bd0c7b860896528c"
+    },
+    {
+      "path": "reports/short_range_revised_2026_10_21/GIAI_THICH_THEO_CAU_HOI.docx",
+      "bytes": 42489,
+      "sha256": "ec608cd459ec6b68c4fba269a523bf3ef81a811cea802e3711a596db9a1427a1"
+    },
+    {
+      "path": "reports/short_range_revised_2026_10_21/GIAI_THICH_THEO_CAU_HOI.md",
+      "bytes": 7723,
+      "sha256": "54064af0464e710a3298b4c4a1293744cdfc0534ee1afbaf66489bdb7b6ee19d"
+    },
+    {
+      "path": "reports/short_range_revised_2026_10_21/LOI_DAN.md",
+      "bytes": 25666,
+      "sha256": "f5390bbcf0d5ba441b03b8dcff9539dfc31a08ec16af740e4a1b8141d9437472"
+    },
+    {
+      "path": "reports/short_range_revised_2026_10_21/PBL6_BAO_CAO_DE_HIEU.html",
+      "bytes": 287628,
+      "sha256": "252c7802fff138f17a90309f45a24f23e5efc4f3f3c998926733b4c4e60f5f29"
+    },
+    {
+      "path": "reports/short_range_revised_2026_10_21/PBL6_BAO_CAO_DE_HIEU.pptx",
+      "bytes": 232708,
+      "sha256": "8915a0a5404cba3a581d7a5d26e48bc0c00eb4731c12395d4d70b16d5caa47ec"
+    },
+    {
+      "path": "reports/short_range_revised_2026_10_21/POD_SOURCES.json",
+      "bytes": 2420,
+      "sha256": "881b5d74dc84ccdc272b90dfab18c1b59a5d10239f7e21333c5a60561ff4dfc0"
+    },
+    {
+      "path": "reports/short_range_revised_2026_10_21/README.md",
+      "bytes": 1567,
+      "sha256": "80e507bf2585296796f424ea0c658f4bb85056ab4c91a5534ea68084c6bcd8f7"
+    },
+    {
+      "path": "reports/short_range_revised_2026_10_21/render_manifest.json",
+      "bytes": 465,
+      "sha256": "963384bddcbeda523eaff110d95a63704e7d9ab0e0faab119232486b90085eb4"
+    },
+    {
+      "path": "reports/short_range_revised_2026_10_21/slide_scene.json",
+      "bytes": 209394,
+      "sha256": "15b44f0d38351c4461856896a54c5396325985cec96f33a3e7d4d7957b87fd41"
+    },
+    {
+      "path": "reports/short_range_revised_2026_10_21/validation.json",
+      "bytes": 364,
+      "sha256": "56399908910cf0710ce613ffa07d037cad1fdde17a0a6a3f6b3888070073c3e1"
+    },
+    {
+      "path": "reports/short_range_revised_2026_10_21/XEM_TRUOC.png",
+      "bytes": 1696529,
+      "sha256": "8606d162a5ee32a6c76e80175b3423f58a5b993e778e46ebb107b57566ff9a9d"
+    }
+  ]
+}

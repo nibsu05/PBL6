@@ -1,0 +1,6 @@
+{
+  "status": "protocol_frozen_before_new_fit_and_holdout_scoring",
+  "protocol_sha256": "53082716ccf382ad705f634550e50b39f0d36537868aaddab93ed081bb8a4dd4",
+  "protected_artifacts": 181,
+  "holdout_scored": false
+}

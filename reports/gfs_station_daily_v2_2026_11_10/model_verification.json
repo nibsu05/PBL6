@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "lightgbm_estimators_replayed": 288,
+  "gru_models_replayed": 6,
+  "calibrators_refit_on_2023": 186,
+  "metric_checks": 2106,
+  "previous_artifacts_unchanged": 56,
+  "training_code_lock_verified": true,
+  "dataset_sha256": "9e5b6aed6a933d8be3deac9558976e953d14110e3e83159e381e760fc03865b4",
+  "probability_and_decision_nesting": true,
+  "primary_and_latency_models_same_samples": true,
+  "test2025_read": false
+}

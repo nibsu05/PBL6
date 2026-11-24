@@ -1,0 +1,77 @@
+{
+  "note": "Inherited pilot fit unchanged; canonical LF hashes support equivalent Git checkouts.",
+  "files": {
+    "src/informer_regional_pilot.py": {
+      "workspace_sha256": "90b1cec0c32c122443bcada3be77d76664af42147f3dc6a0d496e535faf25c53",
+      "normalized_lf_sha256": "90b1cec0c32c122443bcada3be77d76664af42147f3dc6a0d496e535faf25c53"
+    },
+    "scripts/pilot_informer_regional.py": {
+      "workspace_sha256": "93b2a2f1d377b853ad94f21971a9079bcd821334b86a20afedf672a14520b5e4",
+      "normalized_lf_sha256": "93b2a2f1d377b853ad94f21971a9079bcd821334b86a20afedf672a14520b5e4"
+    },
+    "src/short_range_dataset.py": {
+      "workspace_sha256": "542be8863962f64315269da2c093d19ed78de54a849b38a296c319f559759c39",
+      "normalized_lf_sha256": "542be8863962f64315269da2c093d19ed78de54a849b38a296c319f559759c39"
+    },
+    "src/short_range_evaluation.py": {
+      "workspace_sha256": "674c650149283f59008d4f2a80a86ec226baec7b40e12143c663a170edf3ad1a",
+      "normalized_lf_sha256": "674c650149283f59008d4f2a80a86ec226baec7b40e12143c663a170edf3ad1a"
+    },
+    "src/tft_regional.py": {
+      "workspace_sha256": "3b5c047f8d4c5cb42a512cee9a90db549ed711c29d66125747df15b6620df1bf",
+      "normalized_lf_sha256": "3b5c047f8d4c5cb42a512cee9a90db549ed711c29d66125747df15b6620df1bf"
+    },
+    "src/informer/attention.py": {
+      "workspace_sha256": "cc54b5a8c5f82d3c88a147de148ce48bedddd8a3aea1a1c8c34b379ded70a3ff",
+      "normalized_lf_sha256": "fb6ef64cee373b1b796f1a87ce4c49213b3dc86379882c1e0c8d6a1564c94a07"
+    },
+    "src/informer/decoder.py": {
+      "workspace_sha256": "7100decd79105e5d02fe2d17748d3c28446ad0b24fc73183c0957b55184ad793",
+      "normalized_lf_sha256": "d7060c518b0554f794dc8fac8c407064e66c50242274af78925b4c1abe2d1c4b"
+    },
+    "src/informer/embed.py": {
+      "workspace_sha256": "91a025b1b3410841440fbbadf56606cf6d884d6a9bf5e6cb1a101e6b2709e95f",
+      "normalized_lf_sha256": "f0ba337feb9efd1220f8219e7866cb891dc0c79f05d04ae441ac00b54162c137"
+    },
+    "src/informer/encoder.py": {
+      "workspace_sha256": "7c56a7486cb5d7bc993a82198b5d07b6149c14aae66d99205ce03542d3313486",
+      "normalized_lf_sha256": "240d1c02c4631bfc43ced32b18a901ba6ce3b4f898dba2f2d383962e482f1bef"
+    },
+    "src/informer/model.py": {
+      "workspace_sha256": "6353062cc9d0dcb07ce03bbd18d7371bb1717d60fafe2473985d3880e43798e0",
+      "normalized_lf_sha256": "84faeb7e7cdcfb5d3ce6b97dcd23b2f02236bdc50605d7e9fc20a2245f8a52e0"
+    },
+    "src/informer/__init__.py": {
+      "workspace_sha256": "9895c7af095a8ea28aa8e3cabf988d78f182bdc280c313fc8b5365531bb7ab93",
+      "normalized_lf_sha256": "09d837cafe47e8ce77cdb0fb92b8cf5cb10cd9e876d5aca3bbab01876ef63f1d"
+    },
+    "src/short_range_ablation.py": {
+      "workspace_sha256": "659f75dbda2ada809df42de6cc312d11d0a953362c1e9c458741f4eccf00930a",
+      "normalized_lf_sha256": "659f75dbda2ada809df42de6cc312d11d0a953362c1e9c458741f4eccf00930a"
+    },
+    "src/verification.py": {
+      "workspace_sha256": "987678d539616ac8dfb7b9d9166d52efc031ff729bca8465671cb0ef8d81a7e6",
+      "normalized_lf_sha256": "829a24b934e7714568f38f1a3a9186f5a30962e9bc1350b23a9bd952d109be9b"
+    },
+    "src/dataset_v2.py": {
+      "workspace_sha256": "6126b825ab1bfb4329ce98d1535ba2e8c19c9731da877ac2ae45cc5adcdd954c",
+      "normalized_lf_sha256": "8bbf1175ce84003eb4a202796b0f7a2072c6b71dad1f7f3689b85bb02cc416cd"
+    },
+    "scripts/run_informer_regional_matrix.py": {
+      "workspace_sha256": "03bb9c88270d4e6780ef9b0c90ff23b490c19264a54aa6a30055c0e92e0799a9",
+      "normalized_lf_sha256": "03bb9c88270d4e6780ef9b0c90ff23b490c19264a54aa6a30055c0e92e0799a9"
+    },
+    "scripts/validate_informer_regional_matrix.py": {
+      "workspace_sha256": "b66f1c1d0f5c155a6bf0c3b0dd204ee05c70f3b2f7e9672b195c2b4e5fe58e21",
+      "normalized_lf_sha256": "b66f1c1d0f5c155a6bf0c3b0dd204ee05c70f3b2f7e9672b195c2b4e5fe58e21"
+    },
+    "scripts/evaluate_informer_regional_matrix.py": {
+      "workspace_sha256": "e1c444bab6cc6649802a9db7f3daef8e633f8a480fbb870c054a9dab7c327c99",
+      "normalized_lf_sha256": "e1c444bab6cc6649802a9db7f3daef8e633f8a480fbb870c054a9dab7c327c99"
+    },
+    "scripts/publish_informer_regional_matrix.py": {
+      "workspace_sha256": "573f87d6616c09c07c0dd739af99b937311c6843b892a6b8bc236f5709f02a2d",
+      "normalized_lf_sha256": "573f87d6616c09c07c0dd739af99b937311c6843b892a6b8bc236f5709f02a2d"
+    }
+  }
+}

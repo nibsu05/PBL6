@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "protocol_sha256": "53082716ccf382ad705f634550e50b39f0d36537868aaddab93ed081bb8a4dd4",
+  "all_development_rows_replayed": 218658,
+  "prediction_columns_replayed": 68,
+  "control_checkpoints_replayed": 6,
+  "normalizers_train_only": true,
+  "future_label_perturbation_does_not_change_predictions": true,
+  "original_models_reproduce_saved_predictions": true,
+  "numeric_checks": 134,
+  "old_artifacts_preserved": 181,
+  "holdout_scored": false
+}

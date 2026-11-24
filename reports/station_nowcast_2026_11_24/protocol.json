@@ -1,0 +1,55 @@
+{
+  "version": "station_nowcast_2026_11_24",
+  "dataset_sha256": "51d215768370ecffc45f9bf275c3377745b643029926eaa2ec942f2d36488476",
+  "time_zone": "Asia/Ho_Chi_Minh",
+  "history_hours": 24,
+  "lead_hours": [1, 2, 3, 4, 5, 6],
+  "splits": {
+    "train": [2021, 2023],
+    "cal": [2023, 2024],
+    "dev": [2024, 2025],
+    "reserved2025": [2025, 2026]
+  },
+  "historical_gauge_source_code": 0,
+  "eligibility": "All stations with a complete training window in the 17 Nov hourly release; complete 24h history and six target hours, own station, same Vrain channel, and complete historical ERA5 for the paired comparison. Predictors use only the past.",
+  "pilot_stations": ["ST004", "ST009", "ST014"],
+  "feature_sets": {
+    "R": ["rain_mm", "delta_rain", "month"],
+    "E0": ["rain_mm", "delta_rain", "month", "t2m_c", "wind_speed", "rh2m_pct", "sp_hpa", "delta_t2m", "delta_wind_speed", "delta_rh", "delta_pressure"],
+    "E2": ["rain_mm", "delta_rain", "month", "t2m_c", "wind_speed", "rh2m_pct", "sp_hpa", "delta_t2m", "delta_wind_speed", "delta_rh", "delta_pressure", "u850", "v850"]
+  },
+  "bilstm": {
+    "seeds": [17, 29, 43],
+    "hidden_size_per_direction": 64,
+    "station_embedding_size": 8,
+    "head_size": 32,
+    "dropout": 0.2,
+    "max_epochs": 20,
+    "min_epochs": 6,
+    "patience": 4,
+    "batch_size": 2048,
+    "learning_rate": 0.001,
+    "selection": "Lower pooled RMSE in physical mm across all six hours on 2023; same training budget and 13 input slots, ablated features fixed to standardized zero",
+    "training_loss": "MSE on log1p(mm)",
+    "reported_prediction": "Arithmetic mean of the three forecasts in mm"
+  },
+  "rain_lightgbm": {
+    "num_boost_round": 250,
+    "early_stopping_rounds": 20,
+    "num_leaves": 31,
+    "min_data_in_leaf": 128,
+    "seed": 17,
+    "training_loss": "L2 in mm",
+    "predictors": "Same Vrain history and month as R, flattened as 24 lags plus sum3/sum6/sum24/max6/max24; station id categorical"
+  },
+  "event_thresholds_mm": [0.1, 0.5, 1, 5, 10],
+  "primary_comparison": {"candidate": "BiLSTM_E2", "reference": "BiLSTM_E0", "lead_hour": 6, "metric": "CSI", "threshold_mm": 1, "scope": "all eligible stations, micro"},
+  "block_bootstrap": {"block_days": [7, 14], "replicates": 4000, "seed": 2701, "unit": "paired local calendar-day blocks including all stations"},
+  "replay": {
+    "selection": "Compare 2023 pooled all-lead RMSE for BiLSTM_R, LightGBM_R and persistence; use the lowest for Vrain-only replay",
+    "dates_local": ["2026-11-04", "2026-11-05", "2026-11-06", "2026-11-07", "2026-11-08", "2026-11-09", "2026-11-10"],
+    "issue_hour_local": 19,
+    "gauge_source_code": 1,
+    "mode": "historical_replay"
+  }
+}

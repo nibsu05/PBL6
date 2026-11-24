@@ -1,0 +1,169 @@
+{
+  "cases": [
+    {
+      "model": "A",
+      "window": "short",
+      "loss": "tweedie",
+      "config": "N3",
+      "horizon": 1
+    },
+    {
+      "model": "C",
+      "window": "short",
+      "loss": "l2",
+      "config": "N3",
+      "horizon": 1
+    },
+    {
+      "model": "B",
+      "window": "long",
+      "loss": "tweedie",
+      "config": "N3",
+      "horizon": 1
+    },
+    {
+      "model": "D",
+      "window": "long",
+      "loss": "l2",
+      "config": "N3",
+      "horizon": 1
+    },
+    {
+      "model": "N0",
+      "window": "long",
+      "loss": "tweedie",
+      "config": "N0",
+      "horizon": 1
+    },
+    {
+      "model": "N1",
+      "window": "long",
+      "loss": "tweedie",
+      "config": "N1",
+      "horizon": 1
+    },
+    {
+      "model": "N3",
+      "window": "long",
+      "loss": "tweedie",
+      "config": "N3",
+      "horizon": 1,
+      "alias": "B"
+    },
+    {
+      "model": "A",
+      "window": "short",
+      "loss": "tweedie",
+      "config": "N3",
+      "horizon": 2
+    },
+    {
+      "model": "C",
+      "window": "short",
+      "loss": "l2",
+      "config": "N3",
+      "horizon": 2
+    },
+    {
+      "model": "B",
+      "window": "long",
+      "loss": "tweedie",
+      "config": "N3",
+      "horizon": 2
+    },
+    {
+      "model": "D",
+      "window": "long",
+      "loss": "l2",
+      "config": "N3",
+      "horizon": 2
+    },
+    {
+      "model": "N0",
+      "window": "long",
+      "loss": "tweedie",
+      "config": "N0",
+      "horizon": 2
+    },
+    {
+      "model": "N1",
+      "window": "long",
+      "loss": "tweedie",
+      "config": "N1",
+      "horizon": 2
+    },
+    {
+      "model": "N3",
+      "window": "long",
+      "loss": "tweedie",
+      "config": "N3",
+      "horizon": 2,
+      "alias": "B"
+    },
+    {
+      "model": "A",
+      "window": "short",
+      "loss": "tweedie",
+      "config": "N3",
+      "horizon": 3
+    },
+    {
+      "model": "C",
+      "window": "short",
+      "loss": "l2",
+      "config": "N3",
+      "horizon": 3
+    },
+    {
+      "model": "B",
+      "window": "long",
+      "loss": "tweedie",
+      "config": "N3",
+      "horizon": 3
+    },
+    {
+      "model": "D",
+      "window": "long",
+      "loss": "l2",
+      "config": "N3",
+      "horizon": 3
+    },
+    {
+      "model": "N0",
+      "window": "long",
+      "loss": "tweedie",
+      "config": "N0",
+      "horizon": 3
+    },
+    {
+      "model": "N1",
+      "window": "long",
+      "loss": "tweedie",
+      "config": "N1",
+      "horizon": 3
+    },
+    {
+      "model": "N3",
+      "window": "long",
+      "loss": "tweedie",
+      "config": "N3",
+      "horizon": 3,
+      "alias": "B"
+    }
+  ],
+  "selected_prospective_case": "B",
+  "objective_selection": "train-only2022CV",
+  "new_mean_estimators": 54,
+  "new_auxiliary_estimators": 108,
+  "factorial_cases": 4,
+  "ablations": [
+    "N0",
+    "N1",
+    "N3 alias"
+  ],
+  "seeds": [
+    17,
+    29,
+    43
+  ]
+}

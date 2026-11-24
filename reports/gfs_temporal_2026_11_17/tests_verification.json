@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "tests": 42,
+  "suites": [
+    "tests.test_gfs_temporal",
+    "tests.test_gfs_temporal_models",
+    "tests.test_gfs_temporal_evaluation",
+    "tests.test_gfs_temporal_integration",
+    "tests.test_gfs_daily_v2",
+    "tests.test_gfs_capacity_control",
+    "tests.test_gfs_final_evaluation"
+  ],
+  "code_sha256": {
+    "tests\\test_gfs_temporal.py": "02e1626d0b33006b5bc7d29a2c6fa75864794aed58a71102cdfa67ec7be23060",
+    "tests\\test_gfs_temporal_models.py": "86ab34026e3e4bce5165d046b81752cb07873dfcaeed9b89f60c2af91cfe4136",
+    "tests\\test_gfs_temporal_evaluation.py": "2d40dfc3fad9928fa0803f1a85a115352431e1f200a348ff72064965ced7580d",
+    "tests\\test_gfs_temporal_integration.py": "618d025138df19b1f3c652e8937d9fbe7bedecc6c7233952867a5f7926c31b7f"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "status": "complete",
+  "planned_issues": 1451,
+  "available_source_issues": 1449,
+  "source_unavailable_issues": 2,
+  "station_count": 57,
+  "source_messages": 27531,
+  "station_issues": 72886,
+  "long_horizon_rows": 218658,
+  "counts": {
+    "train": {
+      "station_issues": 35116,
+      "rows": 105348,
+      "issue_dates": 717,
+      "stations": 57
+    },
+    "cal": {
+      "station_issues": 18365,
+      "rows": 55095,
+      "issue_dates": 362,
+      "stations": 57
+    },
+    "dev": {
+      "station_issues": 19405,
+      "rows": 58215,
+      "issue_dates": 363,
+      "stations": 57
+    }
+  },
+  "rejected": {
+    "boundary_issues": 6,
+    "incomplete_station_issues": 9365
+  },
+  "feature_counts": {
+    "N0": 16,
+    "N1": 21,
+    "N2": 25,
+    "N3": 26,
+    "N4": 30,
+    "N5": 32
+  },
+  "dataset_sha256": "9e5b6aed6a933d8be3deac9558976e953d14110e3e83159e381e760fc03865b4",
+  "source_gauge_sha256": "d0cc22efb6609e68c2b992843670ffe725389914df2b282f086ebd1b04e75fa3",
+  "test2025_read": false,
+  "common_mask_gauge_delays": [
+    1,
+    3,
+    6
+  ],
+  "all_hourly_values_required": true
+}

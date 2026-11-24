@@ -1,0 +1,6 @@
+{
+  "status": "kept_B_in_train_only_selection",
+  "alpha": 0,
+  "candidate_forecast_evaluated": false,
+  "no_post_training_selection": true
+}

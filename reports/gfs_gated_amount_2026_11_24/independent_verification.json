@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "matched_rows": 43464,
+  "equal_baseline_targets": true,
+  "gate_zero_through_5_verified": true,
+  "neighbor_primary_metrics_checked": 3,
+  "neighbor_probability_nesting": true,
+  "tail_intervals_sha256": "89eceb0880648496a74a2872b23b813db78f0d2cda0229560c64694b20edc346",
+  "conditional_interval_scope": "post-hoc exploratory modern 2026"
+}

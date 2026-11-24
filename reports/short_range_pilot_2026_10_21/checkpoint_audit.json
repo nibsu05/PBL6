@@ -1,0 +1,148 @@
+{
+  "status": "passed",
+  "full_runs_replayed": 12,
+  "results": [
+    {
+      "learner": "lgbm",
+      "year": 2021,
+      "experiment": "E0",
+      "seed": 42,
+      "issues": 363,
+      "max_amount_difference": 0.0,
+      "max_probability_difference": 0.0,
+      "all_metrics_reproduced": true
+    },
+    {
+      "learner": "lgbm",
+      "year": 2021,
+      "experiment": "E7",
+      "seed": 42,
+      "issues": 363,
+      "max_amount_difference": 0.0,
+      "max_probability_difference": 0.0,
+      "all_metrics_reproduced": true
+    },
+    {
+      "learner": "lgbm",
+      "year": 2022,
+      "experiment": "E0",
+      "seed": 42,
+      "issues": 349,
+      "max_amount_difference": 0.0,
+      "max_probability_difference": 0.0,
+      "all_metrics_reproduced": true
+    },
+    {
+      "learner": "lgbm",
+      "year": 2022,
+      "experiment": "E7",
+      "seed": 42,
+      "issues": 349,
+      "max_amount_difference": 0.0,
+      "max_probability_difference": 0.0,
+      "all_metrics_reproduced": true
+    },
+    {
+      "learner": "lgbm",
+      "year": 2023,
+      "experiment": "E0",
+      "seed": 42,
+      "issues": 363,
+      "max_amount_difference": 0.0,
+      "max_probability_difference": 0.0,
+      "all_metrics_reproduced": true
+    },
+    {
+      "learner": "lgbm",
+      "year": 2023,
+      "experiment": "E7",
+      "seed": 42,
+      "issues": 363,
+      "max_amount_difference": 0.0,
+      "max_probability_difference": 0.0,
+      "all_metrics_reproduced": true
+    },
+    {
+      "learner": "tft",
+      "year": 2021,
+      "experiment": "E0",
+      "seed": 42,
+      "issues": 363,
+      "max_amount_difference": 0.0,
+      "max_probability_difference": 0.0,
+      "all_metrics_reproduced": true,
+      "cpu_max_amount_drift": 0.000911712646484375,
+      "cpu_max_raw_probability_drift": 3.975629806518555e-05,
+      "note": "Cross-device floating-point drift, not the reference replay criterion"
+    },
+    {
+      "learner": "tft",
+      "year": 2021,
+      "experiment": "E7",
+      "seed": 42,
+      "issues": 363,
+      "max_amount_difference": 0.0,
+      "max_probability_difference": 0.0,
+      "all_metrics_reproduced": true,
+      "cpu_max_amount_drift": 0.0019769668579101562,
+      "cpu_max_raw_probability_drift": 8.392333984375e-05,
+      "note": "Cross-device floating-point drift, not the reference replay criterion"
+    },
+    {
+      "learner": "tft",
+      "year": 2022,
+      "experiment": "E0",
+      "seed": 42,
+      "issues": 349,
+      "max_amount_difference": 0.0,
+      "max_probability_difference": 0.0,
+      "all_metrics_reproduced": true,
+      "cpu_max_amount_drift": 0.00345611572265625,
+      "cpu_max_raw_probability_drift": 6.000697612762451e-05,
+      "note": "Cross-device floating-point drift, not the reference replay criterion"
+    },
+    {
+      "learner": "tft",
+      "year": 2022,
+      "experiment": "E7",
+      "seed": 42,
+      "issues": 349,
+      "max_amount_difference": 0.0,
+      "max_probability_difference": 0.0,
+      "all_metrics_reproduced": true,
+      "cpu_max_amount_drift": 0.001628875732421875,
+      "cpu_max_raw_probability_drift": 5.6162476539611816e-05,
+      "note": "Cross-device floating-point drift, not the reference replay criterion"
+    },
+    {
+      "learner": "tft",
+      "year": 2023,
+      "experiment": "E0",
+      "seed": 42,
+      "issues": 363,
+      "max_amount_difference": 0.0,
+      "max_probability_difference": 0.0,
+      "all_metrics_reproduced": true,
+      "cpu_max_amount_drift": 0.0018253326416015625,
+      "cpu_max_raw_probability_drift": 4.933774471282959e-05,
+      "note": "Cross-device floating-point drift, not the reference replay criterion"
+    },
+    {
+      "learner": "tft",
+      "year": 2023,
+      "experiment": "E7",
+      "seed": 42,
+      "issues": 363,
+      "max_amount_difference": 0.0,
+      "max_probability_difference": 0.0,
+      "all_metrics_reproduced": true,
+      "cpu_max_amount_drift": 0.00179290771484375,
+      "cpu_max_raw_probability_drift": 5.3048133850097656e-05,
+      "note": "Cross-device floating-point drift, not the reference replay criterion"
+    }
+  ],
+  "test2025_read": false,
+  "reference_replay_device": "cuda",
+  "new_training": false,
+  "elapsed_seconds": 5.850250799998321
+}

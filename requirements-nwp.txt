@@ -1,0 +1,3 @@
+# Optional historical GFS pilot, tested on Windows/Python 3.12.
+eccodes==2.50.0
+requests>=2.31,<3

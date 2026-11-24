@@ -1,0 +1,46 @@
+{
+  "audit_date": "2026-11-09",
+  "login_host": "www.vrain.vn",
+  "login_status": 200,
+  "authorized_group_reads_status": 200,
+  "authorized_groups": 1,
+  "observed_group_label": "Da Nang",
+  "web_session_authenticated": true,
+  "partner_open_api_key_verified": false,
+  "inventory_v1_stations": 82,
+  "inventory_v2_stations": 86,
+  "historical_station_ids_match_v1": true,
+  "history_probe_count": 10,
+  "history_scope": "Selected days only; not full-archive verification",
+  "file_export": {
+    "probe_day": "2023-10-14",
+    "file_link_status": 200,
+    "file_downloaded": true,
+    "bytes": 14034,
+    "format": ".xlsx"
+  },
+  "xlsx_structure": {
+    "opened": true,
+    "sheet_count": 1,
+    "sheets": [
+      {
+        "rows": 86,
+        "columns": 26,
+        "clock_headers": 24
+      }
+    ],
+    "sha256": "60f0435460f8345777dffbf0e667372ca3ac33a4fea18dcd1bff0c5b32b55d51",
+    "displayed_title_end": "19:20 14-10-2023",
+    "last_clock_header": "19:00 14/10",
+    "title_and_clock_interval_need_confirmation": true
+  },
+  "timezone_confirmed": false,
+  "units_confirmed": false,
+  "interval_semantics_confirmed": false,
+  "station_historical_locations_confirmed": false,
+  "full_administrative_coverage_confirmed": false,
+  "training_performed": false,
+  "test2025_read": false,
+  "credentials_included": false,
+  "session_tokens_included": false
+}

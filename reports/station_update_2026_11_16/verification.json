@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "hourly_rows_checked": 4427280,
+  "daily_rows_checked": 726528,
+  "raw_probe_cells_checked": 115584,
+  "source_responses_probed": 56,
+  "history_samples_checked": 242176,
+  "ready_rows": 427746,
+  "recommended_rows": 427746,
+  "original_daily_rows_reproduced": 218658,
+  "original_features_labels_match": true,
+  "reused_response_checksums_verified": 622,
+  "previous_artifacts_preserved": 87,
+  "intervals_checked": true,
+  "missing_not_zero": true,
+  "conflicting_channels_not_merged": true,
+  "mixed_namespace_history_targets": false,
+  "modern_continuity_confirmed": false,
+  "training_performed": false,
+  "model_evaluation": false,
+  "collection_2025_authorized": true,
+  "datasets": {
+    "hourly": "cba9b1f2788fc65f46cfe675ce5500e2cfd780ba0f5d5e21b21b596b24275d14",
+    "daily": "17c6b220fa4b275cfde46f8ba52f3c068d42950fc0f272fcf8b2dd68dcfc1768"
+  }
+}

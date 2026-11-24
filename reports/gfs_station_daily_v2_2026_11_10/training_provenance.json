@@ -1,0 +1,16 @@
+{
+  "code_and_protocol_sha256": {
+    "src/gfs_daily.py": "1b191171c4db4910a78bab758176305c589fb9f0c96b10b66cd4e18908792d69",
+    "src/gfs_daily_models.py": "a6cf23ab65f056d1802d7559d3631f3f26156dcf4713f8ede2bfebdef457f86a",
+    "src/gfs_daily_gru.py": "28cc7433f9458bf225e6f684165980d017ab5baa1cef06fcb52e308afbb1f501",
+    "src/gfs_daily_lock.py": "a9333c566837d69507a7462d57a5a7390601191d172c656b260c8ff131fa3996",
+    "scripts/run_gfs_daily_trees.py": "b3d14961e07248c11081117833ff504e333f5ae3530ffaeeb34881f2a1e07c08",
+    "scripts/run_gfs_daily_gru.py": "3f959510ba81c5cc64176cc4794168ec77826300386ef7bb9d07291856c054d0",
+    "scripts/build_gfs_daily.py": "36dea7b4340501ec7db030b553d5e768b8bd942de141980384207eab47ef0f02",
+    "reports/gfs_station_daily_v2_2026_11_10/protocol.json": "f7b3e9d8d02538e7da8ac60278078ff95936f251e49fed0b1b556162a29abbc6",
+    "reports/gfs_station_daily_v2_2026_11_10/source_coverage_policy.json": "9bc3b565c7e6fcb027bc0ab4f86eea99bf45c2d752f8d2e029cc454b44e1d585"
+  },
+  "dataset_sha256": "9e5b6aed6a933d8be3deac9558976e953d14110e3e83159e381e760fc03865b4",
+  "locked_utc": "2026-11-10T22:37:15.659429+00:00",
+  "test2025_read": false
+}

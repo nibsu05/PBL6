@@ -1,0 +1,121 @@
+{
+  "status": "built",
+  "date": "2026-10-21",
+  "test2025_read": false,
+  "slides": 8,
+  "files": {
+    "protocol_frozen.json": {
+      "bytes": 2178,
+      "sha256": "ab9c5fd944a8346e6a253b0b7aafd3fbfcb549390837c893aa20887d93d499d4"
+    },
+    "run.json": {
+      "bytes": 806636,
+      "sha256": "090995c725de83be332b3092d7d3db6405bf49d21449e18634bb2e803cb41c00"
+    },
+    "stability_first_stage.csv": {
+      "bytes": 5030,
+      "sha256": "8718fa5883d4728453ae7e3461f197d591b7b3990e6bac34af66f7e81047cb3c"
+    },
+    "CAU_HOI_BAO_VE.md": {
+      "bytes": 8145,
+      "sha256": "c7e9f60ea15b1b5c407a8b3753cee451dd32022261b3d4b74047bfcf4bb67041"
+    },
+    "lgbm_completed_stage.csv": {
+      "bytes": 6696,
+      "sha256": "39ca23dee390c345d5365d5496b4df076eeb708c24b1b86cdd0c530644a5b0af"
+    },
+    "checkpoint_audit_partial.json": {
+      "bytes": 17155,
+      "sha256": "bc2a80e3e3618f85e7cc4cd1b3ffbd0afff64c2ea540372ce8b49c72a92b9c9b"
+    },
+    "scores_seed.csv": {
+      "bytes": 765830,
+      "sha256": "c9a0bc1beb868acfa18ed8d686ec59545a7196a16e36a966fe117308d2ee6963"
+    },
+    "scores_seed_pooled.csv": {
+      "bytes": 276023,
+      "sha256": "ab31bd1a63e4df6378d85e14352bd219f2287ab56fa013cef1ed3c3e77b763c5"
+    },
+    "ensemble_calibration_thresholds.csv": {
+      "bytes": 7609,
+      "sha256": "a210e9c922e96df32ee75c7e303b4bd2e4fb953218387bf6096fa12084eb9d1e"
+    },
+    "scores_ensemble.csv": {
+      "bytes": 402709,
+      "sha256": "7587341c6400362c8c35e2259107284e36a58a074069183eb2663ff624e6a780"
+    },
+    "scores_ensemble_pooled.csv": {
+      "bytes": 145495,
+      "sha256": "32458005303c7f7cd9e53447c1bbbe2f6439ff238fe92b4ccac467aeb379c89f"
+    },
+    "seed_stability.csv": {
+      "bytes": 58482,
+      "sha256": "1f6852d6a70e0e931eede528d6c080e25d49785c153c27834ac6f14d4e2d2888"
+    },
+    "paired_bootstrap.csv": {
+      "bytes": 48585,
+      "sha256": "34080e63d8d80b133144d53ee25f4ffcc3051909e12a12bb994632497cdf902c"
+    },
+    "reliability16.csv": {
+      "bytes": 20128,
+      "sha256": "8e598ec4da8959cd2a7f7d499776ebcd18fb8836cbce992581e9f6d79f4dbc52"
+    },
+    "evaluation.json": {
+      "bytes": 535,
+      "sha256": "f6439e7052c50501ee0e29872c08f0be7f83d0c641c4bd3d2f36190f5abe1336"
+    },
+    "checkpoint_audit.json": {
+      "bytes": 29699,
+      "sha256": "30ec7260c5b58046d3eabeec0ef5f344685d5f5c9de23a2c8cd72a98b7cc8fc6"
+    },
+    "environment.json": {
+      "bytes": 390,
+      "sha256": "dcbfd08d2b46fc9a14fef95a6a43786fa0905cbe8f209157ef61f08083faaa73"
+    },
+    "feature_catalog.csv": {
+      "bytes": 3340,
+      "sha256": "558568ef1417a4e2d147f7305472279b130cc43f0636dda44db828a73e67c585"
+    },
+    "bss_factorial.png": {
+      "bytes": 152466,
+      "sha256": "911808ddb3aa17cbe71e1c978f8c4038492f86ff343da5f83c0e027efd1443f0"
+    },
+    "seed_stability.png": {
+      "bytes": 175829,
+      "sha256": "756f4365be18515f51f5604c50850d51cddbc6ef7805c1cc82dc6af5acd8fbc9"
+    },
+    "primary_family_ci.png": {
+      "bytes": 73651,
+      "sha256": "f26f4cd54f9299673981ce285148ef892a2ca62deca14bcf51fb945d562e0faa"
+    },
+    "seasonal_bss.png": {
+      "bytes": 109934,
+      "sha256": "2570941c55337b6c33e26c985b2ff804877d7db914c82e1587f2ce77383fdf80"
+    },
+    "paired_seed_deltas.csv": {
+      "bytes": 450,
+      "sha256": "de53b166d43bfab2332c8c85440dc8dbab54280cb7cdc4bc58d590eaa3b7054f"
+    },
+    "factorial_marginal_bss.csv": {
+      "bytes": 192,
+      "sha256": "3f172bd477c8d8a3305aa3065f06462566ec335d0c66ad75052d592266391a35"
+    },
+    "BAO_CAO_MO_RONG.md": {
+      "bytes": 17043,
+      "sha256": "cfc4b6ef64dd1314f80a87819b24310535f996b6087b413e45292b0075cc3c5a"
+    },
+    "BAO_CAO_MO_RONG.docx": {
+      "bytes": 518592,
+      "sha256": "5d2d429eb898edf5add68110bc30ce2916d4eb46545e10fb19ef07385122a85c"
+    },
+    "PBL6_TFT_24_72h_mo_rong_2026_10_21.pptx": {
+      "bytes": 523223,
+      "sha256": "1cd687a289a0f80cb2fc4c4862f0250d54436887a9e4376920251e382e4e40ed"
+    },
+    "README.md": {
+      "bytes": 1997,
+      "sha256": "cea6463566ebeee6d194af44449459ed2427108ff754c6843e3efacbaba6308f"
+    }
+  },
+  "report_code_sha256": "d09c6fb22d4a49a0e908ed5bec709fff2889d6ae3e3b6972e29792d330f2321c"
+}

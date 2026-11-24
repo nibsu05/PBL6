@@ -1,0 +1,30 @@
+{
+  "status": "complete",
+  "models": [
+    "LGB_N0",
+    "LGB_N1",
+    "LGB_N2",
+    "LGB_N3",
+    "LGB_N4",
+    "LGB_N5",
+    "LGB_N3_delay3",
+    "LGB_N3_delay6",
+    "ZERO",
+    "GFS",
+    "PERSISTENCE",
+    "CLIM",
+    "MOS"
+  ],
+  "dataset_sha256": "9e5b6aed6a933d8be3deac9558976e953d14110e3e83159e381e760fc03865b4",
+  "calibration": "2023 only, nested conditional probabilities",
+  "amount_functionals": [
+    "mean",
+    "median"
+  ],
+  "final_lightgbm_estimators": 288,
+  "hyperparameter_tuning_years": [
+    2021,
+    2022
+  ],
+  "test2025_read": false
+}

@@ -1,0 +1,58 @@
+{
+  "status": "lightgbm_pilot_complete",
+  "configurations": [
+    "A0",
+    "A1",
+    "A2",
+    "A3"
+  ],
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "models": [
+    "CLIM",
+    "PERSISTENCE",
+    "GFS",
+    "A0",
+    "A1",
+    "A2",
+    "A3"
+  ],
+  "stations": 57,
+  "fits_amount": 36,
+  "fits_binary_max": 72,
+  "probability_calibration": "Platt on cal2023, after tree early stopping; cal probabilities not out-of-sample",
+  "ensemble": "arithmetic mean of three seeds",
+  "daily_experiment_complete": false,
+  "pilot_cadence_days": 7,
+  "small_gru_gate_based_only_on_cal": [
+    {
+      "horizon": 1,
+      "passed": false,
+      "station_fraction_better_raw_gfs": 0.43859649122807015,
+      "cal_mae_A2": 8.774847649786643,
+      "cal_mae_GFS": 8.51714169437686,
+      "cal_mae_CLIM": 13.400915998281095
+    },
+    {
+      "horizon": 2,
+      "passed": false,
+      "station_fraction_better_raw_gfs": 0.49122807017543857,
+      "cal_mae_A2": 9.278786320037248,
+      "cal_mae_GFS": 9.292330808703959,
+      "cal_mae_CLIM": 13.389061621431596
+    },
+    {
+      "horizon": 3,
+      "passed": true,
+      "station_fraction_better_raw_gfs": 0.5263157894736842,
+      "cal_mae_A2": 9.760996504614516,
+      "cal_mae_GFS": 10.04792432016482,
+      "cal_mae_CLIM": 13.1624443550184
+    }
+  ],
+  "test2025_read": false,
+  "station_model_training_performed": true
+}

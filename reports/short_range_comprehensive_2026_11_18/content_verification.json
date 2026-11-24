@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "verified_utc": "2026-11-18T01:47:40.177281+00:00",
+  "slides": 62,
+  "main_slides": 31,
+  "appendix_slides": 31,
+  "talk_minutes": 28.3,
+  "speaker_notes_checked": 62,
+  "tables_checked": 31,
+  "displayed_cells_checked": 641,
+  "bold_cells_checked": 28,
+  "numeric_bindings_checked": 211,
+  "evidence_files_sha_checked": 22,
+  "old_files_preserved": 109,
+  "word_sections": 62,
+  "scientific_scope_checks": true,
+  "models_refit": false,
+  "private_payload_absent": true,
+  "pptx_sha256": "4a58fbf733fbeccbab68225060cd69eff8c45b4d4155609603cf7daaf02c416b"
+}

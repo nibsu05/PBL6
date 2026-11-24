@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "fresh_grib_ranges": 8,
+  "independent_station_samples": 688,
+  "dataset_sha256": "17c6b220fa4b275cfde46f8ba52f3c068d42950fc0f272fcf8b2dd68dcfc1768",
+  "fixed_source_dates": [
+    "2024-12-29",
+    "2025-01-01",
+    "2025-06-15",
+    "2026-11-12"
+  ],
+  "joined_fields_checked": [
+    "gfs_rain_mm",
+    "gfs_t850_c",
+    "gfs_rh850_pct",
+    "gfs_u850",
+    "gfs_v850",
+    "gfs_pwat",
+    "wind_upslope"
+  ],
+  "init_valid_issue_times_checked": true,
+  "actual_historical_receipt_time_proven": false,
+  "training_performed": false,
+  "model_evaluation": false
+}

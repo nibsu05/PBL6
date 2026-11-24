@@ -1,0 +1,481 @@
+{
+  "status": "passed",
+  "source": "CPC Unified daily gauge-based gridded analysis, PSL archive",
+  "label_kind": "station-based spatial analysis, not direct area observation",
+  "development_years": [
+    2015,
+    2023
+  ],
+  "regional_days": 3287,
+  "missing_region_days": 0,
+  "region": "Existing 93 full-cell approximate footprint of Danang-new; not exact administrative boundary",
+  "regional_weights_sha256": "8eadf9ebaee72506f65599fba84821ec881383836e7f13ecef11ff030598bff6",
+  "cpc_boxes": 9,
+  "eod_utc_hours": 12,
+  "eod_scope": "Nominal provider EOD file; README warns EOD information is not fully checked",
+  "issue_time": "12 UTC; y1/y2/y3 are three following, separate 24-hour intervals",
+  "station_inventory_near_region": [
+    {
+      "station": "VMM00048855",
+      "name": "DANANG INTL",
+      "lat": 16.044,
+      "lon": 108.199,
+      "first_year": 1973,
+      "last_year": 2025
+    },
+    {
+      "station": "VMW00041003",
+      "name": "DA NANG",
+      "lat": 16.05,
+      "lon": 108.2,
+      "first_year": 1965,
+      "last_year": 1967
+    },
+    {
+      "station": "VMW00041013",
+      "name": "KY HA",
+      "lat": 15.4667,
+      "lon": 108.7,
+      "first_year": 1965,
+      "last_year": 1967
+    },
+    {
+      "station": "VMW00041014",
+      "name": "CHU LAI",
+      "lat": 15.4167,
+      "lon": 108.7,
+      "first_year": 1965,
+      "last_year": 1970
+    },
+    {
+      "station": "VMW00041024",
+      "name": "MARBLE MTN",
+      "lat": 16.0333,
+      "lon": 108.25,
+      "first_year": 1966,
+      "last_year": 1971
+    },
+    {
+      "station": "VMW00041040",
+      "name": "HUE",
+      "lat": 16.4,
+      "lon": 107.7,
+      "first_year": 1967,
+      "last_year": 1969
+    },
+    {
+      "station": "VMW00041048",
+      "name": "AN HOA",
+      "lat": 15.7833,
+      "lon": 108.05,
+      "first_year": 1967,
+      "last_year": 1969
+    }
+  ],
+  "original_binary_probes": [
+    {
+      "date": "2015-01-01",
+      "cells_with_gauge": 3,
+      "weight_in_boxes_with_gauge": 0.09665893165185808,
+      "gauge_counts": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "psl_vs_original": "passed"
+    },
+    {
+      "date": "2015-04-01",
+      "cells_with_gauge": 3,
+      "weight_in_boxes_with_gauge": 0.09665893165185808,
+      "gauge_counts": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "psl_vs_original": "passed"
+    },
+    {
+      "date": "2015-07-01",
+      "cells_with_gauge": 3,
+      "weight_in_boxes_with_gauge": 0.09665893165185808,
+      "gauge_counts": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "psl_vs_original": "passed"
+    },
+    {
+      "date": "2015-10-01",
+      "cells_with_gauge": 3,
+      "weight_in_boxes_with_gauge": 0.09665893165185808,
+      "gauge_counts": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "psl_vs_original": "passed"
+    },
+    {
+      "date": "2019-01-01",
+      "cells_with_gauge": 3,
+      "weight_in_boxes_with_gauge": 0.09665893165185808,
+      "gauge_counts": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "psl_vs_original": "passed"
+    },
+    {
+      "date": "2019-04-01",
+      "cells_with_gauge": 3,
+      "weight_in_boxes_with_gauge": 0.09665893165185808,
+      "gauge_counts": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "psl_vs_original": "passed"
+    },
+    {
+      "date": "2019-07-01",
+      "cells_with_gauge": 3,
+      "weight_in_boxes_with_gauge": 0.09665893165185808,
+      "gauge_counts": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "psl_vs_original": "passed"
+    },
+    {
+      "date": "2019-10-01",
+      "cells_with_gauge": 3,
+      "weight_in_boxes_with_gauge": 0.09665893165185808,
+      "gauge_counts": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "psl_vs_original": "passed"
+    },
+    {
+      "date": "2022-10-14",
+      "cells_with_gauge": 3,
+      "weight_in_boxes_with_gauge": 0.09665893165185808,
+      "gauge_counts": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "psl_vs_original": "passed"
+    },
+    {
+      "date": "2023-01-01",
+      "cells_with_gauge": 3,
+      "weight_in_boxes_with_gauge": 0.09665893165185808,
+      "gauge_counts": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "psl_vs_original": "passed"
+    },
+    {
+      "date": "2023-04-01",
+      "cells_with_gauge": 3,
+      "weight_in_boxes_with_gauge": 0.09665893165185808,
+      "gauge_counts": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "psl_vs_original": "passed"
+    },
+    {
+      "date": "2023-07-01",
+      "cells_with_gauge": 3,
+      "weight_in_boxes_with_gauge": 0.09665893165185808,
+      "gauge_counts": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "psl_vs_original": "passed"
+    },
+    {
+      "date": "2023-10-01",
+      "cells_with_gauge": 3,
+      "weight_in_boxes_with_gauge": 0.09665893165185808,
+      "gauge_counts": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "psl_vs_original": "passed"
+    }
+  ],
+  "probe_scope": "13 predetermined dates only; zero gauges in a box does not mean zero information or invalid interpolation",
+  "sources": [
+    {
+      "year": 2015,
+      "url": "https://downloads.psl.noaa.gov/Datasets/cpc_global_precip/precip.2015.nc",
+      "bytes": 62882761,
+      "sha256": "d2b7eb5df99c21533d3171a6e78f3b46175a9d9337e5d6203f0d2397b313a6d4"
+    },
+    {
+      "year": 2016,
+      "url": "https://downloads.psl.noaa.gov/Datasets/cpc_global_precip/precip.2016.nc",
+      "bytes": 57853207,
+      "sha256": "f2cdf656a03f53f89295c7308c58be6ec8002d1e9a32f7da0d97b48856cd8bdd"
+    },
+    {
+      "year": 2017,
+      "url": "https://downloads.psl.noaa.gov/Datasets/cpc_global_precip/precip.2017.nc",
+      "bytes": 60168712,
+      "sha256": "bad29c7c6c2069c2703a2e209554a27ee143a06a47e0a2178d25305009a72c57"
+    },
+    {
+      "year": 2018,
+      "url": "https://downloads.psl.noaa.gov/Datasets/cpc_global_precip/precip.2018.nc",
+      "bytes": 58864546,
+      "sha256": "251ba08bf979e31c3b4a4f97311fe4131d4f9178f03656a1b599de3cc41b4b51"
+    },
+    {
+      "year": 2019,
+      "url": "https://downloads.psl.noaa.gov/Datasets/cpc_global_precip/precip.2019.nc",
+      "bytes": 59798408,
+      "sha256": "ae5ab9c1ca53b0f2c6685acf4f33c48d6b33298f3895aa91dee5a64da576c39c"
+    },
+    {
+      "year": 2020,
+      "url": "https://downloads.psl.noaa.gov/Datasets/cpc_global_precip/precip.2020.nc",
+      "bytes": 59112656,
+      "sha256": "45af0378a4ee885b63bac797284866c1e39b828775093a667b8dc5baaf26b72a"
+    },
+    {
+      "year": 2021,
+      "url": "https://downloads.psl.noaa.gov/Datasets/cpc_global_precip/precip.2021.nc",
+      "bytes": 59910391,
+      "sha256": "e4ca984593b551f2b56407cbcdadc2b0eb3cb46a069dab436a83f3d0d7d4e70e"
+    },
+    {
+      "year": 2022,
+      "url": "https://downloads.psl.noaa.gov/Datasets/cpc_global_precip/precip.2022.nc",
+      "bytes": 66268125,
+      "sha256": "cd90c1962bb700e64ce4f314bd9b8ae972bc28df2e53c185ec14db13dc1855bd"
+    },
+    {
+      "year": 2023,
+      "url": "https://downloads.psl.noaa.gov/Datasets/cpc_global_precip/precip.2023.nc",
+      "bytes": 64499992,
+      "sha256": "e3f1281118738239612491b8fc0b52588b0e6494239caba6e329c5f987da6ae0"
+    }
+  ],
+  "attributes": [
+    {
+      "year": 2015,
+      "units": "mm",
+      "dataset_attributes": {
+        "Conventions": "CF-1.0",
+        "version": "V1.0",
+        "history": "created 9/2016 by CAS NOAA/ESRL PSD",
+        "title": "CPC GLOBAL PRCP V1.0 RT",
+        "dataset_title": "CPC GLOBAL PRCP V1.0",
+        "Source": "ftp://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/",
+        "References": "https://www.psl.noaa.gov/data/gridded/data.cpc.globalprecip.html"
+      }
+    },
+    {
+      "year": 2016,
+      "units": "mm",
+      "dataset_attributes": {
+        "Conventions": "CF-1.0",
+        "version": "V1.0",
+        "history": "created 9/2016 by CAS NOAA/ESRL PSD",
+        "title": "CPC GLOBAL PRCP V1.0 RT",
+        "dataset_title": "CPC GLOBAL PRCP V1.0",
+        "Source": "ftp://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/",
+        "References": "https://www.psl.noaa.gov/data/gridded/data.cpc.globalprecip.html"
+      }
+    },
+    {
+      "year": 2017,
+      "units": "mm",
+      "dataset_attributes": {
+        "Conventions": "CF-1.0",
+        "version": "V1.0",
+        "title": "CPC GLOBAL PRCP V1.0 RT",
+        "dataset_title": "CPC GLOBAL PRCP V1.0",
+        "Source": "ftp://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/",
+        "history": "Updated 2018-01-02 23:30:40",
+        "References": "https://www.psl.noaa.gov/data/gridded/data.cpc.globalprecip.html"
+      }
+    },
+    {
+      "year": 2018,
+      "units": "mm",
+      "dataset_attributes": {
+        "Conventions": "CF-1.0",
+        "Source": "ftp://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/",
+        "version": "V1.0",
+        "title": "CPC GLOBAL PRCP V1.0 RT",
+        "dataset_title": "CPC GLOBAL PRCP V1.0",
+        "dataset": "CPC Global Precipitation",
+        "history": "Updated 2019-01-28 17:33:20",
+        "References": "https://www.psl.noaa.gov/data/gridded/data.cpc.globalprecip.html"
+      }
+    },
+    {
+      "year": 2019,
+      "units": "mm",
+      "dataset_attributes": {
+        "Conventions": "CF-1.0",
+        "Source": "ftp://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/",
+        "version": "V1.0",
+        "title": "CPC GLOBAL PRCP V1.0 RT",
+        "dataset_title": "CPC GLOBAL PRCP V1.0",
+        "dataset": "CPC Global Precipitation",
+        "history": "Updated 2020-01-02 23:31:10",
+        "References": "https://www.psl.noaa.gov/data/gridded/data.cpc.globalprecip.html"
+      }
+    },
+    {
+      "year": 2020,
+      "units": "mm",
+      "dataset_attributes": {
+        "Conventions": "CF-1.0",
+        "version": "V1.0",
+        "title": "CPC GLOBAL PRCP V1.0 RT",
+        "dataset_title": "CPC GLOBAL PRCP V1.0",
+        "Source": "ftp://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/",
+        "References": "https://www.psl.noaa.gov/data/gridded/data.cpc.globalprecip.html",
+        "history": "Updated 2021-01-02 23:31:03"
+      }
+    },
+    {
+      "year": 2021,
+      "units": "mm",
+      "dataset_attributes": {
+        "Conventions": "CF-1.0",
+        "version": "V1.0",
+        "title": "CPC GLOBAL PRCP V1.0 RT",
+        "References": "https://www.psl.noaa.gov/data/gridded/data.cpc.globalprecip.html",
+        "dataset_title": "CPC GLOBAL PRCP V1.0",
+        "Source": "ftp://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/",
+        "history": "Updated 2022-01-02 23:30:58"
+      }
+    },
+    {
+      "year": 2022,
+      "units": "mm",
+      "dataset_attributes": {
+        "Conventions": "CF-1.0",
+        "version": "V1.0",
+        "title": "CPC GLOBAL PRCP V1.0 RT",
+        "References": "https://www.psl.noaa.gov/data/gridded/data.cpc.globalprecip.html",
+        "dataset_title": "CPC GLOBAL PRCP V1.0",
+        "Source": "ftp://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/",
+        "history": "Updated 2023-01-02 23:31:13"
+      }
+    },
+    {
+      "year": 2023,
+      "units": "mm",
+      "dataset_attributes": {
+        "Conventions": "CF-1.0",
+        "version": "V1.0",
+        "title": "CPC GLOBAL PRCP V1.0 RT",
+        "References": "https://www.psl.noaa.gov/data/gridded/data.cpc.globalprecip.html",
+        "dataset_title": "CPC GLOBAL PRCP V1.0",
+        "Source": "ftp://ftp.cpc.ncep.noaa.gov/precip/CPC_UNI_PRCP/",
+        "history": "Updated 2024-01-02 23:30:47"
+      }
+    }
+  ],
+  "private_output_hashes": {
+    "cpc_daily_cells.parquet": "471d34035e57db95c5468e75e27c9677fa515b588cf469c25c266dc444dbf157",
+    "cpc_daily_region.parquet": "471b66b2b5d791512b63cfaa1a065876c314065b6ff990d07c5b47bc49d94ad0"
+  },
+  "test2025_read": false
+}

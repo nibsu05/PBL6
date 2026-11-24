@@ -1,0 +1,5 @@
+{
+  "protected_checksum_entries": 367,
+  "protected_distinct_files": 336,
+  "explanation": "Some old manifests use Windows backslashes and newer entries use forward slashes; both checks refer to the same preserved file."
+}

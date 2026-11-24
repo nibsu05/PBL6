@@ -1,0 +1,4 @@
+horizon,rows,cutoff,observed_ge50,missed,low_gfs,low_lightgbm,both_under10
+1,14488,0.35,600,325,114,62,45
+2,14488,0.35,604,311,147,67,41
+3,14488,0.2,603,248,158,96,65

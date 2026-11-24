@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "source_sha256": "3497f0832313df953640a8d83229117bc2da51d2adae434a405edf66cdcda8a2",
+  "station_count": 57,
+  "short_training_packs": 35116,
+  "long_training_packs": 72886,
+  "calibration_packs": 18723,
+  "fitting_max_year": 2024,
+  "calibration_year": 2025,
+  "retrospective_labels_read": false,
+  "common_rows_and_features_finite": true,
+  "original_source_read_only": true
+}

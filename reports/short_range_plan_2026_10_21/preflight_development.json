@@ -1,0 +1,286 @@
+{
+  "status": "planning_inventory_only_no_models_fitted",
+  "inspected_date_local": "2026-10-21",
+  "dataset_id": "regional-v1-v2-2026-10-20",
+  "source_path": "data/processed/regional_danang/v1_hourly.parquet",
+  "source_sha256": "92a6bc6a527b25107761e85f0d14e64713a39dfd2930560a4498927c27dfc448",
+  "hash_scope": "whole file mechanical integrity only; row-level inspection restricted to 2015–2023",
+  "feature_groups_path": "reports/regional_research_plan_2026_10_20/feature_groups.json",
+  "development_rows_read": 78888,
+  "predictors_in_common_mask": 44,
+  "history_hours": 168,
+  "future_hours": 72,
+  "issue_hour_utc": 0,
+  "stride_hours": 24,
+  "candidate_issues": 3278,
+  "valid_common_issues": 3248,
+  "planned_input_shape_per_sample": [
+    28,
+    44
+  ],
+  "planned_decoder_calendar_shape_per_sample": [
+    12,
+    4
+  ],
+  "planned_target_shape_per_sample": [
+    3
+  ],
+  "planned_hourly_inputs_mean_aggregated_to_hours": 6,
+  "per_year": [
+    {
+      "year": 2015,
+      "candidate_issues": 358,
+      "valid_common_issues": 356,
+      "invalid_history": 0,
+      "invalid_label": 0,
+      "cross_year_label": 2,
+      "events": {
+        "16": [
+          19,
+          19,
+          19
+        ],
+        "50": [
+          3,
+          3,
+          3
+        ],
+        "100": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "year": 2016,
+      "candidate_issues": 366,
+      "valid_common_issues": 364,
+      "invalid_history": 0,
+      "invalid_label": 0,
+      "cross_year_label": 2,
+      "events": {
+        "16": [
+          47,
+          48,
+          49
+        ],
+        "50": [
+          10,
+          10,
+          10
+        ],
+        "100": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "year": 2017,
+      "candidate_issues": 365,
+      "valid_common_issues": 363,
+      "invalid_history": 0,
+      "invalid_label": 0,
+      "cross_year_label": 2,
+      "events": {
+        "16": [
+          46,
+          46,
+          46
+        ],
+        "50": [
+          9,
+          9,
+          9
+        ],
+        "100": [
+          3,
+          3,
+          3
+        ]
+      }
+    },
+    {
+      "year": 2018,
+      "candidate_issues": 365,
+      "valid_common_issues": 363,
+      "invalid_history": 0,
+      "invalid_label": 0,
+      "cross_year_label": 2,
+      "events": {
+        "16": [
+          35,
+          35,
+          35
+        ],
+        "50": [
+          4,
+          4,
+          4
+        ],
+        "100": [
+          2,
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "year": 2019,
+      "candidate_issues": 365,
+      "valid_common_issues": 363,
+      "invalid_history": 0,
+      "invalid_label": 0,
+      "cross_year_label": 2,
+      "events": {
+        "16": [
+          31,
+          31,
+          31
+        ],
+        "50": [
+          7,
+          7,
+          7
+        ],
+        "100": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "year": 2020,
+      "candidate_issues": 366,
+      "valid_common_issues": 364,
+      "invalid_history": 0,
+      "invalid_label": 0,
+      "cross_year_label": 2,
+      "events": {
+        "16": [
+          34,
+          34,
+          34
+        ],
+        "50": [
+          16,
+          16,
+          16
+        ],
+        "100": [
+          6,
+          6,
+          6
+        ]
+      }
+    },
+    {
+      "year": 2021,
+      "candidate_issues": 365,
+      "valid_common_issues": 363,
+      "invalid_history": 0,
+      "invalid_label": 0,
+      "cross_year_label": 2,
+      "events": {
+        "16": [
+          33,
+          33,
+          33
+        ],
+        "50": [
+          15,
+          15,
+          15
+        ],
+        "100": [
+          6,
+          6,
+          6
+        ]
+      }
+    },
+    {
+      "year": 2022,
+      "candidate_issues": 365,
+      "valid_common_issues": 349,
+      "invalid_history": 14,
+      "invalid_label": 0,
+      "cross_year_label": 2,
+      "events": {
+        "16": [
+          31,
+          31,
+          31
+        ],
+        "50": [
+          10,
+          10,
+          10
+        ],
+        "100": [
+          4,
+          4,
+          4
+        ]
+      }
+    },
+    {
+      "year": 2023,
+      "candidate_issues": 363,
+      "valid_common_issues": 363,
+      "invalid_history": 0,
+      "invalid_label": 0,
+      "cross_year_label": 0,
+      "events": {
+        "16": [
+          50,
+          50,
+          50
+        ],
+        "50": [
+          12,
+          12,
+          12
+        ],
+        "100": [
+          5,
+          5,
+          5
+        ]
+      }
+    }
+  ],
+  "development_folds": [
+    {
+      "evaluation_year": 2021,
+      "train_issues": 1809,
+      "calibration_issues": 364,
+      "evaluation_issues": 363
+    },
+    {
+      "evaluation_year": 2022,
+      "train_issues": 2173,
+      "calibration_issues": 363,
+      "evaluation_issues": 349
+    },
+    {
+      "evaluation_year": 2023,
+      "train_issues": 2536,
+      "calibration_issues": 349,
+      "evaluation_issues": 363
+    }
+  ],
+  "test_2025_rows_read_for_diagnostics": false,
+  "models_fitted": false,
+  "source_package_verification": "See package_data.py verify result recorded separately in plan",
+  "spatial_support": "93 selected full cells, approximate footprint; polygon intersection not yet resolved",
+  "caveats": [
+    "Validity reasons can overlap and must not be added as mutually exclusive counts.",
+    "All E0–E7 share the E7 history-validity and all-72h label-validity mask.",
+    "Overlapping issue targets and the three horizons are not independent samples.",
+    "Forecast field missingness and spatial support require a separate audit if dataset changes."
+  ]
+}

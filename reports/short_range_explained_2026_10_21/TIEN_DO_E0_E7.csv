@@ -1,0 +1,9 @@
+experiment,groups,variables,tabular_columns,tft_runs,lgbm_pipelines,status
+E0,B,11,87,9,3,complete
+E1,B+A,23,147,9,3,complete
+E2,B+M,31,187,9,3,complete
+E3,B+C,12,92,9,3,complete
+E4,B+A+M,43,247,9,3,complete
+E5,B+A+C,24,152,9,3,complete
+E6,B+M+C,32,192,9,3,complete
+E7,B+A+M+C,44,252,9,3,complete

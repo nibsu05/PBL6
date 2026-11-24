@@ -1,0 +1,28 @@
+{
+  "status": "selected_train2021_2022_only",
+  "candidate": {
+    "name": "small",
+    "num_leaves": 7,
+    "max_depth": 3,
+    "min_child_samples": 40,
+    "reg_lambda": 5.0
+  },
+  "candidate_scores": {
+    "small": 0.9198013605237523,
+    "pilot": 0.9214603229278578,
+    "medium": 0.9227750223940553
+  },
+  "objective_scores": {
+    "tweedie": 0.9107967828569016,
+    "l2": 0.928805938190603
+  },
+  "selected_loss": "tweedie",
+  "selected_window": "long",
+  "trees": {
+    "1": 171,
+    "2": 109,
+    "3": 76
+  },
+  "cv_estimators": 72,
+  "same_candidate_and_rounds_all_four_cases": true
+}

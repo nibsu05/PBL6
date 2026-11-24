@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "slides": 41,
+  "main_slides": 32,
+  "appendix_slides": 9,
+  "numeric_cells_checked": 476,
+  "numeric_values_checked": 512,
+  "source_hashes_checked": 37,
+  "editable_pptx_and_notes_checked": true,
+  "geometry_checked": true,
+  "native_text_boxes_checked": 1189,
+  "native_overflows": [],
+  "browser_layout": {
+    "checked": true,
+    "overflows": []
+  },
+  "protected_user_files_unchanged": true,
+  "training_performed": false,
+  "test2025_read": false,
+  "pdf_private_sha256": "291019c3f0b796730438c04a5d90ae771ecc4cf2f2e62ec679e4806353aa8042",
+  "previews": [
+    "XEM_TRUOC_01.png",
+    "XEM_TRUOC_02.png",
+    "XEM_TRUOC_03.png"
+  ]
+}

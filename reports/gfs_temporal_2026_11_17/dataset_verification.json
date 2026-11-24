@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "source_sha256": "17c6b220fa4b275cfde46f8ba52f3c068d42950fc0f272fcf8b2dd68dcfc1768",
+  "dataset_sha256": "3497f0832313df953640a8d83229117bc2da51d2adae434a405edf66cdcda8a2",
+  "original_rows": 323466,
+  "common_rows": 323466,
+  "common_packs": 107822,
+  "excluded_rows": 0,
+  "source_issues": 2120,
+  "new_source_failures": {},
+  "packing_rounding_clipped": 0,
+  "old_development_rows_reproduced": 218658,
+  "features_same_samples": true,
+  "source_hash_manifest_sha256": "ad7ba5ee31b2900ea0c23fd599efb1d87615d7ab462c79794266c6947084b893",
+  "feature_counts": {
+    "T0": 26,
+    "T1": 34,
+    "T2": 41,
+    "T3": 49
+  },
+  "no_labels_filled_or_removed_by_score": true
+}

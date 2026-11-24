@@ -1,0 +1,55 @@
+{
+  "status": "verified",
+  "models": [
+    {
+      "model": "GRU_N3_LINEAR6",
+      "seed": 17,
+      "parameter_count": 4796,
+      "epochs": 17,
+      "training_samples": 35116,
+      "device": "cuda"
+    },
+    {
+      "model": "GRU_N3_LINEAR6",
+      "seed": 29,
+      "parameter_count": 4796,
+      "epochs": 17,
+      "training_samples": 35116,
+      "device": "cuda"
+    },
+    {
+      "model": "GRU_N3_LINEAR6",
+      "seed": 43,
+      "parameter_count": 4796,
+      "epochs": 17,
+      "training_samples": 35116,
+      "device": "cuda"
+    },
+    {
+      "model": "GRU_N3_WIDE",
+      "seed": 17,
+      "parameter_count": 4751,
+      "epochs": 17,
+      "training_samples": 35116,
+      "device": "cuda"
+    },
+    {
+      "model": "GRU_N3_WIDE",
+      "seed": 29,
+      "parameter_count": 4751,
+      "epochs": 17,
+      "training_samples": 35116,
+      "device": "cuda"
+    },
+    {
+      "model": "GRU_N3_WIDE",
+      "seed": 43,
+      "parameter_count": 4751,
+      "epochs": 17,
+      "training_samples": 35116,
+      "device": "cuda"
+    }
+  ],
+  "holdout_scored": false,
+  "preserved_artifacts": 181
+}

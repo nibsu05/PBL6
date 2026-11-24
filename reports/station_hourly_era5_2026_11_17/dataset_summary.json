@@ -1,0 +1,64 @@
+{
+  "version": "station_hourly_era5_2026_11_17",
+  "status": "verified_with_documented_gaps_and_source_transition",
+  "dataset": "PBL6_TRAM_GIO_ERA5_2021_2026.parquet",
+  "sha256": "51d215768370ecffc45f9bf275c3377745b643029926eaa2ec942f2d36488476",
+  "bytes": 1057957673,
+  "rows": 4427280,
+  "candidate_stations": 86,
+  "stations_seen_train": 79,
+  "weather_channels": 44,
+  "weather_physical_channels": 40,
+  "with_rain_channels": 45,
+  "first_period_start_local": "2020-12-31 19:00:00+07:00",
+  "last_rain_period_end_local": "2026-11-15 19:00:00+07:00",
+  "last_weather_state_utc": "2026-11-10 23:00:00+00:00",
+  "last_complete_weather_row_end_local": "2026-11-11 07:00:00+07:00",
+  "weather_unavailable_tail_rows": 9288,
+  "no_model_training": true,
+  "no_model_evaluation": true,
+  "ready_counts": {
+    "train": {
+      "sample_complete": 1032811,
+      "sample_ready": 1032811,
+      "ready_legacy": 1032811,
+      "ready_modern": 0,
+      "stations_with_ready_samples": 79
+    },
+    "cal": {
+      "sample_complete": 676870,
+      "sample_ready": 676870,
+      "ready_legacy": 676870,
+      "ready_modern": 0,
+      "stations_with_ready_samples": 79
+    },
+    "dev": {
+      "sample_complete": 695203,
+      "sample_ready": 680282,
+      "ready_legacy": 680282,
+      "ready_modern": 0,
+      "stations_with_ready_samples": 79
+    },
+    "reserved2025": {
+      "sample_complete": 705262,
+      "sample_ready": 679461,
+      "ready_legacy": 679461,
+      "ready_modern": 0,
+      "stations_with_ready_samples": 79
+    },
+    "external2026": {
+      "sample_complete": 597123,
+      "sample_ready": 575655,
+      "ready_legacy": 66194,
+      "ready_modern": 509461,
+      "stations_with_ready_samples": 79
+    }
+  },
+  "last_ready_issue_local": {
+    "train": "2022-12-31 18:00:00+07:00",
+    "cal": "2023-12-31 18:00:00+07:00",
+    "dev": "2024-12-31 18:00:00+07:00",
+    "reserved2025": "2025-12-31 18:00:00+07:00",
+    "external2026": "2026-11-11 07:00:00+07:00"
+  }
+}

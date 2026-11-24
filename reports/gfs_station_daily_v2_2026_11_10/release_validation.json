@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "captured_utc": "2026-11-11T00:35:41.872794+00:00",
+  "unit_tests": 179,
+  "frozen_input_git_blobs_verified": 9,
+  "staged_files_reviewed": 63,
+  "raw_data_checkpoints_pdfs_user_slides_excluded": true,
+  "report_native_word_pages": 10,
+  "report_main_table_models": 13,
+  "report_best_value_bold_cells": 6,
+  "report_images": 2,
+  "model_verification": "passed",
+  "test2025_read": false
+}

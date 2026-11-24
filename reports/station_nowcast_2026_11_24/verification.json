@@ -1,0 +1,66 @@
+{
+  "status": "passed",
+  "checks": {
+    "dev": {
+      "origins_verified": 680282,
+      "rows_of_metrics_verified": 180,
+      "stations": 79,
+      "replay_origins": 1264,
+      "model_versions": 15,
+      "max_abs_forecast_difference_mm": 8.58306884765625e-06
+    },
+    "reserved2025": {
+      "origins_verified": 679461,
+      "rows_of_metrics_verified": 180,
+      "stations": 79,
+      "replay_origins": 1264,
+      "model_versions": 15,
+      "max_abs_forecast_difference_mm": 1.33514404296875e-05
+    }
+  },
+  "replay": {
+    "sha256": "d83f2a1591922d0714cb442b1990f6fd409f8f726ef733d74c06f356dbbcb4a4",
+    "fit_manifest_sha256": "400b4aee248687effb04f24c3e4020b2441c4abcb9eb673ec054a759bd483612",
+    "source": "Vrain modern",
+    "mode": "historical_replay",
+    "method": "LightGBM_R",
+    "training_station_count": 79,
+    "coverage": [
+      {
+        "issue_time": "2026-11-04T12:00:00+00:00",
+        "stations": 78,
+        "observed_hours": 468
+      },
+      {
+        "issue_time": "2026-11-05T12:00:00+00:00",
+        "stations": 78,
+        "observed_hours": 468
+      },
+      {
+        "issue_time": "2026-11-06T12:00:00+00:00",
+        "stations": 78,
+        "observed_hours": 468
+      },
+      {
+        "issue_time": "2026-11-07T12:00:00+00:00",
+        "stations": 78,
+        "observed_hours": 468
+      },
+      {
+        "issue_time": "2026-11-08T12:00:00+00:00",
+        "stations": 78,
+        "observed_hours": 468
+      },
+      {
+        "issue_time": "2026-11-09T12:00:00+00:00",
+        "stations": 78,
+        "observed_hours": 468
+      },
+      {
+        "issue_time": "2026-11-10T12:00:00+00:00",
+        "stations": 78,
+        "observed_hours": 468
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "slides": 67,
+  "main_slides": 33,
+  "appendix_slides": 34,
+  "talk_minutes": 28.0,
+  "numeric_bindings": 253,
+  "derived_percentages": 7,
+  "event_denominators_checked": 3,
+  "worked_example_checked": true,
+  "evidence_hashes": 23,
+  "protected_files": 126,
+  "models_refit": false,
+  "metrics_rescored": false,
+  "pptx_sha256": "115da32b1737ee87a32b55b595e95c116879c7b6c4de89a475c29d712315b496",
+  "tables": 35,
+  "cells": 680,
+  "bold_cells": 37,
+  "notes": 67
+}

@@ -1,0 +1,83 @@
+.map-shell { --rain-width: 372px; }
+.map-shell.rain-open .leaflet-top.leaflet-right { right: calc(var(--rain-width) + var(--map-gutter)); }
+.rain-toggle #rain-count {
+  display: inline-grid; place-items: center; min-width: 22px; height: 20px; padding: 0 4px;
+  border-radius: 6px; background: #d4eae9; color: #12525b; font-variant-numeric: tabular-nums; font-size: 11px;
+}
+.map-view-picker { display: flex; gap: 4px; margin-top: 11px; padding: 3px; border-radius: 8px; background: #edf4f6; }
+.map-view-picker button {
+  flex: 1; min-height: 32px; padding: 4px 7px; border: 1px solid transparent; border-radius: 6px;
+  background: transparent; cursor: pointer; font-size: 12px; color: #294e60;
+}
+.map-view-picker button[aria-pressed="true"] { background: #fff; border-color: #c7d8e2; font-weight: 720; }
+.map-view-picker button:disabled { color: #697d87; cursor: default; }
+.area-coverage { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 10px; color: #486674; font-size: 12px; line-height: 1.35; }
+.rain-panel {
+  top: 125px; bottom: var(--timeline-clearance); right: var(--map-gutter); width: var(--rain-width);
+  display: flex; flex-direction: column; padding: 14px; animation: slide-right 150ms ease-out; overflow: hidden;
+}
+.rain-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex: none; margin-bottom: 10px; }
+.rain-heading h2 { font-size: 19px; letter-spacing: -.022em; line-height: 1.25; }
+.rain-period { margin-top: 4px; font-size: 11px; color: #486474; line-height: 1.45; }
+.rain-list-view { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.rain-overview {
+  background: #edf6f6; border-radius: 8px; padding: 8px 9px; font-size: 12px;
+  color: #345763; line-height: 1.35;
+}
+.rain-overview strong { color: #0d555f; }
+.rain-filters { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px; margin: 9px 0; }
+.rain-filters input, .rain-filters select {
+  font: inherit; font-size: 12px; color: #183f50; border: 1px solid #cadbe1; border-radius: 7px;
+  background: #fff; min-width: 0; min-height: 34px; padding: 6px 8px;
+}
+.rain-filters select { max-width: 127px; }
+.rain-table-scroll { min-height: 0; overflow: auto; flex: 1; overscroll-behavior: contain; border-top: 1px solid #dbe6ea; }
+.rain-table { width: 100%; border-collapse: separate; border-spacing: 0; text-align: right; font-size: 12px; font-variant-numeric: tabular-nums; }
+.rain-table th { position: sticky; top: 0; z-index: 1; padding: 6px 5px; background: #f1f6f8; color: #365769; font-size: 11px; }
+.rain-table th, .rain-table td { border-bottom: 1px solid #e4edf0; text-overflow: ellipsis; }
+.rain-table th:first-child, .rain-table td:first-child { text-align: left; }
+.rain-table th:nth-child(2) { min-width: 70px; }
+.rain-table th small { display: block; font-size: 9px; font-weight: 500; white-space: nowrap; color: #506a78; }
+.rain-table td { padding: 5px; min-height: 34px; }
+.rain-table td:nth-child(2) { font-weight: 720; white-space: nowrap; }
+.rain-table td:last-child { text-align: right; color: #506774; white-space: nowrap; }
+.rain-table tr:hover td, .rain-table tr:focus-within td { background: #ecf6f7; }
+.rain-place {
+  border: 0; background: none; padding: 3px 0; text-align: left; min-height: 25px;
+  color: #184755; font-size: 12px; font-weight: 680; cursor: pointer;
+}
+.rain-place:hover { text-decoration: underline; }
+.rain-sample-dot { display: inline-block; width: 8px; height: 8px; margin-right: 6px; border: 1px solid #6a8a9b66; border-radius: 50%; background: var(--rain); }
+.rain-empty { padding: 13px 5px; color: #506774; font-size: 12px; line-height: 1.45; }
+.rain-note { font-size: 10px; line-height: 1.4; color: #506673; margin-top: 9px; flex: none; }
+.area-detail { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 1px; }
+.rain-back { border: 0; background: #ebf3f5; color: #214f60; padding: 6px 7px; border-radius: 6px; font-size: 12px; font-weight: 640; cursor: pointer; }
+.area-title { font-size: 20px; line-height: 1.2; margin: 10px 0 8px; }
+.area-amount { color: #0c5863; font-size: 26px; font-weight: 735; line-height: 1.2; font-variant-numeric: tabular-nums; margin-bottom: 4px; }
+.area-amount small { font-size: 12px; color: #48626f; margin-left: 5px; }
+.area-detail-label, .area-detail p { color: #496574; font-size: 12px; line-height: 1.4; margin-bottom: 5px; }
+.area-station-list { padding: 0; list-style: none; margin: 12px 0 0; }
+.area-station-list button {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px; width: 100%; min-height: 31px;
+  background: #edf5f6; border: 1px solid #e1edef; color: #184755; border-radius: 6px;
+  font-size: 12px; padding: 5px 8px; margin-bottom: 5px; cursor: pointer;
+}
+.area-station-list button:hover { background: #dfeff1; }
+.map-shell .leaflet-tooltip.area-tooltip { padding: 6px 8px; white-space: nowrap; }
+.area-tooltip strong { display: block; }
+.area-tooltip small { font-size: 11px; font-weight: 500; }
+@media (max-width: 1100px) { .map-shell { --rain-width: 326px; } }
+@media (max-width: 680px) {
+  .rain-panel {
+    top: auto; bottom: var(--timeline-clearance); left: var(--map-gutter); right: var(--map-gutter); width: auto;
+    height: min(52%, calc(100% - 368px)); padding: 10px 11px; z-index: 2; animation: slide-bottom 150ms ease-out;
+  }
+  .rain-heading { margin-bottom: 6px; }
+  .rain-heading h2 { font-size: 16px; }
+  .rain-period { font-size: 10px; }
+  .rain-overview { padding: 6px 8px; }
+  .rain-filters { margin-block: 6px; }
+  .rain-note { margin-top: 5px; }
+  .map-shell.rain-open .leaflet-top.leaflet-right { right: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .rain-panel { animation: none; } }

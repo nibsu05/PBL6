@@ -1,0 +1,17 @@
+{
+  "status": "waiting_for_future_issue",
+  "first_issue_utc": "2026-11-18T12:00:00+00:00",
+  "first_issue_vietnam": "2026-11-18 19:00 UTC+7",
+  "first_collection_vietnam": "2026-11-18 18:40 UTC+7",
+  "all_three_targets_end_vietnam": "2026-11-21 19:00 UTC+7",
+  "truth_verification_earliest_vietnam": "2026-11-21 20:00 UTC+7",
+  "bounded_to_one_issue": true,
+  "selected_case": "B",
+  "forecast_issued": false,
+  "truth_verified": false,
+  "requires_machine_and_network_running": true,
+  "model_freeze_sha256": "43d33cee87c3ff3a97d68fb1fe96b5ca8366be4eb84e03d772384db54ffd5d2a",
+  "snapshot_utc": "2026-11-17T18:27:08.696034+00:00",
+  "status_is_publication_snapshot": true,
+  "selection_basis": "train-only2022CV; long window predeclared"
+}

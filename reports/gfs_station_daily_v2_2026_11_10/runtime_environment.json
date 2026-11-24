@@ -1,0 +1,20 @@
+{
+  "captured_utc": "2026-11-11T00:29:27.422478+00:00",
+  "captured_at": "checkpoint verification",
+  "python": "3.12.15",
+  "operating_system": "Windows",
+  "packages": {
+    "torch": "2.5.1+cu121",
+    "lightgbm": "4.5.0",
+    "scikit-learn": "1.6.1",
+    "numpy": "2.2.6",
+    "pandas": "3.0.6",
+    "scipy": "1.15.3",
+    "eccodes": "2.50.0",
+    "python-docx": "1.2.0",
+    "matplotlib": "3.11.2"
+  },
+  "cuda_runtime": "12.1",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "gpu_memory_bytes": 8585216000
+}

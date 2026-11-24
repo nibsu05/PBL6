@@ -1,0 +1,11 @@
+probe_date,status,hourly_rows,unique_clock_labels,excluded_nonclock_summary_rows,nstation_union,expected_hourly_cells,returned_hourly_cells,valid_numeric_cells,missing_cells,absent_hour_rows,all24_complete_station_count,partial_station_count,no_hourly_values_station_count,complete_station_summary_comparisons,complete_station_summary_missing,complete_station_sum_mismatches,sum_tolerance_source_units,exact_current_station_id_matches,exact_current_uuid_matches,current_unique_name_diagnostic_matches,exact_v1_station_id_matches,exact_v1_uuid_matches,names_are_not_an_identity_crosswalk,timezone_confirmed,interval_timestamp_semantics_confirmed,summary_interval_semantics_confirmed,measurement_units_confirmed
+2015-10-14,no_hourly_data,0,0,1,82,1968,0,0,0,24,0,0,82,0,0,0,1e-06,0,0,81,82,82,True,False,False,False,False
+2019-10-14,no_hourly_data,0,0,1,82,1968,0,0,0,24,0,0,82,0,0,0,1e-06,0,0,81,82,82,True,False,False,False,False
+2020-10-14,no_hourly_data,0,0,1,82,1968,0,0,0,24,0,0,82,0,0,0,1e-06,0,0,81,82,82,True,False,False,False,False
+2021-01-15,hourly_rows_present,24,24,1,82,1968,1968,1361,607,0,50,7,25,50,0,0,1e-06,0,0,81,82,82,True,False,False,False,False
+2021-10-14,hourly_rows_present,24,24,1,82,1968,1968,1368,600,0,57,0,25,57,0,0,1e-06,0,0,81,82,82,True,False,False,False,False
+2022-10-14,hourly_rows_present,24,24,1,82,1968,1968,1861,107,0,69,9,4,69,0,0,1e-06,0,0,81,82,82,True,False,False,False,False
+2023-01-15,hourly_rows_present,24,24,1,82,1968,1968,1894,74,0,78,1,3,78,0,0,1e-06,0,0,81,82,82,True,False,False,False,False
+2023-10-14,hourly_rows_present,24,24,1,82,1968,1968,1896,72,0,79,0,3,79,0,0,1e-06,0,0,81,82,82,True,False,False,False,False
+2024-01-15,hourly_rows_present,24,24,1,82,1968,1968,1847,121,0,76,1,5,76,0,0,1e-06,0,0,81,82,82,True,False,False,False,False
+2024-10-14,hourly_rows_present,24,24,1,82,1968,1968,1958,10,0,81,1,0,81,0,0,1e-06,0,0,81,82,82,True,False,False,False,False

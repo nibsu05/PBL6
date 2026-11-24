@@ -1,0 +1,316 @@
+{
+  "document_date": "2026-10-21",
+  "status": "approved_plan_with_completed_development_factorial_on_approximate_footprint",
+  "training_authorized_by_this_document": false,
+  "models_fitted_by_this_build": false,
+  "objective": "Direct regional mean precipitation in three consecutive 24-hour periods",
+  "source_dataset_id": "regional-v1-v2-2026-10-20",
+  "source_sha256": "92a6bc6a527b25107761e85f0d14e64713a39dfd2930560a4498927c27dfc448",
+  "source_region": "93 selected full cells, approximate footprint; polygon intersection not yet resolved",
+  "region_gate": "Freeze truthful footprint or verified administrative intersection before main matrix",
+  "issue_utc_hour": 0,
+  "issue_stride_hours": 24,
+  "history_hours": 168,
+  "encoder_bin_hours": 6,
+  "encoder_steps": 28,
+  "future_calendar_steps": 12,
+  "target_hour_intervals": [
+    [
+      0,
+      24
+    ],
+    [
+      24,
+      48
+    ],
+    [
+      48,
+      72
+    ]
+  ],
+  "label": "y_region_gc_mm",
+  "target_unit": "mm per 24 hours, regional area mean",
+  "future_meteorological_inputs_in_primary": false,
+  "past_rain_inputs_in_primary": false,
+  "static_constant_inputs": false,
+  "validity_mask": "Common E7 history and full72h permanent complete label",
+  "feature_groups_reference": "reports/regional_research_plan_2026_10_20/feature_groups.json",
+  "feature_groups": {
+    "B": [
+      "t2m_c",
+      "td2m_c",
+      "rh2m_pct",
+      "sp_hpa",
+      "mslp_hpa",
+      "u10",
+      "v10",
+      "sin_hour",
+      "cos_hour",
+      "sin_doy",
+      "cos_doy"
+    ],
+    "A": [
+      "cape",
+      "cin_capped",
+      "has_lfc",
+      "tcwv",
+      "kx",
+      "tt",
+      "blh",
+      "tcc",
+      "lcc",
+      "mcc",
+      "hcc",
+      "swvl1"
+    ],
+    "M": [
+      "u850",
+      "v850",
+      "q850_gkg",
+      "t850_c",
+      "rh850_pct",
+      "w850_pas",
+      "u500",
+      "v500",
+      "q500_gkg",
+      "t500_c",
+      "w500_pas",
+      "shear_850_500",
+      "ivt_u",
+      "ivt_v",
+      "ivt_mag",
+      "vimd_mmh",
+      "ctx_tcwv",
+      "ctx_ivt_mag",
+      "cold_surge_dp_hpa",
+      "dp_tonkin_south_hpa"
+    ],
+    "C": [
+      "sst_region_c"
+    ]
+  },
+  "experiments": {
+    "E0": [
+      "B"
+    ],
+    "E1": [
+      "B",
+      "A"
+    ],
+    "E2": [
+      "B",
+      "M"
+    ],
+    "E3": [
+      "B",
+      "C"
+    ],
+    "E4": [
+      "B",
+      "A",
+      "M"
+    ],
+    "E5": [
+      "B",
+      "A",
+      "C"
+    ],
+    "E6": [
+      "B",
+      "M",
+      "C"
+    ],
+    "E7": [
+      "B",
+      "A",
+      "M",
+      "C"
+    ]
+  },
+  "development_folds": [
+    {
+      "train_start": 2015,
+      "train_end": 2019,
+      "cal": 2020,
+      "eval": 2021
+    },
+    {
+      "train_start": 2015,
+      "train_end": 2020,
+      "cal": 2021,
+      "eval": 2022
+    },
+    {
+      "train_start": 2015,
+      "train_end": 2021,
+      "cal": 2022,
+      "eval": 2023
+    }
+  ],
+  "final": {
+    "train": [
+      2015,
+      2023
+    ],
+    "cal": 2024,
+    "test": 2025,
+    "experiments": [
+      "E0",
+      "E7"
+    ]
+  },
+  "no_2026_model_selection_for_2025": true,
+  "tft": {
+    "hidden": 32,
+    "lstm_layers": 1,
+    "attention_heads": 4,
+    "dropout": 0.1,
+    "batch": 64,
+    "optimizer": "AdamW",
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "gradient_clip": 1.0,
+    "max_epochs": 40,
+    "patience": 6,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "readout": "Shared daily heads on each group of four decoder states",
+    "amount_loss": "Tweedie p1.5 normalized by train null deviance for each day",
+    "event_loss": "Mean unweighted BCE, weight1",
+    "early_stopping": "Mean raw calibration Brier score at16mm over3days",
+    "pilot_tuning_budget": "At most hidden16/32 on train2015-2019/cal2020 only"
+  },
+  "lgbm": {
+    "development_pipelines": 24,
+    "final_pipelines": 2,
+    "heads_per_pipeline": 12,
+    "regression_heads": 3,
+    "event_heads": 9,
+    "deterministic_seeds_per_pipeline": 1
+  },
+  "calibration": {
+    "platt": "Regularized per day/threshold, calibration only",
+    "min_positive": 20,
+    "min_negative": 20,
+    "fallback": "Identity",
+    "threshold_grid": [
+      0.01,
+      0.99,
+      0.01
+    ],
+    "threshold_fallback": 0.5,
+    "monotonicity": "Fixed per-day projection p16>=p50>=p100 after calibration"
+  },
+  "event_thresholds_mm_24h": [
+    16,
+    50,
+    100
+  ],
+  "primary_event_threshold": 16,
+  "metrics": {
+    "primary": [
+      "BSS16",
+      "CSI16",
+      "reliability"
+    ],
+    "secondary": [
+      "RMSE",
+      "bias",
+      "MAE",
+      "POD",
+      "FAR",
+      "rare50/100"
+    ]
+  },
+  "bootstrap": {
+    "block_days": 7,
+    "sensitivity_block_days": 14,
+    "replicates_final": 20000,
+    "replicates_pipeline_check": 2000,
+    "seed": 20261021,
+    "development_family": "3 TFT contrasts x3days on pooled eval2021-2023 BSS16",
+    "development_family_size": 9,
+    "development_simultaneous_ci": 0.9944444444444445,
+    "holdout_family": "E7-E0 x3days BSS16",
+    "holdout_family_size": 3,
+    "holdout_simultaneous_ci": 0.9833333333333333,
+    "ensemble": "Mean per-issue predictions over3seeds; seed scores also reported",
+    "reference_alignment": "Resample climatology reference jointly with event and prediction"
+  },
+  "run_budget": {
+    "development_tft": 72,
+    "final_tft": 6,
+    "total_tft": 78,
+    "development_lgbm_pipelines": 24,
+    "final_lgbm_pipelines": 2,
+    "total_lgbm_output_models_upper_bound": 312,
+    "pilot_extra_runs_not_in_total": true
+  },
+  "time_estimate": {
+    "focused_hours": [
+      40,
+      58
+    ],
+    "contingency_fraction": 0.2,
+    "rounded_hours_with_contingency": [
+      48,
+      70
+    ],
+    "assumed_hours_per_workday": 5,
+    "workdays_with_contingency": [
+      10,
+      14
+    ],
+    "gpu_hours_provisional": [
+      1,
+      3
+    ],
+    "tft_epoch_time_measured": true,
+    "extra_boundary_data_workdays_if_needed": [
+      2,
+      5
+    ],
+    "gpu": "NVIDIA GeForce RTX4060 Laptop8GB; CUDA verified",
+    "ram_gib_reported_by_os": 15.2,
+    "hardware_confirmation": "User and local nvidia-smi on2026-10-21",
+    "gpu_hours_before_pilot": [
+      8,
+      30
+    ],
+    "measured_pilot_report": "../short_range_pilot_2026_10_21/run.json"
+  },
+  "optional_excluded": [
+    "Informer",
+    "V2",
+    "past rain ablation",
+    "NWP archive",
+    "quantiles",
+    "app"
+  ],
+  "source_package_verify": {
+    "matched": 2233,
+    "missing": 0,
+    "mismatched": 0,
+    "date": "2026-10-21"
+  },
+  "user_approval": {
+    "date_local": "2026-10-21",
+    "approved_by": "user_in_conversation",
+    "status": "approved_plan_with_completed_development_factorial_on_approximate_footprint",
+    "user_confirmation_excerpt": "tôi thấy ok",
+    "priority": "Obtain a preliminary report in approximately 3–4 hours",
+    "pilot_report": "../short_range_pilot_2026_10_21/README.md",
+    "development_report": "../short_range_ablation_2026_10_21/README.md",
+    "extension_request_excerpt": "hiện tại vẫn còn thời gian, bạn có dự tính làm gì tiếp theo",
+    "development_matrix_complete_on_approximate_footprint": true,
+    "development_tft_runs": 72,
+    "development_lgbm_pipelines": 24,
+    "checkpoint_runs_replayed": 96,
+    "geographic_and_label_validation_complete": false,
+    "full_research_complete": false,
+    "holdout_2025_opened": false
+  }
+}

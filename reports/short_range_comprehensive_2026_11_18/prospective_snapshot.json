@@ -1,0 +1,9 @@
+{
+  "snapshot_utc": "2026-11-18T01:42:50.264899+00:00",
+  "stage": "waiting_for_preissue_collection",
+  "heartbeat_utc": "2026-11-18T01:42:50.167754+00:00",
+  "issue_utc": "2026-11-18T12:00:00+00:00",
+  "forecast_issued": false,
+  "truth_verified": false,
+  "note": "Publication snapshot; inspect private tracker for actual later status."
+}

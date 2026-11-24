@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "dataset_sha256": "ab93ae93fc0a74efc6ad637d521e1f2cf669a0f097a14b99286066804769af76",
+  "rows_replayed": 31188,
+  "forecast_message_headers_checked": 3895,
+  "new_raw_grib_range_requests": 57,
+  "independent_four_corner_samples": 171,
+  "small_negative_rounding_values_clipped": 0,
+  "generating_process_identifiers": [
+    96
+  ],
+  "source_cycle_before_issue": true,
+  "gauge_history_before_assumed_cutoff": true,
+  "nonoverlapping_24h_target_windows": true,
+  "complete_common_A0_A3_mask": true,
+  "whole_targets_within_fold": true,
+  "no_ERA5_or_future_observed_weather": true,
+  "test2025_read": false,
+  "actual_operational_release_delays_verified": false
+}

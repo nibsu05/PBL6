@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102c3a">
+  <title>Bản đồ mưa Đà Nẵng · PBL6</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/map.css">
+  <link rel="stylesheet" href="/portal.css">
+  <link rel="stylesheet" href="/explore.css">
+  <link rel="stylesheet" href="/areas.css">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+  <script defer src="/portal.js"></script>
+  <script defer src="/areas.js"></script>
+  <script defer src="/map.js"></script>
+</head>
+<body class="map-page">
+  <main class="map-shell" aria-label="Bản đồ dự báo mưa">
+    <div id="map" aria-label="Bản đồ mưa theo khu vực và trạm">
+      <p id="map-loading" role="status">Đang mở bản đồ mưa…</p>
+    </div>
+    <header class="map-top">
+      <a class="map-brand" href="/">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>Mưa Đà Nẵng <small>Dự báo 1–3 ngày</small></span>
+      </a>
+      <div class="map-account">
+        <a class="map-nav" href="/cuc-ngan">1–6 giờ</a>
+        <a class="map-nav" href="/dashboard" id="monitor-link" hidden>Theo dõi <span id="admin-badge" class="admin-count" hidden></span></a>
+        <a class="map-login" id="account-link" href="/login">Đăng nhập</a>
+        <span id="account-name" hidden></span>
+        <button class="map-nav" id="sign-out" type="button" hidden>Đăng xuất</button>
+      </div>
+    </header>
+    <p id="load-error" role="alert" class="map-message notice" hidden></p>
+    <p id="map-error" role="status" class="map-message notice" hidden></p>
+
+    <section id="workspace" class="map-workspace" aria-label="Điều khiển bản đồ" hidden>
+      <div class="map-toolbar">
+        <button id="tools-toggle" class="map-tool" type="button" aria-controls="tools-panel" aria-expanded="false">
+          <span class="menu-icon" aria-hidden="true"></span> Công cụ
+        </button>
+        <button id="fit-map" class="map-tool" type="button">Xem toàn vùng</button>
+        <button id="rain-toggle" class="map-tool rain-toggle" type="button" aria-controls="rain-panel" aria-expanded="false" hidden>
+          Nơi có mưa <span id="rain-count" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="map-state" aria-live="polite">
+        <span id="map-mode" class="map-mode" data-mode="historical_replay">Phát lại lịch sử</span>
+        <span id="mode-date"></span>
+        <button id="latest-issue" type="button" class="map-latest" hidden>Xem lượt mới nhất</button>
+      </div>
+
+      <aside id="tools-panel" class="map-panel tools-panel" aria-labelledby="tools-title" hidden>
+        <div class="panel-head">
+          <h1 id="tools-title">Bản đồ lượng mưa</h1>
+          <button id="close-tools" class="panel-close" type="button" aria-label="Thu gọn công cụ">×</button>
+        </div>
+        <label for="issue">Lần phát dự báo</label>
+        <select id="issue"></select>
+        <p id="issue-meta" class="source-caption"></p>
+        <div class="map-view-picker" role="group" aria-label="Cách hiển thị">
+          <button data-view="area" type="button" aria-pressed="true">Theo khu vực</button>
+          <button data-view="station" type="button" aria-pressed="false">Theo trạm</button>
+        </div>
+        <p id="layer-label" class="map-label">Lớp hiển thị</p>
+        <div class="map-layers" role="group" aria-labelledby="layer-label">
+          <button data-layer="lightgbm" style="--layer-color: #1387a0" type="button" aria-pressed="true">LightGBM</button>
+          <button data-layer="gfs" style="--layer-color: #5f75ae" type="button" aria-pressed="false">GFS</button>
+          <button data-layer="probability" style="--layer-color: #cb7e32" type="button" aria-pressed="false">Xác suất mưa ≥50 mm</button>
+          <button data-layer="vrain" style="--layer-color: #30796c" type="button" aria-pressed="false" hidden>Vrain thực đo</button>
+          <button data-layer="difference" style="--layer-color: #b2603d" type="button" aria-pressed="false" hidden>Sai lệch LightGBM − Vrain</button>
+        </div>
+        <p id="area-coverage" class="area-coverage"></p>
+        <section id="station-scan" class="map-scan" aria-labelledby="scan-title" hidden>
+          <div class="scan-heading">
+            <h2 id="scan-title">Trạm nổi bật</h2>
+            <span id="coverage"></span>
+          </div>
+          <ul id="scan-stations"></ul>
+        </section>
+        <div id="station-lookup" class="station-lookup" hidden>
+          <label for="station">Chọn trạm</label>
+          <select id="station"></select>
+          <button id="open-station" class="map-tool" type="button">Xem</button>
+        </div>
+        <a class="map-secondary-link" id="export-forecast" href="/api/export.csv" hidden>Tải bảng của ngày đang xem ↓</a>
+      </aside>
+
+      <aside id="rain-panel" class="map-panel rain-panel" aria-labelledby="rain-title" hidden>
+        <div class="rain-heading">
+          <div>
+            <h2 id="rain-title">Nơi dự kiến có mưa</h2>
+            <p id="rain-period" class="rain-period"></p>
+          </div>
+          <button id="close-rain" class="panel-close" type="button" aria-label="Thu gọn bảng khu vực">×</button>
+        </div>
+        <div id="rain-list-view" class="rain-list-view">
+          <div id="rain-overview" class="rain-overview" aria-live="polite"></div>
+          <div class="rain-filters">
+            <input id="area-search" type="search" aria-label="Tìm xã, phường" placeholder="Tìm xã, phường">
+            <select id="area-filter" aria-label="Lọc khu vực">
+              <option value="rain">Có mưa</option>
+              <option value="10">Từ 10 mm</option>
+              <option value="data">Có số liệu</option>
+              <option value="missing">Chưa có số</option>
+              <option value="all">Tất cả</option>
+            </select>
+          </div>
+          <div class="rain-table-scroll" tabindex="0" aria-label="Bảng khu vực">
+            <table class="rain-table">
+              <thead><tr>
+                <th scope="col">Xã, phường</th>
+                <th scope="col">Cao nhất<small>mm/24 giờ</small></th>
+                <th scope="col">Trạm<small>có số / tổng</small></th>
+              </tr></thead>
+              <tbody id="rain-rows"></tbody>
+            </table>
+            <p id="rain-empty" class="rain-empty" hidden></p>
+          </div>
+          <p class="rain-note">Danh sách có mưa khi ít nhất một trạm được dự báo từ 1 mm/24 giờ. Số liệu theo LightGBM.</p>
+        </div>
+        <div id="area-detail" class="area-detail" hidden>
+          <button id="back-to-rain" class="rain-back" type="button">← Danh sách khu vực</button>
+          <h3 id="area-title" class="area-title"></h3>
+          <div id="area-description"></div>
+          <div id="area-stations"></div>
+        </div>
+      </aside>
+
+      <aside id="station-panel" class="map-panel station-panel station-card" aria-labelledby="station-title" hidden>
+        <div class="panel-head">
+          <div><p id="station-day" class="source-caption"></p><h2 id="station-title"></h2></div>
+          <button id="close-station" class="panel-close" type="button" aria-label="Đóng thông tin trạm">×</button>
+        </div>
+        <div id="station-detail" aria-live="polite"></div>
+        <figure id="station-chart" class="station-chart" aria-label="Lượng mưa ba ngày tại trạm" hidden></figure>
+        <a class="map-secondary-link" id="station-verify" href="/dashboard" hidden>Xem thông tin đối chiếu →</a>
+      </aside>
+
+      <details id="map-legend" class="map-panel map-legend">
+        <summary><strong id="legend-title">Dải lượng mưa</strong><span id="legend-unit">mm/24 giờ</span></summary>
+        <ul id="legend-items" aria-label="Chú giải dải màu"></ul>
+        <p id="legend-note"></p>
+      </details>
+
+      <section class="map-panel map-timeline" aria-label="Thời gian dự báo">
+        <div class="history-head">
+          <strong id="history-title">Lượt phát</strong>
+          <button id="history-scope" class="history-scope" type="button">Ngày gần đây</button>
+        </div>
+        <div id="history-strip" class="history-strip" role="group" aria-label="Lịch bảy ngày trước"></div>
+        <div class="timeline-summary">
+          <h2 id="map-title">Lượng mưa dự báo · LightGBM</h2>
+          <p id="period" aria-live="polite"></p>
+        </div>
+        <input id="horizon-slider" class="horizon-slider" type="range" min="1" max="3" step="1" value="1"
+               aria-label="Chọn hạn dự báo">
+        <div class="timeline-days" role="group" aria-label="Chọn hạn dự báo">
+          <button data-day="1" type="button" aria-pressed="true">Ngày 1 <small></small></button>
+          <button data-day="2" type="button" aria-pressed="false">Ngày 2 <small></small></button>
+          <button data-day="3" type="button" aria-pressed="false">Ngày 3 <small></small></button>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
