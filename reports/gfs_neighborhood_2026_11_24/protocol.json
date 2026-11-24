@@ -1,0 +1,67 @@
+{
+  "reference": "Frozen LightGBM B (26 features)",
+  "candidate": "B_nbr (30 features)",
+  "primary_question": "Does pre-issue GFS spatial context improve station rainfall?",
+  "hypothesis": "Higher surrounding forecast rain may retain context when GFS rain at the target station is too low",
+  "extra_features": [
+    "gfs_rain_mean_25km_mm",
+    "gfs_rain_max_25km_mm",
+    "gfs_rain_mean_50km_mm",
+    "gfs_rain_max_50km_mm"
+  ],
+  "radius_km": [
+    25,
+    50
+  ],
+  "weight": "equal across the locked cohort inside each radius; includes the target itself",
+  "feature_source": "same-cycle archived GFS interpolates at all 57 fixed locations before Vrain label filtering",
+  "model_fit": "2021–2024 only",
+  "probability_calibration": "2025 Platt and cutoffs only, same rule as reference",
+  "evaluation_scope": "retrospective2026_modern",
+  "evaluated_2026_previously": true,
+  "choose_default_from_2026": false,
+  "fixed_mean_loss": "tweedie",
+  "mean_tree_budget": {
+    "1": 171,
+    "2": 109,
+    "3": 76
+  },
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "same_auxiliary_budgets_and_candidate_as_B": true,
+  "bootstrap_draws": 5000,
+  "block_days": 14,
+  "metrics": [
+    "macro_rmse",
+    "macro_bs50"
+  ],
+  "intervals": "95% Bonferroni percentile within the 3 horizons for each metric",
+  "exploratory": true,
+  "created_before_candidate_fit": "2026-11-24T06:29:32.327637+00:00",
+  "source_sha256": "3497f0832313df953640a8d83229117bc2da51d2adae434a405edf66cdcda8a2",
+  "frozen_model_sha256": "43d33cee87c3ff3a97d68fb1fe96b5ca8366be4eb84e03d772384db54ffd5d2a",
+  "builder_sha256": "863622d86a3c6f5d2d19f5d641436dce156b224ccf21b63613247428b4d2971c",
+  "dataset_audit": {
+    "cycles": 2120,
+    "station_radius_counts_include_self": {
+      "25": {
+        "min": 2,
+        "max": 28,
+        "median": 17.0
+      },
+      "50": {
+        "min": 13,
+        "max": 53,
+        "median": 41.0
+      }
+    },
+    "base_rows_preserved": 323466,
+    "fields_verified_per_cycle": 19,
+    "raw_gfs_identical_to_frozen_point_feature": true,
+    "uses_neighbor_gauge": false,
+    "archive_manifest_sha256": "9f26ac695a2f756903a7b0898c254514950305fe474ac6513c3bbcfc5a17997c"
+  }
+}

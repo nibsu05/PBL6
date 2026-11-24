@@ -147,3 +147,12 @@ reports/short_range_explained_v2_2026_11_18/*.json text eol=lf
 reports/gfs_short_range_closeout_2026_11_24/*.csv text eol=lf
 reports/gfs_short_range_closeout_2026_11_24/*.json text eol=lf
 reports/gfs_short_range_closeout_2026_11_24/*.md text eol=lf
+
+# Preserve the source and aggregate checksums of the rain improvement experiments.
+scripts/run_gfs_neighborhood.py text eol=lf
+scripts/run_gfs_weighted_amount.py text eol=lf
+scripts/run_gfs_gated_amount.py text eol=lf
+scripts/verify_gfs_rain_improvements.py text eol=lf
+reports/gfs_neighborhood_2026_11_24/* text eol=lf
+reports/gfs_weighted_amount_2026_11_24/* text eol=lf
+reports/gfs_gated_amount_2026_11_24/* text eol=lf

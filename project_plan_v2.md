@@ -2,6 +2,8 @@
 
 **Kết luận ngắn hạn ngày 24/11/2026.** [Bản chốt và bảng số](reports/gfs_short_range_closeout_2026_11_24/KET_LUAN_NGAN_HAN.md) phân biệt kiểm định 2025 sau khóa và phân tích bổ sung trên hồi cứu 2026 đã xem. LightGBM B phục vụ bản xem thử bằng điểm trạm tô màu theo ba tổng 24 giờ. Xem [giao diện và hợp đồng đầu ra](demo/station_map/README.md).
 
+**Phép thử bổ sung ngày 24/11.** Đánh giá đặc trưng mưa GFS lân cận và hai cách tăng trọng số mẫu mưa lớn. Phương án có điều kiện giảm MAE trong nhóm thực đo ≥50 mm ở cả ba hạn trên cùng 43.464 lượt hồi cứu 2026. Kết quả dùng để đề xuất kiểm chứng tiếp, với B vẫn phục vụ web. Xem [thiết kế, giới hạn và bảng số](reports/gfs_gated_amount_2026_11_24/KET_LUAN.md).
+
 **Bản cho người mới:** [trình bày 33 slide chính và lời giải thích](reports/short_range_explained_v2_2026_11_18/README.md). Tách rõ mô hình nhóm huấn luyện, GFS có sẵn và các đối chứng. Có ví dụ tính tay, Tweedie/L2 và bảng ba mốc đủ tốt. B giảm điểm RMSE so GFS/MOS dài trong hồi cứu 2026 modern; chưa chứng minh cải thiện ổn định hoặc đủ vận hành. Không có ngưỡng POD 0,4 hay RMSE chung để tự gọi đạt. Mô hình chung và 19h chưa được so với lựa chọn khác; GRU bốn năm chưa chạy. Bản tổng hợp trước giữ nguyên, không có nghiên cứu mới.
 
 **Tài liệu trình bày đầy đủ 18/11:** [PowerPoint và lời giải thích](reports/short_range_comprehensive_2026_11_18/README.md). Luồng chính 31 slide cho 25–30 phút; 31 phụ lục về biến, kiến trúc, tuning, metric và bảng số. Có nguồn paper gốc, phân biệt độ đúng khi xử lý với chất lượng cảm biến/vận hành. Đây là bản tổng hợp, không phải một protocol hoặc lần huấn luyện mới.

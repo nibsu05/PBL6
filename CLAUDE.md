@@ -2,6 +2,12 @@
 
 Cập nhật 24/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
 
+## Bản thảo cuối kỳ và thử cải thiện ngày 24/11
+
+Bản thảo Word ngắn hạn theo mẫu Khoa CNTT nằm trong `data/operational/pbl6_bao_cao_cuoi_ky_2026_11_24/PBL6_BAO_CAO_CUOI_KY_PHAN_NGAN_HAN.docx`. Bìa chừa tên, chương 3 và 4 chừa phương pháp và kết quả cực ngắn. Nội dung dùng dữ liệu trạm Vrain, các đặc trưng dự báo GFS, kiểm định 2025, hồi cứu 2026 và mô tả web cục bộ.
+
+Đã chạy ba thử nghiệm trên cùng tập dữ liệu của B. Bối cảnh GFS lân cận 25/50 km chưa cải thiện RMSE nhất quán. Tăng trọng số cho mẫu mưa lớn toàn bộ làm bias ngày khô vượt giới hạn CV 2022. Điều chỉnh lượng với ngưỡng kích hoạt 5 mm chọn trong CV giảm MAE nhóm thực đo ≥50 mm khoảng 3,91–6,47 mm trong hồi cứu 2026. RMSE toàn bộ có đánh đổi. Xác suất giữ nguyên. B tiếp tục là mặc định của web. Chi tiết, giao thức và bảng số trong [kết luận thí nghiệm bổ sung](reports/gfs_gated_amount_2026_11_24/KET_LUAN.md).
+
 ## Chốt phần dự báo ngắn hạn ngày 24/11
 
 Người dùng yêu cầu hoàn thành phần ngắn hạn, chỉ ra đóng góp cụ thể, xem cách làm bản đồ màu và chuẩn bị báo cáo cuối kỳ trong ngày. Người dùng sẽ gửi template. Thành viên khác chuẩn bị đầu ra cực ngắn để tích hợp sau.

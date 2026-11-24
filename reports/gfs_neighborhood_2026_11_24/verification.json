@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "fit_rows_per_horizon": 72886,
+  "calibration_rows_per_horizon": 18723,
+  "evaluated_rows": 43464,
+  "stations": 57,
+  "issue_dates": 280,
+  "final_trees_and_classifiers": 36,
+  "artifact_count": 12,
+  "old_models_rechecked": true,
+  "evaluation_rows_matched": true,
+  "no_vrain_neighbor_inputs": true,
+  "exploratory_improvements": 0,
+  "prediction_sha256": "d26a97dc55cef8aead2db7db36906fcc0f358e144cd191cae9f6c80a330a6d5a",
+  "cycles": 2120,
+  "station_radius_counts_include_self": {
+    "25": {
+      "min": 2,
+      "max": 28,
+      "median": 17.0
+    },
+    "50": {
+      "min": 13,
+      "max": 53,
+      "median": 41.0
+    }
+  },
+  "base_rows_preserved": 323466,
+  "fields_verified_per_cycle": 19,
+  "raw_gfs_identical_to_frozen_point_feature": true,
+  "uses_neighbor_gauge": false,
+  "archive_manifest_sha256": "9f26ac695a2f756903a7b0898c254514950305fe474ac6513c3bbcfc5a17997c"
+}
