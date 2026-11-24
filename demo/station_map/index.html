@@ -25,7 +25,7 @@
     <div class="intro">
       <div>
         <h1>Lượng mưa tại trạm</h1>
-        <p>Chọn một ngày dự báo, sau đó bấm vào trạm để xem số liệu.</p>
+        <p>Chọn ngày và lớp dữ liệu. Bấm vào một trạm để so sánh kết quả qua ba ngày.</p>
       </div>
       <span class="mode">Phát lại lịch sử</span>
     </div>
@@ -48,16 +48,26 @@
         <section class="card map-card" aria-label="Bản đồ lượng mưa">
           <div class="map-header">
             <div>
-              <h2>Lượng mưa dự báo</h2>
+              <h2 id="map-title">Lượng mưa dự báo · LightGBM</h2>
               <p id="period"></p>
             </div>
             <span id="coverage" class="coverage"></span>
           </div>
+          <div class="layer-bar">
+            <span id="layer-label">Lớp bản đồ</span>
+            <div class="layer-picker" role="group" aria-labelledby="layer-label">
+              <button data-layer="lightgbm" type="button" aria-pressed="true">LightGBM</button>
+              <button data-layer="gfs" type="button" aria-pressed="false">GFS</button>
+              <button data-layer="vrain" type="button" aria-pressed="false">Vrain thực đo</button>
+              <button data-layer="difference" type="button" aria-pressed="false">Sai lệch</button>
+            </div>
+          </div>
           <div id="map-error" class="notice" role="status" hidden></div>
           <div id="map" aria-label="Vị trí các trạm mưa"></div>
           <div class="legend">
-            <h3>Dải lượng mưa <span>mm/24 giờ</span></h3>
+            <h3><strong id="legend-title">Dải lượng mưa</strong> <span>mm/24 giờ</span></h3>
             <ul id="legend-items" aria-label="Chú giải dải màu"></ul>
+            <p id="legend-note" hidden></p>
           </div>
         </section>
 
@@ -65,6 +75,7 @@
           <label for="station">Trạm đang xem</label>
           <select id="station"></select>
           <div id="station-detail" aria-live="polite"></div>
+          <figure id="station-chart" class="station-chart" aria-label="Lượng mưa ba ngày tại trạm" hidden></figure>
         </aside>
       </div>
       <footer>
