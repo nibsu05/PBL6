@@ -173,11 +173,21 @@ def insert_paragraph(doc, anchor, text, style="Normal"):
     return p._p
 
 
-def insert_caption(doc, anchor, group, text):
-    p = doc.add_paragraph(f"{group} ", style="Caption")
-    field = OxmlElement("w:fldSimple")
-    field.set(qn("w:instr"), f" SEQ {group} \\* ARABIC ")
-    p._p.append(field)
+def insert_caption(doc, anchor, group, cached_number, text):
+    prefix = {"Table": "Bảng", "Figure": "Hình"}[group]
+    p = doc.add_paragraph(f"{prefix} ", style="Caption")
+    for part in ("begin", "instruction", "separate", "number", "end"):
+        if part == "number":
+            p.add_run(str(cached_number))
+            continue
+        if part == "instruction":
+            field = OxmlElement("w:instrText")
+            field.set(qn("xml:space"), "preserve")
+            field.text = f" SEQ {group} \\* ARABIC "
+        else:
+            field = OxmlElement("w:fldChar")
+            field.set(qn("w:fldCharType"), part)
+        p.add_run()._r.append(field)
     p.add_run(f". {text}")
     anchor.addnext(p._p)
     return p._p
@@ -215,7 +225,11 @@ def publish_word(source, path, out, data):
             p.text = ("Dự báo cực ngắn đã có cấu hình phát lại dùng mưa Vrain. Bước vận hành cần đo "
                       "độ trễ quan trắc theo giờ và ghi dự báo trước khi kiểm chứng. Cần một thử nghiệm "
                       "giữ riêng trạm để đánh giá khả năng mở rộng đến các vị trí thiếu lịch sử.")
-    if set(anchors) != {"method", "result"}:
+        elif p.text.startswith("Bước tiếp theo là thu và ghi dự báo") and "conclusion" not in anchors:
+            anchors["conclusion"] = p._p.getprevious().getprevious()
+        elif p.text.startswith("[15] NOAA National Centers"):
+            anchors["sources"] = p._p
+    if set(anchors) != {"method", "result", "conclusion", "sources"}:
         raise ValueError("Final report placeholders differ from expected template")
     method = anchors["method"]
     method.text = (f"Mỗi mẫu là một trạm và một giờ phát, gồm 24 giờ đầu vào và sáu lượng mưa giờ tiếp theo. "
@@ -227,9 +241,10 @@ def publish_word(source, path, out, data):
         "Đồng hồ được hiểu theo giờ Việt Nam. Quan trắc 10h là lượng mưa tích lũy 09h–10h. "
         "Tại 10h, nhãn giờ 1 là 10h–11h, nhãn giờ 6 là 15h–16h. Cửa sổ đầu vào chỉ kiểm tra các "
         "giờ đã qua. Sáu giờ tương lai được kiểm tra khi ghép nhãn để huấn luyện và chấm điểm.",
-        "Mô hình Bi-LSTM một lớp đọc 24 giờ quá khứ từ hai hướng, dùng 64 nút mỗi hướng và mã trạm "
+        "Mô hình Bi-LSTM một lớp đọc 24 giờ quá khứ từ hai hướng [16], dùng 64 nút mỗi hướng và mã trạm "
         "học được. R có mưa, chênh mưa và tháng. E0 thêm nhiệt độ, tốc độ gió, độ ẩm, áp suất gần mặt đất "
-        "và các chênh lệch theo giờ. E2 thêm hai thành phần gió 850 hPa. Khí tượng lấy từ ERA5 ghép theo tọa độ trạm.",
+        "và các chênh lệch theo giờ. E2 thêm hai thành phần gió 850 hPa. Khí tượng lấy từ ERA5 [17] "
+        "ghép theo tọa độ trạm.",
         "Chuẩn hóa được tính từ train. Huấn luyện dùng MSE trên log(1 + mm) với ba seed 17, 29, 43. "
         "Chọn epoch theo RMSE năm 2023, rồi trung bình ba dự báo sau đổi về mm. Các đối chứng gồm "
         "0 mm, giữ mưa giờ vừa đo và LightGBM học từ lịch sử mưa trạm cùng tháng.",
@@ -238,9 +253,9 @@ def publish_word(source, path, out, data):
     result = anchors["result"]
     result.text = (f"Tập kiểm định 2025 gồm {count(held['origins_verified'])} mẫu trạm–giờ ở {held['stations']} trạm. "
                    "Mọi mô hình được so trên cùng tập mẫu và sáu giờ đích. Số đo Vrain là mốc đối chiếu.")
-    anchor = insert_caption(doc, result._p, "Bảng", "RMSE (mm) của dự báo 1–6 giờ trên kiểm định 2025")
+    anchor = insert_caption(doc, result._p, "Table", 18, "RMSE (mm) của dự báo 1–6 giờ trên kiểm định 2025")
     anchor = insert_table(doc, anchor, table(data, "RMSE"))
-    anchor = insert_caption(doc, anchor, "Bảng", "CSI phát hiện từ 1 mm trong giờ đích trên kiểm định 2025")
+    anchor = insert_caption(doc, anchor, "Table", 19, "CSI phát hiện từ 1 mm trong giờ đích trên kiểm định 2025")
     anchor = insert_table(doc, anchor, table(data, "CSI"))
     primary = data["primary"].loc[7]
     rain_heavy = data["heavy"].loc[("LightGBM_R", 6)]
@@ -261,7 +276,20 @@ def publish_word(source, path, out, data):
         p = doc.add_paragraph()
         p.add_run().add_picture(str(frame), width=Cm(15))
         anchor.addnext(p._p)
-        insert_caption(doc, p._p, "Hình", "Phát lại dự báo 1–6 giờ và bảng mưa tại một trạm")
+        insert_caption(doc, p._p, "Figure", 7, "Phát lại dự báo 1–6 giờ và bảng mưa tại một trạm")
+    point = data["event"]
+    reduction = 100 * (1 - point.loc[("LightGBM_R", 6), "RMSE"] / point.loc[("Persistence", 6), "RMSE"])
+    insert_paragraph(doc, anchors["conclusion"],
+                     f"Nhánh cực ngắn đã huấn luyện và kiểm định dự báo sáu giờ trên {c['training']} trạm. "
+                     f"Ở năm 2025, LightGBM dùng mưa trạm giảm RMSE giờ 6 khoảng {number(reduction, 1)}% "
+                     "so với giữ mưa giờ vừa đo. Khả năng phát hiện giờ mưa mạnh còn hạn chế. "
+                     "Lợi ích của hai thành phần gió tầng 850 hPa chưa được xác nhận.")
+    sources = insert_paragraph(doc, anchors["sources"],
+                               "[16] Schuster, M. và Paliwal, K. K. (1997). Bidirectional recurrent neural networks. "
+                               "IEEE Transactions on Signal Processing, 45(11), 2673–2681. "
+                               "https://doi.org/10.1109/78.650093")
+    insert_paragraph(doc, sources, "[17] ECMWF. ERA5 data documentation. "
+                     "https://confluence.ecmwf.int/pages/viewpage.action?pageId=301966210")
     doc.save(path)
     print(path, flush=True)
 
