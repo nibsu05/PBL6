@@ -1,0 +1,66 @@
+{
+  "status": "completed",
+  "run_device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "n_hour_origs": 679461,
+  "hourly_stations": 79,
+  "n_daily_origs": 18723,
+  "daily_stations": 57,
+  "fit_details": {
+    "hour": [
+      {
+        "epoch": 4,
+        "epochs_run": 8,
+        "calibration_rmse": 2.2404796877132616,
+        "parameters": 45944,
+        "seconds": 61.551078000000416,
+        "seed": 17
+      },
+      {
+        "epoch": 2,
+        "epochs_run": 6,
+        "calibration_rmse": 2.2433899796487546,
+        "parameters": 45944,
+        "seconds": 44.711469699999725,
+        "seed": 29
+      },
+      {
+        "epoch": 3,
+        "epochs_run": 7,
+        "calibration_rmse": 2.2412589304554205,
+        "parameters": 45944,
+        "seconds": 52.404681499996514,
+        "seed": 43
+      }
+    ],
+    "day": [
+      {
+        "epochs_run": 17,
+        "parameters": 4460,
+        "seconds": 100.21113200000036,
+        "seed": 17
+      },
+      {
+        "epochs_run": 17,
+        "parameters": 4460,
+        "seconds": 98.50021859999833,
+        "seed": 29
+      },
+      {
+        "epochs_run": 17,
+        "parameters": 4460,
+        "seconds": 102.76896719999786,
+        "seed": 43
+      }
+    ]
+  },
+  "checkpoints": {
+    "day_seed17.pt": "b546dc5b78fc4e08381f375b5699d3bcc6194e3fc7425434ff878a2ee73354a0",
+    "day_seed29.pt": "9c105fb3a5a0286ff33f812b49b42242f9ee6fdf63ac2792b99f5f1e21080f3a",
+    "day_seed43.pt": "7db96467eaaf43d3404ae8ca87239bb98a100429b6a412f17f1bf4392b37b265",
+    "hour_seed17.pt": "c223ef5d7cdbd92543a612aa2786194a5eb069e2562742a4bdd95922ee29d11f",
+    "hour_seed29.pt": "bedc2529e31d4835b693296d2818e88b13670922913333163938067279d2e1ed",
+    "hour_seed43.pt": "ffb6faccf0f10bd53ebe7d896c3d979b30b420a58fe4507e94e6fa9be4f4648d"
+  },
+  "probability_nesting_checked": true,
+  "interpretation": "Retroactive paired comparison on the already examined 2025 samples"
+}

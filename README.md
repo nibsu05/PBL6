@@ -2,7 +2,7 @@
 
 **Bản đồ chung 1–6 giờ và Ngày 1–3.** Hai nhánh có 57 trạm chung, cực ngắn thêm 22 trạm. Web tô xã, phường cho cả chín kỳ và có tùy chọn toàn bộ trạm theo hạn. [Báo cáo chi tiết và so sánh trên cùng 57 trạm](reports/station_forecast_unified_2026_11_24/BAO_CAO_CHI_TIET.md) · [Web cục bộ](http://127.0.0.1:8766/).
 
-**Báo cáo cuối kỳ đã rà soát.** Bản Word lưu cục bộ tại `data/operational/pbl6_bao_cao_cuoi_ky_2026_11_24/PBL6_BAO_CAO_CUOI_KY_RA_SOAT.docx`. Nhóm có thể dùng [đề xuất thí điểm Đà Nẵng và Huế](reports/station_forecast_reviewed_2026_11_24/DE_XUAT_MO_RONG.md) để thống nhất phạm vi dữ liệu và phép thử chuyển địa bàn.
+**Hoàn thiện tại Đà Nẵng.** Bản Word mới lưu cục bộ tại `data/operational/pbl6_bao_cao_cuoi_ky_2026_11_24/PBL6_BAO_CAO_CUOI_KY_DA_NANG.docx`. [Thiết kế hệ thống và trạng thái Vrain](reports/danang_system_2026_11_24/THIET_KE_HE_THONG.md) có sáu sơ đồ. [So sánh mô hình](reports/danang_system_2026_11_24/SO_SANH_MO_HINH.md) có thêm GRU cho 1–6 giờ và Bi-LSTM cho 1–3 ngày trên đúng các mẫu 2025. Bản đồ giữ LightGBM R cho giờ và LightGBM B cho ngày.
 
 **Chốt phần ngắn hạn ngày 24/11/2026.** Kiểm định 2025 cho thấy nhóm biến khí tượng GFS giảm RMSE khoảng 0,83 mm ở cả ngày 2 và ngày 3. LightGBM B đã được chạy lại trên 43.464 lượt trạm và khoảng dự báo của hồi cứu 2026. Web cục bộ có bản đồ dự báo, xác suất mưa lớn, đăng nhập, theo dõi GFS/Vrain và bảng kiểm chứng. Xem [kết luận và bằng chứng](reports/gfs_short_range_closeout_2026_11_24/KET_LUAN_NGAN_HAN.md) và [cách mở web](demo/station_map/README.md).
 

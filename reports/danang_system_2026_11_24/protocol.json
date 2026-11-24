@@ -1,0 +1,25 @@
+{
+  "scope": "Da Nang station forecasts; supplementary recurrent architecture comparison",
+  "seeds": [17, 29, 43],
+  "hour": {
+    "candidate": "GRU_R",
+    "reference": "BiLSTM_R",
+    "hidden": 110,
+    "fit": "Reuse station_nowcast R windows, scaler, log-MSE, optimizer and epoch selection on 2023. Only the recurrent encoder and its output width change.",
+    "evaluation": "Exact paired 2025 station and issue-hour keys; six separate one-hour targets; micro RMSE and event metrics at 1 and 5 mm."
+  },
+  "day": {
+    "candidate": "BiLSTM_N3",
+    "reference": "GRU_N3",
+    "hidden_per_direction": 9,
+    "fit": "Reuse daily-v2 N3 pack and 2021–2022 train, seven past rainfall totals, 18 context inputs per horizon, station embedding, heads, combined loss, learning rate and 17 epochs. Fit nested calibration and cutoff on 2023 only.",
+    "evaluation": "Exact 2025 legacy packs from the final paired evaluation; three separate 24-hour totals; macro RMSE of mean, macro MAE of median and 50 mm event metrics."
+  },
+  "bootstrap": {
+    "days": 14,
+    "draws": 4000,
+    "seed": 2701,
+    "interpretation": "Paired calendar blocks including all stations. Report pointwise 95% intervals. The 2025 period has already been examined and these comparisons are retrospective."
+  },
+  "deployment": "Research only. Existing frozen models and web choices are preserved."
+}

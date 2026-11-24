@@ -2,6 +2,12 @@
 
 Cập nhật 24/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
 
+## Hoàn thiện tại Đà Nẵng và so sánh kiến trúc
+
+Người dùng ưu tiên Đà Nẵng. [Báo cáo bổ sung](reports/danang_system_2026_11_24/SO_SANH_MO_HINH.md) huấn luyện GRU R cho 1–6 giờ và Bi-LSTM N3 cho 1–3 ngày với ba seed. Chấm hồi cứu trên đúng 679.461 mẫu giờ/79 trạm và 18.723 mẫu ngày/57 trạm của 2025. LightGBM R giữ RMSE thấp nhất cả sáu giờ. GRU R giảm RMSE 0,007–0,028 mm so với Bi-LSTM R. Bi-LSTM N3 và GRU N3 chênh 0,06–0,11 mm RMSE, cả ba khoảng 95% còn chứa 0. Mô hình mặc định của app vẫn là LightGBM R/B. [Sáu sơ đồ và kiểm tra nguồn](reports/danang_system_2026_11_24/THIET_KE_HE_THONG.md). Bản Word mới là `data/operational/pbl6_bao_cao_cuoi_ky_2026_11_24/PBL6_BAO_CAO_CUOI_KY_DA_NANG.docx`.
+
+Hai lần kiểm tra 20h20 và 22h20 ngày 24/11 ghi Vrain danh mục 200 và cả hai đường mưa 404. Kết quả tương tự khi hỏi ngày 12/11 đã có dữ liệu. Kiểm trực tiếp Parquet cho thấy mốc mưa hợp lệ cuối 19h 15/11 với 82 trạm. GFS có 19 chỉ mục ở lần kiểm tra. Ưu tiên kiểm tra đường thu được cấp cho Đà Nẵng và ghi thời gian thực nhận trước khi đánh giá lượt phát trực tiếp.
+
 ## Bản đồ chung và báo cáo chi tiết hai nhánh
 
 Bản đồ tại `/` có một thanh 1–6 giờ và Ngày 1–3, cùng lớp xã/phường và mặc định 57 trạm chung. Phạm vi toàn bộ theo hạn là 79 trạm cho giờ và 57 cho ngày. Mốc 19h 12/11 có 57/57 trạm giờ và 55/57 trạm ngày trên tập chung. API `/api/forecast` ghép theo giờ phát chính xác, ghi chế độ và kỳ hiệu lực riêng rồi ẩn thực đo với khách. `/cuc-ngan` dẫn về thanh chung ở Giờ 1. Thêm bản giờ phát lại cùng các mốc ngày trong tệp private, tổng 9 lượt đủ hai nhánh. Kiểm Edge 1440×900, 390×844 và 320×780, gồm CSV sau đăng nhập, thiếu ra màu xám và chuyển đơn vị.
