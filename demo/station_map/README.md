@@ -2,6 +2,8 @@
 
 Bản đồ **LightGBM B** mở mặc định theo xã, phường, với bảng **Nơi dự kiến có mưa** ở bên phải. Trên điện thoại, bấm **Nơi có mưa** để mở bảng trượt từ dưới. Dùng thanh ngày để chọn một trong ba khoảng 24 giờ. Có thể tìm theo tên, lọc nơi từ 10 mm hoặc xem các khu vực chưa có số. Bấm tên để xem khu vực và các trạm bên trong. Mở **Công cụ → Theo trạm** để xem mọi điểm và biểu đồ ba ngày.
 
+Thanh trượt ngang ở cuối bản đồ chọn **Ngày 1, 2 hoặc 3**, ghi ngày kết thúc và giờ hiệu lực của từng khoảng. Dãy **Lượt đã lưu** gồm ngày phát mới nhất có dữ liệu và bảy ngày trước đó. Bấm **Ngày gần đây** để xem tình trạng các lượt quanh ngày hiện tại. Ngày thiếu bản được đánh dấu và không chọn được. Ngày hiện tại trước 19h có nhãn **Chờ 19h**. Một lượt hồi cứu đã chọn vẫn mang ngày và nhãn phát lại khi chuyển dãy.
+
 Màu khu vực dùng lượng cao nhất trong các trạm hợp lệ nằm trong ranh giới. Bảng xếp theo lượng LightGBM cao nhất và lọc **Có mưa** khi có ít nhất một trạm đạt 1 mm/24 giờ. Cột Trạm cho biết số có dự báo trên tổng số trạm thuộc khu vực. Vùng xám chưa có số cho lớp đang xem. Lớp xác suất lấy giá trị cao nhất tại trạm, còn lớp sai lệch lấy giá trị tại trạm có độ lệch tuyệt đối lớn nhất, giữ dấu. Các đại lượng này tóm tắt kết quả tại các điểm trạm trong ranh giới.
 
 Sau đăng nhập, có thêm Vrain thực đo, lớp sai lệch, tải CSV và trang theo dõi. Ba lớp lượng mưa dùng chung thang màu. Lớp **Sai lệch** tính LightGBM trừ Vrain. Xanh là dự báo thiếu, cam là dự báo thừa. Từ danh sách trạm có sai lệch lớn nhất có thể mở đúng lượt, ngày và trạm trên bản đồ.
@@ -16,6 +18,8 @@ Chạy lệnh ở thư mục gốc dự án.
 
 Mở **http://127.0.0.1:8766/** và chọn **Đăng nhập**. Lần đầu, chọn tên và mật khẩu riêng cho web. Các lần sau dùng đúng tài khoản này. Nếu thiếu tệp phát lại, chạy `.venv\Scripts\python.exe -X utf8 scripts/close_short_range.py` để tạo lại từ bản nghiên cứu đã khóa. Bản đồ nền cần kết nối mạng.
 
+Lấy bảy lượt phát lại liền trước bằng `.venv\Scripts\python.exe -X utf8 scripts/prepare_station_map_history.py`. Trình tạo kiểm tra tệp dự báo đã khóa và lưu `past_week_private.json` cùng thư mục bản phát lại. Bộ hiện có các lượt ghi ngày phát từ **05–12/11/2026**. Nguồn Vrain đối chiếu có số hợp lệ tới **19h ngày 15/11/2026**.
+
 Ứng dụng hiện nghe trên máy này qua `127.0.0.1`. Tài khoản được lưu dưới dạng băm có salt. Phiên đăng nhập hết hạn sau 8 giờ hoặc khi khởi động lại máy chủ. Hồ sơ tài khoản tại `data/operational/station_map_web/` nằm ngoài Git.
 
 ### Ranh giới tham chiếu
@@ -26,6 +30,7 @@ Nguồn ranh giới tham chiếu là tinhthanhpho.com, bản 2026.10.8 theo đơ
 
 ## Trang theo dõi
 
+- **Thông báo admin** lưu các lần nguồn lỗi, trạm thiếu, lượt phát bị dừng và lượt đến hạn đối chiếu chưa có nhãn. Số chưa đọc hiện trên nút Theo dõi. Có thể đánh dấu từng mục hoặc đọc tất cả. Các lần lặp cùng loại trong cùng ngày được gộp kèm thời điểm mới nhất. Tác vụ Python lưu thông báo vào cơ sở dữ liệu cục bộ kể cả khi đóng tab web.
 - **Cập nhật hằng ngày** hiển thị lịch đã đăng ký trên máy, kết quả của lần chạy gần nhất và trạng thái GFS/cả hai kênh Vrain. Nút **Kiểm tra nguồn** hỏi nguồn trong một lượt có giới hạn. GFS kiểm tra chỉ mục, Vrain kiểm tra số đo của ngày hiện tại. Trang đọc lại trạng thái lưu trên máy mỗi 30 giây khi đang mở.
 - **Lần phát** hiển thị bản dự báo được ghi trước giờ phát nếu có, cùng giờ ghi nhận và tình trạng đối chiếu. Mỗi bản hiện đúng ngày đã phát. Khi thiếu lượt trực tiếp, bản đồ mở **Phát lại lịch sử**. Giờ phát theo thiết kế là 19h Việt Nam.
 - **Đối chiếu** chấm LightGBM, GFS và MOS trên các trạm có đủ dự báo và thực đo cùng cửa sổ. Hiển thị MAE, RMSE, Bias và số trúng, bỏ sót, báo nhầm mưa ≥50 mm. Có thể mở đúng kỳ trên bản đồ hoặc tải CSV.
@@ -43,7 +48,7 @@ Lượt 18h40 kiểm tra GFS khởi tạo 07h và Vrain tới mốc quan trắc 
 
 Lượt 20h05 kiểm tra các lần phát đã đủ 72 giờ cộng 1 giờ chờ số đo. Nếu chưa có đủ nhãn, có thể kiểm tra lại vào ngày sau. Các lần tải dở được lưu riêng để truy vết. Nhật ký truy vấn, lần phát và đối chiếu nằm trong `data/operational/station_map_web/daily/` và thư mục `live/` của bản nghiên cứu. Không có bước huấn luyện lại tự động.
 
-Ngày 24/11/2026, đã tải và giải mã đủ 19 trường GFS tại 57 trạm. Lần kiểm tra lại khoảng 16h06 thấy đủ chỉ mục, nhưng cả hai kênh Vrain trả HTTP 404. Lần chạy thử tác vụ nhận diện đúng tình trạng chưa có lượt đến hạn đối chiếu. Chưa có dự báo trực tiếp đủ nguồn để đánh giá vận hành đầu cuối. Web hiển thị các lượt phát lại có ghi ngày phát. [Sản phẩm GFS của NOAA](https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).
+Ngày 24/11/2026, đã tải và giải mã đủ 19 trường GFS tại 57 trạm. Lần kiểm tra lúc 17h19 thấy đủ chỉ mục. Sau khi làm mới phiên Vrain, danh mục có quyền xem nhóm Đà Nẵng vẫn trả HTTP 200, còn cả hai kênh xuất mưa giờ trả HTTP 404. Tác vụ hằng ngày có thể thử làm mới phiên nếu danh mục trả 401/403. Lỗi đường xuất còn tồn tại sau làm mới phiên nên chưa bổ sung được số đo gần đây. Web hiển thị các lượt phát lại có ghi ngày phát. [Sản phẩm GFS của NOAA](https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).
 
 ## Tham khảo giao diện
 

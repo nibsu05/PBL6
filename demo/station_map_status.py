@@ -2,14 +2,18 @@
 
 import csv
 from datetime import datetime, timedelta, timezone
+import hashlib
 import io
 import json
+import logging
 import math
+import sqlite3
 from threading import Lock, Thread
 from urllib.error import HTTPError
 from urllib.request import urlopen
 
 from demo.station_map_live import LIVE, ROOT, VIETNAM, read_optional, recent_snapshots, timestamp
+from demo.station_map_alerts import AdminAlerts
 
 OPERATIONAL = ROOT / 'data' / 'operational'
 REPLAY_DIR = OPERATIONAL / 'gfs_short_range_closeout_2026_11_24'
@@ -31,6 +35,14 @@ def replay():
 def available_forecasts():
     data = replay()
     historical = data['snapshots']
+    archive = read_optional(REPLAY_DIR / 'past_week_private.json')
+    if (archive and archive.get('schema_version') == 1 and isinstance(archive.get('snapshots'), list)
+            and archive.get('anchor_utc') == historical[0]['issue_utc']
+            and archive.get('model_freeze_sha256') == data['model_freeze_sha256']
+            and archive.get('replay_sha256') == hashlib.sha256((REPLAY_DIR / 'station_map_private.json').read_bytes()).hexdigest()):
+        combined = {issue['issue_utc']: issue for issue in archive['snapshots'] + historical}
+        historical = sorted(combined.values(), key=lambda issue: issue['issue_utc'], reverse=True)
+        data['snapshots'] = historical
     for issue in historical:
         issue.update(mode='historical_replay', has_truth=True)
     if not any((LIVE / 'issuances').glob('*/issuance.json')):
@@ -199,6 +211,7 @@ def check_vrain(now):
     registry, aliases, organization = source_context()
     stations = registry.canonical_id.tolist()
     channels = {}
+    access = {}
     with load_session(VRAIN / 'session.dpapi') as session:
         for channel, endpoint, headers, extra in [
             ('modern', '/api/kttv/private/v1/organizations/details', {'x-org-uuid': organization}, {'i': '_1h'}),
@@ -219,9 +232,23 @@ def check_vrain(now):
                                          last_hour=clocks[released].max().isoformat() if released.any() else None)
             except (requests.RequestException, ValueError, KeyError, TypeError) as error:
                 channels[channel] = dict(status='error', error_type=type(error).__name__)
+        if any(item.get('http_status') == 404 for item in channels.values()):
+            # Export routes can return 404 even with an expired session. Check the
+            # authenticated inventory separately using its established endpoint.
+            try:
+                inventory = session.get(ORIGIN + '/api/vrain/private/v2/stats/summary', timeout=(6, 12))
+                access['inventory_http_status'] = inventory.status_code
+                if inventory.ok:
+                    groups = inventory.json()
+                    access['authorized_group'] = isinstance(groups, list) and any(
+                        str(row.get('groupId')) == '29' for group in groups if isinstance(group, dict)
+                        for row in group.get('stats', []) if isinstance(row, dict)
+                    )
+            except (requests.RequestException, ValueError, TypeError):
+                access['authorized_group'] = None
     representative = max(channels.values(),
                          key=lambda item: (item.get('last_hour') or '', item['status'] == 'waiting'))
-    return dict(kind='station_hours', day=day, channels=channels, **representative)
+    return dict(kind='station_hours', day=day, channels=channels, **access, **representative)
 
 
 def probe_sources(started):
@@ -240,9 +267,21 @@ class SourceMonitor:
     def __init__(self, state_dir):
         self.path = state_dir / 'source_status.json'
         self.daily = state_dir / 'daily'
+        self.alerts = AdminAlerts(state_dir / 'admin_alerts.sqlite')
         self.lock = Lock()
         self.started = None
         self.running = False
+        try:
+            for path in (self.daily / 'source_status.json', self.path):
+                report = read_optional(path)
+                if report:
+                    self.alerts.sources(report)
+            for job in ('forecast', 'verify'):
+                report = read_optional(self.daily / (job + '.json'))
+                if report:
+                    self.alerts.job(report)
+        except (ValueError, KeyError, TypeError, sqlite3.Error) as error:
+            logging.warning('Cannot import previous admin notifications: %s', type(error).__name__)
 
     def start_check(self):
         now = datetime.now(timezone.utc)
@@ -262,10 +301,35 @@ class SourceMonitor:
         try:
             from src.gfs_window import write_json
 
-            write_json(self.path, probe_sources(started))
+            report = probe_sources(started)
+            write_json(self.path, report)
+            try:
+                self.alerts.sources(report)
+            except sqlite3.Error as error:
+                logging.warning('Cannot save admin notification: %s', type(error).__name__)
         finally:
             with self.lock:
                 self.running = False
+
+    def alert_inbox(self, summary=False):
+        schedule = read_optional(self.daily / 'schedule.json')
+        if schedule and schedule.get('task_state') != 'Disabled':
+            now = datetime.now(VIETNAM)
+            check_at = now.replace(hour=19, minute=10, second=0, microsecond=0)
+            if check_at > now:
+                check_at -= timedelta(days=1)
+            if check_at - timedelta(minutes=30) >= timestamp(schedule['registered_at']):
+                issue_at = check_at - timedelta(minutes=10)
+                attempt = read_optional(self.daily / 'forecast.json') or {}
+                already_alerted = (attempt.get('issue_utc') and timestamp(attempt['issue_utc']) == issue_at
+                                   and attempt.get('status') in ('blocked', 'failed', 'skipped'))
+                if not already_alerted:
+                    latest = recorded_issue()
+                    if not latest or timestamp(latest['issue_utc']) < issue_at:
+                        self.alerts.add('forecast', check_at, 'Thiếu lượt phát theo lịch',
+                                        'Web chưa tìm thấy tệp dự báo hợp lệ cho mốc 19h.',
+                                        'Kiểm tra lịch Windows, trạng thái máy và lần thu dữ liệu gần nhất.')
+        return self.alerts.inbox(summary=summary)
 
     def status(self):
         checked_at = datetime.now(timezone.utc)

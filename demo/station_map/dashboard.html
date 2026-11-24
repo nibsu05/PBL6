@@ -31,6 +31,17 @@
       </div>
     </div>
     <p id="dashboard-error" class="notice" role="alert" hidden></p>
+    <section id="admin-inbox" class="dashboard-section" aria-labelledby="admin-alerts-title">
+      <div class="section-top">
+        <div>
+          <h2 id="admin-alerts-title">Thông báo admin <span id="admin-unread" class="admin-count" hidden></span></h2>
+          <p>Nguồn thiếu, lượt phát bị gián đoạn và các bước cần kiểm tra.</p>
+        </div>
+        <button id="alerts-read-all" class="action" type="button" hidden>Đánh dấu tất cả đã đọc</button>
+      </div>
+      <p id="alerts-feedback" class="subtle" role="status"></p>
+      <div id="alert-items" class="admin-alerts"></div>
+    </section>
     <section class="dashboard-section" aria-labelledby="source-title">
       <div class="section-top">
         <div>

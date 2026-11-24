@@ -176,10 +176,10 @@ function initMap() {
 }
 
 function mapPadding() {
-  if (narrow.matches) return {paddingTopLeft: [25, 141], paddingBottomRight: [26, 166]};
+  if (narrow.matches) return {paddingTopLeft: [25, 141], paddingBottomRight: [26, 232]};
   const left = element("tools-panel").hidden ? 35 : 344;
   const right = element("rain-panel").hidden ? 46 : element("rain-panel").offsetWidth + 33;
-  return {paddingTopLeft: [left, 116], paddingBottomRight: [right, 146]};
+  return {paddingTopLeft: [left, 116], paddingBottomRight: [right, 198]};
 }
 
 function fitMap() {
@@ -251,6 +251,8 @@ function syncUrl() {
   else url.searchParams.delete("view");
   if (state.view === "area" && state.areaCode) url.searchParams.set("area", state.areaCode);
   else url.searchParams.delete("area");
+  if (state.historyScope === "recent") url.searchParams.set("history", "recent");
+  else url.searchParams.delete("history");
   if (!element("station-panel").hidden && state.stationId) url.searchParams.set("station", state.stationId);
   else url.searchParams.delete("station");
   if (state.mapLayer !== "lightgbm") url.searchParams.set("layer", state.mapLayer);
@@ -260,6 +262,76 @@ function syncUrl() {
 
 function currentWindow() {
   return state.selectedIssue.windows.find((window) => window.horizon === state.day);
+}
+
+function vietnamDay(value) {
+  // Viet Nam is UTC+7. ISO date keys allow date arithmetic without the browser's local zone.
+  return new Date(new Date(value).getTime() + 7 * 3600000).toISOString().slice(0, 10);
+}
+
+function shortDate(value) {
+  const key = vietnamDay(value);
+  return key.slice(8) + "/" + key.slice(5, 7);
+}
+
+function chooseIssue(issue, followLatest = false) {
+  state.selectedIssue = issue;
+  state.followLatest = followLatest;
+  render();
+}
+
+function renderHistory() {
+  const recent = state.historyScope === "recent";
+  const latest = state.data.snapshots[0];
+  const now = Date.now();
+  const today = vietnamDay(now);
+  const anchor = recent ? today : vietnamDay(latest.issue_utc);
+  // Use noon UTC for display and jump by whole days in the same fixed time zone.
+  const last = new Date(anchor + "T12:00:00Z");
+  const days = Array.from({length: 8}, (_, i) => new Date(last.getTime() - (7 - i) * 86400000));
+  const byDay = new Map();
+  for (const issue of state.data.snapshots) {
+    const key = vietnamDay(issue.issue_utc);
+    if (!byDay.has(key)) byDay.set(key, issue);
+  }
+  const dates = Array.from(byDay, ([date, {id, mode}]) => [date, id, mode]);
+  const signature = JSON.stringify([recent, anchor, state.selectedIssue.id, dates, now >= last.getTime()]);
+  if (signature === state.historySignature) return;
+  const scopeChanged = state.historyRenderedScope !== state.historyScope;
+  state.historySignature = signature;
+  state.historyRenderedScope = state.historyScope;
+
+  const rail = element("history-strip");
+  const previous = rail.scrollLeft;
+  rail.replaceChildren();
+  element("history-title").textContent = (recent ? "Theo lịch " : "Lượt đã lưu ") +
+    shortDate(days[0]) + "–" + calendarDate.format(last);
+  element("history-scope").textContent = recent ? "Lượt đã lưu" : "Ngày gần đây";
+  for (const day of days) {
+    const key = vietnamDay(day);
+    const issue = byDay.get(key);
+    const pending = recent && key === today && now < day.getTime();
+    const label = issue ? (issue.mode === "prospective" ? "Đã ghi" : "Phát lại")
+      : pending ? "Chờ 19h" : "Thiếu bản";
+    const button = add(rail, "button", shortDate(day));
+    button.type = "button";
+    button.dataset.archiveDate = key;
+    button.disabled = !issue;
+    button.setAttribute("aria-pressed", String(issue?.id === state.selectedIssue.id));
+    button.setAttribute("aria-label", calendarDate.format(day) + " · " + label);
+    add(button, "small", label);
+    if (issue) button.addEventListener("click", () => {
+      chooseIssue(state.data.snapshots.find(({id}) => id === issue.id));
+      rail.querySelector('[aria-pressed="true"]')?.focus({preventScroll: true});
+    });
+  }
+  rail.scrollLeft = scopeChanged ? rail.scrollWidth : previous;
+}
+
+function chooseDay(day) {
+  if (state.day === day) return;
+  state.day = day;
+  render();
 }
 
 function renderChart() {
@@ -594,7 +666,17 @@ function render() {
   element("export-forecast").href = "/api/export.csv?" + new URLSearchParams({
     issue: state.selectedIssue.id, day: String(state.day),
   });
-  for (const button of dayButtons) button.setAttribute("aria-pressed", String(Number(button.dataset.day) === state.day));
+  const slider = element("horizon-slider");
+  slider.value = state.day;
+  slider.setAttribute("aria-valuetext", "Ngày " + state.day + " · " + element("period").textContent);
+  for (const button of dayButtons) {
+    const h = Number(button.dataset.day);
+    const end = state.selectedIssue.windows.find((span) => span.horizon === h).end_utc;
+    button.querySelector("small").textContent = shortDate(end);
+    button.setAttribute("aria-label", "Ngày " + h + " · Kết thúc " + localTime(end));
+    button.setAttribute("aria-pressed", String(h === state.day));
+  }
+  renderHistory();
   renderMapLayer();
   if (state.stationId) renderStation();
   syncUrl();
@@ -634,7 +716,10 @@ async function refreshForecasts() {
   refreshing = true;
   try {
     const data = await loadForecasts();
-    if (JSON.stringify(data) === JSON.stringify(state.data)) return;
+    if (JSON.stringify(data) === JSON.stringify(state.data)) {
+      renderHistory();
+      return;
+    }
     state.data = data;
     state.member = data.viewer === "member";
     state.selectedIssue = (state.followLatest ? null : data.snapshots.find(({id}) => id === state.selectedIssue.id)) ?? data.snapshots[0];
@@ -668,6 +753,7 @@ async function start() {
     const areaCode = view === "area" && areaByCode.has(query.get("area")) ? query.get("area") : null;
     state = {data, selectedIssue, day, stationId, mapLayer: requestedLayer ?? "lightgbm",
              member: data.viewer === "member", followLatest: !pinned,
+             historyScope: query.get("history") === "recent" ? "recent" : "saved",
              view, areaCode, areaByCode, areas: matched.shapes, unmatched: matched.unmatched};
     applyViewer();
     fillIssues();
@@ -682,14 +768,15 @@ async function start() {
     if (stationId) showStation(stationId, true);
     if (areaCode) pickArea(areaCode);
     issueControl.addEventListener("change", () => {
-      state.followLatest = false;
-      state.selectedIssue = state.data.snapshots.find((issue) => issue.id === issueControl.value);
-      render();
+      chooseIssue(state.data.snapshots.find((issue) => issue.id === issueControl.value));
     });
     element("latest-issue").addEventListener("click", () => {
-      state.followLatest = true;
-      state.selectedIssue = state.data.snapshots[0];
-      render();
+      chooseIssue(state.data.snapshots[0], true);
+    });
+    element("history-scope").addEventListener("click", () => {
+      state.historyScope = state.historyScope === "recent" ? "saved" : "recent";
+      renderHistory();
+      syncUrl();
     });
     element("open-station").addEventListener("click", () => showStation(stationControl.value, true));
     element("fit-map").addEventListener("click", () => fitMap());
@@ -726,12 +813,8 @@ async function start() {
       else if (!element("tools-panel").hidden) showTools(false, true);
       else if (!element("rain-panel").hidden) showRain(false, true);
     });
-    for (const button of dayButtons) {
-      button.addEventListener("click", () => {
-        state.day = Number(button.dataset.day);
-        render();
-      });
-    }
+    element("horizon-slider").addEventListener("input", (event) => chooseDay(Number(event.target.value)));
+    for (const button of dayButtons) button.addEventListener("click", () => chooseDay(Number(button.dataset.day)));
     for (const button of layerButtons) {
       button.addEventListener("click", () => {
         state.mapLayer = button.dataset.layer;

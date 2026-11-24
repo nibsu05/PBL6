@@ -3,6 +3,8 @@
 import argparse
 from datetime import datetime, time, timedelta, timezone
 from pathlib import Path
+import logging
+import sqlite3
 import sys
 from time import sleep
 from uuid import uuid4
@@ -11,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from demo.station_map_live import LIVE, VIETNAM, read_optional, timestamp
+from demo.station_map_alerts import AdminAlerts
 from demo.station_map_status import probe_sources
 from src.gfs_window import write_json
 from src.gfs_window_live import record_issue, verify_due
@@ -42,8 +45,12 @@ def source_block(sources, required_hour):
 
 def collect_sources(state, at, refresh=False):
     report = probe_sources(at)
-    channels = report['sources']['vrain'].get('channels', {})
-    if refresh and any(info.get('http_status') in (401, 403) for info in channels.values()):
+    vrain = report['sources']['vrain']
+    channels = vrain.get('channels', {})
+    session_rejected = vrain.get('inventory_http_status') in (401, 403) or any(
+        info.get('http_status') in (401, 403) for info in channels.values()
+    )
+    if refresh and session_rejected:
         from scripts.track_gfs_window_issue import refresh_authorized_session
 
         try:
@@ -53,7 +60,19 @@ def collect_sources(state, at, refresh=False):
         else:
             report = probe_sources(datetime.now(timezone.utc))
     write_json(state / 'source_status.json', report)
+    notify_owner(state, report, source=True)
     return report['sources']
+
+
+def notify_owner(state, report, source=False):
+    try:
+        inbox = AdminAlerts(state.parent / 'admin_alerts.sqlite')
+        if source:
+            inbox.sources(report)
+        else:
+            inbox.job(report)
+    except (OSError, sqlite3.Error) as error:
+        logging.warning('Cannot save admin notification: %s', type(error).__name__)
 
 
 def forecast(state, started):
@@ -82,7 +101,7 @@ def forecast(state, started):
             except Exception as error:
                 return dict(status='failed', reason='issue_record_error', error_type=type(error).__name__, **reference)
             return dict(status='recorded', recorded_utc=result['recorded_utc'],
-                        stations=result['station_count'], **reference)
+                        stations=result['station_count'], stations_expected=result['candidate_stations'], **reference)
         if attempt < 2:
             sleep(75)
     return dict(status='blocked', reason=reason, **reference)
@@ -158,6 +177,7 @@ def run(state, job, started):
             report = dict(details, **result, finished_utc=datetime.now(timezone.utc).isoformat())
             write_json(state / (job + '.json'), report)
             write_json(state / 'history' / f'{local:%Y%m%dT%H%M%S%f}_{job}.json', report)
+            notify_owner(state, report)
     except OSError:
         return dict(details, status='skipped', reason='job_lock_or_storage_error')
     return report

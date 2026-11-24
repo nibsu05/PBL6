@@ -133,6 +133,6 @@ def recent_snapshots(stations, cutoffs, now=None, live=LIVE):
             continue
         if snapshot is not None:
             snapshots.append(snapshot)
-        if len(snapshots) == 7:
+        if len(snapshots) == 8:
             break
     return snapshots

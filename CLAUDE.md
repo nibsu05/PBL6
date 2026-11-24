@@ -2,6 +2,12 @@
 
 Cập nhật 24/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
 
+## Lịch sử bảy ngày và thông báo admin
+
+Thanh trượt ngang chọn ba hạn, ghi ngày kết thúc và khoảng hiệu lực. Dãy lượt lưu có **05–12/11/2026**, trích thêm 7 lượt từ Parquet B đã khóa bằng `scripts/prepare_station_map_history.py`. Nút Ngày gần đây hiện ngày thiếu bản hoặc chờ 19h. Trình đọc không gán hồi cứu thành lượt phát mới. Đã kiểm tra giao diện và quyền truy cập bằng Edge.
+
+Thông báo admin lưu cục bộ trong `data/operational/station_map_web/admin_alerts.sqlite`. Tác vụ dự báo và bước kiểm tra nguồn ghi lỗi GFS/Vrain, số trạm thiếu hoặc tình trạng dự báo và đối chiếu bị dừng. Gộp lỗi cùng loại theo ngày, giữ thời điểm và trạng thái đã đọc. Phiên admin đọc từ Theo dõi. Kiểm tra 17h19 ngày 24/11 thấy GFS 19/19 chỉ mục. Phiên Vrain trước đó bị từ chối ở danh mục. Sau gia hạn, danh mục HTTP 200 xác nhận có nhóm Đà Nẵng, song hai đường lấy mưa theo giờ vẫn HTTP 404. Có thông báo thật trong tài khoản admin. Kho mưa giờ có số hợp lệ tới 19h 15/11 (82 trạm ở giờ đó), chưa có lượt phát trực tiếp. Bước chạy 18h40 dựa trên lịch Windows và trạng thái máy. Xem [web và cách đọc](demo/station_map/README.md).
+
 ## Bản đồ theo xã/phường và bảng nơi có mưa
 
 Web mở mặc định lớp khu vực và bảng dự kiến mưa cho từng kỳ 24 giờ. Ranh giới tham chiếu tinhthanhpho.com bản 2026.10.8, CC BY 4.0, có 94 vùng. Tệp hình học lưu riêng theo `scripts/prepare_station_map_areas.py`. Ghép đủ 57 trạm vào 40 xã/phường theo phép chứa điểm, 28 vùng có một trạm. Màu lượng mưa là giá trị cao nhất của các trạm trong ranh giới, vùng xám chưa có số, bảng lọc mưa từ 1 mm và ngưỡng 10 mm. Có bộ lọc theo tên, trạm hợp lệ/tổng trạm và chi tiết khi chọn vùng. Lớp Trạm và liên kết đối chiếu theo trạm vẫn dùng được. Kiểm tra bằng Edge desktop/mobile, kể cả khi tệp ranh giới thiếu. Xem [cách đọc và nguồn ranh giới](demo/station_map/README.md).

@@ -28,7 +28,7 @@
         <span>Mưa Đà Nẵng <small>Dự báo 1–3 ngày</small></span>
       </a>
       <div class="map-account">
-        <a class="map-nav" href="/dashboard" id="monitor-link" hidden>Theo dõi</a>
+        <a class="map-nav" href="/dashboard" id="monitor-link" hidden>Theo dõi <span id="admin-badge" class="admin-count" hidden></span></a>
         <a class="map-login" id="account-link" href="/login">Đăng nhập</a>
         <span id="account-name" hidden></span>
         <button class="map-nav" id="sign-out" type="button" hidden>Đăng xuất</button>
@@ -147,15 +147,22 @@
         <p id="legend-note"></p>
       </details>
 
-      <section class="map-panel map-timeline" aria-label="Ba khoảng dự báo">
+      <section class="map-panel map-timeline" aria-label="Thời gian dự báo">
+        <div class="history-head">
+          <strong id="history-title">Lượt phát</strong>
+          <button id="history-scope" class="history-scope" type="button">Ngày gần đây</button>
+        </div>
+        <div id="history-strip" class="history-strip" role="group" aria-label="Lịch bảy ngày trước"></div>
         <div class="timeline-summary">
           <h2 id="map-title">Lượng mưa dự báo · LightGBM</h2>
           <p id="period" aria-live="polite"></p>
         </div>
+        <input id="horizon-slider" class="horizon-slider" type="range" min="1" max="3" step="1" value="1"
+               aria-label="Chọn hạn dự báo">
         <div class="timeline-days" role="group" aria-label="Chọn hạn dự báo">
-          <button data-day="1" type="button" aria-pressed="true">Ngày 1 <small>0–24 giờ</small></button>
-          <button data-day="2" type="button" aria-pressed="false">Ngày 2 <small>24–48 giờ</small></button>
-          <button data-day="3" type="button" aria-pressed="false">Ngày 3 <small>48–72 giờ</small></button>
+          <button data-day="1" type="button" aria-pressed="true">Ngày 1 <small></small></button>
+          <button data-day="2" type="button" aria-pressed="false">Ngày 2 <small></small></button>
+          <button data-day="3" type="button" aria-pressed="false">Ngày 3 <small></small></button>
         </div>
       </section>
     </section>

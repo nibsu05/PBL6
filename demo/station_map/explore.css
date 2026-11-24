@@ -4,6 +4,7 @@
   --panel-top: 128px;
   --panel-width: 308px;
   --map-navy: #102c3a;
+  --timeline-clearance: 225px;
   height: 100vh;
   height: 100dvh;
   position: relative;
@@ -118,13 +119,25 @@
 .station-panel .panel-head { margin-bottom: 7px; }
 .station-panel .source-caption { padding-top: 0; margin-bottom: 2px; }
 .station-panel .amount-label { margin-top: 8px; }
-.map-timeline { bottom: 24px; left: 50%; transform: translateX(-50%); width: min(485px, calc(100% - 40px)); padding: 10px 11px; }
-.timeline-summary { padding: 1px 4px 8px; }
+.map-timeline { bottom: 24px; left: 50%; transform: translateX(-50%); width: min(532px, calc(100% - 40px)); padding: 10px 11px; }
+.history-head { display: flex; justify-content: space-between; align-items: center; gap: 5px; color: #38596a; margin-bottom: 4px; font-size: 11px; }
+.history-scope { cursor: pointer; color: #136472; padding: 4px 6px; background: #edf6f6; border: 0; border-radius: 5px; font-size: 11px; font-weight: 650; white-space: nowrap; }
+.history-strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(57px, 1fr); gap: 4px; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; scroll-snap-type: x proximity; padding-bottom: 3px; }
+.history-strip button {
+  min-height: 33px; padding: 4px 2px; border-radius: 6px; border: 1px solid #d7e3e8;
+  background: #f7fafb; color: #255365; font-size: 11px; font-variant-numeric: tabular-nums;
+  font-weight: 720; cursor: pointer; scroll-snap-align: start;
+}
+.history-strip button small { display: block; font-weight: 500; font-size: 8px; margin-top: 1px; }
+.history-strip button[aria-pressed="true"] { background: #e3f1f1; border-color: #6098a2; color: #104a56; }
+.history-strip button:disabled { color: #566b77; background: #f5f7f8; border-style: dashed; cursor: default; }
+.timeline-summary { padding: 5px 4px 0; }
 .timeline-summary h2 { font-size: 15px; line-height: 1.25; }
 .timeline-summary p { color: #4c6472; font-size: 11px; margin-top: 3px; font-variant-numeric: tabular-nums; }
+.horizon-slider { display: block; width: calc(100% - 22px); margin: 3px 11px; height: 18px; accent-color: #116c77; cursor: pointer; }
 .timeline-days { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
 .timeline-days button {
-  min-height: 44px; border: 1px solid #d5e1e6; border-radius: 8px; background: #f1f6f8;
+  min-height: 38px; border: 1px solid #d5e1e6; border-radius: 8px; background: #f1f6f8;
   color: #244758; font-size: 13px; font-weight: 720; cursor: pointer; padding: 5px;
 }
 .timeline-days button small { display: block; font-size: 10px; font-weight: 500; margin-top: 1px; }
@@ -137,12 +150,12 @@
 .map-legend li { display: flex; gap: 4px; align-items: center; font-size: 10px; white-space: nowrap; }
 .map-legend .swatch { width: 9px; height: 9px; }
 .map-legend #legend-note { margin-top: 5px; font-size: 10px; line-height: 1.35; }
-@media (max-width: 1160px) {
+@media (max-width: 1200px) {
   .map-timeline { width: min(450px, calc(100% - 344px)); left: auto; right: var(--map-gutter); transform: none; }
-  .station-panel { max-height: calc(100% - 353px); }
+  .station-panel { max-height: calc(100% - 209px - var(--timeline-clearance)); }
 }
 @media (max-width: 680px) {
-  .map-shell { --map-gutter: 11px; }
+  .map-shell { --map-gutter: 11px; --timeline-clearance: 232px; }
   .map-top { top: 10px; }
   .map-brand { padding: 6px 8px 6px 6px; gap: 7px; border-radius: 10px; font-size: 15px; }
   .map-brand small { font-size: 10px; }
@@ -157,14 +170,15 @@
   .map-shell .leaflet-top.leaflet-right { top: 58px; right: 0; }
   .map-shell .leaflet-control-zoom a { width: 31px; height: 31px; line-height: 31px; }
   .tools-panel, .station-panel {
-    top: auto; left: var(--map-gutter); right: var(--map-gutter); bottom: 152px; width: auto; max-height: min(50%, calc(100% - 257px));
+    top: auto; left: var(--map-gutter); right: var(--map-gutter); bottom: var(--timeline-clearance); width: auto; max-height: min(52%, calc(100% - 364px));
     padding: 12px; animation: slide-bottom 150ms ease-out; z-index: 2;
   }
   .map-timeline { left: var(--map-gutter); right: var(--map-gutter); width: auto; bottom: max(19px, env(safe-area-inset-bottom)); padding: 8px; }
   .timeline-summary h2 { font-size: 13px; }
   .timeline-summary p { font-size: 10px; }
-  .timeline-days button { min-height: 38px; }
-  .map-legend { left: var(--map-gutter); bottom: 121px; width: auto; max-width: calc(100% - 22px); padding: 5px 8px; }
+  .timeline-days button { min-height: 34px; }
+  .history-strip { grid-auto-columns: minmax(39px, 1fr); }
+  .map-legend { left: var(--map-gutter); bottom: calc(var(--timeline-clearance) - 27px); width: auto; max-width: calc(100% - 22px); padding: 5px 8px; }
   .map-legend[open] { width: min(305px, calc(100% - 22px)); }
   .map-message { bottom: 169px; font-size: 12px; }
 }

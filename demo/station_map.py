@@ -4,6 +4,7 @@ import argparse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 from pathlib import Path
+import sqlite3
 import sys
 from urllib.parse import parse_qs, urlsplit
 
@@ -31,7 +32,7 @@ ROUTES = {
     '/portal.js': (STATIC / 'portal.js', 'application/javascript; charset=utf-8'),
     '/dashboard.js': (STATIC / 'dashboard.js', 'application/javascript; charset=utf-8'),
 }
-MEMBER_APIS = ('/api/status', '/api/verification', '/api/export.csv')
+MEMBER_APIS = ('/api/status', '/api/verification', '/api/export.csv', '/api/admin/alerts')
 AUTH_COMMANDS = ('/api/account/setup', '/api/account/login', '/api/account/logout')
 
 
@@ -94,6 +95,9 @@ class MapHandler(BaseHTTPRequestHandler):
                 self.reply_json(self.server.monitor.status())
             elif path == '/api/verification':
                 self.reply_json(verification_payload())
+            elif path == '/api/admin/alerts':
+                summary = parse_qs(requested.query).get('summary') == ['1']
+                self.reply_json(self.server.monitor.alert_inbox(summary))
             elif path == '/api/export.csv':
                 query = parse_qs(requested.query)
                 try:
@@ -108,7 +112,7 @@ class MapHandler(BaseHTTPRequestHandler):
                 self.respond(200, file.read_bytes(), media_type)
             else:
                 self.reply_json({'error': 'not_found'}, 404)
-        except (OSError, ValueError):
+        except (OSError, ValueError, sqlite3.Error):
             self.reply_json({'error': 'data_unavailable'}, 503)
 
     def object_body(self):
@@ -126,7 +130,7 @@ class MapHandler(BaseHTTPRequestHandler):
             self.reply_json({'error': 'local_access_only'}, 403)
             return
         path = urlsplit(self.path).path
-        if path not in (*AUTH_COMMANDS, '/api/source-check'):
+        if path not in (*AUTH_COMMANDS, '/api/source-check', '/api/admin/alerts/read'):
             self.reply_json({'error': 'not_found'}, 404)
             return
         if self.headers.get_content_type() != 'application/json':
@@ -137,9 +141,21 @@ class MapHandler(BaseHTTPRequestHandler):
         except (ValueError, OSError):
             self.reply_json({'error': 'invalid_request'}, 400)
             return
-        if path == '/api/source-check':
+        if path in ('/api/source-check', '/api/admin/alerts/read'):
             if not self.user():
                 self.reply_json({'error': 'login_required'}, 401)
+            elif path == '/api/admin/alerts/read':
+                identifier = body.get('id')
+                if body.keys() == {'all'} and body['all'] is True:
+                    identifier = None
+                elif type(identifier) is not int or not 0 < identifier < 2**63:
+                    self.reply_json({'error': 'invalid_request'}, 400)
+                    return
+                try:
+                    self.server.monitor.alerts.mark_read(identifier)
+                    self.reply_json(self.server.monitor.alerts.inbox(summary=True))
+                except sqlite3.Error:
+                    self.reply_json({'error': 'data_unavailable'}, 503)
             elif self.server.monitor.start_check():
                 self.reply_json({'status': 'started'}, 202)
             else:

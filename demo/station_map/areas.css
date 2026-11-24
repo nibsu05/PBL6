@@ -13,7 +13,7 @@
 .map-view-picker button:disabled { color: #697d87; cursor: default; }
 .area-coverage { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 10px; color: #486674; font-size: 12px; line-height: 1.35; }
 .rain-panel {
-  top: 125px; bottom: 141px; right: var(--map-gutter); width: var(--rain-width);
+  top: 125px; bottom: var(--timeline-clearance); right: var(--map-gutter); width: var(--rain-width);
   display: flex; flex-direction: column; padding: 14px; animation: slide-right 150ms ease-out; overflow: hidden;
 }
 .rain-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex: none; margin-bottom: 10px; }
@@ -69,8 +69,8 @@
 @media (max-width: 1100px) { .map-shell { --rain-width: 326px; } }
 @media (max-width: 680px) {
   .rain-panel {
-    top: auto; bottom: 152px; left: var(--map-gutter); right: var(--map-gutter); width: auto;
-    height: min(55%, calc(100% - 268px)); padding: 10px 11px; z-index: 2; animation: slide-bottom 150ms ease-out;
+    top: auto; bottom: var(--timeline-clearance); left: var(--map-gutter); right: var(--map-gutter); width: auto;
+    height: min(52%, calc(100% - 368px)); padding: 10px 11px; z-index: 2; animation: slide-bottom 150ms ease-out;
   }
   .rain-heading { margin-bottom: 6px; }
   .rain-heading h2 { font-size: 16px; }

@@ -19,6 +19,8 @@
   let day = 1;
   let checking = false;
   let updatingResults = false;
+  let inboxSignature;
+  let checkingInbox = false;
   let pollAfterProbe;
   const query = new URLSearchParams(location.search);
   if ([1, 2, 3].includes(Number(query.get("day")))) day = Number(query.get("day"));
@@ -38,6 +40,58 @@
   function notify(message, id = "dashboard-error") {
     get(id).textContent = message;
     get(id).hidden = !message;
+  }
+
+  function renderAdminAlerts(data) {
+    const signature = JSON.stringify(data);
+    if (signature === inboxSignature) return;
+    inboxSignature = signature;
+    const label = get("admin-unread");
+    label.hidden = !data.unread;
+    label.textContent = data.unread + " chưa đọc";
+    get("alerts-read-all").hidden = !data.unread;
+    const list = get("alert-items");
+    list.replaceChildren();
+    for (const item of data.items) {
+      const card = add(list, "article", undefined, "card admin-alert");
+      card.dataset.unread = String(!item.read_utc);
+      const heading = add(card, "div");
+      add(heading, "h3", item.title);
+      const when = add(heading, "time", time(item.last_seen_utc) + " (VN)" +
+        (item.occurrences > 1 ? " · " + item.occurrences + " lần ghi nhận" : ""));
+      when.dateTime = item.last_seen_utc;
+      if (!item.read_utc) {
+        const button = add(card, "button", "Đã đọc", "action");
+        button.type = "button";
+        button.addEventListener("click", () => markAlerts({id: item.id}));
+      }
+      add(card, "p", item.detail);
+      add(card, "p", item.action);
+    }
+    notify(data.items.length ? "" : "Chưa có thông báo.", "alerts-feedback");
+  }
+
+  async function refreshAdminAlerts() {
+    if (checkingInbox) return;
+    checkingInbox = true;
+    try {
+      renderAdminAlerts(await api("/api/admin/alerts"));
+    } catch (error) {
+      if (error.status === 401) window.location.replace("/login");
+      else notify("Chưa đọc được hộp thông báo. Trang sẽ thử lại.", "alerts-feedback");
+    } finally {
+      checkingInbox = false;
+    }
+  }
+
+  async function markAlerts(body) {
+    try {
+      await send("/api/admin/alerts/read", body);
+      await refreshAdminAlerts();
+    } catch (error) {
+      if (error.status === 401) window.location.replace("/login");
+      else notify("Chưa lưu được trạng thái đã đọc. Hãy thử lại.", "alerts-feedback");
+    }
   }
 
   function sourceCard(title, status, label, facts) {
@@ -123,6 +177,8 @@
       ["Lần kiểm tra gần nhất", time(vrain?.checked_at)],
       ...(vrain?.channels ? [["Kênh hiện tại", channelText(vrain.channels.modern)],
                             ["Kênh lịch sử", channelText(vrain.channels.legacy)]] : []),
+      ...(vrain?.inventory_http_status ? [["Danh mục theo phiên hiện tại",
+        vrain.authorized_group ? "HTTP 200 · Có nhóm Đà Nẵng" : "HTTP " + vrain.inventory_http_status]] : []),
       ["Ngày yêu cầu dữ liệu", vrain?.day ?? "Chưa rõ"],
       ["Số trạm có giá trị trả về", vrain?.stations ?? "Chưa rõ"],
       ["Giờ có số đo mới nhất trong lần kiểm tra", time(vrain?.last_hour)],
@@ -145,6 +201,7 @@
     try {
       const data = await api("/api/status");
       renderStatus(data);
+      refreshAdminAlerts();
       notify("", "status-error");
       if (data.source_probe_running) {
         window.clearTimeout(pollAfterProbe);
@@ -276,6 +333,7 @@
     }
   });
   get("check-issue").addEventListener("change", renderIssue);
+  get("alerts-read-all").addEventListener("click", () => markAlerts({all: true}));
   for (const button of dayButtons) button.addEventListener("click", () => {
     if (!verification) return;
     day = Number(button.dataset.checkDay);

@@ -133,6 +133,29 @@ def holdout_evidence():
     return accepted.sort_values(['family', 'model', 'horizon'])
 
 
+def replay_snapshot(case_id, label, issue, rows, cutoff):
+    if not rows.groupby('station_id').horizon.apply(lambda series: tuple(sorted(series)) == TARGET_HORIZONS).all():
+        raise ValueError('Incomplete or duplicated three-window prediction')
+    windows = []
+    for horizon in TARGET_HORIZONS:
+        part = rows[rows.horizon.eq(horizon)].sort_values('station_id')
+        start, end = part.target_start_utc.unique().item(), part.target_end_utc.unique().item()
+        if pd.Timestamp(start) != issue + pd.Timedelta(hours=24*(horizon-1)) or pd.Timestamp(end) != issue + pd.Timedelta(hours=24*horizon):
+            raise ValueError('Forecast windows do not match the model contract')
+        points = [
+            dict(station_id=row.station_id, predicted_mm=float(row.B_mean), median_mm=float(row.B_median),
+                 gfs_mm=float(row.GFS_mean), mos_mm=float(row.MOS_LONG_mean), observed_mm=float(row.y_mm),
+                 probability_ge1=float(row.B_p1), probability_ge50=float(row.B_p50))
+            for row in part.itertuples()
+        ]
+        windows.append(dict(horizon=horizon, start_utc=pd.Timestamp(start).isoformat(),
+                            end_utc=pd.Timestamp(end).isoformat(), cutoff_ge50_probability=float(cutoff[horizon]),
+                            points=points))
+    return dict(id=case_id, label=label, issue_utc=issue.isoformat(),
+                gfs_init_utc=pd.Timestamp(rows.gfs_init_utc.unique().item()).isoformat(),
+                available_stations=rows.station_id.nunique(), windows=windows)
+
+
 def to_snapshot(frame, outputs, freeze_sha):
     """Public UI schema; instance values stay in private local workspace."""
     cutoffs = pd.read_csv(PUBLIC / 'cutoffs.csv')
@@ -150,28 +173,7 @@ def to_snapshot(frame, outputs, freeze_sha):
     cases = [('latest', 'Lần dự báo gần nhất trong bộ đánh giá', latest_issue, latest)]
     if rainy_issue != latest_issue:
         cases.append(('heavy_observed', 'Ngày có nhiều trạm ghi nhận mưa lớn', rainy_issue, rainy))
-    snapshots = []
-    for case_id, label, issue, rows in cases:
-        if not rows.groupby('station_id').horizon.apply(lambda series: tuple(sorted(series)) == TARGET_HORIZONS).all():
-            raise ValueError('Incomplete or duplicated three-window prediction')
-        windows = []
-        for horizon in TARGET_HORIZONS:
-            part = rows[rows.horizon.eq(horizon)].sort_values('station_id')
-            start, end = part.target_start_utc.unique().item(), part.target_end_utc.unique().item()
-            if pd.Timestamp(start) != issue + pd.Timedelta(hours=24*(horizon-1)) or pd.Timestamp(end) != issue + pd.Timedelta(hours=24*horizon):
-                raise ValueError('Forecast windows do not match the model contract')
-            points = [
-                dict(station_id=row.station_id, predicted_mm=float(row.B_mean), median_mm=float(row.B_median),
-                     gfs_mm=float(row.GFS_mean), mos_mm=float(row.MOS_LONG_mean), observed_mm=float(row.y_mm),
-                     probability_ge1=float(row.B_p1), probability_ge50=float(row.B_p50))
-                for row in part.itertuples()
-            ]
-            windows.append(dict(horizon=horizon, start_utc=pd.Timestamp(start).isoformat(),
-                                end_utc=pd.Timestamp(end).isoformat(), cutoff_ge50_probability=float(cutoff[horizon]),
-                                points=points))
-        snapshots.append(dict(id=case_id, label=label, issue_utc=issue.isoformat(),
-                              gfs_init_utc=pd.Timestamp(rows.gfs_init_utc.unique().item()).isoformat(),
-                              available_stations=rows.station_id.nunique(), windows=windows))
+    snapshots = [replay_snapshot(case_id, label, issue, rows, cutoff) for case_id, label, issue, rows in cases]
     return dict(
         schema_version=1, product='short_range', mode='historical_replay', model='LightGBM B',
         window_hours=24, rain_unit='mm', gauge_source='Vrain modern', model_freeze_sha256=freeze_sha,

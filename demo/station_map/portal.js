@@ -25,6 +25,24 @@ window.PBL6Portal = (() => {
     method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body),
   });
 
+  function observeAlertCount() {
+    const badge = document.getElementById("admin-badge");
+    if (!badge) return;
+    async function update() {
+      if (document.hidden) return;
+      try {
+        const {unread} = await api("/api/admin/alerts?summary=1");
+        badge.hidden = !unread;
+        badge.textContent = String(unread);
+        badge.setAttribute("aria-label", unread + " thông báo chưa đọc");
+      } catch {
+        badge.hidden = true;
+      }
+    }
+    update();
+    window.setInterval(update, 30000);
+  }
+
   async function bindAccount() {
     const form = document.getElementById("signin-form");
     const logout = document.getElementById("sign-out");
@@ -38,6 +56,7 @@ window.PBL6Portal = (() => {
         name.hidden = false;
         document.getElementById("account-link")?.setAttribute("hidden", "");
         logout.hidden = false;
+        observeAlertCount();
         logout.addEventListener("click", async () => {
           logout.disabled = true;
           try {
