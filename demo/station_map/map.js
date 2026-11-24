@@ -361,15 +361,19 @@ function shortDate(value) {
   return key.slice(8) + "/" + key.slice(5, 7);
 }
 
+function latestForStep(data, step) {
+  return data.snapshots.find(({windows}) => windows[step - 1].mode !== "missing") ?? data.snapshots[0];
+}
+
 function chooseIssue(issue, followLatest = false) {
-  state.selectedIssue = issue;
+  state.selectedIssue = followLatest ? latestForStep(state.data, state.step) : issue;
   state.followLatest = followLatest;
   render();
 }
 
 function renderHistory() {
   const recent = state.historyScope === "recent";
-  const latest = state.data.snapshots[0];
+  const latest = latestForStep(state.data, state.step);
   const now = Date.now();
   const today = vietnamDay(now);
   const anchor = recent ? today : vietnamDay(latest.issue_utc);
@@ -379,7 +383,9 @@ function renderHistory() {
   const byDay = new Map();
   for (const issue of state.data.snapshots) {
     const key = vietnamDay(issue.issue_utc);
-    if (!byDay.has(key)) byDay.set(key, issue);
+    const previous = byDay.get(key);
+    if (!previous || (previous.windows[state.step - 1].mode === "missing" &&
+                      issue.windows[state.step - 1].mode !== "missing")) byDay.set(key, issue);
   }
   const dates = Array.from(byDay, ([date, {id, mode}]) => [date, id, mode]);
   const signature = JSON.stringify([recent, anchor, state.selectedIssue.id, dates, now >= last.getTime()]);
@@ -418,6 +424,7 @@ function renderHistory() {
 function chooseStep(step) {
   if (state.step === step) return;
   state.step = step;
+  if (state.followLatest) state.selectedIssue = latestForStep(state.data, step);
   render();
 }
 
@@ -767,6 +774,23 @@ function renderMapLayer() {
   }
 }
 
+function renderIssueStatus() {
+  const window = currentWindow();
+  const selected = state.selectedIssue;
+  const mode = element("map-mode");
+  const archived = window.mode === "prospective" && Date.now() >= new Date(window.end_utc).getTime();
+  mode.dataset.mode = archived ? "archived" : window.mode;
+  mode.textContent = window.mode === "missing" ? "Chưa có dự báo" :
+    window.mode === "historical_replay" ? "Phát lại lịch sử" : archived ? "Dự báo đã lưu" : "Lần phát đã ghi";
+  element("mode-date").textContent = localTime(selected.issue_utc);
+  element("latest-issue").hidden = state.followLatest;
+  element("issue-meta").textContent = window.mode === "missing" ? "Lượt này chưa có dữ liệu cho hạn đã chọn." :
+    window.recorded_utc ? "Mốc dữ liệu " + localTime(selected.issue_utc) +
+      " · Công bố " + localTime(window.recorded_utc) + " (VN)." :
+    hourly() ? "Phát lại từ 24 giờ mưa Vrain." :
+      selected.gfs_init_utc ? "GFS khởi tạo lúc " + localTime(selected.gfs_init_utc) + " (VN)." : "Dự báo lượng mưa ngày.";
+}
+
 function render() {
   const window = currentWindow();
   updateScope();
@@ -775,19 +799,9 @@ function render() {
     .map((point) => [point.station_id, point]));
   if (!layerAllowed(state.mapLayer)) state.mapLayer = "lightgbm";
   issueControl.value = state.selectedIssue.id;
-  const selected = state.selectedIssue;
-  const mode = element("map-mode");
-  const archived = window.mode === "prospective" && Date.now() >= new Date(window.end_utc).getTime();
-  mode.dataset.mode = archived ? "archived" : window.mode;
-  mode.textContent = window.mode === "missing" ? "Chưa có dự báo" :
-    window.mode === "historical_replay" ? "Phát lại lịch sử" : archived ? "Dự báo đã lưu" : "Lần phát đã ghi";
-  element("mode-date").textContent = localTime(selected.issue_utc);
-  element("latest-issue").hidden = state.followLatest || selected.id === state.data.snapshots[0].id;
+  renderIssueStatus();
   element("period").textContent = localTime(window.start_utc) + " → " + localTime(window.end_utc) + " (VN)";
   element("rain-period").textContent = periodName(window) + " · " + element("period").textContent;
-  element("issue-meta").textContent = window.mode === "missing" ? "Lượt này chưa có dữ liệu cho hạn đã chọn." :
-    hourly() ? "Đầu vào phát lại từ 24 giờ mưa Vrain." :
-      selected.gfs_init_utc ? "GFS khởi tạo lúc " + localTime(selected.gfs_init_utc) + " (VN)." : "Dự báo lượng mưa ngày.";
   const csv = element("export-forecast");
   csv.hidden = !state.member || window.mode === "missing";
   csv.href = "/api/export-forecast.csv?" + new URLSearchParams({
@@ -797,7 +811,8 @@ function render() {
   slider.value = state.step;
   slider.setAttribute("aria-valuetext", periodName(window) + " · " + element("period").textContent);
   for (const [i, button] of [...element("period-steps").children].entries()) {
-    const span = selected.windows[i];
+    const issue = state.followLatest ? latestForStep(state.data, i + 1) : state.selectedIssue;
+    const span = issue.windows[i];
     const missing = span.mode === "missing";
     button.dataset.missing = String(missing);
     button.querySelector("small").textContent = missing ? "Thiếu" :
@@ -844,6 +859,7 @@ async function refreshForecasts() {
   try {
     const data = await loadForecasts();
     if (JSON.stringify(data) === JSON.stringify(state.data)) {
+      renderIssueStatus();
       renderHistory();
       return;
     }
@@ -855,7 +871,7 @@ async function refreshForecasts() {
     state.stationById = new Map(data.stations.map((station) => [station.station_id, station]));
     state.member = data.viewer === "member";
     state.selectedIssue = (state.followLatest ? null :
-      data.snapshots.find(({issue_utc}) => issue_utc === state.selectedIssue.issue_utc)) ?? data.snapshots[0];
+      data.snapshots.find(({issue_utc}) => issue_utc === state.selectedIssue.issue_utc)) ?? latestForStep(data, state.step);
     applyViewer();
     fillIssues();
     render();
@@ -877,16 +893,17 @@ async function start() {
     const geometry = boundaries ? prepareAreas(boundaries, data.stations) : {shapes: [], unmatched: []};
     const query = new URLSearchParams(location.search);
     const pinned = data.snapshots.find(({id}) => id === query.get("issue"));
-    const selectedIssue = pinned ?? data.snapshots[0];
+    const firstIssue = pinned ?? data.snapshots[0];
     const legacy = ["1", "2", "3"].includes(query.get("day")) ? "d" + query.get("day") : null;
-    const indexed = selectedIssue.windows.findIndex(({lead}) => lead === (query.get("lead") ?? legacy));
-    const step = 1 + (indexed >= 0 ? indexed : selectedIssue.windows.findIndex(({mode}) => mode !== "missing"));
+    const indexed = firstIssue.windows.findIndex(({lead}) => lead === (query.get("lead") ?? legacy));
+    const step = Math.max(1, 1 + (indexed >= 0 ? indexed : firstIssue.windows.findIndex(({mode}) => mode !== "missing")));
+    const selectedIssue = pinned ?? latestForStep(data, step);
     const stationId = data.stations.find(({station_id}) => station_id === query.get("station"))?.station_id;
     const requestedLayer = layerButtons.find((button) => button.dataset.layer === query.get("layer"))?.dataset.layer;
     const view = geometry.shapes.length && !stationId && query.get("view") !== "station" ? "area" : "station";
     const areaCode = view === "area" && geometry.shapes.some(({code}) => code === query.get("area")) ? query.get("area") : null;
     const scope = query.get("scope") === "all" || (stationId && !data.shared_stations.includes(stationId)) ? "all" : "common";
-    state = {data, selectedIssue, step: Math.max(1, step), stationId, scope, mapLayer: requestedLayer ?? "lightgbm",
+    state = {data, selectedIssue, step, stationId, scope, mapLayer: requestedLayer ?? "lightgbm",
              member: data.viewer === "member", followLatest: !pinned,
              historyScope: query.get("history") === "recent" ? "recent" : "saved",
              view, areaCode, boundaries, geometry,

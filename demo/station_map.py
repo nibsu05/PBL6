@@ -97,7 +97,7 @@ class MapHandler(BaseHTTPRequestHandler):
             elif path == '/api/short-range':
                 self.reply_json(forecast_payload(available_forecasts(), bool(user)))
             elif path == '/api/forecast':
-                self.reply_json(station_forecasts(bool(user)))
+                self.reply_json(station_forecasts(bool(user), self.server.monitor.hourly))
             elif path == '/api/nowcast-replay':
                 self.reply_json(nowcast_replay(REPLAY, bool(user)))
             elif path == '/api/status':
@@ -119,7 +119,7 @@ class MapHandler(BaseHTTPRequestHandler):
             elif path == '/api/export-forecast.csv':
                 query = parse_qs(requested.query)
                 try:
-                    body, filename = export_period(station_forecasts(True), query.get('issue', [''])[0],
+                    body, filename = export_period(station_forecasts(True, self.server.monitor.hourly), query.get('issue', [''])[0],
                                                    query.get('lead', [''])[0], query.get('scope', ['common'])[0])
                 except ValueError:
                     self.reply_json({'error': 'unknown_issue_or_horizon'}, 404)

@@ -155,6 +155,33 @@
     return channel.http_status ? "HTTP " + channel.http_status : "Lấy dữ liệu lỗi";
   }
 
+  function renderHourly(hourly) {
+    if (!hourly?.schedule && !hourly?.last_recorded) return;
+    const {last_recorded: last, last_verified: truth, latest} = hourly;
+    const reasons = {
+      incomplete_24h_history: "Chờ đủ 24 giờ đo",
+      vrain_session: "Phiên Vrain cần làm mới",
+      late_source: "Số đo về sau hạn lưu",
+      outside_hourly_window: "Chạy sau khung thu",
+      hourly_source_or_inference_error: "Thu dữ liệu hoặc suy luận gặp lỗi",
+      hourly_job_error: "Lượt chạy gặp lỗi",
+    };
+    const result = latest ? reasons[latest.reason] ??
+      (["recorded", "already_recorded"].includes(latest.status) ? "Đã ghi dự báo" : "Chờ lượt thử") : "Chưa chạy";
+    sourceCard("Dự báo 1–6 giờ", hourly.display_enabled ? "ok" : "waiting",
+               hourly.display_enabled ? "Đang hiển thị" : "Đang thí điểm", [
+      ["Lịch trên máy", hourly.schedule ? "Phút 05 mỗi giờ · lưu trước phút 15" : "Chưa đăng ký"],
+      ["Trạng thái lượt gần nhất", result + (latest ? " · " + time(latest.started_utc) : "")],
+      ["Mốc dữ liệu", time(last?.issue_utc)],
+      ["Giờ nhận Vrain", time(last?.received_utc)],
+      ["Giờ ghi dự báo", time(last?.recorded_utc)],
+      ["Trạm đủ đầu vào", last ? last.stations + " / " + last.stations_expected : "Chưa ghi nhận"],
+      ["Số lượt đã lưu trong 8 ngày", hourly.recent_issues],
+      ["Đối chiếu", truth ? time(truth.issue_utc) + " · " + truth.observed_cells + " cặp có thực đo"
+                  : last ? "Chờ thực đo đến " + time(last.truth_due_utc) : "Chờ lượt ghi đầu tiên"],
+    ]);
+  }
+
   function renderStatus(data) {
     const {gfs, vrain} = data.sources;
     const forecast = data.last_recorded_issue;
@@ -190,6 +217,7 @@
       ...(forecast ? [["Giờ lưu dự báo", time(forecast.recorded_utc)]] : []),
       ["Đối chiếu bản ghi mới với Vrain", forecast ? (forecast.verified ? "Có kết quả" : "Đang chờ") : "Chưa có lượt để chấm"],
     ]);
+    renderHourly(data.hourly);
     const button = get("source-check");
     button.disabled = data.source_probe_running;
     button.textContent = data.source_probe_running ? "Đang kiểm tra nguồn…" : "Kiểm tra nguồn";

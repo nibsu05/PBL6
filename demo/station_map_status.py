@@ -258,6 +258,7 @@ class SourceMonitor:
     def __init__(self, state_dir):
         self.path = state_dir / 'source_status.json'
         self.daily = state_dir / 'daily'
+        self.hourly = state_dir / 'hourly'
         self.alerts = AdminAlerts(state_dir / 'admin_alerts.sqlite')
         self.lock = Lock()
         self.started = None
@@ -323,6 +324,8 @@ class SourceMonitor:
         return self.alerts.inbox(summary=summary)
 
     def status(self):
+        from demo.station_map_nowcast import hourly_status
+
         checked_at = datetime.now(timezone.utc)
         sources, decode = saved_sources()
         for saved in (read_optional(self.daily / 'source_status.json'), read_optional(self.path)):
@@ -338,5 +341,5 @@ class SourceMonitor:
         return dict(
             checked_at=checked_at.isoformat(), sources=sources, last_gfs_decode=decode,
             source_probe_running=self.running, last_recorded_issue=recorded_issue(),
-            planned_issue_local='19:00', daily=daily,
+            planned_issue_local='19:00', daily=daily, hourly=hourly_status(self.hourly, checked_at),
         )

@@ -6,7 +6,7 @@ import io
 import math
 from pathlib import Path
 
-from demo.station_map_nowcast import REPLAY, nowcast_replay
+from demo.station_map_nowcast import HOURLY, REPLAY, live_hourly, nowcast_replay
 from demo.station_map_status import available_forecasts, forecast_payload
 
 
@@ -37,6 +37,14 @@ def collect_replays(authenticated):
             continue
         break
     return archive or {"stations": [], "issues": []}
+
+
+def collect_hourly(authenticated, state):
+    archive = collect_replays(authenticated)
+    live = live_hourly(state, authenticated)
+    stations = {s["id"]: s for s in archive["stations"] + live["stations"]}
+    issues = {at(i["issue_time"]): i for i in archive["issues"] + live["issues"]}
+    return dict(stations=list(stations.values()), issues=list(issues.values()))
 
 
 def combine_forecasts(daily, hourly, authenticated):
@@ -75,6 +83,7 @@ def combine_forecasts(daily, hourly, authenticated):
             end = start + timedelta(hours=hours)
             points = []
             mode = "missing"
+            recorded = None
             if hours == 1 and h is not None:
                 for sid, sample in h["by_station"].items():
                     if sid not in hourly_stations:
@@ -88,7 +97,8 @@ def combine_forecasts(daily, hourly, authenticated):
                         truth = sample.get("observed") or []
                         point["observed_mm"] = number(truth[n - 1]) if len(truth) == 6 else None
                     points.append(point)
-                mode = "historical_replay"
+                mode = h.get("mode", "historical_replay")
+                recorded = h.get("recorded_utc")
             if hours == 24 and d is not None:
                 window = next((item for item in d["windows"] if item["horizon"] == n), None)
                 if window is not None:
@@ -105,20 +115,23 @@ def combine_forecasts(daily, hourly, authenticated):
                 raise ValueError("Duplicate station in a forecast period")
             windows.append(dict(lead=lead, horizon=n, hours=hours, start_utc=start.isoformat(),
                                 end_utc=end.isoformat(), mode=mode, points=points,
+                                recorded_utc=recorded,
                                 has_truth=any(point.get("observed_mm") is not None for point in points)))
-        result.append(dict(id=id_, issue_utc=when.isoformat(), mode=d["mode"] if d else "historical_replay",
-                           label=d["label"] if d else "Phát lại giờ", gfs_init_utc=d.get("gfs_init_utc") if d else None,
+        live = any(w["mode"] == "prospective" for w in windows)
+        result.append(dict(id=id_, issue_utc=when.isoformat(), mode="prospective" if live else "historical_replay",
+                           label=d["label"] if d else "Dự báo theo giờ" if live else "Phát lại giờ",
+                           gfs_init_utc=d.get("gfs_init_utc") if d else None,
                            windows=windows))
     return dict(schema_version=1, product="station_forecast", viewer="member" if authenticated else "guest",
                 stations=stations, shared_stations=common, snapshots=result)
 
 
-def station_forecasts(authenticated):
+def station_forecasts(authenticated, state=HOURLY):
     try:
         daily = forecast_payload(available_forecasts(), authenticated)
     except FileNotFoundError:
         daily = {"stations": [], "snapshots": []}
-    hourly = collect_replays(authenticated)
+    hourly = collect_hourly(authenticated, state)
     return combine_forecasts(daily, hourly, authenticated)
 
 

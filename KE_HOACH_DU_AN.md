@@ -1,5 +1,7 @@
 # Kế hoạch hiện hành — dự báo mưa tại trạm
 
+**Đã triển khai thí điểm 1–6 giờ.** Windows chạy phút 05 mỗi giờ. Lượt khởi chạy mốc 23h ngày 24/11 đã ghi dự báo sáu kỳ cho 77/79 trạm. Nhật ký lưu giờ nhận Vrain và giờ ghi dự báo. Trang Theo dõi đọc kết quả thí điểm và trạng thái chờ đủ sáu giờ thực đo. Đo 2–3 ngày trước khi hiển thị các lượt giờ mới trên bản đồ. [Thiết lập và hiện trạng](demo/station_map/README.md#thí-điểm-dự-báo-16-giờ).
+
 **Đã gộp bản đồ và so lại hai nhánh trên phần giao.** Trang chính chọn chín kỳ trên một thanh, dùng lớp xã/phường và mặc định 57 trạm chung. Cực ngắn có thể hiển thị thêm 22 trạm bằng Công cụ. [Báo cáo chi tiết](reports/station_forecast_unified_2026_11_24/BAO_CAO_CHI_TIET.md) giải thích thử nghiệm, so sánh trên 18.719 khóa trạm–19h, thử nhất quán 6–24 giờ và lộ trình khôi phục Vrain, mở rộng ngày, cải thiện mưa mạnh, kiểm chứng lần phát thật.
 
 **Cực ngắn đã kiểm định trên 79 trạm.** Mô hình chung dự báo đủ sáu lượng mưa giờ. Thực hiện R/E0/E2, ba seed, đối chứng 0 mm, giữ mưa và LightGBM R. Kiểm định 2025 cho thấy LightGBM R giảm RMSE so với giữ mưa, còn lợi ích của nhóm gió 850 hPa tại giờ 6 chưa rõ. Web có phát lại riêng theo giờ. Xem [kết quả và phạm vi](reports/station_nowcast_2026_11_24/README.md).

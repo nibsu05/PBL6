@@ -1,10 +1,10 @@
 # Web dự báo mưa tại trạm
 
-Bản đồ dùng một thanh **1h, 2h, 3h, 4h, 5h, 6h, Ngày 1, Ngày 2, Ngày 3**. Mỗi ô giờ là lượng của 1 giờ riêng. Ngày 1 tính đủ 24 giờ từ lúc phát và bao gồm sáu giờ đầu. Giờ hiệu lực, đơn vị, trạng thái và số trạm có số thay đổi theo hạn đã chọn.
+Bản đồ dùng một thanh **1h, 2h, 3h, 4h, 5h, 6h, Ngày 1, Ngày 2, Ngày 3**. Mỗi ô giờ là lượng của một giờ riêng. Khi chọn **Mới nhất**, nhóm giờ và nhóm ngày tự chọn lượt mới nhất của từng nhóm. Hai nhánh đối chiếu tổng sáu giờ với Ngày 1 khi cùng mốc. Giờ hiệu lực, đơn vị, trạng thái và số trạm có số thay đổi theo hạn đã chọn.
 
 Giao diện mặc định dùng **57 trạm chung** và lớp xã, phường cho cả hai nhánh. Mở **Công cụ → Phạm vi trạm** để hiện toàn bộ 79 trạm giờ hoặc 57 trạm ngày. **Nơi có mưa** mở danh sách khu vực, có tìm tên, lọc ngưỡng theo kỳ và xem số trạm. Chọn **Theo trạm** để xem dự báo từng mô hình và đối chiếu tổng sáu giờ với Ngày 1. Trên màn hình nhỏ, bảng khu vực mở từ dưới.
 
-Dãy **Lượt đã lưu** chọn lượt mới nhất và bảy ngày trước. Bấm **Ngày gần đây** để xem lịch quanh ngày hiện tại. Khi một lượt chỉ có một nhánh, các kỳ còn lại hiển thị thiếu và có số trạm bằng 0. Các lượt phát lại có ngày thật và nhãn riêng từng kỳ.
+Dãy **Lượt đã lưu** chọn lượt mới nhất và bảy ngày trước. Bấm **Ngày gần đây** để xem lịch quanh ngày hiện tại. Khi chọn cố định một lượt chỉ có một nhánh, các kỳ còn lại hiển thị thiếu. Các lượt phát lại có ngày thật và nhãn riêng từng kỳ.
 
 Màu khu vực dùng lượng cao nhất trong các trạm hợp lệ nằm trong ranh giới. Lọc **Có mưa** theo mức 0,1 mm trong giờ hoặc 1 mm trong 24 giờ tại ít nhất một trạm. Vùng xám chưa có số cho lớp đang xem. Lớp xác suất ngày lấy giá trị cao nhất tại trạm, lớp sai lệch lấy độ lệch tuyệt đối lớn nhất và giữ dấu.
 
@@ -53,6 +53,16 @@ Lượt 18h40 kiểm tra GFS khởi tạo 07h và Vrain tới mốc quan trắc 
 Lượt 20h05 kiểm tra các lần phát đã đủ 72 giờ cộng 1 giờ chờ số đo. Nếu chưa có đủ nhãn, có thể kiểm tra lại vào ngày sau. Các lần tải dở được lưu riêng để truy vết. Nhật ký truy vấn, lần phát và đối chiếu nằm trong `data/operational/station_map_web/daily/` và thư mục `live/` của bản nghiên cứu. Không có bước huấn luyện lại tự động.
 
 Ngày 24/11/2026, đã tải và giải mã đủ 19 trường GFS tại 57 trạm. Đường chi tiết Vrain cũ trả 404, trong khi giao diện hiện tại dùng báo cáo phân trang trên đường mới. Tác vụ đã đọc thành công cả hai kênh mới lúc 22h41. Kênh hiện hành có số ở 84 trạm tại mốc 19h. Web có thể xem các lượt phát lại với ngày phát gốc. Kiểm tra lần phát trực tiếp cần số đo đến đúng giờ trong kỳ theo lịch. [Bằng chứng phục hồi Vrain](../../reports/danang_system_2026_11_24/THIET_KE_HE_THONG.md#khi-nguồn-thiếu-hệ-thống-xử-lý-thế-nào) · [Sản phẩm GFS của NOAA](https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).
+
+## Thí điểm dự báo 1–6 giờ
+
+**PBL6-HourlyRainfall** đã được đăng ký trong Windows Task Scheduler lúc 23h08 ngày 24/11/2026. Tác vụ bắt đầu ở **phút 05 mỗi giờ** và lưu lượt trước phút 15 của cùng giờ. Tác vụ dùng cùng cơ chế đăng nhập Windows của nhánh ngày. Để cài trên máy khác đã có dữ liệu và mô hình, chạy `scripts/install_station_nowcast_hourly.ps1`. Có thể thử riêng bước đọc dữ liệu và suy luận bằng `.venv\Scripts\python.exe -X utf8 scripts/run_station_nowcast_hourly.py --probe`.
+
+Mỗi lượt lấy từ Vrain đúng 24 giờ đã chốt, ưu tiên mốc hiện tại và giữ nguyên mã trạm. LightGBM R, Bi-LSTM R và mốc giữ mưa trả sáu kỳ ở các trạm đủ lịch sử. Nhật ký ghi cả mốc dữ liệu, giờ nhận, giờ lưu và số trạm. Khi một lượt gặp lỗi, admin xem tình trạng trong thẻ **Dự báo 1–6 giờ**. Tác vụ cũng chấm các lượt đủ sáu giờ thực đo, giữ các ô thiếu riêng và báo MAE, RMSE, POD, FAR và CSI theo hạn.
+
+Lần khởi chạy đầu tiên qua Task Scheduler đã ghi **mốc 23h ngày 24/11** lúc **23h09:34**, với **77/79 trạm** và **1.848 hàng đầu vào**. Các tệp phản hồi, đầu vào, dự báo và nhật ký thuộc `data/operational/station_map_web/hourly/`. Dự báo giờ đầu của lượt này có hiệu lực 23h–00h. Giờ thứ sáu kết thúc lúc 05h ngày 25/11.
+
+Trong giai đoạn thí điểm, trang **Theo dõi** cho biết giờ lưu, độ phủ và trạng thái đối chiếu. Bản đồ công khai trên máy dùng các bản phát lại. Sau khi đọc nhật ký 2–3 ngày, đặt `enabled` thành `true` trong tệp `hourly/display.json` để bản đồ đọc các lượt đã ghi. Chế độ **Mới nhất** lấy riêng bản mới của nhóm giờ và nhóm ngày. Khi xem một lượt cụ thể, cả hai nhóm giữ đúng mốc của lượt đó.
 
 ## Tham khảo giao diện
 
