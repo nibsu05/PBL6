@@ -2,6 +2,10 @@
 
 Cập nhật 24/11/2026. Đọc file này trước, rồi `KE_HOACH_DU_AN.md` và `project_plan_v2.md`. Người dùng bắt đầu từ `README.md`.
 
+## Bản đồ theo xã/phường và bảng nơi có mưa
+
+Web mở mặc định lớp khu vực và bảng dự kiến mưa cho từng kỳ 24 giờ. Ranh giới tham chiếu tinhthanhpho.com bản 2026.10.8, CC BY 4.0, có 94 vùng. Tệp hình học lưu riêng theo `scripts/prepare_station_map_areas.py`. Ghép đủ 57 trạm vào 40 xã/phường theo phép chứa điểm, 28 vùng có một trạm. Màu lượng mưa là giá trị cao nhất của các trạm trong ranh giới, vùng xám chưa có số, bảng lọc mưa từ 1 mm và ngưỡng 10 mm. Có bộ lọc theo tên, trạm hợp lệ/tổng trạm và chi tiết khi chọn vùng. Lớp Trạm và liên kết đối chiếu theo trạm vẫn dùng được. Kiểm tra bằng Edge desktop/mobile, kể cả khi tệp ranh giới thiếu. Xem [cách đọc và nguồn ranh giới](demo/station_map/README.md).
+
 ## Bản đồ toàn màn hình, lịch cập nhật và Word chi tiết
 
 Web cục bộ `http://127.0.0.1:8766/` mở bản đồ toàn cửa sổ. Có bảng công cụ trái trên máy tính, bảng trượt dưới trên điện thoại, thanh ba ngày và bảng chi tiết khi chọn trạm. Trang Theo dõi có lịch 18h40/19h/20h05, trạng thái riêng từng kênh Vrain, trạm sai khác nhiều và MAE mưa lớn của thí nghiệm bổ sung. Đã kiểm thử bằng Edge ở 1440×900 và 390×844, tài khoản kiểm thử lưu riêng. API phát lượt ghi trước 19h sau khi kiểm tra thời gian hiệu lực, mô hình khóa và hàm kiểm tệp. Khi thiếu lượt trực tiếp, map dùng các bản phát lại có ngày thật. Khách không nhận thực đo hoặc MOS.

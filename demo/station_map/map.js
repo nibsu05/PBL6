@@ -44,9 +44,15 @@ const issueControl = element("issue");
 const stationControl = element("station");
 const dayButtons = Array.from(document.querySelectorAll("[data-day]"));
 const layerButtons = Array.from(document.querySelectorAll("[data-layer]"));
+const viewButtons = Array.from(document.querySelectorAll("[data-view]"));
+const {prepareAreas, summarizeArea, simplifyName} = window.PBL6Areas;
+const areaPaths = new Map();
+const areaCollator = new Intl.Collator("vi");
+const hoangSaCode = "20333"; // Offshore and outside the default view of the station network.
 let state;
 let map;
 let layer;
+let areaLayer;
 let markers = new Map();
 let refreshing = false;
 const narrow = window.matchMedia("(max-width: 680px)");
@@ -98,19 +104,29 @@ function formatAmount(value, signed = false) {
   return sign + amount.format(rounded);
 }
 
+function binFor(value, kind = state.mapLayer) {
+  if (value === null) return null;
+  if (kind === "difference") return differenceBins.find(({match}) => match(value));
+  const bins = kind === "probability" ? probabilityBins : rainBins;
+  return bins.find(({limit}) => value < limit);
+}
+
 function makeLegend() {
   const list = element("legend-items");
   list.replaceChildren();
   const showDifference = state.mapLayer === "difference";
   const showProbability = state.mapLayer === "probability";
   const bins = showDifference ? differenceBins : showProbability ? probabilityBins : rainBins;
+  const areaView = state.view === "area";
   element("legend-title").textContent = showDifference ? "Sai lệch LightGBM − Vrain"
-    : showProbability ? "Xác suất dự báo" : "Dải lượng mưa";
+    : showProbability ? "Xác suất dự báo" : areaView ? "Mưa cao nhất tại trạm" : "Dải lượng mưa";
   element("legend-unit").textContent = showProbability ? "%" : "mm/24 giờ";
   const note = element("legend-note");
-  note.textContent = showDifference ? "Xanh biểu thị dự báo thiếu. Cam biểu thị dự báo thừa."
-    : showProbability ? "Khả năng đạt 50 mm trong 24 giờ tại mỗi trạm."
-      : "Mỗi điểm biểu thị lượng mưa tại một trạm.";
+  note.textContent = showDifference
+    ? (areaView ? "Lấy độ lệch lớn nhất tại trạm. Xanh là thiếu, cam là thừa." : "Xanh là dự báo thiếu. Cam là dự báo thừa.")
+    : showProbability
+      ? (areaView ? "Màu theo xác suất cao nhất trong các trạm thuộc khu vực." : "Khả năng đạt 50 mm trong 24 giờ tại mỗi trạm.")
+      : areaView ? "Tổng hợp các trạm nằm trong ranh giới. Vùng xám chưa có số." : "Mỗi điểm biểu thị lượng mưa tại một trạm.";
   for (const bin of bins) {
     const item = add(list, "li");
     add(item, "span", "", "swatch").style.setProperty("--rain", bin.color);
@@ -118,12 +134,12 @@ function makeLegend() {
   }
   const missing = add(list, "li");
   add(missing, "span", "", "swatch missing");
-  add(missing, "span", "Thiếu mẫu");
+  add(missing, "span", areaView ? "Chưa có số liệu" : "Thiếu mẫu");
 }
 
-function initMap(stations) {
+function initMap() {
   if (!window.L) {
-    mapError.textContent = "Không tải được bản đồ. Bạn vẫn có thể chọn trạm để đọc số liệu.";
+    mapError.textContent = "Không tải được bản đồ. Bạn vẫn có thể xem bảng khu vực hoặc chọn trạm.";
     mapError.hidden = false;
     element("fit-map").disabled = true;
     return;
@@ -135,35 +151,79 @@ function initMap(stations) {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   });
   tiles.on("tileerror", () => {
-    mapError.textContent = "Bản đồ nền tải chưa đủ. Điểm trạm vẫn hiển thị đúng vị trí.";
+    mapError.textContent = "Bản đồ nền tải chưa đủ. Lớp dự báo vẫn hiển thị.";
     mapError.hidden = false;
   });
   tiles.on("tileload", () => { mapError.hidden = true; });
   tiles.addTo(map);
   layer = L.layerGroup().addTo(map);
-  fitMap(stations);
+  if (state.areas.length) {
+    areaLayer = L.geoJSON(state.areas.map(({feature}) => feature), {
+      smoothFactor: 1,
+      className: "ward-path",
+      onEachFeature: (feature, path) => {
+        const code = String(feature.properties.code);
+        areaPaths.set(code, path);
+        path.on("click", () => pickArea(code));
+        path.bindTooltip(document.createTextNode(feature.properties.name), {className: "area-tooltip", sticky: true});
+      },
+    });
+    map.attributionControl.addAttribution(
+      'Ranh giới <a href="https://www.tinhthanhpho.com/tp-da-nang">tinhthanhpho.com</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>'
+    );
+  }
+  fitMap();
 }
 
-function fitMap(stations = state.data.stations) {
+function mapPadding() {
+  if (narrow.matches) return {paddingTopLeft: [25, 141], paddingBottomRight: [26, 166]};
+  const left = element("tools-panel").hidden ? 35 : 344;
+  const right = element("rain-panel").hidden ? 46 : element("rain-panel").offsetWidth + 33;
+  return {paddingTopLeft: [left, 116], paddingBottomRight: [right, 146]};
+}
+
+function fitMap() {
   if (!map) return;
-  const left = !narrow.matches && !element("tools-panel").hidden ? 344 : 35;
-  map.fitBounds(stations.map(({latitude, longitude}) => [latitude, longitude]), {
-    paddingTopLeft: [left, narrow.matches ? 140 : 115],
-    paddingBottomRight: [46, narrow.matches ? 163 : 146],
-    maxZoom: 12,
-    animate: false,
-  });
+  const coordinates = state.view === "area"
+    ? state.areas.filter(({code}) => code !== hoangSaCode).flatMap(({bounds: [w, s, e, n]}) => [[s, w], [n, e]])
+    : state.data.stations.map(({latitude, longitude}) => [latitude, longitude]);
+  map.fitBounds(coordinates, {...mapPadding(), maxZoom: 12, animate: false});
 }
 
 function showTools(open, focus = false) {
   element("tools-panel").hidden = !open;
   element("tools-toggle").setAttribute("aria-expanded", String(open));
-  if (open && narrow.matches) element("station-panel").hidden = true;
+  if (open && narrow.matches) {
+    element("station-panel").hidden = true;
+    showRain(false);
+  }
   if (focus) element(open ? "close-tools" : "tools-toggle").focus();
+}
+
+function showRain(open, focus = false) {
+  element("rain-panel").hidden = !open;
+  element("rain-toggle").setAttribute("aria-expanded", String(open));
+  document.querySelector(".map-shell").classList.toggle("rain-open", open);
+  if (open) {
+    element("station-panel").hidden = true;
+    if (narrow.matches) showTools(false);
+  }
+  if (focus) element(open ? "close-rain" : "rain-toggle").focus();
+}
+
+function changeView(view, fit = true) {
+  if (state.view === view || (view === "area" && !state.areas.length)) return;
+  state.view = view;
+  element("station-panel").hidden = true;
+  showRain(view === "area" && !narrow.matches);
+  renderMapLayer();
+  if (fit) fitMap();
+  syncUrl();
 }
 
 function showStation(id, pan = false) {
   state.stationId = id;
+  changeView("station", false);
   if (narrow.matches) showTools(false);
   element("station-panel").hidden = false;
   renderStation();
@@ -187,6 +247,10 @@ function syncUrl() {
   if (!state.followLatest) url.searchParams.set("issue", state.selectedIssue.id);
   else url.searchParams.delete("issue");
   url.searchParams.set("day", String(state.day));
+  if (state.view === "station" && state.areas.length) url.searchParams.set("view", "station");
+  else url.searchParams.delete("view");
+  if (state.view === "area" && state.areaCode) url.searchParams.set("area", state.areaCode);
+  else url.searchParams.delete("area");
   if (!element("station-panel").hidden && state.stationId) url.searchParams.set("station", state.stationId);
   else url.searchParams.delete("station");
   if (state.mapLayer !== "lightgbm") url.searchParams.set("layer", state.mapLayer);
@@ -306,10 +370,7 @@ function renderPoints() {
     const value = mapValue(state.points.get(id));
     const showDifference = state.mapLayer === "difference";
     const showProbability = state.mapLayer === "probability";
-    const bands = showProbability ? probabilityBins : rainBins;
-    const bin = value === null ? null : showDifference
-      ? differenceBins.find(({match}) => match(value))
-      : bands.find(({limit}) => value < limit);
+    const bin = binFor(value);
     const icon = L.divIcon({
       className: "map-point" + (bin ? "" : " missing"),
       iconSize: [16, 16], iconAnchor: [8, 8],
@@ -325,6 +386,134 @@ function renderPoints() {
     marker.bindTooltip(document.createTextNode(name), {direction: "top", offset: [0, -7]});
     markers.set(id, marker);
   }
+}
+
+function updateAreaPaths() {
+  if (!areaLayer || !map) return;
+  for (const area of state.areas) {
+    const path = areaPaths.get(area.code);
+    const summary = state.displayAreas.get(area.code);
+    const color = binFor(summary.value)?.color ?? "#bac6cd";
+    const selected = state.areaCode === area.code;
+    path.setStyle({
+      color: selected ? "#123d4e" : "#3f6171", weight: selected ? 2.7 : 0.8,
+      fillColor: color, fillOpacity: summary.valid ? .75 : .30,
+      dashArray: summary.valid ? "" : "3 3",
+    });
+    if (selected) path.bringToFront();
+    const tip = document.createElement("div");
+    add(tip, "strong", area.name);
+    const suffix = state.mapLayer === "probability" ? "%" : " mm";
+    const amount = summary.valid ? unitValue(summary.value, suffix, state.mapLayer === "difference") + " · " +
+      summary.valid + "/" + area.stationIds.length + " trạm" : "Chưa có số liệu";
+    add(tip, "small", amount);
+    path.setTooltipContent(tip);
+  }
+}
+
+function renderRainRows() {
+  const rows = element("rain-rows");
+  rows.replaceChildren();
+  const filter = element("area-filter").value;
+  const query = simplifyName(element("area-search").value);
+  const matches = state.areas.filter((area) => {
+    if (query && !simplifyName(area.name).includes(query)) return false;
+    const summary = state.forecastAreas.get(area.code);
+    return filter === "all" || (filter === "rain" && summary.rainy > 0) ||
+      (filter === "10" && summary.value !== null && summary.value >= 10) ||
+      (filter === "data" && summary.valid > 0) || (filter === "missing" && !summary.valid);
+  }).sort((a, b) => (state.forecastAreas.get(b.code).value ?? -1) -
+    (state.forecastAreas.get(a.code).value ?? -1) || areaCollator.compare(a.name, b.name));
+  for (const area of matches) {
+    const summary = state.forecastAreas.get(area.code);
+    const row = add(rows, "tr");
+    const name = add(add(row, "td"), "button", area.name, "rain-place");
+    name.type = "button";
+    name.dataset.area = area.code;
+    name.addEventListener("click", () => pickArea(area.code));
+    const value = add(row, "td");
+    if (summary.valid) {
+      add(value, "i", undefined, "rain-sample-dot").style.setProperty("--rain", binFor(summary.value, "lightgbm").color);
+    }
+    add(value, "span", formatAmount(summary.value));
+    add(row, "td", summary.valid + "/" + area.stationIds.length);
+  }
+  const message = element("rain-empty");
+  message.hidden = matches.length > 0;
+  message.textContent = query ? "Không tìm thấy khu vực trong bộ lọc này."
+    : filter === "rain" ? "Kỳ này chưa có trạm nào được dự báo từ 1 mm."
+      : "Không có khu vực phù hợp với bộ lọc.";
+}
+
+function renderAreaDetail() {
+  const area = state.areaByCode.get(state.areaCode);
+  element("rain-list-view").hidden = Boolean(area);
+  element("area-detail").hidden = !area;
+  if (!area) return;
+
+  element("area-title").textContent = area.name;
+  const description = element("area-description");
+  const stations = element("area-stations");
+  description.replaceChildren();
+  stations.replaceChildren();
+  const summary = state.forecastAreas.get(area.code);
+  if (summary.valid) {
+    add(description, "p", "Lượng LightGBM cao nhất tại trạm", "area-detail-label");
+    add(add(description, "div", formatAmount(summary.value), "area-amount"), "small", "mm/24 giờ");
+    add(description, "p", summary.rainy + "/" + summary.valid + " trạm có số dự kiến từ 1 mm.");
+    if (summary.valid > 1) add(description, "p",
+      "Các trạm dự báo từ " + formatAmount(summary.minimum) + " đến " + formatAmount(summary.value) + " mm.");
+    else add(description, "p", "Kỳ này chỉ có số từ một trạm.");
+  } else {
+    add(description, "p", area.stationIds.length ? "Chưa có dự báo hợp lệ tại trạm cho kỳ này."
+      : "Khu vực chưa có trạm trong bộ dữ liệu.");
+  }
+  if (!summary.readings.length) return;
+  add(stations, "p", "Chọn trạm để xem dự báo ba ngày");
+  const list = add(stations, "ul", undefined, "area-station-list");
+  for (const {id, value} of summary.readings) {
+    const button = add(add(list, "li"), "button");
+    button.type = "button";
+    add(button, "span", id);
+    add(button, "strong", unitValue(value));
+    button.addEventListener("click", () => showStation(id, true));
+  }
+}
+
+function pickArea(code) {
+  state.areaCode = code;
+  showRain(true);
+  renderAreaDetail();
+  updateAreaPaths();
+  const path = areaPaths.get(code);
+  if (path) {
+    if (narrow.matches) {
+      map.panInside(path.getBounds().getCenter(), {paddingTopLeft: [26, 151], paddingBottomRight: [26, 300]});
+    } else {
+      map.fitBounds(path.getBounds(), {...mapPadding(), maxZoom: 11, animate: false});
+    }
+  }
+  element("back-to-rain").focus({preventScroll: true});
+  syncUrl();
+}
+
+function renderAreaPanel() {
+  state.forecastAreas = new Map(state.areas.map((area) => [
+    area.code, summarizeArea(area, state.points, (p) => measurement(p, "predicted_mm")),
+  ]));
+  const sources = [...state.forecastAreas.values()];
+  const withData = sources.filter((item) => item.valid > 0).length;
+  const withRain = sources.filter((item) => item.rainy > 0).length;
+  element("rain-count").textContent = withRain;
+  const summary = element("rain-overview");
+  summary.replaceChildren();
+  add(summary, "strong", withRain + " khu vực có tín hiệu mưa");
+  add(summary, "span", " · " + withData + "/" + state.areas.length + " khu vực có số");
+  element("area-coverage").textContent = withData + "/" + state.areas.length +
+    " khu vực có số cho kỳ đã chọn. Số khu vực tính theo LightGBM." +
+    (state.unmatched.length ? " Có " + state.unmatched.length + " trạm chưa ghép được ranh giới." : "");
+  renderRainRows();
+  renderAreaDetail();
 }
 
 function highlightList() {
@@ -347,6 +536,7 @@ function highlightList() {
 }
 
 function renderMapLayer() {
+  const byArea = state.view === "area";
   element("map-title").textContent = state.mapLayer === "difference"
     ? "Sai lệch dự báo · LightGBM − Vrain" : state.mapLayer === "probability"
       ? "Xác suất mưa ≥50 mm/24 giờ" : rainLayers[state.mapLayer].title;
@@ -355,10 +545,36 @@ function renderMapLayer() {
   for (const button of layerButtons) {
     button.setAttribute("aria-pressed", String(button.dataset.layer === state.mapLayer));
   }
+  for (const button of viewButtons) {
+    button.setAttribute("aria-pressed", String(button.dataset.view === state.view));
+    button.disabled = button.dataset.view === "area" && state.areas.length === 0;
+  }
+  element("station-scan").hidden = byArea;
+  element("station-lookup").hidden = byArea;
+  const areaStatus = element("area-coverage");
+  areaStatus.hidden = !byArea && state.areas.length > 0;
+  if (!state.areas.length) areaStatus.textContent = "Chưa có ranh giới khu vực. Bạn có thể xem theo trạm.";
+  element("rain-toggle").hidden = state.areas.length === 0;
+  element("fit-map").textContent = byArea ? "Xem toàn vùng" : "Xem các trạm";
   makeLegend();
-  highlightList();
-  renderPoints();
-  highlightStation();
+  if (state.areas.length) renderAreaPanel();
+  if (byArea) {
+    layer?.clearLayers();
+    markers = new Map();
+    state.displayAreas = state.mapLayer === "lightgbm" ? state.forecastAreas
+      : new Map(state.areas.map((area) => [
+        area.code, summarizeArea(area, state.points, mapValue, state.mapLayer === "difference"),
+      ]));
+    if (areaLayer) {
+      areaLayer.addTo(map);
+      updateAreaPaths();
+    }
+  } else {
+    if (areaLayer) areaLayer.remove();
+    highlightList();
+    renderPoints();
+    highlightStation();
+  }
 }
 
 function render() {
@@ -373,6 +589,7 @@ function render() {
   element("mode-date").textContent = calendarDate.format(new Date(selected.issue_utc));
   element("latest-issue").hidden = state.followLatest || selected.id === state.data.snapshots[0].id;
   element("period").textContent = localTime(window.start_utc) + " → " + localTime(window.end_utc) + " (VN)";
+  element("rain-period").textContent = "Ngày " + state.day + " · " + element("period").textContent;
   element("issue-meta").textContent = "GFS khởi tạo lúc " + localTime(state.selectedIssue.gfs_init_utc) + " (VN).";
   element("export-forecast").href = "/api/export.csv?" + new URLSearchParams({
     issue: state.selectedIssue.id, day: String(state.day),
@@ -433,25 +650,37 @@ async function refreshForecasts() {
 
 async function start() {
   try {
-    const data = await loadForecasts();
+    const [data, boundaries] = await Promise.all([
+      loadForecasts(),
+      window.PBL6Portal.api("/api/areas")
+        .then((value) => value.type === "FeatureCollection" ? value : null)
+        .catch(() => null),
+    ]);
+    const matched = boundaries ? prepareAreas(boundaries, data.stations) : {shapes: [], unmatched: []};
+    const areaByCode = new Map(matched.shapes.map((area) => [area.code, area]));
     const query = new URLSearchParams(location.search);
     const pinned = data.snapshots.find(({id}) => id === query.get("issue"));
     const selectedIssue = pinned ?? data.snapshots[0];
     const day = [1, 2, 3].includes(Number(query.get("day"))) ? Number(query.get("day")) : 1;
     const stationId = data.stations.find(({station_id}) => station_id === query.get("station"))?.station_id;
     const requestedLayer = layerButtons.find((button) => button.dataset.layer === query.get("layer"))?.dataset.layer;
+    const view = matched.shapes.length && !stationId && query.get("view") !== "station" ? "area" : "station";
+    const areaCode = view === "area" && areaByCode.has(query.get("area")) ? query.get("area") : null;
     state = {data, selectedIssue, day, stationId, mapLayer: requestedLayer ?? "lightgbm",
-             member: data.viewer === "member", followLatest: !pinned};
+             member: data.viewer === "member", followLatest: !pinned,
+             view, areaCode, areaByCode, areas: matched.shapes, unmatched: matched.unmatched};
     applyViewer();
     fillIssues();
     for (const station of data.stations) option(stationControl, station.station_id, station.station_id);
     element("map-loading").hidden = true;
     element("workspace").hidden = false;
-    showTools(!narrow.matches);
+    showTools(!narrow.matches && view === "station");
+    showRain(view === "area" && (!narrow.matches || Boolean(areaCode)));
     element("map-legend").open = !narrow.matches;
-    initMap(data.stations);
+    initMap();
     render();
     if (stationId) showStation(stationId, true);
+    if (areaCode) pickArea(areaCode);
     issueControl.addEventListener("change", () => {
       state.followLatest = false;
       state.selectedIssue = state.data.snapshots.find((issue) => issue.id === issueControl.value);
@@ -466,6 +695,25 @@ async function start() {
     element("fit-map").addEventListener("click", () => fitMap());
     element("tools-toggle").addEventListener("click", () => showTools(element("tools-panel").hidden, true));
     element("close-tools").addEventListener("click", () => showTools(false, true));
+    for (const button of viewButtons) {
+      button.addEventListener("click", () => changeView(button.dataset.view));
+    }
+    element("rain-toggle").addEventListener("click", () => {
+      const open = element("rain-panel").hidden;
+      if (open && state.view !== "area") changeView("area");
+      showRain(open, true);
+    });
+    element("close-rain").addEventListener("click", () => showRain(false, true));
+    element("back-to-rain").addEventListener("click", () => {
+      const last = state.areaCode;
+      state.areaCode = null;
+      renderAreaDetail();
+      updateAreaPaths();
+      element("rain-rows").querySelector('[data-area="' + last + '"]')?.focus({preventScroll: true});
+      syncUrl();
+    });
+    element("area-search").addEventListener("input", renderRainRows);
+    element("area-filter").addEventListener("change", renderRainRows);
     const closeStation = () => {
       element("station-panel").hidden = true;
       markers.get(state.stationId)?.getElement()?.focus({preventScroll: true});
@@ -476,6 +724,7 @@ async function start() {
       if (event.key !== "Escape") return;
       if (!element("station-panel").hidden) closeStation();
       else if (!element("tools-panel").hidden) showTools(false, true);
+      else if (!element("rain-panel").hidden) showRain(false, true);
     });
     for (const button of dayButtons) {
       button.addEventListener("click", () => {

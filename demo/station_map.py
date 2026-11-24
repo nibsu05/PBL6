@@ -16,13 +16,17 @@ from demo.station_map_status import SourceMonitor, available_forecasts, export_c
 
 STATIC = Path(__file__).with_name('station_map')
 STATE = ROOT / 'data' / 'operational' / 'station_map_web'
+WARD_BOUNDARIES = ROOT / 'data' / 'operational' / 'station_map_areas' / 'wards-48.geojson'
 ROUTES = {
     '/': (STATIC / 'index.html', 'text/html; charset=utf-8'),
     '/login': (STATIC / 'login.html', 'text/html; charset=utf-8'),
     '/dashboard': (STATIC / 'dashboard.html', 'text/html; charset=utf-8'),
     '/map.css': (STATIC / 'map.css', 'text/css; charset=utf-8'),
     '/explore.css': (STATIC / 'explore.css', 'text/css; charset=utf-8'),
+    '/areas.css': (STATIC / 'areas.css', 'text/css; charset=utf-8'),
     '/map.js': (STATIC / 'map.js', 'application/javascript; charset=utf-8'),
+    '/areas.js': (STATIC / 'areas.js', 'application/javascript; charset=utf-8'),
+    '/api/areas': (WARD_BOUNDARIES, 'application/geo+json; charset=utf-8'),
     '/portal.css': (STATIC / 'portal.css', 'text/css; charset=utf-8'),
     '/portal.js': (STATIC / 'portal.js', 'application/javascript; charset=utf-8'),
     '/dashboard.js': (STATIC / 'dashboard.js', 'application/javascript; charset=utf-8'),

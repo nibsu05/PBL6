@@ -1,6 +1,8 @@
 # Web dự báo mưa tại trạm
 
-Bản đồ **LightGBM B** phủ toàn cửa sổ, có ba khoảng 24 giờ, lớp LightGBM/GFS, xác suất mưa ≥50 mm và ký hiệu trạm thiếu mẫu. Mở **Công cụ** ở cạnh trái trên máy tính hoặc ở bảng trượt dưới trên điện thoại. Dùng thanh ngày để chọn khoảng thời gian và bấm vào một điểm để xem số, xác suất và biểu đồ qua ba ngày.
+Bản đồ **LightGBM B** mở mặc định theo xã, phường, với bảng **Nơi dự kiến có mưa** ở bên phải. Trên điện thoại, bấm **Nơi có mưa** để mở bảng trượt từ dưới. Dùng thanh ngày để chọn một trong ba khoảng 24 giờ. Có thể tìm theo tên, lọc nơi từ 10 mm hoặc xem các khu vực chưa có số. Bấm tên để xem khu vực và các trạm bên trong. Mở **Công cụ → Theo trạm** để xem mọi điểm và biểu đồ ba ngày.
+
+Màu khu vực dùng lượng cao nhất trong các trạm hợp lệ nằm trong ranh giới. Bảng xếp theo lượng LightGBM cao nhất và lọc **Có mưa** khi có ít nhất một trạm đạt 1 mm/24 giờ. Cột Trạm cho biết số có dự báo trên tổng số trạm thuộc khu vực. Vùng xám chưa có số cho lớp đang xem. Lớp xác suất lấy giá trị cao nhất tại trạm, còn lớp sai lệch lấy giá trị tại trạm có độ lệch tuyệt đối lớn nhất, giữ dấu. Các đại lượng này tóm tắt kết quả tại các điểm trạm trong ranh giới.
 
 Sau đăng nhập, có thêm Vrain thực đo, lớp sai lệch, tải CSV và trang theo dõi. Ba lớp lượng mưa dùng chung thang màu. Lớp **Sai lệch** tính LightGBM trừ Vrain. Xanh là dự báo thiếu, cam là dự báo thừa. Từ danh sách trạm có sai lệch lớn nhất có thể mở đúng lượt, ngày và trạm trên bản đồ.
 
@@ -15,6 +17,12 @@ Chạy lệnh ở thư mục gốc dự án.
 Mở **http://127.0.0.1:8766/** và chọn **Đăng nhập**. Lần đầu, chọn tên và mật khẩu riêng cho web. Các lần sau dùng đúng tài khoản này. Nếu thiếu tệp phát lại, chạy `.venv\Scripts\python.exe -X utf8 scripts/close_short_range.py` để tạo lại từ bản nghiên cứu đã khóa. Bản đồ nền cần kết nối mạng.
 
 Ứng dụng hiện nghe trên máy này qua `127.0.0.1`. Tài khoản được lưu dưới dạng băm có salt. Phiên đăng nhập hết hạn sau 8 giờ hoặc khi khởi động lại máy chủ. Hồ sơ tài khoản tại `data/operational/station_map_web/` nằm ngoài Git.
+
+### Ranh giới tham chiếu
+
+Lấy tệp hình học trên máy mới bằng `.venv\Scripts\python.exe -X utf8 scripts/prepare_station_map_areas.py`. Tệp `data/operational/station_map_areas/wards-48.geojson` được phục vụ qua `/api/areas` và lưu cục bộ. Khi tệp thiếu, web mở theo trạm.
+
+Nguồn ranh giới tham chiếu là tinhthanhpho.com, bản 2026.10.8 theo đơn vị cấp xã hiện hành. Kiểm tra 94 vùng, ghép đủ 57 trạm vào 40 xã/phường theo phép chứa điểm. Trong 40 nơi có trạm, 28 nơi chỉ có một trạm. Không gán trạm sang khu vực gần nhất. Đặc khu Hoàng Sa có trong bộ ranh giới và nằm ngoài khung nhìn mặc định vì không có trạm trong bộ dự báo. [Tệp nguồn](https://www.tinhthanhpho.com/data/wards-48.geojson) · [Giấy phép CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 ## Trang theo dõi
 
